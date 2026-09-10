@@ -47,6 +47,10 @@ var documentation_camera_position := Vector3.ZERO
 
 func run() -> void:
 	host=get_parent()
+	if not host.world._ready_complete:
+		push_error("FLIGHT_QA requires the complete assembled world")
+		get_tree().quit(1)
+		return
 	process_priority=1000 # Camera composition and explicit capture draw follow the host's camera update.
 	movie_path=Engine.get_write_movie_path()
 	manual_render=DisplayServer.get_name()!="headless" and not movie_path.is_empty()
@@ -64,10 +68,15 @@ func run() -> void:
 	host.qa_running=true
 	host.new_world("sandbox","Flight validation",false)
 	host.world_id="qa_flight_validation"
+	# New fleet placement queries the physics world. Allow freshly constructed
+	# terrain and rigid bodies to synchronize before requesting a runway copy.
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	host.airport_start()
 	jet=host.current_vehicle
 	if not is_instance_valid(jet) or jet.kind!="airliner":
 		push_error("FLIGHT_QA could not enter the production airliner")
+		get_tree().quit(1)
 		return
 	report.impacts=[]
 	jet.impacted.connect(func(_point:Vector3,_energy:float):
@@ -94,9 +103,19 @@ func run() -> void:
 		at_height(runway_start-runway_forward*3200,180),
 		at_height(runway_start+runway_forward*500,runway_y+4.4)]
 	report.engine=Engine.get_version_info().string
+	report.started_utc=Time.get_datetime_string_from_system(true)
+	report.world_ready=host.world._ready_complete
+	report.world_structure_components=host.world.structures.size()
+	report.map_counts=host.world.map_snapshot.get("counts",{})
+	report.custom_venues=[]
+	for group in ["city_landmarks","bank_landmarks","quay_landmarks","cyber_landmarks","icc_landmarks"]:
+		for record in host.world.get_meta(group,[]):report.custom_venues.append(record.id)
+	var args:=OS.get_cmdline_args()
+	var fixed_index:=args.find("--fixed-fps")
+	report.fixed_simulation_fps=int(args[fixed_index+1]) if fixed_index>=0 and fixed_index+1<args.size() else 0
 	report.rendered = DisplayServer.get_name() != "headless"
-	report.capture_mode="movie_writer_fixed_step" if not movie_path.is_empty() else ("headless_physics" if not report.rendered else "realtime_rendered")
-	report.performance_note="MovieWriter uses forced simulation pacing and encoding; these wall-clock intervals are not a real-time gameplay benchmark." if not movie_path.is_empty() else ("Headless physics does not measure rendering performance." if not report.rendered else "Real-time wall-clock process frame intervals, with automatic rendering.")
+	report.capture_mode="movie_writer_fixed_step" if not movie_path.is_empty() else ("headless_physics" if not report.rendered else "native_fixed_step" if report.fixed_simulation_fps>0 else "realtime_rendered")
+	report.performance_note="Fixed simulation pacing or MovieWriter capture; wall-clock intervals are not a real-time gameplay benchmark." if not movie_path.is_empty() or report.fixed_simulation_fps>0 else ("Headless physics does not measure rendering performance." if not report.rendered else "Real-time wall-clock process frame intervals, with automatic rendering.")
 	report.movie_writer_active=not movie_path.is_empty()
 	report.manual_render_each_process=manual_render
 	report.movie_path=movie_path

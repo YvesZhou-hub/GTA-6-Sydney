@@ -1,0 +1,746 @@
+{
+  "captured_utc": "2026-09-10T12:19:55",
+  "counts": {
+    "flattened_profiles": [],
+    "region": {
+      "city": 110,
+      "manly": 406,
+      "north": 8
+    },
+    "rendered": 523,
+    "reserved_profiles": [
+      "way/555419323"
+    ],
+    "shape": {
+      "gabled": 212,
+      "hipped": 280,
+      "pyramidal": 3,
+      "skillion": 29
+    },
+    "total": 524
+  },
+  "failures": 0,
+  "frames": [
+    {
+      "camera": [
+        7600.0,
+        210.0,
+        -6420.0
+      ],
+      "captured_utc": "2026-09-10T12:19:52",
+      "center_ray": {
+        "hit": false
+      },
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_roofscape_far.png",
+      "ready": true,
+      "saved": true,
+      "target": [
+        7150.0,
+        13.0,
+        -6450.0
+      ],
+      "view": "manly_roofscape_far"
+    },
+    {
+      "camera": [
+        7423.0,
+        6.30000019073486,
+        -6380.0
+      ],
+      "captured_utc": "2026-09-10T12:19:52",
+      "center_ray": {
+        "hit": false
+      },
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_fairy_bower_street.png",
+      "ready": true,
+      "saved": true,
+      "target": [
+        7398.0,
+        13.0,
+        -6355.0
+      ],
+      "view": "manly_fairy_bower_street"
+    },
+    {
+      "camera": [
+        -1163.0,
+        6.30000019073486,
+        2302.0
+      ],
+      "captured_utc": "2026-09-10T12:19:52",
+      "center_ray": {
+        "damage_id": "osm/way/1046973326/storey_group/0",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_1046973326_storey_group_0",
+        "position": [
+          -1172.47094726562,
+          8.45936489105225,
+          2300.86352539062
+        ]
+      },
+      "png": "<project>/game/../reports/roof-review/after-fix/jones_terrace_street.png",
+      "ready": true,
+      "saved": true,
+      "target": [
+        -1188.0,
+        12.0,
+        2299.0
+      ],
+      "view": "jones_terrace_street"
+    },
+    {
+      "actual_mesh_peak_above_ground": 8.82,
+      "camera": [
+        7424.02294921875,
+        21.0788993835449,
+        -6333.26904296875
+      ],
+      "captured_utc": "2026-09-10T12:19:53",
+      "center_ray": {
+        "damage_id": "osm/way/585589163/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_585589163_roof",
+        "position": [
+          7406.52197265625,
+          12.6106224060059,
+          -6350.77001953125
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/585589163",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_gabled_front.png",
+      "ready": true,
+      "ridge_above_ground": 8.82,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "29",
+        "addr:street": "Fairy Bower Road",
+        "building": "apartments",
+        "building:levels": "2",
+        "building:material": "brick",
+        "name": "NAOJ",
+        "roof:shape": "gabled"
+      },
+      "saved": true,
+      "target": [
+        7405.3837890625,
+        12.0599994659424,
+        -6351.908203125
+      ],
+      "view": "manly_gabled_front"
+    },
+    {
+      "actual_mesh_peak_above_ground": 8.82,
+      "camera": [
+        7386.74462890625,
+        21.0788993835449,
+        -6370.54736328125
+      ],
+      "captured_utc": "2026-09-10T12:19:53",
+      "center_ray": {
+        "damage_id": "osm/way/585589163/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_585589163_roof",
+        "position": [
+          7404.24560546875,
+          12.6106042861938,
+          -6353.04638671875
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/585589163",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_gabled_reverse.png",
+      "ready": true,
+      "ridge_above_ground": 8.82,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "29",
+        "addr:street": "Fairy Bower Road",
+        "building": "apartments",
+        "building:levels": "2",
+        "building:material": "brick",
+        "name": "NAOJ",
+        "roof:shape": "gabled"
+      },
+      "saved": true,
+      "target": [
+        7405.3837890625,
+        12.0599994659424,
+        -6351.908203125
+      ],
+      "view": "manly_gabled_reverse"
+    },
+    {
+      "actual_mesh_peak_above_ground": 8.7813,
+      "camera": [
+        7410.13916015625,
+        20.9384994506836,
+        -6343.3876953125
+      ],
+      "captured_utc": "2026-09-10T12:19:53",
+      "center_ray": {
+        "damage_id": "osm/way/586181625/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_586181625_roof",
+        "position": [
+          7392.86962890625,
+          12.5821485519409,
+          -6360.6572265625
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/586181625",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_hipped_front.png",
+      "ready": true,
+      "ridge_above_ground": 8.7813,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "31",
+        "addr:street": "Fairy Bower Road",
+        "building": "apartments",
+        "building:levels": "2",
+        "name": "Airdrie",
+        "roof:shape": "hipped"
+      },
+      "saved": true,
+      "target": [
+        7391.75048828125,
+        12.0406494140625,
+        -6361.7763671875
+      ],
+      "view": "manly_hipped_front"
+    },
+    {
+      "actual_mesh_peak_above_ground": 8.7813,
+      "camera": [
+        7373.36181640625,
+        20.9384994506836,
+        -6380.1650390625
+      ],
+      "captured_utc": "2026-09-10T12:19:53",
+      "center_ray": {
+        "damage_id": "osm/way/586181625/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_586181625_roof",
+        "position": [
+          7390.63134765625,
+          12.5821485519409,
+          -6362.8955078125
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/586181625",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_hipped_reverse.png",
+      "ready": true,
+      "ridge_above_ground": 8.7813,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "31",
+        "addr:street": "Fairy Bower Road",
+        "building": "apartments",
+        "building:levels": "2",
+        "name": "Airdrie",
+        "roof:shape": "hipped"
+      },
+      "saved": true,
+      "target": [
+        7391.75048828125,
+        12.0406494140625,
+        -6361.7763671875
+      ],
+      "view": "manly_hipped_reverse"
+    },
+    {
+      "actual_mesh_peak_above_ground": 16.6,
+      "camera": [
+        7240.73095703125,
+        36.1270980834961,
+        -6241.29345703125
+      ],
+      "captured_utc": "2026-09-10T12:19:53",
+      "center_ray": {
+        "damage_id": "osm/way/1067236342/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_1067236342_roof",
+        "position": [
+          7207.12060546875,
+          19.8640804290771,
+          -6274.90380859375
+        ]
+      },
+      "eave_above_ground": 12.6,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/1067236342",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_complex_front.png",
+      "ready": true,
+      "ridge_above_ground": 16.6,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "100-110",
+        "addr:street": "Addison Road",
+        "building": "apartments",
+        "building:levels": "4",
+        "building:material": "brick",
+        "name": "Andalusia",
+        "roof:colour": "red",
+        "roof:levels": "0",
+        "roof:shape": "gabled"
+      },
+      "saved": true,
+      "target": [
+        7205.54150390625,
+        19.1000003814697,
+        -6276.48291015625
+      ],
+      "view": "manly_complex_front"
+    },
+    {
+      "actual_mesh_peak_above_ground": 16.6,
+      "camera": [
+        7170.35205078125,
+        36.1270980834961,
+        -6311.67236328125
+      ],
+      "captured_utc": "2026-09-10T12:19:54",
+      "center_ray": {
+        "damage_id": "osm/way/1067236342/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_1067236342_roof",
+        "position": [
+          7202.728515625,
+          20.460994720459,
+          -6279.2958984375
+        ]
+      },
+      "eave_above_ground": 12.6,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/1067236342",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_complex_reverse.png",
+      "ready": true,
+      "ridge_above_ground": 16.6,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "100-110",
+        "addr:street": "Addison Road",
+        "building": "apartments",
+        "building:levels": "4",
+        "building:material": "brick",
+        "name": "Andalusia",
+        "roof:colour": "red",
+        "roof:levels": "0",
+        "roof:shape": "gabled"
+      },
+      "saved": true,
+      "target": [
+        7205.54150390625,
+        19.1000003814697,
+        -6276.48291015625
+      ],
+      "view": "manly_complex_reverse"
+    },
+    {
+      "actual_mesh_peak_above_ground": 8.82,
+      "camera": [
+        6925.87744140625,
+        32.1025505065918,
+        -6829.8330078125
+      ],
+      "captured_utc": "2026-09-10T12:19:54",
+      "center_ray": {
+        "damage_id": "osm/way/223784548/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_223784548_roof",
+        "position": [
+          6886.25634765625,
+          12.9309692382812,
+          -6869.4541015625
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/223784548",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_town_hall_front.png",
+      "ready": true,
+      "ridge_above_ground": 8.82,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "1",
+        "addr:street": "Belgrave Street",
+        "admin_level": "6",
+        "amenity": "townhall",
+        "building": "yes",
+        "building:levels": "2",
+        "building:material": "brick",
+        "name": "Manly Town Hall",
+        "office": "government",
+        "opening_hours": "Mo-Fr 08:30-17:00",
+        "operator": "Northern Beaches Council",
+        "operator:wikidata": "Q56477644",
+        "roof:levels": "0",
+        "roof:shape": "gabled",
+        "source:addr": "LPI Base Map May 2018",
+        "wikidata": "Q19787231"
+      },
+      "saved": true,
+      "target": [
+        6884.4560546875,
+        12.0599994659424,
+        -6871.25439453125
+      ],
+      "view": "manly_town_hall_front"
+    },
+    {
+      "actual_mesh_peak_above_ground": 8.82,
+      "camera": [
+        6843.03466796875,
+        32.1025505065918,
+        -6912.67578125
+      ],
+      "captured_utc": "2026-09-10T12:19:54",
+      "center_ray": {
+        "damage_id": "osm/way/223784548/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_223784548_roof",
+        "position": [
+          6882.5576171875,
+          12.9785633087158,
+          -6873.15283203125
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/223784548",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_town_hall_reverse.png",
+      "ready": true,
+      "ridge_above_ground": 8.82,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "1",
+        "addr:street": "Belgrave Street",
+        "admin_level": "6",
+        "amenity": "townhall",
+        "building": "yes",
+        "building:levels": "2",
+        "building:material": "brick",
+        "name": "Manly Town Hall",
+        "office": "government",
+        "opening_hours": "Mo-Fr 08:30-17:00",
+        "operator": "Northern Beaches Council",
+        "operator:wikidata": "Q56477644",
+        "roof:levels": "0",
+        "roof:shape": "gabled",
+        "source:addr": "LPI Base Map May 2018",
+        "wikidata": "Q19787231"
+      },
+      "saved": true,
+      "target": [
+        6884.4560546875,
+        12.0599994659424,
+        -6871.25439453125
+      ],
+      "view": "manly_town_hall_reverse"
+    },
+    {
+      "actual_mesh_peak_above_ground": 4.35,
+      "camera": [
+        7806.26416015625,
+        15.25,
+        -6577.5615234375
+      ],
+      "captured_utc": "2026-09-10T12:19:54",
+      "center_ray": {
+        "damage_id": "osm/way/682193579/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_682193579_roof",
+        "position": [
+          7796.2685546875,
+          8.25301361083984,
+          -6587.55712890625
+        ]
+      },
+      "eave_above_ground": 3.15,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/682193579",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_skillion_front.png",
+      "ready": true,
+      "ridge_above_ground": 4.35,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "access": "yes",
+        "addr:country": "AU",
+        "addr:postcode": "2095",
+        "addr:state": "NSW",
+        "addr:street": "Marine Parade",
+        "addr:suburb": "Manly",
+        "amenity": "toilets",
+        "building": "yes",
+        "building:levels": "1",
+        "changing_table": "yes",
+        "changing_table:fee": "no",
+        "contact:website": "https://www.toiletmap.gov.au/6129",
+        "fee": "no",
+        "handwashing:soap": "yes",
+        "name": "Public Toilet Fairy Bower Beach, Manly",
+        "opening_hours": "06:00-21:00",
+        "operator": "Northern Beaches Council",
+        "operator:email": "council@northernbeaches.nsw.gov.au",
+        "operator:phone": "+61 2 9470 5900",
+        "operator:type": "public",
+        "operator:website": "https://www.northernbeaches.nsw.gov.au",
+        "operator:wikidata": "Q56477644",
+        "roof:shape": "skillion",
+        "shower": "cold",
+        "supervised": "no",
+        "toilets": "yes",
+        "toilets:access": "yes",
+        "toilets:disposal": "flush",
+        "toilets:handwashing": "yes",
+        "toilets:ostomy": "no",
+        "toilets:paper_supplied": "yes",
+        "toilets:wheelchair": "yes",
+        "unisex": "yes",
+        "website": "https://www.toiletmap.gov.au/6129",
+        "wheelchair": "yes"
+      },
+      "saved": true,
+      "target": [
+        7796.26416015625,
+        8.25,
+        -6587.5615234375
+      ],
+      "view": "manly_skillion_front"
+    },
+    {
+      "actual_mesh_peak_above_ground": 4.35,
+      "camera": [
+        7786.26416015625,
+        15.25,
+        -6597.5615234375
+      ],
+      "captured_utc": "2026-09-10T12:19:54",
+      "center_ray": {
+        "damage_id": "osm/way/682193579/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_682193579_roof",
+        "position": [
+          7796.2626953125,
+          8.25108909606934,
+          -6587.56298828125
+        ]
+      },
+      "eave_above_ground": 3.15,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/682193579",
+      "png": "<project>/game/../reports/roof-review/after-fix/manly_skillion_reverse.png",
+      "ready": true,
+      "ridge_above_ground": 4.35,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "access": "yes",
+        "addr:country": "AU",
+        "addr:postcode": "2095",
+        "addr:state": "NSW",
+        "addr:street": "Marine Parade",
+        "addr:suburb": "Manly",
+        "amenity": "toilets",
+        "building": "yes",
+        "building:levels": "1",
+        "changing_table": "yes",
+        "changing_table:fee": "no",
+        "contact:website": "https://www.toiletmap.gov.au/6129",
+        "fee": "no",
+        "handwashing:soap": "yes",
+        "name": "Public Toilet Fairy Bower Beach, Manly",
+        "opening_hours": "06:00-21:00",
+        "operator": "Northern Beaches Council",
+        "operator:email": "council@northernbeaches.nsw.gov.au",
+        "operator:phone": "+61 2 9470 5900",
+        "operator:type": "public",
+        "operator:website": "https://www.northernbeaches.nsw.gov.au",
+        "operator:wikidata": "Q56477644",
+        "roof:shape": "skillion",
+        "shower": "cold",
+        "supervised": "no",
+        "toilets": "yes",
+        "toilets:access": "yes",
+        "toilets:disposal": "flush",
+        "toilets:handwashing": "yes",
+        "toilets:ostomy": "no",
+        "toilets:paper_supplied": "yes",
+        "toilets:wheelchair": "yes",
+        "unisex": "yes",
+        "website": "https://www.toiletmap.gov.au/6129",
+        "wheelchair": "yes"
+      },
+      "saved": true,
+      "target": [
+        7796.26416015625,
+        8.25,
+        -6587.5615234375
+      ],
+      "view": "manly_skillion_reverse"
+    },
+    {
+      "actual_mesh_peak_above_ground": 4.35,
+      "camera": [
+        -602.278991699219,
+        15.25,
+        1983.01904296875
+      ],
+      "captured_utc": "2026-09-10T12:19:55",
+      "center_ray": {
+        "damage_id": "osm/way/553843778/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_553843778_roof",
+        "position": [
+          -611.854431152344,
+          8.54718208312988,
+          1973.44360351562
+        ]
+      },
+      "eave_above_ground": 3.15,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/553843778",
+      "png": "<project>/game/../reports/roof-review/after-fix/darling_pyramidal_front.png",
+      "ready": true,
+      "ridge_above_ground": 4.35,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "building": "hut",
+        "building:levels": "1",
+        "roof:shape": "pyramidal"
+      },
+      "saved": true,
+      "target": [
+        -612.278991699219,
+        8.25,
+        1973.01904296875
+      ],
+      "view": "darling_pyramidal_front"
+    },
+    {
+      "actual_mesh_peak_above_ground": 4.35,
+      "camera": [
+        -622.278991699219,
+        15.25,
+        1963.01904296875
+      ],
+      "captured_utc": "2026-09-10T12:19:55",
+      "center_ray": {
+        "damage_id": "osm/way/553843778/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_553843778_roof",
+        "position": [
+          -612.732788085938,
+          8.56765365600586,
+          1972.56530761719
+        ]
+      },
+      "eave_above_ground": 3.15,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/553843778",
+      "png": "<project>/game/../reports/roof-review/after-fix/darling_pyramidal_reverse.png",
+      "ready": true,
+      "ridge_above_ground": 4.35,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "building": "hut",
+        "building:levels": "1",
+        "roof:shape": "pyramidal"
+      },
+      "saved": true,
+      "target": [
+        -612.278991699219,
+        8.25,
+        1973.01904296875
+      ],
+      "view": "darling_pyramidal_reverse"
+    },
+    {
+      "actual_mesh_peak_above_ground": 7.5,
+      "camera": [
+        -1158.45288085938,
+        18.3999996185303,
+        2332.70947265625
+      ],
+      "captured_utc": "2026-09-10T12:19:55",
+      "center_ray": {
+        "damage_id": "osm/way/1046973320/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_1046973320_roof",
+        "position": [
+          -1172.11413574219,
+          11.6060380935669,
+          2319.04833984375
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/1046973320",
+      "png": "<project>/game/../reports/roof-review/after-fix/jones_terrace_front.png",
+      "ready": true,
+      "ridge_above_ground": 7.5,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "151",
+        "addr:street": "Jones Street",
+        "building": "house",
+        "building:levels": "2",
+        "roof:shape": "gabled"
+      },
+      "saved": true,
+      "target": [
+        -1172.52844238281,
+        11.3999996185303,
+        2318.63403320312
+      ],
+      "view": "jones_terrace_front"
+    },
+    {
+      "actual_mesh_peak_above_ground": 7.5,
+      "camera": [
+        -1186.60400390625,
+        18.3999996185303,
+        2304.55859375
+      ],
+      "captured_utc": "2026-09-10T12:19:55",
+      "center_ray": {
+        "damage_id": "osm/way/1046973320/roof",
+        "hit": true,
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_1046973320_roof",
+        "position": [
+          -1172.92102050781,
+          11.5952110290527,
+          2318.24169921875
+        ]
+      },
+      "eave_above_ground": 6.3,
+      "height_source": "OSM levels × assumed floor height + assumed roof rise",
+      "osm_id": "way/1046973320",
+      "png": "<project>/game/../reports/roof-review/after-fix/jones_terrace_reverse.png",
+      "ready": true,
+      "ridge_above_ground": 7.5,
+      "roof_profile_source": "OSM roof shape; rise and slope estimated from footprint",
+      "roof_tags": {
+        "addr:housenumber": "151",
+        "addr:street": "Jones Street",
+        "building": "house",
+        "building:levels": "2",
+        "roof:shape": "gabled"
+      },
+      "saved": true,
+      "target": [
+        -1172.52844238281,
+        11.3999996185303,
+        2318.63403320312
+      ],
+      "view": "jones_terrace_reverse"
+    }
+  ],
+  "scope": "Only dataset roof_surface entries derived from OSM roof:shape; visual sample only; rise and slope inferred unless explicit tags",
+  "startup_ms": 39068.12
+}

@@ -1,0 +1,695 @@
+[
+  {
+    "camera": [
+      900.0,
+      690.0,
+      1850.0
+    ],
+    "captured_utc": "2026-09-10T12:50:22",
+    "draw_calls": 2438.0,
+    "performance": {
+      "draw_calls_last": 2438.0,
+      "elapsed_ms": 1322.932,
+      "frame_intervals_ms": [
+        13.299,
+        12.196,
+        11.347,
+        10.719,
+        10.398,
+        11.118,
+        11.087,
+        10.931,
+        10.505,
+        11.044,
+        10.756,
+        11.14,
+        9.675,
+        11.205,
+        10.81,
+        11.164,
+        10.966,
+        10.51,
+        11.462,
+        11.385,
+        10.319,
+        10.176,
+        11.875,
+        10.973,
+        10.099,
+        11.631,
+        10.727,
+        10.466,
+        10.788,
+        11.487,
+        10.883,
+        10.612,
+        11.114,
+        10.054,
+        11.898,
+        10.027,
+        10.854,
+        11.062,
+        11.391,
+        10.56,
+        10.487,
+        10.875,
+        11.383,
+        10.26,
+        10.44,
+        11.953,
+        12.02,
+        9.51,
+        11.585,
+        10.506,
+        10.476,
+        10.832,
+        11.067,
+        10.774,
+        10.682,
+        11.121,
+        9.819,
+        12.019,
+        9.947,
+        10.932,
+        10.571,
+        10.784,
+        11.423,
+        10.132,
+        11.168,
+        11.513,
+        10.998,
+        9.684,
+        12.724,
+        11.335,
+        9.915,
+        12.277,
+        10.79,
+        10.267,
+        11.339,
+        10.664,
+        10.945,
+        10.798,
+        10.159,
+        10.404,
+        12.174,
+        10.71,
+        10.42,
+        11.355,
+        12.082,
+        10.071,
+        12.373,
+        10.778,
+        9.921,
+        13.044,
+        11.141,
+        12.032,
+        12.488,
+        10.886,
+        10.992,
+        11.877,
+        10.27,
+        10.784,
+        11.9,
+        10.705,
+        12.021,
+        10.772,
+        11.603,
+        10.845,
+        11.227,
+        11.481,
+        10.131,
+        12.822,
+        9.58,
+        11.521,
+        11.138,
+        11.057,
+        9.439,
+        12.679,
+        11.296,
+        10.927,
+        11.504,
+        11.563,
+        11.896,
+        10.136
+      ],
+      "frames": 120,
+      "mean_ms": 11.0244333333333,
+      "median_ms": 10.9385,
+      "p95_ms": 12.373,
+      "resolution": [
+        1440,
+        900
+      ],
+      "sample": "static production camera; force_draw(false) + process_frame; no window buffer swap; not display FPS or moving gameplay",
+      "worst_ms": 13.299
+    },
+    "ray_probes": [
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          160,
+          260
+        ],
+        "position": [
+          -10618.736328125,
+          -34.0,
+          1338.62158203125
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          280,
+          260
+        ],
+        "position": [
+          -9587.3857421875,
+          -34.0,
+          174.806762695312
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          420,
+          260
+        ],
+        "position": [
+          -8384.1455078125,
+          -34.0,
+          -1182.9775390625
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          580,
+          260
+        ],
+        "position": [
+          -7009.0146484375,
+          -34.0,
+          -2734.7314453125
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          720,
+          260
+        ],
+        "position": [
+          -5805.77392578125,
+          -34.0,
+          -4092.51416015625
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          960,
+          260
+        ],
+        "position": [
+          -3743.07666015625,
+          -34.0,
+          -6420.1435546875
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_1",
+        "osm_id": "",
+        "pixel": [
+          1220,
+          260
+        ],
+        "position": [
+          -1380.41430664062,
+          4.5001220703125,
+          -8367.875
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/Sydney_Airport/Simplified_City_Corridor",
+        "osm_id": "",
+        "pixel": [
+          60,
+          380
+        ],
+        "position": [
+          -2864.17724609375,
+          4.35003662109375,
+          2107.833984375
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          160,
+          380
+        ],
+        "position": [
+          -2593.14892578125,
+          4.5,
+          1802.86694335938
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          280,
+          380
+        ],
+        "position": [
+          -2268.9033203125,
+          4.49993896484375,
+          1436.97412109375
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          420,
+          380
+        ],
+        "position": [
+          -1890.61499023438,
+          4.49993896484375,
+          1010.09918212891
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          580,
+          380
+        ],
+        "position": [
+          -1590.7353515625,
+          -34.0,
+          447.670654296875
+        ]
+      },
+      {
+        "damage_id": "osm/way/1068760241/storey_group/3",
+        "height_source": "OSM tagged height; not independently surveyed",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_1068760241_storey_group_3",
+        "osm_id": "way/1068760241",
+        "pixel": [
+          720,
+          380
+        ],
+        "position": [
+          -776.7021484375,
+          109.505004882812,
+          364.142150878906
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          960,
+          380
+        ],
+        "position": [
+          -506.28759765625,
+          -34.0,
+          -776.064208984375
+        ]
+      },
+      {
+        "damage_id": "bridge/ramp/north/16",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/bridge_ramp_north_16",
+        "osm_id": "",
+        "pixel": [
+          1220,
+          380
+        ],
+        "position": [
+          290.360565185547,
+          25.5698204040527,
+          -1328.39599609375
+        ]
+      },
+      {
+        "damage_id": "osm/way/614678675/storey_group/1",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_614678675_storey_group_1",
+        "osm_id": "way/614678675",
+        "pixel": [
+          60,
+          500
+        ],
+        "position": [
+          -1214.88244628906,
+          24.7902221679688,
+          2066.08740234375
+        ]
+      },
+      {
+        "damage_id": "osm/way/603944782/storey_group/0",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_603944782_storey_group_0",
+        "osm_id": "way/603944782",
+        "pixel": [
+          160,
+          500
+        ],
+        "position": [
+          -1094.1484375,
+          12.3981323242188,
+          1889.41369628906
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          280,
+          500
+        ],
+        "position": [
+          -922.994140625,
+          4.5,
+          1670.50671386719
+        ]
+      },
+      {
+        "damage_id": "osm/way/85690878/storey_group/0",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_85690878_storey_group_0",
+        "osm_id": "way/85690878",
+        "pixel": [
+          420,
+          500
+        ],
+        "position": [
+          -681.459655761719,
+          10.828857421875,
+          1418.59912109375
+        ]
+      },
+      {
+        "damage_id": "osm/way/389002730/storey_group/2",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_389002730_storey_group_2",
+        "osm_id": "way/389002730",
+        "pixel": [
+          580,
+          500
+        ],
+        "position": [
+          -351.571655273438,
+          48.2999877929688,
+          1168.60021972656
+        ]
+      },
+      {
+        "damage_id": "osm/way/52751202/storey_group/2",
+        "height_source": "OSM tagged height; not independently surveyed",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_52751202_storey_group_2",
+        "osm_id": "way/52751202",
+        "pixel": [
+          720,
+          500
+        ],
+        "position": [
+          -88.5646209716797,
+          79.60546875,
+          973.955017089844
+        ]
+      },
+      {
+        "damage_id": "osm/way/409035073/storey_group/0",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_409035073_storey_group_0",
+        "osm_id": "way/409035073",
+        "pixel": [
+          960,
+          500
+        ],
+        "position": [
+          190.286605834961,
+          15.6104736328125,
+          450.486450195312
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/@StaticBody3D@471",
+        "osm_id": "",
+        "pixel": [
+          1220,
+          500
+        ],
+        "position": [
+          582.928894042969,
+          -34.0,
+          -154.454833984375
+        ]
+      },
+      {
+        "damage_id": "osm/way/367553895/storey_group/4",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_367553895_storey_group_4",
+        "osm_id": "way/367553895",
+        "pixel": [
+          60,
+          640
+        ],
+        "position": [
+          -361.153503417969,
+          83.0070190429688,
+          2032.35986328125
+        ]
+      },
+      {
+        "damage_id": "osm/way/271946525/storey_group/1",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_271946525_storey_group_1",
+        "osm_id": "way/271946525",
+        "pixel": [
+          160,
+          640
+        ],
+        "position": [
+          -354.050537109375,
+          35.7030029296875,
+          1927.64868164062
+        ]
+      },
+      {
+        "damage_id": "osm/way/477593561/storey_group/3",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_477593561_storey_group_3",
+        "osm_id": "way/477593561",
+        "pixel": [
+          280,
+          640
+        ],
+        "position": [
+          -172.886779785156,
+          67.4430541992188,
+          1788.09716796875
+        ]
+      },
+      {
+        "damage_id": "osm/way/387742035/storey_group/1",
+        "height_source": "OSM levels × assumed floor height",
+        "node": "/root/Harbourlife/@Node3D@4/osm_way_387742035_storey_group_1",
+        "osm_id": "way/387742035",
+        "pixel": [
+          420,
+          640
+        ],
+        "position": [
+          -90.0576705932617,
+          29.0179443359375,
+          1616.08337402344
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          580,
+          640
+        ],
+        "position": [
+          49.8783569335938,
+          4.5,
+          1408.05578613281
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          720,
+          640
+        ],
+        "position": [
+          204.456237792969,
+          4.5,
+          1233.62377929688
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          960,
+          640
+        ],
+        "position": [
+          469.446899414062,
+          4.5,
+          934.597717285156
+        ]
+      },
+      {
+        "damage_id": "",
+        "height_source": "",
+        "node": "/root/Harbourlife/@Node3D@4/OSM_Land_6",
+        "osm_id": "",
+        "pixel": [
+          1220,
+          640
+        ],
+        "position": [
+          756.520141601562,
+          4.5,
+          610.652709960938
+        ]
+      }
+    ],
+    "ready": true,
+    "saved": true,
+    "startup_ms": 39034.349,
+    "target": [
+      -330.0,
+      75.0,
+      760.0
+    ],
+    "view": "city_overview"
+  },
+  {
+    "camera": [
+      -684.877685546875,
+      184.5,
+      1876.67700195312
+    ],
+    "captured_utc": "2026-09-10T12:50:24",
+    "draw_calls": 920.0,
+    "ready": true,
+    "saved": true,
+    "startup_ms": 39034.349,
+    "target": [
+      -982.25,
+      14.5,
+      1724.13098144531
+    ],
+    "view": "icc_group"
+  },
+  {
+    "camera": [
+      -937.668151855469,
+      8.5,
+      1870.29235839844
+    ],
+    "captured_utc": "2026-09-10T12:50:24",
+    "draw_calls": 1649.0,
+    "ready": true,
+    "saved": true,
+    "startup_ms": 39034.349,
+    "target": [
+      -886.393493652344,
+      17.5,
+      1881.05908203125
+    ],
+    "view": "theatre_auditorium"
+  },
+  {
+    "camera": [
+      -889.779418945312,
+      22.5,
+      1874.6142578125
+    ],
+    "captured_utc": "2026-09-10T12:50:24",
+    "draw_calls": 834.0,
+    "ready": true,
+    "saved": true,
+    "startup_ms": 39034.349,
+    "target": [
+      -936.158203125,
+      7.5,
+      1887.34289550781
+    ],
+    "view": "theatre_stage"
+  },
+  {
+    "camera": [
+      -771.0,
+      36.0,
+      2081.0
+    ],
+    "captured_utc": "2026-09-10T12:50:24",
+    "draw_calls": 3500.0,
+    "ready": true,
+    "saved": true,
+    "startup_ms": 39034.349,
+    "target": [
+      -773.0,
+      14.0,
+      2008.0
+    ],
+    "view": "darling_square_wide"
+  }
+]

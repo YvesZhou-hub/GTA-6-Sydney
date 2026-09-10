@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=15066 reserved=442 roads=67462
+HARBOR_WORLD_READY buildings=15069 structure_components=19799
+PASS barangaroo all escalator collision support continuous: 0
+PASS barangaroo human capsule and head clearance: 0
+PASS barangaroo actual earth opening; no ground slab crosses stairs
+PASS barangaroo underground landing is a declared dry volume
+PASS barangaroo actual player reaches lower landing, y=-4.509
+PASS barangaroo underground walking/jump never becomes swimming
+PASS barangaroo actual player walks back to street, y=4.491
+PASS martin_place all escalator collision support continuous: 0
+PASS martin_place human capsule and head clearance: 0
+PASS martin_place actual earth opening; no ground slab crosses stairs
+PASS martin_place underground landing is a declared dry volume
+PASS Martin Place mapped Hunter Street entrance 1 reaches escalators: 0 blocked
+PASS Martin Place mapped Hunter Street entrance 7 reaches escalators: 0 blocked
+PASS martin_place actual player reaches lower landing, y=-7.509
+PASS martin_place underground walking/jump never becomes swimming
+PASS martin_place actual player walks back to street, y=4.491
+METRO CHECK COMPLETE failures=0

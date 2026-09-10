@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=1347 reserved=13 roads=5033
+PASS three Manly landmark groups integrated
+PASS real OSM Manly tree points populated
+PASS Hotel Steyne real courtyard stays open through roof and storeys
+PASS The Corso has actual supporting pavement
+PASS The Corso central pedestrian route is unobstructed: 0
+PASS Manly Wharf north entrance concourse remains open
+PASS landmarks participate in persistent structural damage
+MANLY CHECK COMPLETE failures=0

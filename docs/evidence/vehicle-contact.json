@@ -1,0 +1,112 @@
+{
+  "checks": [
+    {
+      "health": 100.0,
+      "impact": {},
+      "name": "normal wheel settling causes no damage",
+      "passed": true
+    },
+    {
+      "health": 72.9025146484375,
+      "impact": {
+        "angular_velocity": [
+          1.46962975122733e-08,
+          -1.83269839908462e-05,
+          7.85287284088554e-08
+        ],
+        "closing_mps": 13.1776733398438,
+        "collider": "/root/@Node3D@133/@StaticBody3D@135",
+        "contact_count": 4,
+        "energy_j": 128501.795242205,
+        "health": 72.9025146484375,
+        "impulse_mps": 0.0,
+        "impulse_normal_mps": 0.0,
+        "linear_velocity": [
+          9.99341136775911e-06,
+          1.05421340465546,
+          -6.21544531895779e-05
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "normal_closing": 13.1776733398438,
+        "point": [
+          -0.980000019073486,
+          4.49240016937256,
+          -1.47000002861023
+        ],
+        "previous_velocity": [
+          0.0,
+          -13.1776733398438,
+          0.0
+        ],
+        "relative_velocity": [
+          0.0,
+          -13.1776733398438,
+          0.0
+        ],
+        "rotation": [
+          2.44938708204856e-10,
+          -3.05449759707699e-07,
+          1.30881228077584e-09
+        ]
+      },
+      "name": "hard landing damages vehicle and leaves contact evidence",
+      "passed": true
+    },
+    {
+      "health": 36.8160865783691,
+      "impact": {
+        "angular_velocity": [
+          -0.00363041902892292,
+          -0.00408969167619944,
+          0.00112635176628828
+        ],
+        "closing_mps": 26.0656833648682,
+        "collider": "/root/@Node3D@265/@StaticBody3D@269",
+        "contact_count": 8,
+        "energy_j": 502770.688465398,
+        "health": 36.8160865783691,
+        "impulse_mps": 0.0,
+        "impulse_normal_mps": 0.0,
+        "linear_velocity": [
+          -0.010045301169157,
+          0.00898607913404703,
+          2.08921456336975
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "normal_closing": 26.0656833648682,
+        "point": [
+          -0.980406105518341,
+          4.8795919418335,
+          -74.0074157714844
+        ],
+        "previous_velocity": [
+          -0.000307273090584204,
+          1.11102854134515e-05,
+          -26.0656833648682
+        ],
+        "relative_velocity": [
+          -0.000307273090584204,
+          1.11102854134515e-05,
+          -26.0656833648682
+        ],
+        "rotation": [
+          -0.000335755117703229,
+          -1.41663967951899e-05,
+          -0.000107995103462599
+        ]
+      },
+      "name": "normal throttle into real wall damages body",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Native production vehicle contacts on controlled physical surfaces; no user saves"
+}

@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "runs": [
+    {
+      "direction": "south_to_north",
+      "elapsed_s": 82.4333333333299,
+      "end": [
+        351.081146240234,
+        6.2254753112793,
+        -1493.65661621094
+      ],
+      "impacts": [],
+      "maximum_lateral_error_m": 0.0991798400878907,
+      "minimum_health": 100.0,
+      "passed": true,
+      "section": 2
+    },
+    {
+      "direction": "north_to_south",
+      "elapsed_s": 82.4499999999966,
+      "end": [
+        -323.302673339844,
+        6.06459999084473,
+        -203.737762451172
+      ],
+      "impacts": [
+        {
+          "angular_velocity": [
+            1.51186156272888,
+            -0.000892136653419584,
+            0.733479857444763
+          ],
+          "closing_mps": 3.54016351699829,
+          "collider": "/root/Harbourlife/@Node3D@4/BridgeDriveSurface/BridgeDriveRun_1",
+          "contact_count": 4,
+          "energy_j": 9274.24071804342,
+          "health": 99.8875421524048,
+          "impulse_mps": 0.0,
+          "impulse_normal_mps": 0.0,
+          "linear_velocity": [
+            -8.06905651092529,
+            2.5959894657135,
+            15.5072793960571
+          ],
+          "normal": [
+            0.116386607289314,
+            0.963422477245331,
+            -0.241394445300102
+          ],
+          "normal_closing": 3.54016351699829,
+          "point": [
+            145.927658081055,
+            53.9965896606445,
+            -1109.90637207031
+          ],
+          "previous_velocity": [
+            -8.2816333770752,
+            1.31907594203949,
+            15.9370670318604
+          ],
+          "relative_velocity": [
+            -8.2816333770752,
+            1.31907594203949,
+            15.9370670318604
+          ],
+          "rotation": [
+            0.040075521916151,
+            2.66218400001526,
+            0.00169595971237868
+          ],
+          "time_s": 26.3833333333331
+        }
+      ],
+      "maximum_lateral_error_m": 0.108282470703125,
+      "minimum_health": 99.8875421524048,
+      "passed": true,
+      "section": 2
+    }
+  ],
+  "scope": "Inputs-only driving after controlled test starting pose; full original game scene and physical vehicle"
+}

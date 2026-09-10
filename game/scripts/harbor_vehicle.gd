@@ -32,6 +32,7 @@ var _dent_nodes: Array[Node3D] = []
 var _pending_state: Dictionary = {}
 var _smoke: CPUParticles3D
 var _restored: bool = false
+var _idle_sleep_time := 0.0
 var _built: bool = false
 var last_impact_info: Dictionary = {}
 var _base_paint: Color = Color("287b89")
@@ -120,6 +121,20 @@ func _physics_process(delta: float) -> void:
 				"paraglider": linear_velocity = -global_basis.z*9.0 + Vector3.DOWN*1.0
 		_restored = false
 	_was_occupied = occupied
+	# Truly idle rigid bodies use normal engine sleeping. Applying zero-input forces
+	# every frame otherwise keeps every newly created copy awake indefinitely.
+	if not occupied and (sleeping or freeze):
+		_engine_target = -60.0
+		if is_instance_valid(_engine): _engine.volume_db = -60.0
+		return
+	if not occupied and linear_velocity.length_squared()<0.012 and angular_velocity.length_squared()<0.01:
+		_idle_sleep_time+=delta
+	else: _idle_sleep_time=0.0
+	if _idle_sleep_time>2.0:
+		var has_support := not _ground_probe(5.0 if kind=="airliner" else 2.0).is_empty()
+		if has_support or (kind=="yacht" and global_position.y>0.3 and global_position.y<1.8):
+			sleeping=true
+			return
 	var forward := -global_basis.z.normalized()
 	var right := global_basis.x.normalized()
 	var up := global_basis.y.normalized()
@@ -210,7 +225,7 @@ func _boat(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,bra
 			var point: Vector3 = global_position+offset
 			var wave: float = sin(point.x*0.044+_visual_time*1.1)*0.07 + sin(point.z*0.066+_visual_time*0.9)*0.045
 			var depth: float = wave+0.60-point.y
-			if depth>0.0:
+			if depth>0.0 and not preload("res://scripts/metro_entrances.gd").contains_dry_volume(point):
 				in_water = true
 				var vertical_speed: float = (linear_velocity+angular_velocity.cross(offset)).y
 				var force: float = maxf(0.0,depth*mass*G*0.42-vertical_speed*mass*0.52)
@@ -334,6 +349,7 @@ func _integrate_forces(state:PhysicsDirectBodyState3D) -> void:
 	var worst_point := global_position
 	var worst_collider := ""
 	var worst_normal := Vector3.ZERO
+	var worst_contact := {}
 	for i in state.get_contact_count():
 		var other: Object = state.get_contact_collider_object(i)
 		if other is Node and other.is_in_group("players") and occupied:
@@ -348,12 +364,15 @@ func _integrate_forces(state:PhysicsDirectBodyState3D) -> void:
 			worst_point = state.get_contact_local_position(i)
 			worst_collider = str(other.get_path()) if other is Node else str(other)
 			worst_normal = normal
+			if worst_speed>3.5:
+				worst_contact = {"previous_velocity":[_previous_velocity.x,_previous_velocity.y,_previous_velocity.z],"linear_velocity":[state.linear_velocity.x,state.linear_velocity.y,state.linear_velocity.z],"angular_velocity":[state.angular_velocity.x,state.angular_velocity.y,state.angular_velocity.z],"relative_velocity":[relative_velocity.x,relative_velocity.y,relative_velocity.z],"normal_closing":maxf(0.0,-relative_velocity.dot(normal)),"impulse_mps":state.get_contact_impulse(i).length()/maxf(mass,1.0),"impulse_normal_mps":absf(state.get_contact_impulse(i).dot(normal))/maxf(mass,1.0),"contact_count":state.get_contact_count(),"rotation":[rotation.x,rotation.y,rotation.z]}
 	if worst_speed>3.5:
 		_impact_cooldown = 0.30
 		var energy := 0.5*mass*worst_speed*worst_speed
 		var damage := clampf((worst_speed-3.5)*2.8,0.0,75.0)
 		health = maxf(0.0,health-damage)
 		last_impact_info = {"collider":worst_collider,"point":[worst_point.x,worst_point.y,worst_point.z],"normal":[worst_normal.x,worst_normal.y,worst_normal.z],"closing_mps":worst_speed,"energy_j":energy,"health":health}
+		last_impact_info.merge(worst_contact)
 		call_deferred("_show_impact",worst_point,energy)
 
 func _show_impact(point:Vector3,energy:float) -> void:
@@ -578,6 +597,7 @@ func apply_state(data:Dictionary) -> void:
 	freeze = bool(data.get("frozen",false))
 	_restored = true
 	sleeping = false
+	reset_physics_interpolation()
 
 func _exit_tree() -> void:
 	if is_instance_valid(_engine):

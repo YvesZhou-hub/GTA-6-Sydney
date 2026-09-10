@@ -1,4 +1,6 @@
-# Harbour environment: provenance, implemented geometry, limits
+# v0.1.0 historical harbour construction notes
+
+**Historical record from the initial preview, retained for provenance only.** The building counts, geometry, coverage and performance samples below describe v0.1.0 and have been superseded. Current coverage and uncertainty are documented in [CITY_DATA](../docs/CITY_DATA.md); current bridge and Opera models in [BRIDGE_REFERENCE](../docs/BRIDGE_REFERENCE.md) and [OPERA_REFERENCE](../docs/OPERA_REFERENCE.md). Use [TESTING](../docs/TESTING.md) for current build-specific validation. The old development log/probe filenames mentioned below are historical, are not public reproduction commands, and are not included in this release.
 
 Last verified: 10 September 2026. This is a playable interpretation, not a surveyed digital twin. The original runtime source is `game/scripts/harbor_world.gd`; shoreline/road coordinates are in `game/assets/world_geography.json`.
 

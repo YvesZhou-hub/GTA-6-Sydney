@@ -1,6 +1,6 @@
 extends RefCounted
 
-const VERSION = 2
+const VERSION = 3
 const ROOT = "user://worlds/"
 static var last_error = ""
 
@@ -81,8 +81,8 @@ static func read(id: String, backup: bool = false) -> Dictionary:
 	if version > VERSION:
 		last_error = "This world was saved by a newer version."
 		return {}
-	if version == 1:
-		data["version"] = 2
+	if version < VERSION:
+		data["version"] = VERSION
 		data["settings"] = data.get("settings",{})
 	return data
 

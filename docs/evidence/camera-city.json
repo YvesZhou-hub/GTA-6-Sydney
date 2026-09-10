@@ -1,0 +1,27 @@
+{
+  "failures": [],
+  "interpolation": true,
+  "physics_hz": 20,
+  "render_cap": 120,
+  "route": "controlled airport ground path; old before/after pair used pre-city open ground",
+  "scenarios": [
+    {
+      "camera_mean_speed": -1.89098678898999,
+      "camera_speed_std": 0.140877274826687,
+      "frames": 245,
+      "interpolated_stationary_frames": 0,
+      "mean_pitch_velocity_jump": 3.51565791498086e-06,
+      "raw_stationary_frames": 174,
+      "stage": "walk"
+    },
+    {
+      "camera_mean_speed": -4.41601834741593,
+      "camera_speed_std": 1.36021199157378,
+      "frames": 245,
+      "interpolated_stationary_frames": 0,
+      "mean_pitch_velocity_jump": 0.0,
+      "raw_stationary_frames": 174,
+      "stage": "car"
+    }
+  ]
+}

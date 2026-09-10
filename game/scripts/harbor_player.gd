@@ -76,7 +76,7 @@ func _physics_process(delta):
 	if not enabled: return
 	var direction = Input.get_vector("left","right","forward","back")
 	var move = Vector3(direction.x,0,direction.y).rotated(Vector3.UP,yaw)
-	swimming = global_position.y < 0.65 and not is_on_floor()
+	swimming = global_position.y < 0.65 and not is_on_floor() and not preload("res://scripts/metro_entrances.gd").contains_dry_volume(global_position)
 	var sprint = Input.is_action_pressed("sprint") and stamina > 1 and not swimming
 	var target = move * (9.0 if sprint else (3.2 if swimming else 5.2))
 	stamina = clampf(stamina + (-17.0 if sprint and move.length()>0 else 14.0)*delta,0,100)
@@ -118,6 +118,7 @@ func _physics_process(delta):
 
 func recover():
 	global_position = last_safe + Vector3.UP*2
+	reset_physics_interpolation()
 	velocity = Vector3.ZERO
 
 func rounded_box() -> ArrayMesh:

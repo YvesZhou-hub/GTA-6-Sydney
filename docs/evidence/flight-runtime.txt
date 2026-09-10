@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15056 reserved=452 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":33916,"custom_landmarks_ms":27418,"mapped_city_ms":9993,"terrain_and_harbour_ms":3422}
+HARBOR_WORLD_READY buildings=15059 structure_components=20798
+CITY_STARTUP_MS 34535
+FLIGHT_QA started from Sydney runway; output=user-data/flight-qa
+FLIGHT_QA waypoint=harbour_south t=72.4 health=100.0
+FLIGHT_QA waypoint=opera_east t=156.2 health=100.0
+FLIGHT_QA waypoint=bridge_north t=183.3 health=100.0
+FLIGHT_QA waypoint=downwind t=211.2 health=100.0
+FLIGHT_QA waypoint=base t=369.0 health=100.0
+FLIGHT_QA waypoint=approach_gate t=434.1 health=100.0
+FLIGHT_QA waypoint=final t=486.8 health=100.0
+FLIGHT_QA_FINISHED {"distance_m":44373.091347985,"health":100.0,"pass":true,"reason":"completed","report":"user-data/flight-qa/flight-report.json","seconds":565.649999999814}

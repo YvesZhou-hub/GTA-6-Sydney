@@ -1,55 +1,329 @@
 extends Control
-var anchors:Dictionary={}
-var player_position=Vector3.ZERO
-var overview=false
-var runway_data:Array=[]
-var south_points=PackedVector2Array()
-var north_points=PackedVector2Array()
-func project_point(v:Vector3)->Vector2:
-	return Vector2(430+v.x*0.046,120+v.z*0.044) if overview else Vector2(390+v.x*0.34,580+v.z*0.34)
-func _draw():
-	draw_style_box(style(),Rect2(Vector2.ZERO,size))
-	var grid=Color(0.7,0.85,0.8,0.08)
-	for x in range(0,int(size.x),50): draw_line(Vector2(x,0),Vector2(x,size.y),grid)
-	for y in range(0,int(size.y),50): draw_line(Vector2(0,y),Vector2(size.x,y),grid)
-	if overview:
-		draw_overview()
-		return
-	var south=PackedVector2Array([Vector2(0,735),Vector2(0,490),Vector2(225,435),Vector2(345,360),Vector2(376,408),Vector2(380,535),Vector2(432,543),Vector2(480,415),Vector2(555,422),Vector2(550,568),Vector2(780,580),Vector2(780,735)])
-	var north=PackedVector2Array([Vector2(0,0),Vector2(780,0),Vector2(780,180),Vector2(470,185),Vector2(425,251),Vector2(365,208),Vector2(260,265),Vector2(0,220)])
-	draw_colored_polygon(south,Color("3c6262"))
-	draw_colored_polygon(north,Color("3c6262"))
-	draw_line(Vector2(365,395),Vector2(420,210),Color("d4c39a"),9)
-	var f=get_theme_default_font()
-	var names={"home":"STUDIO","quay":"CIRCULAR QUAY","opera":"OPERA HOUSE","rocks":"THE ROCKS","north":"MILSONS POINT","marina":"MARINA","helipad":"HELIPAD"}
-	for key in names:
-		if anchors.has(key):
-			var p=project_point(anchors[key])
-			draw_circle(p,5,Color("ecdbac"))
-			draw_string(f,p+Vector2(10,-8),names[key],HORIZONTAL_ALIGNMENT_LEFT,-1,14,Color("ecdbac"))
-	var player=project_point(player_position)
-	draw_circle(player,11,Color(0.4,1,0.82,0.22))
-	draw_circle(player,5,Color("8ff6c9"))
-	draw_string(f,Vector2(30,35),"N ↑    SYDNEY HARBOUR",HORIZONTAL_ALIGNMENT_LEFT,-1,18,Color("c6ddd5"))
-	draw_string(f,Vector2(30,size.y-26),"Schematic · 游戏示意图 / not a surveyed map",HORIZONTAL_ALIGNMENT_LEFT,-1,14,Color("9cbbb4"))
-func style()->StyleBoxFlat:
-	var s=StyleBoxFlat.new()
-	s.bg_color=Color(0.035,0.17,0.23,0.96)
-	s.set_corner_radius_all(12)
-	return s
+## Metre-for-metre map of the same geographic frame as the 3D world.
+## All base geometry is cached; mouse movement only changes the canvas transform.
+signal landmark_selected(key: String)
+class MapInk extends Node2D:
+	var owner_map
+	func _draw(): owner_map.paint(self)
 
-func draw_overview():
-	var f=get_theme_default_font()
-	draw_string(f,Vector2(30,35),"N ↑   AIRPORT ↔ HARBOUR",HORIZONTAL_ALIGNMENT_LEFT,-1,22,Color("ecdbac"))
-	for key in ["airport","opera","north"]:
-		if anchors.has(key):
-			var p=project_point(anchors[key])
-			draw_circle(p,6,Color("ecdbac"))
-			draw_string(f,p+Vector2(12,0),{"airport":"SYDNEY AIRPORT","opera":"OPERA HOUSE","north":"HARBOUR BRIDGE"}[key],HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("ecdbac"))
-	for runway in runway_data:
-		draw_line(project_point(runway.a),project_point(runway.b),Color("f4f0d8"),5)
-	if anchors.has("airport"):
-		draw_dashed_line(project_point(anchors.airport),project_point(anchors.opera),Color("7abda8"),2,10)
-	draw_circle(project_point(player_position),7,Color("8ff6c9"))
-	draw_string(f,Vector2(30,650),"中间区域：简化地形 / 未建街区",HORIZONTAL_ALIGNMENT_LEFT,-1,19,Color("c6ddd5"))
-	draw_string(f,Vector2(30,681),"位置保持真实距离；这是游戏路线示意图。",HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color("9cbbb4"))
+var anchors:Dictionary={}
+var landmarks:Array=[]
+var player_position:=Vector3.ZERO
+var player_heading:=0.0
+var target_key:=""
+var target_position:=Vector3.ZERO
+var target_name:=""
+var spawn_position:=Vector3.ZERO
+var has_spawn:=false
+var runway_data:Array=[]
+var map_center:=Vector2(0,-350)
+var pixels_per_metre:=0.26
+var view_name:="悉尼海港"
+var data_loaded:=false
+var data_counts:={"land":0,"roads":0,"buildings":0,"places":0}
+var _ink:MapInk
+var _land_mesh:ArrayMesh
+var _building_mesh:ArrayMesh
+var _simplified_mesh:ArrayMesh
+var _simplified_lines:=PackedVector2Array()
+var _simplified_hatching:=PackedVector2Array()
+var _road_lines:Dictionary={}
+var _coast_lines:=PackedVector2Array()
+var _footprint_lines:=PackedVector2Array()
+var _places:Array=[]
+var _named_roads:Array=[]
+var _dragging:=false
+var _drag_distance:=0.0
+var _labels:Array[Rect2]=[]
+var _source_note:="位置参考 OpenStreetMap · 普通建筑立面仍在细化"
+const ROAD_COLOURS={"major":Color("e6d5ad"),"street":Color("b9c8b1"),"path":Color("8db29b"),"rail":Color("c9a491")}
+const FOOTER_HEIGHT:=124.0
+
+func _ready():
+	clip_contents=true
+	mouse_filter=Control.MOUSE_FILTER_STOP
+	_ink=MapInk.new()
+	_ink.owner_map=self
+	add_child(_ink)
+	resized.connect(refresh)
+	load_map_data()
+
+func _points(values,offset:=Vector2.ZERO) -> PackedVector2Array:
+	var points:=PackedVector2Array()
+	if not values is Array: return points
+	for value in values:
+		if value is Array and value.size()>=2:
+			points.append(Vector2(float(value[0]),float(value[1]))+offset)
+	return points
+
+func _mesh(vertices:PackedVector2Array) -> ArrayMesh:
+	if vertices.is_empty(): return null
+	var arrays:=[]
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX]=vertices
+	var mesh:=ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+	return mesh
+
+func _append_lines(to:PackedVector2Array,points:PackedVector2Array,closed:=false):
+	for i in range(points.size()-1): to.append_array(PackedVector2Array([points[i],points[i+1]]))
+	if closed and points.size()>2 and not points[0].is_equal_approx(points[-1]): to.append_array(PackedVector2Array([points[-1],points[0]]))
+
+func load_map_data():
+	var file_path:="res://assets/city_map.json"
+	var data:Dictionary={}
+	if FileAccess.file_exists(file_path):
+		var parsed=JSON.parse_string(FileAccess.get_file_as_string(file_path))
+		if parsed is Dictionary: data=parsed
+	data_loaded=not data.is_empty()
+	var land_vertices:=PackedVector2Array()
+	var building_vertices:=PackedVector2Array()
+	var simplified_vertices:=PackedVector2Array()
+	_simplified_lines.clear()
+	_simplified_hatching.clear()
+	for patch in preload("res://scripts/airport_world.gd").SIMPLIFIED_TERRAIN:
+		var polygon:=_points(patch.outline)
+		for index in Geometry2D.triangulate_polygon(polygon): simplified_vertices.append(polygon[index])
+		_append_lines(_simplified_lines,polygon,true)
+		_append_hatching(polygon)
+	_simplified_mesh=_mesh(simplified_vertices)
+	_coast_lines.clear()
+	_footprint_lines.clear()
+	_road_lines={"major":PackedVector2Array(),"street":PackedVector2Array(),"path":PackedVector2Array(),"rail":PackedVector2Array()}
+	_named_roads.clear()
+	_places.clear()
+	data_counts={"land":0,"roads":0,"buildings":0,"places":0}
+	if data_loaded:
+		for land in data.get("land",[]):
+			var outline:=_points(land.get("outline",[]))
+			var triangles:=_points(land.get("triangles",[]))
+			if triangles.size()>0 and triangles.size()%3==0: land_vertices.append_array(triangles)
+			elif outline.size()>2:
+				for index in Geometry2D.triangulate_polygon(outline): land_vertices.append(outline[index])
+			_append_lines(_coast_lines,outline,true)
+			data_counts.land+=1
+	else:
+		# A missing optional city file shows the original surveyed coast/road lines,
+		# never invented filled shapes masquerading as geography.
+		var original=JSON.parse_string(FileAccess.get_file_as_string("res://assets/world_geography.json"))
+		if original is Dictionary:
+			data.roads=original.get("roads",[])
+			_append_lines(_coast_lines,_points(original.get("south_coast",[])))
+			_append_lines(_coast_lines,_points(original.get("north_coast",[])))
+	for road in data.get("roads",[]):
+		var points:=_points(road.get("points",[]))
+		if points.size()<2: continue
+		var tags:Dictionary=road.get("tags",{})
+		var highway:=str(tags.get("highway","residential"))
+		var category:="major" if highway in ["motorway","motorway_link","trunk","trunk_link","primary","primary_link","secondary"] else ("path" if highway in ["footway","path","steps","pedestrian","cycleway"] else ("rail" if tags.has("railway") else "street"))
+		var lines:PackedVector2Array=_road_lines[category]
+		_append_lines(lines,points)
+		_road_lines[category]=lines
+		var road_name:=str(road.get("name",tags.get("name","")))
+		if not road_name.is_empty(): _named_roads.append({"point":points[points.size()/2],"name":road_name})
+		data_counts.roads+=1
+	for building in data.get("buildings",[]):
+		# Building geometry is local to its surveyed centre; roads/coasts are world-space.
+		var centre_values=building.get("center",[0,0])
+		var centre:=Vector2(float(centre_values[0]),float(centre_values[1]))
+		var outline:=_points(building.get("outline",[]),centre)
+		if outline.size()<3: continue
+		if outline[0].is_equal_approx(outline[-1]): outline.remove_at(outline.size()-1)
+		var roof:=_points(building.get("roof",[]),centre)
+		if not roof.is_empty() and roof.size()%3==0: building_vertices.append_array(roof)
+		else:
+			for index in Geometry2D.triangulate_polygon(outline): building_vertices.append(outline[index])
+		_append_lines(_footprint_lines,outline,true)
+		for hole in building.get("holes",[]): _append_lines(_footprint_lines,_points(hole,centre),true)
+		data_counts.buildings+=1
+	for place in data.get("places",[]):
+		var point_values=place.get("point",[])
+		if not point_values is Array or point_values.size()<2: continue
+		var tags:Dictionary=place.get("tags",{})
+		var place_name:=str(place.get("name",tags.get("name",tags.get("brand",""))))
+		if place_name.is_empty(): continue
+		_places.append({"point":Vector2(float(point_values[0]),float(point_values[1])),"name":place_name,"shop":tags.has("shop") or tags.has("amenity")})
+		data_counts.places+=1
+	_land_mesh=_mesh(land_vertices)
+	_building_mesh=_mesh(building_vertices)
+	refresh()
+
+func refresh():
+	if is_instance_valid(_ink): _ink.queue_redraw()
+
+func _append_hatching(polygon:PackedVector2Array):
+	# Intersect evenly spaced diagonal lines with each actual game-terrain outline.
+	var low:=INF
+	var high:=-INF
+	for point in polygon:
+		low=minf(low,point.y-point.x)
+		high=maxf(high,point.y-point.x)
+	for diagonal in range(int(floor(low/220))*220,int(high)+1,220):
+		var hits:Array[Vector2]=[]
+		for i in polygon.size():
+			var a:=polygon[i]
+			var b:=polygon[(i+1)%polygon.size()]
+			var da:=a.y-a.x
+			var db:=b.y-b.x
+			if (da<=diagonal and db>diagonal) or (db<=diagonal and da>diagonal): hits.append(a.lerp(b,(diagonal-da)/(db-da)))
+		hits.sort_custom(func(a:Vector2,b:Vector2): return a.x<b.x)
+		for i in range(0,hits.size()-1,2): _simplified_hatching.append_array(PackedVector2Array([hits[i],hits[i+1]]))
+
+func view_center() -> Vector2: return Vector2(size.x*0.5,(size.y-FOOTER_HEIGHT-54)*0.5+54)
+func project_flat(point:Vector2) -> Vector2: return (point-map_center)*pixels_per_metre+view_center()
+func project_point(point:Vector3) -> Vector2: return project_flat(Vector2(point.x,point.z))
+func unproject_point(point:Vector2) -> Vector2: return (point-view_center())/pixels_per_metre+map_center
+
+func fit_area(bounds:Rect2):
+	map_center=bounds.get_center()
+	pixels_per_metre=clampf(minf((size.x-85)/maxf(bounds.size.x,1.0),(size.y-FOOTER_HEIGHT-85)/maxf(bounds.size.y,1.0)),0.012,2.8)
+	refresh()
+
+func show_preset(preset:String):
+	match preset:
+		"all":
+			view_name="悉尼 · 机场至 Manly"
+			var bounds:=Rect2(Vector2(-900,-1750),Vector2(2000,3000))
+			for value in anchors.values():
+				if value is Vector3: bounds=bounds.expand(Vector2(value.x,value.z))
+			for place in _places:
+				if "Manly Wharf"==str(place.name): bounds=bounds.expand(place.point)
+			for runway in runway_data:
+				bounds=bounds.expand(Vector2(runway.a.x,runway.a.z)).expand(Vector2(runway.b.x,runway.b.z))
+			fit_area(bounds.grow(650))
+		"manly":
+			view_name="Manly · 码头与海滩"
+			var at:=Vector3(6680,0,-6730)
+			for landmark in landmarks:
+				if "manly" in str(landmark.key).to_lower(): at=landmark.position; break
+			fit_area(Rect2(Vector2(at.x,at.z)-Vector2(1400,1650),Vector2(2800,3300)))
+		"airport":
+			view_name="Sydney Airport · YSSY"
+			fit_area(Rect2(Vector2(-5600,7250),Vector2(4700,5750)))
+		"player":
+			view_name="我的位置"
+			map_center=Vector2(player_position.x,player_position.z)
+			pixels_per_metre=maxf(pixels_per_metre,0.34)
+			refresh()
+		_:
+			view_name="悉尼海港 · 城市街区"
+			fit_area(Rect2(Vector2(-1550,-2000),Vector2(3600,4800)))
+
+func zoom_at(factor:float,screen_point:Vector2):
+	var before:=unproject_point(screen_point)
+	pixels_per_metre=clampf(pixels_per_metre*factor,0.012,2.8)
+	map_center=before-(screen_point-view_center())/pixels_per_metre
+	refresh()
+
+func _gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN] and event.pressed:
+			zoom_at(1.22 if event.button_index==MOUSE_BUTTON_WHEEL_UP else 1.0/1.22,event.position)
+			accept_event()
+		elif event.button_index==MOUSE_BUTTON_LEFT:
+			_dragging=event.pressed
+			if event.pressed: _drag_distance=0.0
+			elif _drag_distance<6.0:
+				for landmark in landmarks:
+					if project_point(landmark.position).distance_to(event.position)<17:
+						landmark_selected.emit(str(landmark.key))
+						break
+			accept_event()
+	elif event is InputEventMouseMotion and _dragging:
+		_drag_distance+=event.relative.length()
+		map_center-=event.relative/pixels_per_metre
+		refresh()
+		accept_event()
+	elif event is InputEventMagnifyGesture:
+		zoom_at(event.factor,event.position)
+		accept_event()
+	elif event is InputEventPanGesture:
+		map_center+=event.delta*18.0/pixels_per_metre
+		refresh()
+		accept_event()
+
+func _label(ink:Node2D,point:Vector2,text:String,color:Color,font_size:int=13,force:=false) -> bool:
+	var font=get_theme_default_font()
+	var extent=font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size)
+	var rect:=Rect2(point+Vector2(7,-extent.y),extent+Vector2(10,5))
+	if not Rect2(Vector2(18,63),size-Vector2(36,FOOTER_HEIGHT+70)).encloses(rect): return false
+	if not force:
+		for previous in _labels:
+			if previous.grow(5).intersects(rect): return false
+	_labels.append(rect)
+	ink.draw_string_outline(font,point+Vector2(10,-3),text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,3,Color("153d42"))
+	ink.draw_string(font,point+Vector2(10,-3),text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,color)
+	return true
+
+func paint(ink:Node2D):
+	ink.draw_rect(Rect2(Vector2.ZERO,size),Color("153d4d"))
+	ink.draw_set_transform(view_center()-map_center*pixels_per_metre,0,Vector2.ONE*pixels_per_metre)
+	if _simplified_mesh!=null:
+		ink.draw_mesh(_simplified_mesh,null,Transform2D.IDENTITY,Color("665f4f"))
+		ink.draw_multiline(_simplified_hatching,Color("827962"),0.8/pixels_per_metre,true)
+		ink.draw_multiline(_simplified_lines,Color("a99b7e"),1.0/pixels_per_metre,true)
+	if _land_mesh!=null: ink.draw_mesh(_land_mesh,null,Transform2D.IDENTITY,Color("496e65"))
+	if pixels_per_metre>0.08 and _building_mesh!=null: ink.draw_mesh(_building_mesh,null,Transform2D.IDENTITY,Color("729080"))
+	if not _coast_lines.is_empty(): ink.draw_multiline(_coast_lines,Color("b4c7ac"),maxf(1.0/pixels_per_metre,1.0),true)
+	if pixels_per_metre>0.55 and not _footprint_lines.is_empty(): ink.draw_multiline(_footprint_lines,Color("a6b69d"),0.65/pixels_per_metre,true)
+	for category in ["path","street","major","rail"]:
+		if category=="path" and pixels_per_metre<0.2: continue
+		var points:PackedVector2Array=_road_lines.get(category,PackedVector2Array())
+		if not points.is_empty(): ink.draw_multiline(points,ROAD_COLOURS[category],maxf((1.8 if category=="major" else 0.85)/pixels_per_metre,8.0 if category=="major" else 3.4),true)
+	var connector=anchors.get("airport_connector",[])
+	for i in range(connector.size()-1):
+		var a:Vector3=connector[i]
+		var b:Vector3=connector[i+1]
+		ink.draw_dashed_line(Vector2(a.x,a.z),Vector2(b.x,b.z),Color("c9bfa1"),1.5/pixels_per_metre,7.0/pixels_per_metre,true,true)
+	for runway in runway_data: ink.draw_line(Vector2(runway.a.x,runway.a.z),Vector2(runway.b.x,runway.b.z),Color("f0e4c5"),maxf(3.0/pixels_per_metre,45.0),true)
+	ink.draw_set_transform(Vector2.ZERO)
+	_labels.clear()
+	var viewport_rect:=Rect2(Vector2(10,62),size-Vector2(20,FOOTER_HEIGHT+69))
+	if not target_key.is_empty():
+		var from:=project_point(player_position)
+		var to:=project_point(target_position)
+		ink.draw_dashed_line(from,to,Color("f2ce85"),2.0,9.0,true,true)
+	for landmark in landmarks:
+		var point:=project_point(landmark.position)
+		if not viewport_rect.has_point(point): continue
+		var selected:bool=str(landmark.key)==target_key
+		ink.draw_circle(point,8 if selected else 4.5,Color("ffdc8d") if selected else Color("dfd6b6"),true,-1,true)
+		_label(ink,point,str(landmark.title),Color("ffdfa0") if selected else Color("f0e2bc"),14 if selected else 12)
+	if pixels_per_metre>0.38:
+		for road in _named_roads:
+			var point:=project_flat(road.point)
+			if viewport_rect.has_point(point): _label(ink,point,road.name,Color("c6d0b5"),12)
+	if pixels_per_metre>0.62:
+		for place in _places:
+			var point:=project_flat(place.point)
+			if not viewport_rect.has_point(point): continue
+			if _label(ink,point,place.name,Color("e1c9a1") if place.shop else Color("cde0be"),12): ink.draw_circle(point,2,Color("e4be81"))
+	if has_spawn:
+		var spawned:=project_point(spawn_position)
+		if viewport_rect.has_point(spawned):
+			ink.draw_arc(spawned,9,0,TAU,24,Color("f4d882"),2,true)
+			_label(ink,spawned,"新载具",Color("f4d882"),13)
+	var player:=project_point(player_position)
+	if viewport_rect.has_point(player):
+		ink.draw_circle(player,12,Color(0.4,1,0.82,0.22),true,-1,true)
+		ink.draw_circle(player,5,Color("8ff6c9"),true,-1,true)
+		var forward:=Vector2(-sin(player_heading),-cos(player_heading))*15.0
+		ink.draw_line(player,player+forward,Color("c8ffe3"),2.2,true)
+		_label(ink,player,"你在这里",Color("b9f8d6"),13)
+	var font=get_theme_default_font()
+	ink.draw_rect(Rect2(Vector2.ZERO,Vector2(size.x,54)),Color("0c2936"))
+	ink.draw_string(font,Vector2(22,34),"N ↑   "+view_name,HORIZONTAL_ALIGNMENT_LEFT,-1,20,Color("eee6c9"))
+	ink.draw_rect(Rect2(Vector2(0,size.y-FOOTER_HEIGHT),Vector2(size.x,FOOTER_HEIGHT)),Color("0c2936"))
+	var distance:=pow(10.0,floor(log(120.0/pixels_per_metre)/log(10.0)))
+	if distance*pixels_per_metre<55: distance*=2
+	var length_px:=distance*pixels_per_metre
+	var origin:=Vector2(24,size.y-104)
+	ink.draw_line(origin,origin+Vector2(length_px,0),Color("e5dfc6"),2)
+	ink.draw_line(origin+Vector2(0,-4),origin+Vector2(0,4),Color("e5dfc6"),2)
+	ink.draw_line(origin+Vector2(length_px,-4),origin+Vector2(length_px,4),Color("e5dfc6"),2)
+	ink.draw_string(font,origin+Vector2(length_px+10,5),("%.1f km"%(distance/1000.0)) if distance>=1000 else ("%d m"%distance),HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("e5dfc6"))
+	ink.draw_string(font,Vector2(size.x-310,size.y-99),"滚轮缩放 · 拖动平移 · 点击地标指引",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("b2c9be"))
+	ink.draw_string(font,Vector2(24,size.y-73),"斜纹：机场及中间走廊为游戏简化地形，岸线未实测",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("c5b394"))
+	ink.draw_string(font,Vector2(24,size.y-42),_source_note,HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("b9c6ad"))
+	ink.draw_string(font,Vector2(24,size.y-19),"© OpenStreetMap contributors · ODbL · openstreetmap.org/copyright",HORIZONTAL_ALIGNMENT_LEFT,-1,12,Color("91b2ad"))
+	if not data_loaded: ink.draw_string(font,Vector2(28,86),"扩展城市地图等待数据载入；当前显示已核实的海港岸线与道路。",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("efd28c"))

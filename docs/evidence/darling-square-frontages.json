@@ -1,0 +1,608 @@
+{
+  "checks": [
+    {
+      "name": "12 independently researched street frontage records",
+      "passed": true
+    },
+    {
+      "name": "Edition Roasters integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Edition Roasters unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Edition Roasters projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Edition Roasters has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_coal outward winding",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_slate outward winding",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "edition Facade_stone outward winding",
+      "passed": true
+    },
+    {
+      "name": "Matcha-Ya integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Matcha-Ya unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Matcha-Ya projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Matcha-Ya has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_coal outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_matcha outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_white outward winding",
+      "passed": true
+    },
+    {
+      "name": "matcha Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "Nakano Darling integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Nakano Darling unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Nakano Darling projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Nakano Darling has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "nakano Facade_coal outward winding",
+      "passed": true
+    },
+    {
+      "name": "nakano Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "nakano Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "nakano Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "nakano Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "nakano Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "nakano Facade_stone outward winding",
+      "passed": true
+    },
+    {
+      "name": "Marrickville Pork Roll integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Marrickville Pork Roll unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Marrickville Pork Roll projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Marrickville Pork Roll has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "pork_roll Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "pork_roll Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "pork_roll Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "pork_roll Facade_red outward winding",
+      "passed": true
+    },
+    {
+      "name": "pork_roll Facade_ochre outward winding",
+      "passed": true
+    },
+    {
+      "name": "pork_roll Facade_slate outward winding",
+      "passed": true
+    },
+    {
+      "name": "KUKI integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "KUKI unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "KUKI projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "KUKI has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "kuki Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "kuki Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "kuki Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "kuki Facade_peach outward winding",
+      "passed": true
+    },
+    {
+      "name": "kuki Facade_pink_stone outward winding",
+      "passed": true
+    },
+    {
+      "name": "kuki Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "Kwang Jang Pocha integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Kwang Jang Pocha unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Kwang Jang Pocha projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Kwang Jang Pocha has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_coal outward winding",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_red outward winding",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_blue outward winding",
+      "passed": true
+    },
+    {
+      "name": "kwang Facade_ochre outward winding",
+      "passed": true
+    },
+    {
+      "name": "Wingboy integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Wingboy unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Wingboy projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Wingboy has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_green outward winding",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "wingboy Facade_coal outward winding",
+      "passed": true
+    },
+    {
+      "name": "Holy Basil integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Holy Basil unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Holy Basil projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Holy Basil has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "holy_basil Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "holy_basil Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "holy_basil Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "holy_basil Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "holy_basil Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "holy_basil Facade_purple outward winding",
+      "passed": true
+    },
+    {
+      "name": "Gelato Messina integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Gelato Messina unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Gelato Messina projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Gelato Messina has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_white outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_ochre outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "messina Facade_leaf outward winding",
+      "passed": true
+    },
+    {
+      "name": "Kürtősh integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Kürtősh unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Kürtősh projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Kürtősh has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "kurtosh Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "kurtosh Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "kurtosh Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "kurtosh Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "kurtosh Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "kurtosh Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "kurtosh Facade_ochre outward winding",
+      "passed": true
+    },
+    {
+      "name": "DOPA Donburi integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "DOPA Donburi unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "DOPA Donburi projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "DOPA Donburi has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "dopa Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "dopa Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "dopa Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "dopa Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "dopa Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "dopa Facade_red outward winding",
+      "passed": true
+    },
+    {
+      "name": "dopa Facade_white outward winding",
+      "passed": true
+    },
+    {
+      "name": "Shortstop Coffee & Donuts integrated persistent structure",
+      "passed": true
+    },
+    {
+      "name": "Shortstop Coffee & Donuts unobstructed door approach",
+      "passed": true
+    },
+    {
+      "name": "Shortstop Coffee & Donuts projected to real outside building edge",
+      "passed": true
+    },
+    {
+      "name": "Shortstop Coffee & Donuts has authored geometry beyond signage",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_frame outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_cream outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_gold outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_wood outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_warm_glass outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_ochre outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_blue outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_coal outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_matcha outward winding",
+      "passed": true
+    },
+    {
+      "name": "shortstop Facade_stone outward winding",
+      "passed": true
+    },
+    {
+      "name": "distinct material and geometry compositions",
+      "passed": true
+    },
+    {
+      "name": "indoor Exchange tenants not transplanted onto lane",
+      "passed": true
+    },
+    {
+      "name": "81 Steam Mill Lane center walking probes clear",
+      "passed": true
+    },
+    {
+      "name": "frontage damage persists with unique shop ID",
+      "passed": true
+    },
+    {
+      "name": "frontage destruction restores from world state",
+      "passed": true
+    },
+    {
+      "name": "repair restores frontage geometry and collision",
+      "passed": true
+    }
+  ],
+  "composition_surfaces": {
+    "dopa": 7,
+    "edition": 8,
+    "holy_basil": 6,
+    "kuki": 6,
+    "kurtosh": 7,
+    "kwang": 8,
+    "matcha": 9,
+    "messina": 9,
+    "nakano": 7,
+    "pork_roll": 6,
+    "shortstop": 11,
+    "wingboy": 8
+  },
+  "passed": true,
+  "user_saves_touched": false
+}

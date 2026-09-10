@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "detail": 0,
+      "name": "shared OSM node joins separate ways and different widths",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "dead-end butt cap does not grow into unmapped land",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "centerlines remain identical to the source",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "local road join uses spatial material batches",
+      "passed": true
+    },
+    {
+      "detail": 0.0,
+      "name": "hole fully inside a road junction remains actually open",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "excavation clipping preserves surrounding pavement",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "overlapping pedestrian and asphalt surfaces are geometrically disjoint",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "pedestrian approach survives outside carriageway",
+      "passed": true
+    },
+    {
+      "detail": 131,
+      "name": "Fairy Bower Road source fixture reproduces old strip gaps",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "Fairy Bower Road every reproduced gap is paved",
+      "passed": true
+    },
+    {
+      "detail": 185,
+      "name": "Darling pyramidal street source fixture reproduces old strip gaps",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "Darling pyramidal street every reproduced gap is paved",
+      "passed": true
+    },
+    {
+      "detail": 0.0,
+      "name": "Darling street native artifact has no coplanar material overlap",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "all city roads keep the original 4.585m visible surface",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "all city road triangles face upward without degenerates",
+      "passed": true
+    },
+    {
+      "detail": 0.0,
+      "name": "both real metro holes contain no road or join triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "all city roads batch below original segment instance count",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "stats": {
+    "build_ms": 2517,
+    "draw_groups": 1817,
+    "joins": 49529,
+    "segments": 67462,
+    "triangles": 782256
+  }
+}

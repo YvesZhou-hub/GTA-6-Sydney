@@ -2,10 +2,10 @@ config_version=5
 
 [application]
 config/name="Harbourlife · 悉尼海港"
-run/main_scene="res://main.tscn"
+run/main_scene="res://bootstrap.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://assets/icon.svg"
-config/version="0.1.0"
+config/version="0.1.1"
 
 [display]
 window/size/viewport_width=1440
@@ -25,6 +25,7 @@ environment/defaults/default_clear_color=Color(0.49,0.68,0.79,1)
 
 [physics]
 common/physics_ticks_per_second=60
+common/physics_interpolation=true
 3d/default_gravity=9.81
 
 [debug]

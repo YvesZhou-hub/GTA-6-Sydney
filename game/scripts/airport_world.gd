@@ -13,6 +13,13 @@ const AIRFIELD_Y := 6.4
 # Every connected physical airside paving top shares this datum.
 # Raised paint remains visual-only; even small collider steps damage fast aircraft.
 const PAVEMENT_TOP := AIRFIELD_Y + 0.06
+const SIMPLIFIED_TERRAIN := [
+	{"id":"Simplified_City_Corridor","outline":[[-7800,1900],[2600,1900],[2900,5000],[1400,7200],[-1100,8000],[-5100,8600],[-7800,8200]],"elevation":4.35,"material":"scrub"},
+	{"id":"Airport_North_Land","outline":[[-5300,7000],[-2200,7000],[-900,8600],[-1100,9430],[-2050,9920],[-3570,9600],[-4450,9770],[-5450,9100]],"elevation":6.25},
+	{"id":"Airport_West_Coast","outline":[[-7800,8200],[-5450,8200],[-4400,9470],[-4150,10700],[-4500,12900],[-4850,14700],[-7800,14800]],"elevation":4.8},
+	{"id":"Main_Runway_Peninsula","outline":[[-3650,9240],[-2980,9000],[-2500,11570],[-2590,11890],[-2870,11940],[-3020,11780]],"elevation":6.25},
+	{"id":"Parallel_Runway_Peninsula","outline":[[-2350,9550],[-1660,9410],[-1190,12180],[-1290,12620],[-1710,12710],[-1820,12330]],"elevation":6.25}
+]
 const RUNWAY_SPECS := [
 	{"id": "16R_34L", "a": [-33.92940139770508,151.1719970703125], "b": [-33.964298248291016,151.18099975585938], "length": 3962.0, "width": 45.0, "a_name": "16R", "b_name": "34L"},
 	{"id": "16L_34R", "a": [-33.94960021972656,151.18800354003906], "b": [-33.971099853515625,151.19400024414062], "length": 2438.0, "width": 45.0, "a_name": "16L", "b_name": "34R"},
@@ -60,7 +67,11 @@ func _init_materials() -> void:
 	_materials["taxi"] = _mat(Color("464c4b"), 0.9)
 	_materials["shoulder"] = _mat(Color("868579"), 0.93)
 	_materials["grass"] = _mat(Color("667361"), 1.0)
-	_materials["scrub"] = _mat(Color("687661"), 1.0)
+	# The simplified corridor shares the city's world-space ground material;
+	# a flat, differently shaded patch looked like a huge wall in aerial views.
+	var scrub:=ShaderMaterial.new()
+	scrub.shader=preload("res://shaders/world_landcover.gdshader")
+	_materials["scrub"] = scrub
 	_materials["concrete"] = _mat(Color("a6aaa4"), 0.88)
 	_materials["white"] = _mat(Color("e8e5d5"), 0.72)
 	_materials["yellow"] = _mat(Color("dbc56b"), 0.65)
@@ -156,11 +167,8 @@ func _land(id: String, points: Array, elevation: float, material: String = "gras
 func _build_terrain() -> void:
 	# This deliberately empty continuous land corridor is a game adjustment.
 	# Botany Bay stays open south/east of the two runway peninsulas.
-	_land("Simplified_City_Corridor", [[-7800,1900],[2600,1900],[2900,5000],[1400,7200],[-1100,8000],[-5100,8600],[-7800,8200]],4.35,"scrub")
-	_land("Airport_North_Land", [[-5300,7000],[-2200,7000],[-900,8600],[-1100,9430],[-2050,9920],[-3570,9600],[-4450,9770],[-5450,9100]],6.25)
-	_land("Airport_West_Coast", [[-7800,8200],[-5450,8200],[-4400,9470],[-4150,10700],[-4500,12900],[-4850,14700],[-7800,14800]],4.8)
-	_land("Main_Runway_Peninsula", [[-3650,9240],[-2980,9000],[-2500,11570],[-2590,11890],[-2870,11940],[-3020,11780]],6.25)
-	_land("Parallel_Runway_Peninsula", [[-2350,9550],[-1660,9410],[-1190,12180],[-1290,12620],[-1710,12710],[-1820,12330]],6.25)
+	for patch in SIMPLIFIED_TERRAIN:
+		_land(patch.id,patch.outline,patch.elevation,patch.get("material","grass"))
 
 func _build_runway(spec: Dictionary) -> void:
 	var source_a := geo(float(spec.a[0]), float(spec.a[1]))

@@ -1,4 +1,8 @@
-HARBOR_WORLD_READY buildings=339 structure_components=13437
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=15056 reserved=452 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":17825,"custom_landmarks_ms":11838,"mapped_city_ms":11364,"terrain_and_harbour_ms":3473}
+HARBOR_WORLD_READY buildings=15059 structure_components=20793
 WORLD_DAMAGE wall_initially_collides PASS
 WORLD_DAMAGE local_wall_removed PASS
 WORLD_DAMAGE local_mesh_vertices_removed PASS

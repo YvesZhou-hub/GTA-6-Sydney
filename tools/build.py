@@ -25,6 +25,8 @@ def run(name,args):
  log=(reports/f'{name}.log').read_text()
  if 'SCRIPT ERROR:' in log or (name=='export' and 'ERROR:' in log):
   raise RuntimeError(log[-4000:])
+ if name=='bundle-smoke' and 'HARBOR_WORLD_READY' not in log:
+  raise RuntimeError('Exported application did not finish assembling the city: '+log[-4000:])
 run('import',[engine,'--headless','--path',root/'game','--editor','--import','--quit'])
 with tempfile.TemporaryDirectory(prefix='.staging-',dir=output) as stage:
  bundle=pathlib.Path(stage)/'Harbourlife.app'

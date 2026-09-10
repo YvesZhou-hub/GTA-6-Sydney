@@ -2,7 +2,9 @@ game/.godot/
 .DS_Store
 tools/runtime/
 dist/
+tmp/
 tools/media-venv/
+tools/map-runtime/
 __pycache__/
 *.py[cod]
 .env

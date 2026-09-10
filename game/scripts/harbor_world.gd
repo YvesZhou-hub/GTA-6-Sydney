@@ -16,6 +16,7 @@ var destroyed: Dictionary = {}
 var partial_damage: Dictionary = {}
 var rubble: Array[Node3D] = []
 var geography: Dictionary = {}
+var map_snapshot: Dictionary = {}
 var south_polygon: PackedVector2Array
 var north_polygon: PackedVector2Array
 var road_segments: Array = []
@@ -25,6 +26,7 @@ var _batch_foliage: Dictionary = {}
 var _visual_cells: Dictionary = {}
 var _dirty_cells: Dictionary = {}
 var _visual_refresh_queued := false
+var _bridge_collision_pending := false
 var _rng := RandomNumberGenerator.new()
 var _building_count := 0
 var _ready_complete := false
@@ -33,14 +35,31 @@ var _building_plots: Array[AABB] = []
 var _distant_visual_plots: Array[AABB] = []
 const GROUND := 4.5
 const MAX_RUBBLE := 96
+const BRIDGE_CORRIDOR := [Vector2(-310,-170),Vector2(-336.75,-173.06),Vector2(-325.70848,-194.36771),Vector2(-83,-662),Vector2(149,-1109),Vector2(353.49109,-1502.99791),Vector2(370,-1580)]
+const CityMap = preload("res://scripts/city_map.gd")
+const LANDMARK_MODELS = [
+	preload("res://scripts/city_landmarks.gd"),
+	preload("res://scripts/manly_landmarks.gd"),
+	preload("res://scripts/bank_landmarks.gd"),
+	preload("res://scripts/metro_entrances.gd"),
+	preload("res://scripts/darling_square_frontages.gd"),
+	preload("res://scripts/quay_landmarks.gd"),
+	preload("res://scripts/cyber_landmarks.gd"),
+	preload("res://scripts/icc_landmarks.gd")
+]
 const FACADE = preload("res://assets/world_facade.gdshader")
 const WATER = preload("res://shaders/water.gdshader")
 const LANDCOVER = preload("res://shaders/world_landcover.gdshader")
+var _box_meshes: Dictionary={}
+var _mesh_array_cache: Dictionary={}
 
 func _ready() -> void:
+	var build_started:=Time.get_ticks_msec()
+	var timings:Dictionary={}
 	_rng.seed = 940219
 	_make_materials()
 	geography = JSON.parse_string(FileAccess.get_file_as_string("res://assets/world_geography.json"))
+	map_snapshot = CityMap.data()
 	_build_land()
 	_build_water()
 	_build_streets()
@@ -48,18 +67,27 @@ func _ready() -> void:
 	_build_opera()
 	_build_quay()
 	_build_home()
-	_build_neighborhoods()
-	_build_north()
-	_build_frontages()
-	_build_gardens()
+	timings["terrain_and_harbour_ms"]=Time.get_ticks_msec()-build_started
+	CityMap.build_buildings(self,map_snapshot)
+	CityMap.build_places(self,map_snapshot)
+	timings["mapped_city_ms"]=Time.get_ticks_msec()-build_started
+	for model in LANDMARK_MODELS:
+		model.build(self)
+		if model.has_method("metadata"):
+			for item in model.metadata():
+				if item.has("center") and not anchors.has(item.id): anchors[item.id]=item.get("arrival",item.center)
+	CityMap.build_vegetation(self,map_snapshot)
 	_build_observatory()
 	_build_helipad()
-	_polish_landscape_visuals()
+	timings["custom_landmarks_ms"]=Time.get_ticks_msec()-build_started
 	_flush_batches()
 	for id in structures:
 		for child in structures[id]["node"].get_children():
 			if child is MeshInstance3D: child.set_meta("intact_material",child.material_override)
 	_build_structure_batches()
+	timings["complete_ms"]=Time.get_ticks_msec()-build_started
+	set_meta("build_timings",timings)
+	print("CITY_BUILD_TIMINGS ",JSON.stringify(timings))
 	_ready_complete = true
 	print("HARBOR_WORLD_READY buildings=%s structure_components=%s" % [_building_count, structures.size()])
 
@@ -128,8 +156,11 @@ func _surface_texture(key: String) -> ImageTexture:
 	return ImageTexture.create_from_image(im)
 
 func _box(parent: Node3D, pos: Vector3, size: Vector3, key: String, collide: bool = false) -> MeshInstance3D:
-	var mesh := BoxMesh.new()
-	mesh.size = size
+	if not _box_meshes.has(size):
+		var cube:=BoxMesh.new()
+		cube.size=size
+		_box_meshes[size]=cube
+	var mesh: BoxMesh=_box_meshes[size]
 	var n := MeshInstance3D.new()
 	n.mesh = mesh
 	n.material_override = materials[key]
@@ -210,32 +241,75 @@ func _build_structure_batches() -> void:
 			var instance := MeshInstance3D.new()
 			instance.name = "Architecture_%s_%s"%[cell.x,cell.y]
 			add_child(instance)
-			_visual_cells[cell] = {"ids":[],"instance":instance}
+			var detail := MeshInstance3D.new()
+			detail.name="FacadeDetail_%s_%s"%[cell.x,cell.y]
+			detail.visibility_range_end=320.0
+			detail.visibility_range_end_margin=60.0
+			detail.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			add_child(detail)
+			_visual_cells[cell] = {"ids":[],"instance":instance,"detail":detail}
 		_visual_cells[cell]["ids"].append(id)
 		for child in structures[id]["node"].get_children():
 			if child is MeshInstance3D: child.visible = false
 	for cell in _visual_cells: _rebuild_visual_cell(cell)
 
 func _rebuild_visual_cell(cell: Vector2i) -> void:
-	var groups: Dictionary = {}
+	var groups: Dictionary = {false:{},true:{}}
 	var data: Dictionary = _visual_cells[cell]
 	for id in data["ids"]:
 		if destroyed.has(id): continue
 		var node: Node3D = structures[id]["node"]
+		for cpu_surface in structures[id].get("surfaces",[]):
+			var target: Dictionary=groups[bool(cpu_surface.get("near",false))]
+			var material: Material=materials.rubble if float(partial_damage.get(id,0.0))>0.22 else cpu_surface.material
+			var key: int=material.get_instance_id()
+			if not target.has(key):
+				var surface:=SurfaceTool.new()
+				surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+				surface.set_material(material)
+				target[key]=surface
+			var arrays: Array=cpu_surface.arrays
+			var vertices: PackedVector3Array=node.transform*arrays[Mesh.ARRAY_VERTEX]
+			var normals: PackedVector3Array=Transform3D(node.basis,Vector3.ZERO)*arrays[Mesh.ARRAY_NORMAL]
+			var uv: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV]
+			for index in arrays[Mesh.ARRAY_INDEX]:
+				target[key].set_normal(normals[index])
+				target[key].set_uv(uv[index])
+				target[key].add_vertex(vertices[index])
 		for child in node.get_children():
 			if not child is MeshInstance3D: continue
+			var target: Dictionary=groups[bool(child.get_meta("near_facade",false))]
 			var material: Material = child.material_override
 			var key: int = material.get_instance_id()
-			if not groups.has(key):
+			if not target.has(key):
 				var surface := SurfaceTool.new()
 				surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 				surface.set_material(material)
-				groups[key] = surface
-			for surface_index in range(child.mesh.get_surface_count()):
-				groups[key].append_from(child.mesh,surface_index,node.transform*child.transform)
-	var mesh := ArrayMesh.new()
-	for key in groups: groups[key].commit(mesh)
-	data["instance"].mesh = mesh if groups.size()>0 else null
+				target[key] = surface
+			if not _mesh_array_cache.has(child.mesh):
+				var cached:Array=[]
+				for surface_index in child.mesh.get_surface_count(): cached.append(child.mesh.surface_get_arrays(surface_index))
+				_mesh_array_cache[child.mesh]=cached
+			for arrays in _mesh_array_cache[child.mesh]:
+				_append_cached_arrays(target[key],arrays,node.transform*child.transform)
+	for near in [false,true]:
+		var mesh := ArrayMesh.new()
+		for key in groups[near]: groups[near][key].commit(mesh)
+		data["detail" if near else "instance"].mesh = mesh if groups[near].size()>0 else null
+
+func _append_cached_arrays(surface: SurfaceTool, arrays: Array, pose: Transform3D) -> void:
+	# Native Metal readback is paid once per source mesh, including the thousands
+	# of repeated mullions/treads. Damage rebuilds reuse the same CPU geometry.
+	var vertices: PackedVector3Array=pose*arrays[Mesh.ARRAY_VERTEX]
+	var normal_basis:=pose.basis.inverse().transposed()
+	var normals: PackedVector3Array=Transform3D(normal_basis,Vector3.ZERO)*arrays[Mesh.ARRAY_NORMAL]
+	var uv: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV] if arrays[Mesh.ARRAY_TEX_UV]!=null else PackedVector2Array()
+	var indices: PackedInt32Array=arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX]!=null else PackedInt32Array()
+	for cursor in (vertices.size() if indices.is_empty() else indices.size()):
+		var index:int=cursor if indices.is_empty() else indices[cursor]
+		surface.set_normal(normals[index].normalized())
+		surface.set_uv(uv[index] if not uv.is_empty() else Vector2.ZERO)
+		surface.add_vertex(vertices[index])
 
 func _mark_visual_dirty(id: String) -> void:
 	if not structures[id].has("cell"): return
@@ -291,6 +365,29 @@ func _structure_mesh(id: String, mesh: ArrayMesh, pos: Vector3, key: String, str
 	structures[id] = {"node":body,"position":pos+basis*bounds.get_center(),"half":bounds.size*0.5,"basis":basis,"strength":strength,"color":key}
 	return body
 
+func _structure_arrays(id: String, arrays: Array, pos: Vector3, key: String, strength: float) -> StaticBody3D:
+	# Ordinary mapped buildings retain CPU geometry and independent physics.
+	# Only the final spatial cell mesh is uploaded to Metal, avoiding tens of
+	# thousands of create-mesh/readback/upload cycles during native startup.
+	var body:=StaticBody3D.new()
+	body.name=id.replace("/","_")
+	body.position=pos
+	body.add_to_group("world_structure")
+	body.set_meta("damage_id",id)
+	add_child(body)
+	var vertices: PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+	var faces:=PackedVector3Array()
+	for index in arrays[Mesh.ARRAY_INDEX]: faces.append(vertices[index])
+	var shape:=ConcavePolygonShape3D.new()
+	shape.set_faces(faces)
+	var collision:=CollisionShape3D.new()
+	collision.shape=shape
+	body.add_child(collision)
+	var bounds:=AABB(vertices[0],Vector3.ZERO)
+	for vertex in vertices: bounds=bounds.expand(vertex)
+	structures[id]={"node":body,"position":pos+bounds.get_center(),"half":bounds.size*0.5,"basis":Basis.IDENTITY,"strength":strength,"color":key,"surfaces":[{"arrays":arrays,"material":materials[key],"near":false}]}
+	return body
+
 func _array_mesh(vertices: PackedVector3Array, indices: PackedInt32Array, uv: PackedVector2Array = PackedVector2Array()) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -316,17 +413,7 @@ func _build_land() -> void:
 	south_polygon.append_array(PackedVector2Array([Vector2(2100,1350),Vector2(-1000,1350),Vector2(-1000,650)]))
 	for p in geography["north_coast"]: north_polygon.append(Vector2(p[0],p[1]))
 	north_polygon.append_array(PackedVector2Array([Vector2(2200,-2800),Vector2(-1250,-2800),Vector2(-1250,-1710)]))
-	for poly in [south_polygon,north_polygon]:
-		var mesh := _land_mesh(poly)
-		var n := MeshInstance3D.new()
-		n.mesh = mesh
-		n.material_override = materials["north_landcover"] if poly==north_polygon else materials["paving"]
-		add_child(n)
-		var body := StaticBody3D.new()
-		var c := CollisionShape3D.new()
-		c.shape = mesh.create_trimesh_shape()
-		body.add_child(c)
-		add_child(body)
+	CityMap.build_terrain(self,map_snapshot)
 	for shore in [geography["south_coast"],geography["north_coast"]]:
 		for i in range(shore.size()-1):
 			var a := Vector3(shore[i][0],1.15,shore[i][1])
@@ -351,6 +438,9 @@ func _build_land() -> void:
 func _build_water() -> void:
 	var water_mat := ShaderMaterial.new()
 	water_mat.shader = WATER
+	var exclusions:=preload("res://scripts/metro_entrances.gd").water_exclusion_rects()
+	water_mat.set_shader_parameter("dry_rect_a",exclusions[0])
+	water_mat.set_shader_parameter("dry_rect_b",exclusions[1])
 	for x in range(-3,4):
 		for z in range(-4,3):
 			var plane := PlaneMesh.new()
@@ -400,227 +490,23 @@ func _road(a: Vector3, b: Vector3, width: float = 13.0, stripes: bool = true, re
 			_batch_box(a+d.normalized()*(n+2.0)+Vector3(0,0.043,0),Vector3(0.13,0.02,4.0),"white",basis)
 
 func _build_streets() -> void:
-	for way in geography["roads"]:
-		var points: Array = way["points"]
-		for i in range(points.size()-1):
-			var a := Vector3(points[i][0],GROUND+0.055,points[i][1])
-			var b := Vector3(points[i+1][0],GROUND+0.055,points[i+1][1])
-			if a.z < -1760 or a.z>740: continue
-			_road(a,b,12.0 if way["name"]!="Hickson Road" else 15.0)
-	# Additional connected service streets are intentionally fictional infill, not claimed as surveyed roads.
-	for z in [-170,-30,155,310,470,620]:
-		_road(Vector3(-800,4.57,z),Vector3(-70 if z<100 else 225,4.57,z),12.0)
-	for x in [-800,-630,-465]:
-		_road(Vector3(x,4.57,-270),Vector3(x,4.57,690),13.0)
-	_road(Vector3(-210,4.57,155),Vector3(230,4.57,205),17)
-	_road(Vector3(235,4.57,175),Vector3(292,4.57,-120),12)
-	_road(Vector3(-545,4.57,-270),Vector3(-545,4.57,-350),12)
-	for z in [-1250,-1400,-1580,-1730]:
-		_road(Vector3(25 if z<-1400 else 225,4.57,z),Vector3(685,4.57,z),12)
-	for x in [370,530,685]:
-		_road(Vector3(x,4.57,-1190),Vector3(x,4.57,-1740),13)
-	# Paving accents, lighting and actual street furniture along the primary promenade.
-	for z in range(-530,120,35):
-		var x: float = -31.0 if z>-300 else -30.0+(z+300)*0.07
-		_lamp(Vector3(x-10,GROUND,z))
-		if z%70==0: _bench(Vector3(x-17,GROUND,z),-PI*0.5)
-	for x in range(-165,220,32):
-		_lamp(Vector3(x,GROUND,150))
-		if x%2==1: _tree(Vector3(x,GROUND,225),0.7)
-	for pos in [Vector3(-210,6.4,-172),Vector3(120,6.4,174),Vector3(310,6.4,-1220),Vector3(-580,6.4,-312)]:
-		_sign(pos,"HARBOURLIFE",0.0,Color("d8c69d"))
+	CityMap.build_roads(self,map_snapshot)
+
 
 func _bridge_pos(t: float, y: float = 54.0, across: float = 0.0) -> Vector3:
 	var dir := Vector3(232,0,-447).normalized()
 	return Vector3(-83,y,-662)+dir*t+Vector3(-dir.z,0,dir.x)*across
 
 func _build_bridge() -> void:
-	var dir := Vector3(232,0,-447).normalized()
-	var right := Vector3(-dir.z,0,dir.x)
-	var basis := Basis(right,Vector3.UP,-dir)
-	var length := 503.0
-	# 42 independent deck segments keep damage localized and expose a real hole in the crossing.
-	for j in range(42):
-		var t := (j+0.5)*length/42.0
-		var p := _bridge_pos(t,51.5)
-		var deck := _structure_box("bridge/deck/%02d"%j,p,Vector3(49,5,length/42.0+0.04),"concrete",2800000,basis)
-		_box(deck,Vector3(0,2.54,0),Vector3(38,0.10,length/42.0),"road")
-		for side in [-1,1]:
-			_box(deck,Vector3(side*22,2.74,0),Vector3(4.2,0.42,length/42.0),"paving")
-			_box(deck,Vector3(side*24.2,5.0,0),Vector3(0.22,0.15,length/42.0),"steel")
-			for wire in range(6):
-				_box(deck,Vector3(side*24.2,2.85+wire*0.4,0),Vector3(0.045,0.04,length/42.0),"steel")
-			_extra_box_collision(deck,Vector3(side*24.2,3.8,0),Vector3(0.25,2.4,length/42.0))
-			_box(deck,Vector3(side*19.3,3.3,0),Vector3(0.3,1.3,length/42.0),"steel")
-			_extra_box_collision(deck,Vector3(side*19.3,3.3,0),Vector3(0.3,1.3,length/42.0))
-		for lane in [-14,-7,0,7,14]:
-			_box(deck,Vector3(lane,2.61,0),Vector3(0.13,0.025,4.0),"white")
-		for side in [-1,1]:
-			for railing in [-4.0,0.0,4.0]:
-				_box(deck,Vector3(side*24.1,4.2,railing),Vector3(0.12,3,0.12),"darksteel")
-	# Two complete polygonal arch trusses, 28 panels each, braced laterally.
-	for j in range(28):
-		var a := float(j)/28.0
-		var b := float(j+1)/28.0
-		var lower_a := 18.0 + 101.0*pow(sin(a*PI),0.79)
-		var lower_b := 18.0 + 101.0*pow(sin(b*PI),0.79)
-		var upper_a := 33.0 + 101.0*pow(sin(a*PI),0.79)
-		var upper_b := 33.0 + 101.0*pow(sin(b*PI),0.79)
-		for side in [-1,1]:
-			var ax: float = side*19.5
-			var p1 := _bridge_pos(a*length,lower_a,ax)
-			var p2 := _bridge_pos(b*length,lower_b,ax)
-			var p3 := _bridge_pos(a*length,upper_a,ax)
-			var p4 := _bridge_pos(b*length,upper_b,ax)
-			_destruct_beam("bridge/arch/%s/%s/lower"%[side,j],p1,p2,2.4,1200000)
-			_destruct_beam("bridge/arch/%s/%s/upper"%[side,j],p3,p4,2.2,1200000)
-			_destruct_beam("bridge/arch/%s/%s/diag"%[side,j],p1,p4,1.2,650000)
-			_destruct_beam("bridge/arch/%s/%s/upright"%[side,j],p2,p4,1.25,650000)
-			if lower_b>56.0:
-				_destruct_beam("bridge/hanger/%s/%s"%[side,j],_bridge_pos(b*length,54,ax),p2,0.75,420000)
-		_beam(_bridge_pos(a*length,upper_a,-19.5),_bridge_pos(b*length,upper_b,19.5),0.85,"steel")
-		_beam(_bridge_pos(a*length,upper_a,19.5),_bridge_pos(b*length,upper_b,-19.5),0.85,"steel")
-	# Massive detailed sandstone/granite towers on each end of the arch.
-	for end in [0.0,length]:
-		for side in [-1,1]:
-			var p := _bridge_pos(end,0,side*31.5)
-			for tier in range(4):
-				var size := Vector3(19-tier*1.8,20,27-tier*1.6)
-				var tower := _structure_box("bridge/pylon/%s/%s/%s"%[int(end),side,tier],p+Vector3(0,14+tier*20,0),size,"sandstone",3600000,basis)
-				_box(tower,Vector3(0,9.3,0),Vector3(size.x+1.0,1.2,size.z+1.0),"lightstone")
-				for f in [-1,1]:
-					for slit in [-4.2,0.0,4.2]:
-						_box(tower,Vector3(slit,1,f*(size.z*0.5+0.02)),Vector3(1.2,7,0.1),"darksteel")
-				for cornice in [-1,1]:
-					_box(tower,Vector3(cornice*(size.x*0.5+0.15),0,0),Vector3(0.3,20,size.z),"lightstone")
-	# Continuous gently graded road + walkway approaches, independently colliding.
-	_bridge_ramp(Vector3(-325,GROUND,-194),_bridge_pos(0,54),"south")
-	_bridge_ramp(_bridge_pos(length,54),Vector3(340,GROUND,-1510),"north")
-	_road(Vector3(-325,4.59,-194),Vector3(-310,4.59,-170),28)
-	_road(Vector3(340,4.59,-1510),Vector3(370,4.59,-1580),28)
-	for t in range(30,490,45):
-		_lamp(_bridge_pos(t,54,21.5))
-	# Ladder-like public maintenance steps and lookout access remain physically explorable.
-	for side in [-1,1]:
-		var start := _bridge_pos(4,55,side*22.0)
-		for step in range(28):
-			_box(self,start+dir*(step*1.0)+Vector3(0,step*0.55,0),Vector3(2.7,0.55,1.1),"steel",true)
-	_sign(_bridge_pos(245,58,21),"HARBOUR CROSSING",atan2(right.z,right.x),Color("f2e3bc"))
+	preload("res://scripts/bridge_landmark.gd").build(self)
 
 func _destruct_beam(id: String, a: Vector3, b: Vector3, width: float, strength: float) -> void:
 	var d := b-a
 	var basis := Basis.looking_at(d.normalized(),Vector3.UP if absf(d.normalized().y)<0.98 else Vector3.RIGHT)
 	_structure_box(id,(a+b)*0.5,Vector3(width,width,d.length()+0.12),"steel",strength,basis)
 
-func _bridge_ramp(a: Vector3, b: Vector3, id: String) -> void:
-	var d := b-a
-	var length := d.length()
-	var dir := d.normalized()
-	var basis := Basis.looking_at(dir,Vector3.UP)
-	for i in range(28):
-		var p := a.lerp(b,(i+0.5)/28.0)
-		var deck := _structure_box("bridge/ramp/%s/%s"%[id,i],p-Vector3(0,1.0,0),Vector3(35,2,length/28.0+0.2),"concrete",2100000,basis)
-		_box(deck,Vector3(0,1.055,0),Vector3(27,0.10,length/28.0+0.2),"road")
-		for side in [-1,1]:
-			_box(deck,Vector3(side*15.5,1.23,0),Vector3(3.2,0.4,length/28.0+0.2),"paving")
-			_box(deck,Vector3(side*17.2,1.8,0),Vector3(0.3,1.4,length/28.0+0.2),"steel")
-			_extra_box_collision(deck,Vector3(side*17.2,1.8,0),Vector3(0.3,1.4,length/28.0+0.2))
-		for lane in [-9,-3,3,9]:
-			_box(deck,Vector3(lane,1.125,0),Vector3(0.13,0.025,5.2),"white")
-		if i%5==3 and p.y>12:
-			for side in [-1,1]:
-				_structure_box("bridge/support/%s/%s/%s"%[id,i,side],p+basis.x*side*12-Vector3(0,(p.y-GROUND)*0.5+1,0),Vector3(4,p.y-GROUND-1,5),"sandstone",3200000)
-
 func _build_opera() -> void:
-	var center := Vector3(421,GROUND,-326)
-	var angle := deg_to_rad(-12.0)
-	var basis := Basis(Vector3.UP,angle)
-	# A broad layered podium, northern terrace, stepped southern concourse.
-	for tier in range(4):
-		var size := Vector3(112-tier*2,2.8,166-tier*2)
-		_structure_box("opera/podium/%s"%tier,center+Vector3(0,tier*2.8+1.4,0),size,"sandstone",1800000,basis)
-	for step in range(18):
-		var local := Vector3(0,0.30+step*0.60,103-step*1.12)
-		var p := center+basis*local
-		_structure_box("opera/steps/%s"%step,p,Vector3(78,0.6,1.25),"lightstone",260000,basis)
-	# Two unequal parallel halls. Each sail is a curved original ribbed shell, not a triangular billboard.
-	var shells := [
-		[-26.0,-51.0,23.0,50.0,45.0],[-26.0,-14.0,24.0,52.0,41.0],[-26.0,23.0,20.0,43.0,32.0],
-		[23.0,-41.0,19.0,47.0,35.0],[23.0,-8.0,19.0,45.0,30.0],[23.0,25.0,16.0,36.0,24.0],
-		[24.0,63.0,12.0,23.0,14.0]
-	]
-	for idx in range(shells.size()):
-		var s: Array = shells[idx]
-		var origin := center+basis*Vector3(s[0],11.2,s[1])
-		var width: float = s[2]
-		var depth: float = s[3]
-		var height: float = s[4]
-		# Shell is divided into eight removable curved roof bands. Normal ribs and thin tile seams follow the curvature.
-		for panel in range(8):
-			var mesh := _sail_mesh(width,depth,height,float(panel)/8.0,float(panel+1)/8.0)
-			_structure_mesh("opera/shell/%s/%s"%[idx,panel],mesh,origin,"white",180000,basis)
-		for rib in range(0,17):
-			var u := float(rib)/16.0
-			for k in range(18):
-				var p1 := _sail_point(u,float(k)/18.0,width,depth,height)
-				var p2 := _sail_point(u,float(k+1)/18.0,width,depth,height)
-				# Ribs are children of their matching shell chunk so damage removes them, too.
-				var panel := mini(int(u*8.0),7)
-				var body: StaticBody3D = structures["opera/shell/%s/%s"%[idx,panel]]["node"]
-				_local_beam(body,p1+Vector3(0,0.07,0),p2+Vector3(0,0.07,0),0.13,"lightstone")
-		var glass := _opera_glass_mesh(width,height)
-		_structure_mesh("opera/glass/%s"%idx,glass,origin+basis*Vector3(0,0,-depth*0.52),"glass",105000,basis)
-		for fin in range(-4,5):
-			var x := fin*width/4.5
-			var ht := height*(1.0-pow(absf(x)/width,1.8))*0.78
-			if ht>0:
-				_local_beam(structures["opera/glass/%s"%idx]["node"],Vector3(x,0,0),Vector3(x,ht,0),0.3,"darksteel")
-	# Broadwalk planters, polished bronze edge, external podium terraces.
-	for z in range(-425,-185,22):
-		if z<-385: continue
-		_lamp(Vector3(485,GROUND,z))
-	for x in [357,377,397,437,457,477]:
-		_bench(Vector3(x,GROUND,-171),PI)
-	_sign(Vector3(415,6.6,-151),"BENNELONG POINT",0.0,Color("3b4c4e"))
-	# Accessible seaward viewing gallery tucked beneath the podium's eastern side.
-	_box(self,Vector3(475,5.0,-312),Vector3(20,0.8,80),"paving",true)
-	for z in range(-348,-270,8):
-		_batch_box(Vector3(480,7.2,z),Vector3(0.45,4.4,0.45),"sandstone")
-		_batch_box(Vector3(480,9.5,z),Vector3(10,0.4,7.8),"concrete")
-
-func _sail_point(u: float, v: float, width: float, depth: float, height: float) -> Vector3:
-	var lateral := (u*2.0-1.0)
-	var taper := 0.38 + 0.62*sin(v*PI*0.5)
-	var x := lateral*width*taper
-	var y := height*pow(maxf(0.0,1.0-lateral*lateral),0.72)*pow(1.0-v,0.55)
-	var z := (v-0.52)*depth
-	return Vector3(x,y,z)
-
-func _sail_mesh(width: float, depth: float, height: float, from: float, to: float) -> ArrayMesh:
-	var verts := PackedVector3Array()
-	var uv := PackedVector2Array()
-	var indices := PackedInt32Array()
-	for x in range(5):
-		for z in range(21):
-			var u := lerpf(from,to,float(x)/4.0)
-			var v := float(z)/20.0
-			verts.append(_sail_point(u,v,width,depth,height))
-			uv.append(Vector2(u*width*0.4,v*depth*0.2))
-	for x in range(4):
-		for z in range(20):
-			var i := x*21+z
-			indices.append_array(PackedInt32Array([i,i+21,i+1,i+1,i+21,i+22]))
-	var mesh := _array_mesh(verts,indices,uv)
-	return mesh
-
-func _opera_glass_mesh(width: float, height: float) -> ArrayMesh:
-	var verts := PackedVector3Array([Vector3.ZERO])
-	for i in range(25):
-		var x := -width*0.38+width*0.76*i/24.0
-		verts.append(Vector3(x,height*pow(maxf(0.0,1.0-pow(x/(width*0.38),2.0)),0.72),0))
-	var ix := PackedInt32Array()
-	for i in range(1,25): ix.append_array(PackedInt32Array([0,i+1,i]))
-	return _array_mesh(verts,ix)
+	preload("res://scripts/opera_landmark.gd").build(self)
 
 func _local_beam(parent: Node3D, a: Vector3, b: Vector3, width: float, key: String) -> void:
 	var d := b-a
@@ -696,6 +582,9 @@ func _wall_panel(id: String, pos: Vector3, width: float, height: float, style: i
 	return body
 
 func _building(id: String, p: Vector3, width: float, depth: float, height: float, style: int) -> void:
+	# Apply to every generator, including fixed landmarks such as the former north hotel.
+	# The entire footprint must clear the carriageway and footways, not just its centre.
+	if _in_bridge_corridor(Vector2(p.x,p.z),Vector2(width,depth).length()*0.5): return
 	_building_count += 1
 	_building_plots.append(AABB(Vector3(p.x-width*0.5,GROUND,p.z-depth*0.5),Vector3(width,maxf(1,height),depth)))
 	var stories := maxi(1,int(ceil(height/11.4)))
@@ -735,109 +624,6 @@ func _building(id: String, p: Vector3, width: float, depth: float, height: float
 	if structures.has(front_id):
 		var front: Node3D = structures[front_id]["node"]
 		_box(front,Vector3(0,-h*0.5+3.0,1.2),Vector3(width/ceil(width/13.0),0.2,2.8),"teal" if style%2==0 else "cloth")
-		if height<30:
-			var names := ["TIDELINE GOODS","QUAY COFFEE","HARBOUR BOOKS","THE BOAT SHOP","CORNER MARKET","SALT & STONE"]
-			var shop := Label3D.new()
-			shop.text = names[posmod(id.hash(),names.size())]
-			shop.font_size = 36
-			shop.pixel_size = 0.008
-			shop.modulate = Color("f0dfb9")
-			shop.outline_size = 0
-			shop.position = Vector3(0,-h*0.5+3.28,1.5)
-			shop.visibility_range_end = 90
-			front.add_child(shop)
-
-func _build_frontages() -> void:
-	var index := 0
-	for street_z in [-170,-30,155,310,470,620,-1250,-1400,-1580]:
-		var north: bool = street_z< -1000
-		for street_x in range(275 if north else -765,710 if north else 225,31):
-			for side in [-1,1]:
-				var p := Vector2(street_x,street_z+side*23.0)
-				var poly := north_polygon if north else south_polygon
-				var plot := AABB(Vector3(p.x-12,GROUND,p.y-13.5),Vector3(24,20,27))
-				var blocked := false
-				for corner in [Vector2(-14,-16),Vector2(-14,16),Vector2(14,-16),Vector2(14,16)]:
-					if not Geometry2D.is_point_in_polygon(p+corner,poly): blocked = true
-				if blocked or _near_road(p,9): continue
-				for anchor in anchors.values():
-					if p.distance_to(Vector2(anchor.x,anchor.z))<31: blocked = true
-				if blocked: continue
-				if p.distance_to(Vector2(-335,-28))<27 or p.distance_to(Vector2(-367,-30))<29: continue
-				if p.distance_to(Vector2(-410,420))<65: continue
-				if pow((p.x+715)/83.0,2)+pow((p.y-74)/122.0,2)<1.0: continue
-				if _distance_segment(p,Vector2(-325,-194),Vector2(-83,-662))<43: continue
-				if _distance_segment(p,Vector2(149,-1109),Vector2(340,-1510))<43: continue
-				for existing in _building_plots:
-					if plot.grow(2.0).intersects(existing):
-						blocked = true
-						break
-				if blocked: continue
-				_building("frontage/%s_%s_%s"%[street_x,street_z,side],Vector3(p.x,GROUND,p.y),24,27,11.4+(index%3)*3.8,index%6)
-				if index%3==0:
-					_tree(Vector3(p.x+14,GROUND,street_z+side*11),0.58)
-					_lamp(Vector3(p.x-14,GROUND,street_z+side*10))
-				if index%4==0: _bench(Vector3(p.x+9,GROUND,street_z+side*9.5),0 if side>0 else PI)
-				index += 1
-
-func _build_neighborhoods() -> void:
-	var index := 0
-	for z in range(-285,725,66):
-		for x in range(-770,245,67):
-			var p := Vector2(x+_rng.randf_range(-5,5),z+_rng.randf_range(-4,4))
-			if not Geometry2D.is_point_in_polygon(p,south_polygon): continue
-			if _near_road(p,25): continue
-			if p.distance_to(Vector2(-335,-28))<53: continue
-			if p.distance_to(Vector2(-410,420))<62: continue
-			if pow((p.x+715)/83.0,2)+pow((p.y-74)/122.0,2)<1.0: continue
-			if p.y<0 and p.x>-90: continue
-			if p.y>155 and p.y<230 and p.x>-70: continue
-			if _distance_segment(p,Vector2(-325,-194),Vector2(-83,-662))<40: continue
-			var w := _rng.randf_range(23,39)
-			var d := _rng.randf_range(25,43)
-			var h := _rng.randf_range(11,23) if z<155 or x<-430 else _rng.randf_range(28,89)
-			_building("south/building/%s_%s"%[x,z],Vector3(p.x,GROUND,p.y),w,d,h,index%6)
-			index += 1
-	# Deliberate skyline silhouettes: stepped towers, a cylindrical crown and a slender spire.
-	_building("skyline/quay_tower",Vector3(190,GROUND,326),54,48,91,3)
-	_building("skyline/quay_tower_upper",Vector3(190,95.5,326),39,34,36,3)
-	_building("skyline/west_tower",Vector3(-81,GROUND,402),51,43,125,2)
-	_building("skyline/merchant_house",Vector3(-349,GROUND,301),54,44,43,5)
-	_building("skyline/east_spire",Vector3(64,GROUND,637),41,43,151,0)
-	_destruct_beam("skyline/east_antenna",Vector3(64,155.5,637),Vector3(64,177,637),0.65,120000)
-	for z in range(-205,605,66):
-		_lamp(Vector3(-448,GROUND,z))
-		if z>0: _tree(Vector3(-442,GROUND,z+16),0.6)
-	for z in range(-220,590,80):
-		_lamp(Vector3(-645,GROUND,z))
-		_tree(Vector3(-652,GROUND,z+12),0.6)
-
-func _build_north() -> void:
-	var i := 0
-	for z in range(-1690,-1150,69):
-		for x in range(276,757,68):
-			var p := Vector2(x,z)
-			if not Geometry2D.is_point_in_polygon(p,north_polygon): continue
-			if _near_road(p,25): continue
-			if _distance_segment(p,Vector2(149,-1109),Vector2(340,-1510))<40: continue
-			_building("north/terrace/%s_%s"%[x,z],Vector3(x,GROUND,z),_rng.randf_range(24,38),32,_rng.randf_range(12,29),i%6)
-			i += 1
-	for z in range(-1740,-1260,60):
-		_tree(Vector3(389,GROUND,z),0.8)
-		_lamp(Vector3(353,GROUND,z))
-	_building("north/hotel",Vector3(254,GROUND,-1340),51,47,59,3)
-	# Milsons Point waterfront park, wharf and an original leisure pavilion.
-	for x in range(183,460,27):
-		if Geometry2D.is_point_in_polygon(Vector2(x,-1150),north_polygon):
-			_tree(Vector3(x,GROUND,-1150),0.72)
-			_bench(Vector3(x,GROUND,-1138),0)
-	_structure_box("north/wharf",Vector3(277,2.5,-1093),Vector3(16,1,55),"wood",550000)
-	_ramp_box(Vector3(277,4.5,-1133),Vector3(277,3,-1118),14,"wood")
-	_sign(Vector3(294,7,-1180),"MILSONS POINT",PI,Color("244a52"))
-	# Waterfront pavilion frames and accessible skate-scale ramps.
-	_building("north/pavilion",Vector3(395,GROUND,-1195),48,24,10,5)
-	for pos in [Vector3(438,GROUND,-1235),Vector3(440,GROUND,-1280)]:
-		_ramp_box(pos,pos+Vector3(12,3.5,0),9,"concrete")
 
 func _build_home() -> void:
 	var p := Vector3(-335,GROUND,-28)
@@ -906,22 +692,6 @@ func _build_gardens() -> void:
 			if _near_road(pos,16): continue
 			if pos.distance_to(Vector2(421,-326))<175: continue
 			_tree(Vector3(pos.x,GROUND,pos.y),_rng.randf_range(0.7,1.25))
-	for z in range(0,551,66):
-		_road(Vector3(425,4.58,z),Vector3(665,4.58,z+35),3.2,false,false)
-		_bench(Vector3(445,GROUND,z-6),0)
-		_lamp(Vector3(430,GROUND,z-8))
-	# Sparse distant ridgelines are fully modelled geometry and explicitly outside detailed core coverage.
-	for i in range(80):
-		var x := _rng.randf_range(-950,1950)
-		var z := _rng.randf_range(-2630,-1800)
-		if not Geometry2D.is_point_in_polygon(Vector2(x,z),north_polygon): continue
-		var h := _rng.randf_range(10,55)
-		var b := _box(self,Vector3(x,GROUND+h*0.5,z),Vector3(_rng.randf_range(25,47),h,35),"concrete",true)
-		b.material_override = _facade_material(i%6,35,h)
-		_distant_visual_plots.append(AABB(Vector3(x-b.mesh.size.x*0.5,GROUND,z-17.5),Vector3(b.mesh.size.x,h,35)))
-		for y in range(5,int(h),4):
-			_batch_box(Vector3(x,GROUND+y,z),Vector3(37,0.15,37),"lightstone")
-		_tree(Vector3(x+22,GROUND,z+22),1.2)
 
 func _visual_lawn(boundary: PackedVector2Array, coast: PackedVector2Array) -> void:
 	for patch in Geometry2D.intersect_polygons(coast,boundary):
@@ -932,6 +702,7 @@ func _visual_lawn(boundary: PackedVector2Array, coast: PackedVector2Array) -> vo
 		add_child(lawn)
 
 func _visual_plot_clear(p: Vector2, margin: float) -> bool:
+	if _in_bridge_corridor(p,margin): return false
 	for collection in [_building_plots,_distant_visual_plots]:
 		for box in collection:
 			var rect := Rect2(Vector2(box.position.x,box.position.z),Vector2(box.size.x,box.size.z)).grow(margin)
@@ -940,77 +711,8 @@ func _visual_plot_clear(p: Vector2, margin: float) -> bool:
 		if p.distance_to(Vector2(anchor.x,anchor.z))<18: return false
 	return true
 
-func _polish_landscape_visuals() -> void:
-	# Visual-only dressing: uses its own RNG after all gameplay geometry, so saved IDs/colliders/positions do not change.
-	var dressing_rng := RandomNumberGenerator.new()
-	dressing_rng.seed = 7182046
-	_visual_lawn(PackedVector2Array([Vector2(-270,-725),Vector2(-15,-725),Vector2(-15,-440),Vector2(-270,-440)]),south_polygon)
-	# Every existing north-shore building receives a paved foot apron, defining street blocks against the green ground.
-	for collection in [_building_plots,_distant_visual_plots]:
-		for plot in collection:
-			var center: Vector3 = plot.get_center()
-			if center.z>-950: continue
-			_batch_box(Vector3(center.x,GROUND+0.035,center.z),Vector3(plot.size.x+7,0.045,plot.size.z+7),"paving")
-			if center.z<-1780:
-				# Small garden paving and a common pedestrian network bind the lower-detail lots together.
-				var street_z := roundf(center.z/145.0)*145.0
-				var a := Vector3(center.x,GROUND+0.06,center.z+plot.size.z*0.5+3.0)
-				var b := Vector3(center.x,GROUND+0.06,street_z)
-				if Geometry2D.is_point_in_polygon(Vector2(b.x,b.z),north_polygon):
-					_road(a,b,3.4,false,false)
-	# Shared garden walks connect those visual lot spurs, clipped strictly to the existing land polygon.
-	for path_z in [-1740,-1885,-2030,-2175,-2320,-2465,-2610]:
-		var ribbon := PackedVector2Array([Vector2(-1120,path_z-2.5),Vector2(2120,path_z-2.5),Vector2(2120,path_z+2.5),Vector2(-1120,path_z+2.5)])
-		for patch in Geometry2D.intersect_polygons(north_polygon,ribbon):
-			var path := MeshInstance3D.new()
-			path.mesh = _land_mesh(patch)
-			path.position.y = 0.045
-			path.material_override = materials["paving"]
-			add_child(path)
-	# A clipped promenade follows the retained north coast. Paths remain on the same existing physical ground.
-	var shore: Array = geography["north_coast"]
-	var last_furniture := Vector2.INF
-	for i in range(shore.size()-1):
-		var a := Vector2(shore[i][0],shore[i][1])
-		var b := Vector2(shore[i+1][0],shore[i+1][1])
-		var delta := b-a
-		if delta.length()<3 or delta.length()>130: continue
-		var inward := Vector2(-delta.y,delta.x).normalized()
-		var middle := (a+b)*0.5
-		if not Geometry2D.is_point_in_polygon(middle+inward*8,north_polygon): inward = -inward
-		var p := middle+inward*8
-		if not Geometry2D.is_point_in_polygon(p,north_polygon): continue
-		var ribbon := PackedVector2Array([a+inward*4.5,b+inward*4.5,b+inward*10.5,a+inward*10.5])
-		for patch in Geometry2D.intersect_polygons(north_polygon,ribbon):
-			var path := MeshInstance3D.new()
-			path.mesh = _land_mesh(patch)
-			path.position.y = 0.04
-			path.material_override = materials["paving"]
-			add_child(path)
-		if p.distance_to(last_furniture)>55 and _visual_plot_clear(p,7) and not _near_road(p,6):
-			_bench(Vector3(p.x,GROUND,p.y),atan2(delta.y,delta.x))
-			_lamp(Vector3(p.x+inward.x*2,GROUND,p.y+inward.y*2))
-			last_furniture = p
-	# Loose planted groves avoid roads, buildings and activity anchors; crowns use the existing spatial MultiMesh batches.
-	var planted := 0
-	for z in range(-2690,-1090,48):
-		for x in range(-1090,2080,48):
-			var p := Vector2(x+dressing_rng.randf_range(-20,20),z+dressing_rng.randf_range(-20,20))
-			if dressing_rng.randf()>0.46: continue
-			if not Geometry2D.is_point_in_polygon(p,north_polygon): continue
-			if p.y<-1730 and absf(p.y-roundf(p.y/145.0)*145.0)<7: continue
-			if not _visual_plot_clear(p,8) or _near_road(p,13): continue
-			if _distance_segment(p,Vector2(149,-1109),Vector2(340,-1510))<31: continue
-			var grouping := 0.65+0.35*sin(p.x*0.018+p.y*0.007)
-			if dressing_rng.randf()>grouping: continue
-			_tree(Vector3(p.x,GROUND,p.y),dressing_rng.randf_range(0.95,1.65))
-			planted += 1
-			if planted>=560: break
-		if planted>=560: break
-	print("HARBOR_VISUAL_DRESSING trees=",planted," distant_aprons=",_distant_visual_plots.size())
-
 func _hill_height(x: float, z: float) -> float:
-	var radial := pow((x+715.0)/72.0,2.0)+pow((z-74.0)/113.0,2.0)
+	var radial := pow((x+547.947)/72.0,2.0)+pow((z+47.452)/113.0,2.0)
 	return GROUND+19.0*pow(maxf(0.0,1.0-radial),1.3)
 
 func _build_observatory() -> void:
@@ -1021,8 +723,8 @@ func _build_observatory() -> void:
 		var t := float(ring)/16.0
 		for sector in range(49):
 			var a := float(sector)/48.0*TAU
-			var x := -715.0+cos(a)*72*t
-			var z := 74.0+sin(a)*113*t
+			var x := -547.947+cos(a)*72*t
+			var z := -47.452+sin(a)*113*t
 			vertices.append(Vector3(x,_hill_height(x,z)+0.05,z))
 	for ring in range(16):
 		for sector in range(48):
@@ -1042,14 +744,14 @@ func _build_observatory() -> void:
 		var t := i/29.0
 		var a := lerpf(0.2,4.5,t)
 		var r := lerpf(0.94,0.15,t)
-		var x := -715.0+cos(a)*72*r
-		var z := 74.0+sin(a)*113*r
+		var x := -547.947+cos(a)*72*r
+		var z := -47.452+sin(a)*113*r
 		var a2 := lerpf(0.2,4.5,minf(t+1.0/29.0,1.0))
 		var r2 := lerpf(0.94,0.15,minf(t+1.0/29.0,1.0))
-		var x2 := -715.0+cos(a2)*72*r2
-		var z2 := 74.0+sin(a2)*113*r2
+		var x2 := -547.947+cos(a2)*72*r2
+		var z2 := -47.452+sin(a2)*113*r2
 		_road(Vector3(x,_hill_height(x,z)+0.17,z),Vector3(x2,_hill_height(x2,z2)+0.17,z2),3.8,false,false)
-	_building("observatory/lodge",Vector3(-715,23.5,74),24,20,8,5)
+	_building("observatory/lodge",Vector3(-547.947,23.5,-47.452),24,20,8,5)
 	var dome_vertices := PackedVector3Array()
 	var dome_ix := PackedInt32Array()
 	for r in range(13):
@@ -1061,12 +763,12 @@ func _build_observatory() -> void:
 		for s in range(32):
 			var i := r*33+s
 			dome_ix.append_array(PackedInt32Array([i,i+1,i+33,i+1,i+34,i+33]))
-	_structure_mesh("observatory/dome",_array_mesh(dome_vertices,dome_ix),Vector3(-715,32,74),"copper",320000)
+	_structure_mesh("observatory/dome",_array_mesh(dome_vertices,dome_ix),Vector3(-547.947,32,-47.452),"copper",320000)
 	for a in range(0,360,35):
-		var x := -715+cos(deg_to_rad(a))*62
-		var z := 74+sin(deg_to_rad(a))*97
+		var x := -547.947+cos(deg_to_rad(a))*62
+		var z := -47.452+sin(deg_to_rad(a))*97
 		_tree(Vector3(x,_hill_height(x,z),z),0.8)
-	_sign(Vector3(-690,8,159),"OBSERVATORY GARDEN",0,Color("3e554d"))
+	_sign(Vector3(-522.947,8,37.548),"OBSERVATORY GARDEN",0,Color("3e554d"))
 
 func _build_helipad() -> void:
 	var p: Vector3 = anchors["helipad"]
@@ -1085,6 +787,7 @@ func _build_helipad() -> void:
 	_sign(p+Vector3(0,2.5,30),"HARBOUR AIR / LOCAL OPERATIONS",0,Color("eed8b0"))
 
 func _tree(p: Vector3, scale: float = 1.0) -> void:
+	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),5.0*scale): return
 	_batch_cylinder(p+Vector3(0,3.1*scale,0),0.36*scale,6.2*scale,"bark")
 	for branch in [-1,1]:
 		_beam(p+Vector3(0,2.5*scale,0),p+Vector3(branch*1.8*scale,5.8*scale,0.4*scale),0.2*scale,"bark")
@@ -1106,12 +809,14 @@ func _tree(p: Vector3, scale: float = 1.0) -> void:
 		_batch_foliage[key].append(Transform3D(Basis.IDENTITY.scaled(Vector3(3.0,2.6,3.1)*scale),origin))
 
 func _lamp(p: Vector3) -> void:
+	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),0.5): return
 	_batch_cylinder(p+Vector3(0,3.1,0),0.11,6.2,"steel")
 	_batch_cylinder(p+Vector3(0,0.2,0),0.34,0.4,"darksteel")
 	_batch_box(p+Vector3(0.6,6.1,0),Vector3(1.4,0.12,0.15),"steel")
 	_batch_box(p+Vector3(1.2,5.95,0),Vector3(0.9,0.18,0.55),"lamp")
 
 func _bench(p: Vector3, angle: float) -> void:
+	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),2.0): return
 	var b := Basis(Vector3.UP,angle)
 	for slat in range(4):
 		_batch_box(p+b*Vector3(0,0.62,(slat-1.5)*0.14),Vector3(2.7,0.09,0.12),"wood",b)
@@ -1135,6 +840,12 @@ func _sign(p: Vector3, text_value: String, angle: float, color: Color) -> void:
 func _near_road(p: Vector2, distance: float) -> bool:
 	for seg in road_segments:
 		if _distance_segment(p,seg[0],seg[1]) < distance+float(seg[2])*0.5: return true
+	return false
+
+func _in_bridge_corridor(p: Vector2, margin: float = 0.0) -> bool:
+	for i in range(BRIDGE_CORRIDOR.size()-1):
+		if _distance_segment(p,BRIDGE_CORRIDOR[i],BRIDGE_CORRIDOR[i+1])<32.0+margin:
+			return true
 	return false
 
 func _distance_segment(p: Vector2, a: Vector2, b: Vector2) -> float:
@@ -1183,6 +894,8 @@ func _destroy_component(id: String, impact: Vector3, energy: float, spawn_rubble
 	node.visible = false
 	for child in node.get_children():
 		if child is CollisionShape3D: child.set_deferred("disabled",true)
+	if id.begins_with("bridge/deck/") or id.begins_with("bridge/ramp/"):
+		_queue_bridge_collision_refresh()
 	if not spawn_rubble: return
 	var local_rng := RandomNumberGenerator.new()
 	local_rng.seed = id.hash()
@@ -1220,6 +933,15 @@ func get_state() -> Dictionary:
 		var size: Vector3 = mesh.mesh.size
 		debris_state.append({"p":[node.position.x,node.position.y,node.position.z],"r":[node.rotation.x,node.rotation.y,node.rotation.z],"s":[size.x,size.y,size.z]})
 	return {"version":1,"destroyed":destroyed.keys(),"partial":partial_damage.duplicate(),"rubble":debris_state}
+
+func _queue_bridge_collision_refresh() -> void:
+	if _bridge_collision_pending: return
+	_bridge_collision_pending=true
+	call_deferred("_refresh_bridge_collision")
+
+func _refresh_bridge_collision() -> void:
+	_bridge_collision_pending=false
+	preload("res://scripts/bridge_landmark.gd").refresh_drive_collision(self)
 
 func apply_state(data: Dictionary) -> void:
 	repair_all()
@@ -1265,3 +987,4 @@ func repair_all() -> void:
 	for node in rubble:
 		if is_instance_valid(node): node.queue_free()
 	rubble.clear()
+	_queue_bridge_collision_refresh()

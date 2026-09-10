@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "name": "all building roof triangulations preserve footprint and courtyard area",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "positive building vertical extent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "tagged pitched roofs preserve footprint holes and height envelope",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "pitched roof triangulations retain visible ridge rise",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "all heights have confidence labels",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OSM estimated heights are never labelled surveyed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Gateway outline does not duplicate its mapped tower parts",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Martin Place atrium clears the street",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Opera forecourt land/water classification",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CBD land/water classification",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Manly Corso land/water classification",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Sydney Cove land/water classification",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Harbour shipping channel land/water classification",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Manly Pacific beach water land/water classification",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metro excavation snapshot matches source",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "barangaroo ground and road paving do not cover excavation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "martin_place ground and road paving do not cover excavation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "way/191626163 footprint agrees with source",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "way/183246899 footprint agrees with source",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "way/1116329930 footprint agrees with source",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "underground routes are not painted on the ground",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "counts": {
+    "buildings": 15508,
+    "roads": 19680,
+    "places": 5103,
+    "beaches": 23,
+    "parks": 847,
+    "trees": 6739,
+    "land": 16,
+    "buildings_with_height": 230,
+    "tagged_height_estimates": 4,
+    "outlines_replaced_by_parts": 293,
+    "tagged_pitched_roofs": 524,
+    "buildings_with_levels": 7539
+  },
+  "snapshots": {
+    "city": "2026-09-10T10:26:34Z",
+    "north": "2026-09-10T10:27:34Z",
+    "manly": "2026-05-06T03:25:00Z"
+  },
+  "passed": true
+}

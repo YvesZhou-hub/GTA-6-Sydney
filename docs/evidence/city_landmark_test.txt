@@ -1,0 +1,23 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS four verified named buildings carry addresses and confidence records
+PASS five exact OSM outlines replace generic footprints including tower podium
+PASS geographic coordinate conversion remains consistent to centimetres
+PASS 103 meaningful damage components, repeated facade details merged
+PASS all structural collision faces exactly match rendered solid geometry
+PASS all facade and structural faces are nondegenerate
+PASS all explicit triangle winding matches supplied exterior normals
+PASS bounded four-building triangle budget 213106
+PASS Tower One retains documented 217m height
+PASS BOC rooftop envelope retains explicitly estimated 58m height
+PASS The Ribbon curved apex reaches 90m with thin perimeter trim
+PASS The Exchange stays within 30m estimated roof envelope
+PASS The Ribbon has a curved closed elevation, not a rectangular tower
+PASS long rising Ribbon shoulder is represented geometrically
+PASS tower_one facade has physical ray support at intended map position
+PASS boc facade has physical ray support at intended map position
+PASS ribbon facade has physical ray support at intended map position
+PASS exchange facade has physical ray support at intended map position
+PASS destroying a floor removes its glazing, timber facade and collision together
+PASS new-world restore reconstructs the landmark collision
+CITY LANDMARK CHECK COMPLETE failures=0 triangles=213106 components=103

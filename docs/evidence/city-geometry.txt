@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=525 reserved=1 roads=0
+CITY_GEOMETRY mapped solids retain CPU surfaces and independent collision PASS
+CITY_GEOMETRY actual footprint creates rendered base and near facade PASS
+CITY_GEOMETRY CPU extrusion and facade winding point outward PASS
+CITY_GEOMETRY tagged roof profiles have matching physical faces and winding PASS
+CITY_GEOMETRY partial damage appears on the rendered CPU batch PASS
+CITY_GEOMETRY destruction removes collision PASS
+CITY_GEOMETRY destruction removes base and near facade together PASS
+CITY_GEOMETRY saved city damage restores physical and visual holes PASS
+CITY_GEOMETRY repair restores exact base and relief geometry PASS
+CITY_GEOMETRY_COMPLETE checks=9 failures=0

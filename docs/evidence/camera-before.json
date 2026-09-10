@@ -1,0 +1,25 @@
+{
+  "interpolation": false,
+  "physics_hz": 20,
+  "render_cap": 120,
+  "scenarios": [
+    {
+      "camera_mean_speed": -9.80586048068425,
+      "camera_speed_std": 2.77282984494953,
+      "frames": 341,
+      "interpolated_stationary_frames": 270,
+      "mean_pitch_velocity_jump": 0.528540035754837,
+      "raw_stationary_frames": 270,
+      "stage": "walk"
+    },
+    {
+      "camera_mean_speed": -21.93496570553,
+      "camera_speed_std": 7.2131240886551,
+      "frames": 418,
+      "interpolated_stationary_frames": 347,
+      "mean_pitch_velocity_jump": 0.857876011890393,
+      "raw_stationary_frames": 347,
+      "stage": "car"
+    }
+  ]
+}

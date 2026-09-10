@@ -1,96 +1,100 @@
 # Harbourlife · 悉尼海港
 
-**[下载 Mac 试玩版](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.0-preview.1/Harbourlife-macOS-arm64.zip)** · [发布页面](https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.1.0-preview.1) · [实机试飞短片](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.0-preview.1/flight-highlights.mp4)
+**v0.1.1-preview.1 · 悉尼城市扩展试玩版**
 
-一个免费的实验性原生单人城市沙盒。从悉尼金斯福德机场起飞，沿连续世界飞向歌剧院和海港大桥，也可以步行、驾车、开船、做活动和进行局部破坏实验。游戏离线运行，不需要账号、浏览器或付费 AI 服务。
+[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.1-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases) · [初版试飞短片](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.0-preview.1/flight-highlights.mp4)
 
-当前版本为 **v0.1.0-preview.1**，是可游玩的开发预览，美术、性能和内容仍在完善。下载包面向 **Apple Silicon Mac（M 系列芯片）**；目前只在 **Apple M4 / 16 GB / macOS 26.5** 实测。没有发布 Windows、Intel Mac 或浏览器版本。
+免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-![交付应用中的海港实景](docs/screenshots/harbour.png)
+本轮扩大了真实地图覆盖，单独重建地标和部分店面，加入可步行进出的地铁入口，并修复载具生成、旧存档位置冲突和镜头跟随问题。详见 [更新说明](docs/FIXES_0.1.1.md)。公开下载包面向 **Apple Silicon Mac（M 系列芯片）**；目前验证环境为 Apple M4 / 16 GB / macOS 26.5，没有 Windows、Intel Mac 或浏览器玩家版本。
 
-## 下载与启动
+上方短片来自 **v0.1.0 初版预览**，不代表本轮更新后的城市画面或最终试飞验收。
 
-1. 下载上方的 `Harbourlife-macOS-arm64.zip`，解压得到 `Harbourlife.app`。
-2. 可将应用移到“应用程序”文件夹，然后双击打开。游玩不需要下载源码或安装 Godot。
-3. 标题页选择 **“从悉尼机场起飞”**，即可建立独立沙盒世界，从机场跑道开始。
+![海港大桥的实际游戏画面](docs/screenshots/bridge.png)
 
-应用经过本地 ad-hoc 签名，**没有 Apple Developer ID 签名或公证**。如果 macOS 因开发者无法验证而阻止首次打开，请先确认文件来自本仓库的发布页面且未被篡改；尝试打开后，可依照 [Apple 官方说明](https://support.apple.com/en-au/102445)，在“系统设置 → 隐私与安全”中针对这个应用选择“仍要打开”，再确认“打开”。这只是该应用的单独例外。
+![悉尼歌剧院的实际游戏画面](docs/screenshots/opera.png)
 
-GitHub 的绿色 **Code → Download ZIP** 下载的是源码，不是可直接玩的应用。玩家请使用上方的试玩版下载链接。
+## 下载后直接试飞
 
-## 从机场飞到海港
+1. 从发布页面下载 `Harbourlife-macOS-arm64.zip`，解压得到 `Harbourlife.app`，双击打开。游玩不需要源码或 Godot 编辑器。
+2. 标题页选择 **“从悉尼机场起飞”**，建立独立沙盒世界，从 **34L 跑道**进入客机。
+3. 按住 **W** 加推力，约 **250 km/h** 时按 **R** 抬头；离地后松开，按需用 **R / F** 调整俯仰。
+4. **A / D** 转弯，朝北偏东飞向海港；**M** 打开地图选择歌剧院或大桥，跟随距离和方向指引。**S** 减推力，落地后用空格制动。
 
-飞机停在 **34L 跑道**，起飞方向略偏西北，海港位于机场北偏东。
+这是辅助飞行游戏模型：客机需要前进速度，会失速，不能悬停。不要将游戏地图或操纵当作现实导航与驾驶依据。
 
-1. 按住 **W** 增加推力，在跑道上加速。
-2. 约 **250 km/h** 时按 **R** 抬头；离地后松开，按需用 **R / F** 调整俯仰。
-3. 用 **A / D** 转弯，参考 HUD 的航向和海港距离；按 **M** 切换地图。
-4. **S** 减推力；落地后用 **空格** 制动。
+发布包采用本地 ad-hoc 签名，未取得 Apple Developer ID 签名或公证。首次打开若被 macOS 阻止，请确认来自本仓库发布页面，再按 [Apple 官方说明](https://support.apple.com/en-au/102445)，在“系统设置 → 隐私与安全”中针对该应用选择“仍要打开”。GitHub 的 **Code → Download ZIP** 下载的是源码，不能直接当应用打开。
 
-这是为游戏设计的辅助飞行模型。客机需要前进速度，会失速，不能悬停；游戏地理与操纵不能作为现实导航或驾驶依据。
+![悉尼机场跑道上的客机，初版预览画面](docs/screenshots/airport.png)
 
-![悉尼机场跑道上的客机](docs/screenshots/airport.png)
+## 用 M 找城市里的地点
+
+地图显示真实岸线、道路与建筑轮廓，支持缩放、拖动和目的地指引。可以选择机场、歌剧院、大桥、银行总部所在楼、Darling Square 店面、Manly 码头与海滩，以及已制作的地铁入口。
+
+- **CBD 与海港：**HSBC 所在的 Tower One、中国银行 140 Sussex Street、Westpac Place、Commonwealth Bank Place South / North、Quay Quarter Tower 与 Salesforce Tower，均有单独制作的外观。
+- **Darling Harbour / Darling Square：**W Sydney 的 Ribbon 楼体、The Exchange 与其 Level 5 海底捞位置；已列明的 12 家街边店面包含 Matcha-Ya、Nakano Darling、KUKI、Messina 等，逐店记录照片依据与仍属推断的细节。这一轮尚未完成 Darling Square 全部商户。
+- **Manly：**真实街道与岸线、Manly Wharf、The Corso、Hotel Steyne 和海滩，可在地图中定位。
+- **Metro：**Barangaroo 与 Martin Place 北入口包含街面门厅、下行扶梯和第一层地下落脚区，可实际走下去再返回街道。扶梯静止，没有列车或完整站台运营。
+
+**新增办公楼与 ICC 场馆群：**CyberCX 的 2 Market Street、Cloudflare 的 388 George Street 已单独建模。ICC 的 Convention Centre、Exhibition Centre 与相邻 **TikTok Entertainment Centre** 分为三个独立场馆，可从街面进入已制作的大厅、展厅和观众厅，走上剧场舞台后返回。TikTok 在这里指演出场馆；楼层高差、座位数量及未公开空间仍有简化。[场馆资料与范围](docs/ICC_REFERENCE.md)
+
+![ICC 三个场馆的实际游戏画面](docs/screenshots/icc.png)
+
+![TikTok Entertainment Centre 观众厅的实际游戏画面](docs/screenshots/tiktok-auditorium.png)
+
+![CBD 与海港的实际游戏画面](docs/screenshots/city.png)
+
+![Darling Square 的实际游戏画面](docs/screenshots/darling-square.png)
+
+## 真实地图与建模精度
+
+当前数据库包含 **15,508 个建筑轮廓或分体记录**；计数包括同一建筑的分体，普通街区使用地图轮廓和推断外立面。其中 524 条记录带已支持的坡屋顶类型，523 个在实际场景中生成，桥头保护区内另 1 个被排除；517 个屋顶升高仍需估算。已列明的地标、银行楼和店面另按真实照片单独制作。具体覆盖、记录数和参考资料统一见 [城市数据与精度](docs/CITY_DATA.md)。
+
+位置、外形和高度分别记录来源。有公开高度时采用对应资料；仅有层数或照片时明确使用估算。大部分地面仍是平坦游戏基准，山坡、高架和地下网络尚未完整重建；机场至城区的中间地形也保留简化。本项目不声称已完成全悉尼一比一复刻或摄影测量扫描。
+
+## 创造载具与其他玩法
+
+按 **Tab** 选择车型，**每点击一次就新增一个独立副本**，保留已有车辆和人物当前所在位置。没有预设副本数量上限；数量仍受设备性能和可用空间影响。系统检查完整车身、机翼或船体，选择合适空间，黄色标记显示新副本的位置与距离。靠近按 **E** 进入，或在菜单明确选择“前往并进入新载具”。
+
+附近放不下大飞机时提供机场空闲位置；游艇选择水面，滑翔器可在安全空中待飞。生活模式先解锁车型，沙盒免费。跑车、摩托车、游艇、滑翔伞、滑翔机、直升机和客机共七类载具，各副本独立保存位置、油量和损伤。
+
+还可以参与摄影、货物回收、码头巡检、空中观察和跨桥计时赛，获得收入用于资产与维修。NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与碰撞。室内、活动和 NPC 内容仍有限，破坏系统不等同于现实建筑倒塌模拟。
 
 ## 操作
 
 | 操作 | 按键 |
 | --- | --- |
-| 行走 / 驾驶油门与转向 | WASD / 方向键 |
+| 行走、油门与转向 | WASD / 方向键 |
 | 观察 | 鼠标 |
 | 奔跑 | Shift |
-| 跳跃 / 载具制动或空中减速板 | 空格 |
-| 交互、进入或离开载具 | E |
-| 飞行俯仰 / 直升机升降 | R / F |
-| 拿起或放下货物 | G |
+| 跳跃、载具制动 / 减速板 | 空格 |
+| 交互、进入 / 离开载具 | E |
+| 飞行俯仰、直升机升降 | R / F |
+| 货物 | G |
 | 工作与活动 | J |
-| 车库、购买、调用、维修 | Tab |
-| 地图 | M |
-| 保存游戏截图 | P |
-| 保存世界 | F5 |
+| 创造载具、购买与维修 | Tab |
+| 地图与目的地 | M |
+| 保存截图 / 保存世界 | P / F5 |
 | 暂停、设置、存档与恢复 | Esc |
 | 角色返回个人空间 | Home |
 
-## 可以玩什么
+## 存档与旧世界
 
-- **连续世界：**海港两岸、歌剧院、大桥道路与步道、Circular Quay、The Rocks、Milsons Point、码头、工作室和车库；机场包含三条原尺度跑道、滑行道、灯光、近似航站楼、塔台与可进入机库。机场至海港间保留简化地形。
-- **七类载具：**跑车、摩托车、游艇、滑翔伞、滑翔机、直升机、双发宽体客机。陆、海、空载具使用不同的运动模型；游艇可承载实体货物。
-- **五种活动：**摄影漫步、货物回收、码头巡检、空中观察、跨桥计时赛。收入可用于资产购买和维修。
-- **世界反馈：**NPC 行走、对话与危险躲避，有限的事故记忆；建筑局部损伤会同时改变可见网格与碰撞。
-- **独立世界：**生活与沙盒模式、本地保存、复制、前一次存档恢复，以及角色、货物和建筑修复功能。
+存档位于本机 `~/Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港/worlds/`。每个世界使用独立 JSON，保留前一次成功保存的 `.bak`；约每 60 秒自动保存，F5 手动保存，正常退出也会保存。截图存于同级 `photos/`，没有云存档。
 
-## 存档与恢复
+存档格式 3 可读取旧格式 1 / 2。旧世界首次进入本次地图时，会检查人物和已有载具是否被新建筑包住，只调整发生冲突的副本，保留 ID、油量、损伤与占用关系；之后正常保存记录地图版本。详见 [旧地图存档迁移](docs/SAVE_MAP_MIGRATION.md)。新版存档请继续用新版应用，旧应用会拒绝读取，避免丢掉独立副本。
 
-存档保存在本机：
+## 验证与已知限制
 
-```text
-~/Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港/worlds/
-```
+最终发布构建、原生试玩、镜头跟随、静态渲染采样和试飞结果，以 [本轮验证记录](docs/TESTING.md) 对应的构建和证据为准。初版试飞视频及旧性能数据不作为这次城市扩展的通过证明。最终应用已通过 28 项原生验收、机场往返试飞及独立解压启动检查。
 
-每个世界使用独立 JSON，保留前一次成功写入的 `.bak`。游戏约每 60 秒自动保存，**F5** 手动保存，正常退出也会保存；异常中断可能丢失上次保存后的变化。标题或暂停菜单的“存档与恢复”可以继续、复制世界或读取恢复副本。请避免在运行时手工改动存档。
-
-角色、资产、活动进度及重要损伤会随世界保存。按 **P** 生成的截图位于同级 `photos/` 文件夹。游戏不提供云存档。
-
-## 已验证与已知限制
-
-原生构建已完成机场起飞、经过歌剧院与海港大桥、返回同一跑道并停稳的自动试飞，约 **9 分 26 秒、44.37 km、全程无损**。这使用正常游戏输入和物理系统；它不等同于全面人工手飞验收。更多测试范围、环境与证据见 [测试摘要](docs/TESTING.md)。
-
-- 局部破坏测试记录到约 **0.52 秒**的单次停顿，不能保证全场景稳定 60 FPS。
-- 人物、地标细节、机场建筑、水面、动画与声音仍明显简化；机场与海港间不是完整悉尼城市复刻。
-- NPC、室内与生活内容数量有限；局部破坏不是完整建筑结构倒塌模拟，多小时稳定性尚未完成验证。
-- 只有上述 Mac 配置完成实测；其他硬件与系统版本表现未知。
-- 歌剧院商业形象和推广使用等权利事项尚未解决。本预览不声称已获相关机构授权，也不代表任何真实机场、运营商或地标机构。
-
-这是免费试玩预览，尚未达到商业成品质量。
+仅上述 Mac 配置有实测记录，其他设备表现未知。还没有多小时稳定性或完整硬件矩阵验证，不能保证所有场景稳定 60 FPS。游戏、美术、声音和生活内容仍是开发预览；商业推广所需的第三方地标形象等权利也尚未全部解决。
 
 ## 源码与本地构建
 
-[下载此版本源码](https://github.com/YvesZhou-hub/harbourlife/archive/refs/tags/v0.1.0-preview.1.zip)，或克隆仓库并切换至 `v0.1.0-preview.1`。可维护的程序化建模源码也是本版本的源资产；地理数据与验证脚本保存在 `source/`。
+[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.1-preview.1` 标签对应的源码。
 
-构建需要 macOS、Python 3，以及固定版本的 **Godot 4.7.2** 编辑器和 macOS 导出模板。开发工具需从 [Godot 官方 4.7.2-stable 发布页面](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable) 获取，不包含在本项目的玩家下载包或源码 ZIP 中。
-
-下载并解压 macOS 编辑器和对应导出模板，创建 `tools/runtime/templates/` 目录。将编辑器应用内 `Contents/MacOS/Godot` 可执行文件放为 `tools/runtime/godot`，将导出模板中的 `macos.zip` 放为 `tools/runtime/templates/macos.zip`。保持编辑器和模板版本一致。
-
-在项目根目录执行：
+构建需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
 
 ```sh
 chmod +x tools/runtime/godot
@@ -98,27 +102,18 @@ codesign --force --sign - tools/runtime/godot
 ./tools/build.sh
 ```
 
-脚本在本机非 iCloud 暂存目录中构建并进行 ad-hoc 签名和启动检查，输出 `dist/Harbourlife-macOS-arm64.zip`。`dist/Harbourlife.app` 是指向本机生成应用的链接；分享游戏时请使用 ZIP。构建过程不会获得 Apple Developer ID 签名或公证。
-
-独立验证示例：
-
-```sh
-./tools/runtime/godot --headless --path game --script ../tools/test_save.gd
-./tools/runtime/godot --headless --path game --script ../tools/test_integration.gd
-./tools/runtime/godot --headless --path game --script ../tools/test_vehicles.gd
-./tools/runtime/godot --headless --path game --script ../source/airport_test.gd
-```
+脚本使用本机暂存目录构建、ad-hoc 签名和启动检查，输出 `dist/Harbourlife-macOS-arm64.zip`。`dist/Harbourlife.app` 是本地生成应用的链接，分享请用 ZIP。地图的离线重建步骤见 [CITY_DATA.md](docs/CITY_DATA.md)，验证命令见 [TESTING.md](docs/TESTING.md)。
 
 ## 许可与来源
 
-原创游戏源码和资产保留权利，允许的免费个人试玩范围见 [PLAY_PERMISSION.md](PLAY_PERMISSION.md)。公开源码不代表授予 MIT 或其他无限制开源许可，也不代表授予第三方地标的商业使用权。
+原创源码和资产保留权利，免费个人试玩范围见 [PLAY_PERMISSION.md](PLAY_PERMISSION.md)。公开源码不代表 MIT 授权，也不授予第三方地标的商业使用权。
 
-Godot 使用 MIT 许可，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据为公共领域；各自条款保持独立。游戏未分发 Google 地图瓦片、航空照片、第三方城市模型或系统字体文件。
+Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据为公共领域，各自条款独立。没有分发 Google 地图瓦片、街景照片或第三方城市模型。
 
-[资产与依赖来源](licenses/ASSET_REGISTER.md) · [地理数据许可](licenses/GEOGRAPHY.md) · [海港地理说明](reports/GEOGRAPHY.md) · [机场说明](reports/AIRPORT.md)
+[资产与依赖来源](licenses/ASSET_REGISTER.md) · [地理数据许可](licenses/GEOGRAPHY.md) · [城市精度与参考](docs/CITY_DATA.md) · [机场说明](reports/AIRPORT.md)
 
 ## English
 
-Harbourlife is a **free experimental, offline single-player Sydney sandbox**. Take off from Sydney Airport, visit the Opera House and Harbour Bridge, or explore on foot and with seven vehicle types. Download the **Apple Silicon Mac application** from the links above to play. The source ZIP is for developers; building requires the editor and export templates from the [official Godot 4.7.2 release](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable).
+Harbourlife is a free, offline, single-player Sydney sandbox for **Apple Silicon Mac**. Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
-Tested only on Apple M4, 16 GB RAM, macOS 26.5. The application is ad-hoc signed and **not notarized**. There is no Windows, Intel Mac, or browser release. Art and content remain simplified, and a destruction test showed a 0.52-second stall. Original source and assets are rights-reserved; see [play permission](PLAY_PERMISSION.md) and the separate dependency/data licenses. Commercial landmark clearance remains unresolved.
+**v0.1.1-preview.1 · Sydney city expansion preview.** The exported app passed 28 native checks, the airport return flight and fresh-extraction startup. The linked flight video shows the initial v0.1.0 preview. Real map footprints, individually photo-referenced landmarks and inferred building details have different accuracy levels; this is not a full 1:1 city scan. The app is ad-hoc signed and not notarized. Final build-specific results belong in [TESTING.md](docs/TESTING.md). See [play permission](PLAY_PERMISSION.md) and the separate data/dependency licences.

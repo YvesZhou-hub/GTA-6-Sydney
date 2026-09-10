@@ -1,0 +1,20 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS Westpac HQ and both CBA campus buildings have separate identity records
+PASS all eight custom footprint parts have explicit OSM exclusions
+PASS CBA South remains southeast of its paired North building
+PASS documented headquarters coordinates agree with the world projection
+PASS every detailed structural collider uses the identical rendered solid faces
+PASS no zero-area triangles in the bank geometry
+PASS all faces have outward Godot triangle winding
+PASS combined bank geometry remains bounded triangles=109217
+PASS Westpac's beacon reaches the published 166m architectural height
+PASS both CBA roofs retain explicitly estimated 43.2m curved envelopes
+PASS Westpac massing contains two offset towers with distinct floor counts
+PASS both low-rise campus buildings have curved structural roof meshes
+PASS westpac has actual collision at its mapped position
+PASS cba_south has actual collision at its mapped position
+PASS cba_north has actual collision at its mapped position
+PASS floor destruction removes glazing, timber trim and collision together
+PASS restoration reinstates matching bank collision
+BANK CHECK COMPLETE failures=0 triangles=109217 components=140

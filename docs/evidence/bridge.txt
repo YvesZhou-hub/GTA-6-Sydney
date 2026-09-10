@@ -1,0 +1,35 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=15056 reserved=452 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":17697,"custom_landmarks_ms":11742,"mapped_city_ms":11232,"terrain_and_harbour_ms":3272}
+HARBOR_WORLD_READY buildings=15059 structure_components=20793
+PASS reference-led bridge is integrated
+PASS south approach all eight road lanes have continuous ground (0 missing)
+PASS south approach 2.4m vehicle width and 5.5m height are unobstructed (0 blocked)
+PASS south approach both footways remain continuous (0 missing)
+PASS south approach pedestrian/camera envelope remains unobstructed (0 blocked)
+PASS south approach collision planes remain flush (max 0.0000m)
+PASS main span all eight road lanes have continuous ground (0 missing)
+PASS main span 2.4m vehicle width and 5.5m height are unobstructed (0 blocked)
+PASS main span both footways remain continuous (0 missing)
+PASS main span pedestrian/camera envelope remains unobstructed (0 blocked)
+PASS main span collision planes remain flush (max 0.0000m)
+PASS north approach all eight road lanes have continuous ground (0 missing)
+PASS north approach 2.4m vehicle width and 5.5m height are unobstructed (0 blocked)
+PASS north approach both footways remain continuous (0 missing)
+PASS north approach pedestrian/camera envelope remains unobstructed (0 blocked)
+PASS north approach collision planes remain flush (max 0.0000m)
+PASS dense 0m ramp/span join collision continuity (0 gaps)
+PASS dense 0m ramp/span join body clearance (0 blocked)
+PASS dense 503m ramp/span join collision continuity (0 gaps)
+PASS dense 503m ramp/span join body clearance (0 blocked)
+PASS ground exit (-325.7085, 4.5, -194.3677) reaches local streets, missing=0 blocked=0
+PASS ground exit (-336.75, 4.5, -173.06) reaches local streets, missing=0 blocked=0
+PASS ground exit (353.4911, 4.5, -1502.998) reaches local streets, missing=0 blocked=0
+PASS destroyed bridge deck opens a real collision hole
+PASS destroyed deck removes its continuous footway support
+PASS neighbouring intact deck retains support
+PASS saved deck and ramp damage rebuild both actual collision holes
+PASS repair restores the complete drive surface
+PASS undamaged bridge has only three continuous support runs
+BRIDGE CHECK COMPLETE failures=0 shape_probes=11111

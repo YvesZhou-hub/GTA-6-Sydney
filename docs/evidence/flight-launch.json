@@ -1,0 +1,14 @@
+{
+  "application": "Harbourlife.app/Contents/MacOS/Harbourlife",
+  "arguments": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--flight-qa"
+  ],
+  "fixed_simulation_fps": 60,
+  "performance_scope": "Native rendered fixed-step route validation, not real-time gameplay performance.",
+  "native_report_flag_detection": "The in-game command-line detector returned zero; this runner record retains the actual execution arguments. Raw simulation measurements are preserved.",
+  "archive_sha256": "58dbc6c6b32ca6c5a9cde95b7927bfc143b51674bf6414abb1a54dea75a40d58"
+}

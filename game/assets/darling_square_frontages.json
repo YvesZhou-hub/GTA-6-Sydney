@@ -1,0 +1,396 @@
+{
+  "checked": "2026-09-10",
+  "origin": {
+    "lat": -33.86,
+    "lon": 151.2105,
+    "meters_per_degree_lon": 92400,
+    "meters_per_degree_lat": 111320
+  },
+  "shops": [
+    {
+      "id": "edition",
+      "name": "Edition Roasters",
+      "osm": "node/7041091585",
+      "width": 7.0,
+      "facing": [
+        -0.935,
+        0.355
+      ],
+      "street": "Darling Drive / Steam Mill Lane",
+      "address": "60 Darling Drive",
+      "style": "edition",
+      "directory": "edition-coffee-roasters",
+      "source": "https://editionroasters.com/",
+      "photo": "https://sydneytales.com/edition-coffee-roasters/",
+      "evidence": "photo_details",
+      "notes": "Dark grey panel pier, restrained small lettering, tall glazing and long slatted timber bench. Exterior photo June 2024.",
+      "poi": [
+        -865.557,
+        2060.4
+      ],
+      "front": [
+        -865.3182,
+        2066.5781
+      ],
+      "normal": [
+        -0.940039,
+        0.341068
+      ],
+      "building": "way/545749187",
+      "projection_metres": 6.183
+    },
+    {
+      "id": "matcha",
+      "name": "Matcha-Ya",
+      "osm": "node/5783072555",
+      "width": 4.5,
+      "facing": [
+        0.356,
+        0.934
+      ],
+      "street": "Steam Mill Lane",
+      "address": "10 Steam Mill Lane",
+      "style": "matcha",
+      "directory": "matchaya",
+      "source": "https://matchaya.com.au/",
+      "photo": "https://betterfutureawards.com/syd19/project.asp?ID=18744",
+      "evidence": "photo_details",
+      "notes": "Documented 4.5 m facade. Black folding frame, low black awning, left fixed glazing/right entrance, green hexagonal tiles and zigzag interior light.",
+      "poi": [
+        -844.129,
+        2036.956
+      ],
+      "front": [
+        -842.464,
+        2041.3289
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 4.679
+    },
+    {
+      "id": "nakano",
+      "name": "Nakano Darling",
+      "osm": "node/11271537769",
+      "width": 6.2,
+      "facing": [
+        0.356,
+        0.934
+      ],
+      "street": "Steam Mill Lane",
+      "address": "14 Steam Mill Lane",
+      "style": "nakano",
+      "directory": "nakano-darling",
+      "source": "https://nakanodarling.com.au/contact-us",
+      "photo": "https://nakanodarling.com.au/about",
+      "evidence": "photo_details",
+      "notes": "Dark horizontal roller/slat face, narrow entry, timber bench, hanging warm lanterns. Yellow noren is corroborated by the venue-linked Time Out review.",
+      "poi": [
+        -830.676,
+        2031.768
+      ],
+      "front": [
+        -828.9891,
+        2036.1983
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 4.741
+    },
+    {
+      "id": "pork_roll",
+      "name": "Marrickville Pork Roll",
+      "osm": "node/5783556455",
+      "width": 3.6,
+      "facing": [
+        0.356,
+        0.934
+      ],
+      "street": "Steam Mill Lane",
+      "address": "16 Steam Mill Lane",
+      "style": "pork_roll",
+      "directory": "marrickville-pork-roll",
+      "source": "https://www.darlingharbour.com/eat-drink/marrickville-pork-roll",
+      "photo": "https://www.kuki.au/",
+      "evidence": "partial_photo",
+      "notes": "Neighbour visible at the left of KUKI official 2024 photograph: black brick, small illuminated badge, red interior. Official precinct confirms a small counter and neon tiger; no Illawarra Road awning copied.",
+      "poi": [
+        -821.168,
+        2028.195
+      ],
+      "front": [
+        -819.4968,
+        2032.584
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 4.696
+    },
+    {
+      "id": "kuki",
+      "name": "KUKI",
+      "osm": "node/13028462508",
+      "width": 4.6,
+      "facing": [
+        0.356,
+        0.934
+      ],
+      "street": "Steam Mill Lane",
+      "address": "9/18 Steam Mill Lane",
+      "style": "kuki",
+      "directory": "kuki",
+      "source": "https://www.kuki.au/",
+      "photo": "https://incostudio.co/projects/kuki-softserve-and-cookies",
+      "evidence": "photo_details",
+      "notes": "Two asymmetric apertures, peach order canopy, square KU/KI blade, cream lightbox, pink stone counter, timber counter base. Yusuke Oba March 2024 photography.",
+      "poi": [
+        -815.772,
+        2025.846
+      ],
+      "front": [
+        -814.0029,
+        2030.4921
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 4.972
+    },
+    {
+      "id": "kwang",
+      "name": "Kwang Jang Pocha",
+      "osm": "node/14053385031",
+      "width": 7.0,
+      "facing": [
+        -0.356,
+        -0.934
+      ],
+      "street": "Steam Mill Lane",
+      "address": "Steam Mill Lane",
+      "style": "kwang",
+      "directory": "kwang-jang-pocha",
+      "source": "https://www.darlingsq.com/eat-drink-shop/kwang-jang-pocha/",
+      "photo": "https://www.darlingsq.com/eat-drink-shop/kwang-jang-pocha/",
+      "evidence": "photo_details",
+      "notes": "Official night photo: dark glazed facade, red vertical lettering, cream canopy, colourful plastic stools and flags.",
+      "poi": [
+        -843.529,
+        2052.796
+      ],
+      "front": [
+        -844.4716,
+        2050.3813
+      ],
+      "normal": [
+        -0.363632,
+        -0.931543
+      ],
+      "building": "way/610783860",
+      "projection_metres": 2.592
+    },
+    {
+      "id": "wingboy",
+      "name": "Wingboy",
+      "osm": "node/14053356762",
+      "width": 7.2,
+      "facing": [
+        -0.356,
+        -0.934
+      ],
+      "street": "Steam Mill Lane",
+      "address": "7 Steam Mill Lane",
+      "style": "wingboy",
+      "directory": "wingboy",
+      "source": "https://wingboy.com.au/",
+      "photo": "https://www.opentable.com.au/r/wingboy-darling-square-haymarket",
+      "evidence": "photo_details",
+      "notes": "Merchant listing exterior: dark green vertical wainscot, timber sill, large dark-framed glass, white sign and red neon. Exterior menu board remains beside the door.",
+      "poi": [
+        -826.638,
+        2045.995
+      ],
+      "front": [
+        -827.5103,
+        2043.7604
+      ],
+      "normal": [
+        -0.363632,
+        -0.931543
+      ],
+      "building": "way/610783860",
+      "projection_metres": 2.399
+    },
+    {
+      "id": "holy_basil",
+      "name": "Holy Basil",
+      "osm": "node/5783581153",
+      "width": 8.0,
+      "facing": [
+        -0.356,
+        -0.934
+      ],
+      "street": "Steam Mill Lane / Tumbalong Boulevard",
+      "address": "SW.08, 51 Tumbalong Boulevard",
+      "style": "holy_basil",
+      "directory": "holybasil",
+      "source": "https://holybasil.com.au/darling-square/",
+      "photo": "https://www.notquitenigella.com/2023/05/23/holy-basil-darling-square/",
+      "evidence": "partial_photo",
+      "notes": "Open alfresco shop edge, warm metal trim and purple seating reference the photographed Darling Square venue. Exact street glazing subdivisions are inferred.",
+      "poi": [
+        -800.526,
+        2036.021
+      ],
+      "front": [
+        -801.7358,
+        2033.7237
+      ],
+      "normal": [
+        -0.360174,
+        -0.932885
+      ],
+      "building": "way/610783860",
+      "projection_metres": 2.596
+    },
+    {
+      "id": "messina",
+      "name": "Gelato Messina",
+      "osm": "node/6901321187",
+      "width": 10.0,
+      "facing": [
+        0.197,
+        -0.98
+      ],
+      "street": "Little Hay Street",
+      "address": "Shop 02, 3 Little Hay Street",
+      "style": "messina",
+      "directory": "gelato-messina",
+      "source": "https://gelatomessina.com/pages/stores",
+      "photo": "https://madebytait.com.au/stories/gelato-messina/",
+      "evidence": "photo_details",
+      "notes": "Actual Darling Square supplier photography: tall transom with white MESSINA letters, timber ceiling, folding glazed doors, yellow/white striped parasols, white wire chairs and timber planters.",
+      "poi": [
+        -737.5,
+        2082.708
+      ],
+      "front": [
+        -736.1138,
+        2076.3016
+      ],
+      "normal": [
+        0.211475,
+        -0.977383
+      ],
+      "building": "way/614603728",
+      "projection_metres": 6.555
+    },
+    {
+      "id": "kurtosh",
+      "name": "Kürtősh",
+      "osm": "node/10689694170",
+      "width": 5.6,
+      "facing": [
+        -0.995,
+        0.1
+      ],
+      "street": "Nicolle Walk",
+      "address": "Shop 1, 16 Nicolle Walk",
+      "style": "kurtosh",
+      "directory": "kurtosh",
+      "source": "https://kurtosh.com.au/locations/",
+      "photo": "",
+      "evidence": "location_verified",
+      "notes": "Official branch/address and OSM point verified; exterior is an explicitly inferred glazed bakery frontage with timber pastry display and ochre ceramic details. No claim of photographed facade replication.",
+      "poi": [
+        -731.217,
+        2062.882
+      ],
+      "front": [
+        -735.9179,
+        2063.4264
+      ],
+      "normal": [
+        -0.993361,
+        0.115036
+      ],
+      "building": "way/614603732",
+      "projection_metres": 4.732
+    },
+    {
+      "id": "dopa",
+      "name": "DOPA Donburi",
+      "osm": "node/9805973142",
+      "width": 7.8,
+      "facing": [
+        -0.197,
+        0.98
+      ],
+      "street": "Little Hay Street",
+      "address": "Shop 5/6, 2 Little Hay Street",
+      "style": "dopa",
+      "directory": "",
+      "source": "https://www.darlingharbour.com/eat-drink/dopa-by-devon",
+      "photo": "https://concreteplayground.com/sydney/restaurants/dopa-don-and-milk-bar",
+      "evidence": "photo_details",
+      "notes": "Jasper Avenue Darling Square photo: narrow glazed door left, dark bronze divider with vertical gold DOPA lettering, broad right glazing, red tiled counter and pale furniture.",
+      "poi": [
+        -676.932,
+        2072.177
+      ],
+      "front": [
+        -678.145,
+        2078.2972
+      ],
+      "normal": [
+        -0.194413,
+        0.98092
+      ],
+      "building": "way/614603732",
+      "projection_metres": 6.239
+    },
+    {
+      "id": "shortstop",
+      "name": "Shortstop Coffee & Donuts",
+      "osm": "node/7704131106",
+      "width": 4.2,
+      "facing": [
+        0.197,
+        -0.98
+      ],
+      "street": "Little Hay Street",
+      "address": "15 Little Hay Street",
+      "style": "shortstop",
+      "directory": "shortstop-coffee-donuts",
+      "source": "https://www.short-stop.com.au/",
+      "photo": "https://www.sydney.com/destinations/sydney/sydney-city/chinatown-and-haymarket/food-and-drink/shortstop-coffee-and-donuts-darling-square",
+      "evidence": "photo_details",
+      "notes": "Darling Square tourism image confirms round navy SHORT/STOP projecting blade. Nick De Lorenzo Darling Square 2019 exterior photo confirms narrow left entry, timber jambs and right display, tall transom, blue tables and striped side panels. Approximate width 4.2m; supplied photo showing street number 19 excluded as unproven branch.",
+      "poi": [
+        -691.993,
+        2093.54
+      ],
+      "front": [
+        -690.4027,
+        2086.1983
+      ],
+      "normal": [
+        0.211704,
+        -0.977334
+      ],
+      "building": "way/614603728",
+      "projection_metres": 7.512
+    }
+  ],
+  "scope": "Original game frontage reconstruction; OSM coordinates, photographed details where stated, inferred non-surveyed dimensions. No downloaded photo textures."
+}
