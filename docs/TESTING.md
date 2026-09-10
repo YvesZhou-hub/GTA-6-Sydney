@@ -16,7 +16,7 @@
 
 | 流程 | 通过检查 | 启动记录 | 原始结果 |
 |---|---:|---|---|
-| 玩家体验、九类载具创建入座、地图、22 项消费与保存加载 | 70 | [experience-launch.json](evidence/v013-app/experience-launch.json) | [experience-report.json](evidence/v013-app/experience-report.json) |
+| 玩家体验、九类载具创建入座、地图、22 项体验目录、一次消费与保存加载 | 70 | [experience-launch.json](evidence/v013-app/experience-launch.json) | [experience-report.json](evidence/v013-app/experience-report.json) |
 | 滑翔机、滑翔伞创建初速与空中保存加载 | 16 | [air-vehicle-launch.json](evidence/v013-app/air-vehicle-launch.json) | [air-vehicle-report.json](evidence/v013-app/air-vehicle-report.json) |
 | 全城基础流程、九类载具移动、破坏与持久化 | 32 | [qa-launch.json](evidence/v013-app/qa-launch.json) | [qa-report.json](evidence/v013-app/qa-report.json) |
 

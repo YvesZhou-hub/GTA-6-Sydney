@@ -9,7 +9,7 @@
     "build_report": "reports/release-v013-render-physics-build/build.json",
     "archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c",
     "launch_report": "reports/release-v013-render-physics/visual-launch.json",
-    "launch_sha256": "df063f7d2c3c3de8f00830287dc052dcee2a3b84ebdef3b4974a9882740b429d",
+    "launch_sha256": "8de6d98c034a980e628ba2d093873a9c3fe25c205886dbb221080283829ade53",
     "started_utc": "2026-09-10T18:51:03.854689+00:00",
     "exit_code": 0,
     "capture_count": 31,
@@ -17,7 +17,9 @@
     "world_ready": [
       "HARBOR_WORLD_READY buildings=15127 structure_components=21302"
     ],
-    "scope_note": "Render/physics candidate before the save-only VERSION 4 to 5 change. Reviewed archive SHA remains 18450e59; this is not a repeated visual run on the final 39ab7826 archive."
+    "scope_note": "Render/physics candidate before the save-only VERSION 4 to 5 change. Reviewed archive SHA remains 18450e59; this is not a repeated visual run on the final 39ab7826 archive.",
+    "launch_sha256_before_provenance_annotation": "df063f7d2c3c3de8f00830287dc052dcee2a3b84ebdef3b4974a9882740b429d",
+    "launch_sha256_note": "Current launch hash includes archive_sha256 and build_stage provenance annotations added after capture; original pre-annotation hash retained separately. All image bytes are unchanged."
   },
   "source_binding": {
     "game/scripts/circular_quay_detail.gd": {
