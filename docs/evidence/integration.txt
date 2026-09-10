@@ -1,0 +1,45 @@
+HARBOR_WORLD_READY buildings=339 structure_components=13437
+INTEGRATION initial_life_economy PASS
+INTEGRATION mode_reset_0 PASS
+INTEGRATION stable_population_0 PASS
+INTEGRATION mode_reset_1 PASS
+INTEGRATION stable_population_1 PASS
+INTEGRATION mode_reset_2 PASS
+INTEGRATION stable_population_2 PASS
+INTEGRATION mode_reset_3 PASS
+INTEGRATION stable_population_3 PASS
+INTEGRATION start_photo PASS
+INTEGRATION wrong_context_rejected_photo PASS
+INTEGRATION complete_photo PASS
+INTEGRATION repeat_photo PASS
+INTEGRATION cancel_photo PASS
+INTEGRATION start_salvage PASS
+INTEGRATION complete_salvage PASS
+INTEGRATION repeat_salvage PASS
+INTEGRATION cancel_salvage PASS
+INTEGRATION start_harbor PASS
+INTEGRATION wrong_context_rejected_harbor PASS
+INTEGRATION complete_harbor PASS
+INTEGRATION repeat_harbor PASS
+INTEGRATION cancel_harbor PASS
+INTEGRATION start_air PASS
+INTEGRATION wrong_context_rejected_air PASS
+INTEGRATION complete_air PASS
+INTEGRATION repeat_air PASS
+INTEGRATION cancel_air PASS
+INTEGRATION start_race PASS
+INTEGRATION wrong_context_rejected_race PASS
+INTEGRATION complete_race PASS
+INTEGRATION repeat_race PASS
+INTEGRATION cancel_race PASS
+INTEGRATION loose_salvage_interact PASS hint=E  Unload at workshop   G  Put down case response=旧物回收 complete · +$360 · 0:00
+INTEGRATION vehicle_entry_disables_player_collider PASS
+INTEGRATION new_world_restores_walking_collision PASS layer=1 mask=15
+INTEGRATION load_on_foot_restores_walking_collision PASS
+INTEGRATION photo_waypoints_have_ground PASS
+INTEGRATION harbor_waypoints_are_open_water PASS
+INTEGRATION released_cargo_vehicle_mask PASS
+INTEGRATION loaded_cargo_vehicle_mask PASS mask=15
+INTEGRATION released_cargo_supported_on_boat_layer PASS height=25.58
+INTEGRATION loaded_cargo_supported_on_boat_layer PASS height=25.58
+INTEGRATION COMPLETE checks=43 failures=0 elapsed_ms=3945

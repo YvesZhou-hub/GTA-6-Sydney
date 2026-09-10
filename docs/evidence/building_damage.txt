@@ -1,0 +1,12 @@
+HARBOR_WORLD_READY buildings=339 structure_components=13437
+WORLD_DAMAGE wall_initially_collides PASS
+WORLD_DAMAGE local_wall_removed PASS
+WORLD_DAMAGE local_mesh_vertices_removed PASS
+WORLD_DAMAGE neighbor_front_panel_retained PASS
+WORLD_DAMAGE restored_hole_stays_open PASS
+WORLD_DAMAGE restored_visual_hole PASS
+WORLD_DAMAGE destroyed_ids_roundtrip PASS
+WORLD_DAMAGE repair_restores_collision PASS
+WORLD_DAMAGE repair_restores_geometry PASS
+WORLD_DAMAGE repair_restores_facade_shader PASS
+WORLD_DAMAGE_COMPLETE failures=0

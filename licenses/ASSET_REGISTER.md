@@ -1,0 +1,13 @@
+# Asset and dependency provenance
+
+- Engine: Godot 4.7.2 stable, official `ed1daf0bf`, MIT. Exact bundled license and third-party copyright notices are adjacent. The runtime and macOS template were reused from the already installed official toolchain; no unrelated game assets/code were copied. A local ad-hoc signature was applied to the standalone CLI and generated app. No Apple Developer ID or notarization is claimed.
+- Game models: original deterministic source geometry in `game/scripts/harbor_world.gd`, `airport_world.gd`, `vehicle_factory.gd`, `harbor_player.gd`, `harbor_npc.gd`, `harbor_cargo.gd`. Meshes, façade elements, vegetation and collisions are generated offline from these maintainable sources. No external aircraft/vehicle models, branding or livery packs are included.
+- Textures/shaders: original generated paving/stone textures, window façade shader and water shader. No downloaded satellite/aerial photographs, streamed city meshes, Google map tiles or photogrammetry are redistributed.
+- Audio: original deterministic synthesized waveforms for environment, footsteps, water, engines, rotor and impacts. No music library or external recordings.
+- Font: runtime `SystemFont` requests the user's installed Avenir Next / PingFang / Arial, with engine fallback. No Apple/Microsoft font file is copied or redistributed. Godot fallback font notices are in its copyright file.
+- Geography: see `GEOGRAPHY.md`, `../reports/GEOGRAPHY.md`, `../reports/AIRPORT.md` and included source records. OpenStreetMap-derived data remains under ODbL and is attributed in the game credits. OurAirports runway records are published as public domain. Official Sydney Airport lengths were used to reconcile rounded endpoint coordinates.
+- Video development tool: imageio-ffmpeg/FFmpeg 7.1 obtained from PyPI for encoding captured game frames; excluded from the player application. It contributes no external content to the recording.
+
+## Commercial status
+
+The game uses original depictions of named real places. Original authorship of meshes does not settle building image/brand, promotion or other commercial rights. Sydney Opera House image/brand commercial clearance is unresolved. No third-party permission, legal clearance, purchase, store submission or approval has been claimed or executed. Airport buildings are original approximations and use no airline logos. The public preview permits personal play and testing under `../PLAY_PERMISSION.md`; the original source has not been assigned an open-source licence. Third-party components and data retain their own licences. Free publication does not establish third-party commercial clearance.

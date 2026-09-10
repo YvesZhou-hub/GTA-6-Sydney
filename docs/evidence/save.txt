@@ -1,0 +1,8 @@
+SAVE_TEST atomic write PASS
+SAVE_TEST read data PASS
+SAVE_TEST overwrite PASS
+SAVE_TEST previous recovery copy PASS
+SAVE_TEST independent copy PASS
+SAVE_TEST corrupt rejected PASS
+SAVE_TEST backup preserved PASS
+SAVE_TEST future version rejected PASS
