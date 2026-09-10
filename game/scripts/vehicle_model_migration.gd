@@ -2,7 +2,7 @@ extends RefCounted
 ## Larger replacement models may no longer fit an old parking berth.
 ## Relocate only parked legacy copies; preserve identities, damage, fuel and live flight.
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
-const REVISION:=2
+const REVISION:=3
 static func apply(game:Node3D,occupied_id:String) -> Array:
 	var adjustments:Array=[]
 	var previous=game.current_vehicle
@@ -10,7 +10,7 @@ static func apply(game:Node3D,occupied_id:String) -> Array:
 		if v.vehicle_id==occupied_id:game.current_vehicle=v;break
 	for v in game.vehicles:
 		if int(v.get_meta("loaded_model_revision",REVISION))>=REVISION:continue
-		if not v.kind in ["car","motorcycle","airliner","yacht"]:continue
+		if not v.kind in ["car","motorcycle","airliner","yacht","helicopter"]:continue
 		if v.linear_velocity.length()>1.0 or v.angular_velocity.length()>0.2:continue
 		if absf(v.rotation.x)>0.15 or absf(v.rotation.z)>0.15:continue
 		var before:Transform3D=v.global_transform

@@ -28,6 +28,9 @@ func run() -> void:
 	verify(ICC.metadata().size()==3,"separate Convention / Exhibition / entertainment theatre entries")
 	verify(ICC.footprints().size()==6 and ICC.excluded_way_ids().size()==7,"all exact mapped parts replace parent and ordinary envelopes")
 	verify(world.get_meta("icc_modeled_seats",0)>1500,"three tiers contain distinct red / grey seat geometry")
+	verify(world.get_meta("icc_convention_fitout",{}).get("registration_workstations",0)==4,"Convention counter has four modeled workstations and digital wayfinding")
+	verify(world.get_meta("icc_exhibition_fitout",{}).get("digital_screens",0)==20,"Exhibition foyer has four fitted concession bays and twenty guide screens")
+	verify(world.get_meta("icc_theatre_fitout",{}).get("foyer_battens",false),"Theatre ticket foyer has timber relief and a suspended metal ceiling")
 	var before: int=world.structures.size();ICC.build(world);verify(before==world.structures.size(),"build is idempotent")
 	var triangles:=0;var mesh_parts:=0
 	for node in world.find_children("*","MeshInstance3D",true,false):
@@ -138,6 +141,8 @@ func capture(world:Node3D) -> void:
 		["group",ICC.point(ICC.EXHIBITION,Vector3(260,180,210)),ICC.EXHIBITION+Vector3.UP*10],
 		["convention-front",ICC.point(ICC.CONVENTION,Vector3(120,22,-55)),ICC.CONVENTION+Vector3.UP*20],
 		["convention-foyer",ICC.point(ICC.CONVENTION,Vector3(53,1.8,17)),ICC.point(ICC.CONVENTION,Vector3(8,3,-10))],
+		["convention-registration",ICC.point(ICC.CONVENTION,Vector3(24,1.85,16)),ICC.point(ICC.CONVENTION,Vector3(27,1.8,24))],
+		["exhibition-foyer",ICC.point(ICC.EXHIBITION,Vector3(49,8.4,-90)),ICC.point(ICC.EXHIBITION,Vector3(41,9.2,-80))],
 		["exhibition-front",ICC.point(ICC.EXHIBITION,Vector3(147,16,120)),ICC.point(ICC.EXHIBITION,Vector3(52,15,-22))],
 		["exhibition-stairs",ICC.point(ICC.EXHIBITION,Vector3(60,1.8,-83)),ICC.point(ICC.EXHIBITION,Vector3(56,7,-45))],
 		["exhibition-hall",ICC.point(ICC.EXHIBITION,Vector3(34,8.3,-39)),ICC.point(ICC.EXHIBITION,Vector3(-48,10,-11))],
@@ -146,6 +151,7 @@ func capture(world:Node3D) -> void:
 		["theatre-auditorium",ICC.point(ICC.THEATRE,Vector3(-29,4.0,-17)),ICC.point(ICC.THEATRE,Vector3(19,13,4))],
 		["theatre-stage",ICC.point(ICC.THEATRE,Vector3(17,18,-3)),ICC.point(ICC.THEATRE,Vector3(-31,3,0))]
 	]
+	if "--fitout-capture" in OS.get_cmdline_user_args():views=views.filter(func(view):return view[0] in ["convention-registration","exhibition-foyer"])
 	if "--theatre-capture" in OS.get_cmdline_user_args():views=views.filter(func(view):return view[0] in ["theatre-auditorium","theatre-foyer"])
 	var folder:=ProjectSettings.globalize_path("res://../reports/icc-refinement/"+("full-world" if "--full-world" in OS.get_cmdline_user_args() else "local"));DirAccess.make_dir_recursive_absolute(folder)
 	for view:Array in views:

@@ -1,0 +1,24 @@
+# Sydney Tower Eye exterior reconstruction
+
+This v0.1.3 module replaces the previously generic mapped tower and its office base with an independently built exterior. It is an architectural reconstruction from sources below, not a measured BIM or a playable elevator/observation-deck tour. No source photograph, raster logo, commercial 3D asset or plan image is packaged.
+
+## Primary evidence inspected
+
+- [Sydney Tower Eye operator facts](https://www.sydneytowereye.com.au/explore/explore/about-sydney-tower/) and [operator fact sheet](https://www.sydneytowereye.com.au/media/m3pniui5/ste-fact-sheet.pdf): 309m tip, 250m observation level, 268m SKYWALK, 6.7m shaft diameter, approximately 31m turret diameter, 56 cables and 420 windows. The present tower identity and dimensions take precedence over historic names or approximate third-party heights.
+- [Official SKYWALK photograph](https://www.sydneytowereye.com.au/media/cdaa2zzr/look-at-skywalk.jpg), actually opened and viewed: broad gold windowed turret, narrower gold upper drum, red Westfield lettering, white plant enclosure, rails and projecting external platforms. [Official view page](https://www.sydneytowereye.com.au/explore/explore/the-view/) supplies skyline context.
+- [BBR CONNAECT 2016, printed page10](https://www.bbrnetwork.com/fileadmin/userdaten/CONNAECT/CONNAECT_2016.pdf), downloaded only to `/tmp` for PDF rendering and visually inspected: reproduces its original 2009 Sydney Tower engineering article. It describes two groups of 28 straight cables forming a hyperboloid, a 37.2m roof anchorage circle, a 90m coupling point, a 140m neck connection and turret anchorage 184m above the roof. This establishes the cable arrangement rather than a guessed straight pole or decorative vertical lattice.
+- [100 Market Street owner Link REIT](https://www.linkreit.com/en/business/properties/100-market-street/), actual owner-gallery exterior viewed: ten office storeys above the retail development, dark glazing and strong pale vertical fins. The mapped twelve-level tag is retained as twelve geometric damage bands, not described as twelve office floors.
+
+## Geography and height limits
+
+The module uses the polygon centroid of OSM way197801072 from the checked-in source snapshot: latitude **-33.8704954659**, longitude **151.2089471132**. The existing map conversion produces **(-143.48673656, 4.5, 1168.3552663)** metres. The base follows the exact point sequence of way197801073. Replaced source ways are **197801072, 197801073, 197801074 and 273960049**; the rest of Westfield is not removed. The source snapshot is `source/map-data/city.json` and is ODbL map data, not a cadastral survey.
+
+The street arrival **(-168.4, 4.5, 1190.8)** is on the public Market Street side, outside the building footprint. It is separate from the map/building centre and does not claim to be the actual Level5 ticket desk. The module does not add an operating lift or navigate players onto a closed tower floor.
+
+The 309m top, shaft/turret diameters, cable count and window count are source dimensions. The **55m base roof height is estimated** by fitting the source's roof-relative cable arrangement to a roughly239m underside anchorage; it is not an independently measured roof elevation. Turret band heights, cladding depth, cable angular offsets and thicknesses, plant profile, lettering font and individual rail/panel geometry are reconstructed approximations. The world still uses its existing flat4.5m terrain datum, which is not an AHD height or an exact reproduction of street grades.
+
+## Geometry and verification
+
+The model has 56 geometric cable paths with coupling/neck details, a segmented shaft, tapered turret underside, four bands totalling420 physical window panels, layered gold drum, outer platform/rails, white upper plant room, tapering communications spire and navigation beacon. The ten-storey office appearance uses mapped perimeter geometry with separate facade fins. Major body sections have damage collisions and grouped details; thin cables and rail ornament are visual geometry, not individual destructible physics ropes.
+
+`source/sydney_tower_landmark_test.gd` passes **19/19** focused checks, including map projection, independent street arrival, 309m maximum height, nondegenerate faces and winding, exact solid/collision correspondence, high-elevation collision rays and damage/repair. The local fixture has **33** structure records and **103,264** triangles. The native fixture uses the same intact-material caching as the production world, so damaging and repairing a turret section preserves its distinct dark windows. Five original game captures cover whole tower, turret, cable net, street and base aerial. Logs: `reports/sydney-tower-v013.log` and `reports/sydney-tower-v013-native.log`. Local tests do not replace complete-world neighbour/arrival and packaged-app checks.

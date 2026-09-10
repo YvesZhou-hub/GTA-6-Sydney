@@ -11,7 +11,7 @@ func _ready():
 	ambient.stream = wave(8.0,0)
 	ambient.volume_db = -22
 	add_child(ambient)
-	ambient.play()
+	if DisplayServer.get_name()!="headless": ambient.play()
 	cue = AudioStreamPlayer.new()
 	add_child(cue)
 	step = AudioStreamPlayer3D.new()
@@ -51,11 +51,9 @@ func wave(seconds:float,kind:int) -> AudioStreamWAV:
 		stream.loop_end=count
 	return stream
 
-func footstep(water:bool,pos:Vector3):
-	step.global_position=pos
-	step.stream=wave(0.2,4 if water else 1)
-	step.pitch_scale=randf_range(0.9,1.1)
-	step.play()
+func footstep(_water:bool,_pos:Vector3):
+	# Retained for older call sites; footsteps are deliberately silent.
+	pass
 
 func chime():
 	cue.stream=wave(0.7,2)

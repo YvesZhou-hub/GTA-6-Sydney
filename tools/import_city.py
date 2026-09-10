@@ -71,6 +71,37 @@ def number(value, default=0.0):
     match = re.match(r'^\s*(-?[0-9.]+)', str(value))
     return float(match[1]) if match else default
 
+def annotate_parent_geometry(buildings):
+    """Keep explicitly mapped bases only when their height cannot overlap a part.
+
+    A mere 2D parent/part relation is not enough: many mapped podiums have their
+    own height while every upper part starts at that height. Unknown/inferred
+    dimensions retain the conservative outline-only policy.
+    """
+    by_id = {b['id']: b for b in buildings}
+    for building in buildings:
+        ids = building.get('parts', [])
+        if not ids:
+            continue
+        parts = [by_id[key] for key in ids if key in by_id]
+        policy = {'mode': 'parts_only', 'reason': 'Parent outline replaced by mapped parts; no explicit non-overlapping base established.'}
+        tagged_height = number(building.get('tags', {}).get('height'), -1)
+        explicit_parent = (tagged_height > building.get('base', 0)
+                           and abs(tagged_height - building['height']) < .001
+                           and building.get('height_source') == 'OSM tagged height; not independently surveyed')
+        explicit_parts = len(parts) == len(ids) and all(
+            'min_height' in part.get('tags', {})
+            and abs(number(part['tags']['min_height'], -1) - part['base']) < .001
+            for part in parts)
+        if explicit_parent and explicit_parts and parts:
+            minimum_base = min(part['base'] for part in parts)
+            if tagged_height <= minimum_base + .001:
+                policy = {'mode': 'preserve_tagged_base',
+                          'parent_height_m': tagged_height,
+                          'lowest_part_base_m': minimum_base,
+                          'reason': 'Explicit OSM height is at or below every mapped part explicit min_height; the parent is a separate lower volume.'}
+        building['parent_geometry_policy'] = policy
+
 def compile_map():
     from shapely.geometry import Polygon, LineString, Point, box
     from shapely.ops import polygonize, unary_union
@@ -165,6 +196,7 @@ def compile_map():
         shape=Polygon([(building['center'][0]+p[0],building['center'][1]+p[1]) for p in building['outline']]).buffer(0)
         contained=[parts[i]['id'] for i in tree.query(shape) if shape.buffer(.4).covers(part_shapes[i].representative_point()) and shape.intersection(part_shapes[i]).area>part_shapes[i].area*.90]
         if contained: building['parts']=contained
+    annotate_parent_geometry(out['buildings'])
     for building in out['buildings']: add_roof(building)
     if (DATA/'trees.json').exists():
         out['trees']=[{'id':'node/'+str(e['id']),'point':project(e),'tags':e.get('tags',{})}
@@ -233,7 +265,9 @@ def compile_map():
     out['counts'] = {k:len(out[k]) for k in ['buildings','roads','places','beaches','parks','trees','land']}
     out['counts']['buildings_with_height']=sum(b['height_source'].startswith('OSM tagged') for b in out['buildings'])
     out['counts']['tagged_height_estimates']=sum(b['height_source']=='OSM tagged estimate' for b in out['buildings'])
-    out['counts']['outlines_replaced_by_parts']=sum(bool(b.get('parts')) for b in out['buildings'])
+    out['counts']['parent_outlines_with_parts']=sum(bool(b.get('parts')) for b in out['buildings'])
+    out['counts']['tagged_parent_bases_preserved']=sum(b.get('parent_geometry_policy',{}).get('mode')=='preserve_tagged_base' for b in out['buildings'])
+    out['counts']['outlines_replaced_by_parts']=out['counts']['parent_outlines_with_parts']-out['counts']['tagged_parent_bases_preserved']
     out['counts']['tagged_pitched_roofs']=sum(bool(b.get('roof_surface')) for b in out['buildings'])
     out['counts']['buildings_with_levels']=sum(b['height_source'].startswith('OSM levels') for b in out['buildings'])
     target=ROOT/'game/assets/city_map.json'

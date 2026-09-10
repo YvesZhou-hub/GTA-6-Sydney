@@ -1,0 +1,28 @@
+{
+  "mode": "flight",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--flight-qa",
+    "--qa-fixed-fps=60"
+  ],
+  "started_utc": "2026-09-10T18:56:23.961730+00:00",
+  "wall_seconds": 815.102,
+  "exit_code": 0,
+  "report_fresh": true,
+  "passed": true,
+  "screenshots": [
+    "03_harbour.png",
+    "02_takeoff.png",
+    "05_approach.png",
+    "04_bridge.png",
+    "07_stopped.png",
+    "01_runway_parked.png",
+    "06_touchdown.png"
+  ],
+  "runtime_errors": [],
+  "archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c",
+  "build_stage": "render and physics candidate before save-format-only guard"
+}

@@ -4,6 +4,9 @@ const City=preload("res://scripts/city_map.gd")
 const Geo=preload("res://scripts/city_landmarks.gd")
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
 const Store=preload("res://scripts/save_store.gd")
+const Tower=preload("res://scripts/sydney_tower_landmark.gd")
+const QuayDetail=preload("res://scripts/circular_quay_detail.gd")
+const DarlingDetail=preload("res://scripts/darling_square_detail.gd")
 class LocalWorld:
 	extends "res://scripts/harbor_world.gd"
 	func _ready():
@@ -25,11 +28,18 @@ class LocalWorld:
 		var a=[-10,35,-10];var b=[10,35,-10];var c=[10,35,10];var d=[-10,35,10]
 		var e=[0,43,-10];var f=[0,43,10]
 		pitched.roof_surface=[a,e,f,a,f,d,e,b,c,e,c,f,a,b,e,d,f,c]
+		for item in City.data().buildings:
+			if int(str(item.id).get_slice("/",1)) in Tower.excluded_way_ids():map_snapshot.buildings.append(item)
 		City.build_buildings(self,map_snapshot)
 		var poly:=PackedVector2Array([Vector2(-10,-10),Vector2(10,-10),Vector2(10,10),Vector2(-10,10)])
 		_structure_mesh("bank/qa_closed/lobby",Geo.prism(poly,0,40),Vector3(2240,GROUND,2000),"concrete")
 		_structure_box("metro/qa_column",Vector3(2280,GROUND+5,2000),Vector3(6,10,6),"concrete")
 		_structure_mesh("city/qa_overhang/floor",Geo.prism(poly,15,20),Vector3(2320,GROUND,2000),"concrete")
+		# Actual v0.1.3 authored meshes exercise new damage namespaces, including
+		# complete containment that a collision-shell query cannot detect alone.
+		Tower.build(self)
+		QuayDetail.build(self)
+		DarlingDetail.build(self)
 		_ready_complete=true
 	func add_block(id:String,center:Vector2,height:float,base:=0.0,holes:Array=[]):
 		var outline=[[-10,-10],[10,-10],[10,10],[-10,10]]
@@ -83,6 +93,37 @@ func run():
 	check("custom bank closed trimesh interior detected",Migration.overlaps_new_building(world,player_bounds(Vector3(2240,5,2000))))
 	check("custom metro solid column interior detected",Migration.overlaps_new_building(world,player_bounds(Vector3(2280,5,2000))))
 	check("custom raised architecture does not fill public ground",not Migration.overlaps_new_building(world,player_bounds(Vector3(2320,5,2000))))
+	var tower_inside:Vector3=Tower.CENTER+Vector3(10,42,0)
+	var tower_base:Node3D=world.structures["sydney_tower/base/09"].node
+	var tower_collision:CollisionShape3D=tower_base.get_child(1)
+	check("v013 actual tower base is a closed solid containing the legacy roof region",Migration._closed_mesh(tower_collision.shape.get_faces()) and Migration._inside_mesh(tower_collision.global_transform.affine_inverse()*(tower_inside+Vector3.UP*.9),tower_collision.shape.get_faces()))
+	check("v013 tower interior is detected despite replacing reserved OSM geometry",Migration.overlaps_new_building(world,player_bounds(tower_inside)))
+	check("reserved original tower OSM pieces are not double-counted as migration solids",Migration._geometry(world).mapped.all(func(item):return not int(str(item.id).get_slice("/",1)) in Tower.excluded_way_ids()))
+	check("v013 tower Market Street public arrival remains outside closed geometry",not Migration.overlaps_new_building(world,player_bounds(Tower.ARRIVAL+Vector3.UP*.10)))
+	var tower_copy=game.make_vehicle("hoverboard","qa_tower_enclosure",tower_inside)
+	tower_copy.freeze=true
+	check("summon rejects a complete hoverboard enclosure in the new tower base",not Spawn.clear_envelope(game,tower_copy,tower_copy.global_transform))
+	game.reset_fleet(false)
+	world._destroy_component("sydney_tower/base/09",Vector3.ZERO,0,false)
+	await physics_frame
+	check("destroyed tower base floor leaves its actual interior usable",not Migration.overlaps_new_building(world,player_bounds(tower_inside)))
+	world.repair_all();await physics_frame
+	var kiosk_id:=""
+	for id in world.structures:
+		if str(id).begins_with("circular_quay/kiosk/"):kiosk_id=str(id);break
+	var kiosk:Dictionary=world.structures[kiosk_id]
+	var kiosk_inside:Vector3=kiosk.node.global_transform*kiosk.node.get_child(0).mesh.get_aabb().get_center()
+	check("v013 real mapped Circular Quay kiosk closed interior is rejected",Migration.overlaps_new_building(world,AABB(kiosk_inside-Vector3.ONE*.05,Vector3.ONE*.1)))
+	var wharves_open:=true
+	for item in QuayDetail.metadata():
+		if str(item.id).begins_with("cq_wharf_") and Migration.overlaps_new_building(world,player_bounds(item.arrival+Vector3.UP*.15)):wharves_open=false
+	check("all five Circular Quay public arrivals remain open below overhead roofs",wharves_open)
+	var post_id:=""
+	for id in world.structures:
+		if str(id).begins_with("darling_detail/canopy/post/"):post_id=str(id);break
+	var post:Dictionary=world.structures[post_id]
+	check("v013 Darling public canopy post is an occupied solid",Migration.overlaps_new_building(world,AABB(post.position-Vector3.ONE*.02,Vector3.ONE*.04)))
+	check("Darling public canopy centre remains an open walk route",not Migration.overlaps_new_building(world,player_bounds(DarlingDetail.CANOPY_A.lerp(DarlingDetail.CANOPY_B,.5)+Vector3.UP*.1)))
 	var enclosed_wing=game.make_vehicle("paraglider","qa_enclosed_wing",Vector3(2240,20,2000));enclosed_wing.freeze=true
 	check("summon rejects complete enclosure in custom solid shell",not Spawn.clear_envelope(game,enclosed_wing,enclosed_wing.global_transform))
 	game.reset_fleet(false)
@@ -126,6 +167,29 @@ func run():
 	var migrated_plane:int=Migration.apply(game)
 	check("wide aircraft migration finds nearby flat field with full footprint clearance",migrated_plane==1 and widebody.global_position.distance_to(widebody_origin)<250 and Spawn.clear_envelope(game,widebody,widebody.global_transform))
 	check("wide aircraft migration preserves ID health fuel and parked state",widebody.vehicle_id=="qa_migration_widebody" and widebody.health==77 and widebody.fuel==29 and widebody.freeze)
+	game.reset_fleet(false)
+	# Same ordering as load_world: apply_state queues first-frame velocities,
+	# then map migration may relocate the body before physics integrates it.
+	var loaded_car=game.make_vehicle("car","qa_pending_motion",Vector3(2000,5.5,2000))
+	var moving_state:Dictionary=loaded_car.get_state()
+	moving_state.velocity=[15.0,0.0,0.0];moving_state.angular_velocity=[0.0,.1,0.0]
+	moving_state.throttle=.8;moving_state.frozen=false
+	loaded_car.apply_state(moving_state)
+	var motion_relocated:int=Migration.apply(game)
+	var stopped_state:Dictionary=loaded_car.get_state()
+	var stopped_position:Vector3=loaded_car.global_position
+	check("relocated loaded car clears queued velocity before same-frame save",motion_relocated==1 and not loaded_car.freeze and loaded_car.linear_velocity.is_zero_approx() and loaded_car.angular_velocity.is_zero_approx() and game.unvec(stopped_state.velocity).is_zero_approx() and game.unvec(stopped_state.angular_velocity).is_zero_approx() and stopped_state.throttle==0.0)
+	await physics_frame;await physics_frame
+	check("first physics integration cannot restore pre-migration driving momentum",Vector2(loaded_car.linear_velocity.x,loaded_car.linear_velocity.z).length()<.02 and loaded_car.angular_velocity.length()<.02 and Vector2(loaded_car.global_position.x-stopped_position.x,loaded_car.global_position.z-stopped_position.z).length()<.02)
+	game.reset_fleet(false)
+	var live_plane=game.make_vehicle("airliner","qa_live_motion_preserved",Vector3(2700,180,2000))
+	var live_state:Dictionary=live_plane.get_state()
+	live_state.velocity=[0.0,0.0,-80.0];live_state.frozen=false;live_state.throttle=.5
+	live_plane.apply_state(live_state)
+	check("non-overlapping live flight keeps queued saved velocity during map migration",Migration.apply(game)==0 and game.unvec(live_plane.get_state().velocity).is_equal_approx(Vector3(0,0,-80)) and live_plane.global_position.is_equal_approx(Vector3(2700,180,2000)))
+	game.enter_vehicle(live_plane)
+	await physics_frame;await physics_frame
+	check("unmigrated flight resumes saved motion after normal boarding integration",live_plane.linear_velocity.distance_to(Vector3(0,0,-80))<.6 and live_plane.health==100 and live_plane.global_position.y>179.9)
 	game.reset_fleet(false)
 	# Destroy every overlapping lower storey: saved gaps must stay usable.
 	for id in world.structures:

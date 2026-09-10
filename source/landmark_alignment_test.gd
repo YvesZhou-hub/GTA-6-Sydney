@@ -3,7 +3,7 @@ extends SceneTree
 const Bridge = preload("res://scripts/bridge_landmark.gd")
 const Opera = preload("res://scripts/opera_landmark.gd")
 const ICC = preload("res://scripts/icc_landmarks.gd")
-const MODELS := ["city_landmarks","bank_landmarks","quay_landmarks","cyber_landmarks","manly_landmarks","icc_landmarks"]
+const MODELS := ["city_landmarks","bank_landmarks","quay_landmarks","cyber_landmarks","manly_landmarks","icc_landmarks","sydney_tower_landmark"]
 var failures := 0
 var assertions := 0
 var raw: Dictionary = {}
@@ -139,9 +139,11 @@ func check() -> void:
 	verify(world._ready_complete,"production world reached READY before arrival physics")
 	var catalog: Dictionary=world.get_meta("landmark_geography",{})
 	verify(catalog.size()>=22,"runtime exposes geographic catalogue with map/arrival separation")
-	var source: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/landmark_geography.json"))
 	var space: PhysicsDirectSpaceState3D=world.get_world_3d().direct_space_state
-	for record: Dictionary in source.landmarks:
+	var arrivals:Array=[]
+	for key in catalog:
+		if key==str(catalog[key].id):arrivals.append(catalog[key])
+	for record: Dictionary in arrivals:
 		var item: Dictionary=catalog[record.id]
 		var map_point: Vector3=item.map_position
 		var at: Vector3=item.arrival

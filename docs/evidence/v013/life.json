@@ -1,0 +1,173 @@
+{
+  "passed": true,
+  "check_count": 40,
+  "checks": [
+    {
+      "name": "life mode begins with $50,000",
+      "passed": true
+    },
+    {
+      "name": "new economy is already versioned without a migration grant",
+      "passed": true
+    },
+    {
+      "name": "all nine vehicle types including hoverboard remain free at zero balance",
+      "passed": true
+    },
+    {
+      "name": "optional paid repairs cannot overdraw the balance",
+      "passed": true
+    },
+    {
+      "name": "negative general transactions cannot mint currency",
+      "passed": true
+    },
+    {
+      "name": "sandbox starts with the same generous spending money",
+      "passed": true
+    },
+    {
+      "name": "legacy low balance receives only the difference to $50,000",
+      "passed": true
+    },
+    {
+      "name": "welcome grant preserves earned income, completions and owned assets",
+      "passed": true
+    },
+    {
+      "name": "in-progress legacy job keeps progress and receives the new base reward",
+      "passed": true
+    },
+    {
+      "name": "ICC venues, fifteen Darling Square shops three Circular Quay restaurants and Manly provide twenty-two experiences",
+      "passed": true
+    },
+    {
+      "name": "service IDs are unique and positions/prices/source boundary are explicit",
+      "passed": true
+    },
+    {
+      "name": "remote purchase neither charges nor delivers",
+      "passed": true
+    },
+    {
+      "name": "flying above a venue is not considered arrival",
+      "passed": true
+    },
+    {
+      "name": "missing service does not charge",
+      "passed": true
+    },
+    {
+      "name": "moving vehicle must stop before ordering",
+      "passed": true
+    },
+    {
+      "name": "stopped vehicle can buy once without exiting; one delivery signal carries stamina effect",
+      "passed": true
+    },
+    {
+      "name": "purchase displays a world-space stamp and persists visit/spending ledger",
+      "passed": true
+    },
+    {
+      "name": "another deliberate purchase is immediately available without artificial cooldown",
+      "passed": true
+    },
+    {
+      "name": "nearby hints and interaction open the service menu",
+      "passed": true
+    },
+    {
+      "name": "save fixture uses a fresh isolated temporary directory",
+      "passed": true
+    },
+    {
+      "name": "JSON save reload preserves spent balance and never repeats welcome top-up",
+      "passed": true
+    },
+    {
+      "name": "loading never repeats a purchase, stamina award or visual delivery",
+      "passed": true
+    },
+    {
+      "name": "travel passport and last receipt survive actual temporary JSON round-trip",
+      "passed": true
+    },
+    {
+      "name": "save snapshot cannot mutate the live journal by alias",
+      "passed": true
+    },
+    {
+      "name": "wealthy legacy save is never reduced or granted unnecessary money",
+      "passed": true
+    },
+    {
+      "name": "current-version empty wallet remains empty on reload",
+      "passed": true
+    },
+    {
+      "name": "insufficient funds returns a recoverable error without side effects",
+      "passed": true
+    },
+    {
+      "name": "missing world anchors never create experiences at invented fallback locations",
+      "passed": true
+    },
+    {
+      "name": "invalid anchor coordinates are omitted",
+      "passed": true
+    },
+    {
+      "name": "all twenty-two experiences work and use game money in sandbox too",
+      "passed": true
+    },
+    {
+      "name": "repeat activities reuse one feedback label and account every cost",
+      "passed": true
+    },
+    {
+      "name": "brief stamp feedback ends without delaying movement or the next purchase",
+      "passed": true
+    },
+    {
+      "name": "photo spatial activity completes with generous earned reward",
+      "passed": true
+    },
+    {
+      "name": "salvage spatial activity completes with generous earned reward",
+      "passed": true
+    },
+    {
+      "name": "harbor spatial activity completes with generous earned reward",
+      "passed": true
+    },
+    {
+      "name": "air spatial activity completes with generous earned reward",
+      "passed": true
+    },
+    {
+      "name": "race spatial activity completes with generous earned reward",
+      "passed": true
+    },
+    {
+      "name": "job earnings balance exactly; welcome money is not counted as earned income",
+      "passed": true
+    },
+    {
+      "name": "save fixture uses a fresh isolated temporary directory",
+      "passed": true
+    },
+    {
+      "name": "earned money and all job records persist unchanged",
+      "passed": true
+    }
+  ],
+  "source_type": "summary_from_actual_passed_log",
+  "source_log": "reports/life-v013-final.log",
+  "source_log_sha256": "12637a76bc836ee5a2b4b7c10cb6c8ee11515e697a516277ef1393ace6fb1746",
+  "engine_header": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+  "completion_line": "LIFE EXPERIENCE COMPLETE checks=40 failures=0",
+  "runtime_errors": [],
+  "scope": "局部经济与体验服务；由实际日志生成摘要"
+}

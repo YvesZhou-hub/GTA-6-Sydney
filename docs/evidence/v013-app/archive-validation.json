@@ -1,0 +1,96 @@
+{
+  "checked_at_utc": "2026-09-10T19:21:12.754051+00:00",
+  "mode": "final_archive_audit",
+  "checks": {
+    "public_allowlist_excludes_runtime_saves_private_credentials": true,
+    "archive_matches_final_build_manifest": true,
+    "all_game_hashes_match_final_build": true,
+    "zip_crc_and_safe_entries": true,
+    "executable_permissions_preserved": true,
+    "plist_version_and_executable": true,
+    "arm64_only": true,
+    "strict_codesign": true,
+    "pck_and_resources_present": true,
+    "extracted_pck_matches_built_app": true,
+    "bundled_v013_models_and_qa_resources_loadable": true,
+    "fresh_extracted_app_full_world_ready_without_errors": true,
+    "game_hashes_still_match_after_smoke": true
+  },
+  "public_source_allowlist": {
+    "file_count": 350,
+    "forbidden_paths": [],
+    "credential_pattern_paths": [],
+    "scope": "Explicit source allowlist and high-confidence credential scan; no matching values printed; no user-data or ignored private files opened.",
+    "passed": true
+  },
+  "archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c",
+  "source_hashes": {
+    "file_count": 106,
+    "expected_count": 106,
+    "missing": [],
+    "extra": [],
+    "mismatched": []
+  },
+  "extraction_directory": "$FRESH_EXTRACTION",
+  "archive_entries": 12,
+  "executable_mode": "0o755",
+  "plist": {
+    "CFBundleExecutable": "Harbourlife",
+    "CFBundleIdentifier": "local.yveszhou.harbourlife",
+    "CFBundleShortVersionString": "0.1.3",
+    "CFBundleVersion": "0.1.3"
+  },
+  "architecture": "arm64",
+  "codesign": {
+    "returncode": 0,
+    "output": "$FRESH_EXTRACTION/Harbourlife.app: valid on disk\n$FRESH_EXTRACTION/Harbourlife.app: satisfies its Designated Requirement\n",
+    "notarization": "Not tested; project distributes an ad-hoc signed local preview."
+  },
+  "resources": [
+    "Harbourlife.pck",
+    "PLAY_PERMISSION.md",
+    "PrivacyInfo.xcprivacy",
+    "icon.icns",
+    "licenses/ASSET_REGISTER.md",
+    "licenses/GEOGRAPHY.md",
+    "licenses/GODOT_COPYRIGHT.txt",
+    "licenses/GODOT_LICENSE.txt"
+  ],
+  "pck_sha256": "77b3c8f1f51b8b8f8d69a05e1cc40a944576b56c83c27c61ef9fa0a23c1ce299",
+  "resource_probe": {
+    "returncode": 0,
+    "resources": 17,
+    "packed_save_format": 5,
+    "expected_save_format": 5,
+    "errors": [],
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "method": "Matching official Godot version independently loads scripts and JSON from this extracted PCK and reads its actual save-store VERSION; not a claim that the release template accepts external --script."
+  },
+  "smoke": {
+    "returncode": 0,
+    "elapsed_seconds": 21.399,
+    "cwd": "/tmp",
+    "command": [
+      "$FRESH_EXTRACTION/Harbourlife.app/Contents/MacOS/Harbourlife",
+      "--headless",
+      "--quit-after",
+      "15",
+      "--log-file",
+      "$FRESH_EXTRACTION/isolated-engine.log",
+      "--",
+      "--interactive-qa"
+    ],
+    "world_ready_lines": [
+      "HARBOR_WORLD_READY buildings=15127 structure_components=21302"
+    ],
+    "qa_ready_lines": [
+      "INTERACTIVE_QA_READY world=qa_isolated components=21302"
+    ],
+    "errors": [],
+    "save_isolation": "Built-in --interactive-qa skips normal slot/settings reads; no existing user saves read or deleted. Headless only; no native GPU validation in this audit."
+  },
+  "public_source_zip": {
+    "status": "Not supplied; source allowlist checked, source ZIP not verified in this run."
+  },
+  "passed": true
+}

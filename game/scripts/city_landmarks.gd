@@ -23,7 +23,7 @@ const EXCHANGE_RADII := [15.5,16.9,17.8,17.0,16.1,18.0,16.9]
 const EXCHANGE_OFFSETS := [[0.0,0.0],[-0.6,0.7],[-1.1,-0.4],[0.8,-1.0],[1.1,0.8],[-0.3,0.5],[-1.2,-0.6]]
 
 # UV is in physical metres. Filtered window/facade patterns remain stable at
-# flying distance; no third-party raster textures or invented logos are used.
+# flying distance; no third-party raster textures are used; observed signs use original geometry.
 const GLAZING_SHADER := """
 shader_type spatial;
 render_mode diffuse_burley, specular_schlick_ggx;
@@ -95,12 +95,23 @@ static func _materials(world: Node3D) -> void:
 	world._mat("city_landmark_stone",Color("bcb8ac"),0.83)
 	world._mat("city_landmark_dark",Color("293739"),0.52,0.28)
 	world._mat("city_landmark_roof",Color("697675"),0.85)
+	world._mat("city_w_copper",Color("b87342"),0.33,0.66)
+	world._mat("city_w_white",Color("f3f2e8"),0.36,0.25)
+	world._mat("city_w_red",Color("b91c36"),0.60,0.15)
+	world._mat("city_w_petal",Color("ed3650"),0.65,0.12)
+	world._mat("city_w_blue",Color("314eb2"),0.34,0.25)
+	world._mat("city_w_roof",Color("283b45"),0.44,0.32)
+	world._mat("city_w_light",Color("aabfff"),0.30)
+	world.materials.city_w_light.emission_enabled=true
+	world.materials.city_w_light.emission=Color("849dec")
+	world.materials.city_w_light.emission_energy_multiplier=1.2
 	world._mat("city_exchange_wood",Color("c8bd9f"),0.88)
 	world._mat("city_exchange_wood_light",Color("ded3b9"),0.89)
 	_glazing(world,"city_tower_glass",Color("456474"),Color("a1aaa7"),Vector2(1.38,202.0/49.0),Vector2(0.052,0.095),15.0)
 	_glazing(world,"city_boc_glass",Color("526267"),Color("bdb8ac"),Vector2(3.05,3.6),Vector2(0.37,0.56),5.4)
 	_glazing(world,"city_lobby_glass",Color("3a555d"),Color("a6acaa"),Vector2(2.25,5.4),Vector2(0.06,0.13))
 	_glazing(world,"city_ribbon_glass",Color("536f7a"),Color("9bacae"),Vector2(1.9,76.0/25.0),Vector2(0.047,0.078),14.0)
+	world.materials.city_ribbon_glass.shader.code=GLAZING_SHADER.replace("frame_color.rgb*0.72","glass_color.rgb*0.70")
 	_glazing(world,"city_exchange_glass",Color("526a6a"),Color("aaa9a0"),Vector2(1.8,4.45),Vector2(0.05,0.08))
 
 static func _glazing(world: Node3D, key: String, glass: Color, frame_color: Color, bay: Vector2, frame: Vector2, base_height: float = 0.0) -> void:
@@ -222,8 +233,17 @@ static func _ribbon(world: Node3D) -> void:
 	var footprint := polygon(RIBBON_POINTS)
 	for level in range(3):
 		var low := float(level)*14.0/3.0
-		var podium: StaticBody3D = world._structure_mesh("city/ribbon/podium/%02d"%level,prism(footprint,low,low+14.0/3.0),RIBBON_CENTER,"city_landmark_dark" if level==0 else "city_lobby_glass",220000.0)
-		_detail(world,podium,prism(_scaled(footprint,1.001),low+4.30,low+14.0/3.0),"city_landmark_metal")
+		var podium_shape := footprint
+		if level<2:
+			# The completed porte cochere photograph has a two-storey recess.
+			# Subtract it from the actual podium volume, not an entrance decal.
+			var cut := PackedVector2Array()
+			for v in [Vector3(54.8,0,-25),Vector3(69,0,-25),Vector3(69,0,-9.3),Vector3(54.8,0,-9.3)]:
+				var q: Vector3=basis*v;cut.append(Vector2(q.x,q.z))
+			var remaining:=Geometry2D.clip_polygons(footprint,cut)
+			if not remaining.is_empty():podium_shape=remaining[0]
+		var podium: StaticBody3D = world._structure_mesh("city/ribbon/podium/%02d"%level,prism(podium_shape,low,low+14.0/3.0),RIBBON_CENTER,"city_landmark_dark" if level==0 else "city_lobby_glass",220000.0)
+		_detail(world,podium,prism(_scaled(podium_shape,1.001),low+4.30,low+14.0/3.0),"city_landmark_metal")
 	var profile := ribbon_profile()
 	var floor_height := 76.0/25.0
 	for floor_index in range(25):
@@ -256,11 +276,85 @@ static func _ribbon(world: Node3D) -> void:
 				_triangle(roof_panels,p,r,s,normal,Vector2.ZERO,Vector2.ONE,Vector2(1,0))
 				for z in [-7.6,7.6]:
 					_append_beam(frame,Vector3(segment[0].x,segment[0].y,z)+normal*0.15,Vector3(segment[1].x,segment[1].y,z)+normal*0.15,0.23,0.23)
+		# Physical mullion lips and paired edge bands give the glass relief at
+		# street distance; all details disappear with their own floor component.
+		var mullions:=SurfaceTool.new();mullions.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for x in range(-64,67,2):
+			for z in [-20.10,20.10]:
+				var inside:PackedVector2Array=Geometry2D.intersect_polyline_with_polygon(PackedVector2Array([Vector2(x,low+0.04),Vector2(x,high-0.04)]),profile)[0] if Geometry2D.is_point_in_polygon(Vector2(x,(low+high)*0.5),profile) else PackedVector2Array()
+				if inside.size()==2:_append_beam(mullions,Vector3(inside[0].x,inside[0].y,z),Vector3(inside[1].x,inside[1].y,z),0.052,0.11)
+		for i in profile.size()-1:
+			var segment:=_clip_line_y(profile[i],profile[i+1],low,high)
+			if segment.size()!=2:continue
+			for z in [-18.4,18.4]:_append_beam(frame,Vector3(segment[0].x,segment[0].y,z),Vector3(segment[1].x,segment[1].y,z),0.25,0.19)
+		_commit_detail(world,body,mullions,"city_landmark_metal")
 		_commit_detail(world,body,frame,"city_landmark_gold")
-		_commit_detail(world,body,roof_panels,"city_landmark_roof")
-	# Small rooftop pool volume exists in the hotel description. The publicly
-	# visible curved silhouette stays the architectural envelope; no guessed
-	# branded signs or interior storefronts are attached to it.
+		_commit_detail(world,body,roof_panels,"city_w_roof")
+		if floor_index==22:
+			var sign_mesh:=SurfaceTool.new();sign_mesh.begin(Mesh.PRIMITIVE_TRIANGLES)
+			_w_mark(sign_mesh,Vector3(38,80.5,-20.45),8.0,0.80,0.30)
+			_commit_detail(world,body,sign_mesh,"city_w_white")
+	_ribbon_arrival(world,basis)
+	world.set_meta("ribbon_refinement",{"facade_w":Vector3(38,80.5,-20.45),"arrival_w":Vector3(58.2,1.55,-11.8),"mullion_spacing_m":2.0,"entry_clear_width_m":4.0,"reference":"Marriott exterior / porte cochere; Corlette Waratah sign"})
+
+static func _w_mark(st:SurfaceTool,origin:Vector3,height:float,width:float,depth:float) -> void:
+	var path: Array[Vector2]=[Vector2(-0.55,0.5),Vector2(-0.27,-0.5),Vector2(0,0.33),Vector2(0.27,-0.5),Vector2(0.55,0.5)]
+	for i in 4:_append_beam(st,origin+Vector3(path[i].x,path[i].y,0)*height,origin+Vector3(path[i+1].x,path[i+1].y,0)*height,width,depth)
+
+static func ribbon_entry_point(local:Vector3) -> Vector3:
+	return RIBBON_CENTER+Basis(Vector3.UP,deg_to_rad(RIBBON_ANGLE))*local
+
+static func _ribbon_arrival(world:Node3D,basis:Basis) -> void:
+	# Dimensions within the mapped northeast podium are photo-based estimates.
+	# A real recess leaves the public approach open. It stops at a small foyer;
+	# bedrooms, the full escalator journey and rooftop pool are not simulated.
+	# Photo-informed paved approach extends outside the entrance canopy.
+	# Existing mapped road surfaces remain above this thin apron.
+	var floor_poly:=PackedVector2Array([Vector2(54.8,-34),Vector2(67,-34),Vector2(67,-9.3),Vector2(54.8,-9.3)])
+	var entry:StaticBody3D=world._structure_mesh("city/ribbon/entry/floor",prism(floor_poly,-0.10,0.035),RIBBON_CENTER,"city_landmark_stone",90000,basis)
+	for item:Array in [["rear",Vector3(60.9,4.5,-9.6),Vector3(12.3,9,0.3)],["side",Vector3(54.9,4.5,-14.5),Vector3(0.2,9,10.8)],["ceiling",Vector3(61,8.9,-15),Vector3(12.4,0.2,12)]]:
+		world._structure_box("city/ribbon/entry/"+item[0],ribbon_entry_point(item[1]),item[2],"city_w_copper",95000,basis)
+	var copper:=SurfaceTool.new();copper.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var lights:=SurfaceTool.new();lights.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var dark:=SurfaceTool.new();dark.begin(Mesh.PRIMITIVE_TRIANGLES)
+	# Alternating faceted copper panels on the entrance canyon's left wall.
+	for row in 10:
+		for col in 9:
+			var yy:=0.55+row*0.81;var zz:=-18.9+col*0.96
+			_append_box(copper,Vector3(55.10,yy,zz),Vector3(0.18,0.77,0.88),Basis(Vector3.UP,deg_to_rad(15 if (row+col)%2==0 else -15)))
+	for y in [3.35,8.4]:_append_box(dark,Vector3(61, y,-19.5),Vector3(12,0.14,0.18),Basis.IDENTITY)
+	for x in [55.25,60.7,66.75]:_append_box(dark,Vector3(x,4.25,-19.5),Vector3(0.17,8.4,0.18),Basis.IDENTITY)
+	# Open automatic door bay at x=62.8; no collision pane across the opening.
+	for x in [61.0,65.4]:_append_box(dark,Vector3(x,1.68,-19.55),Vector3(0.09,3.3,0.12),Basis.IDENTITY)
+	for i in 9:
+		var zz:=-17.7+i*0.87
+		_append_box(lights,Vector3(63.0,7.2,zz),Vector3(4,0.045,0.045),Basis.IDENTITY)
+		for x in [61.0,65.0]:_append_box(lights,Vector3(x,4.4,zz),Vector3(0.045,5.6,0.045),Basis.IDENTITY)
+	for i in 6:
+		var x:=55.8+i*1.9
+		_append_box(copper,Vector3(x,8.74,-21.5),Vector3(0.16,0.08,0.16),Basis.IDENTITY)
+	# Panels sit in front of the recessed rear closure, so the original podium
+	# surface cannot show through the new copper-lined entrance.
+	for row in 10:
+		for col in 6:
+			_append_box(copper,Vector3(55.45+col*0.92,0.55+row*0.81,-9.90),Vector3(0.87,0.77,0.20),Basis(Vector3.UP,deg_to_rad(14 if (row+col)%2==0 else -14)))
+	var blue:=SurfaceTool.new();blue.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_append_box(blue,Vector3(63,4.10,-9.82),Vector3(4.2,7.8,0.045),Basis.IDENTITY)
+	_commit_detail(world,entry,blue,"city_w_blue")
+	_commit_detail(world,entry,copper,"city_w_copper")
+	_commit_detail(world,entry,dark,"city_landmark_dark")
+	_commit_detail(world,entry,lights,"city_w_light")
+	var red:=SurfaceTool.new();red.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_w_mark(red,Vector3(58.2,1.55,-11.8),2.7,0.43,0.40)
+	_commit_detail(world,entry,red,"city_w_red")
+	var petals:=SurfaceTool.new();petals.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var path:Array[Vector2]=[Vector2(-0.55,0.5),Vector2(-0.27,-0.5),Vector2(0,0.33),Vector2(0.27,-0.5),Vector2(0.55,0.5)]
+	for arm in 4:
+		for row in 19:
+			var p:=path[arm].lerp(path[arm+1],(row+0.5)/19.0)*2.7
+			for j in [-1,0,1]:
+				_append_box(petals,Vector3(58.2+p.x+j*0.11,1.55+p.y,-12.07),Vector3(0.075,0.15,0.13),Basis(Vector3.RIGHT,deg_to_rad(28+j*8)))
+	_commit_detail(world,entry,petals,"city_w_petal")
 
 static func _clip_line_y(a: Vector2, b: Vector2, low: float, high: float) -> PackedVector2Array:
 	if maxf(a.y,b.y)<low or minf(a.y,b.y)>high: return PackedVector2Array()

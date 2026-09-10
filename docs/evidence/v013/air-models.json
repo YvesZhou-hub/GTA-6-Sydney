@@ -1,0 +1,33 @@
+{
+  "checks": 18,
+  "failures": 0,
+  "models": {
+    "glider": {
+      "bad_normals": 0,
+      "bounds": "[P: (-9.0, -0.67, -3.15), S: (18.0, 2.547543, 6.85)]",
+      "colliders": 20,
+      "collision_low": -0.670000016689301,
+      "invalid": 0,
+      "meshes": 23,
+      "triangles": 33676
+    },
+    "helicopter": {
+      "bad_normals": 0,
+      "bounds": "[P: (-6.361263, -1.425, -6.93), S: (12.79051, 4.98, 15.67)]",
+      "colliders": 24,
+      "collision_low": -1.42500007152557,
+      "invalid": 0,
+      "meshes": 36,
+      "triangles": 43660
+    },
+    "paraglider": {
+      "bad_normals": 0,
+      "bounds": "[P: (-4.697474, -0.56, -0.95), S: (9.394948, 7.879272, 3.021142)]",
+      "colliders": 1,
+      "collision_low": -0.629999995231628,
+      "invalid": 0,
+      "meshes": 12,
+      "triangles": 50328
+    }
+  }
+}

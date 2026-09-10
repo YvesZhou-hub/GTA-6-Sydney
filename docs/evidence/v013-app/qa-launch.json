@@ -1,0 +1,34 @@
+{
+  "mode": "qa",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--qa"
+  ],
+  "started_utc": "2026-09-10T19:20:42.293572+00:00",
+  "wall_seconds": 77.404,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 32,
+  "passed": true,
+  "screenshots": [
+    "03-motorcycle.png",
+    "03-yacht.png",
+    "02-opera.png",
+    "01-home.png",
+    "03-paraglider.png",
+    "03-speedboat.png",
+    "04-damage.png",
+    "03-airliner.png",
+    "02-quay.png",
+    "03-glider.png",
+    "03-hoverboard.png",
+    "02-north.png",
+    "02-rocks.png",
+    "03-helicopter.png",
+    "03-car.png"
+  ],
+  "runtime_errors": [],
+  "archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c",
+  "build_stage": "final format-5 release"
+}

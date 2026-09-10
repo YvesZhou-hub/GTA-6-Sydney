@@ -113,7 +113,11 @@ func run():
 	game.clear_landmark_target()
 	check("clear removes all destination indicators",game.landmark_target_key.is_empty() and game.minimap.target_key.is_empty() and game.navigation_hud.target_key.is_empty())
 	var services:Array=game.life.service_catalog()
-	check("actual mapped city experiences available",services.size()>=16)
+	check("actual mapped city experiences available",services.size()==22)
+	for anchor:String in ["auvers","hakatamon","chinta_ria","cq_eastbank","cq_searock","cq_city_extra"]:
+		var matches:Array=services.filter(func(s):return s.anchor==anchor)
+		game.set_landmark_target(anchor)
+		check("new shop service and map share checked entrance "+anchor,matches.size()==1 and game.landmark_target_key==anchor and game.landmark_target_position.is_equal_approx(matches[0].position) and game.world.anchors[anchor].is_equal_approx(matches[0].position))
 	if not services.is_empty():
 		var service:Dictionary=services[0]
 		game.exit_vehicle()

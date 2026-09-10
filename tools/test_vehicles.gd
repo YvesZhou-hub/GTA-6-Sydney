@@ -76,12 +76,14 @@ class Runner extends Node:
 			await new_stage(true)
 			var vehicle:=make(kind,Vector3(0,5.25,0))
 			vehicle.occupied=true
-			Input.action_press("forward")
+			# Moderate analog throttle exercises ordinary road manoeuvres; the separate
+			# vehicle_speed_test drives the 420/320 km/h cases at full input.
+			Input.action_press("forward",.35)
 			await frames(360)
 			var cruise:float=vehicle.linear_velocity.length()
 			var travelled:float=-vehicle.position.z
 			Input.action_press("right",0.45)
-			await frames(80)
+			await frames(240)
 			var heading:float=absf(vehicle.rotation.y)
 			release_all()
 			Input.action_press("brake")

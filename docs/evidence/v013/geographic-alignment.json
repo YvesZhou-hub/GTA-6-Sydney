@@ -1,0 +1,745 @@
+{
+  "arrivals": [
+    {
+      "arrival": [
+        -584.372619628906,
+        4.5,
+        622.106018066406
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "westpac",
+      "map_position": [
+        -608.804626464844,
+        4.5,
+        674.130493164062
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -672.871520996094,
+        4.5,
+        1663.58850097656
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cba_south",
+      "map_position": [
+        -693.502990722656,
+        4.5,
+        1705.14453125
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -700.79150390625,
+        4.5,
+        1626.6533203125
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cba_north",
+      "map_position": [
+        -758.717895507812,
+        4.5,
+        1622.03149414062
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -824.625,
+        4.5,
+        435.119689941406
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "tower_one",
+      "map_position": [
+        -775.003356933594,
+        4.5,
+        427.869171142578
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -627.112915039062,
+        4.5,
+        1004.00897216797
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "boc",
+      "map_position": [
+        -610.636474609375,
+        4.5,
+        1027.06213378906
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -765.504821777344,
+        4.5,
+        1453.73864746094
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "ribbon",
+      "map_position": [
+        -811.469360351562,
+        4.5,
+        1507.24865722656
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -757.081787109375,
+        4.5,
+        1974.38061523438
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "exchange_haidilao",
+      "map_position": [
+        -768.495056152344,
+        4.5,
+        1993.50219726562
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -579.0,
+        4.5,
+        1214.0
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cybercx_sydney",
+      "map_position": [
+        -571.779907226562,
+        4.5,
+        1180.09814453125
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -316.5,
+        4.5,
+        924.0
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cloudflare_sydney",
+      "map_position": [
+        -287.698577880859,
+        4.5,
+        933.896179199219
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -980.132934570312,
+        4.5,
+        1492.30322265625
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "icc_convention",
+      "map_position": [
+        -1038.91809082031,
+        4.5,
+        1542.23596191406
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -927.063415527344,
+        4.5,
+        1636.02026367188
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "icc_exhibition",
+      "map_position": [
+        -982.249572753906,
+        4.5,
+        1724.13098144531
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -881.949584960938,
+        4.5,
+        1823.95153808594
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "tiktok_entertainment",
+      "map_position": [
+        -905.809692382812,
+        4.5,
+        1881.01843261719
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        6809.8798828125,
+        4.5,
+        -6753.7841796875
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "manly_wharf",
+      "map_position": [
+        6827.1201171875,
+        4.5,
+        -6676.82958984375
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        7157.30419921875,
+        4.5,
+        -6999.8017578125
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "hotel_steyne",
+      "map_position": [
+        7127.76611328125,
+        4.5,
+        -7016.64404296875
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        98.3010025024414,
+        4.5,
+        366.433502197266
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "quay_quarter",
+      "map_position": [
+        92.7268600463867,
+        4.5,
+        313.37548828125
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -208.805999755859,
+        4.5,
+        268.520690917969
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "salesforce",
+      "map_position": [
+        -171.890106201172,
+        4.5,
+        264.077178955078
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        403.946044921875,
+        4.5,
+        -222.162734985352
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "opera",
+      "map_position": [
+        427.294769287109,
+        4.5,
+        -321.454406738281
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -316.198059082031,
+        4.5,
+        -162.40446472168
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "bridge",
+      "map_position": [
+        16.1431198120117,
+        54.0,
+        -858.627380371094
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -751.175048828125,
+        4.5,
+        -97.0
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "barangaroo_metro",
+      "map_position": [
+        -751.175048828125,
+        4.5,
+        -94.1878509521484
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -33.2178001403809,
+        4.5,
+        707.5
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "martin_place_metro",
+      "map_position": [
+        -33.2178001403809,
+        4.5,
+        712.214233398438
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        7070.38330078125,
+        4.5,
+        -6927.154296875
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "manly_corso",
+      "map_position": [
+        7070.38330078125,
+        4.5,
+        -6927.154296875
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        7194.29150390625,
+        4.5,
+        -7007.66064453125
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "manly_beach",
+      "map_position": [
+        7194.29150390625,
+        4.5,
+        -7007.66064453125
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -168.399993896484,
+        4.5,
+        1190.80004882812
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "sydney_tower",
+      "map_position": [
+        -143.486740112305,
+        4.5,
+        1168.35522460938
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        139.435928344727,
+        4.5,
+        136.048080444336
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_wharf_2",
+      "map_position": [
+        139.266998291016,
+        4.5,
+        139.544006347656
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        84.9775543212891,
+        4.5,
+        140.23030090332
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_wharf_3",
+      "map_position": [
+        84.5179977416992,
+        4.5,
+        143.699996948242
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        38.7028007507324,
+        4.5,
+        135.025390625
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_wharf_4",
+      "map_position": [
+        38.2820014953613,
+        4.5,
+        138.5
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -7.60499286651611,
+        4.5,
+        130.529830932617
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_wharf_5",
+      "map_position": [
+        -8.06099987030029,
+        4.5,
+        134.0
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -53.559268951416,
+        4.5,
+        126.528244018555
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_wharf_6",
+      "map_position": [
+        -54.0029983520508,
+        4.5,
+        130.0
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        11.9300003051758,
+        4.5,
+        167.360000610352
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_station",
+      "map_position": [
+        13.8170003890991,
+        4.5,
+        149.977996826172
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        212.390563964844,
+        4.5,
+        65.9399566650391
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_eastbank",
+      "map_position": [
+        213.563201904297,
+        4.5,
+        71.8168029785156
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        217.248657226562,
+        4.5,
+        16.7159442901611
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_searock",
+      "map_position": [
+        218.553802490234,
+        4.5,
+        21.4606990814209
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        76.7439270019531,
+        4.5,
+        142.522766113281
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "cq_city_extra",
+      "map_position": [
+        68.611198425293,
+        4.5,
+        143.503402709961
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -742.3515625,
+        4.5,
+        2023.08374023438
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "auvers",
+      "map_position": [
+        -740.2197265625,
+        4.5,
+        2026.27978515625
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -744.412231445312,
+        4.5,
+        2005.298828125
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "hakatamon",
+      "map_position": [
+        -742.158020019531,
+        4.5,
+        2009.5517578125
+      ],
+      "supported": true
+    },
+    {
+      "arrival": [
+        -740.779846191406,
+        4.5,
+        2036.65576171875
+      ],
+      "blocked": false,
+      "hits": [],
+      "id": "chinta_ria",
+      "map_position": [
+        -738.648010253906,
+        4.5,
+        2039.85180664062
+      ],
+      "supported": true
+    }
+  ],
+  "assertions": 96,
+  "failures": 0,
+  "footprint_count": 35,
+  "footprints": [
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "city_landmarks",
+      "osm": "way/468557019"
+    },
+    {
+      "max_boundary_error_m": 6.82393801980652e-05,
+      "model": "city_landmarks",
+      "osm": "way/581013659"
+    },
+    {
+      "max_boundary_error_m": 0.0001220703125,
+      "model": "city_landmarks",
+      "osm": "way/544307818"
+    },
+    {
+      "max_boundary_error_m": 0.0001220703125,
+      "model": "city_landmarks",
+      "osm": "way/614461305"
+    },
+    {
+      "max_boundary_error_m": 0.00013647876039613,
+      "model": "city_landmarks",
+      "osm": "way/614603737"
+    },
+    {
+      "max_boundary_error_m": 8.63167442730628e-05,
+      "model": "bank_landmarks",
+      "osm": "way/120926554"
+    },
+    {
+      "max_boundary_error_m": 6.103515625e-05,
+      "model": "bank_landmarks",
+      "osm": "way/335696788"
+    },
+    {
+      "max_boundary_error_m": 6.103515625e-05,
+      "model": "bank_landmarks",
+      "osm": "way/544300935"
+    },
+    {
+      "max_boundary_error_m": 6.103515625e-05,
+      "model": "bank_landmarks",
+      "osm": "way/544300936"
+    },
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "bank_landmarks",
+      "osm": "way/544300937"
+    },
+    {
+      "max_boundary_error_m": 6.103515625e-05,
+      "model": "bank_landmarks",
+      "osm": "way/544300938"
+    },
+    {
+      "max_boundary_error_m": 0.0001220703125,
+      "model": "bank_landmarks",
+      "osm": "way/183246899"
+    },
+    {
+      "max_boundary_error_m": 0.00013647876039613,
+      "model": "bank_landmarks",
+      "osm": "way/183246900"
+    },
+    {
+      "max_boundary_error_m": 3.14567987516057e-05,
+      "model": "quay_landmarks",
+      "osm": "way/312373859"
+    },
+    {
+      "max_boundary_error_m": 3.14567987516057e-05,
+      "model": "quay_landmarks",
+      "osm": "way/387782063"
+    },
+    {
+      "max_boundary_error_m": 3.14567987516057e-05,
+      "model": "quay_landmarks",
+      "osm": "way/1120046335"
+    },
+    {
+      "max_boundary_error_m": 3.14567987516057e-05,
+      "model": "quay_landmarks",
+      "osm": "way/1120046336"
+    },
+    {
+      "max_boundary_error_m": 3.14567987516057e-05,
+      "model": "quay_landmarks",
+      "osm": "way/1120046337"
+    },
+    {
+      "max_boundary_error_m": 3.14567987516057e-05,
+      "model": "quay_landmarks",
+      "osm": "way/1120046338"
+    },
+    {
+      "max_boundary_error_m": 3.41196900990326e-05,
+      "model": "quay_landmarks",
+      "osm": "way/1116329930"
+    },
+    {
+      "max_boundary_error_m": 0.0001220703125,
+      "model": "cyber_landmarks",
+      "osm": "way/1521293802"
+    },
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "cyber_landmarks",
+      "osm": "way/335699164"
+    },
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "cyber_landmarks",
+      "osm": "way/335699165"
+    },
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "cyber_landmarks",
+      "osm": "way/1521293801"
+    },
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "cyber_landmarks",
+      "osm": "way/386563854"
+    },
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "cyber_landmarks",
+      "osm": "way/386563852"
+    },
+    {
+      "max_boundary_error_m": 0.000690533954184502,
+      "model": "manly_landmarks",
+      "osm": "way/7981564"
+    },
+    {
+      "max_boundary_error_m": 0.0,
+      "model": "manly_landmarks",
+      "osm": "way/223786812"
+    },
+    {
+      "max_boundary_error_m": 0.000517900451086462,
+      "model": "icc_landmarks",
+      "osm": "way/23646745"
+    },
+    {
+      "max_boundary_error_m": 0.000637225748505443,
+      "model": "icc_landmarks",
+      "osm": "way/487371417"
+    },
+    {
+      "max_boundary_error_m": 0.000545915041584522,
+      "model": "icc_landmarks",
+      "osm": "way/488447518"
+    },
+    {
+      "max_boundary_error_m": 0.000503308780025691,
+      "model": "icc_landmarks",
+      "osm": "way/488447519"
+    },
+    {
+      "max_boundary_error_m": 0.000492081162519753,
+      "model": "icc_landmarks",
+      "osm": "way/1098953175"
+    },
+    {
+      "max_boundary_error_m": 0.000660196179524064,
+      "model": "icc_landmarks",
+      "osm": "way/1116329939"
+    },
+    {
+      "max_boundary_error_m": 0.000122308498248458,
+      "model": "sydney_tower_landmark",
+      "osm": "way/197801073"
+    }
+  ],
+  "max_boundary_error_m": 0.000690533954184502
+}

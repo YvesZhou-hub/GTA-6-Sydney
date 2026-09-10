@@ -1,0 +1,23 @@
+{
+  "mode": "experience",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--experience-qa"
+  ],
+  "started_utc": "2026-09-10T19:18:15.779488+00:00",
+  "wall_seconds": 59.205,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 70,
+  "passed": true,
+  "screenshots": [
+    "01-map-pin.png",
+    "04-live-navigation.png",
+    "02-experiences.png",
+    "03-experience-reward.png"
+  ],
+  "runtime_errors": [],
+  "archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c",
+  "build_stage": "final format-5 release"
+}

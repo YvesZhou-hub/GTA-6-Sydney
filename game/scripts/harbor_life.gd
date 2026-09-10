@@ -12,7 +12,7 @@ signal service_completed(result: Dictionary)
 
 const STARTING_MONEY := 50000
 const ECONOMY_VERSION := 1
-const FREE_VEHICLES := ["car", "motorcycle", "speedboat", "yacht", "paraglider", "glider", "helicopter", "airliner"]
+const FREE_VEHICLES := ["car", "motorcycle", "hoverboard", "speedboat", "yacht", "paraglider", "glider", "helicopter", "airliner"]
 const SERVICE_NOTICE := "游戏体验与游戏价格 · 非真实订单、演出或预订"
 
 var money: int = STARTING_MONEY
@@ -261,7 +261,13 @@ func service_catalog() -> Array[Dictionary]:
 		["kurtosh_cake", "shop_kurtosh", "Kürtősh · 甜点补给", 15, 40, "一份甜点，恢复探索精力。", "sweet"],
 		["dopa_meal", "shop_dopa", "DOPA · 午餐补给", 25, 70, "午餐补给完成。", "meal"],
 		["shortstop_break", "shop_shortstop", "Shortstop · 咖啡与甜点", 18, 50, "咖啡与甜点已享用。", "coffee"],
-		["manly_picnic", "manly_beach", "Manly · 海边野餐", 30, 90, "在海边享用野餐，留下 Manly 旅行印章。", "picnic"]]
+		["manly_picnic", "manly_beach", "Manly · 海边野餐", 30, 90, "在海边享用野餐，留下 Manly 旅行印章。", "picnic"],
+		["auvers_coffee", "auvers", "Auvers · 咖啡与街景", 14, 40, "在 Nicolle Walk 小憩，收集咖啡印章。", "coffee"],
+		["hakatamon_ramen", "hakatamon", "Hakatamon · 拉面补给", 24, 70, "享用拉面，继续探索 Darling Square。", "meal"],
+		["chinta_ria_meal", "chinta_ria", "Chinta Ria · 街区晚餐", 32, 80, "收集旅行印章，继续沿广场散步。", "meal"],
+		["eastbank_meal", "cq_eastbank", "Eastbank · 海港午餐", 35, 75, "面向 Sydney Cove 享用午餐，留下海港印章。", "meal"],
+		["searock_meal", "cq_searock", "Searock · 滨水晚餐", 38, 80, "在环形码头休息，继续沿岸探索。", "meal"],
+		["city_extra_coffee", "cq_city_extra", "City Extra · 码头咖啡", 14, 40, "咖啡补给完成，Wharf 4 就在附近。", "coffee"]]
 	var result: Array[Dictionary] = []
 	for entry: Array in definitions:
 		var anchor_key := str(entry[1])

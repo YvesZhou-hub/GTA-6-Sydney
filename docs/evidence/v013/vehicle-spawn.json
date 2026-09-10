@@ -1,0 +1,339 @@
+{
+  "checks": [
+    {
+      "name": "new independent car #1",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one car",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy car",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles car",
+      "passed": true
+    },
+    {
+      "name": "new independent car #2",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one car",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy car",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles car",
+      "passed": true
+    },
+    {
+      "name": "new independent car #3",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one car",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy car",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles car",
+      "passed": true
+    },
+    {
+      "name": "new independent car #4",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one car",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy car",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles car",
+      "passed": true
+    },
+    {
+      "name": "new independent motorcycle #5",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one motorcycle",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy motorcycle",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles motorcycle",
+      "passed": true
+    },
+    {
+      "name": "new independent hoverboard #6",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one hoverboard",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy hoverboard",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles hoverboard",
+      "passed": true
+    },
+    {
+      "name": "new independent speedboat #7",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one speedboat",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy speedboat",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles speedboat",
+      "passed": true
+    },
+    {
+      "name": "new independent yacht #8",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one yacht",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy yacht",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles yacht",
+      "passed": true
+    },
+    {
+      "name": "new independent helicopter #9",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one helicopter",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy helicopter",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles helicopter",
+      "passed": true
+    },
+    {
+      "name": "new independent glider #10",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one glider",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy glider",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles glider",
+      "passed": true
+    },
+    {
+      "name": "new independent paraglider #11",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one paraglider",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy paraglider",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles paraglider",
+      "passed": true
+    },
+    {
+      "name": "new independent airliner #12",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one airliner",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy airliner",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles airliner",
+      "passed": true
+    },
+    {
+      "name": "new independent airliner #13",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one airliner",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy airliner",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles airliner",
+      "passed": true
+    },
+    {
+      "name": "new independent airliner #14",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one airliner",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy airliner",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles airliner",
+      "passed": true
+    },
+    {
+      "name": "new independent airliner #15",
+      "passed": true
+    },
+    {
+      "name": "fleet grows by exactly one airliner",
+      "passed": true
+    },
+    {
+      "name": "summon immediately boards fresh copy airliner",
+      "passed": true
+    },
+    {
+      "name": "full geometry clear of walls/vehicles airliner",
+      "passed": true
+    },
+    {
+      "name": "all original and summoned IDs are unique",
+      "passed": true
+    },
+    {
+      "name": "same-type copies have no fixed fleet cap",
+      "passed": true
+    },
+    {
+      "name": "summoning never relocates an existing instance",
+      "passed": true
+    },
+    {
+      "name": "candidate search avoids full-height wall in front",
+      "passed": true
+    },
+    {
+      "name": "summoning while occupied transfers driver into new copy",
+      "passed": true
+    },
+    {
+      "name": "summoning does not move occupied vehicle",
+      "passed": true
+    },
+    {
+      "name": "fresh road vehicle settles gently and rests",
+      "passed": true
+    },
+    {
+      "name": "unused road copy enters normal physics sleep",
+      "passed": true
+    },
+    {
+      "name": "dynamic fleet save succeeds",
+      "passed": true
+    },
+    {
+      "name": "fleet format5 protects new hoverboards from older app4",
+      "passed": true
+    },
+    {
+      "name": "format2 saves migrate without discarding fleet data",
+      "passed": true
+    },
+    {
+      "name": "all dynamic copies survive actual load_world",
+      "passed": true
+    },
+    {
+      "name": "copy identities, position, independent health and fuel restored",
+      "passed": true
+    },
+    {
+      "name": "original occupied copy restored",
+      "passed": true
+    },
+    {
+      "name": "new-copy waypoint restored",
+      "passed": true
+    },
+    {
+      "name": "saved waiting glider retains trim speed after first physics integration",
+      "passed": true
+    },
+    {
+      "name": "airport start explicitly boards a fresh plane",
+      "passed": true
+    },
+    {
+      "name": "first airport start uses actual 34L threshold",
+      "passed": true
+    },
+    {
+      "name": "second airport start preserves earlier runway aircraft",
+      "passed": true
+    },
+    {
+      "name": "large plane uses nearby clear field before distant airport",
+      "passed": true
+    },
+    {
+      "name": "indoor summon safely moves player into new outdoor copy",
+      "passed": true
+    },
+    {
+      "name": "hangar roof is never treated as widebody parking",
+      "passed": true
+    },
+    {
+      "name": "terminal roof is never treated as car parking",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "test_world": "qa_isolated",
+  "user_saves_touched": false
+}

@@ -1,11 +1,11 @@
 extends RefCounted
 ## One-time safety migration when loading a world made before real city geometry.
-const REVISION := 2
+const REVISION := 3
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
 const City=preload("res://scripts/city_map.gd")
 
 static func _custom_id(id:String) -> bool:
-	return id.begins_with("city/") or id.begins_with("bank/") or id.begins_with("manly/") or id.begins_with("quay/") or id.begins_with("metro/") or id.begins_with("darling_square/") or id.begins_with("cyber/") or id.begins_with("icc/")
+	return id.begins_with("city/") or id.begins_with("bank/") or id.begins_with("manly/") or id.begins_with("quay/") or id.begins_with("metro/") or id.begins_with("darling_square/") or id.begins_with("cyber/") or id.begins_with("icc/") or id.begins_with("sydney_tower/") or id.begins_with("circular_quay/") or id.begins_with("darling_detail/")
 
 static func _geometry(world:Node3D) -> Dictionary:
 	if world.has_meta("map_migration_cache"):return world.get_meta("map_migration_cache")
@@ -179,9 +179,7 @@ static func apply(game: Node3D) -> int:
 		var placement:=Spawn.find_spawn(game,body)
 		if placement.is_empty(): continue
 		body.global_transform=placement.transform
-		body.linear_velocity=Vector3.ZERO
-		body.angular_velocity=Vector3.ZERO
-		body.throttle=0.0
+		body.stop_motion_after_relocation()
 		body.freeze=bool(placement.get("airborne",false)) or body.freeze
 		body.reset_physics_interpolation()
 		shifted+=1
@@ -221,9 +219,7 @@ static func repair_old_approach(game:Node3D,occupied_id:String) -> int:
 		var placement:=Spawn.find_spawn(game,body,false,body.global_transform)
 		if placement.is_empty():continue
 		body.global_transform=placement.transform
-		body.linear_velocity=Vector3.ZERO
-		body.angular_velocity=Vector3.ZERO
-		body.throttle=0.0
+		body.stop_motion_after_relocation()
 		body.reset_physics_interpolation()
 		shifted+=1
 	if occupied_id.is_empty() and _on_old_north_approach(game.player.global_position) and not _near_support(game,game.player.global_position,[game.player.get_rid()]):

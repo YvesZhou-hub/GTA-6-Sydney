@@ -1,0 +1,73 @@
+{
+  "reviewed_at_utc": "2026-09-10T19:35:04.132594+00:00",
+  "archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c",
+  "scope": "Visual review through image viewer of five bridge/opera frames and all seven actual native flight stages. Render/physics candidate; the later final package changes only the save format constant.",
+  "findings": [
+    "Bridge deck and north approach visually clear of obstructions; static images do not establish driving clearance.",
+    "Opera shells, tiled surface and stepped podium visible; stylized geometry with simplified surrounding terrain.",
+    "All flight stage images depict the expected runway, airborne aircraft, landmark pass, approach or return. Returned-aircraft HUD shows 0 km/h and 100% health.",
+    "Map outlines are present; HUD overlay text can overlap around initial airport prompts. This is a presentation limitation, not a completed UI polish claim."
+  ],
+  "images": [
+    {
+      "image": "reports/release-v013-render-physics/visual-screenshots/bridge.png",
+      "sha256": "ffaa9a255dcdc194b7c0d6cc3f1a6bd1f84a89094978c5416b8dda1c0d034c0f",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/visual-screenshots/bridge-road.png",
+      "sha256": "9808848f7a5162bd2450297deb4abd44ca3de7dc39fe7d79f28186eb1234c98c",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/visual-screenshots/north-approach.png",
+      "sha256": "1c3081a9c777b1c2868f26b69ad2682da5b1db93c3fcc2a68a22f9f86877b2be",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/visual-screenshots/opera.png",
+      "sha256": "2a9790ae1baf3ea1c3075771f4a86003157a59c4203624465fd6db9bcf7fe690",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/visual-screenshots/opera-ground.png",
+      "sha256": "674cdedff414b4ebb0fa03eb73838ff91538472ef6744ba0e9c00d44b4775f21",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/flight-screenshots/01_runway_parked.png",
+      "sha256": "8a6593463c2a813bb9f984973576b663097b393f32baa71ae2e372bbec3e0a76",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/flight-screenshots/02_takeoff.png",
+      "sha256": "6ae21f8dc46d2e2bc060e3c1d84279e2180520230540f03d01c64d80a2f19d6a",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/flight-screenshots/03_harbour.png",
+      "sha256": "c2de7ba6068e9345b9fa9f2abe06560d1f8d1e94be31dd9422f2c909e10b909d",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/flight-screenshots/04_bridge.png",
+      "sha256": "b8885b38d65a8cb2d91fa15497a89d4ffd76e5ff9c3c077c995805348b5152b8",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/flight-screenshots/05_approach.png",
+      "sha256": "42b128ad9cc09536e679955f647900c1097562ab00924a0705ea741ea9c767af",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/flight-screenshots/06_touchdown.png",
+      "sha256": "248868ca83de384ccd788e999ff196e7c3552b1f8dc4c5f096a8f1f770e3a711",
+      "reviewed": true
+    },
+    {
+      "image": "reports/release-v013-render-physics/flight-screenshots/07_stopped.png",
+      "sha256": "fe3d99c8820c8b8804aefa14f78cd7e323b5c10a0835f421e68a11d892151845",
+      "reviewed": true
+    }
+  ]
+}

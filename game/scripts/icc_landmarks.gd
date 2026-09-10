@@ -60,12 +60,25 @@ static func build(world: Node3D) -> void:
 	world.set_meta("icc_public_routes",routes())
 
 static func _materials(w: Node3D) -> void:
-	for row: Array in [["stone","c7c7bb"],["floor","b4b4a9"],["wood","b88248"],["wood_light","d1a36c"],["dark","262b30"],["black","111820"],["metal","adb7ba"],["red","bd3f42"],["seat_grey","8e9494"],["seat_dark","555c62"],["cream","d9cfb7"],["white","ebeee5"],["plant","54705a"],["screen","315268"],["stripe","d8be72"]]:
+	for row: Array in [["stone","c7c7bb"],["floor","b4b4a9"],["wood","b88248"],["wood_light","d1a36c"],["dark","262b30"],["black","111820"],["metal","adb7ba"],["red","bd3f42"],["seat_grey","8e9494"],["seat_dark","555c62"],["cream","d9cfb7"],["white","ebeee5"],["plant","54705a"],["screen","315268"],["stripe","d8be72"],["blue","203c76"],["light","fff0cd"],["carpet","737c7e"]]:
 		w._mat("icc_"+row[0],Color(row[1]),0.76 if row[0] not in ["metal","screen"] else 0.38)
 	w._mat("icc_glass",Color(0.34,0.53,0.59,0.30),0.24,0.20)
 	var glass: StandardMaterial3D = w.materials.icc_glass
 	glass.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
 	glass.cull_mode=BaseMaterial3D.CULL_DISABLED
+	var floor_shader:=Shader.new()
+	floor_shader.code="""shader_type spatial;
+varying vec3 p;
+void vertex(){ p=(MODEL_MATRIX*vec4(VERTEX,1.0)).xyz; }
+void fragment(){
+ vec2 uv=p.xz/vec2(1.2,0.6); vec2 d=min(fract(uv),1.0-fract(uv));
+ vec2 aa=max(fwidth(uv),vec2(0.001));
+ float joint=1.0-smoothstep(0.003-aa.x,0.003+aa.x,d.x)*smoothstep(0.004-aa.y,0.004+aa.y,d.y);
+ float n=fract(sin(dot(floor(uv),vec2(31.7,43.1)))*17519.5);
+ ALBEDO=mix(vec3(0.53,0.53,0.48)*(0.97+n*0.055),vec3(0.36,0.36,0.33),joint*0.45); ROUGHNESS=0.65; }
+"""
+	var floor_mat:=ShaderMaterial.new();floor_mat.shader=floor_shader;w.materials.icc_floor=floor_mat
+	w.materials.icc_light.emission_enabled=true;w.materials.icc_light.emission=Color("fbe9c7");w.materials.icc_light.emission_energy_multiplier=0.75
 	Geo._glazing(w,"icc_crystal",Color("456f7c"),Color("a6b4b9"),Vector2(2.3,4.3),Vector2(0.075,0.075))
 
 static func _box(w: Node3D, id: String, o: Vector3, p: Vector3, size: Vector3, key: String, basis: Basis=Basis.IDENTITY) -> StaticBody3D:
@@ -213,6 +226,7 @@ static func _convention(w: Node3D) -> void:
 		_detail(batch,"wood_light",Vector3(-17.83,2.65,z),Vector3(0.018,5.1,0.022))
 	for z in [-19.0,19.0]:
 		for y in [1.35,2.75,4.15]:_detail(batch,"metal",Vector3(32,y,z),Vector3(1.215,0.015,1.215))
+	_convention_fitout(w,root,batch)
 	_flush(w,root,batch)
 	# Southern conference/theatre wing is externally independent; rooms closed.
 	var wing:=_poly(488447519,CONVENTION)
@@ -286,6 +300,7 @@ static func _exhibition(w: Node3D) -> void:
 	_text(w,root,"ICC SYDNEY\nEXHIBITION CENTRE",Vector3(68.6,5.3,-74),1.1)
 	_text(w,root,"LEVEL 1  ·  HALLS 1–4",Vector3(45,9.8,-79),0.7)
 	_text(w,root,"停车场及上层展区尚未复刻\nParking / upper halls closed",Vector3(40.2,2.6,-65),0.46)
+	_exhibition_fitout(w,root,batch)
 	_flush(w,root,batch)
 
 static func _theatre(w: Node3D) -> void:
@@ -393,6 +408,7 @@ static func _theatre(w: Node3D) -> void:
 	for z in [-32.0,32.0]:
 		for x in range(-44,39,5):_detail(batch,"black",Vector3(x,23,z),Vector3(4.6,13,0.6),Basis(Vector3.UP,deg_to_rad(7 if x%2==0 else -7)))
 	_text(w,root,"舞台及观众厅可步行参观\n座椅为示意数量 · 上层包厢未开放",Vector3(36,3.2,-30),0.55,180)
+	_theatre_fitout(w,root,batch)
 	_flush(w,root,batch)
 	root.set_meta("modeled_seats",seat_count)
 	w.set_meta("icc_modeled_seats",seat_count)
@@ -411,3 +427,119 @@ static func theatre_foyer_route() -> Array[Vector3]:
 	for p:Vector3 in [Vector3(72,0,0),Vector3(54,0,0),Vector3(54,0,-31),Vector3(39,0,-31),Vector3(35,0,-34)]:
 		result.append(point(THEATRE,p))
 	return result
+
+
+static func _screen_bank(w:Node3D,root:Node3D,batch:Dictionary,origin:Vector3,count:int,yaw:float=0) -> void:
+	var frame:=Basis(Vector3.UP,deg_to_rad(yaw))
+	for i in count:
+		var p:=origin+frame*Vector3((i-(count-1)*0.5)*1.86,0,0)
+		_detail(batch,"black",p,Vector3(1.8,1.02,0.13),frame)
+		_detail(batch,"screen",p+frame*Vector3(0,0,0.074),Vector3(1.66,0.88,0.022),frame)
+		# Reconstruct permanent wayfinding, not the photographed temporary show.
+		_detail(batch,"white",p+frame*Vector3(-0.49,0.09,0.09),Vector3(0.35,0.035,0.01),frame)
+		_detail(batch,"white",p+frame*Vector3(0.24,0.18,0.09),Vector3(0.66,0.06,0.01),frame)
+		_detail(batch,"metal",p+frame*Vector3(0.24,-0.12,0.09),Vector3(0.66,0.035,0.01),frame)
+
+static func _peak_wall(batch:Dictionary,x:float,low:float,high:float,z0:float,z1:float) -> void:
+	# Photograph confirms alternating spotted-gum peaks. 0.12m sampling is an
+	# explicitly coarser rendering choice than the supplier's 42+15mm system.
+	var n:=ceili((z1-z0)/0.12)
+	for i in n:
+		var z:=lerpf(z0,z1,(i+0.5)/n)
+		var x_tip:=x+0.07
+		var a:=Vector3(x,low,z-0.047);var b:=Vector3(x,high,z-0.047)
+		var c:=Vector3(x_tip,high,z);var d:=Vector3(x_tip,low,z)
+		_triangle(batch,"wood_light" if i%2==0 else "wood",a,b,c)
+		_triangle(batch,"wood_light" if i%2==0 else "wood",a,c,d)
+		var e:=Vector3(x,low,z+0.047);var f:=Vector3(x,high,z+0.047)
+		_triangle(batch,"wood",d,c,f);_triangle(batch,"wood",d,f,e)
+
+static func _ceiling_field(batch:Dictionary,center:Vector3,size:Vector2,axis:bool=false) -> void:
+	# Suspended silver battens, black plenums and paired recessed luminaires.
+	_detail(batch,"dark",center+Vector3.UP*0.10,Vector3(size.x,0.05,size.y))
+	var n:=ceili((size.y if axis else size.x)/0.24)
+	for i in n:
+		var p:=center+Vector3(0,0,(i+0.5)*0.24-size.y*0.5) if axis else center+Vector3((i+0.5)*0.24-size.x*0.5,0,0)
+		_detail(batch,"metal",p,Vector3(size.x,0.10,0.085) if axis else Vector3(0.085,0.10,size.y))
+	for x in range(2,int(size.x)-1,6):
+		for z in range(2,int(size.y)-1,6):
+			var p:=center+Vector3(x-size.x*0.5,-0.063,z-size.y*0.5)
+			_detail(batch,"black",p,Vector3(0.40,0.035,0.24))
+			for dx in [-0.10,0.10]:_detail(batch,"light",p+Vector3(dx,-0.025,0),Vector3(0.105,0.018,0.12))
+
+static func _convention_fitout(w:Node3D,root:Node3D,batch:Dictionary) -> void:
+	_ceiling_field(batch,Vector3(36,5.43,8),Vector2(42,49))
+	_ceiling_field(batch,Vector3(-6,10.68,0),Vector2(23,51),true)
+	_peak_wall(batch,-17.79,0.18,5.3,-33,33)
+	# The registration counter has stone cladding, a recessed toe and actual
+	# worktops/monitors; photographed fixture language, estimated positions.
+	_detail(batch,"stone",Vector3(27,0.61,23.30),Vector3(16.2,1.0,0.18))
+	_detail(batch,"black",Vector3(27,0.13,23.34),Vector3(15.5,0.16,0.12))
+	_detail(batch,"stone",Vector3(27,1.16,24),Vector3(16.3,0.12,1.55))
+	for x in [21.0,25.0,29.0,33.0]:
+		_detail(batch,"black",Vector3(x,1.37,24.35),Vector3(0.06,0.44,0.06))
+		_detail(batch,"dark",Vector3(x,1.64,24.35),Vector3(0.70,0.41,0.07),Basis(Vector3.RIGHT,deg_to_rad(-8)))
+		_detail(batch,"screen",Vector3(x,1.64,24.30),Vector3(0.63,0.34,0.015),Basis(Vector3.RIGHT,deg_to_rad(-8)))
+		_detail(batch,"white",Vector3(x+0.8,1.23,23.80),Vector3(0.28,0.02,0.35))
+	_screen_bank(w,root,batch,Vector3(27,3.45,24.1),7,180)
+	# Glazed mezzanine guard stops before the timber stair landing opening.
+	for row:Array in [[Vector3(35,6.05,-20.36),Vector3(43,1,0.035)],[Vector3(-1.85,6.05,4),Vector3(0.035,1,40)]]:
+		_detail(batch,"glass",row[0],row[1])
+		_detail(batch,"metal",row[0]+Vector3.UP*0.54,Vector3(row[1].x,0.055,row[1].z))
+	for z in range(-14,23,3):_detail(batch,"metal",Vector3(-1.82,6.03,z),Vector3(0.055,1.18,0.055))
+	# Real internal wayfinding rather than floating game annotations.
+	_detail(batch,"blue",Vector3(20,3.3,-19.8),Vector3(10,0.90,0.14))
+	_text(w,root,"← MEETING ROOMS   1   →",Vector3(20,3.3,-19.70),0.39,0)
+	for x in [45.0,52.0]:
+		for dx in [-1.65,1.65]:_detail(batch,"metal",Vector3(x+dx,0.20,-13),Vector3(0.12,0.4,0.7))
+		_detail(batch,"wood_light",Vector3(x,0.73,-13.45),Vector3(4,0.42,0.12))
+	w.set_meta("icc_convention_fitout",{"ceiling_battens":true,"registration_workstations":4,"digital_screens":7,"mezzanine_guards":true})
+
+static func _exhibition_fitout(w:Node3D,root:Node3D,batch:Dictionary) -> void:
+	# The long foyer follows the official Level 1 plan; individual concession
+	# modules use the installed blue surrounds, pale counter and timber peaks.
+	_ceiling_field(batch,Vector3(53,11.51,-4),Vector2(21,174),true)
+	for i in 4:
+		var z:float=-68+i*45.5
+		_peak_wall(batch,41.19,6.62,11.40,z-22.4,z-7.6)
+		_peak_wall(batch,41.19,6.62,11.40,z+7.6,z+22.4)
+		_detail(batch,"blue",Vector3(41.38,9.25,z-12),Vector3(0.22,3.55,10))
+		_detail(batch,"dark",Vector3(41.53,8.85,z-12),Vector3(0.025,2.4,9.3))
+		for y in range(8):_detail(batch,"metal",Vector3(41.56,7.8+y*0.26,z-12),Vector3(0.018,0.019,9.1))
+		_detail(batch,"stone",Vector3(43.77,7.14,z-11),Vector3(0.16,1.12,9.2))
+		_detail(batch,"stone",Vector3(43,7.68,z-11),Vector3(1.65,0.12,9.2))
+		_screen_bank(w,root,batch,Vector3(41.75,10.65,z-12),5,90)
+		for zz in [z-7.4,z+7.4]:_detail(batch,"blue",Vector3(41.3,9.2,zz),Vector3(0.20,5.4,0.20))
+		_detail(batch,"blue",Vector3(41.30,11.85,z),Vector3(0.20,0.32,15.0))
+		# Overhead main trusses, suspension rods and ventilation runners are
+		# architectural fabric; hall floors stay in the empty-event configuration.
+		for zz in [z-17,z,z+17]:
+			for y in [15.55,16.65]:_detail(batch,"metal",Vector3(-13,y,zz),Vector3(105,0.16,0.16))
+			for x in range(-62,38,4):
+				_detail(batch,"metal",Vector3(x,16.1,zz),Vector3(0.10,1.47,0.10),Basis(Vector3.FORWARD,deg_to_rad(42 if x%8==0 else -42)))
+		for x in [-53.0,-27.0,-1.0,25.0]:
+			_detail(batch,"dark",Vector3(x,16.72,z),Vector3(0.65,0.40,44))
+			for dz in [-16.0,0.0,16.0]:
+				_detail(batch,"black",Vector3(x,16.2,z+dz),Vector3(0.50,0.24,0.5))
+				_detail(batch,"white",Vector3(x,16.065,z+dz),Vector3(0.35,0.035,0.35))
+		for zz in [z-20,z+20]:
+			_detail(batch,"blue",Vector3(-65.75,8.4,zz),Vector3(0.18,3.8,2.5))
+			_detail(batch,"metal",Vector3(-65.62,7.6,zz),Vector3(0.04,0.08,1.9))
+			_detail(batch,"plant",Vector3(-65.63,10.62,zz),Vector3(0.05,0.32,1.1))
+	w.set_meta("icc_exhibition_fitout",{"concessions":4,"digital_screens":20,"structural_trusses":12,"empty_event_halls":true})
+
+static func _theatre_fitout(w:Node3D,root:Node3D,batch:Dictionary) -> void:
+	_peak_wall(batch,42.24,0.18,8.8,-27.8,35)
+	_ceiling_field(batch,Vector3(52,8.8,3),Vector2(18,60),true)
+	_detail(batch,"stone",Vector3(54,0.61,27.13),Vector3(8.2,1.0,0.14))
+	_detail(batch,"stone",Vector3(54,1.15,28),Vector3(8.2,0.12,1.85))
+	_screen_bank(w,root,batch,Vector3(54,3.5,28.8),4,180)
+	for x in [51.0,54.0,57.0]:
+		_detail(batch,"black",Vector3(x,1.4,28.4),Vector3(0.07,0.5,0.07))
+		_detail(batch,"screen",Vector3(x,1.65,28.4),Vector3(0.64,0.39,0.05))
+	# The narrow north/auditorium entry stays unobstructed; seats and trusses
+	# remain the existing three-tier reconstruction, not a full seating survey.
+	for z in [5.0,17.0]:
+		_box(w,"theatre/foyer_bench/%s"%z,THEATRE,Vector3(44.2,0.4,z),Vector3(1.15,0.8,4.2),"wood")
+		_detail(batch,"wood_light",Vector3(43.7,0.95,z),Vector3(0.13,0.52,4.2))
+	w.set_meta("icc_theatre_fitout",{"box_office_workstations":3,"digital_screens":4,"foyer_battens":true})

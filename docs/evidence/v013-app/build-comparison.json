@@ -1,0 +1,12 @@
+{
+  "scope": "Exact production source comparison between visually/physically validated candidate and final release; final package separately retests save-dependent flows.",
+  "candidate_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c",
+  "release_archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c",
+  "total_game_files": 106,
+  "unchanged_game_files": 105,
+  "changed_game_files": [
+    "game/scripts/save_store.gd"
+  ],
+  "sole_change": "save_store.gd: const VERSION = 4 becomes const VERSION = 5",
+  "final_source_hashes_match_working_tree": true
+}

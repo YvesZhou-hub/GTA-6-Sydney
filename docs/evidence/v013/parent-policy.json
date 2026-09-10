@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "tagged podium stops exactly at raised part",
+      "passed": true
+    },
+    {
+      "name": "tagged lower structure below raised part",
+      "passed": true
+    },
+    {
+      "name": "overlapping full-height parent remains suppressed",
+      "passed": true
+    },
+    {
+      "name": "one ground-level part prevents wholesale base reconstruction",
+      "passed": true
+    },
+    {
+      "name": "inferred parent height is never filled blindly",
+      "passed": true
+    },
+    {
+      "name": "inferred child minimum level is not explicit min_height",
+      "passed": true
+    },
+    {
+      "name": "OSM height explicitly marked estimate stays suppressed",
+      "passed": true
+    },
+    {
+      "name": "missing part prevents inferred reconstruction",
+      "passed": true
+    },
+    {
+      "name": "all committed parent policies reproduce from source dimensions",
+      "passed": true
+    },
+    {
+      "name": "Darling Square 18 m podium is explicit and retained",
+      "passed": true
+    },
+    {
+      "name": "preserved base count is explicit and agrees with snapshot",
+      "passed": true
+    },
+    {
+      "name": "only overlapping or unestablished parent outlines are suppressed",
+      "passed": true
+    }
+  ]
+}

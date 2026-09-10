@@ -3,7 +3,7 @@ from pathlib import Path
 
 ROOT_FILES = ('.gitignore', '.gitattributes', 'README.md', 'PLAY_PERMISSION.md', '启动 Harbourlife.command')
 TOOL_FILES = ('build.py', 'build.sh', 'package_source.py', 'release_files.py', 'encode_video.py',
-              'test_save.gd', 'test_integration.gd', 'test_vehicles.gd', 'import_city.py', 'city_roofs.py')
+              'test_save.gd', 'test_integration.gd', 'test_vehicles.gd', 'import_city.py', 'city_roofs.py', 'verify_native.py')
 SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geography.json',
                 'airport-runways.json', 'airport_test.gd', 'world_physics_probe.gd',
                 'world_damage_probe.gd', 'world_road_probe.gd', 'world_winding_check.gd',
@@ -16,7 +16,11 @@ SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geogr
                 'icc_landmark_test.gd', 'roof_visual_check.gd', 'road_join_test.gd',
                 'experience_flow_test.gd', 'landmark_alignment_test.gd', 'life_experience_test.gd',
                 'navigation_map_test.gd', 'vehicle_model_test.gd', 'vehicle_model_migration_test.gd',
-                'boat_model_test.gd', 'interactive_qa.gd')
+                'boat_model_test.gd', 'interactive_qa.gd', 'hoverboard_test.gd',
+                'air_vehicle_flight_test.gd', 'vehicle_speed_test.gd', 'air_vehicle_model_test.gd',
+                'precinct_detail_test.gd', 'sydney_tower_landmark_test.gd',
+                'city_parent_base_test.gd', 'city_parent_policy_test.py', 'helipad_clearance_test.gd',
+                'fixtures/save_store_v012.gd')
 
 def public_files(root: Path):
     files = [root / name for name in ROOT_FILES]

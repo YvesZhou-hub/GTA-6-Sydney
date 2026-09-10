@@ -49,3 +49,39 @@ Run from the repository:
 ```
 
 19 checks passed in native Godot 4.7.2: mapping/exclusions, five QQT plan changes, six branch paths and floor clipping, nondegenerate triangles, outward winding, identical structural render/collision faces, total heights, physical roof rays, and destruction/restoration. Final module: 149 structural components and 98,888 triangles including repeated facade details. Native screenshot review covers `qqt_north.png`, `qqt_street.png`, `qqt_roof.png`, `salesforce_north.png`, `salesforce_south.png`, and `salesforce_roof.png`, written to `/tmp/harbourlife-quay-review/`. These isolated scene checks precede the parent's full-city integration regression.
+
+
+## v0.1.3: Existing wharves and waterfront shops
+
+[circular_quay_detail.gd](../game/scripts/circular_quay_detail.gd) replaces five equally spaced invented piers with the **existing Wharves 2–6**. It does not depict an unbuilt renewal proposal. [TfNSW's stop guide](https://transportnsw.info/document/4688/circular-quay-stop-guide.pdf) identifies the interchange. [Bermagui Constructions' wharf refurbishment](https://bermaguiconstructions.com.au/projects/commercial/circular-quay-wharf-refresh/) supplies completed-work photographs: the [Wharf 2 entrance](https://bermaguiconstructions.com.au/wp-content/gallery/commercial-circularquay/Andronicus_J20150217_Circular-Quay-20_19.jpg) and [roof/waterfront view](https://bermaguiconstructions.com.au/wp-content/gallery/commercial-circularquay/Andronicus_J20150217_Circular-Quay-4_03.jpg) were both inspected. These photographs document 2015 work; the model does not claim a new survey of every current paint finish.
+
+The existing OSM snapshot provides **14 canopy outlines and 14 kiosk/service footprints**. All polygons are retained, rather than regenerated with uniform widths and rotation. `excluded_way_ids()` lists these 28 replacements plus seven station envelopes, **35 explicit exclusions** in total; the world excludes them from ordinary building extrusion. The platform is an inferred half-metre extension around each pier's mapped roof envelope. Its top is 4.58 m, aligned with the game's flat 4.5 m shore datum, not a hydrographic measurement. Metal roof seams, slender columns, green numbered gate panels, ticket-reader bodies, tactile strips, open boarding edges and benches distinguish the wharves. Wharf 3 receives a taller clerestory. Live ferry services and operational upper-level boarding are not implemented.
+
+**Three** commercial exteriors use identified branch photographs. The fourteen small mapped pier kiosks use restrained generic glazing without unverified current tenant graphics; they are not counted as photographed shop reproductions.
+
+| Venue | Mapped facade centre X, Z (m) | Primary identity and actual exterior source |
+| --- | --- | --- |
+| Eastbank Café · Bar · Pizzeria | 213.5632, 71.8168 | [Operator address: Ground Level Quay Grand, 61–69 Macquarie Street](https://eastbank.com.au/); [property agent's sale photograph](https://www.colliers.com.au/en-au/news/circular-quay-sale). Tall glass bays, pale stone piers, dark rails, small fascia, round tables and planters. |
+| Searock Grill | 218.5538, 21.4607 | [Operator address: Shop 15, 5 Macquarie Street](https://searock.com.au/); [photographed accessible entrance](https://wheeleasy.org/explore/searock-grill). Veined dark stone jambs, narrow glass frames, bottle silhouettes, projecting sign and outdoor tables. |
+| City Extra | 68.6112, 143.5034 | [Operator address: E4 East Podium between Wharves 3 and 4](https://cityextra.com.au/); [identified street photograph](https://portplanner.com.au/port/sydney-au/city-extra-restaurant). Red awning supported by diagonal steel arms, upper glazing, red lettering and a low planted dining boundary. |
+
+OSM POIs 4242649492 / 4739109527 / 4422281496 are projected to host building polygons 23717454 / 23717448 / 51065527. Projection distances are approximately 4.07 / 5.45 / 1.33 m; widths 15 / 12 / 21 m and small fittings are photo estimates. Doors are closed collision-backed exteriors, not invented enterable spaces inside solid ordinary OSM buildings. No third-party reference pixels or personal OSM editing metadata are shipped.
+
+Metadata group `circular_quay_detail` contains nine entries: `cq_wharf_2` through `cq_wharf_6`, `cq_station`, `cq_eastbank`, `cq_searock`, `cq_city_extra`. `center`/`map_position` describe the place; `arrival`/`anchors[id]` identify a supported public approach. The original coast and street centre-lines remain authoritative. Foreshore benches/bins and apron bollards are photo-informed approximations, not surveyed fixtures.
+
+### Circular Quay railway station
+
+The [Heritage NSW station record, item 4801109](https://www.hms.heritage.nsw.gov.au/App/Item/ViewItem?itemId=4801109) identifies the 1956 transport structure; its indexed record was accessible, while opening the complete page returned an access error. The actual [September 2023 north-elevation photograph](https://upload.wikimedia.org/wikipedia/commons/2/2b/20230910_Circular_Quay.jpg) was visually inspected. It informed the long granite name band, single steel-framed window strip, open end galleries and lower concourse piers. No photograph is redistributed as a material.
+
+The replacement retains the plan of **way/51065527** and the six separately mapped ground enclosures **ways/408117948–408117953**. All seven are explicit `CUSTOM_IDS` exclusions. The lower enclosures use their original outlines, with a 6.4 m central public passage cut through the collision geometry. Their stone and glazed faces replace the previous generic office-window boxes. City Extra remains attached to its mapped station-side facade. The raised rail floor and Cahill roof retain the main outline; their levels, facade band dimensions, roof fittings and gallery details are photo estimates, not engineering measurements. The accessible ground concourse has a supported arrival at world **(11.93, 4.5, 167.36)**. Train operation, upstairs access and a connected elevated traffic route are outside this model.
+
+### v0.1.3 precinct validation
+
+The [combined precinct test](../source/precinct_detail_test.gd) passes **72/72 headless and 72/72 native checks** on the final geometry: 1.8 m capsule clearance and actual floor support at twelve destinations, 41 continuous route samples on each pier, canopy outlines, station raised floor and public-concourse clearance/support, idempotence, original frontage retention and outward finite geometry. The local integration fixture also rejects old `quay/pier/*` and `quay/transit_hall` IDs. The six final ground enclosures were included in both runs.
+
+`--capture` writes eleven real Godot images to `reports/precinct-detail/`; all eleven were inspected after the final station revision. These are an isolated mapped-precinct fixture with native rendering, not screenshots of the exported complete city. The fixture deliberately omits the main-world water/environment and operating gameplay. Full-world arrival, spawning, runtime and export checks are separate release evidence. No user save is loaded or changed.
+
+```sh
+./tools/runtime/godot --headless --path game --script ../source/precinct_detail_test.gd
+./tools/runtime/godot --path game --script ../source/precinct_detail_test.gd -- --capture
+```

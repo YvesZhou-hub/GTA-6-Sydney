@@ -232,6 +232,15 @@ func _physics_process(delta:float) -> void:
 	else:
 		axis("back","forward",clampf((target_speed-speed)*0.4,-1.0,1.0))
 		var desired_vertical:=clampf((target_height-position.y)*0.055,-7.0,11.0)
+		if waypoint==7:
+			# Track the descending path itself, not only the altitude error. With
+			# the faster jet's lower drag, P-only height control lands far long.
+			var path_vertical := -maxf(0.0,jet.linear_velocity.dot(runway_forward))*.042 if progress<500.0 else 0.0
+			desired_vertical=clampf(path_vertical+(target_height-position.y)*.10,-7.0,3.0)
+			if position.y<runway_y+15.0:
+				# Flare before wheel contact; retain finite descent rather than striking
+				# the runway at the three-degree approach sink rate.
+				desired_vertical=maxf(desired_vertical,-.90)
 		var pitch_command:=clampf(asin(clampf(desired_vertical/maxf(speed,20.0),-0.4,0.4))+(desired_vertical-jet.linear_velocity.y)*0.035+0.015,-0.21,0.21)
 		axis("fall","rise",(pitch_command-0.015)/0.22)
 	if waypoint==7 and (position.y<runway_y+5.5 or touched):

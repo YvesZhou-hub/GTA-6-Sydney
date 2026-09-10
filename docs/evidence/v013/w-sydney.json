@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "check_count": 23,
+  "checks": [
+    {
+      "name": "four verified named buildings carry addresses and confidence records",
+      "passed": true
+    },
+    {
+      "name": "five exact OSM outlines replace generic footprints including tower podium",
+      "passed": true
+    },
+    {
+      "name": "geographic coordinate conversion remains consistent to centimetres",
+      "passed": true
+    },
+    {
+      "name": "107 meaningful damage components, repeated facade details merged",
+      "passed": true
+    },
+    {
+      "name": "all structural collision faces exactly match rendered solid geometry",
+      "passed": true
+    },
+    {
+      "name": "all facade and structural faces are nondegenerate",
+      "passed": true
+    },
+    {
+      "name": "all explicit triangle winding matches supplied exterior normals",
+      "passed": true
+    },
+    {
+      "name": "bounded four-building triangle budget 251334",
+      "passed": true
+    },
+    {
+      "name": "Tower One retains documented 217m height",
+      "passed": true
+    },
+    {
+      "name": "BOC rooftop envelope retains explicitly estimated 58m height",
+      "passed": true
+    },
+    {
+      "name": "The Ribbon curved apex reaches 90m with thin perimeter trim",
+      "passed": true
+    },
+    {
+      "name": "The Exchange stays within 30m estimated roof envelope",
+      "passed": true
+    },
+    {
+      "name": "The Ribbon has a curved closed elevation, not a rectangular tower",
+      "passed": true
+    },
+    {
+      "name": "long rising Ribbon shoulder is represented geometrically",
+      "passed": true
+    },
+    {
+      "name": "tower_one facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "boc facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "ribbon facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "exchange facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "W has photo-referenced facade sign, Waratah entrance and relief mullions",
+      "passed": true
+    },
+    {
+      "name": "W northeast entry is a real removed solid volume with a clear 2m-wide approach",
+      "passed": true
+    },
+    {
+      "name": "W copper arrival foyer has physical floor support",
+      "passed": true
+    },
+    {
+      "name": "destroying a floor removes its glazing, timber facade and collision together",
+      "passed": true
+    },
+    {
+      "name": "new-world restore reconstructs the landmark collision",
+      "passed": true
+    }
+  ],
+  "source_type": "summary_from_actual_passed_log",
+  "source_log": "reports/city-v013-geometry.log",
+  "source_log_sha256": "99751d6f0a1a314b7db62c7429fb10df48ca40451a346076f0da1856bbff2a3b",
+  "engine_header": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+  "completion_line": "CITY LANDMARK CHECK COMPLETE failures=0 triangles=251334 components=107",
+  "runtime_errors": [],
+  "scope": "局部几何；23 项也涵盖该模块另外三栋地标，并非全是 W；由日志摘要"
+}

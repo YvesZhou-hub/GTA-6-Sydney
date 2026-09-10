@@ -29,7 +29,7 @@ func run():
 		v.freeze=true
 		originals[v.vehicle_id]=v.global_transform
 	var created: Array=[]
-	for kind in ["car","car","car","car","motorcycle","speedboat","yacht","helicopter","glider","paraglider","airliner","airliner","airliner","airliner"]:
+	for kind in ["car","car","car","car","motorcycle","hoverboard","speedboat","yacht","helicopter","glider","paraglider","airliner","airliner","airliner","airliner"]:
 		var before: Vector3=game.player.global_position
 		var prior_count: int=game.vehicles.size()
 		var vehicle=game.request_vehicle(kind)
@@ -43,7 +43,7 @@ func run():
 	var unique:={}
 	for vehicle in game.vehicles: unique[vehicle.vehicle_id]=true
 	check(unique.size()==game.vehicles.size(),"all original and summoned IDs are unique")
-	check(game.vehicles.size()==initial_count+14,"same-type copies have no fixed fleet cap")
+	check(game.vehicles.size()==initial_count+15,"same-type copies have no fixed fleet cap")
 	var originals_preserved:=true
 	for v in game.vehicles:
 		if originals.has(v.vehicle_id) and not v.global_transform.is_equal_approx(originals[v.vehicle_id]): originals_preserved=false
@@ -96,7 +96,7 @@ func run():
 	var expected_occupied_id:String=game.current_vehicle.vehicle_id
 	var expected_target_id:String=game.spawn_target.vehicle_id
 	check(game.save_world(),"dynamic fleet save succeeds")
-	check(Store.read(test_id).get("version")==4,"fleet format4 protects new boats and navigation from older app3")
+	check(Store.read(test_id).get("version")==5,"fleet format5 protects new hoverboards from older app4")
 	var legacy=Store.read(test_id)
 	legacy.version=2
 	var legacy_file=FileAccess.open(Store.ROOT+test_id+"_legacy.json",FileAccess.WRITE)
@@ -119,7 +119,9 @@ func run():
 	for v in game.vehicles:
 		if v.kind=="glider" and v.vehicle_id.begins_with("spawn_"): saved_wing=v; break
 	game.enter_vehicle(saved_wing)
-	check(saved_wing!=null and saved_wing.linear_velocity.length()>20,"saved waiting glider has forward speed when boarded")
+	await physics_frame
+	await physics_frame
+	check(saved_wing!=null and saved_wing.linear_velocity.length()>27,"saved waiting glider retains trim speed after first physics integration")
 	# Fresh airport-start remains the explicit teleport/boarding flow.
 	game.active=false
 	game.new_world("sandbox","QA Runway Spawn",false)

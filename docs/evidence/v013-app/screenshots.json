@@ -1,0 +1,225 @@
+{
+  "scope": "Original app-rendered PNGs; no retouching. Build provenance retained per image.",
+  "frames": [
+    {
+      "file": "../../screenshots/v013/01-map-pin.png",
+      "sha256": "b4aa6c76373cb4582eaea70bbdb01383a070c8285a1f4aa0e1be1050b8fe7c8f",
+      "source_archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c"
+    },
+    {
+      "file": "../../screenshots/v013/02-experiences.png",
+      "sha256": "f8fff5c27a6cc6de4c6f6e977db2766f8bac6e60d6e1d3790d4cb3f51229265c",
+      "source_archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c"
+    },
+    {
+      "file": "../../screenshots/v013/03-experience-reward.png",
+      "sha256": "85f9810b464ce271ce1c400e91d37d247a3075a38261f26cf22a65f4bc979c0a",
+      "source_archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c"
+    },
+    {
+      "file": "../../screenshots/v013/04-live-navigation.png",
+      "sha256": "c7b44e35aa17c95925a15b7da3cc1db0f9dfbf3d9c25d8d0b4ccfe45068d445c",
+      "source_archive_sha256": "39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c"
+    },
+    {
+      "file": "../../screenshots/v013/aether-front.png",
+      "sha256": "67f4eba97935816052bc60d5338cd8021d70e4fef9b326c8276f7c41b8d20e90",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/aether-stairs.png",
+      "sha256": "689f3dc25b3486fb39e52e36fbd5fd38e76b6f47151fe9844e22b90a5a8a3e6b",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/airliner.png",
+      "sha256": "11b7df7b617f580ae20d7e73422da832616924acadd7c8c5326eef399539b39a",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/auvers.png",
+      "sha256": "9f6e1dd633cb0ba5a304f80aa6bc52e5637df2d9770a4d2c44f0a31d77ea283b",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/bridge-road.png",
+      "sha256": "9808848f7a5162bd2450297deb4abd44ca3de7dc39fe7d79f28186eb1234c98c",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/bridge.png",
+      "sha256": "ffaa9a255dcdc194b7c0d6cc3f1a6bd1f84a89094978c5416b8dda1c0d034c0f",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/car.png",
+      "sha256": "6ce37d7dee1edb3e6ed0723c468a3e405c08a4ee03cfc94c26bdc9bd630145e5",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/chinta_ria.png",
+      "sha256": "03a18c182ddd86484b0ff29412f3fb2fde2c4269362dffb9c42d32d5c803919c",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/circular-quay-station.png",
+      "sha256": "010fd1dccd6254bbf77f26bea08a712c9a384ebd8b6ae222c4ce107561374f8f",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/circular-quay-street.png",
+      "sha256": "6a0ea22c92e10dc9112aa359cda29a047880e5afd3eadd7fc89e189fd9b6ec3e",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/circular-quay.png",
+      "sha256": "b7deef143d5086dd25cc7ff67f685bf4e0d5081e3c3383d7b18888ec7a8091e9",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/cq_city_extra.png",
+      "sha256": "a72415eb771438afdeaee670047ff55c9258b545e6f47739ed50c197473d8c06",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/cq_eastbank.png",
+      "sha256": "01ed9485a2b578a2956ac9e06911510275a76c936241891daa835becf8bb654c",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/cq_searock.png",
+      "sha256": "67a4ddc35871f0d15b32b1439a0c03cf934fe3b779cb2d31f78ce241b272899f",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/darling-square-street.png",
+      "sha256": "3f2b4bfad2ee1b8109564e520d8107f47576a64f93f96d66d72c1afd2844b331",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/darling-square.png",
+      "sha256": "5e16aef7d6cdddde0446d9f335f27d07b6d3f5faecb99067ac75662a76d054c8",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/flight-01_runway_parked.png",
+      "sha256": "8a6593463c2a813bb9f984973576b663097b393f32baa71ae2e372bbec3e0a76",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/flight-02_takeoff.png",
+      "sha256": "6ae21f8dc46d2e2bc060e3c1d84279e2180520230540f03d01c64d80a2f19d6a",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/flight-03_harbour.png",
+      "sha256": "c2de7ba6068e9345b9fa9f2abe06560d1f8d1e94be31dd9422f2c909e10b909d",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/flight-04_bridge.png",
+      "sha256": "b8885b38d65a8cb2d91fa15497a89d4ffd76e5ff9c3c077c995805348b5152b8",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/flight-05_approach.png",
+      "sha256": "42b128ad9cc09536e679955f647900c1097562ab00924a0705ea741ea9c767af",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/flight-06_touchdown.png",
+      "sha256": "248868ca83de384ccd788e999ff196e7c3552b1f8dc4c5f096a8f1f770e3a711",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/flight-07_stopped.png",
+      "sha256": "fe3d99c8820c8b8804aefa14f78cd7e323b5c10a0835f421e68a11d892151845",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/glider.png",
+      "sha256": "a69bfea87e7b2c22f0b9fec69b7e23863e0d67756a24c0fe16ba8faa299db7c4",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/hakatamon.png",
+      "sha256": "ae09fb6c816afaffa109b3bba9059d75ad880faf672e5f4d365520bb41530a86",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/helicopter.png",
+      "sha256": "4d96d9a89eb341c80f5b8d90f3b70ebb579fd84a094e83c3325982932055732f",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/hoverboard.png",
+      "sha256": "a631b9e104ab366da09d2334025f0620e4542be8aa74b963e4c3dc6355d090c1",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/icc-convention-foyer.png",
+      "sha256": "04e6c12203aeb379438b40ae7f3dd25e490f17cc348cf3b6f2dcf06f0a82be80",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/icc-exhibition-foyer.png",
+      "sha256": "d8b136c7495687200ed3a69292b9060c6310aba32d7b65baec1d5bb528b37ecf",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/motorcycle.png",
+      "sha256": "c3e24934ae958c9ad9fbe2d03b5728a593e6cedf32263c2628cc4ee7ca0d1711",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/north-approach.png",
+      "sha256": "1c3081a9c777b1c2868f26b69ad2682da5b1db93c3fcc2a68a22f9f86877b2be",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/opera-ground.png",
+      "sha256": "674cdedff414b4ebb0fa03eb73838ff91538472ef6744ba0e9c00d44b4775f21",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/opera.png",
+      "sha256": "2a9790ae1baf3ea1c3075771f4a86003157a59c4203624465fd6db9bcf7fe690",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/paraglider.png",
+      "sha256": "464951408f5448e0e9bd22be86425fd3c140ba9b2bc555301303c8b1706c72a4",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/speedboat.png",
+      "sha256": "35cdb5b28f79c4c9d43903f839dfcc1006b0d5820f29baceefcdc79c76a31ac4",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/sydney-tower-pod.png",
+      "sha256": "2181e4db03e2de747d7963a5ec5504a04a406260dc0a8f9a7e7d27f8133eb75e",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/sydney-tower.png",
+      "sha256": "597f9f769c9ece92434a2c4d507973149a5cba343814bc06b68708347f90fe24",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/w-entrance.png",
+      "sha256": "4c2e51e035c5319b24471c7bc0bcfb967296469312256e6c4981f989a8146e09",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/w-sydney.png",
+      "sha256": "0756aec559fcb7ff08eac28c676108249d1710ad9d33af6d6d16407d1e78734d",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    },
+    {
+      "file": "../../screenshots/v013/yacht.png",
+      "sha256": "0f7a43ae0aceafea3675f476be192ca3c0eb5e78fd0a841a502cdfc93672f4d4",
+      "source_archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c"
+    }
+  ]
+}

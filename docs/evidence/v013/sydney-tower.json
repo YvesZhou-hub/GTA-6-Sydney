@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "check_count": 19,
+  "checks": [
+    {
+      "name": "Sydney Tower model builds with canonical metadata",
+      "passed": true
+    },
+    {
+      "name": "Tower build is idempotent",
+      "passed": true
+    },
+    {
+      "name": "four source OSM pieces are replaced; surrounding mall not suppressed",
+      "passed": true
+    },
+    {
+      "name": "Tower centroid projects to mapped OSM turret center",
+      "passed": true
+    },
+    {
+      "name": "Market Street arrival lies outside office footprint",
+      "passed": true
+    },
+    {
+      "name": "all tower geometry triangles are nondegenerate",
+      "passed": true
+    },
+    {
+      "name": "tower winding matches exterior normals",
+      "passed": true
+    },
+    {
+      "name": "damage solids and physics geometry match",
+      "passed": true
+    },
+    {
+      "name": "modeled navigation beacon tops out at official 309m",
+      "passed": true
+    },
+    {
+      "name": "two families contain the documented 56 visible stabilising cables",
+      "passed": true
+    },
+    {
+      "name": "turret has 420 distinct window panels",
+      "passed": true
+    },
+    {
+      "name": "tower detail remains within triangle budget: 103264",
+      "passed": true
+    },
+    {
+      "name": "tower physical shell exists at height 100.0",
+      "passed": true
+    },
+    {
+      "name": "tower physical shell exists at height 220.0",
+      "passed": true
+    },
+    {
+      "name": "tower physical shell exists at height 243.0",
+      "passed": true
+    },
+    {
+      "name": "tower physical shell exists at height 275.0",
+      "passed": true
+    },
+    {
+      "name": "public arrival fits standing pedestrian",
+      "passed": true
+    },
+    {
+      "name": "turret damage removes the corresponding solid and attached window detail",
+      "passed": true
+    },
+    {
+      "name": "repair restores tower collision",
+      "passed": true
+    }
+  ],
+  "source_type": "summary_from_actual_passed_log",
+  "source_log": "reports/sydney-tower-v013.log",
+  "source_log_sha256": "79492a7c760fb1af3a7a4500bd204a9200a79fba4978e6bbfb0ccc9188812846",
+  "engine_header": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+  "completion_line": "SYDNEY TOWER CHECK COMPLETE checks=19 failures=0 triangles=103264 structures=33",
+  "runtime_errors": [],
+  "scope": "局部模型、地理位置、碰撞与损毁恢复；由实际日志生成摘要"
+}

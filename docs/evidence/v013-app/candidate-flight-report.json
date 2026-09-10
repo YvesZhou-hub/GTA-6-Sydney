@@ -1,0 +1,1555 @@
+{
+  "active_physics_frames": 33919,
+  "active_process_frames": 33919,
+  "active_start_frame": 48,
+  "active_start_physics_frame": 49,
+  "canvas_logical_resolution": [
+    1440.0,
+    900.0
+  ],
+  "capture_mode": "native_fixed_step",
+  "closest_bridge_m": 1016.90856933594,
+  "closest_opera_m": 486.915802001953,
+  "custom_venues": [
+    "tower_one",
+    "boc",
+    "ribbon",
+    "exchange_haidilao",
+    "westpac",
+    "cba_south",
+    "cba_north",
+    "quay_quarter",
+    "salesforce",
+    "cybercx_sydney",
+    "cloudflare_sydney",
+    "icc_convention",
+    "icc_exhibition",
+    "tiktok_entertainment"
+  ],
+  "elapsed_s": 565.316666666481,
+  "engine": "4.7.2-stable (official)",
+  "engine_drawn_frames_at_finish": 33967,
+  "engine_process_frame_at_finish": 33967,
+  "fixed_simulation_fps": 60,
+  "frame_index_note": "movie_frame_index is the zero-based global process iteration being drawn; MovieWriter appends that image after process. Validate final encoded frame count independently.",
+  "frame_time_median_ms": 23.951,
+  "frame_time_p95_ms": 25.514,
+  "frame_time_worst_ms": 230.746,
+  "gpu": "Apple M4 (Apple9)",
+  "impacts": [],
+  "liftoff_time_s": 25.4499999999998,
+  "manual_draw_count_at_finish": 0,
+  "manual_render_each_process": false,
+  "map_counts": {
+    "beaches": 23.0,
+    "buildings": 15508.0,
+    "buildings_with_height": 230.0,
+    "buildings_with_levels": 7539.0,
+    "land": 16.0,
+    "outlines_replaced_by_parts": 272.0,
+    "parent_outlines_with_parts": 293.0,
+    "parks": 847.0,
+    "places": 5103.0,
+    "roads": 19680.0,
+    "tagged_height_estimates": 4.0,
+    "tagged_parent_bases_preserved": 21.0,
+    "tagged_pitched_roofs": 524.0,
+    "trees": 6739.0
+  },
+  "max_altitude_m": 442.904022216797,
+  "minimum_health": 100.0,
+  "movie_active_duration_from_process_frames_s": null,
+  "movie_path": "",
+  "movie_writer_active": false,
+  "pacing_source": "launcher-declared user argument; compare recorded launch command",
+  "parked_speed_mps": 3.67811163470844e-11,
+  "passed": true,
+  "performance_note": "Fixed simulation pacing or MovieWriter capture; wall-clock intervals are not a real-time gameplay benchmark.",
+  "reason": "completed",
+  "rendered": true,
+  "renderer": "forward_plus",
+  "resolution": [
+    1440,
+    900
+  ],
+  "route": [
+    [
+      -3725.6640625,
+      340.0,
+      6948.82177734375
+    ],
+    [
+      403.946044921875,
+      440.0,
+      1177.83728027344
+    ],
+    [
+      1153.94604492188,
+      440.0,
+      -972.162719726562
+    ],
+    [
+      -698.0,
+      440.0,
+      -1568.0
+    ],
+    [
+      -496.310119628906,
+      340.0,
+      11520.7890625
+    ],
+    [
+      -1600.13110351562,
+      220.0,
+      16870.703125
+    ],
+    [
+      -2081.92138671875,
+      180.0,
+      14621.73046875
+    ],
+    [
+      -2856.97534179688,
+      10.8599996566772,
+      11003.8173828125
+    ]
+  ],
+  "runway_heading": 0.211037024903695,
+  "runway_length_m": 3737.0,
+  "samples": [
+    {
+      "draw_calls": 3346.0,
+      "engine_drawn_frames": 49,
+      "engine_physics_frame": 50,
+      "engine_process_frame": 49,
+      "fps": 18.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2752.23828125,
+        10.6994256973267,
+        11492.724609375
+      ],
+      "speed_mps": 3.18263956855525e-11,
+      "stage": "departure",
+      "throttle": 0.0,
+      "time_s": 0.0166666666666667
+    },
+    {
+      "draw_calls": 3395.0,
+      "engine_drawn_frames": 648,
+      "engine_physics_frame": 649,
+      "engine_process_frame": 648,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2772.81567382812,
+        10.7000036239624,
+        11397.2568359375
+      ],
+      "speed_mps": 24.993709564209,
+      "stage": "departure",
+      "throttle": 1.0,
+      "time_s": 10.0000000000001
+    },
+    {
+      "draw_calls": 3500.0,
+      "engine_drawn_frames": 1248,
+      "engine_physics_frame": 1249,
+      "engine_process_frame": 1248,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2860.07397460938,
+        10.7000007629395,
+        10992.9150390625
+      ],
+      "speed_mps": 57.5508041381836,
+      "stage": "departure",
+      "throttle": 1.0,
+      "time_s": 20.0000000000001
+    },
+    {
+      "draw_calls": 3759.0,
+      "engine_drawn_frames": 1849,
+      "engine_physics_frame": 1850,
+      "engine_process_frame": 1849,
+      "fps": 39.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3011.00537109375,
+        64.4423370361328,
+        10293.4462890625
+      ],
+      "speed_mps": 82.2884216308594,
+      "stage": "departure",
+      "throttle": 1.0,
+      "time_s": 30.0166666666662
+    },
+    {
+      "draw_calls": 3802.0,
+      "engine_drawn_frames": 2449,
+      "engine_physics_frame": 2450,
+      "engine_process_frame": 2449,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3187.76708984375,
+        174.495758056641,
+        9474.197265625
+      ],
+      "speed_mps": 80.9460906982422,
+      "stage": "departure",
+      "throttle": 0.497883310786755,
+      "time_s": 40.0166666666657
+    },
+    {
+      "draw_calls": 3363.0,
+      "engine_drawn_frames": 3049,
+      "engine_physics_frame": 3050,
+      "engine_process_frame": 3049,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3366.46630859375,
+        248.245040893555,
+        8645.9560546875
+      ],
+      "speed_mps": 83.8362197875977,
+      "stage": "departure",
+      "throttle": 0.000809535723179579,
+      "time_s": 50.0166666666651
+    },
+    {
+      "draw_calls": 3066.0,
+      "engine_drawn_frames": 3649,
+      "engine_physics_frame": 3650,
+      "engine_process_frame": 3649,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3543.45654296875,
+        289.735473632812,
+        7825.64013671875
+      ],
+      "speed_mps": 85.1625747680664,
+      "stage": "departure",
+      "throttle": 0.0,
+      "time_s": 60.0166666666645
+    },
+    {
+      "draw_calls": 3199.0,
+      "engine_drawn_frames": 4249,
+      "engine_physics_frame": 4250,
+      "engine_process_frame": 4249,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3689.92602539062,
+        326.283538818359,
+        7004.34619140625
+      ],
+      "speed_mps": 84.125244140625,
+      "stage": "harbour_south",
+      "throttle": 0.328310869256655,
+      "time_s": 70.016666666664
+    },
+    {
+      "draw_calls": 3212.0,
+      "engine_drawn_frames": 4849,
+      "engine_physics_frame": 4850,
+      "engine_process_frame": 4849,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3375.40478515625,
+        373.182037353516,
+        6237.40185546875
+      ],
+      "speed_mps": 84.1793899536133,
+      "stage": "harbour_south",
+      "throttle": 0.267334464335193,
+      "time_s": 80.0166666666634
+    },
+    {
+      "draw_calls": 3201.0,
+      "engine_drawn_frames": 5449,
+      "engine_physics_frame": 5450,
+      "engine_process_frame": 5449,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2891.02319335938,
+        403.640441894531,
+        5551.4208984375
+      ],
+      "speed_mps": 84.0550994873047,
+      "stage": "harbour_south",
+      "throttle": 0.227367853534097,
+      "time_s": 90.0166666666628
+    },
+    {
+      "draw_calls": 3200.0,
+      "engine_drawn_frames": 6049,
+      "engine_physics_frame": 6050,
+      "engine_process_frame": 6049,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2391.86791992188,
+        420.739532470703,
+        4875.556640625
+      ],
+      "speed_mps": 83.9170379638672,
+      "stage": "harbour_south",
+      "throttle": 0.192522591790184,
+      "time_s": 100.016666666662
+    },
+    {
+      "draw_calls": 3284.0,
+      "engine_drawn_frames": 6649,
+      "engine_physics_frame": 6650,
+      "engine_process_frame": 6649,
+      "fps": 39.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1891.03845214844,
+        430.05126953125,
+        4200.677734375
+      ],
+      "speed_mps": 83.8707580566406,
+      "stage": "harbour_south",
+      "throttle": 0.151109142698968,
+      "time_s": 110.016666666662
+    },
+    {
+      "draw_calls": 3476.0,
+      "engine_drawn_frames": 7249,
+      "engine_physics_frame": 7250,
+      "engine_process_frame": 7249,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1388.79626464844,
+        436.156127929688,
+        3527.03515625
+      ],
+      "speed_mps": 83.9528579711914,
+      "stage": "harbour_south",
+      "throttle": 0.126405804069092,
+      "time_s": 120.016666666661
+    },
+    {
+      "draw_calls": 3306.0,
+      "engine_drawn_frames": 7849,
+      "engine_physics_frame": 7850,
+      "engine_process_frame": 7849,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -884.799377441406,
+        439.435852050781,
+        2854.9365234375
+      ],
+      "speed_mps": 84.0624389648438,
+      "stage": "harbour_south",
+      "throttle": 0.118072574319318,
+      "time_s": 130.016666666662
+    },
+    {
+      "draw_calls": 2982.0,
+      "engine_drawn_frames": 8448,
+      "engine_physics_frame": 8449,
+      "engine_process_frame": 8448,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -379.130767822266,
+        441.395355224609,
+        2186.109375
+      ],
+      "speed_mps": 84.1094512939453,
+      "stage": "harbour_south",
+      "throttle": 0.128173799872398,
+      "time_s": 140.000000000004
+    },
+    {
+      "draw_calls": 2171.0,
+      "engine_drawn_frames": 9048,
+      "engine_physics_frame": 9049,
+      "engine_process_frame": 9048,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        131.960464477539,
+        442.412536621094,
+        1519.71618652344
+      ],
+      "speed_mps": 84.0528411865234,
+      "stage": "harbour_south",
+      "throttle": 0.143723944365978,
+      "time_s": 150.000000000012
+    },
+    {
+      "draw_calls": 2304.0,
+      "engine_drawn_frames": 9648,
+      "engine_physics_frame": 9649,
+      "engine_process_frame": 9648,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        552.957153320312,
+        441.503936767578,
+        797.085388183594
+      ],
+      "speed_mps": 83.9226684570312,
+      "stage": "opera_east",
+      "throttle": 0.143397952539225,
+      "time_s": 160.000000000019
+    },
+    {
+      "draw_calls": 1828.0,
+      "engine_drawn_frames": 10248,
+      "engine_physics_frame": 10249,
+      "engine_process_frame": 10248,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        840.487487792969,
+        442.330963134766,
+        7.72507667541504
+      ],
+      "speed_mps": 83.9355239868164,
+      "stage": "opera_east",
+      "throttle": 0.119300394984583,
+      "time_s": 170.000000000027
+    },
+    {
+      "draw_calls": 2362.0,
+      "engine_drawn_frames": 10848,
+      "engine_physics_frame": 10849,
+      "engine_process_frame": 10848,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        1096.13024902344,
+        442.559814453125,
+        -792.335571289062
+      ],
+      "speed_mps": 83.9754638671875,
+      "stage": "bridge_north",
+      "throttle": 0.115898400185009,
+      "time_s": 180.000000000035
+    },
+    {
+      "draw_calls": 1191.0,
+      "engine_drawn_frames": 11448,
+      "engine_physics_frame": 11449,
+      "engine_process_frame": 11448,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        911.128173828125,
+        430.198944091797,
+        -1581.32629394531
+      ],
+      "speed_mps": 83.8921051025391,
+      "stage": "bridge_north",
+      "throttle": 0.114133380286395,
+      "time_s": 190.000000000043
+    },
+    {
+      "draw_calls": 991.0,
+      "engine_drawn_frames": 12048,
+      "engine_physics_frame": 12049,
+      "engine_process_frame": 12048,
+      "fps": 42.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        175.392181396484,
+        423.380615234375,
+        -1924.96569824219
+      ],
+      "speed_mps": 83.8784255981445,
+      "stage": "bridge_north",
+      "throttle": 0.112109641648208,
+      "time_s": 200.000000000051
+    },
+    {
+      "draw_calls": 1310.0,
+      "engine_drawn_frames": 12648,
+      "engine_physics_frame": 12649,
+      "engine_process_frame": 12648,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -616.669921875,
+        415.977905273438,
+        -1674.06079101562
+      ],
+      "speed_mps": 85.0483856201172,
+      "stage": "downwind",
+      "throttle": 0.0766031423024829,
+      "time_s": 210.000000000059
+    },
+    {
+      "draw_calls": 2935.0,
+      "engine_drawn_frames": 13248,
+      "engine_physics_frame": 13249,
+      "engine_process_frame": 13248,
+      "fps": 39.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1036.845703125,
+        374.469879150391,
+        -960.621704101562
+      ],
+      "speed_mps": 84.9990921020508,
+      "stage": "downwind",
+      "throttle": 0.0,
+      "time_s": 220.000000000067
+    },
+    {
+      "draw_calls": 2760.0,
+      "engine_drawn_frames": 13848,
+      "engine_physics_frame": 13849,
+      "engine_process_frame": 13848,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1061.91723632812,
+        360.015808105469,
+        -121.751487731934
+      ],
+      "speed_mps": 83.9680557250977,
+      "stage": "downwind",
+      "throttle": 0.174007536704342,
+      "time_s": 230.000000000075
+    },
+    {
+      "draw_calls": 2452.0,
+      "engine_drawn_frames": 14448,
+      "engine_physics_frame": 14449,
+      "engine_process_frame": 14448,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1030.94946289062,
+        352.642028808594,
+        717.718627929688
+      ],
+      "speed_mps": 83.6943588256836,
+      "stage": "downwind",
+      "throttle": 0.166416626010711,
+      "time_s": 240.000000000083
+    },
+    {
+      "draw_calls": 2218.0,
+      "engine_drawn_frames": 15048,
+      "engine_physics_frame": 15049,
+      "engine_process_frame": 15048,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -997.143737792969,
+        348.505279541016,
+        1557.45458984375
+      ],
+      "speed_mps": 83.5717086791992,
+      "stage": "downwind",
+      "throttle": 0.128681760891651,
+      "time_s": 250.000000000091
+    },
+    {
+      "draw_calls": 1708.0,
+      "engine_drawn_frames": 15648,
+      "engine_physics_frame": 15649,
+      "engine_process_frame": 15648,
+      "fps": 42.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -962.765441894531,
+        346.194885253906,
+        2397.21215820312
+      ],
+      "speed_mps": 83.6608047485352,
+      "stage": "downwind",
+      "throttle": 0.0876903341040018,
+      "time_s": 260.000000000092
+    },
+    {
+      "draw_calls": 1245.0,
+      "engine_drawn_frames": 16248,
+      "engine_physics_frame": 16249,
+      "engine_process_frame": 16248,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -927.634765625,
+        344.898223876953,
+        3236.7109375
+      ],
+      "speed_mps": 83.9044723510742,
+      "stage": "downwind",
+      "throttle": 0.0672661912385376,
+      "time_s": 270.000000000083
+    },
+    {
+      "draw_calls": 1132.0,
+      "engine_drawn_frames": 16848,
+      "engine_physics_frame": 16849,
+      "engine_process_frame": 16848,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -891.701354980469,
+        344.169311523438,
+        4075.83666992188
+      ],
+      "speed_mps": 84.1680068969727,
+      "stage": "downwind",
+      "throttle": 0.0772675367345416,
+      "time_s": 280.000000000074
+    },
+    {
+      "draw_calls": 1104.0,
+      "engine_drawn_frames": 17448,
+      "engine_physics_frame": 17449,
+      "engine_process_frame": 17448,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -854.869995117188,
+        343.758728027344,
+        4914.64990234375
+      ],
+      "speed_mps": 84.3210220336914,
+      "stage": "downwind",
+      "throttle": 0.110757861620436,
+      "time_s": 290.000000000065
+    },
+    {
+      "draw_calls": 781.0,
+      "engine_drawn_frames": 18048,
+      "engine_physics_frame": 18049,
+      "engine_process_frame": 18048,
+      "fps": 45.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -817.015991210938,
+        343.52685546875,
+        5753.35595703125
+      ],
+      "speed_mps": 84.296257019043,
+      "stage": "downwind",
+      "throttle": 0.149267406773443,
+      "time_s": 300.000000000056
+    },
+    {
+      "draw_calls": 600.0,
+      "engine_drawn_frames": 18648,
+      "engine_physics_frame": 18649,
+      "engine_process_frame": 18648,
+      "fps": 45.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -777.979309082031,
+        343.395965576172,
+        6592.17236328125
+      ],
+      "speed_mps": 84.1247940063477,
+      "stage": "downwind",
+      "throttle": 0.173245524771512,
+      "time_s": 310.000000000047
+    },
+    {
+      "draw_calls": 569.0,
+      "engine_drawn_frames": 19248,
+      "engine_physics_frame": 19249,
+      "engine_process_frame": 19248,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -737.550659179688,
+        343.320709228516,
+        7431.205078125
+      ],
+      "speed_mps": 83.9088821411133,
+      "stage": "downwind",
+      "throttle": 0.172276008870453,
+      "time_s": 320.000000000038
+    },
+    {
+      "draw_calls": 540.0,
+      "engine_drawn_frames": 19848,
+      "engine_physics_frame": 19849,
+      "engine_process_frame": 19848,
+      "fps": 45.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -695.443298339844,
+        343.281433105469,
+        8270.3955078125
+      ],
+      "speed_mps": 83.7590789794922,
+      "stage": "downwind",
+      "throttle": 0.149351151113709,
+      "time_s": 330.000000000029
+    },
+    {
+      "draw_calls": 499.0,
+      "engine_drawn_frames": 20448,
+      "engine_physics_frame": 20449,
+      "engine_process_frame": 20448,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -651.224304199219,
+        343.261901855469,
+        9109.5830078125
+      ],
+      "speed_mps": 83.7472686767578,
+      "stage": "downwind",
+      "throttle": 0.118147144099698,
+      "time_s": 340.000000000019
+    },
+    {
+      "draw_calls": 458.0,
+      "engine_drawn_frames": 21048,
+      "engine_physics_frame": 21049,
+      "engine_process_frame": 21048,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -604.142578125,
+        343.243560791016,
+        9948.517578125
+      ],
+      "speed_mps": 83.8675079345703,
+      "stage": "downwind",
+      "throttle": 0.0955560664031656,
+      "time_s": 350.00000000001
+    },
+    {
+      "draw_calls": 463.0,
+      "engine_drawn_frames": 21648,
+      "engine_physics_frame": 21649,
+      "engine_process_frame": 21648,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -552.534606933594,
+        343.236450195312,
+        10786.974609375
+      ],
+      "speed_mps": 84.0426712036133,
+      "stage": "downwind",
+      "throttle": 0.0932035051782927,
+      "time_s": 360.000000000001
+    },
+    {
+      "draw_calls": 435.0,
+      "engine_drawn_frames": 22249,
+      "engine_physics_frame": 22250,
+      "engine_process_frame": 22249,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -527.78759765625,
+        312.881072998047,
+        11630.9365234375
+      ],
+      "speed_mps": 86.1043701171875,
+      "stage": "base",
+      "throttle": 0.0,
+      "time_s": 370.016666666659
+    },
+    {
+      "draw_calls": 405.0,
+      "engine_drawn_frames": 22849,
+      "engine_physics_frame": 22850,
+      "engine_process_frame": 22849,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -666.580383300781,
+        274.008117675781,
+        12479.365234375
+      ],
+      "speed_mps": 85.76318359375,
+      "stage": "base",
+      "throttle": 0.0,
+      "time_s": 380.01666666665
+    },
+    {
+      "draw_calls": 403.0,
+      "engine_drawn_frames": 23449,
+      "engine_physics_frame": 23450,
+      "engine_process_frame": 23449,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -834.228393554688,
+        251.946182250977,
+        13310.587890625
+      ],
+      "speed_mps": 83.7207641601562,
+      "stage": "base",
+      "throttle": 0.0123862010066708,
+      "time_s": 390.016666666641
+    },
+    {
+      "draw_calls": 403.0,
+      "engine_drawn_frames": 24049,
+      "engine_physics_frame": 24050,
+      "engine_process_frame": 24049,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1003.54827880859,
+        239.423782348633,
+        14133.0126953125
+      ],
+      "speed_mps": 84.0467071533203,
+      "stage": "base",
+      "throttle": 0.0327938508527975,
+      "time_s": 400.016666666632
+    },
+    {
+      "draw_calls": 403.0,
+      "engine_drawn_frames": 24649,
+      "engine_physics_frame": 24650,
+      "engine_process_frame": 24649,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1175.43139648438,
+        232.35627746582,
+        14954.7158203125
+      ],
+      "speed_mps": 84.297607421875,
+      "stage": "base",
+      "throttle": 0.0736318877395247,
+      "time_s": 410.016666666622
+    },
+    {
+      "draw_calls": 405.0,
+      "engine_drawn_frames": 25249,
+      "engine_physics_frame": 25250,
+      "engine_process_frame": 25249,
+      "fps": 43.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1350.80920410156,
+        228.372482299805,
+        15775.615234375
+      ],
+      "speed_mps": 84.364875793457,
+      "stage": "base",
+      "throttle": 0.124393658011531,
+      "time_s": 420.016666666613
+    },
+    {
+      "draw_calls": 302.0,
+      "engine_drawn_frames": 25849,
+      "engine_physics_frame": 25850,
+      "engine_process_frame": 25849,
+      "fps": 95.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -1533.29370117188,
+        225.819458007812,
+        16595.08984375
+      ],
+      "speed_mps": 84.2587814331055,
+      "stage": "approach_gate",
+      "throttle": 0.164288139468059,
+      "time_s": 430.016666666604
+    },
+    {
+      "draw_calls": 304.0,
+      "engine_drawn_frames": 26449,
+      "engine_physics_frame": 26450,
+      "engine_process_frame": 26449,
+      "fps": 120.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2024.65576171875,
+        194.519515991211,
+        17248.802734375
+      ],
+      "speed_mps": 84.0087814331055,
+      "stage": "approach_gate",
+      "throttle": 0.0,
+      "time_s": 440.016666666595
+    },
+    {
+      "draw_calls": 256.0,
+      "engine_drawn_frames": 27049,
+      "engine_physics_frame": 27050,
+      "engine_process_frame": 27049,
+      "fps": 120.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2835.46044921875,
+        177.026733398438,
+        17277.2109375
+      ],
+      "speed_mps": 84.2183380126953,
+      "stage": "approach_gate",
+      "throttle": 0.055560048195844,
+      "time_s": 450.016666666586
+    },
+    {
+      "draw_calls": 1264.0,
+      "engine_drawn_frames": 27649,
+      "engine_physics_frame": 27650,
+      "engine_process_frame": 27649,
+      "fps": 120.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3364.13623046875,
+        167.363082885742,
+        16661.814453125
+      ],
+      "speed_mps": 84.2859420776367,
+      "stage": "approach_gate",
+      "throttle": 0.108284807863335,
+      "time_s": 460.016666666577
+    },
+    {
+      "draw_calls": 1158.0,
+      "engine_drawn_frames": 28249,
+      "engine_physics_frame": 28250,
+      "engine_process_frame": 28249,
+      "fps": 120.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3221.36303710938,
+        164.326202392578,
+        15860.294921875
+      ],
+      "speed_mps": 84.0098342895508,
+      "stage": "approach_gate",
+      "throttle": 0.166614986849328,
+      "time_s": 470.016666666568
+    },
+    {
+      "draw_calls": 1805.0,
+      "engine_drawn_frames": 28849,
+      "engine_physics_frame": 28850,
+      "engine_process_frame": 28849,
+      "fps": 44.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2693.59594726562,
+        171.913681030273,
+        15208.4501953125
+      ],
+      "speed_mps": 83.9668579101562,
+      "stage": "approach_gate",
+      "throttle": 0.149601778811465,
+      "time_s": 480.016666666559
+    },
+    {
+      "draw_calls": 1705.0,
+      "engine_drawn_frames": 29449,
+      "engine_physics_frame": 29450,
+      "engine_process_frame": 29449,
+      "fps": 43.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2121.36010742188,
+        163.316268920898,
+        14599.9814453125
+      ],
+      "speed_mps": 83.3137283325195,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 490.01666666655
+    },
+    {
+      "draw_calls": 2242.0,
+      "engine_drawn_frames": 30049,
+      "engine_physics_frame": 30050,
+      "engine_process_frame": 30049,
+      "fps": 43.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2033.53625488281,
+        126.333824157715,
+        13797.5771484375
+      ],
+      "speed_mps": 83.0743026733398,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 500.016666666541
+    },
+    {
+      "draw_calls": 3031.0,
+      "engine_drawn_frames": 30649,
+      "engine_physics_frame": 30650,
+      "engine_process_frame": 30649,
+      "fps": 39.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2315.76220703125,
+        97.3239822387695,
+        13023.056640625
+      ],
+      "speed_mps": 82.0938339233398,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 510.016666666531
+    },
+    {
+      "draw_calls": 3113.0,
+      "engine_drawn_frames": 31249,
+      "engine_physics_frame": 31250,
+      "engine_process_frame": 31249,
+      "fps": 41.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2570.32763671875,
+        65.0753173828125,
+        12246.1044921875
+      ],
+      "speed_mps": 81.6597747802734,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 520.016666666522
+    },
+    {
+      "draw_calls": 3382.0,
+      "engine_drawn_frames": 31849,
+      "engine_physics_frame": 31850,
+      "engine_process_frame": 31849,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2764.41455078125,
+        31.5988006591797,
+        11455.03125
+      ],
+      "speed_mps": 81.4240570068359,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 530.016666666513
+    },
+    {
+      "draw_calls": 3644.0,
+      "engine_drawn_frames": 32449,
+      "engine_physics_frame": 32450,
+      "engine_process_frame": 32449,
+      "fps": 39.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -2937.31860351562,
+        14.9416265487671,
+        10666.8486328125
+      ],
+      "speed_mps": 79.2732925415039,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 540.016666666504
+    },
+    {
+      "draw_calls": 3819.0,
+      "engine_drawn_frames": 33049,
+      "engine_physics_frame": 33050,
+      "engine_process_frame": 33049,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3100.46801757812,
+        13.4759731292725,
+        9910.314453125
+      ],
+      "speed_mps": 75.6255874633789,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 550.016666666495
+    },
+    {
+      "draw_calls": 3801.0,
+      "engine_drawn_frames": 33649,
+      "engine_physics_frame": 33650,
+      "engine_process_frame": 33649,
+      "fps": 40.0,
+      "health": 100.0,
+      "manual_draw_count": 0,
+      "movie_time_s": null,
+      "objects": 81175.0,
+      "position": [
+        -3231.25244140625,
+        10.7000036239624,
+        9301.314453125
+      ],
+      "speed_mps": 11.7466526031494,
+      "stage": "final",
+      "throttle": 0.0,
+      "time_s": 560.016666666486
+    }
+  ],
+  "scope": "Actual delivery scene, airport runway to Sydney harbour and back; inputs only after airport_start",
+  "screenshot_resolution": [
+    1440,
+    900
+  ],
+  "screenshots": [
+    {
+      "aircraft_position": [
+        -2752.23828125,
+        10.6994256973267,
+        11492.724609375
+      ],
+      "camera_position": [
+        -2734.73046875,
+        23.3854484558105,
+        11574.4501953125
+      ],
+      "engine_drawn_frames": 48,
+      "engine_physics_frame": 49,
+      "engine_process_frame": 48,
+      "error": 0,
+      "manual_draw_count": 0,
+      "movie_frame_index": null,
+      "movie_time_s": null,
+      "path": "$QA_USER_DATA/flight-qa/01_runway_parked.png",
+      "pixel_resolution": [
+        1440,
+        900
+      ],
+      "request_time_s": 0.0,
+      "stage": "01_runway_parked",
+      "time_s": 0.0
+    },
+    {
+      "aircraft_position": [
+        -2936.15942382812,
+        14.4676246643066,
+        10640.3193359375
+      ],
+      "camera_position": [
+        -2917.32006835938,
+        28.4194793701172,
+        10727.6328125
+      ],
+      "engine_drawn_frames": 1575,
+      "engine_physics_frame": 1576,
+      "engine_process_frame": 1575,
+      "error": 0,
+      "manual_draw_count": 0,
+      "movie_frame_index": null,
+      "movie_time_s": null,
+      "path": "$QA_USER_DATA/flight-qa/02_takeoff.png",
+      "pixel_resolution": [
+        1440,
+        900
+      ],
+      "request_time_s": 25.4499999999998,
+      "stage": "02_takeoff",
+      "time_s": 25.4499999999998
+    },
+    {
+      "aircraft_position": [
+        632.789978027344,
+        441.8388671875,
+        595.366943359375
+      ],
+      "camera_position": [
+        748.446594238281,
+        531.782531738281,
+        739.997131347656
+      ],
+      "engine_drawn_frames": 9803,
+      "engine_physics_frame": 9804,
+      "engine_process_frame": 9803,
+      "error": 0,
+      "landmark": "opera",
+      "landmark_image_pixel": [
+        756.981201171875,
+        447.614562988281
+      ],
+      "landmark_in_frustum": true,
+      "manual_draw_count": 0,
+      "movie_frame_index": null,
+      "movie_time_s": null,
+      "path": "$QA_USER_DATA/flight-qa/03_harbour.png",
+      "pixel_resolution": [
+        1440,
+        900
+      ],
+      "request_time_s": 162.583333333355,
+      "stage": "03_harbour",
+      "time_s": 162.583333333355
+    },
+    {
+      "aircraft_position": [
+        1091.22375488281,
+        442.673461914062,
+        -771.924072265625
+      ],
+      "camera_position": [
+        1249.09692382812,
+        532.715576171875,
+        -824.112915039062
+      ],
+      "engine_drawn_frames": 10833,
+      "engine_physics_frame": 10834,
+      "engine_process_frame": 10833,
+      "error": 0,
+      "landmark": "bridge",
+      "landmark_image_pixel": [
+        751.576354980469,
+        432.908020019531
+      ],
+      "landmark_in_frustum": true,
+      "manual_draw_count": 0,
+      "movie_frame_index": null,
+      "movie_time_s": null,
+      "path": "$QA_USER_DATA/flight-qa/04_bridge.png",
+      "pixel_resolution": [
+        1440,
+        900
+      ],
+      "request_time_s": 179.750000000035,
+      "stage": "04_bridge",
+      "time_s": 179.750000000035
+    },
+    {
+      "aircraft_position": [
+        -1511.56140136719,
+        226.318634033203,
+        16502.208984375
+      ],
+      "camera_position": [
+        -1491.52307128906,
+        240.688598632812,
+        16414.34375
+      ],
+      "engine_drawn_frames": 25781,
+      "engine_physics_frame": 25782,
+      "engine_process_frame": 25781,
+      "error": 0,
+      "manual_draw_count": 0,
+      "movie_frame_index": null,
+      "movie_time_s": null,
+      "path": "$QA_USER_DATA/flight-qa/05_approach.png",
+      "pixel_resolution": [
+        1440,
+        900
+      ],
+      "request_time_s": 428.883333333272,
+      "stage": "05_approach",
+      "time_s": 428.883333333272
+    },
+    {
+      "aircraft_position": [
+        -3211.126953125,
+        10.9001836776733,
+        9395.083984375
+      ],
+      "camera_position": [
+        -3192.4130859375,
+        25.4524402618408,
+        9482.294921875
+      ],
+      "engine_drawn_frames": 33474,
+      "engine_physics_frame": 33475,
+      "engine_process_frame": 33474,
+      "error": 0,
+      "manual_draw_count": 0,
+      "movie_frame_index": null,
+      "movie_time_s": null,
+      "path": "$QA_USER_DATA/flight-qa/06_touchdown.png",
+      "pixel_resolution": [
+        1440,
+        900
+      ],
+      "request_time_s": 557.099999999822,
+      "stage": "06_touchdown",
+      "time_s": 557.099999999822
+    },
+    {
+      "aircraft_position": [
+        -3234.9140625,
+        10.7000007629395,
+        9284.259765625
+      ],
+      "camera_position": [
+        -3217.42602539062,
+        25.0558261871338,
+        9365.8203125
+      ],
+      "engine_drawn_frames": 33967,
+      "engine_physics_frame": 33968,
+      "engine_process_frame": 33967,
+      "error": 0,
+      "manual_draw_count": 0,
+      "movie_frame_index": null,
+      "movie_time_s": null,
+      "path": "$QA_USER_DATA/flight-qa/07_stopped.png",
+      "pixel_resolution": [
+        1440,
+        900
+      ],
+      "request_time_s": 565.316666666481,
+      "stage": "07_stopped",
+      "time_s": 565.316666666481
+    }
+  ],
+  "simulation_to_movie_time_ratio": null,
+  "stages": [
+    {
+      "elapsed_s": 66.2166666666642,
+      "health": 100.0,
+      "name": "departure",
+      "position": [
+        -3651.92944335938,
+        305.697235107422,
+        7320.25341796875
+      ]
+    },
+    {
+      "elapsed_s": 150.683333333345,
+      "health": 100.0,
+      "name": "harbour_south",
+      "position": [
+        167.227676391602,
+        442.393249511719,
+        1474.3681640625
+      ]
+    },
+    {
+      "elapsed_s": 177.733333333367,
+      "health": 100.0,
+      "name": "opera_east",
+      "position": [
+        1042.95715332031,
+        442.872100830078,
+        -609.439636230469
+      ]
+    },
+    {
+      "elapsed_s": 206.98333333339,
+      "health": 100.0,
+      "name": "bridge_north",
+      "position": [
+        -391.103240966797,
+        426.497375488281,
+        -1790.52099609375
+      ]
+    },
+    {
+      "elapsed_s": 364.249999999997,
+      "health": 100.0,
+      "name": "downwind",
+      "position": [
+        -528.157287597656,
+        343.232604980469,
+        11142.4794921875
+      ]
+    },
+    {
+      "elapsed_s": 428.883333333272,
+      "health": 100.0,
+      "name": "base",
+      "position": [
+        -1511.56140136719,
+        226.318634033203,
+        16502.208984375
+      ]
+    },
+    {
+      "elapsed_s": 485.599999999887,
+      "health": 100.0,
+      "name": "approach_gate",
+      "position": [
+        -2363.33227539062,
+        175.221389770508,
+        14875.8515625
+      ]
+    }
+  ],
+  "start_position": [
+    -2752.23828125,
+    10.8200378417969,
+    11492.724609375
+  ],
+  "started_utc": "2026-09-10T18:57:10",
+  "takeoff_run_m": 872.020629882812,
+  "touchdown_cross_track_m": -9.306640625,
+  "touchdown_progress_m": 2147.22802734375,
+  "touchdown_speed_mps": 71.7967987060547,
+  "travelled_m": 45449.0487232589,
+  "world_ready": true,
+  "world_structure_components": 21302
+}

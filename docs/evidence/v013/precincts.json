@@ -1,0 +1,370 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "name": "READY reached with both mapped precincts",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "Original 12 researched Darling frontages retained",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "Three added Darling shops",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "Five numbered piers, heritage station and three Quay restaurants",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "All 28 mapped canopy/kiosk replacements available",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "Both modules idempotent",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "Mapped station has explicit replacement and raised railway floor",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "Station public concourse is open and supported",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "Three Nicolle shopfronts retain real ground-level host podium",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "auvers mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(-742.3516, 4.5, 2023.084)",
+      "name": "auvers 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(-742.3516, 4.5, 2023.084)",
+      "name": "auvers arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "hakatamon mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(-744.4122, 4.5, 2005.299)",
+      "name": "hakatamon 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(-744.4122, 4.5, 2005.299)",
+      "name": "hakatamon arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "chinta_ria mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(-740.7798, 4.5, 2036.656)",
+      "name": "chinta_ria 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(-740.7798, 4.5, 2036.656)",
+      "name": "chinta_ria arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_wharf_2 mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(139.4359, 4.5, 136.0481)",
+      "name": "cq_wharf_2 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(139.4359, 4.5, 136.0481)",
+      "name": "cq_wharf_2 arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_wharf_3 mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(84.97755, 4.5, 140.2303)",
+      "name": "cq_wharf_3 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(84.97755, 4.5, 140.2303)",
+      "name": "cq_wharf_3 arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_wharf_4 mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(38.7028, 4.5, 135.0254)",
+      "name": "cq_wharf_4 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(38.7028, 4.5, 135.0254)",
+      "name": "cq_wharf_4 arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_wharf_5 mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(-7.604993, 4.5, 130.5298)",
+      "name": "cq_wharf_5 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(-7.604993, 4.5, 130.5298)",
+      "name": "cq_wharf_5 arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_wharf_6 mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(-53.55927, 4.5, 126.5282)",
+      "name": "cq_wharf_6 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(-53.55927, 4.5, 126.5282)",
+      "name": "cq_wharf_6 arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_station mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(11.93, 4.5, 167.36)",
+      "name": "cq_station 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(11.93, 4.5, 167.36)",
+      "name": "cq_station arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_eastbank mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(212.3906, 4.5, 65.93996)",
+      "name": "cq_eastbank 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(212.3906, 4.5, 65.93996)",
+      "name": "cq_eastbank arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_searock mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(217.2487, 4.5, 16.71594)",
+      "name": "cq_searock 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(217.2487, 4.5, 16.71594)",
+      "name": "cq_searock arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cq_city_extra mapped anchor equals public arrival",
+      "passed": true
+    },
+    {
+      "detail": "(76.74393, 4.5, 142.5228)",
+      "name": "cq_city_extra 1.8m capsule approach clear",
+      "passed": true
+    },
+    {
+      "detail": "(76.74393, 4.5, 142.5228)",
+      "name": "cq_city_extra arrival has real floor support",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "No legacy quay/pier/0",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "No legacy quay/pier/1",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "No legacy quay/pier/2",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "No legacy quay/pier/3",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "No legacy quay/pier/4",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "No legacy quay/transit_hall",
+      "passed": true
+    },
+    {
+      "detail": "blocked=0 unsupported=0",
+      "name": "Wharf 2 continuous 41-point walking route",
+      "passed": true
+    },
+    {
+      "detail": "blocked=0 unsupported=0",
+      "name": "Wharf 3 continuous 41-point walking route",
+      "passed": true
+    },
+    {
+      "detail": "blocked=0 unsupported=0",
+      "name": "Wharf 4 continuous 41-point walking route",
+      "passed": true
+    },
+    {
+      "detail": "blocked=0 unsupported=0",
+      "name": "Wharf 5 continuous 41-point walking route",
+      "passed": true
+    },
+    {
+      "detail": "blocked=0 unsupported=0",
+      "name": "Wharf 6 continuous 41-point walking route",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1295125150 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1295125151 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1295125161 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/270803850 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/354270484 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/354270481 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1295125194 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1295125195 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/354270479 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1295125196 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1295125197 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/354270487 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1269027215 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "way/1269027216 retained mapped canopy outline",
+      "passed": true
+    },
+    {
+      "detail": "0",
+      "name": "All authored faces finite with outward winding",
+      "passed": true
+    },
+    {
+      "detail": "14",
+      "name": "14 individual mapped canopy roofs",
+      "passed": true
+    }
+  ],
+  "headless": false,
+  "new_shop_count": 6,
+  "passed": true,
+  "retained_darling_shops": 12,
+  "scope": "Local native physics of two true mapped precincts; private shop interiors not modeled",
+  "wharf_count": 5
+}

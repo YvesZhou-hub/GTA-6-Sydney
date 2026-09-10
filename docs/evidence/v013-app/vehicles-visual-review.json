@@ -1,0 +1,96 @@
+{
+  "reviewed_utc": "2026-09-10T19:31:25.579300+00:00",
+  "archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c",
+  "build_report": "reports/release-v013-render-physics-build/build.json",
+  "build_stage": "Render and physics candidate before the save-format-only VERSION 4 to 5 guard. These images are not captures of the later final archive.",
+  "source_launch": "reports/release-v013-render-physics/visual-launch.json",
+  "source_started_utc": "2026-09-10T18:51:03.854689+00:00",
+  "source_exit_code": 0,
+  "source_report_fresh": true,
+  "source_runtime_errors": [],
+  "status": "review_complete_no_apparent_visual_defects",
+  "scope": "Read-only manual review of nine exported-App stills. The capture fixture freezes vehicles. Review establishes visible model completeness and lack of apparent scene intersection, not motion or hidden-side physical clearance.",
+  "reviewed_count": 9,
+  "no_apparent_defect_count": 9,
+  "inconclusive_count": 0,
+  "previous_findings_resolved": [
+    "Helicopter tree-crown obstruction removed by production vegetation clearance.",
+    "Airliner hangar camera obstruction removed by production-runway capture placement; the default apron remains separately covered by helipad-clearance-v013.json geometry tests."
+  ],
+  "items": [
+    {
+      "vehicle": "car",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/car.png",
+      "sha256": "6ce37d7dee1edb3e6ed0723c468a3e405c08a4ee03cfc94c26bdc9bd630145e5",
+      "modified_utc": "2026-09-10T18:51:50.732852+00:00",
+      "status": "no_apparent_defect",
+      "observation": "Body, glazing, front lamps, wheels and mirrors are present; no visible building overlap."
+    },
+    {
+      "vehicle": "motorcycle",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/motorcycle.png",
+      "sha256": "c3e24934ae958c9ad9fbe2d03b5728a593e6cedf32263c2628cc4ee7ca0d1711",
+      "modified_utc": "2026-09-10T18:51:50.978636+00:00",
+      "status": "no_apparent_defect",
+      "observation": "Fairing, paired front lamps, windscreen, fork, wheels and exhaust are present. Small apparent tyre-to-ground gap in this frozen capture is not a confirmed runtime defect."
+    },
+    {
+      "vehicle": "hoverboard",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/hoverboard.png",
+      "sha256": "a631b9e104ab366da09d2334025f0620e4542be8aa74b963e4c3dc6355d090c1",
+      "modified_utc": "2026-09-10T18:51:51.217827+00:00",
+      "status": "no_apparent_defect",
+      "observation": "Deck, corner lift units and standing rider are present; intentional hover separation from terrain is visible."
+    },
+    {
+      "vehicle": "speedboat",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/speedboat.png",
+      "sha256": "35cdb5b28f79c4c9d43903f839dfcc1006b0d5820f29baceefcdc79c76a31ac4",
+      "modified_utc": "2026-09-10T18:51:51.574746+00:00",
+      "status": "no_apparent_defect",
+      "observation": "Hull, foredeck, cockpit glazing, helm and aft seating are present; visible waterline does not intersect the cockpit."
+    },
+    {
+      "vehicle": "yacht",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/yacht.png",
+      "sha256": "0f7a43ae0aceafea3675f476be192ca3c0eb5e78fd0a841a502cdfc93672f4d4",
+      "modified_utc": "2026-09-10T18:51:51.845362+00:00",
+      "status": "no_apparent_defect",
+      "observation": "Hull, main cabin, upper helm, railings and aft stairs/platform are present; visible deck circulation is unobstructed."
+    },
+    {
+      "vehicle": "glider",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/glider.png",
+      "sha256": "a69bfea87e7b2c22f0b9fec69b7e23863e0d67756a24c0fe16ba8faa299db7c4",
+      "modified_utc": "2026-09-10T18:51:52.738426+00:00",
+      "status": "no_apparent_defect",
+      "observation": "Both long wings and tips, fuselage, canopy, undercarriage and T-tail are present, with visible clearance above the city."
+    },
+    {
+      "vehicle": "paraglider",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/paraglider.png",
+      "sha256": "464951408f5448e0e9bd22be86425fd3c140ba9b2bc555301303c8b1706c72a4",
+      "modified_utc": "2026-09-10T18:51:52.295268+00:00",
+      "status": "no_apparent_defect",
+      "observation": "Inflated canopy, suspension lines, harness and pilot are present; no visible canopy or line intersection with bridge."
+    },
+    {
+      "vehicle": "helicopter",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/helicopter.png",
+      "sha256": "4d96d9a89eb341c80f5b8d90f3b70ebb579fd84a094e83c3325982932055732f",
+      "modified_utc": "2026-09-10T18:51:52.915874+00:00",
+      "status": "no_apparent_defect",
+      "observation": "The cleared H pad now shows the entire five-blade rotor, body, wheels and tail without tree-crown obstruction or visible scene intersection. Previous tree obstruction is resolved."
+    },
+    {
+      "vehicle": "airliner",
+      "screenshot": "reports/release-v013-render-physics/visual-screenshots/airliner.png",
+      "sha256": "11b7df7b617f580ae20d7e73422da832616924acadd7c8c5326eef399539b39a",
+      "modified_utc": "2026-09-10T18:51:53.068046+00:00",
+      "status": "no_apparent_defect",
+      "observation": "The production-runway capture shows the complete silhouette, wings, tail, near engine and nose landing gear without hangar obstruction or visible scene intersection. This image shows the runway capture placement, not the default apron parking position."
+    }
+  ],
+  "engine_started_by_reviewer": false,
+  "core_or_images_modified": false
+}

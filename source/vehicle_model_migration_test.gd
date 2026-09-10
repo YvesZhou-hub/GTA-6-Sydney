@@ -126,6 +126,23 @@ func run():
 	var under_player:Vector3=game.player.position
 	MapMigration.repair_old_approach(game,"")
 	check("pedestrian below south bridge stays on ground",game.player.position==under_player)
-	print("MODEL_MIGRATION COMPLETE checks=21 failures=",failures)
+	var parked_heli=load("res://scripts/harbor_vehicle.gd").new()
+	parked_heli.configure("helicopter","legacy_v012_heli")
+	parked_heli.position=Vector3(260,5.925,100);parked_heli.freeze=true
+	game.add_child(parked_heli);game.vehicles.append(parked_heli)
+	parked_heli.set_meta("loaded_model_revision",2);parked_heli.health=72;parked_heli.fuel=38
+	var flying_heli=load("res://scripts/harbor_vehicle.gd").new()
+	flying_heli.configure("helicopter","legacy_v012_flying_heli")
+	flying_heli.position=Vector3(300,80,100);flying_heli.freeze=true
+	game.add_child(flying_heli);game.vehicles.append(flying_heli)
+	flying_heli.set_meta("loaded_model_revision",2)
+	flying_heli.linear_velocity=Vector3(0,0,-24)
+	var flying_pose:Transform3D=flying_heli.global_transform
+	await physics_frame
+	Migration.apply(game,"legacy_v012_heli")
+	check("v012 parked helicopter keeps original support surface",parked_heli.position.x==260 and parked_heli.position.y>5.9 and parked_heli.position.y<6.2)
+	check("helicopter model migration preserves identity fuel damage",parked_heli.vehicle_id=="legacy_v012_heli" and parked_heli.health==72 and parked_heli.fuel==38 and parked_heli.freeze)
+	check("v012 airborne helicopter retains pose and velocity",flying_heli.global_transform.is_equal_approx(flying_pose) and flying_heli.linear_velocity.is_equal_approx(Vector3(0,0,-24)))
+	print("MODEL_MIGRATION COMPLETE checks=24 failures=",failures)
 	game.queue_free();await process_frame
 	quit(1 if failures else 0)

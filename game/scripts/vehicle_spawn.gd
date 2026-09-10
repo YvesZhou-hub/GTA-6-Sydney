@@ -92,7 +92,8 @@ static func _ground_pose(game: Node3D, body: RigidBody3D, at: Vector3, heading: 
 		lowest = minf(lowest,hit.position.y)
 		highest = maxf(highest,hit.position.y)
 	if highest-lowest > 0.2: return {}
-	var pose := Transform3D(basis,Vector3(at.x,highest-bounds.position.y+0.12,at.z))
+	var clearance:=1.0 if body.kind=="hoverboard" else -bounds.position.y+0.12
+	var pose := Transform3D(basis,Vector3(at.x,highest+clearance,at.z))
 	if not clear_envelope(game,body,pose): return {}
 	return {"transform":pose,"airborne":false,"description":"附近的平坦空地"}
 
@@ -159,14 +160,22 @@ static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false, r
 		for ring in range(1,maxi(20,ceili(sqrt(game.vehicles.size()))+10)):
 			for angle in [0.0,0.5,-0.5,1.0,-1.0,2.0,-2.0,PI]:
 				var at := origin+forward.rotated(Vector3.UP,angle)*(radius+ring*10)
-				at.y = maxf(origin.y+15.0,85.0)+floori(ring/8.0)*30.0
+				at.y = maxf(origin.y+35.0,180.0 if body.kind=="glider" else 120.0)+floori(ring/8.0)*35.0
 				var pose := Transform3D(Basis(Vector3.UP,heading),at)
-				if clear_envelope(game,body,pose,2.0): return {"transform":pose,"airborne":true,"description":"视野附近的空中待飞点"}
+				var departure_clear:=true
+				# Reserve the first three seconds of the unpowered departure too,
+				# so a clear start cannot launch directly into a nearby tower.
+				for seconds in [0.0,1.0,2.0,3.0]:
+					var future:=pose
+					future.origin+=forward*(28.0 if body.kind=="glider" else 9.5)*seconds+Vector3.DOWN*seconds
+					if not clear_envelope(game,body,future,2.0):departure_clear=false;break
+				if departure_clear:return {"transform":pose,"airborne":true,"description":"已预留起飞净空的空中滑翔点"}
 		return {}
 	for ring in range(0,maxi(12,ceili(sqrt(game.vehicles.size()))+5)):
 		for angle in [0.0,0.4,-0.4,0.8,-0.8,1.3,-1.3,2.0,-2.0,PI]:
 			var at := origin+forward.rotated(Vector3.UP,angle)*(radius+ring*maxf(radius*0.65,7.0))
 			var found := _water_pose(game,body,at,heading) if body.kind in ["yacht","speedboat"] else _ground_pose(game,body,at,heading)
+			if found.is_empty() and body.kind=="hoverboard":found=_water_pose(game,body,at,heading)
 			if not found.is_empty(): return found
 	# Search real mapped road segments when the immediate neighborhood is obstructed.
 	if not body.kind in ["yacht","speedboat"]:

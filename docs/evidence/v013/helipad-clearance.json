@@ -1,0 +1,357 @@
+{
+  "checks": [
+    {
+      "name": "default production H160 starts at authored helipad",
+      "passed": true
+    },
+    {
+      "name": "tree trunk outside 55 m still rejected when crown crosses boundary",
+      "passed": true
+    },
+    {
+      "name": "complete crown beyond boundary is retained",
+      "passed": true
+    },
+    {
+      "name": "large mapped crown uses its actual scale",
+      "passed": true
+    },
+    {
+      "name": "authored tree entry point also refuses helipad vegetation",
+      "passed": true
+    },
+    {
+      "name": "actual nearby crown render inputs remain outside 55 m operation area",
+      "passed": true
+    },
+    {
+      "name": "complete helicopter visual and collision envelope has no tree-crown overlap",
+      "passed": true
+    },
+    {
+      "name": "complete helicopter envelope is clear of mapped building volumes",
+      "passed": true
+    },
+    {
+      "name": "game-only foliage omissions retain source node IDs",
+      "passed": true
+    },
+    {
+      "name": "production full envelope has no non-support physics obstruction",
+      "passed": true
+    },
+    {
+      "name": "default helicopter settles six seconds with 100 health",
+      "passed": true
+    },
+    {
+      "name": "settled helicopter has no impact event",
+      "passed": true
+    },
+    {
+      "name": "settled full envelope remains clear except wheel support",
+      "passed": true
+    },
+    {
+      "name": "default 787 original parking has no physical shape intersections",
+      "passed": true
+    },
+    {
+      "name": "default 787 full visible mesh clears every broad-envelope building candidate",
+      "passed": true
+    },
+    {
+      "name": "triangle-box check distinguishes crossing inside and outside triangles",
+      "passed": true
+    }
+  ],
+  "details": {
+    "default_airliner": {
+      "broad_envelope_candidates": [
+        {
+          "collider": "Sydney_Airport/International_Gate_06/Concourse_Roof",
+          "shape_type": "BoxShape3D",
+          "tested_visual_triangles": 43460,
+          "visual_triangle_intersections": 0
+        },
+        {
+          "collider": "Sydney_Airport/International_Gate_06/Concourse",
+          "shape_type": "BoxShape3D",
+          "tested_visual_triangles": 43460,
+          "visual_triangle_intersections": 0
+        }
+      ],
+      "heading": 0.211037024855614,
+      "physical_intersections": [],
+      "position": [
+        -4180.0,
+        10.7799997329712,
+        8600.0
+      ],
+      "visual_triangle_count": 43460,
+      "visual_triangle_intersections": 0
+    },
+    "final_health": 100.0,
+    "final_physics_obstructions": [],
+    "heli_envelope_position": [
+      -416.700012207031,
+      4.91182565689087,
+      413.069976806641
+    ],
+    "heli_envelope_size": [
+      13.4000244140625,
+      4.98000001907349,
+      15.6700134277344
+    ],
+    "initial_physics_obstructions": [],
+    "minimum_health": 100.0,
+    "nearby_crown_render_inputs_examined": 18,
+    "nearest_crown_bound_to_pad_m": 58.5798721313477,
+    "nearest_crown_origin": [
+      -469.037994384766,
+      10.8000001907349,
+      440.168823242188
+    ],
+    "tree_bounds_source": "Exact production foliage batch inputs within 75 m; headless MultiMesh readback is intentionally not used.",
+    "vegetation_adjustment": {
+      "omitted_mapped_trees": [
+        {
+          "id": "node/11303556044",
+          "point": [
+            -391.573,
+            383.308
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564675",
+          "point": [
+            -395.056,
+            412.084
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564723",
+          "point": [
+            -432.081,
+            462.201
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564756",
+          "point": [
+            -391.868,
+            399.283
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564804",
+          "point": [
+            -426.509,
+            439.614
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564811",
+          "point": [
+            -450.376,
+            430.575
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564838",
+          "point": [
+            -419.635,
+            384.666
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564886",
+          "point": [
+            -414.719,
+            430.697
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564893",
+          "point": [
+            -454.793,
+            404.181
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564920",
+          "point": [
+            -442.753,
+            385.056
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564969",
+          "point": [
+            -403.945,
+            421.981
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303564976",
+          "point": [
+            -452.936,
+            385.034
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565003",
+          "point": [
+            -418.729,
+            364.506
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565052",
+          "point": [
+            -392.016,
+            402.856
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565059",
+          "point": [
+            -398.641,
+            385.59
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565104",
+          "point": [
+            -409.406,
+            383.386
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565107",
+          "point": [
+            -445.008,
+            449.187
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565134",
+          "point": [
+            -388.69,
+            389.809
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565182",
+          "point": [
+            -373.056,
+            403.19
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565189",
+          "point": [
+            -451.744,
+            418.285
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565215",
+          "point": [
+            -431.73,
+            384.733
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565263",
+          "point": [
+            -437.837,
+            448.185
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565270",
+          "point": [
+            -457.01,
+            392.158
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565345",
+          "point": [
+            -411.753,
+            428.448
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565352",
+          "point": [
+            -434.659,
+            380.603
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565379",
+          "point": [
+            -399.011,
+            365.23
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565397",
+          "point": [
+            -447.281,
+            444.634
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565428",
+          "point": [
+            -399.972,
+            418.129
+          ],
+          "rendered_scale": 1.0
+        },
+        {
+          "id": "node/11303565435",
+          "point": [
+            -403.437,
+            386.603
+          ],
+          "rendered_scale": 1.0
+        }
+      ],
+      "radius_m": 55.0,
+      "reason": "Authored game helipad operation area; complete rendered crown bounds excluded, original OSM snapshot unchanged."
+    }
+  },
+  "passed": true,
+  "user_saves_touched": false
+}

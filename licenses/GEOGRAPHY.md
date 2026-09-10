@@ -24,4 +24,4 @@ The Opera House's official [media image gallery](https://www.sydneyoperahouse.co
 
 Before paid public distribution or storefront advertising centered on the landmark, the publisher must resolve appropriate legal/rights review and any permissions that review identifies. This record intentionally does not invent an approval, presume that renaming the landmark solves rights issues, or use the local playable build as proof of commercial publishability.
 
-The bridge and real place names also require ordinary publisher review for promotional use and non-endorsement. No government or real transport operator's logo, livery or claimed endorsement is included in the world assets.
+The bridge and real place names also require ordinary publisher review for promotional use and non-endorsement. No downloaded government or transport-operator logo artwork, livery pack or claimed endorsement is included. Station letters and place signs use original text or geometry; their presence does not imply operator affiliation.

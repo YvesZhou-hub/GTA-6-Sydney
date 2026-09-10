@@ -1,0 +1,118 @@
+{
+  "checks": [
+    {
+      "metrics": {
+        "vertical_speed": -9.97562619886594e-06,
+        "y": 5.49971628189087
+      },
+      "name": "hover settles at one metre clearance",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance_m": 476.102569580078,
+        "health": 100.0,
+        "kmh": 199.999868774414
+      },
+      "name": "200 km/h reached through acceleration",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "kmh": 0.138023646175861
+      },
+      "name": "emergency brake stops within three seconds",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "kmh": 75.9742698669434,
+        "yaw_radians": -0.698700368404388
+      },
+      "name": "steering changes course while moving",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "health": 100.0,
+        "position": [
+          -2.15778461765126e-09,
+          10.7796993255615,
+          -40.4889450073242
+        ]
+      },
+      "name": "climbs 24 physical stair risers",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance_m": 70.9345474243164,
+        "height": 0.999714195728302
+      },
+      "name": "crosses water without sinking",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "height": 21.0006618499756,
+        "vertical_speed": -0.0067038987763226
+      },
+      "name": "manual lift holds height after release",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "lift_offset": 20.0
+      },
+      "name": "save restores hoverboard class pose and lift",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "health": 100.0,
+        "height": 0.998656153678894
+      },
+      "name": "lowering stops safely above water",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "health": 100.0,
+        "z": -16.3576641082764
+      },
+      "name": "wall protection brakes before solid wall",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "expected": 235.0,
+        "health": 100.0,
+        "height": 234.999694824219,
+        "height_range": 0.0,
+        "vertical_peak": 0.000122753292089328
+      },
+      "name": "maximum lift above elevated bridge remains stable",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "walking no longer plays synthesized step",
+      "passed": true
+    }
+  ],
+  "engine": "4.7.2-stable (official)",
+  "input": "Godot production Input actions; no pose or velocity edits after each fixture creation",
+  "native": true,
+  "passed": true,
+  "physics_hz": 60,
+  "screenshots": [
+    {
+      "name": "aether-front.png",
+      "saved": true
+    },
+    {
+      "name": "aether-stairs.png",
+      "saved": true
+    }
+  ]
+}

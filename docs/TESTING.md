@@ -1,73 +1,88 @@
-# v0.1.2-preview.1 validation
+# v0.1.3-preview.1 验证记录
 
-This update was developed and checked on Apple M4 / 16 GB, macOS 26.5, Godot 4.7.2, Metal / Forward+, with Jolt physics. The released application targets Apple Silicon Mac. Intel Mac, Windows, Linux and browser builds are unverified. The historical [v0.1.1 record](TESTING_0.1.1.md) remains separate.
+本轮在 Apple M4 / 16 GB、macOS 26.5、Godot 4.7.2、Metal / Forward+ 和 Jolt 上开发与验证。公开玩家构建为 Apple Silicon Mac 原生离线应用。其他平台未提供已验收的玩家包；[v0.1.2 记录](TESTING_0.1.2.md)独立保留。
 
-The **final exported application** passed [60 / 60 interaction checks](evidence/v012-app/experience-report.json), [30 / 30 native driving/save checks](evidence/v012-app/qa-report.json), and [ten native landmark/model captures](evidence/v012-app/visual-report.json). All runs reached READY, produced fresh reports and exited normally with no logged errors or warnings. Four additional UI captures were visually checked. These are bundled application validators using production buttons/controllers and input actions; OS-level input was unavailable while the Mac was locked.
+## 最终下载包
 
-The [build manifest](evidence/v012-app/build.json) records SHA-256 for all 90 game files. The [independent ZIP audit](evidence/v012-app/archive-validation.json) passed ten checks, including strict ad-hoc signature, arm64 architecture, version 0.1.2, executable permissions, PCK identity, source hashes and startup from a fresh extraction outside the repository. No editor is needed to play. The app is not notarized.
+`Harbourlife-macOS-arm64.zip` 的 SHA-256 为：
 
-The [final exported-app airport return flight](evidence/v012-app/flight-report.json) passed: **44.406 km**, **566.133 simulated seconds**, health **100**, no recorded impacts, and a return to the runway below the completion threshold of **0.20 m/s**. All seven captured stages were visually inspected, including the [harbour pass](screenshots/v012/flight-harbour.png) and [stopped aircraft](screenshots/v012/flight-return.png). `parked_speed_mps` in the raw report describes the pre-departure wait, not the final speed.
-
-The [recorded launch](evidence/v012-app/flight-launch.json) used `--disable-vsync --fixed-fps 60 -- --flight-qa --qa-fixed-fps=60`. The run recorded 33,968 active process/physics frames and 34,016 total native draws. Fixed simulation pacing is a route/control check, not a real-time performance benchmark. Its interval statistics and the locked-screen native QA profiles must not be quoted as normal foreground FPS. Aircraft movement after the standard airport-start action used only the production input actions; documentation camera composition did not reposition the aircraft.
-
-## Production and component checks
-
-The [v0.1.2 evidence index](evidence/v012/index.md) identifies each fixture, final log and whether it actually rendered. Complete-world checks assemble 20,864 damage components; local asset tests use smaller controlled scenes.
-
-| Check | Result | What was exercised |
-| --- | --- | --- |
-| Free creation, immediate entry and navigation | 60 / 60 headless | Actual garage buttons, all eight free classes at zero balance, old copies, occupied state, saved waypoint, optional service charging and incident ownership |
-| Economy and experiences | 40 / 40 | Generous first-time funds, repeatable rewards, no repeated migration grant, 16 services and saved stamps |
-| World/life integration | 43 / 43 | Complete world, activities, modes and collision |
-| Independent vehicle copies | 79 / 79 | Whole-model safe clearance, repeated copies, no wall/building spawn, retained fleet and recovery |
-| Vehicle physics | 23 / 23 | All eight classes, steering and braking, stable yacht cargo and actual unrestrained car transport |
-| Ground vehicle / aircraft geometry | 33 / 33 headless and native | Dimensions, contact heights, animated wheels/fans, finite geometry, bounded render budget; 11 local native views |
-| Boat geometry | 41 / 41 headless; 48 / 48 native | Two hulls, waterlines, stairs, stern platforms and cargo clearance; seven local native views |
-| Navigation component | 22 / 22 headless and native | Shared map geometry, clipping, heading, distant marker and no terrain redraw while moving |
-| Complete-city map | 21 / 21 | Geographic coordinates, zoom/pan, named entrances and no implicit teleport |
-| Legacy city migration | 38 / 38 | Only unsafe old actors move, damage-aware geometry, identifiers and source files preserved |
-| Legacy vehicle / bridge migration | 21 / 21 | Safe bridge-underpass parking, airborne aircraft, old approaches and enlarged models |
-| Atomic saves and recovery | 8 / 8 | State serialization, backup recovery and independent copies |
-| Destruction and repair | 10 / 10 | Visible geometry and collision are removed/restored together |
-| Airport | 24 / 24 | Full-size runway layout, wheel tracks, seams and saved damage |
-| ICC interiors in full city | 27 / 27 | Actual player walking between street, foyer, hall, auditorium and stage |
-| Opera geometry | 17 / 17 | Production model and collider checks |
-| Bridge clearance | 29 / 29 | 11,345 road, rail, walkway, approach and damage queries |
-| Geographic alignment | 69 / 69 | 34 mapped footprints and 22 public arrival points; same-source projection consistency |
-
-[Bridge driving](evidence/bridge-drive-v012.json) uses the production input actions in both directions. Both runs finished at health 100 with no impacts (85.817 / 85.533 seconds). The live race crossed all eight checkpoints; its completion clock was 84.85 seconds with zero player incidents, a $232 time bonus and $2,232 total reward. The return did not award a second completion. Ambient parked-vehicle impacts no longer deduct the player's race bonus. The bridge collision skin is welded, and Jolt's internal-edge handling prevents the false surface kicks found with the previous physics configuration.
-
-## Camera regression and test conditions
-
-The camera samples the interpolated actor transform after physics, and the test now samples after the production camera update with one native draw per process. The earlier test incorrectly drew in addition to automatic rendering and sampled before the camera's process callback.
-
-This session's Mac was locked. At both 1440 × 900 and 960 × 600 window sizes, the native process ran near 20 Hz and never reported focus. The two 20 Hz physics attempts could not create a meaningful render/physics mismatch; they remain recorded as inconclusive, with their failed evidence checks preserved. They do not establish normal foreground performance.
-
-An explicit 10 Hz physics / approximately 20 Hz native draw test then collected 151 walking and 153 driving frames. Raw physics positions repeated 76 and 77 times; interpolated positions repeated zero times in both cases. Pitch-velocity jumps were 0 and 0.00002464 radians/second between samples, below the unchanged 0.01 limit. Engine draw counts matched the collected frames. The test used a 960 × 600 window and 1440 × 900 logical viewport, nine seconds per scenario including 1.5 seconds of warm-up. This is an interpolation regression, not a foreground FPS claim or an OS keyboard/mouse walkthrough.
-
-## Modelling and geographic limits
-
-Manufacturer photographs and dimensions informed the original procedural car, motorcycle, 787-9-sized jet, Rivamare-inspired speedboat and 90 Ocean-inspired yacht. [Vehicle references](VEHICLE_REFERENCE.md) and [boat references](BOAT_REFERENCE.md) distinguish measured dimensions from estimated panel, cabin and deck geometry. These are stylised game assets, not vendor CAD or photoreal scans.
-
-The map uses real geographic data; ordinary facades and many heights remain inferred. The airport-to-city corridor is simplified, ground is mostly a flat datum, and roads do not implement a complete real traffic or driving-test system. Public venue interiors are partial reconstructions. The city is not a complete 1:1 replica. [Geographic evidence](GEOGRAPHIC_ALIGNMENT.md) tests correspondence to the supplied map sources, not survey accuracy.
-
-No multi-hour soak or broad hardware matrix was completed. Native QA and fixed-step flight are automation, not a manual playthrough. Mac lock prevented final OS-level keyboard/mouse verification; no lock or security setting was changed.
-
-## Reproduce
-
-Install the official matching toolchain described in the README. From the project root:
-
-```sh
-./tools/runtime/godot --headless --path game --script ../source/experience_flow_test.gd
-./tools/runtime/godot --headless --path game --script ../source/vehicle_spawn_test.gd
-./tools/runtime/godot --headless --path game --script ../source/vehicle_model_migration_test.gd
-./tools/runtime/godot --headless --path game --script ../tools/test_vehicles.gd
-./tools/runtime/godot --path game --script ../source/camera_motion_test.gd -- --compact --physics-hz=10 --sample-seconds=9
-./tools/build.sh
-./dist/Harbourlife.app/Contents/MacOS/Harbourlife --disable-vsync -- --experience-qa
-./dist/Harbourlife.app/Contents/MacOS/Harbourlife --disable-vsync -- --visual-qa --release-v012
-./dist/Harbourlife.app/Contents/MacOS/Harbourlife --disable-vsync -- --qa
-./dist/Harbourlife.app/Contents/MacOS/Harbourlife --disable-vsync --fixed-fps 60 -- --flight-qa --qa-fixed-fps=60
+```text
+39ab7826e8b4e251a714b2293250195c69732f1ba2253d58fc87e779ff26241c
 ```
 
-The export template does not support editor-only `--script`. Release checks therefore use bundled validators activated by explicit user arguments. They create isolated `qa_` worlds, retain their fixtures and do not delete player saves. Reports and captures go to the game's local user-data directory. `--interactive-qa` opens a separate test world for normal keyboard/mouse checks without loading a personal save.
+[构建清单](evidence/v013-app/build.json)记录 106 个游戏源文件散列。[独立 ZIP 验收](evidence/v013-app/archive-validation.json)的 13 项检查全部通过：CRC、全新解压、arm64、0.1.3 版本、0755 执行权限、严格 ad-hoc 签名、PCK 与 17 个资源加载，包含实际读取存档 `VERSION = 5`。从 `/tmp` 新解压的 App 在 21.4 秒进入完整世界 READY，生成 15,127 个建筑节点和 21,302 个结构组件，正常退出且没有脚本错误。该启动时间仅属于此机器和该次 headless 检查。
+
+最终包通过以下原生应用内验证；均重新启动该 App，检查输出时间，正常退出，没有记录到运行时 ERROR / WARNING：
+
+| 流程 | 通过检查 | 启动记录 | 原始结果 |
+|---|---:|---|---|
+| 玩家体验、九类载具创建入座、地图、22 项消费与保存加载 | 70 | [experience-launch.json](evidence/v013-app/experience-launch.json) | [experience-report.json](evidence/v013-app/experience-report.json) |
+| 滑翔机、滑翔伞创建初速与空中保存加载 | 16 | [air-vehicle-launch.json](evidence/v013-app/air-vehicle-launch.json) | [air-vehicle-report.json](evidence/v013-app/air-vehicle-report.json) |
+| 全城基础流程、九类载具移动、破坏与持久化 | 32 | [qa-launch.json](evidence/v013-app/qa-launch.json) | [qa-report.json](evidence/v013-app/qa-report.json) |
+
+合计 118 项；这些测试有覆盖重叠，不代表 118 个独立功能。
+
+## 场景画面与完整机场航线
+
+完整场景截图、悬浮物理与机场往返使用此前同轮候选 App，SHA-256 `18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c`。发布前存档审查发现旧版会忽略新滑板，最终包因此仅将 `save_store.gd` 的格式常量从 4 改为 5，阻止旧版读后保存丢失新类型。
+
+[逐文件比较](evidence/v013-app/build-comparison.json)和[候选构建清单](evidence/v013-app/candidate-build.json)确认：106 个游戏文件中 105 个完全相同，唯一差异是上述常量；城市、载具、物理、地图、相机和试飞代码均未改变。与保存加载有关的原生流程已在最终包重新运行。以下结果保留原构建归属，没有改称为新 ZIP 的重复实测。
+
+| 验证 | 结果 | 证据 |
+|---|---|---|
+| 完整城市场景与载具画面 | 31 张新鲜原生截图，31 项保存/世界就绪检查通过 | [启动](evidence/v013-app/candidate-visual-launch.json) · [捕获记录](evidence/v013-app/candidate-visual-report.json) |
+| 悬浮板实体移动 | 12 项通过：200 km/h、24 级实体楼梯、水面、升高后悬停和墙前制动 | [启动](evidence/v013-app/candidate-mobility-launch.json) · [结果](evidence/v013-app/candidate-mobility-report.json) |
+| 机场 → 歌剧院 → 海港大桥 → 机场 | 45.449 km、565.317 模拟秒、全程血量 100、零碰撞事件，返航后低于 0.20 m/s 停车门槛 | [启动](evidence/v013-app/candidate-flight-launch.json) · [完整航线结果](evidence/v013-app/candidate-flight-report.json) |
+
+试飞经过 33,919 个有效物理帧；共记录 33,967 个原生绘制帧。起飞滑跑约 872m，最高高度约 443m，距歌剧院最近约 487m、距大桥约 1,017m。停机坪与所有七个飞行阶段的截图分别保存；原始报告中的 `parked_speed_mps` 是起飞前静置速度，不是返航终速。飞机在标准机场开始动作之后，只通过生产输入动作控制，没有通过改位置或速度完成航线；拍摄地标时仅调整文档相机。
+
+![完整航线经过歌剧院和海港大桥](screenshots/v013/flight-03_harbour.png)
+
+![返航后停稳](screenshots/v013/flight-07_stopped.png)
+
+[截图索引](evidence/v013-app/screenshots.json)记录 44 张公开 PNG 的散列和来源构建，其中最新的四张地图/消费界面图来自最终格式 5 包。31 张场景图已逐张复看：城市 17 张、载具 9 张、大桥/歌剧院 5 张。七张飞行阶段也已查看。图像没有修饰或合成；[城市复核](evidence/v013-app/city-visual-review.json)、[载具复核](evidence/v013-app/vehicles-visual-review.json)与[大桥/歌剧院及航线复核](evidence/v013-app/landmark-flight-visual-review.json)记录观察与限制。截图捕获通过本身不等于视觉质量自动通过。
+
+## 城市、存档与组件
+
+[组件证据索引](evidence/v013/index.md)共列出 19 组、603 项通过检查，区分原始 JSON、实际日志摘要、局部几何、完整世界和原生局部场景。它们可能覆盖相同行为，不能当成 603 个独立功能，也不能冒充最终下载包验收。
+
+- 三种航空模型 18 项，实际车辆加速/转向/制动 16 项，悬浮板 12 项。
+- 地图迁移 52 项，载具模型迁移 24 项；检查新塔、码头、广场实体、损毁洞口、公共入口和重定位后的首帧速度。
+- 默认九类载具各静置六秒，均满血且没有碰撞伤害；停机坪与默认 787 净空另有 16 项检查。
+- W 及同模块地标 23 项、ICC 30 项、悉尼塔 19 项、环形码头和达令广场 72 项。
+- 底座导入规则 12 项、实际底座和 15 家店面的通行 28 项；只保留地图高度标签明确的 21 个底座。
+- 道路连接 17 项、生活经济 40 项、完整世界载具创建与恢复 83 项、完整城市对齐 96 项。
+- 存档格式 5 的 20 项回归使用实际 v0.1.2 reader，验证旧版拒绝新版且不修改文件；新版接受格式 1–4，升级时保留原车、两个独立滑板、占用关系与原始恢复副本。
+
+地理检查核对 35 个轮廓与 35 个公共到达点，采用原始 OSM 投影和实际物理净空。同源轮廓最大差约 0.00069m，只说明程序转换一致，不能作为现实测绘精度。
+
+## 验证边界
+
+本次 Mac 处于锁屏状态，桌面控制工具报告无法获取原生应用；没有改变锁屏或安全设置。生产 UI 按钮、输入动作、物理与存档由原生应用内的隔离验证器运行，OS 层键盘鼠标人工走查未实测。固定步长试飞和锁屏时帧间隔不代表正常前台 FPS；没有多小时稳定性或跨硬件矩阵测试。静态截图也不能证明行驶中所有镜头都无抖动。
+
+城市仍为有资料依据的程序化重建。普通外立面、很多高度、地形、高架、地下网络和私有室内未逐一复刻。W / ICC / Sydney Tower、15 家 Darling Square 店面、3 家 Circular Quay 店面和所列公共区域的具体范围见各参考文档。W 周边部分地面和远景仍简化；细化店面主要是外观与门前公共空间。游戏服务不是现实订票、菜单或营业状态。
+
+原生验证使用带 QA 标识的独立世界，不读取、覆盖或删除玩家已有世界；测试存档及备份保留。可播放应用和公开源码 ZIP 是不同资产。源码包不包含编辑器、导出模板、用户存档、私人文件或外部照片。
+
+## 复现
+
+从项目根目录运行，Godot 官方编辑器和匹配的 macOS 导出模板安装方法见 README：
+
+```sh
+python3 source/city_parent_policy_test.py
+./tools/runtime/godot --headless --path game --script ../tools/test_save.gd
+./tools/runtime/godot --headless --path game --script ../source/vehicle_spawn_test.gd
+./tools/runtime/godot --headless --path game --script ../source/map_migration_test.gd
+./tools/runtime/godot --headless --path game --script ../source/city_parent_base_test.gd
+./tools/runtime/godot --headless --path game --script ../source/precinct_detail_test.gd
+./tools/runtime/godot --headless --path game --script ../source/landmark_alignment_test.gd
+./tools/build.sh
+python3 tools/verify_native.py experience
+python3 tools/verify_native.py visual
+python3 tools/verify_native.py qa
+python3 tools/verify_native.py mobility
+python3 tools/verify_native.py air-vehicle
+python3 tools/verify_native.py flight
+```
+
+需要有图形会话的原生模式按顺序运行。无界面组件检查与导出 App 自动化、OS 层人工试玩是不同验证层次。

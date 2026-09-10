@@ -14,7 +14,7 @@
 
 Manly 普通街区来自后备服务较旧的快照，不能声称所有商户均为今天的状态。各次查询与实际数据基准时间保存在源 JSON 内。岸线覆盖 -33.895 至 -33.770、151.18 至 151.31；没有把整个海港误填成陆地。
 
-编译数据库包含 15,508 个建筑轮廓或分体、19,680 条道路/轨道中心线记录、5,103 个命名地点、23 个海滩区域、847 个公园区域和 6,739 个树木定位点。这些是**地图记录数，不是精细建模建筑数，也不是全部可驾驶道路数**。其中 961 条道路/轨道记录带高架或非零层级等标签，普通地面道路渲染器会跳过这些记录，避免错误压平到街面。293 个父级轮廓已有 `building:part`，只在二维地图显示父轮廓，三维使用分体，避免把整片塔楼基座错误拉到楼顶。此规则依据 [OSM Simple 3D Buildings](https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings)。
+编译数据库包含 15,508 个建筑轮廓或分体、19,680 条道路/轨道中心线记录、5,103 个命名地点、23 个海滩区域、847 个公园区域和 6,739 个树木定位点。这些是**地图记录数，不是精细建模建筑数，也不是全部可驾驶道路数**。其中 961 条道路/轨道记录带高架或非零层级等标签，普通地面道路渲染器会跳过这些记录，避免错误压平到街面。293 个父级轮廓已有 `building:part`；其中 272 个三维使用分体，父轮廓只在二维地图显示。另 21 个父体的明确 `height` 不高于所有子体明确 `min_height`，因此保留独立的底座空间；例如 Darling Square 的 `614603732` 为 0–18m 裙楼，上部四个分体从 18m 开始。自定义地标排除规则仍优先，The Exchange 不会重复生成。缺少明确高度或存在垂直重叠的父体不按此规则补建。此规则依据 [OSM Simple 3D Buildings](https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings)。
 
 230 个记录有高度标签，其中至少 4 个明确写了估算；7,539 个仅有层数，需换算层高。其余采用明确标注的类型估算。地图标签自身也可能过时或错误，单有 `height` 不表示已独立测量。
 
@@ -38,7 +38,9 @@ Manly 普通街区来自后备服务较旧的快照，不能声称所有商户�
 | Westpac Place、Commonwealth Bank Place South / North | 当前总部地址，成组外形和楼顶；[参考](BANK_REFERENCE.md) |
 | Quay Quarter Tower、Salesforce Tower | 分段错动体量、遮阳框、树状结构与电梯侧立面；[参考](QUAY_REFERENCE.md) |
 | CyberCX 悉尼办公室所在 2 Market Street、Cloudflare 悉尼办公室所在 388 George Street | 玻璃塔楼、台阶式屋顶、凹入中庭、曲面裙楼和公共通廊；不是两家公司的悉尼总部或私人办公室内景；[参考](CYBER_REFERENCE.md) |
-| Darling Square 12 家店面 | 逐店记录地址、门面朝向、照片证据与未核实部分；[参考](DARLING_SQUARE_REFERENCE.md) |
+| Darling Square 15 家店面与广场景观 | 逐店记录地址、门面朝向、照片证据与未核实部分；[参考](DARLING_SQUARE_REFERENCE.md) |
+| Circular Quay Wharf 2–6、Eastbank、Searock、City Extra | 保留各码头顶棚与亭廊真实平面，分开制作三家店面、步道和街具；[参考](QUAY_REFERENCE.md) |
+| Sydney Tower Eye | 309m 塔体、金色观景舱、56 条拉索、420 块窗格及临街基座；[参考](SYDNEY_TOWER_REFERENCE.md) |
 | Manly Wharf、Hotel Steyne、The Corso | 码头屋盖、真实院落、阳台、步行街和真实树位；[参考](MANLY_REFERENCE.md) |
 | Barangaroo、Martin Place 北入口 | 地面出入口、扶梯和第一层地下门厅，可实际往返；[参考](METRO_REFERENCE.md) |
 | ICC Sydney Convention Centre、Exhibition Centre、TikTok Entertainment Centre | 独立场馆外形、Convention 公共门厅及夹层、Exhibition 下层四展厅、Theatre 门厅与简化观众席/舞台；[参考](ICC_REFERENCE.md) |
@@ -61,7 +63,7 @@ ICC 三处场馆已通过 `game/scripts/icc_landmarks.gd` 纳入主世界，地�
 - Manly 保留真实岸线、街道和所列地标；沙滩坡度、全部商店外立面、住宅屋顶与内部尚未一比一制作。
 - Fairy Bower Road 回转端中央约 3.7m² 的未铺面区域，是由三条地图中心线及其 6.5m 宽度标签推导出的闭环内部空余地；[实际查看的卫星影像](https://www.google.com/maps/@-33.8027451,151.2907738,20z/data=!3m1!1e3)可见带树和浅色尖端的三角分隔区，支持保留中央岛。3.7m² 的精确边界和当前草地材质仍由道路缓冲推断，未经现场测绘；没有下载或分发卫星图像。
 - 机场跑道位置和长度有公开数据；航站楼、周边岸线与机场至城区的中间走廊仍有简化，二维地图会用斜纹标明简化地形。
-- 个人工作室、车库、部分船坞和可驾驶桥梁接地段是明确的游戏调整，不是现实设施的完整复原。
+- 个人工作室、车库、部分船坞和可驾驶桥梁接地段是明确的游戏调整，不是现实设施的完整复原。虚构 Harbour Air 停机坪保留 55m 操作净空；按完整树冠范围省略了 29 个 OSM 树节点，原始地图数据未修改。
 
 ## 离线重建与校验
 

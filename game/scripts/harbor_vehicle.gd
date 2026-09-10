@@ -1,11 +1,12 @@
 extends RigidBody3D
-## Eight physically distinct, offline native vehicles. Units: metres / kilograms / seconds.
+## Physically distinct, offline native vehicles. Units: metres / kilograms / seconds.
 ## Contacts emit kinetic energy in joules for the world damage system.
 signal impacted(point: Vector3, energy: float)
 
 const Models = preload("res://scripts/vehicle_factory.gd")
 const G := 9.8
-const NAMES := {"car":"Veloce V12", "motorcycle":"Apex RR", "speedboat":"Riviera 39", "yacht":"Ocean 90", "paraglider":"Thermal 9", "glider":"Southern Arc", "helicopter":"Harbour H6", "airliner":"Dreamliner 787-9"}
+const TOP_SPEED_KMH := {"car":420.0,"motorcycle":320.0,"airliner":800.0,"helicopter":350.0}
+const NAMES := {"car":"Veloce V12", "motorcycle":"Apex RR", "speedboat":"Riviera 39", "yacht":"Ocean 90", "paraglider":"Thermal 9", "glider":"Southern Arc", "helicopter":"Harbour H6", "airliner":"Dreamliner 787-9", "hoverboard":"Aether X1"}
 var kind: String = "car"
 var vehicle_id: String = ""
 var occupied: bool = false
@@ -37,6 +38,11 @@ var _built: bool = false
 var last_impact_info: Dictionary = {}
 var _base_paint: Color = Color("287b89")
 var boat_profile: Dictionary = {}
+var _launch_pending := false
+var _launch_velocity := Vector3.ZERO
+var _restore_motion_pending := false
+var _restore_linear := Vector3.ZERO
+var _restore_angular := Vector3.ZERO
 
 func configure(type: String, id: String) -> void:
 	kind = type if NAMES.has(type) else "car"
@@ -62,11 +68,14 @@ func _ready() -> void:
 	surface.bounce = 0.08
 	physics_material_override = surface
 	match kind:
+		"hoverboard": preload("res://scripts/hoverboard_motion.gd").setup(self)
 		"car":
+			linear_damp = 0.0
 			mass = 1480.0
 			inertia = mass*Vector3(1.85,2.15,0.48)
 			center_of_mass = Vector3(0,-0.25,0)
 		"motorcycle":
+			linear_damp = 0.0
 			mass = 265.0
 			inertia = mass*Vector3(0.54,0.65,0.20)
 			center_of_mass = Vector3(0,-0.24,0)
@@ -81,16 +90,19 @@ func _ready() -> void:
 			center_of_mass = Vector3(0,-0.35,0)
 			controls_hint = "W/S throttle • A/D turn • Space reverse thrust"
 		"paraglider":
+			linear_damp = 0.0
 			mass = 115.0
 			inertia = mass*Vector3(1.5,3.0,1.2)
 			controls_hint = "A/D turn • R/F pitch • Space airbrake • Always descending"
 		"glider":
+			linear_damp = 0.0
 			mass = 570.0
 			inertia = mass*Vector3(5.0,14.0,12.0)
 			controls_hint = "A/D bank • R/F pitch • Space airbrake • No engine"
 		"helicopter":
-			mass = 1780.0
-			inertia = mass*Vector3(6.0,6.0,1.8)
+			linear_damp = 0.0
+			mass = 6050.0
+			inertia = mass*Vector3(13.0,14.0,3.8)
 			center_of_mass = Vector3(0,-0.38,0)
 			controls_hint = "W/S tilt forward/back • A/D yaw • R/F climb/descend"
 		"airliner":
@@ -121,11 +133,10 @@ func _physics_process(delta: float) -> void:
 		physics_material_override.friction = 0.07 if occupied else 0.85
 	if occupied and not _was_occupied:
 		sleeping = false
+		prepare_for_boarding()
 		if not _restored and global_position.y > 30.0 and linear_velocity.length()<4.0:
 			match kind:
 				"airliner": linear_velocity = -global_basis.z*82.0
-				"glider": linear_velocity = -global_basis.z*22.0 + Vector3.DOWN*1.2
-				"paraglider": linear_velocity = -global_basis.z*9.0 + Vector3.DOWN*1.0
 		_restored = false
 	_was_occupied = occupied
 	# Truly idle rigid bodies use normal engine sleeping. Applying zero-input forces
@@ -156,10 +167,11 @@ func _physics_process(delta: float) -> void:
 		braking = Input.is_action_pressed("brake")
 		sleeping = false
 	var operable: float = clampf(health/50.0,0.0,1.0) if fuel>0.0 else 0.0
-	if health <= 0.0:
+	if health <= 0.0 and kind != "hoverboard":
 		power = 0.0
 		pitch = 0.0
 	match kind:
+		"hoverboard": preload("res://scripts/hoverboard_motion.gd").tick(self,delta,forward,right,up,power,steer,pitch,braking)
 		"car", "motorcycle": _road(delta,forward,right,up,power*operable,steer,braking or not occupied)
 		"yacht", "speedboat": _boat(delta,forward,right,up,power*operable,steer,braking)
 		"paraglider", "glider": _gliding(delta,forward,right,up,steer,pitch,braking)
@@ -204,15 +216,24 @@ func _road(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,bra
 		forward_speed = rel.dot(f)
 		var lateral := rel.dot(r)
 		var traction := 8.0 if kind=="car" else 6.0
-		var acceleration := 9.4 if kind=="car" else 11.0
-		var limit := 48.0 if kind=="car" else 52.0
-		if signf(throttle)!=signf(forward_speed) or absf(forward_speed)<limit:
-			apply_central_force(f*mass*acceleration*throttle)
-		apply_central_force(-r*lateral*mass*traction)
-		apply_central_force(-f*forward_speed*mass*(0.10 + (7.0 if brake else 0.0)))
-		var yaw_rate := -steer*clampf(forward_speed/8.0,-1.0,1.0)*(1.03 if kind=="car" else 1.30)
-		if brake:
-			yaw_rate *= 1.22
+		var acceleration := 14.0 if kind=="car" else 16.0
+		var target_speed := throttle*(float(TOP_SPEED_KMH[kind])/3.6 if throttle>=0 else 16.0)
+		var resistance := forward_speed*.032+forward_speed*absf(forward_speed)*.00018
+		var downforce := minf(forward_speed*forward_speed*.00025,3.8) if occupied else 0.0
+		# Engine force, tyre resistance and aerodynamic drag determine speed. The
+		# cruise governor reduces thrust continuously; it never clamps velocity.
+		if absf(throttle)>.01:
+			var rolling := (G+downforce)*.07*signf(forward_speed)
+			var drive := clampf((target_speed-forward_speed)*.85+resistance+rolling,-acceleration,acceleration)
+			apply_central_force(f*mass*drive)
+		var lateral_accel := lateral*traction
+		if occupied:lateral_accel=clampf(lateral_accel,-11.0,11.0)
+		apply_central_force(-r*lateral_accel*mass)
+		apply_central_force(-ground_normal*mass*downforce)
+		var deceleration := clampf(forward_speed*7.0,-16.0,16.0) if brake else 0.0
+		apply_central_force(-f*mass*(resistance+deceleration))
+		var yaw_limit := minf(1.03 if kind=="car" else 1.30,8.5/maxf(absf(forward_speed),1.0))
+		var yaw_rate := -steer*clampf(forward_speed/8.0,-1.0,1.0)*yaw_limit
 		var desired_up: Vector3 = ground_normal
 		if kind=="motorcycle":
 			desired_up = (ground_normal+r*steer*clampf(absf(forward_speed)/17.0,0.0,0.50)).normalized()
@@ -257,11 +278,35 @@ func _boat(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,bra
 	_engine_target = -25.0+absf(throttle)*11.0 if occupied and health>0 else -60.0
 	_update_wake(delta,in_water)
 
+func stop_motion_after_relocation() -> void:
+	# Safety relocation supersedes a queued save restore or unconsumed launch.
+	# Clear the serialized state too, so an immediate save cannot revive it.
+	_launch_pending=false
+	_launch_velocity=Vector3.ZERO
+	_restore_motion_pending=false
+	_restore_linear=Vector3.ZERO
+	_restore_angular=Vector3.ZERO
+	_previous_velocity=Vector3.ZERO
+	linear_velocity=Vector3.ZERO
+	angular_velocity=Vector3.ZERO
+	throttle=0.0
+
+func prepare_for_boarding(was_frozen:bool=false) -> void:
+	# Jolt can replace a velocity written while a newly added body is frozen.
+	# Apply launch energy inside its first live integration step, exactly once.
+	if not kind in ["glider","paraglider"] or global_position.y<30:return
+	if _restored and not was_frozen:return
+	if not was_frozen and linear_velocity.length()>4.0:return
+	var trim:=28.0 if kind=="glider" else 9.5
+	if linear_velocity.length()>trim*1.5:return
+	_launch_velocity=-global_basis.z*trim+Vector3.DOWN*(.9 if kind=="glider" else 1.1)
+	_launch_pending=true
+
 func _gliding(_delta:float,f:Vector3,r:Vector3,u:Vector3,steer:float,pitch:float,brake:bool) -> void:
 	grounded = not _ground_probe(0.85).is_empty()
 	var speed := maxf(0.0,linear_velocity.dot(f))
-	var target_speed := 9.5 if kind=="paraglider" else 22.0
-	var min_speed := 5.2 if kind=="paraglider" else 12.0
+	var target_speed := 9.5 if kind=="paraglider" else 28.0
+	var min_speed := 5.2 if kind=="paraglider" else 18.0
 	stalled = speed<min_speed and not grounded
 	var local_velocity := global_basis.inverse()*linear_velocity
 	var angle_of_attack := atan2(-local_velocity.y,maxf(speed,0.1))
@@ -270,11 +315,11 @@ func _gliding(_delta:float,f:Vector3,r:Vector3,u:Vector3,steer:float,pitch:float
 	if effective_up.y<0.1:
 		effective_up = u
 	apply_central_force(effective_up*mass*G*lift_ratio*(0.73 if brake else 0.995))
-	var drag_coefficient := 0.010 if kind=="paraglider" else 0.0018
+	var drag_coefficient := 0.010 if kind=="paraglider" else 0.0005
 	apply_central_force(-linear_velocity*linear_velocity.length()*mass*drag_coefficient*(2.7 if brake else 1.0))
 	apply_central_force(-r*linear_velocity.dot(r)*mass*0.75)
 	# Gravity powers both wings. Nose-down trim trades height for forward speed.
-	var wanted_pitch := -0.14 + pitch*0.28 if kind=="paraglider" else -0.075+pitch*0.23
+	var wanted_pitch := -0.14 + pitch*0.28 if kind=="paraglider" else -0.025+pitch*0.23
 	if stalled:
 		wanted_pitch = -0.32
 	var current_pitch := asin(clampf(f.y,-1.0,1.0))
@@ -291,19 +336,25 @@ func _gliding(_delta:float,f:Vector3,r:Vector3,u:Vector3,steer:float,pitch:float
 func _helicopter(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,pitch:float) -> void:
 	grounded = not _ground_probe(1.6).is_empty()
 	var engine_on := occupied and health>0.0 and fuel>0.0
-	throttle = move_toward(throttle,1.0 if engine_on else 0.0,delta*0.40)
-	var desired_vertical := pitch*7.0
-	var collective := clampf(G + (desired_vertical-linear_velocity.y)*1.75,0.0,G*1.9)*throttle
+	throttle = move_toward(throttle,1.0 if engine_on else 0.0,delta*.40)
+	var horizontal_forward := Vector3(f.x,0,f.z).normalized()
+	var forward_speed := linear_velocity.dot(horizontal_forward)
+	var target_forward_speed := power*float(TOP_SPEED_KMH.helicopter)/3.6
+	var drag := linear_velocity*(.02+linear_velocity.length()*.00035)
+	# Rotor collective compensates its bank/tilt, maintaining commanded vertical
+	# speed while the horizontal component accelerates the aircraft.
+	var desired_vertical := pitch*8.0
+	var vertical_accel := clampf((desired_vertical-linear_velocity.y)*1.75,-6.0,8.0)
+	var collective := clampf((G+vertical_accel+drag.y)/maxf(u.y,.35),0.0,G*2.4)*throttle
 	apply_central_force(u*mass*collective)
-	apply_central_force(-linear_velocity*mass*0.11)
-	apply_central_force(-r*linear_velocity.dot(r)*mass*0.37)
-	var target_forward_speed := power*29.0
-	var nose := clampf((target_forward_speed-linear_velocity.dot(f))*0.024,-0.30,0.42)
-	var desired_up := (Vector3.UP+f*nose).normalized()
-	var yaw_rate := -steer*0.66
+	apply_central_force(-drag*mass)
+	apply_central_force(-r*linear_velocity.dot(r)*mass*.37)
+	var desired_forward_accel := clampf((target_forward_speed-forward_speed)*.65,-8.0,8.0)
+	var tilt := clampf((desired_forward_accel+drag.dot(horizontal_forward))/G,-.85,.95)
+	var desired_up := (Vector3.UP+horizontal_forward*tilt).normalized()
+	var yaw_rate := -steer*minf(.66,8.0/maxf(absf(forward_speed),1.0))
 	_torque_accel(u.cross(desired_up)*4.2 - Vector3(angular_velocity.x,0,angular_velocity.z)*2.8 + Vector3.UP*(yaw_rate-angular_velocity.y)*2.5)
-	if engine_on:
-		fuel = maxf(0.0,fuel-delta*0.016)
+	if engine_on:fuel = maxf(0.0,fuel-delta*.016)
 	_engine_target = -35.0+throttle*20.0
 
 func _airliner(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,pitch:float,brake:bool,operable:float) -> void:
@@ -312,21 +363,23 @@ func _airliner(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float
 		throttle = clampf(throttle+power*delta*0.22,0.0,1.0)
 	var speed := maxf(0.0,linear_velocity.dot(f))
 	stalled = speed<49.0 and not grounded
-	apply_central_force(f*mass*2.8*throttle*operable*(1.0 if occupied else 0.0))
+	var aerodynamic_drag := .000064
+	var governed_thrust := clampf((float(TOP_SPEED_KMH.airliner)/3.6-speed)*.30+speed*speed*aerodynamic_drag,0.0,3.5)
+	apply_central_force(f*mass*governed_thrust*throttle*operable*(1.0 if occupied else 0.0))
 	var speed_ratio := speed/76.0
 	var local_velocity := global_basis.inverse()*linear_velocity
 	var angle_of_attack := atan2(-local_velocity.y,maxf(speed,0.1))
-	var lift_coefficient := clampf(0.78+angle_of_attack*4.6,0.0,1.8)
+	var lift_coefficient := clampf(.97+angle_of_attack*4.6,0.0,1.8)
 	if angle_of_attack>0.38:
 		lift_coefficient *= 0.38
 		stalled = not grounded
-	var lift_factor := clampf(speed_ratio*speed_ratio*lift_coefficient,0.0,1.85)
+	var lift_factor := clampf(minf(speed_ratio*speed_ratio,1.0)*lift_coefficient,0.0,1.85)
 	if speed<49.0:
 		lift_factor *= clampf(speed/49.0,0.0,1.0)
 	var velocity_direction := linear_velocity.normalized()
 	var lift_direction := (u-velocity_direction*u.dot(velocity_direction)).normalized()
 	apply_central_force(lift_direction*mass*G*lift_factor*(0.62 if brake else 1.0))
-	apply_central_force(-linear_velocity*linear_velocity.length()*mass*(0.00020 if not brake else 0.0011))
+	apply_central_force(-linear_velocity*linear_velocity.length()*mass*(aerodynamic_drag if not brake else .00032))
 	apply_central_force(-r*linear_velocity.dot(r)*mass*0.22)
 	var current_pitch := asin(clampf(f.y,-1.0,1.0))
 	var target_pitch := pitch*0.22 + 0.015
@@ -334,7 +387,7 @@ func _airliner(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float
 		target_pitch = -0.15 + pitch*0.10
 	var desired_up := (Vector3.UP+r*steer*0.56).normalized()
 	var control_authority := clampf(speed/65.0,0.05,1.0)
-	var yaw_rate := -steer*0.105*control_authority
+	var yaw_rate := -steer*0.105*control_authority*minf(1.0,76.0/maxf(speed,1.0))
 	if grounded:
 		yaw_rate = -steer*clampf(speed/8.0,0.0,1.0)*0.16
 		apply_central_force(-r*linear_velocity.dot(r)*mass*1.8)
@@ -354,6 +407,15 @@ func _torque_accel(acceleration:Vector3) -> void:
 	apply_torque(global_basis*(local*inertia))
 
 func _integrate_forces(state:PhysicsDirectBodyState3D) -> void:
+	if _restore_motion_pending:
+		state.linear_velocity=_restore_linear
+		state.angular_velocity=_restore_angular
+		_previous_velocity=_restore_linear
+		_restore_motion_pending=false
+	if _launch_pending:
+		state.linear_velocity=_launch_velocity
+		_previous_velocity=_launch_velocity
+		_launch_pending=false
 	if _impact_cooldown>0.0:
 		return
 	var worst_speed := 0.0
@@ -546,6 +608,7 @@ func _animate(delta:float) -> void:
 		_moving.material.albedo_color = _base_paint.lerp(Color("343c3e"),(1.0-health/100.0)*0.62)
 
 func get_exit_position() -> Vector3:
+	if kind=="hoverboard":return to_global(Vector3(1.4,0,0))
 	if kind in ["yacht","speedboat"] and boat_profile.has("exit"):
 		return to_global(boat_profile.exit)
 	var offset := Vector3(-2.3,0.85,0)
@@ -559,17 +622,19 @@ func get_exit_position() -> Vector3:
 	return to_global(offset)
 
 func get_camera_distance() -> float:
+	if kind=="hoverboard":return 7.0
 	if kind in ["yacht","speedboat"]: return float(boat_profile.get("camera_distance",23.0 if kind=="speedboat" else 38.0))
 	match kind:
 		"motorcycle": return 6.5
 		"yacht": return 20.0
 		"paraglider": return 12.0
 		"glider": return 20.0
-		"helicopter": return 17.0
+		"helicopter": return 25.0
 		"airliner": return 84.0
 	return 9.0
 
 func get_camera_height() -> float:
+	if kind=="hoverboard":return 1.1
 	if kind in ["yacht","speedboat"]: return float(boat_profile.get("camera_height",2.2 if kind=="speedboat" else 4.5))
 	if kind=="car": return 0.40
 	if kind=="motorcycle": return 0.65
@@ -585,7 +650,9 @@ func repair() -> void:
 
 func get_state() -> Dictionary:
 	var q := global_basis.get_rotation_quaternion()
-	return {"version":1,"model_revision":2,"kind":kind,"id":vehicle_id,"position":[global_position.x,global_position.y,global_position.z],"quaternion":[q.x,q.y,q.z,q.w],"velocity":[linear_velocity.x,linear_velocity.y,linear_velocity.z],"angular_velocity":[angular_velocity.x,angular_velocity.y,angular_velocity.z],"health":health,"fuel":fuel,"throttle":throttle,"frozen":freeze,"dents":_dents.duplicate(true)}
+	var saved_velocity := _launch_velocity if _launch_pending else _restore_linear if _restore_motion_pending else linear_velocity
+	var saved_angular := _restore_angular if _restore_motion_pending else angular_velocity
+	return {"version":1,"model_revision":3,"kind":kind,"id":vehicle_id,"position":[global_position.x,global_position.y,global_position.z],"quaternion":[q.x,q.y,q.z,q.w],"velocity":[saved_velocity.x,saved_velocity.y,saved_velocity.z],"angular_velocity":[saved_angular.x,saved_angular.y,saved_angular.z],"health":health,"fuel":fuel,"throttle":throttle,"frozen":freeze,"hover_lift_offset":float(get_meta("hover_lift_offset",0.0)),"dents":_dents.duplicate(true)}
 
 func apply_state(data:Dictionary) -> void:
 	if not _built:
@@ -615,7 +682,12 @@ func apply_state(data:Dictionary) -> void:
 	for dent in _dents:
 		if dent is Array and dent.size()==3:
 			_add_dent(Vector3(float(dent[0]),float(dent[1]),float(dent[2])))
+	set_meta("hover_lift_offset",clampf(float(data.get("hover_lift_offset",0.0)),0.0,180.0))
 	freeze = bool(data.get("frozen",false))
+	_launch_pending=false
+	_restore_linear=linear_velocity
+	_restore_angular=angular_velocity
+	_restore_motion_pending=not freeze
 	_restored = true
 	sleeping = false
 	reset_physics_interpolation()

@@ -1,6 +1,6 @@
 extends RefCounted
 
-const VERSION = 4
+const VERSION = 5
 const ROOT = "user://worlds/"
 static var last_error = ""
 

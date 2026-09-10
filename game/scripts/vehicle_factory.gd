@@ -34,12 +34,11 @@ static func build(body: Node3D, kind: String) -> Dictionary:
 	mats.light.emission_energy_multiplier = 1.5
 	var moving: Dictionary = {"wheels": [], "rotors": [], "propellers": [], "rider": null, "material": mats.teal}
 	match kind:
+		"hoverboard": preload("res://scripts/hoverboard_models.gd").build(body,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"car": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"motorcycle": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"speedboat", "yacht": preload("res://scripts/boat_models.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
-		"paraglider": _paraglider(body, mats, moving)
-		"glider": _glider(body, mats, moving)
-		"helicopter": _helicopter(body, mats, moving)
+		"paraglider", "glider", "helicopter": preload("res://scripts/air_vehicle_models.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"airliner": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
 	if kind in ["motorcycle", "paraglider"]:
 		moving.rider = _seated_rider(body, mats, kind)

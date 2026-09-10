@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "check_count": 24,
+  "checks": [
+    {
+      "name": "safe bridge-underpass car stays on its original floor",
+      "passed": true
+    },
+    {
+      "name": "stationary airborne aircraft retains exact flight pose",
+      "passed": true
+    },
+    {
+      "name": "driver identities health fuel and frozen state persist",
+      "passed": true
+    },
+    {
+      "name": "retired straight approach detected from saved support height",
+      "passed": true
+    },
+    {
+      "name": "retired unsupported parking moves safely with identity intact",
+      "passed": true
+    },
+    {
+      "name": "unrelated airborne aircraft still unchanged after map recovery",
+      "passed": true
+    },
+    {
+      "name": "low flight fixture crosses the exact retired ramp envelope",
+      "passed": true
+    },
+    {
+      "name": "low-flying aircraft keeps pose velocity and throttle over retired ramp",
+      "passed": true
+    },
+    {
+      "name": "exactly four unsupported old south parked cars recover",
+      "passed": true
+    },
+    {
+      "name": "legacy_south_0.25 now has upward south-ramp wheel support",
+      "passed": true
+    },
+    {
+      "name": "legacy_south_0.5 now has upward south-ramp wheel support",
+      "passed": true
+    },
+    {
+      "name": "legacy_south_0.75 now has upward south-ramp wheel support",
+      "passed": true
+    },
+    {
+      "name": "legacy_south_0.9 now has upward south-ramp wheel support",
+      "passed": true
+    },
+    {
+      "name": "south recovery preserves IDs health fuel freeze and travel heading",
+      "passed": true
+    },
+    {
+      "name": "moving road vehicle retains pose and velocity over old south plane",
+      "passed": true
+    },
+    {
+      "name": "normal bridge-underpass parking stays unchanged",
+      "passed": true
+    },
+    {
+      "name": "low flight over old south plane retains pose velocity throttle",
+      "passed": true
+    },
+    {
+      "name": "old south pedestrian 0.5 recovers onto actual support",
+      "passed": true
+    },
+    {
+      "name": "old south pedestrian 0.75 recovers onto actual support",
+      "passed": true
+    },
+    {
+      "name": "moving pedestrian retains position and velocity",
+      "passed": true
+    },
+    {
+      "name": "pedestrian below south bridge stays on ground",
+      "passed": true
+    },
+    {
+      "name": "v012 parked helicopter keeps original support surface",
+      "passed": true
+    },
+    {
+      "name": "helicopter model migration preserves identity fuel damage",
+      "passed": true
+    },
+    {
+      "name": "v012 airborne helicopter retains pose and velocity",
+      "passed": true
+    }
+  ],
+  "source_type": "summary_from_actual_passed_log",
+  "source_log": "reports/model-migration-v013-final.log",
+  "source_log_sha256": "ea7f75f4139a594449cf27f58310009d31bf8072895e5b0d0f91ae216bf3e006",
+  "engine_header": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+  "completion_line": "MODEL_MIGRATION COMPLETE checks=24 failures=0",
+  "runtime_errors": [],
+  "scope": "无界面局部几何与存档状态；由实际日志生成摘要"
+}

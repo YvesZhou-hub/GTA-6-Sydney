@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-09-10T19:03:40.300689+00:00",
+  "passed": true,
+  "blockers": [],
+  "reviewed_image_count": 17,
+  "scope": "Read-only inspection of actual full-world exported macOS App PNGs. No engine launched, source changed or image pixels modified during this review. The earlier 18:22 batch was superseded; these 17 images were reopened and inspected from the 18:51 batch.",
+  "build_binding": {
+    "build_report": "reports/release-v013-render-physics-build/build.json",
+    "archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c",
+    "launch_report": "reports/release-v013-render-physics/visual-launch.json",
+    "launch_sha256": "df063f7d2c3c3de8f00830287dc052dcee2a3b84ebdef3b4974a9882740b429d",
+    "started_utc": "2026-09-10T18:51:03.854689+00:00",
+    "exit_code": 0,
+    "capture_count": 31,
+    "runtime_errors": [],
+    "world_ready": [
+      "HARBOR_WORLD_READY buildings=15127 structure_components=21302"
+    ],
+    "scope_note": "Render/physics candidate before the save-only VERSION 4 to 5 change. Reviewed archive SHA remains 18450e59; this is not a repeated visual run on the final 39ab7826 archive."
+  },
+  "source_binding": {
+    "game/scripts/circular_quay_detail.gd": {
+      "sha256": "6663fa6b647470267755406171b61d82f7809bd115029ca71050275e5859a1d3",
+      "matches_reviewed_build": true
+    },
+    "game/scripts/darling_square_detail.gd": {
+      "sha256": "c279d129e25a55f799766b46e3da9cdd44d029459b01546060c4f9f4c59f5ee7",
+      "matches_reviewed_build": true
+    },
+    "game/scripts/city_landmarks.gd": {
+      "sha256": "af41fa615a0b47519fac6636a182519de84e94df8756b4ea7e9f0e149387517c",
+      "matches_reviewed_build": true
+    },
+    "game/scripts/icc_landmarks.gd": {
+      "sha256": "58406d11c4f6b1539ed1728cf321e4b31228cf233b047fe0001256b3b6e2c904",
+      "matches_reviewed_build": true
+    },
+    "game/scripts/sydney_tower_landmark.gd": {
+      "sha256": "79a8dfe9ad93acb34ca62f271ee1dd6f9e70932864aa03a5d048d710c90fcb3f",
+      "matches_reviewed_build": true
+    },
+    "game/scripts/landmark_validation.gd": {
+      "sha256": "cf9c949a2d316a502aa55587488b1c94e5bc529a2021604b958600f9d22cf35a",
+      "matches_reviewed_build": true
+    }
+  },
+  "findings": [
+    {
+      "views": [
+        "circular-quay",
+        "circular-quay-street",
+        "circular-quay-station"
+      ],
+      "observation": "Five mapped wharves and the station are intact. No duplicate old piers or generic station blocks. Public deck and central station opening remain visible. Wharf 3 low view is naturally dominated by nearby canopy; some OSM POI labels float above the scene.",
+      "blocking": false
+    },
+    {
+      "views": [
+        "darling-square",
+        "darling-square-street"
+      ],
+      "observation": "Continuous fan-pattern paving, bounded lawn, canopy, benches and Exchange. Ground-level host podium is present, without the former 18m gap. Trees are beside the central route.",
+      "blocking": false
+    },
+    {
+      "views": [
+        "auvers",
+        "hakatamon",
+        "chinta_ria",
+        "cq_eastbank",
+        "cq_searock",
+        "cq_city_extra"
+      ],
+      "observation": "All six specific exteriors and their paved approaches remain visible against mapped hosts; no intervening tree, building face or duplicate volume hides a shop. Furniture does not visually seal the entrance approaches.",
+      "blocking": false
+    },
+    {
+      "views": [
+        "icc-convention-foyer",
+        "icc-exhibition-foyer"
+      ],
+      "observation": "Both public foyers have continuous floor, ceiling, wall/display composition and visible circulation. No city geometry penetrates the visible indoor space.",
+      "blocking": false
+    },
+    {
+      "views": [
+        "sydney-tower",
+        "sydney-tower-pod"
+      ],
+      "observation": "Tower pod, mast, cable-supported stem, window bands and signage are legible. No missing pod face or duplicate tower volume seen.",
+      "blocking": false
+    },
+    {
+      "views": [
+        "w-sydney",
+        "w-entrance"
+      ],
+      "observation": "Ribbon envelope, podium and entry portal are visible without duplicate generic volume. Surrounding forecourt/terrain remains simplified rather than a surveyed detailed recreation.",
+      "blocking": false
+    }
+  ],
+  "limits": [
+    "Native render is stylized and source-informed, not 1:1 surveyed Sydney, photogrammetry or verification of all building dimensions.",
+    "Static selected views do not prove collision, complete routes, jitter/frame pacing, transit operation or geometry behind the camera.",
+    "Generic background facades, simplified W Sydney surroundings, floating POI labels and roof-dominated Wharf 3 framing are visible non-blocking limitations."
+  ],
+  "frames": [
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/circular-quay.png",
+      "sha256": "b7deef143d5086dd25cc7ff67f685bf4e0d5081e3c3383d7b18888ec7a8091e9",
+      "captured_utc": "2026-09-10T18:51:54Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/circular-quay-street.png",
+      "sha256": "6a0ea22c92e10dc9112aa359cda29a047880e5afd3eadd7fc89e189fd9b6ec3e",
+      "captured_utc": "2026-09-10T18:51:54Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/circular-quay-station.png",
+      "sha256": "010fd1dccd6254bbf77f26bea08a712c9a384ebd8b6ae222c4ce107561374f8f",
+      "captured_utc": "2026-09-10T18:51:54Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/darling-square.png",
+      "sha256": "5e16aef7d6cdddde0446d9f335f27d07b6d3f5faecb99067ac75662a76d054c8",
+      "captured_utc": "2026-09-10T18:51:55Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/darling-square-street.png",
+      "sha256": "3f2b4bfad2ee1b8109564e520d8107f47576a64f93f96d66d72c1afd2844b331",
+      "captured_utc": "2026-09-10T18:51:55Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/auvers.png",
+      "sha256": "9f6e1dd633cb0ba5a304f80aa6bc52e5637df2d9770a4d2c44f0a31d77ea283b",
+      "captured_utc": "2026-09-10T18:51:55Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/hakatamon.png",
+      "sha256": "ae09fb6c816afaffa109b3bba9059d75ad880faf672e5f4d365520bb41530a86",
+      "captured_utc": "2026-09-10T18:51:56Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/chinta_ria.png",
+      "sha256": "03a18c182ddd86484b0ff29412f3fb2fde2c4269362dffb9c42d32d5c803919c",
+      "captured_utc": "2026-09-10T18:51:56Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/cq_eastbank.png",
+      "sha256": "01ed9485a2b578a2956ac9e06911510275a76c936241891daa835becf8bb654c",
+      "captured_utc": "2026-09-10T18:51:56Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/cq_searock.png",
+      "sha256": "67a4ddc35871f0d15b32b1439a0c03cf934fe3b779cb2d31f78ce241b272899f",
+      "captured_utc": "2026-09-10T18:51:56Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/cq_city_extra.png",
+      "sha256": "a72415eb771438afdeaee670047ff55c9258b545e6f47739ed50c197473d8c06",
+      "captured_utc": "2026-09-10T18:51:57Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/icc-convention-foyer.png",
+      "sha256": "04e6c12203aeb379438b40ae7f3dd25e490f17cc348cf3b6f2dcf06f0a82be80",
+      "captured_utc": "2026-09-10T18:51:53Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/icc-exhibition-foyer.png",
+      "sha256": "d8b136c7495687200ed3a69292b9060c6310aba32d7b65baec1d5bb528b37ecf",
+      "captured_utc": "2026-09-10T18:51:53Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/sydney-tower.png",
+      "sha256": "597f9f769c9ece92434a2c4d507973149a5cba343814bc06b68708347f90fe24",
+      "captured_utc": "2026-09-10T18:51:57Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/sydney-tower-pod.png",
+      "sha256": "2181e4db03e2de747d7963a5ec5504a04a406260dc0a8f9a7e7d27f8133eb75e",
+      "captured_utc": "2026-09-10T18:51:57Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/w-sydney.png",
+      "sha256": "0756aec559fcb7ff08eac28c676108249d1710ad9d33af6d6d16407d1e78734d",
+      "captured_utc": "2026-09-10T18:51:53Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    },
+    {
+      "file": "reports/release-v013-render-physics/visual-screenshots/w-entrance.png",
+      "sha256": "4c2e51e035c5319b24471c7bc0bcfb967296469312256e6c4981f989a8146e09",
+      "captured_utc": "2026-09-10T18:51:53Z",
+      "size_px": [
+        1440,
+        900
+      ],
+      "reviewed": true,
+      "blocking_issue": false
+    }
+  ]
+}

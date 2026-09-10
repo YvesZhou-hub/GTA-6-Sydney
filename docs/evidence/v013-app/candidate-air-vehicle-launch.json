@@ -1,0 +1,20 @@
+{
+  "mode": "air-vehicle",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--air-vehicle-qa"
+  ],
+  "started_utc": "2026-09-10T18:53:33.507246+00:00",
+  "wall_seconds": 90.785,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 16,
+  "passed": true,
+  "screenshots": [],
+  "runtime_errors": [],
+  "archive_sha256": "18450e59ddfe399654322e62d28e5544831448ec23cf6af3ddbf0e94df96162c",
+  "build_stage": "render and physics candidate before save-format-only guard"
+}

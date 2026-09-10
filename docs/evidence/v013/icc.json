@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "check_count": 30,
+  "checks": [
+    {
+      "name": "three ICC venues built",
+      "passed": true
+    },
+    {
+      "name": "separate Convention / Exhibition / entertainment theatre entries",
+      "passed": true
+    },
+    {
+      "name": "all exact mapped parts replace parent and ordinary envelopes",
+      "passed": true
+    },
+    {
+      "name": "three tiers contain distinct red / grey seat geometry",
+      "passed": true
+    },
+    {
+      "name": "Convention counter has four modeled workstations and digital wayfinding",
+      "passed": true
+    },
+    {
+      "name": "Exhibition foyer has four fitted concession bays and twenty guide screens",
+      "passed": true
+    },
+    {
+      "name": "Theatre ticket foyer has timber relief and a suspended metal ceiling",
+      "passed": true
+    },
+    {
+      "name": "build is idempotent",
+      "passed": true
+    },
+    {
+      "name": "convention public walking route has full capsule clearance: 0",
+      "passed": true
+    },
+    {
+      "name": "convention public walking route has continuous physical floor: 0",
+      "passed": true
+    },
+    {
+      "name": "convention actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "convention actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "convention interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "exhibition public walking route has full capsule clearance: 0",
+      "passed": true
+    },
+    {
+      "name": "exhibition public walking route has continuous physical floor: 0",
+      "passed": true
+    },
+    {
+      "name": "exhibition actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "exhibition actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "exhibition interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "theatre public walking route has full capsule clearance: 0",
+      "passed": true
+    },
+    {
+      "name": "theatre public walking route has continuous physical floor: 0",
+      "passed": true
+    },
+    {
+      "name": "theatre actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "theatre actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "theatre interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "stage-front sightlines hit opaque internal enclosure above/behind seats: 28/28",
+      "passed": true
+    },
+    {
+      "name": "auditorium enclosure uses opaque charcoal material independently of exterior glazing",
+      "passed": true
+    },
+    {
+      "name": "both public acoustic-room doors retain 6m by 3.6m modeled openings and full human clearance",
+      "passed": true
+    },
+    {
+      "name": "theatre glazed foyer actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "theatre glazed foyer actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "theatre glazed foyer interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "Moriarty Walk stays clear across the venue group",
+      "passed": true
+    }
+  ],
+  "source_type": "summary_from_actual_passed_log",
+  "source_log": "reports/icc-v013.log",
+  "source_log_sha256": "ade940b7a7d60cc3cd0a08dd972034e74d7815dcb69b7664d8b3254fb6ebdfb9",
+  "engine_header": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+  "completion_line": "ICC CHECK COMPLETE checks=30 failures=0",
+  "runtime_errors": [],
+  "scope": "局部场景、真实输入走行与通路遮挡；由实际日志生成摘要"
+}

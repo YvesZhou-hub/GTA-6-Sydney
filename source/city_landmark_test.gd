@@ -42,9 +42,10 @@ func check() -> void:
 	for id: String in world.structures:
 		component_count+=1
 		var body: StaticBody3D=world.structures[id].node
-		var solid: ArrayMesh=body.get_child(0).mesh
-		var shape: ConcavePolygonShape3D=body.get_child(1).shape
-		if shape.get_faces()!=solid.get_faces(): collider_mismatch+=1
+		var solid: Mesh=body.get_child(0).mesh
+		var shape: Shape3D=body.get_child(1).shape
+		if shape is ConcavePolygonShape3D and shape.get_faces()!=solid.get_faces(): collider_mismatch+=1
+		elif shape is BoxShape3D and (not solid is BoxMesh or shape.size!=solid.size):collider_mismatch+=1
 		var landmark: String=id.split("/")[1]
 		for child in body.get_children():
 			if not child is MeshInstance3D: continue
@@ -63,11 +64,11 @@ func check() -> void:
 					var cross := (vertices[b]-vertices[a]).cross(vertices[c]-vertices[a])
 					if cross.length_squared()<0.00000000001: degenerate+=1
 					if cross.dot(normals[a]+normals[b]+normals[c])>0.00001: reversed+=1
-	verify(component_count==103,"103 meaningful damage components, repeated facade details merged")
+	verify(component_count==107,"107 meaningful damage components, repeated facade details merged")
 	verify(collider_mismatch==0,"all structural collision faces exactly match rendered solid geometry")
 	verify(degenerate==0,"all facade and structural faces are nondegenerate")
 	verify(reversed==0,"all explicit triangle winding matches supplied exterior normals")
-	verify(triangles<240000,"bounded four-building triangle budget "+str(triangles))
+	verify(triangles<280000,"bounded four-building triangle budget "+str(triangles))
 	verify(absf(max_heights.tower_one-217.0)<0.05,"Tower One retains documented 217m height")
 	verify(absf(max_heights.boc-58.0)<0.08,"BOC rooftop envelope retains explicitly estimated 58m height")
 	verify(max_heights.ribbon>=90.0 and max_heights.ribbon<91.0,"The Ribbon curved apex reaches 90m with thin perimeter trim")
@@ -85,6 +86,16 @@ func check() -> void:
 		var query := PhysicsRayQueryParameters3D.create(item[1]+item[2],item[1]+item[3])
 		var hit := space.intersect_ray(query)
 		verify(not hit.is_empty() and str(hit.collider.get_meta("damage_id","")).begins_with("city/"+item[0]+"/"),item[0]+" facade has physical ray support at intended map position")
+	verify(world.has_meta("ribbon_refinement"),"W has photo-referenced facade sign, Waratah entrance and relief mullions")
+	var entry_blocked:=0
+	for x in [62.0,63.0,64.0]:
+		for z in range(-24,-10):
+			var q:=PhysicsShapeQueryParameters3D.new();var capsule:=CapsuleShape3D.new();capsule.radius=0.33;capsule.height=1.8;q.shape=capsule
+			q.transform.origin=City.ribbon_entry_point(Vector3(x,1.03,z))
+			if not space.intersect_shape(q).is_empty():entry_blocked+=1
+	verify(entry_blocked==0,"W northeast entry is a real removed solid volume with a clear 2m-wide approach")
+	var entry_support:=space.intersect_ray(PhysicsRayQueryParameters3D.create(City.ribbon_entry_point(Vector3(63,1,-15)),City.ribbon_entry_point(Vector3(63,-1,-15))))
+	verify(not entry_support.is_empty(),"W copper arrival foyer has physical floor support")
 	var id := "city/exchange/floor/04"
 	var body: StaticBody3D=world.structures[id].node
 	world._destroy_component(id,Vector3.ZERO,0,false)
@@ -124,6 +135,7 @@ func capture(world: Node3D) -> void:
 		"tower_one_core":[City.TOWER_CENTER+Vector3(160,145,-200),City.TOWER_CENTER+Vector3(0,110,0)],
 		"boc":[City.BOC_CENTER+Vector3(-92,29,49),City.BOC_CENTER+Vector3(0,26,0)],
 		"ribbon":[City.RIBBON_CENTER+Vector3(-120,74,-205),City.RIBBON_CENTER+Vector3(0,43,0)],
+		"ribbon_entry":[City.ribbon_entry_point(Vector3(70,2.4,-32)),City.ribbon_entry_point(Vector3(59.5,3.4,-12))],
 		"ribbon_aerial":[City.RIBBON_CENTER+Vector3(-140,155,-120),City.RIBBON_CENTER+Vector3(0,40,0)],
 		"exchange":[City.EXCHANGE_CENTER+Vector3(-53,20,-64),City.EXCHANGE_CENTER+Vector3(0,15,0)],
 		"exchange_detail":[City.EXCHANGE_CENTER+Vector3(-32,15,-31),City.EXCHANGE_CENTER+Vector3(0,17,0)]

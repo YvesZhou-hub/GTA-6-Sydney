@@ -3,7 +3,7 @@ extends RefCounted
 ## explicitly retained in city_map.json. Ordinary exteriors are reconstructions.
 const DATA_PATH := "res://assets/city_map.json"
 const FACADE := preload("res://shaders/city_facade.gdshader")
-const CUSTOM_IDS := ["way/581013659","way/468557019","way/544307818","way/614461305","way/614603737","way/7981564","way/1326239876","way/223786812","way/552008767","relation/7889573","way/120926554","way/335696788","way/544300935","way/544300936","way/544300937","way/544300938","way/183246899","way/183246900","way/312373859","way/387782063","way/1120046335","way/1120046336","way/1120046337","way/1120046338","way/1116329930","way/1521293802","way/335699164","way/335699165","way/1521293801","way/386563854","way/386563852","way/501890909","way/488447518","way/488447519","way/23646745","way/1116329939","way/487371417","way/1098953175"]
+const CUSTOM_IDS := ["way/408117953","way/408117952","way/408117951","way/408117950","way/408117949","way/408117948","way/51065527","way/581013659","way/468557019","way/544307818","way/614461305","way/614603737","way/7981564","way/1326239876","way/223786812","way/552008767","relation/7889573","way/120926554","way/335696788","way/544300935","way/544300936","way/544300937","way/544300938","way/183246899","way/183246900","way/312373859","way/387782063","way/1120046335","way/1120046336","way/1120046337","way/1120046338","way/1116329930","way/1521293802","way/335699164","way/335699165","way/1521293801","way/386563854","way/386563852","way/501890909","way/488447518","way/488447519","way/23646745","way/1116329939","way/487371417","way/1098953175","way/197801072","way/197801073","way/197801074","way/273960049","way/270803850","way/354270479","way/354270481","way/354270484","way/354270487","way/1269027215","way/1269027216","way/1269027221","way/1269027222","way/1269027236","way/1269027237","way/1295125146","way/1295125147","way/1295125149","way/1295125150","way/1295125151","way/1295125161","way/1295125162","way/1295125163","way/1295125164","way/1295125165","way/1295125168","way/1295125169","way/1295125170","way/1295125194","way/1295125195","way/1295125196","way/1295125197"]
 const STREET_WIDTH := {"motorway":13.0,"trunk":12.0,"primary":10.5,"secondary":10.0,"tertiary":9.0,"residential":7.0,"unclassified":7.0,"service":4.0,"living_street":5.5,"pedestrian":9.0,"footway":2.0,"path":2.0,"cycleway":2.8,"steps":2.0}
 
 static func data() -> Dictionary:
@@ -404,8 +404,10 @@ static func _relief_box(surface: SurfaceTool, pose: Transform3D) -> void:
 			_triangle(surface,vertices[0],vertices[2],vertices[3],transformed,[Vector2.ZERO,Vector2.ONE,Vector2.DOWN])
 
 static func _reserved(world: Node3D, item: Dictionary) -> bool:
-	if not item.get("parts",[]).is_empty(): return true
 	if item.id in CUSTOM_IDS: return true
+	# A tagged podium below every explicitly raised part is a distinct solid,
+	# not the duplicate full-height outline suppressed by the S3DB rule.
+	if not item.get("parts",[]).is_empty() and item.get("parent_geometry_policy",{}).get("mode","")!="preserve_tagged_base": return true
 	var p:=Vector2(item.center[0],item.center[1])
 	# Existing playable interiors and bridge approaches remain explicit game
 	# adjustments. An OSM block must not seal an old save's front door or roadway.
@@ -490,12 +492,17 @@ static func build_places(world: Node3D, snapshot: Dictionary) -> void:
 
 static func build_vegetation(world: Node3D, snapshot: Dictionary) -> void:
 	var count := 0
+	var helipad_omissions:Array=[]
 	for tree in snapshot.get("trees",[]):
 		var point:=Vector2(tree.point[0],tree.point[1])
 		if point.x>6000 and point.y < -5000: continue # Manly's species-specific model.
 		if world._in_bridge_corridor(point,3.5): continue
 		var height:=8.0
 		if str(tree.tags.get("height","")).is_valid_float(): height=clampf(float(tree.tags.height),2,27)
-		world._tree(Vector3(point.x,world.GROUND,point.y),height/8.0)
-		count+=1
+		var position:=Vector3(point.x,world.GROUND,point.y)
+		if world._tree_canopy_intersects_helipad(position,height/8.0):
+			helipad_omissions.append({"id":tree.id,"point":tree.point,"rendered_scale":height/8.0})
+			continue
+		if world._tree(position,height/8.0):count+=1
 	world.set_meta("mapped_trees",count)
+	world.set_meta("helipad_vegetation_adjustment",{"radius_m":world.HELIPAD_TREE_CLEAR_RADIUS,"reason":"Authored game helipad operation area; complete rendered crown bounds excluded, original OSM snapshot unchanged.","omitted_mapped_trees":helipad_omissions})

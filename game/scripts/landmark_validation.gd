@@ -21,7 +21,8 @@ func run():
 	var release_mode: bool="--release-review" in OS.get_cmdline_user_args()
 	var final_mode: bool="--release-final" in OS.get_cmdline_user_args()
 	var update_mode: bool="--release-v012" in OS.get_cmdline_user_args()
-	var release_capture: bool=release_mode or final_mode or update_mode
+	var detail_mode: bool="--release-v013" in OS.get_cmdline_user_args()
+	var release_capture: bool=release_mode or final_mode or update_mode or detail_mode
 	var headless:bool=DisplayServer.get_name()=="headless"
 	var manual_render: bool=(performance_mode or release_capture) and not headless
 	if release_capture and not game.world.has_meta("icc_landmarks"):
@@ -79,7 +80,7 @@ func run():
 			["theatre_stage",ICC.point(ICC.THEATRE,Vector3(17,18,-3)),ICC.point(ICC.THEATRE,Vector3(-31,3,0))],
 			["darling_square_wide",Vector3(-771,36,2081),Vector3(-773,14,2008)]
 		]
-	if update_mode:
+	if update_mode or detail_mode:
 		game.new_world("sandbox","Update visual QA - no save",false)
 		game.player.enabled=false
 		game.canvas.hide()
@@ -99,19 +100,60 @@ func run():
 			match vehicle.kind:
 				"car":pass
 				"motorcycle":camera_offset=Vector3(3.3,1.5,-4.5)
+				"hoverboard":
+					if not detail_mode:continue
+					vehicle.occupied=true
+					camera_offset=Vector3(3.8,2.8,-4.5);focus_offset=Vector3.UP*.8
+				"glider":
+					if not detail_mode:continue
+					camera_offset=Vector3(15,7,-19)
+				"paraglider":
+					if not detail_mode:continue
+					vehicle.occupied=true
+					camera_offset=Vector3(13,6,-15);focus_offset=Vector3.UP*2.5
+				"helicopter":
+					if not detail_mode:continue
+					camera_offset=Vector3(0,18,12)
 				"speedboat":
 					vehicle.global_position=Vector3(340,.9,-850)
 					camera_offset=Vector3(13,7,-16);focus_offset=Vector3.UP
 				"yacht":
 					vehicle.global_position=Vector3(280,.9,-850)
 					camera_offset=Vector3(28,15,32);focus_offset=Vector3.UP*3
-				"airliner":camera_offset=Vector3(63,24,-71);focus_offset=Vector3.UP*2
+				"airliner":
+					# Use the production clear-runway pose for a complete exterior view.
+					var runway_pose:Dictionary=game.VehicleSpawn.find_spawn(game,vehicle,true)
+					if not runway_pose.is_empty():vehicle.global_transform=runway_pose.transform
+					camera_offset=Vector3(63,24,-71);focus_offset=Vector3.UP*2
 				_:continue
 			vehicle.reset_physics_interpolation()
 			shots.append([vehicle.kind,vehicle.to_global(camera_offset),vehicle.to_global(focus_offset)])
+		if detail_mode:
+			shots.append_array([
+				["w-sydney",Vector3(-635,80,1540),Vector3(-811,45,1507)],
+				["w-entrance",Vector3(-765.7599,6.9,1445.3242),Vector3(-765.2472,7.9,1467.9071)],
+				["icc-convention-foyer",Vector3(-1025.8997,6.35,1507.9687),Vector3(-1021.3308,6.3,1515.1885)],
+				["icc-exhibition-foyer",Vector3(-952.6398,12.9,1626.0275),Vector3(-958.4316,13.7,1637.4492)],
+				["circular-quay",Vector3(-85,48,-30),Vector3(58,6,88)],
+				["circular-quay-street",Vector3(85,6.8,137),Vector3(94,7.4,84)],
+				["circular-quay-station",Vector3(14,15,42),Vector3(14,11,145)],
+				["darling-square",Vector3(-760,22,2057),Vector3(-766,7,2015)],
+				["darling-square-street",Vector3(-770,7.3,2070),Vector3(-777,8.5,2030)]
+			])
+			for shop:Dictionary in preload("res://scripts/darling_square_detail.gd").metadata()+preload("res://scripts/circular_quay_detail.gd").metadata():
+				if not shop.has("normal"):continue
+				var normal:=Vector3(shop.normal[0],0,shop.normal[1])
+				var focus:Vector3=shop.center+Vector3.UP*2.4
+				shots.append([shop.id,focus+normal*shop.width*.9+Vector3.UP,focus])
+			var tower=load("res://scripts/sydney_tower_landmark.gd")
+			if tower!=null:
+				var center:Vector3=tower.metadata()[0].center
+				shots.append(["sydney-tower",center+Vector3(-295,167,375),center+Vector3.UP*150])
+				shots.append(["sydney-tower-pod",center+Vector3(-55,282,88),center+Vector3.UP*265])
 	var folder=ProjectSettings.globalize_path("user://update-v012-views" if update_mode else "res://../reports/release-final" if final_mode else "res://../reports/release-review" if release_mode else "res://../reports/landmark-review")
-	if not get_meta("wrapper_startup",false) and not update_mode:
+	if not get_meta("wrapper_startup",false) and not update_mode and not detail_mode:
 		folder=ProjectSettings.globalize_path("user://"+("release-final" if final_mode else "release-review" if release_mode else "landmark-review"))
+	if detail_mode:folder=ProjectSettings.globalize_path("user://update-v013-views")
 	if headless:folder=folder.path_join("headless-validation")
 	DirAccess.make_dir_recursive_absolute(folder)
 	var evidence: Array[Dictionary]=[]

@@ -34,6 +34,7 @@ var _material_cache: Dictionary = {}
 var _building_plots: Array[AABB] = []
 var _distant_visual_plots: Array[AABB] = []
 const GROUND := 4.5
+const HELIPAD_TREE_CLEAR_RADIUS := 55.0
 const MAX_RUBBLE := 96
 var BRIDGE_CORRIDOR: Array[Vector2] = preload("res://scripts/bridge_landmark.gd").corridor_points()
 const CityMap = preload("res://scripts/city_map.gd")
@@ -43,9 +44,12 @@ const LANDMARK_MODELS = [
 	preload("res://scripts/bank_landmarks.gd"),
 	preload("res://scripts/metro_entrances.gd"),
 	preload("res://scripts/darling_square_frontages.gd"),
+	preload("res://scripts/darling_square_detail.gd"),
 	preload("res://scripts/quay_landmarks.gd"),
+	preload("res://scripts/circular_quay_detail.gd"),
 	preload("res://scripts/cyber_landmarks.gd"),
-	preload("res://scripts/icc_landmarks.gd")
+	preload("res://scripts/icc_landmarks.gd"),
+	preload("res://scripts/sydney_tower_landmark.gd")
 ]
 const FACADE = preload("res://assets/world_facade.gdshader")
 const WATER = preload("res://shaders/water.gdshader")
@@ -96,6 +100,12 @@ func _register_landmark_geography() -> void:
 	# Map icons describe the landmark itself; navigation uses a separately checked
 	# public approach. Never infer an entrance by dropping the player at a centroid.
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/landmark_geography.json"))
+	for group in ["sydney_tower_landmark","circular_quay_detail","darling_square_detail"]:
+		for record:Dictionary in get_meta(group,[]):
+			if not record.has("map_position") or not record.has("arrival"):continue
+			var entry:=record.duplicate(true)
+			entry["group"]=group
+			source.landmarks.append(entry)
 	var catalog: Dictionary = {}
 	for record: Dictionary in source.get("landmarks", []):
 		var item := record.duplicate(true)
@@ -538,26 +548,7 @@ func _local_beam(parent: Node3D, a: Vector3, b: Vector3, width: float, key: Stri
 	mesh.basis = Basis.looking_at(d.normalized(),Vector3.UP if absf(d.normalized().y)<0.98 else Vector3.RIGHT)
 
 func _build_quay() -> void:
-	# Five narrow ferry fingers reach north into Sydney Cove. Covered boarding areas stay on one continuous map.
-	for i in range(5):
-		var x := -47.0+i*43.0
-		var z := 64.0+i*0.5
-		_structure_box("quay/pier/%s"%i,Vector3(x,2.5,z),Vector3(13,1.2,102),"wood",1600000)
-		# Sloped pedestrian gangway from 4.5m quay to 3.1m pontoon.
-		_ramp_box(Vector3(x,GROUND,132),Vector3(x,3.1,113),11,"wood")
-		for section in range(4):
-			var canopy := _structure_box("quay/canopy/%s/%s"%[i,section],Vector3(x,6.8,z-29+section*21),Vector3(10.7,0.35,20.7),"copper",95000)
-			for side in [-1,1]:
-				_box(canopy,Vector3(side*4.7,-1.85,0),Vector3(0.22,3.7,0.22),"white")
-				_box(canopy,Vector3(side*6.0,-2.5,0),Vector3(0.15,1.0,20),"steel")
-		for z2 in range(18,110,18):
-			_batch_cylinder(Vector3(x-5.8,1,z2),0.33,8,"darksteel")
-			_batch_cylinder(Vector3(x+5.8,1,z2),0.33,8,"darksteel")
-		_sign(Vector3(x,7.8,116),"0%s"%(i+1),0,Color("254b55"))
-	# Circular Quay station / service hall: formal roof, platforms, masonry and glazed entrances.
-	_building("quay/transit_hall",Vector3(15,GROUND,202),128,29,13,2)
-	for x in range(-40,78,12):
-		_batch_box(Vector3(x,5.8,184),Vector3(8,0.16,3.2),"copper")
+	preload("res://scripts/circular_quay_detail.gd").build(self)
 	# Open moorings at Walsh Bay, including a garage sized slip and low pontoons.
 	for x in [-660,-605,-545,-485]:
 		_structure_box("marina/pontoon/%s"%x,Vector3(x,2.1,-415),Vector3(7,0.9,114),"wood",600000)
@@ -810,8 +801,27 @@ func _build_helipad() -> void:
 			_batch_cylinder(p+Vector3(x,0,z),0.3,0.3,"lamp")
 	_sign(p+Vector3(0,2.5,30),"HARBOUR AIR / LOCAL OPERATIONS",0,Color("eed8b0"))
 
-func _tree(p: Vector3, scale: float = 1.0) -> void:
-	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),5.0*scale): return
+func _tree_crowns(p: Vector3, scale: float) -> Array[Transform3D]:
+	var crowns:Array[Transform3D]=[]
+	for part in range(3):
+		var origin:=p+Vector3((part-1)*2.1*scale,(7.0+abs(part-1)*-0.7)*scale,sin(float(part)*3.0)*1.4*scale)
+		crowns.append(Transform3D(Basis.IDENTITY.scaled(Vector3(3.0,2.6,3.1)*scale),origin))
+	return crowns
+
+func _tree_canopy_intersects_helipad(p: Vector3, scale: float) -> bool:
+	# This authored game helipad is already excluded from ordinary buildings.
+	# Keep the same 55 m operation area clear of the complete rendered crowns,
+	# including crowns on trees whose trunks are outside the boundary.
+	var pad:Vector3=anchors["helipad"]
+	for crown in _tree_crowns(p,scale):
+		var bounds:AABB=crown*AABB(-Vector3.ONE,Vector3.ONE*2)
+		var nearest:=Vector2(clampf(pad.x,bounds.position.x,bounds.end.x),clampf(pad.z,bounds.position.z,bounds.end.z))
+		if nearest.distance_to(Vector2(pad.x,pad.z))<=HELIPAD_TREE_CLEAR_RADIUS:return true
+	return false
+
+func _tree(p: Vector3, scale: float = 1.0) -> bool:
+	if _tree_canopy_intersects_helipad(p,scale): return false
+	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),5.0*scale): return false
 	_batch_cylinder(p+Vector3(0,3.1*scale,0),0.36*scale,6.2*scale,"bark")
 	for branch in [-1,1]:
 		_beam(p+Vector3(0,2.5*scale,0),p+Vector3(branch*1.8*scale,5.8*scale,0.4*scale),0.2*scale,"bark")
@@ -826,11 +836,21 @@ func _tree(p: Vector3, scale: float = 1.0) -> void:
 		sphere.radial_segments = 12
 		sphere.rings = 6
 		materials["tree_mesh"] = sphere
+	var crowns:=_tree_crowns(p,scale)
 	for part in range(3):
 		var key := "tree_light" if part==1 else "tree"
 		if not _batch_foliage.has(key): _batch_foliage[key] = []
-		var origin := p+Vector3((part-1)*2.1*scale,(7.0+abs(part-1)*-0.7)*scale,sin(float(part)*3.0)*1.4*scale)
-		_batch_foliage[key].append(Transform3D(Basis.IDENTITY.scaled(Vector3(3.0,2.6,3.1)*scale),origin))
+		_batch_foliage[key].append(crowns[part])
+		# Preserve only the small nearby set of exact renderer inputs for
+		# clearance diagnostics; headless MultiMesh readback has no transforms.
+		var bounds:AABB=crowns[part]*AABB(-Vector3.ONE,Vector3.ONE*2)
+		var pad:Vector3=anchors["helipad"]
+		var nearest:=Vector2(clampf(pad.x,bounds.position.x,bounds.end.x),clampf(pad.z,bounds.position.z,bounds.end.z))
+		if nearest.distance_to(Vector2(pad.x,pad.z))<=HELIPAD_TREE_CLEAR_RADIUS+20:
+			var retained:Array=get_meta("helipad_retained_crown_bounds",[])
+			retained.append(bounds)
+			set_meta("helipad_retained_crown_bounds",retained)
+	return true
 
 func _lamp(p: Vector3) -> void:
 	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),0.5): return

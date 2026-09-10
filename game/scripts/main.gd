@@ -4,7 +4,7 @@ const Store = preload("res://scripts/save_store.gd")
 const Player = preload("res://scripts/harbor_player.gd")
 const Sound = preload("res://scripts/harbor_audio.gd")
 const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
-const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机"}
+const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机"}
 var airport: Node3D
 var world: Node3D
 var player: CharacterBody3D
@@ -73,7 +73,14 @@ var _camera_reset := true
 
 func _ready():
 	var arguments:=OS.get_cmdline_user_args()
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--visual-qa","--interactive-qa"].any(func(flag):return flag in arguments)
+	if "--mobility-qa" in arguments:
+		qa_running=true
+		setup_input()
+		set_process(false)
+		set_process_unhandled_input(false)
+		add_child(load("res://scripts/mobility_validation.gd").new())
+		return
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -98,7 +105,7 @@ func _ready():
 	player.last_safe=player.global_position
 	audio=Sound.new()
 	add_child(audio)
-	player.footstep.connect(func(w): audio.footstep(w,player.global_position))
+	# Walking and swimming no longer trigger the repetitive synthesized footstep.
 	player.landed.connect(func(s): if s>16: notify("落地冲击 · 放慢速度，小心高处",false))
 	camera=Camera3D.new()
 	# The camera samples rendered transforms itself; interpolating it a second time causes jitter.
@@ -131,6 +138,8 @@ func _ready():
 		flight.call_deferred("run")
 	elif "--experience-qa" in arguments:
 		add_child(load("res://scripts/experience_validation.gd").new())
+	elif "--air-vehicle-qa" in arguments:
+		add_child(load("res://scripts/air_vehicle_validation.gd").new())
 	elif "--visual-qa" in arguments:
 		add_child(load("res://scripts/landmark_validation.gd").new())
 	elif "--interactive-qa" in arguments:
@@ -437,9 +446,15 @@ func reset_fleet(with_defaults: bool = true):
 	var home=world.anchors.get("home",Vector3(-140,6,150))
 	var marina=world.anchors.get("marina",Vector3(-240,1,-330))
 	var helipad=world.anchors.get("helipad",Vector3(-280,8,-250))
-	var placements={"car":home+Vector3(12,1,6),"motorcycle":home+Vector3(18,1,6),"speedboat":Vector3(marina.x-8.5,0.9,marina.z-28),"yacht":Vector3(marina.x-30,0.9,marina.z-64),"helicopter":helipad+Vector3(0,3,0),"paraglider":world.anchors.get("north",Vector3(50,5,-1350))+Vector3(40,90,0),"glider":Vector3(700,230,-1600),"airliner":Vector3(-4180,10.78,8600)}
+	var placements={"car":home+Vector3(12,1,6),"motorcycle":home+Vector3(18,1,6),"hoverboard":home+Vector3(22,1,6),"speedboat":Vector3(marina.x-8.5,0.9,marina.z-28),"yacht":Vector3(marina.x-30,0.9,marina.z-64),"helicopter":helipad+Vector3(0,3,0),"paraglider":world.anchors.get("north",Vector3(50,5,-1350))+Vector3(40,90,0),"glider":Vector3(700,230,-1600),"airliner":Vector3(-4180,10.78,8600)}
 	for kind in VEHICLE_NAMES:
 		var v=make_vehicle(kind,"owned_"+kind,placements[kind])
+		# Place parked contact geometry just above its authored support surface.
+		# The new world has not necessarily flushed its Jolt broad phase yet.
+		if kind in ["car","motorcycle","helicopter"]:
+			var support:float=helipad.y-.20 if kind=="helicopter" else world.GROUND
+			v.position.y=support-VehicleSpawn.envelope(v).position.y+.12
+			v.reset_physics_interpolation()
 		if kind in ["paraglider","glider","airliner"]: v.freeze=true
 		if kind=="airliner" and is_instance_valid(airport):
 			v.rotation.y=airport.runway_heading
@@ -645,7 +660,7 @@ func request_vehicle(kind:String):
 	if not kind in owned: owned.append(kind)
 	finish_vehicle_spawn(v,placement)
 	yaw=v.rotation.y
-	pitch=-0.10 if kind in ["car","motorcycle"] else -0.17
+	pitch=-0.10 if kind in ["car","motorcycle","hoverboard"] else -0.17
 	enter_vehicle(v)
 	close_panel()
 	notify("已免费新增并入座 · %s\n%s · %s"%[VEHICLE_NAMES[kind],placement.description,vehicle_help(kind)])
@@ -702,10 +717,10 @@ func enter_vehicle(v):
 	if is_instance_valid(current_vehicle) and current_vehicle!=v:
 		current_vehicle.occupied=false
 	current_vehicle=v
-	if v.freeze and v.kind in ["glider","paraglider"] and v.global_position.y>30 and v.linear_velocity.length()<4:
-		v.linear_velocity=-v.global_basis.z*(22.0 if v.kind=="glider" else 9.0)+Vector3.DOWN
-	v.occupied=true
+	var was_frozen:bool=v.freeze
 	v.freeze=false
+	v.prepare_for_boarding(was_frozen)
+	v.occupied=true
 	player.enabled=false
 	player.visible=false
 	player.collision_layer=0
@@ -794,14 +809,14 @@ func landmark_catalog() -> Array:
 				break
 	# The model modules publish their actual IDs and names. This also keeps
 	# new bank/Quay/shop destinations in sync with their verified locations.
-	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks"]:
+	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks","sydney_tower_landmark","circular_quay_detail","darling_square_detail"]:
 		for record in world.get_meta(group,[]):
 			var key:String=("shop_" if group=="darling_square_frontages" else "")+str(record.get("id",""))
 			if not world.anchors.has(key) or not world.anchors[key] is Vector3: continue
 			var title:String=str(record.get("name",key))
 			if group=="metro_entrances": title+=" · Metro 入口厅"
 			if group=="darling_square_frontages" and record.get("evidence","")=="location_verified": title+=" · 店面待核实"
-			catalog.append({"key":key,"title":title,"position":world.anchors[key]})
+			catalog.append({"key":key,"title":title,"position":record.get("arrival",world.anchors[key]),"map_position":record.get("map_position",world.anchors[key])})
 	var geography:Dictionary=world.get_meta("landmark_geography",{})
 	for item in catalog:
 		if geography.has(str(item.key)):
@@ -1301,8 +1316,10 @@ func airport_start():
 
 func vehicle_help(kind:String) -> String:
 	match kind:
-		"car","motorcycle": return "W/S 加速倒车   A/D 转向   空格 制动"
+		"car": return "W/S 加速倒车   A/D 转向   空格 制动 · 极速 420 km/h"
+		"motorcycle": return "W/S 加速倒车   A/D 转向   空格 制动 · 极速 320 km/h"
 		"yacht","speedboat": return "W/S 双机推力   A/D 船舵   空格 反向推力"
-		"helicopter": return "W/S 俯仰   A/D 偏航   R/F 升降"
+		"hoverboard": return "W/S 加速 / 后退 · 200 km/h   A/D 转向   R/F 升降   空格 急停 · 自动越阶 / 掠水"
+		"helicopter": return "W/S 俯仰   A/D 偏航   R/F 升降 · 极速 350 km/h"
 		"paraglider","glider": return "A/D 转弯   R/F 俯仰   空格 减速板 · 无动力"
-		_: return "W/S 推力   A/D 转弯   R/F 俯仰   空格 减速板"
+		_: return "W/S 推力   A/D 转弯   R/F 俯仰   空格 减速板 · 极速 800 km/h"

@@ -1,0 +1,345 @@
+{
+  "checks": [
+    {
+      "detail": {},
+      "name": "production request immediately occupies glider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "saved_speed": 28.0144596099854
+      },
+      "name": "saving before first integration retains launch energy glider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "initial_speed": 28.0144596099854,
+        "lowest_speed": 27.9183101654053
+      },
+      "name": "newly summoned wing has sustainable launch speed glider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "altitude_lost": 17.8958435058594,
+        "distance": 421.755310058594,
+        "health": 100.0,
+        "max_roll": 2.40690162245372e-10,
+        "worst_sink": -1.35702979564667
+      },
+      "name": "fifteen seconds unpowered stable flight glider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "final": 1990.59413116455,
+        "initial": 2157.81301986694
+      },
+      "name": "gliding does not add mechanical energy glider",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "ordinary reboarding adds no launch energy glider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "restored_velocity": [
+          3.54505180766296e-09,
+          -1.15716516971588,
+          -28.2730846405029
+        ],
+        "saved_velocity": [
+          3.54504270383416e-09,
+          -1.15720129013062,
+          -28.2730541229248
+        ]
+      },
+      "name": "airborne save preserves live motion through activation glider",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "immediate summon save reload has launch speed glider",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "production request immediately occupies paraglider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "saved_speed": 9.56347179412842
+      },
+      "name": "saving before first integration retains launch energy paraglider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "initial_speed": 9.56347179412842,
+        "lowest_speed": 9.37432289123535
+      },
+      "name": "newly summoned wing has sustainable launch speed paraglider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "altitude_lost": 16.7983551025391,
+        "distance": 151.268005371094,
+        "health": 100.0,
+        "max_roll": 8.20576454008126e-11,
+        "worst_sink": -1.4403235912323
+      },
+      "name": "fifteen seconds unpowered stable flight paraglider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "final": 1065.46885879517,
+        "initial": 1222.6267943573
+      },
+      "name": "gliding does not add mechanical energy paraglider",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "ordinary reboarding adds no launch energy paraglider",
+      "passed": true
+    },
+    {
+      "detail": {
+        "restored_velocity": [
+          7.21392634517315e-09,
+          -1.11440551280975,
+          -10.2410717010498
+        ],
+        "saved_velocity": [
+          7.21392723335157e-09,
+          -1.11440575122833,
+          -10.2410717010498
+        ]
+      },
+      "name": "airborne save preserves live motion through activation paraglider",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "immediate summon save reload has launch speed paraglider",
+      "passed": true
+    }
+  ],
+  "full_world": true,
+  "physics_engine": "Jolt Physics",
+  "scenarios": [
+    {
+      "kind": "glider",
+      "samples": [
+        {
+          "frame": 1,
+          "position": [
+            -545.0,
+            179.997268676758,
+            -436.799987792969
+          ],
+          "stalled": true,
+          "velocity": [
+            0.0,
+            -0.899999976158142,
+            -28.0
+          ]
+        },
+        {
+          "frame": 2,
+          "position": [
+            -545.0,
+            179.982330322266,
+            -437.266632080078
+          ],
+          "stalled": false,
+          "velocity": [
+            0.0,
+            -0.896091759204865,
+            -27.9988384246826
+          ]
+        },
+        {
+          "frame": 3,
+          "position": [
+            -545.0,
+            179.96745300293,
+            -437.733245849609
+          ],
+          "stalled": false,
+          "velocity": [
+            1.70603629964447e-13,
+            -0.892367482185364,
+            -27.9976482391357
+          ]
+        },
+        {
+          "frame": 60,
+          "position": [
+            -545.0,
+            179.127853393555,
+            -464.291839599609
+          ],
+          "stalled": false,
+          "velocity": [
+            -5.93387172731497e-10,
+            -0.95186460018158,
+            -27.9181156158447
+          ]
+        },
+        {
+          "frame": 300,
+          "position": [
+            -545.0,
+            174.054046630859,
+            -576.198669433594
+          ],
+          "stalled": false,
+          "velocity": [
+            3.35359540137858e-09,
+            -1.30391311645508,
+            -28.1106395721436
+          ]
+        },
+        {
+          "frame": 600,
+          "position": [
+            -545.0,
+            167.924041748047,
+            -717.219665527344
+          ],
+          "stalled": false,
+          "velocity": [
+            3.53302342936956e-09,
+            -1.17782163619995,
+            -28.2549667358398
+          ]
+        },
+        {
+          "frame": 900,
+          "position": [
+            -545.0,
+            162.104156494141,
+            -858.555297851562
+          ],
+          "stalled": false,
+          "velocity": [
+            3.54504270383416e-09,
+            -1.15720129013062,
+            -28.2730541229248
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "paraglider",
+      "samples": [
+        {
+          "frame": 1,
+          "position": [
+            -545.0,
+            119.997276306152,
+            -431.636962890625
+          ],
+          "stalled": true,
+          "velocity": [
+            0.0,
+            -1.10000002384186,
+            -9.5
+          ]
+        },
+        {
+          "frame": 2,
+          "position": [
+            -545.0,
+            119.979644775391,
+            -431.795440673828
+          ],
+          "stalled": false,
+          "velocity": [
+            2.45425056145943e-12,
+            -1.05798065662384,
+            -9.50845146179199
+          ]
+        },
+        {
+          "frame": 3,
+          "position": [
+            -545.0,
+            119.962684631348,
+            -431.954040527344
+          ],
+          "stalled": false,
+          "velocity": [
+            8.15492985639654e-12,
+            -1.01771688461304,
+            -9.51577472686768
+          ]
+        },
+        {
+          "frame": 60,
+          "position": [
+            -545.0,
+            119.330619812012,
+            -440.932312011719
+          ],
+          "stalled": false,
+          "velocity": [
+            -5.59204960115522e-10,
+            -0.819175601005554,
+            -9.33892154693604
+          ]
+        },
+        {
+          "frame": 300,
+          "position": [
+            -545.0,
+            114.34447479248,
+            -480.515930175781
+          ],
+          "stalled": false,
+          "velocity": [
+            7.05956493263216e-09,
+            -1.11567997932434,
+            -10.2381315231323
+          ]
+        },
+        {
+          "frame": 600,
+          "position": [
+            -545.0,
+            108.77335357666,
+            -531.708679199219
+          ],
+          "stalled": false,
+          "velocity": [
+            7.2170620590839e-09,
+            -1.11454474925995,
+            -10.2408647537231
+          ]
+        },
+        {
+          "frame": 900,
+          "position": [
+            -545.0,
+            103.201644897461,
+            -582.904968261719
+          ],
+          "stalled": false,
+          "velocity": [
+            7.21392723335157e-09,
+            -1.11440575122833,
+            -10.2410717010498
+          ]
+        }
+      ]
+    }
+  ],
+  "user_saves_touched": false
+}

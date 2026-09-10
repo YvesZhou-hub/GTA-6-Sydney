@@ -25,6 +25,8 @@ func world_anchors() -> Dictionary:
 	for venue: Dictionary in ICC.metadata(): result[venue.id] = venue.get("arrival",venue.center)
 	for shop: Dictionary in Shops.metadata():
 		result["shop_" + str(shop.id)] = Vector3(shop.front[0],4.5,shop.front[1]) + Vector3(shop.normal[0],0,shop.normal[1])*1.72
+	for shop:Dictionary in preload("res://scripts/darling_square_detail.gd").metadata():result[shop.id]=shop.arrival
+	for shop:Dictionary in preload("res://scripts/circular_quay_detail.gd").metadata():result[shop.id]=shop.arrival
 	result["manly_beach"] = Manly.geo(-33.7970494,151.2883603)
 	return result
 
@@ -51,7 +53,7 @@ func run() -> void:
 	var free := true
 	for kind: String in Life.FREE_VEHICLES:
 		free = free and life.purchase(kind,999999) and life.money == 0 and life.owned_assets.has(kind)
-	check(free and Life.FREE_VEHICLES.size() == 8, "all eight vehicle types including speedboat remain free at zero balance")
+	check(free and Life.FREE_VEHICLES.size() == 9 and "hoverboard" in Life.FREE_VEHICLES, "all nine vehicle types including hoverboard remain free at zero balance")
 	check(not life.purchase("repair",120) and life.money == 0, "optional paid repairs cannot overdraw the balance")
 	check(not life.spend(-10) and not life.purchase("invalid",-10) and life.money == 0, "negative general transactions cannot mint currency")
 	life.setup(anchors,true)
@@ -64,7 +66,7 @@ func run() -> void:
 	check(life.active_job.stage == 1 and life.active_job.reward == 1500 and life._jobs_started == 12, "in-progress legacy job keeps progress and receives the new base reward")
 	life.cancel_job()
 	var catalog := life.service_catalog()
-	check(catalog.size() == 16, "three real ICC venue anchors, twelve authored shops and Manly provide sixteen experiences")
+	check(catalog.size() == 22, "ICC venues, fifteen Darling Square shops three Circular Quay restaurants and Manly provide twenty-two experiences")
 	var valid_catalog := true
 	var ids := {}
 	for service: Dictionary in catalog:
@@ -112,7 +114,7 @@ func run() -> void:
 		var outcome := life.use_service(service.id,service.position)
 		all_delivered = all_delivered and outcome.ok
 		sum_cost += int(service.cost)
-	check(all_delivered and life.experience_visits.size() == 16 and life.money == 50000-sum_cost, "all sixteen experiences work and use game money in sandbox too")
+	check(all_delivered and life.experience_visits.size() == 22 and life.money == 50000-sum_cost, "all twenty-two experiences work and use game money in sandbox too")
 	check(life.experience_spending == sum_cost and life.get_children().filter(func(child): return child.name == "Life_Travel_Stamp").size() == 1, "repeat activities reuse one feedback label and account every cost")
 	life.tick_context(Vector3.ZERO,"",0,5.1)
 	check(not life._experience_label.visible, "brief stamp feedback ends without delaying movement or the next purchase")

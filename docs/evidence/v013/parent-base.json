@@ -1,0 +1,118 @@
+{
+  "checks": [
+    {
+      "name": "tagged 0-18 m Darling Square podium exists",
+      "passed": true
+    },
+    {
+      "name": "base has rendered physical volume from ground through 18 m",
+      "passed": true
+    },
+    {
+      "name": "all four residential parts retain their original 18 m base",
+      "passed": true
+    },
+    {
+      "name": "custom Exchange wins over a retained-base policy",
+      "passed": true
+    },
+    {
+      "name": "overlapping or inferred neighbouring parent remains suppressed",
+      "passed": true
+    },
+    {
+      "name": "migration uses exactly the same retained podium geometry",
+      "passed": true
+    },
+    {
+      "name": "old save inside new podium is detected",
+      "passed": true
+    },
+    {
+      "name": "edition door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "matcha door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "nakano door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "pork_roll door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "kuki door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "kwang door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "wingboy door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "holy_basil door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "messina door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "kurtosh door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "dopa door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "shortstop door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "auvers door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "hakatamon door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "chinta_ria door approach remains physically clear",
+      "passed": true
+    },
+    {
+      "name": "auvers has a solid podium behind its frontage",
+      "passed": true
+    },
+    {
+      "name": "hakatamon has a solid podium behind its frontage",
+      "passed": true
+    },
+    {
+      "name": "chinta_ria has a solid podium behind its frontage",
+      "passed": true
+    },
+    {
+      "name": "destroyed podium no longer traps saved occupants",
+      "passed": true
+    },
+    {
+      "name": "repair restores the physical podium",
+      "passed": true
+    },
+    {
+      "name": "saved destruction restores only the podium hole",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "user_saves_touched": false
+}
