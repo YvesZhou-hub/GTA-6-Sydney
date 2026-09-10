@@ -1,0 +1,18 @@
+{
+  "mode": "experience",
+  "launch": [
+    "$BUILD_DIR/Harbourlife.app/Contents/MacOS/Harbourlife",
+    "--disable-vsync",
+    "--log-file",
+    "$PROJECT/reports/release-v012-native/experience-runtime.log",
+    "--",
+    "--experience-qa"
+  ],
+  "started_utc": "2026-09-10T15:23:14Z",
+  "wall_seconds": 45.48,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 60,
+  "passed": true,
+  "screenshots": 4
+}

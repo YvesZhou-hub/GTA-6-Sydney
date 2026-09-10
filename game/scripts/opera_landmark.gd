@@ -3,8 +3,10 @@ extends RefCounted
 ## Both halves of every roof are cut from an equal-radius sphere and meet at a sharp ridge.
 ## Geometry and its closed collider are the same mesh; ribs live on their damage component.
 
-const CENTER := Vector3(421.0, 4.5, -326.0)
-const ANGLE := -12.0
+# OSM relation/9596872 outer-ring centroid and minimum-area long-axis bearing.
+# These align the authored reconstruction, not a claim that every shell is surveyed.
+const CENTER := Vector3(427.2947742677, 4.5, -321.4544052467)
+const ANGLE := -13.232864688
 const PODIUM_HEIGHT := 11.2
 const SPHERE_RADIUS := 75.2
 const SHELL_THICKNESS := 0.32

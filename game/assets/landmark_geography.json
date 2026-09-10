@@ -1,0 +1,750 @@
+{
+  "schema": 1,
+  "checked": "2026-09-11",
+  "projection": {
+    "lat": -33.86,
+    "lon": 151.2105,
+    "meters_per_degree_lon": 92400,
+    "meters_per_degree_lat": 111320,
+    "axes": "+X east; +Z south; Y=4.5 common game ground datum"
+  },
+  "accuracy": "Numerical consistency with the bundled OSM snapshot, not a survey. Roofs, terrain elevations, bridge approaches, facade details and arrival offsets include authored estimates.",
+  "landmarks": [
+    {
+      "id": "westpac",
+      "address": "275 Kent Street, Sydney NSW 2000",
+      "group": "bank_landmarks",
+      "osm_ids": [
+        "way/120926554",
+        "way/335696788",
+        "way/544300935",
+        "way/544300936",
+        "way/544300937",
+        "way/544300938"
+      ],
+      "map_position": [
+        -608.80465,
+        4.5,
+        674.13052
+      ],
+      "model_reference": [
+        -608.576904296875,
+        4.5,
+        674.605773925781
+      ],
+      "source": "https://www.westpac.com.au/about-westpac/global-locations/westpac-australia/",
+      "arrival": [
+        -584.3726,
+        4.5,
+        622.106
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Kent Street",
+      "name": "Westpac Place \u00b7 Westpac Group headquarters",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.86605579,
+        151.203911205
+      ],
+      "map_to_arrival_m": 57.476
+    },
+    {
+      "id": "cba_south",
+      "address": "11 Harbour Street, Sydney NSW 2000",
+      "group": "bank_landmarks",
+      "osm_ids": [
+        "way/183246899"
+      ],
+      "map_position": [
+        -693.50302,
+        4.5,
+        1705.14453
+      ],
+      "model_reference": [
+        -693.502990722656,
+        4.5,
+        1705.14453125
+      ],
+      "source": "https://www.commbank.com.au/about-us/investors/enquiries.html",
+      "arrival": [
+        -672.8715,
+        4.5,
+        1663.5885
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Harbour Street",
+      "name": "Commonwealth Bank Place South \u00b7 CBA headquarters",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.875317504,
+        151.202994556
+      ],
+      "map_to_arrival_m": 46.396
+    },
+    {
+      "id": "cba_north",
+      "address": "Darling Quarter, Harbour Street, Sydney NSW 2000",
+      "group": "bank_landmarks",
+      "osm_ids": [
+        "way/183246900"
+      ],
+      "map_position": [
+        -758.71791,
+        4.5,
+        1622.03146
+      ],
+      "model_reference": [
+        -758.717895507812,
+        4.5,
+        1622.03149414062
+      ],
+      "source": "https://fjcstudio.com/projects/darling-quarter/",
+      "arrival": [
+        -700.7915,
+        4.5,
+        1626.6533
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Harbour Street",
+      "name": "Commonwealth Bank Place North",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.87457089,
+        151.202288767
+      ],
+      "map_to_arrival_m": 58.111
+    },
+    {
+      "id": "tower_one",
+      "address": "100 Barangaroo Avenue, Barangaroo NSW 2000",
+      "group": "city_landmarks",
+      "osm_ids": [
+        "way/468557019",
+        "way/581013659"
+      ],
+      "map_position": [
+        -775.00336,
+        4.5,
+        427.86918
+      ],
+      "model_reference": [
+        -773.420776367188,
+        4.5,
+        430.784820556641
+      ],
+      "source": "https://www.about.hsbc.com.au/",
+      "arrival": [
+        -824.625,
+        4.5,
+        435.1197
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Barangaroo Avenue",
+      "name": "International Tower One \u00b7 HSBC Australia headquarters",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.863843597,
+        151.202112518
+      ],
+      "map_to_arrival_m": 50.149
+    },
+    {
+      "id": "boc",
+      "address": "140 Sussex Street, Sydney NSW 2000",
+      "group": "city_landmarks",
+      "osm_ids": [
+        "way/544307818"
+      ],
+      "map_position": [
+        -610.63647,
+        4.5,
+        1027.0621
+      ],
+      "model_reference": [
+        -610.636474609375,
+        4.5,
+        1027.06213378906
+      ],
+      "source": "https://www.bankofchina.com/au/en/bocinfo/bi1/201907/t20190710_15913196.html",
+      "arrival": [
+        -627.1129,
+        4.5,
+        1004.009
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Sussex Street",
+      "name": "Bank of China Australia headquarters",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.869226214,
+        151.20389138
+      ],
+      "map_to_arrival_m": 28.336
+    },
+    {
+      "id": "ribbon",
+      "address": "31 Wheat Road, Sydney NSW 2000",
+      "group": "city_landmarks",
+      "osm_ids": [
+        "way/614461305"
+      ],
+      "map_position": [
+        -811.46936,
+        4.5,
+        1507.24868
+      ],
+      "model_reference": [
+        -811.469360351562,
+        4.5,
+        1507.24865722656
+      ],
+      "source": "https://www.marriott.com/en-us/hotels/sydwh-w-sydney/overview/",
+      "arrival": [
+        -765.5048,
+        4.5,
+        1453.7386
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Wheat Road",
+      "name": "W Sydney \u00b7 The Ribbon",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.873539783,
+        151.201717864
+      ],
+      "map_to_arrival_m": 70.541
+    },
+    {
+      "id": "exchange_haidilao",
+      "address": "1 Little Pier Street, Haymarket NSW 2000",
+      "group": "city_landmarks",
+      "osm_ids": [
+        "way/614603737"
+      ],
+      "map_position": [
+        -768.49507,
+        4.5,
+        1993.50219
+      ],
+      "model_reference": [
+        -768.495056152344,
+        4.5,
+        1993.50219726562
+      ],
+      "source": "https://kkaa.co.jp/en/project/the-exchange/",
+      "arrival": [
+        -757.0818,
+        4.5,
+        1974.3806
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Little Pier Street",
+      "name": "The Exchange \u00b7 Haidilao Darling Square (Level 5)",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.877907853,
+        151.202182954
+      ],
+      "map_to_arrival_m": 22.269
+    },
+    {
+      "id": "cybercx_sydney",
+      "address": "Level 23, 2 Market Street, Sydney NSW 2000",
+      "group": "cyber_landmarks",
+      "osm_ids": [
+        "way/1521293802",
+        "way/335699164",
+        "way/335699165",
+        "way/1521293801"
+      ],
+      "map_position": [
+        -571.77988,
+        4.5,
+        1180.09819
+      ],
+      "model_reference": [
+        -579.0,
+        4.5,
+        1177.0
+      ],
+      "source": "https://cybercx.com.au/contact-us/",
+      "arrival": [
+        -579.0,
+        4.5,
+        1214.0
+      ],
+      "arrival_kind": "authored publicly accessible street/arcade approach",
+      "name": "CyberCX \u00b7 Sydney office",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.870600954,
+        151.204311906
+      ],
+      "map_to_arrival_m": 34.662
+    },
+    {
+      "id": "cloudflare_sydney",
+      "address": "388 George Street, Sydney NSW 2000",
+      "group": "cyber_landmarks",
+      "osm_ids": [
+        "way/386563854",
+        "way/386563852"
+      ],
+      "map_position": [
+        -287.69857,
+        4.5,
+        933.89615
+      ],
+      "model_reference": [
+        -282.0,
+        4.5,
+        931.0
+      ],
+      "source": "https://www.cloudflare.com/en-ca/about-overview/",
+      "arrival": [
+        -316.5,
+        4.5,
+        924.0
+      ],
+      "arrival_kind": "authored publicly accessible street/arcade approach",
+      "name": "Cloudflare \u00b7 Sydney office",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.868389293,
+        151.207386379
+      ],
+      "map_to_arrival_m": 30.454
+    },
+    {
+      "id": "icc_convention",
+      "address": "14 Darling Drive \u00b7 northern venue",
+      "group": "icc_landmarks",
+      "osm_ids": [
+        "way/488447518",
+        "way/488447519"
+      ],
+      "map_position": [
+        -1038.91806,
+        4.5,
+        1542.23594
+      ],
+      "model_reference": [
+        -1052.65905761719,
+        4.5,
+        1497.20104980469
+      ],
+      "source": "https://iccsydney.com.au/organisers/organiser-toolkit/floor-plans/",
+      "arrival": [
+        -980.13293,
+        4.5,
+        1492.30322
+      ],
+      "arrival_kind": "public modeled entrance; official public floorplan and collision route verified",
+      "name": "ICC Sydney \u00b7 Convention Centre",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.873854078,
+        151.199256298
+      ],
+      "map_to_arrival_m": 77.13
+    },
+    {
+      "id": "icc_exhibition",
+      "address": "14 Darling Drive \u00b7 Tumbalong Boulevard",
+      "group": "icc_landmarks",
+      "osm_ids": [
+        "way/23646745",
+        "way/1116329939"
+      ],
+      "map_position": [
+        -982.24955,
+        4.5,
+        1724.13097
+      ],
+      "model_reference": [
+        -982.25,
+        4.5,
+        1724.13098144531
+      ],
+      "source": "https://iccsydney.com.au/organisers/organiser-toolkit/floor-plans/",
+      "arrival": [
+        -927.06342,
+        4.5,
+        1636.02026
+      ],
+      "arrival_kind": "public modeled entrance; official public floorplan and collision route verified",
+      "name": "ICC Sydney \u00b7 Exhibition Centre",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.875488061,
+        151.199869594
+      ],
+      "map_to_arrival_m": 103.966
+    },
+    {
+      "id": "tiktok_entertainment",
+      "address": "14 Darling Drive \u00b7 Moriarty Walk / Tumbalong Boulevard",
+      "group": "icc_landmarks",
+      "osm_ids": [
+        "way/487371417"
+      ],
+      "map_position": [
+        -905.80972,
+        4.5,
+        1881.01848
+      ],
+      "model_reference": [
+        -905.809997558594,
+        4.5,
+        1881.01904296875
+      ],
+      "source": "https://iccsydney.com.au/Theatre-Seating-Plan",
+      "arrival": [
+        -881.94958,
+        4.5,
+        1823.95154
+      ],
+      "arrival_kind": "public modeled entrance; official public floorplan and collision route verified",
+      "name": "TikTok Entertainment Centre \u00b7 theatre",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.876897399,
+        151.200696865
+      ],
+      "map_to_arrival_m": 61.854
+    },
+    {
+      "id": "manly_wharf",
+      "address": "",
+      "group": "manly_landmarks",
+      "osm_ids": [
+        "way/7981564"
+      ],
+      "map_position": [
+        6827.12007,
+        4.5,
+        -6676.8296
+      ],
+      "model_reference": [
+        6823.55126953125,
+        4.5,
+        -6681.92724609375
+      ],
+      "source": "https://apps.environment.nsw.gov.au/dpcheritageapp/ViewHeritageItemDetails.aspx?ID=5051365",
+      "arrival": [
+        6809.88,
+        4.5,
+        -6753.7844
+      ],
+      "arrival_kind": "northern public wharf entrance approach",
+      "name": "Manly Wharf",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.800021294,
+        151.284386581
+      ],
+      "map_to_arrival_m": 78.862
+    },
+    {
+      "id": "hotel_steyne",
+      "address": "",
+      "group": "manly_landmarks",
+      "osm_ids": [
+        "relation/7889573"
+      ],
+      "map_position": [
+        7127.76613,
+        4.5,
+        -7016.6439
+      ],
+      "model_reference": [
+        7130.82373046875,
+        4.5,
+        -7012.36962890625
+      ],
+      "source": "https://hotelsteyne.com.au/",
+      "arrival": [
+        7157.304,
+        4.5,
+        -6999.8016
+      ],
+      "arrival_kind": "South Steyne public street approach",
+      "name": "Hotel Steyne",
+      "map_position_kind": "mapped outer polygon minus actual courtyard hole; centroid is not a doorway",
+      "lat_lon": [
+        -33.796968704,
+        151.287640326
+      ],
+      "map_to_arrival_m": 34.002
+    },
+    {
+      "id": "quay_quarter",
+      "address": "50 Bridge Street, Sydney NSW 2000",
+      "group": "quay_landmarks",
+      "osm_ids": [
+        "way/312373859",
+        "way/387782063",
+        "way/1120046335",
+        "way/1120046336",
+        "way/1120046337",
+        "way/1120046338"
+      ],
+      "map_position": [
+        92.72686,
+        4.5,
+        313.37548
+      ],
+      "model_reference": [
+        94.8711090087891,
+        4.5,
+        329.616729736328
+      ],
+      "source": "https://www.bvn.com.au/project/quay-quarter/",
+      "arrival": [
+        98.301,
+        4.5,
+        366.4335
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "Bridge Street",
+      "name": "Quay Quarter Tower \u00b7 AMP / Deloitte",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.862815087,
+        151.211503537
+      ],
+      "map_to_arrival_m": 53.35
+    },
+    {
+      "id": "salesforce",
+      "address": "180 George Street, Sydney NSW 2000",
+      "group": "quay_landmarks",
+      "osm_ids": [
+        "way/1116329930"
+      ],
+      "map_position": [
+        -171.8901,
+        4.5,
+        264.07719
+      ],
+      "model_reference": [
+        -171.890090942383,
+        4.5,
+        264.077209472656
+      ],
+      "source": "https://www.sydneyplace.com/workplace/workplace/",
+      "arrival": [
+        -208.806,
+        4.5,
+        268.5207
+      ],
+      "arrival_kind": "public street approach outside facade; not a surveyed doorway",
+      "arrival_street": "George Street",
+      "name": "Salesforce Tower at Sydney Place",
+      "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
+      "lat_lon": [
+        -33.862372235,
+        151.208639718
+      ],
+      "map_to_arrival_m": 37.182
+    },
+    {
+      "id": "opera",
+      "address": "",
+      "group": "",
+      "osm_ids": [
+        "relation/9596872"
+      ],
+      "map_position": [
+        427.29477,
+        4.5,
+        -321.45441
+      ],
+      "model_reference": [
+        427.2947742677,
+        4.5,
+        -321.4544052467
+      ],
+      "arrival": [
+        403.94603,
+        4.5,
+        -222.16273
+      ],
+      "arrival_kind": "southern forecourt before the modeled monumental stairs; not a vehicle driveway",
+      "source": "https://www.sydneyoperahouse.com/visit/getting-here/map-of-the-sydney-opera-house",
+      "name": "Sydney Opera House",
+      "map_position_kind": "mapped outer ring centroid",
+      "lat_lon": [
+        -33.857112339,
+        151.215124402
+      ],
+      "map_to_arrival_m": 102.0
+    },
+    {
+      "id": "bridge",
+      "address": "",
+      "group": "",
+      "osm_ids": [
+        "way/142518160",
+        "way/142518161",
+        "way/142518162",
+        "way/142518163"
+      ],
+      "map_position": [
+        16.14312,
+        54,
+        -858.62737
+      ],
+      "model_reference": [
+        16.14311661,
+        54,
+        -858.6273666931
+      ],
+      "arrival": [
+        -316.19807,
+        4.5,
+        -162.40446
+      ],
+      "arrival_kind": "southern game ground approach; northern Bradfield plan mapped with estimated grade; Cumberland stairs absent",
+      "source": "https://www.nsw.gov.au/driving-boating-and-transport/using-roads-bridges-tunnels/sydney-harbour-bridge",
+      "name": "Sydney Harbour Bridge",
+      "map_position_kind": "midpoint of mapped four pylon centroids",
+      "lat_lon": [
+        -33.852286854,
+        151.210674709
+      ],
+      "map_to_arrival_m": 771.477
+    },
+    {
+      "id": "barangaroo_metro",
+      "address": "",
+      "group": "metro_entrances",
+      "osm_ids": [
+        "node/11445399049"
+      ],
+      "map_position": [
+        -751.17504,
+        4.5,
+        -94.18785
+      ],
+      "model_reference": [
+        -751.17504,
+        4.5,
+        -94.187852
+      ],
+      "arrival": [
+        -751.17504,
+        4.5,
+        -97.0
+      ],
+      "arrival_kind": "mapped entrance node; arrival 2.81m before escalator approach",
+      "source": "https://www.sydneymetro.info/article/first-look-barangaroos-newest-waterfront-precinct",
+      "name": "Barangaroo \u00b7 Hickson Road",
+      "map_position_kind": "mapped entrance node",
+      "lat_lon": [
+        -33.8591539,
+        151.2023704
+      ],
+      "map_to_arrival_m": 2.812
+    },
+    {
+      "id": "martin_place_metro",
+      "address": "",
+      "group": "metro_entrances",
+      "osm_ids": [
+        "node/11553917358",
+        "node/11553917357"
+      ],
+      "map_position": [
+        -33.2178,
+        4.5,
+        712.21423
+      ],
+      "model_reference": [
+        -33.2178,
+        4.5,
+        712.214228
+      ],
+      "arrival": [
+        -33.2178,
+        4.5,
+        707.5
+      ],
+      "arrival_kind": "northwest mapped entrance; safe Hunter Street approach",
+      "source": "https://www.sydneymetro.info/media/document/37151",
+      "name": "Martin Place \u00b7 Hunter Street",
+      "map_position_kind": "mapped northwest entrance node",
+      "lat_lon": [
+        -33.8663979,
+        151.2101405
+      ],
+      "map_to_arrival_m": 4.714
+    },
+    {
+      "id": "manly_corso",
+      "address": "",
+      "group": "manly_landmarks",
+      "osm_ids": [
+        "way/223785178",
+        "way/546705240"
+      ],
+      "map_position": [
+        7070.38332,
+        4.5,
+        -6927.15417
+      ],
+      "model_reference": [
+        7070.383320000099,
+        4.5,
+        -6927.154167999733
+      ],
+      "arrival": [
+        7070.38332,
+        4.5,
+        -6927.15417
+      ],
+      "arrival_kind": "mapped pedestrian street point; linear precinct has no unique building centre",
+      "source": "https://www.manlyaustralia.com.au/info/thingstodo/walks/manly-heritage-plaques/",
+      "aliases": [
+        "the_corso"
+      ],
+      "name": "The Corso",
+      "map_position_kind": "mapped pedestrian route point",
+      "lat_lon": [
+        -33.7977726,
+        151.2870193
+      ],
+      "map_to_arrival_m": 0.0
+    },
+    {
+      "id": "manly_beach",
+      "address": "",
+      "group": "manly_landmarks",
+      "osm_ids": [],
+      "map_position": [
+        7194.29172,
+        4.5,
+        -7007.66079
+      ],
+      "model_reference": [
+        7194.291719999774,
+        4.5,
+        -7007.660792000071
+      ],
+      "arrival": [
+        7194.29172,
+        4.5,
+        -7007.66079
+      ],
+      "arrival_kind": "public beachfront point; not beach polygon centroid",
+      "source": "https://www.northernbeaches.nsw.gov.au/things-to-do/recreation-area/manly-beach",
+      "name": "Manly Beach",
+      "map_position_kind": "mapped beachfront public point",
+      "lat_lon": [
+        -33.7970494,
+        151.2883603
+      ],
+      "map_to_arrival_m": 0.0
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "race": {
+    "base_reward": 2000,
+    "completed_count_delta": 1,
+    "completion_elapsed_s": 84.8499999999965,
+    "completion_text": "两岸计时赛 complete · +$2232 · 1:24 · $232 time bonus",
+    "expected_checkpoints": 8,
+    "full_clean_bonus_paid": true,
+    "lifetime_earnings_delta": 2232,
+    "money_delta": 2232,
+    "observed_checkpoints": [
+      {
+        "checkpoint": 1,
+        "time_s": 0.166666666666667,
+        "vehicle_position": [
+          -324.89111328125,
+          5.54915142059326,
+          -196.208053588867
+        ]
+      },
+      {
+        "checkpoint": 2,
+        "time_s": 14.0833333333336,
+        "vehicle_position": [
+          -220.777389526367,
+          27.9659767150879,
+          -396.969482421875
+        ]
+      },
+      {
+        "checkpoint": 3,
+        "time_s": 27.8999999999997,
+        "vehicle_position": [
+          -106.80046081543,
+          52.7007141113281,
+          -616.805908203125
+        ]
+      },
+      {
+        "checkpoint": 4,
+        "time_s": 41.6833333333322,
+        "vehicle_position": [
+          8.86597347259521,
+          54.6800003051758,
+          -839.90673828125
+        ]
+      },
+      {
+        "checkpoint": 5,
+        "time_s": 55.4666666666648,
+        "vehicle_position": [
+          124.721298217773,
+          54.6800003051758,
+          -1063.36401367188
+        ]
+      },
+      {
+        "checkpoint": 6,
+        "time_s": 65.1666666666643,
+        "vehicle_position": [
+          192.630081176758,
+          37.1476135253906,
+          -1227.64318847656
+        ]
+      },
+      {
+        "checkpoint": 7,
+        "time_s": 75.1666666666637,
+        "vehicle_position": [
+          194.01774597168,
+          16.0510482788086,
+          -1410.43237304688
+        ]
+      },
+      {
+        "checkpoint": 8,
+        "time_s": 84.8499999999965,
+        "vehicle_position": [
+          146.07975769043,
+          5.31017780303955,
+          -1581.68762207031
+        ]
+      }
+    ],
+    "passed": true,
+    "race_incidents": 0,
+    "return_drive_does_not_repeat_reward": true,
+    "scope": "Production life job; checkpoints advanced only by main physics context while the real vehicle was driven with ordinary inputs",
+    "started": true,
+    "time_bonus_expected": 232,
+    "time_bonus_paid": 232
+  },
+  "runs": [
+    {
+      "direction": "south_to_north",
+      "elapsed_s": 85.8166666666631,
+      "end": [
+        143.085784912109,
+        5.209228515625,
+        -1591.67419433594
+      ],
+      "impacts": [],
+      "maximum_lateral_error_m": 0.405431842803955,
+      "minimum_health": 100.0,
+      "passed": true,
+      "section": 29
+    },
+    {
+      "direction": "north_to_south",
+      "elapsed_s": 85.5333333333298,
+      "end": [
+        -325.275604248047,
+        6.13041210174561,
+        -204.822647094727
+      ],
+      "impacts": [],
+      "maximum_lateral_error_m": 0.339857006072998,
+      "minimum_health": 100.0,
+      "passed": true,
+      "section": 29
+    }
+  ],
+  "scope": "Inputs-only driving after controlled test starting pose; full original game scene and physical vehicle",
+  "engine": "Godot 4.7.2 stable / Jolt Physics",
+  "world_ready": true,
+  "script_errors": 0,
+  "test_log": "final-bridge-drive-v012.txt",
+  "production_configuration": {
+    "max_bodies": 65536,
+    "enhanced_internal_edges": {
+      "simulation": true,
+      "queries": true,
+      "motion_queries": true
+    }
+  }
+}

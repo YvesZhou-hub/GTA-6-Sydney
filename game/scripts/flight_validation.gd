@@ -67,7 +67,7 @@ func run() -> void:
 		return
 	host.qa_running=true
 	host.new_world("sandbox","Flight validation",false)
-	host.world_id="qa_flight_validation"
+	host.world_id="qa_flight_validation_"+str(Time.get_ticks_usec())
 	# New fleet placement queries the physics world. Allow freshly constructed
 	# terrain and rigid bodies to synchronize before requesting a runway copy.
 	await get_tree().physics_frame
@@ -113,6 +113,12 @@ func run() -> void:
 	var args:=OS.get_cmdline_args()
 	var fixed_index:=args.find("--fixed-fps")
 	report.fixed_simulation_fps=int(args[fixed_index+1]) if fixed_index>=0 and fixed_index+1<args.size() else 0
+	# Godot consumes recognized engine switches before exposing command-line args.
+	# The validation launcher repeats its pacing in a user argument for the report.
+	for user_arg in OS.get_cmdline_user_args():
+		if user_arg.begins_with("--qa-fixed-fps="):
+			report.fixed_simulation_fps=int(user_arg.get_slice("=",1))
+			report.pacing_source="launcher-declared user argument; compare recorded launch command"
 	report.rendered = DisplayServer.get_name() != "headless"
 	report.capture_mode="movie_writer_fixed_step" if not movie_path.is_empty() else ("headless_physics" if not report.rendered else "native_fixed_step" if report.fixed_simulation_fps>0 else "realtime_rendered")
 	report.performance_note="Fixed simulation pacing or MovieWriter capture; wall-clock intervals are not a real-time gameplay benchmark." if not movie_path.is_empty() or report.fixed_simulation_fps>0 else ("Headless physics does not measure rendering performance." if not report.rendered else "Real-time wall-clock process frame intervals, with automatic rendering.")

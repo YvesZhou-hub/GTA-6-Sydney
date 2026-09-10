@@ -1,0 +1,43 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS life mode begins with $50,000
+PASS new economy is already versioned without a migration grant
+PASS all eight vehicle types including speedboat remain free at zero balance
+PASS optional paid repairs cannot overdraw the balance
+PASS negative general transactions cannot mint currency
+PASS sandbox starts with the same generous spending money
+PASS legacy low balance receives only the difference to $50,000
+PASS welcome grant preserves earned income, completions and owned assets
+PASS in-progress legacy job keeps progress and receives the new base reward
+PASS three real ICC venue anchors, twelve authored shops and Manly provide sixteen experiences
+PASS service IDs are unique and positions/prices/source boundary are explicit
+PASS remote purchase neither charges nor delivers
+PASS flying above a venue is not considered arrival
+PASS missing service does not charge
+PASS moving vehicle must stop before ordering
+PASS stopped vehicle can buy once without exiting; one delivery signal carries stamina effect
+PASS purchase displays a world-space stamp and persists visit/spending ledger
+PASS another deliberate purchase is immediately available without artificial cooldown
+PASS nearby hints and interaction open the service menu
+PASS save fixture uses a fresh isolated temporary directory
+PASS JSON save reload preserves spent balance and never repeats welcome top-up
+PASS loading never repeats a purchase, stamina award or visual delivery
+PASS travel passport and last receipt survive actual temporary JSON round-trip
+PASS save snapshot cannot mutate the live journal by alias
+PASS wealthy legacy save is never reduced or granted unnecessary money
+PASS current-version empty wallet remains empty on reload
+PASS insufficient funds returns a recoverable error without side effects
+PASS missing world anchors never create experiences at invented fallback locations
+PASS invalid anchor coordinates are omitted
+PASS all sixteen experiences work and use game money in sandbox too
+PASS repeat activities reuse one feedback label and account every cost
+PASS brief stamp feedback ends without delaying movement or the next purchase
+PASS photo spatial activity completes with generous earned reward
+PASS salvage spatial activity completes with generous earned reward
+PASS harbor spatial activity completes with generous earned reward
+PASS air spatial activity completes with generous earned reward
+PASS race spatial activity completes with generous earned reward
+PASS job earnings balance exactly; welcome money is not counted as earned income
+PASS save fixture uses a fresh isolated temporary directory
+PASS earned money and all job records persist unchanged
+LIFE EXPERIENCE COMPLETE checks=40 failures=0

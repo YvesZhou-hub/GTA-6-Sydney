@@ -7,15 +7,30 @@ const DECK_Y := 54.0
 const WIDTH := 49.0
 const ARCH_X := 15.0
 const PANELS := 28
-const SOUTH_ENTRY := Vector3(-325.70848036, 4.5, -194.3677124)
-const NORTH_ENTRY := Vector3(353.49108752, 4.5, -1502.99791431)
+# OSM way/142518160..163 pylon centroids establish the geographic centreline.
+# The 503m arch sits symmetrically between the mapped pylon pairs, 566.85m apart.
+const AXIS := Vector3(0.460282668724, 0.0, -0.887772417274)
+const ARCH_SOUTH := Vector3(-99.6179745741, DECK_Y, -635.3526037487)
+const PYLON_CENTERS := [
+	Vector3(-132.2801842022, 0, -616.6648252243),
+	Vector3(-96.3446178494, 0, -597.3564904913),
+	Vector3(128.2865625702, 0, -1119.9880683657),
+	Vector3(164.9107059213, 0, -1100.5000826912)
+]
+# The south ground link remains a gameplay approximation. The northern X/Z
+# curve is mapped Bradfield Highway; only its grade is authored to game ground.
+const SOUTH_ENTRY := Vector3(-327.7155454215, 4.5, -195.4083138478)
+const NORTH_ENTRY := Vector3(138.3524383863, 4.5, -1600.0)
+const NORTH_EXIT := Vector3(133.1824072090, 4.5, -1615.0)
+const NORTH_SUBDIVISIONS := 16
+static var _north_path: Array[Vector3] = []
+static var _north_lengths: Array[float] = []
 const SOUTH_EXIT := Vector3(-336.75, 4.5, -173.06)
 const ROAD_LANES := [-10.8, -6.5, -2.15, 2.15, 6.5, 10.8, 17.65, 20.55]
 const WALK_X := [-23.15, 23.15]
 
 static func pos(t: float, y: float = DECK_Y, across: float = 0.0) -> Vector3:
-	var direction := Vector3(232, 0, -447).normalized()
-	return Vector3(-83, y, -662) + direction * t + Vector3(-direction.z, 0, direction.x) * across
+	return Vector3(ARCH_SOUTH.x, y, ARCH_SOUTH.z) + AXIS * t + Vector3(-AXIS.z, 0, AXIS.x) * across
 
 static func basis_at(a: Vector3, b: Vector3) -> Basis:
 	return Basis.looking_at((b - a).normalized(), Vector3.UP)
@@ -35,14 +50,15 @@ static func build(world: Node3D) -> void:
 	# Broad ground connections meet all road lanes. Both footways reach ground.
 	world._road(SOUTH_ENTRY + Vector3.UP * 0.09, SOUTH_EXIT + Vector3.UP * 0.09, WIDTH)
 	world._road(SOUTH_EXIT + Vector3.UP * 0.09, Vector3(-310, 4.59, -170), WIDTH)
-	world._road(NORTH_ENTRY + Vector3.UP * 0.09, Vector3(370, 4.59, -1580), WIDTH)
+	world._road(NORTH_ENTRY + Vector3.UP * 0.09, NORTH_EXIT + Vector3.UP * 0.09, WIDTH)
 	for station in range(18, 490, 36):
 		_lamp(world, pos(station, DECK_Y, 23.95), basis)
 		_lamp(world, pos(station, DECK_Y, -23.95), basis)
 	_summit(world, basis)
 	refresh_drive_collision(world)
 	world.set_meta("bridge_geometry_version", 2)
-	world.set_meta("bridge_min_road_clearance", 6.2)
+	world.set_meta("bridge_min_road_clearance", 5.5)
+	world.set_meta("bridge_min_steel_road_clearance", 6.2)
 
 static func _make_materials(world: Node3D) -> void:
 	world._mat("bridge_steel", Color("4e5558"), 0.66, 0.60)
@@ -66,7 +82,7 @@ static func _make_materials(world: Node3D) -> void:
 static func _deck_piece(world: Node3D, id: String, surface: Vector3, basis: Basis, length: float, depth: float, span_piece: bool) -> void:
 	# Exact top planes and a tiny longitudinal overlap avoid tilted lip steps.
 	var deck: StaticBody3D = world._structure_box(id, surface - basis.y * depth * 0.5, Vector3(WIDTH, depth, length + 0.08), "bridge_steel" if span_piece else "concrete", 2800000.0, basis)
-	# Continuous long support boxes below provide floors. Per-piece box end faces
+	# A welded continuous support skin provides the floors. Per-piece box end faces
 	# catch spherical wheels even when the visible top planes are coplanar.
 	var original_floor: CollisionShape3D = deck.get_child(1)
 	deck.remove_child(original_floor)
@@ -183,26 +199,65 @@ static func _member(world: Node3D, id: String, a: Vector3, b: Vector3, width: fl
 					world._box(body, Vector3(face * width * 0.60, rivet * width, z), Vector3(0.11, 0.11, 0.11), "bridge_rivet")
 	return body
 
-static func ramp_position(label: String, fraction: float) -> Vector3:
-	var start := SOUTH_ENTRY if label == "south" else pos(SPAN)
-	var end := pos(0) if label == "south" else NORTH_ENTRY
-	return start.lerp(end, clampf(fraction, 0.0, 1.0))
+static func _load_north_path() -> void:
+	if not _north_path.is_empty(): return
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/bridge_north_approach.json"))
+	var length := 0.0
+	for item: Array in data.points:
+		var point := Vector3(item[0], 0.0, item[1])
+		if not _north_path.is_empty(): length += point.distance_to(_north_path[-1])
+		_north_path.append(point)
+		_north_lengths.append(length)
 
-static func ramp_basis(label: String, _fraction: float) -> Basis:
-	var start := SOUTH_ENTRY if label == "south" else pos(SPAN)
-	var end := pos(0) if label == "south" else NORTH_ENTRY
-	return basis_at(start, end)
+static func corridor_points() -> Array[Vector2]:
+	_load_north_path()
+	var result: Array[Vector2] = [Vector2(-310,-170),Vector2(SOUTH_EXIT.x,SOUTH_EXIT.z),Vector2(SOUTH_ENTRY.x,SOUTH_ENTRY.z),Vector2(pos(0).x,pos(0).z)]
+	for point: Vector3 in _north_path: result.append(Vector2(point.x,point.z))
+	result.append(Vector2(NORTH_EXIT.x,NORTH_EXIT.z))
+	return result
+
+static func drive_route() -> Array[Vector3]:
+	var result: Array[Vector3] = [SOUTH_ENTRY,pos(0),pos(SPAN)]
+	for i in range(1,29): result.append(ramp_position("north",float(i)/28.0))
+	return result
+
+static func ramp_position(label: String, fraction: float) -> Vector3:
+	var f := clampf(fraction, 0.0, 1.0)
+	if label == "south": return SOUTH_ENTRY.lerp(pos(0),f)
+	_load_north_path()
+	var target := f * _north_lengths[-1]
+	for i in range(1,_north_path.size()):
+		if target <= _north_lengths[i] or i == _north_path.size()-1:
+			var point := _north_path[i-1].lerp(_north_path[i],(target-_north_lengths[i-1])/(_north_lengths[i]-_north_lengths[i-1]))
+			# Horizontal location is mapped. Grade is estimated to meet the shared
+			# flat ground, easing to zero slope at the northern ground connection.
+			point.y = lerpf(DECK_Y,4.5,f+f*f-f*f*f)
+			return point
+	return NORTH_ENTRY
+
+static func ramp_basis(label: String, fraction: float) -> Basis:
+	if label == "south": return basis_at(SOUTH_ENTRY,pos(0))
+	# Average the mapped heading over ~11m. A raw polyline knot otherwise
+	# turns a 49m-wide cross section instantly and makes its outer surface fold.
+	# This smooths the section frame only; centreline X/Z stays on the source.
+	var start := ramp_position("north",fraction-0.010)
+	var end := ramp_position("north",fraction+0.010)
+	if fraction<=0.000001:
+		var delta:=end-start
+		return basis_at(start,start+AXIS*Vector2(delta.x,delta.z).length()+Vector3.UP*delta.y)
+	return basis_at(start,end)
 
 static func _ramp(world: Node3D, _a: Vector3, _b: Vector3, label: String) -> void:
-	# Collinear approaches share the exact span transverse direction. The small
-	# ground-end correction removes both outer-lane wedge cracks and wheel snags
-	# at angled support joins; the surveyed arch endpoints remain unchanged.
+	# North follows the paired mapped Bradfield carriageway centreline. The
+	# south approach remains the explicitly documented straight game connection.
 	for i in range(28):
 		var a := ramp_position(label, float(i) / 28.0)
 		var b := ramp_position(label, float(i + 1) / 28.0)
 		var p := (a + b) * 0.5
 		var basis := Basis.looking_at((b - a).normalized(), ramp_basis(label, (i + 0.5) / 28.0).y)
 		_deck_piece(world, "bridge/ramp/%s/%s" % [label, i], p, basis, a.distance_to(b), 2.0, false)
+		if label == "north":
+			_warp_north_piece(world.structures["bridge/ramp/north/%s"%i].node, float(i)/28.0, float(i+1)/28.0, a.distance_to(b))
 		if minf(a.y, b.y) > 14.0:
 			for side in [-1, 1]:
 				var lower_a: Vector3 = a + basis.x * side * ARCH_X - Vector3.UP * 7.0
@@ -220,37 +275,34 @@ static func _ramp(world: Node3D, _a: Vector3, _b: Vector3, label: String) -> voi
 				_lamp(world, p + basis.x * side * 23.95, basis)
 
 static func _pylon(world: Node3D, station: float, side: int, basis: Basis) -> void:
-	var center := pos(station, 0, side * 36.0)
+	var index := (0 if station == 0.0 else 2) + (0 if side < 0 else 1)
+	var center: Vector3 = PYLON_CENTERS[index]
 	var prefix := "bridge/pylon/%s/%s" % [int(station), side]
-	# Tapered, granite-faced concrete pylons. Their flat, restrained crown and
-	# single large arched opening follow the Destination NSW close-up reference.
-	var base: StaticBody3D = world._structure_mesh(prefix + "/0", _taper_mesh(world, Vector2(22.6, 29.0), Vector2(21.0, 26.5), 13.5), center + Vector3.UP * 11.25, "bridge_granite", 3600000, basis)
-	world._box(base, Vector3(0, 6.45, 0), Vector3(21.5, 0.6, 27.0), "bridge_coping")
-	var main: StaticBody3D = world._structure_mesh(prefix + "/1", _taper_mesh(world, Vector2(21.0, 26.5), Vector2(16.7, 21.9), 53.0), center + Vector3.UP * 44.5, "bridge_granite", 3600000, basis)
-	var upper: StaticBody3D = world._structure_mesh(prefix + "/2", _taper_mesh(world, Vector2(16.7, 21.9), Vector2(15.4, 20.5), 14.0), center + Vector3.UP * 78.0, "bridge_granite", 3600000, basis)
-	var cornice: StaticBody3D = world._structure_box(prefix + "/3", center + Vector3.UP * 85.8, Vector3(16.0, 1.6, 21.1), "bridge_coping", 2200000, basis)
+	# The mapped upper pylons are about 10.3 x 25.3m, from 59m to 89m.
+	# Their previous 72m transverse spacing was incorrect (mapped pairs ~41m).
+	# Lower abutments are an authored approximation. A real open passage, not
+	# transparent masonry, preserves the modeled outer lanes and footway below.
+	world._structure_mesh(prefix + "/0", _taper_mesh(world, Vector2(15.8, 29.0), Vector2(13.8, 27.0), 43.5), center + Vector3.UP * 26.25, "bridge_granite", 3600000, basis)
+	for pier in [-1, 1]:
+		world._structure_box(prefix + "/passage/%s" % pier, center + basis.x * pier * 6.9 + Vector3.UP * 53.5, Vector3(1.3, 11.0, 26.0), "bridge_granite", 2200000, basis)
+	var main: StaticBody3D = world._structure_mesh(prefix + "/1", _taper_mesh(world, Vector2(10.3, 25.3), Vector2(9.5, 23.9), 25.8), center + Vector3.UP * 71.9, "bridge_granite", 3600000, basis)
+	world._structure_box(prefix + "/2", center + Vector3.UP * 85.6, Vector3(10.0, 1.6, 24.4), "bridge_coping", 2200000, basis)
 	for face in [-1, 1]:
-		# Pylon face has a single recessed round-headed window with a balcony,
-		# narrow slits above and below, and projecting corner pilasters.
-		_window(world, main, Vector3(0, 17.4, face * 12.03), face)
-		world._box(main, Vector3(0, 11.8, face * 12.8), Vector3(7.6, 0.85, 2.1), "bridge_coping")
-		world._box(main, Vector3(0, 13.0, face * 13.6), Vector3(7.6, 1.55, 0.35), "bridge_granite")
+		_window(world, main, Vector3(0, -3.0, face * 12.45), face)
+		world._box(main, Vector3(0, -8.0, face * 12.8), Vector3(5.4, 0.65, 1.3), "bridge_coping")
+		world._box(main, Vector3(0, -6.9, face * 13.3), Vector3(5.4, 1.5, 0.25), "bridge_granite")
 		for slit in [-1.35, 1.35]:
-			world._box(main, Vector3(slit, -5.5, face * 12.8), Vector3(0.65, 6.2, 0.12), "bridge_recess")
-			world._box(upper, Vector3(slit, -0.2, face * 10.9), Vector3(0.62, 6.6, 0.12), "bridge_recess")
+			world._box(main, Vector3(slit, 8.0, face * 12.06), Vector3(0.62, 5.4, 0.12), "bridge_recess")
 		for edge in [-1, 1]:
-			world._local_beam(main, Vector3(edge * 9.8, -26.5, face * 13.1), Vector3(edge * 7.65, 26.5, face * 10.8), 0.46, "bridge_coping")
-			world._local_beam(upper, Vector3(edge * 7.65, -7.0, face * 10.8), Vector3(edge * 7.0, 7.0, face * 10.2), 0.38, "bridge_coping")
-		# Two smaller round-headed side apertures, safely outside the carriageway.
+			world._local_beam(main, Vector3(edge * 4.95, -12.9, face * 12.55), Vector3(edge * 4.5, 12.9, face * 11.9), 0.34, "bridge_coping")
 		for longitudinal in [-5.3, 5.3]:
-			world._box(main, Vector3(face * 9.0, 14.0, longitudinal), Vector3(0.12, 5.0, 1.8), "bridge_recess")
-	# Low lookout parapet, flat roof and discreet metal railing terminate at 89m.
-	var roof: StaticBody3D = world._structure_box(prefix + "/lookout", center + Vector3.UP * 87.0, Vector3(15.1, 0.8, 20.1), "bridge_granite", 1700000, basis)
+			world._box(main, Vector3(face * 4.99, -2.0, longitudinal), Vector3(0.12, 5.0, 1.8), "bridge_recess")
+	var roof: StaticBody3D = world._structure_box(prefix + "/lookout", center + Vector3.UP * 86.8, Vector3(9.5, 0.8, 23.9), "bridge_granite", 1700000, basis)
 	for face in [-1, 1]:
-		world._box(roof, Vector3(face * 7.25, 0.85, 0), Vector3(0.5, 1.7, 20.1), "bridge_granite")
-		world._box(roof, Vector3(0, 0.85, face * 9.8), Vector3(15.0, 1.7, 0.5), "bridge_granite")
-		world._box(roof, Vector3(face * 7.0, 1.75, 0), Vector3(0.09, 0.14, 19.2), "bridge_steel")
-		world._box(roof, Vector3(0, 1.75, face * 9.55), Vector3(14.0, 0.14, 0.09), "bridge_steel")
+		world._box(roof, Vector3(face * 4.5, 0.85, 0), Vector3(0.5, 1.7, 23.9), "bridge_granite")
+		world._box(roof, Vector3(0, 0.85, face * 11.7), Vector3(9.5, 1.7, 0.5), "bridge_granite")
+		world._box(roof, Vector3(face * 4.25, 1.75, 0), Vector3(0.09, 0.14, 23.0), "bridge_steel")
+		world._box(roof, Vector3(0, 1.75, face * 11.45), Vector3(8.5, 0.14, 0.09), "bridge_steel")
 
 static func _taper_mesh(world: Node3D, bottom: Vector2, top: Vector2, height: float) -> ArrayMesh:
 	var vertices := PackedVector3Array()
@@ -328,48 +380,100 @@ static func refresh_drive_collision(world: Node3D) -> void:
 	for i in range(1, 43):
 		stations.append({"p": pos(float(i) * SPAN / 42.0), "right": basis_at(pos(0), pos(SPAN)).x})
 		component_ids.append("bridge/deck/%02d" % (i - 1))
-	for i in range(1, 29):
-		var t := float(i) / 28.0
+	for i in range(1, 28*NORTH_SUBDIVISIONS+1):
+		var t := float(i) / float(28*NORTH_SUBDIVISIONS)
 		stations.append({"p": ramp_position("north", t), "right": ramp_basis("north", t).x})
-		component_ids.append("bridge/ramp/north/%s" % (i - 1))
+		component_ids.append("bridge/ramp/north/%s" % ((i - 1)/NORTH_SUBDIVISIONS))
 	# The two exact shared join stations use the main span transverse direction.
 	stations[28].right = basis_at(pos(0), pos(SPAN)).x
 	stations[70].right = basis_at(pos(0), pos(SPAN)).x
 	var run_count := 0
-	# One long box per intact approach/span run avoids Godot Physics ghost
-	# contacts at both concave triangle edges and convex-hull end polygons.
-	# Each region has its own shallow underside, keeping the harbour below open.
-	for region in [[0, 28], [28, 70], [70, 98]]:
-		var first := -1
-		for i in range(region[0], region[1] + 1):
-			var intact: bool = i < region[1] and not world.destroyed.has(component_ids[i])
-			if intact and first < 0: first = i
-			if not intact and first >= 0:
-				var body := StaticBody3D.new()
-				body.name = "BridgeDriveRun_%s" % run_count
-				body.add_to_group("world_structure")
-				body.set_meta("bridge_drive_run", true)
-				body.set_meta("bridge_drive_region", region[0])
-				body.set_meta("damage_id", "bridge/deck/continuous_run_%s" % run_count)
-				container.add_child(body)
-				var flat: bool = region[0] == 28
-				_add_drive_shape(body, stations, first, i, -WIDTH * 0.5, WIDTH * 0.5, 0.0, -2.0)
-				if flat:
-					_add_drive_shape(body, stations, first, i, -WIDTH * 0.5, WIDTH * 0.5, -2.0, -5.0)
-				for across in WALK_X:
-					_add_drive_shape(body, stations, first, i, across - 1.1, across + 1.1, 0.24, 0.0)
+	# All contiguous support shapes share one body so internal-edge removal can
+	# handle the two region joins as well as triangles within the north skin.
+	# Broken IDs still omit their complete surface range; no shape spans a hole.
+	var support := StaticBody3D.new()
+	support.name = "BridgeDriveSupport"
+	support.add_to_group("world_structure")
+	support.set_meta("bridge_drive_run", true)
+	support.set_meta("damage_id", "bridge/deck/continuous_support")
+	container.add_child(support)
+	# A single welded skin spans straight and curved regions, so adjoining
+	# triangle edges are known to the physics engine. Separate long primitive
+	# boxes still expose convex entry-edge contacts at a sloped/flat join.
+	var first := -1
+	for i in range(component_ids.size()+1):
+		var intact: bool = i<component_ids.size() and not world.destroyed.has(component_ids[i])
+		if intact and first<0: first=i
+		if not intact and first>=0:
+			_add_curved_drive_shape(support,stations,first,i,-WIDTH*0.5,WIDTH*0.5,0.0,-2.0,true)
+			for across in WALK_X:
+				_add_curved_drive_shape(support,stations,first,i,across-1.1,across+1.1,0.24,0.0)
+			run_count+=1
+			first=-1
+	world.set_meta("bridge_drive_runs",run_count)
 
-				run_count += 1
-				first = -1
-	world.set_meta("bridge_drive_runs", run_count)
+static func _north_warp_point(body: Node3D, local: Vector3, from: float, to: float, length: float) -> Vector3:
+	var fraction := lerpf(from,to,0.5-local.z/length)
+	var point := ramp_position("north",fraction) + ramp_basis("north",fraction).x*local.x + Vector3.UP*(local.y-1.0)
+	return body.to_local(point)
 
-static func _add_drive_shape(body: StaticBody3D, stations: Array[Dictionary], first: int, last: int, left: float, right: float, top: float, bottom: float) -> void:
-	var collision := CollisionShape3D.new()
-	var a: Vector3 = stations[first].p
-	var b: Vector3 = stations[last].p
-	var basis := basis_at(a, b)
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(right - left, top - bottom, a.distance_to(b) + 0.02)
-	collision.shape = shape
-	collision.transform = Transform3D(basis, (a + b) * 0.5 + basis.x * (left + right) * 0.5 + basis.y * (top + bottom) * 0.5)
-	body.add_child(collision)
+static func _warp_north_piece(body: StaticBody3D, from: float, to: float, length: float) -> void:
+	# Warp all longitudinal deck finishes to the same sixteen-sample curved cross
+	# sections. Adjacent pieces meet exactly; grass wedges cannot open at turns.
+	var box_indices := [0,2,1,0,3,2,4,5,6,4,6,7,0,1,5,0,5,4,1,2,6,1,6,5,2,3,7,2,7,6,3,0,4,3,4,7]
+	for child in body.get_children():
+		if child is MeshInstance3D and child.mesh is BoxMesh and child.mesh.size.z>length*0.85:
+			var size: Vector3=child.mesh.size
+			var surface:=SurfaceTool.new();surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+			for slice in range(NORTH_SUBDIVISIONS):
+				var vertices:=PackedVector3Array()
+				for level in range(2):
+					for corner in [Vector2(-1,1),Vector2(1,1),Vector2(1,-1),Vector2(-1,-1)]:
+						var z:=lerpf(size.z*0.5,-size.z*0.5,(slice+(0.0 if corner.y<0 else 1.0))/NORTH_SUBDIVISIONS)
+						var local:Vector3=child.position+Vector3(corner.x*size.x*0.5,(level-0.5)*size.y,z)
+						vertices.append(_north_warp_point(body,local,from,to,length))
+				for index in box_indices:
+					var point:Vector3=vertices[index]
+					surface.set_uv(Vector2(point.x,point.z));surface.add_vertex(point)
+			surface.generate_normals();surface.index()
+			child.mesh=surface.commit();child.transform=Transform3D.IDENTITY
+		elif child is CollisionShape3D and child.shape is BoxShape3D and child.shape.size.z>length*0.85:
+			var faces:=PackedVector3Array()
+			var size:Vector3=child.shape.size
+			for slice in NORTH_SUBDIVISIONS:
+				var points:=PackedVector3Array()
+				for level in range(2):
+					for corner in [Vector2(-1,1),Vector2(1,1),Vector2(1,-1),Vector2(-1,-1)]:
+						var z:=lerpf(size.z*0.5,-size.z*0.5,(slice+(0.0 if corner.y<0 else 1.0))/NORTH_SUBDIVISIONS)
+						points.append(_north_warp_point(body,child.position+Vector3(corner.x*size.x*0.5,(level-0.5)*size.y,z),from,to,length))
+				var indices:Array=[0,2,1,0,3,2,4,5,6,4,6,7,1,2,6,1,6,5,3,0,4,3,4,7]
+				if slice==NORTH_SUBDIVISIONS-1:indices.append_array([0,1,5,0,5,4])
+				if slice==0:indices.append_array([2,3,7,2,7,6])
+				for index in indices:faces.append(points[index])
+			var shape:=ConcavePolygonShape3D.new();shape.set_faces(faces);shape.backface_collision=true
+			child.shape=shape;child.transform=Transform3D.IDENTITY
+
+static func _add_curved_drive_shape(body: StaticBody3D, stations: Array[Dictionary], first: int, last: int, left: float, right: float, top: float, bottom: float, deep_span: bool = false) -> void:
+	# One continuous skin per intact run; there are no transverse end faces at
+	# internal samples. Damage splits this into genuine missing road sections.
+	var faces:=PackedVector3Array()
+	for i in range(first,last):
+		var a:Vector3=stations[i].p
+		var b:Vector3=stations[i+1].p
+		var vertices:=PackedVector3Array()
+		for height in [bottom,top]:
+			var height_a:float=-5.0 if deep_span and height==bottom and i>=28 and i<=70 else height
+			var height_b:float=-5.0 if deep_span and height==bottom and i+1>=28 and i+1<=70 else height
+			vertices.append(a+stations[i].right*left+Vector3.UP*height_a)
+			vertices.append(a+stations[i].right*right+Vector3.UP*height_a)
+			vertices.append(b+stations[i+1].right*right+Vector3.UP*height_b)
+			vertices.append(b+stations[i+1].right*left+Vector3.UP*height_b)
+		var indices: Array=[4,5,6,4,6,7,0,2,1,0,3,2,1,2,6,1,6,5,3,0,4,3,4,7]
+		if i==first:indices.append_array([0,1,5,0,5,4])
+		if i==last-1:indices.append_array([2,3,7,2,7,6])
+		for t in range(0,indices.size(),3):
+			faces.append(vertices[indices[t]])
+			faces.append(vertices[indices[t+2]])
+			faces.append(vertices[indices[t+1]])
+	var shape:=ConcavePolygonShape3D.new();shape.set_faces(faces);shape.backface_collision=true
+	var collision:=CollisionShape3D.new();collision.shape=shape;body.add_child(collision)

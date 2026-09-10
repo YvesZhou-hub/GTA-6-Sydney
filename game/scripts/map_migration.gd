@@ -1,6 +1,6 @@
 extends RefCounted
 ## One-time safety migration when loading a world made before real city geometry.
-const REVISION := 1
+const REVISION := 2
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
 const City=preload("res://scripts/city_map.gd")
 
@@ -194,4 +194,117 @@ static func apply(game: Node3D) -> int:
 			game.player.last_safe=replacement
 			game.player.reset_physics_interpolation()
 			shifted+=1
+	return shifted
+
+static func _on_old_north_approach(contact:Vector3) -> bool:
+	# v0.1.1's retired straight ramp, retained solely for save compatibility.
+	var start:=Vector3(-83,54,-662)+Vector3(232,0,-447).normalized()*503.0
+	var end:=Vector3(353.49108752,4.5,-1502.99791431)
+	var delta:=Vector2(end.x-start.x,end.z-start.z)
+	var relative:=Vector2(contact.x-start.x,contact.z-start.z)
+	var fraction:=relative.dot(delta)/delta.length_squared()
+	if fraction<0 or fraction>1:return false
+	return relative.distance_to(delta*fraction)<25.5 and absf(contact.y-lerpf(start.y,end.y,fraction))<1.6
+
+static func _near_support(game:Node3D,contact:Vector3,excluded:Array[RID]) -> bool:
+	var ray:=PhysicsRayQueryParameters3D.create(contact+Vector3.UP*.4,contact+Vector3.DOWN*.6,15,excluded)
+	return not game.get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
+
+static func repair_old_approach(game:Node3D,occupied_id:String) -> int:
+	var shifted:=_repair_old_south_approach(game,occupied_id)
+	for body in game.vehicles:
+		if not body.kind in ["car","motorcycle","airliner"]:continue
+		if body.kind=="airliner" and (body.linear_velocity.length()>1.0 or body.angular_velocity.length()>0.2 or absf(body.rotation.x)>0.15 or absf(body.rotation.z)>0.15):continue
+		var contact:Vector3=body.global_position+Vector3.UP*Spawn.envelope(body).position.y
+		if not _on_old_north_approach(contact):continue
+		if _near_support(game,contact,[body.get_rid(),game.player.get_rid()]):continue
+		var placement:=Spawn.find_spawn(game,body,false,body.global_transform)
+		if placement.is_empty():continue
+		body.global_transform=placement.transform
+		body.linear_velocity=Vector3.ZERO
+		body.angular_velocity=Vector3.ZERO
+		body.throttle=0.0
+		body.reset_physics_interpolation()
+		shifted+=1
+	if occupied_id.is_empty() and _on_old_north_approach(game.player.global_position) and not _near_support(game,game.player.global_position,[game.player.get_rid()]):
+		var replacement:=_player_pose(game,game.player.global_position)
+		if replacement.is_finite():
+			game.player.global_position=replacement
+			game.player.last_safe=replacement
+			game.player.reset_physics_interpolation()
+			shifted+=1
+	return shifted
+
+static func _on_old_south_approach(contact:Vector3) -> bool:
+	# Exact v0.1.1 south support plane, not a broad area around the harbour.
+	var start:=Vector3(-325.70848036,4.5,-194.3677124)
+	var end:=Vector3(-83,54,-662)
+	var delta:=Vector2(end.x-start.x,end.z-start.z)
+	var relative:=Vector2(contact.x-start.x,contact.z-start.z)
+	var fraction:=relative.dot(delta)/delta.length_squared()
+	if fraction<0.0 or fraction>1.0:return false
+	return relative.distance_to(delta*fraction)<25.5 and absf(contact.y-lerpf(start.y,end.y,fraction))<1.6
+
+static func _old_south_has_support(game:Node3D,contact:Vector3,excluded:Array[RID]) -> bool:
+	var ray:=PhysicsRayQueryParameters3D.create(contact+Vector3.UP*.4,contact+Vector3.DOWN*.6,15,excluded)
+	var hit:Dictionary=game.get_world_3d().direct_space_state.intersect_ray(ray)
+	# A ray from inside the new bridge skin can hit its downward-facing bottom.
+	# That is not a surviving road or legitimate platform under the saved wheels.
+	return Spawn._ground_allowed(hit)
+
+static func _new_south_surface(contact:Vector3) -> Dictionary:
+	var bridge=preload("res://scripts/bridge_landmark.gd")
+	var start:Vector3=bridge.SOUTH_ENTRY
+	var end:Vector3=bridge.pos(0)
+	var delta:=Vector2(end.x-start.x,end.z-start.z)
+	var relative:=Vector2(contact.x-start.x,contact.z-start.z)
+	var fraction:=relative.dot(delta)/delta.length_squared()
+	if fraction<0.0 or fraction>1.0:return {}
+	var frame:Basis=bridge.ramp_basis("south",fraction)
+	# Preserve X/Z where the revised support still passes under the old parking
+	# place. Only the reference plane's height and orientation need adjustment.
+	var point:=Vector3(contact.x,lerpf(start.y,end.y,fraction),contact.z)
+	return {"point":point,"normal":frame.y.normalized()}
+
+static func _repair_old_south_approach(game:Node3D,occupied_id:String) -> int:
+	var shifted:=0
+	for body in game.vehicles:
+		if not body.kind in ["car","motorcycle","airliner"]:continue
+		if body.linear_velocity.length()>1.0 or body.angular_velocity.length()>0.2:continue
+		if absf(body.rotation.x)>0.15 or absf(body.rotation.z)>0.15:continue
+		var bounds:AABB=Spawn.envelope(body)
+		var contact:Vector3=body.global_position+Vector3.UP*bounds.position.y
+		if not _on_old_south_approach(contact):continue
+		if _old_south_has_support(game,contact,[body.get_rid(),game.player.get_rid()]):continue
+		var surface:=_new_south_surface(contact)
+		var placement:Dictionary={}
+		if not surface.is_empty() and _old_south_has_support(game,surface.point,[body.get_rid(),game.player.get_rid()]):
+			var normal:Vector3=surface.normal
+			var forward:Vector3=(-body.global_basis.z).slide(normal).normalized()
+			var basis:=Basis.looking_at(forward,normal)
+			var pose:=Transform3D(basis,surface.point-normal*bounds.position.y+normal*.12)
+			if Spawn.clear_envelope(game,body,pose):placement={"transform":pose}
+		if placement.is_empty():placement=Spawn.find_spawn(game,body,false,body.global_transform)
+		if placement.is_empty():continue
+		body.global_transform=placement.transform
+		body.reset_physics_interpolation()
+		shifted+=1
+	if not occupied_id.is_empty() or game.player.velocity.length()>1.0:return shifted
+	var saved:Vector3=game.player.global_position
+	if not _on_old_south_approach(saved) or _old_south_has_support(game,saved,[game.player.get_rid()]):return shifted
+	var surface:=_new_south_surface(saved)
+	var replacement:=Vector3.INF
+	if not surface.is_empty() and _old_south_has_support(game,surface.point,[game.player.get_rid()]):
+		var candidate:Vector3=surface.point+Vector3.UP*.04
+		var capsule:=CapsuleShape3D.new();capsule.radius=.34;capsule.height=1.8
+		var query:=PhysicsShapeQueryParameters3D.new()
+		query.shape=capsule;query.transform.origin=candidate+Vector3.UP*.91
+		query.collision_mask=15;query.exclude=[game.player.get_rid()];query.margin=.001
+		if game.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():replacement=candidate
+	if not replacement.is_finite():replacement=_player_pose(game,saved)
+	if replacement.is_finite():
+		game.player.global_position=replacement
+		game.player.last_safe=replacement
+		game.player.reset_physics_interpolation()
+		shifted+=1
 	return shifted

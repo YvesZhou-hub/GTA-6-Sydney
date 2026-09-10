@@ -1,11 +1,11 @@
 extends RigidBody3D
-## Seven physically distinct, offline native vehicles. Units: metres / kilograms / seconds.
+## Eight physically distinct, offline native vehicles. Units: metres / kilograms / seconds.
 ## Contacts emit kinetic energy in joules for the world damage system.
 signal impacted(point: Vector3, energy: float)
 
 const Models = preload("res://scripts/vehicle_factory.gd")
 const G := 9.8
-const NAMES := {"car":"Tide GT", "motorcycle":"Quay 650", "yacht":"Pelagic 14", "paraglider":"Thermal 9", "glider":"Southern Arc", "helicopter":"Harbour H6", "airliner":"Southern 62"}
+const NAMES := {"car":"Veloce V12", "motorcycle":"Apex RR", "speedboat":"Riviera 39", "yacht":"Ocean 90", "paraglider":"Thermal 9", "glider":"Southern Arc", "helicopter":"Harbour H6", "airliner":"Dreamliner 787-9"}
 var kind: String = "car"
 var vehicle_id: String = ""
 var occupied: bool = false
@@ -36,6 +36,7 @@ var _idle_sleep_time := 0.0
 var _built: bool = false
 var last_impact_info: Dictionary = {}
 var _base_paint: Color = Color("287b89")
+var boat_profile: Dictionary = {}
 
 func configure(type: String, id: String) -> void:
 	kind = type if NAMES.has(type) else "car"
@@ -70,10 +71,15 @@ func _ready() -> void:
 			inertia = mass*Vector3(0.54,0.65,0.20)
 			center_of_mass = Vector3(0,-0.24,0)
 		"yacht":
-			mass = 9500.0
-			inertia = mass*Vector3(19.0,19.0,3.5)
+			mass = 94000.0
+			inertia = mass*Vector3(62.0,65.0,6.0)
 			center_of_mass = Vector3(0,-0.33,0)
 			controls_hint = "W/S twin engines • A/D rudder • Space reverse thrust"
+		"speedboat":
+			mass = 11500.0
+			inertia = mass*Vector3(13.0,14.0,1.8)
+			center_of_mass = Vector3(0,-0.35,0)
+			controls_hint = "W/S throttle • A/D turn • Space reverse thrust"
 		"paraglider":
 			mass = 115.0
 			inertia = mass*Vector3(1.5,3.0,1.2)
@@ -95,11 +101,12 @@ func _ready() -> void:
 			throttle = 0.68
 			controls_hint = "W/S thrust • A/D bank • R/F pitch • Space speedbrake • Stall below 50 m/s"
 	_moving = Models.build(self,kind)
+	boat_profile=get_meta("boat_profile",{})
 	if _moving.has("material"):
 		_base_paint = _moving.material.albedo_color
 	_setup_audio()
 	_setup_smoke()
-	if kind == "yacht":
+	if kind in ["yacht","speedboat"]:
 		_setup_wake()
 	_built = true
 	if not _pending_state.is_empty():
@@ -132,7 +139,7 @@ func _physics_process(delta: float) -> void:
 	else: _idle_sleep_time=0.0
 	if _idle_sleep_time>2.0:
 		var has_support := not _ground_probe(5.0 if kind=="airliner" else 2.0).is_empty()
-		if has_support or (kind=="yacht" and global_position.y>0.3 and global_position.y<1.8):
+		if has_support or (kind in ["yacht","speedboat"] and global_position.y>0.3 and global_position.y<1.8):
 			sleeping=true
 			return
 	var forward := -global_basis.z.normalized()
@@ -154,12 +161,12 @@ func _physics_process(delta: float) -> void:
 		pitch = 0.0
 	match kind:
 		"car", "motorcycle": _road(delta,forward,right,up,power*operable,steer,braking or not occupied)
-		"yacht": _boat(delta,forward,right,up,power*operable,steer,braking)
+		"yacht", "speedboat": _boat(delta,forward,right,up,power*operable,steer,braking)
 		"paraglider", "glider": _gliding(delta,forward,right,up,steer,pitch,braking)
 		"helicopter": _helicopter(delta,forward,right,up,power*operable,steer,pitch*operable)
 		"airliner": _airliner(delta,forward,right,up,power,steer,pitch,braking,operable)
 	# Immersion applies drag and small residual displacement buoyancy, not a blue floor.
-	if kind != "yacht" and global_position.y < 0.0:
+	if not kind in ["yacht","speedboat"] and global_position.y < 0.0:
 		var immersion := clampf(-global_position.y/2.5,0.0,1.0)
 		apply_central_force(-linear_velocity*mass*immersion*1.8)
 		apply_central_force(Vector3.UP*mass*G*immersion*0.72)
@@ -217,14 +224,18 @@ func _road(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,bra
 	_engine_target = -22.0 + absf(throttle)*9.0 if occupied and health>0.0 else -60.0
 
 func _boat(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,brake:bool) -> void:
-	throttle = move_toward(throttle,power,delta*0.65)
+	var fast:=kind=="speedboat"
+	throttle = move_toward(throttle,power,delta*(1.2 if fast else 0.65))
 	var in_water := false
-	for x in [-2.0,2.0]:
-		for z in [-4.9,4.9]:
-			var offset: Vector3 = global_basis*Vector3(x,-0.6,z)
+	var support_x:=float(boat_profile.get("buoyancy_x",1.2 if fast else 2.6))
+	var support_z:=float(boat_profile.get("buoyancy_z",3.8 if fast else 8.0))
+	var rest_height:=float(boat_profile.get("float_height",0.9))
+	for x in [-support_x,support_x]:
+		for z in [-support_z,support_z]:
+			var offset: Vector3 = global_basis*Vector3(x,0,z)
 			var point: Vector3 = global_position+offset
 			var wave: float = sin(point.x*0.044+_visual_time*1.1)*0.07 + sin(point.z*0.066+_visual_time*0.9)*0.045
-			var depth: float = wave+0.60-point.y
+			var depth: float = wave+rest_height+1.0/(4.0*0.42)-point.y
 			if depth>0.0 and not preload("res://scripts/metro_entrances.gd").contains_dry_volume(point):
 				in_water = true
 				var vertical_speed: float = (linear_velocity+angular_velocity.cross(offset)).y
@@ -232,12 +243,12 @@ func _boat(delta:float,f:Vector3,r:Vector3,u:Vector3,power:float,steer:float,bra
 				apply_force(Vector3.UP*minf(force,mass*G*1.25),offset)
 	if in_water:
 		var forward_speed := linear_velocity.dot(f)
-		apply_central_force(f*mass*2.1*throttle)
+		apply_central_force(f*mass*(4.0 if fast else 2.5)*throttle)
 		apply_central_force(-r*linear_velocity.dot(r)*mass*1.55)
-		apply_central_force(-f*forward_speed*absf(forward_speed)*mass*0.011)
+		apply_central_force(-f*forward_speed*absf(forward_speed)*mass*(0.009 if fast else 0.014))
 		if brake:
 			apply_central_force(-f*forward_speed*mass*0.36)
-		var rudder := -steer*clampf(forward_speed/4.0,-1.0,1.0)*0.26
+		var rudder := -steer*clampf(forward_speed/4.0,-1.0,1.0)*(0.40 if fast else 0.19)
 		_torque_accel(Vector3.UP*(rudder-angular_velocity.y)*1.8-Vector3(angular_velocity.x,0,angular_velocity.z)*1.4)
 		if u.y<0.65:
 			_torque_accel(u.cross(Vector3.UP)*1.5)
@@ -429,6 +440,7 @@ func _synth_sound(hit:bool) -> AudioStreamWAV:
 				"car": value = sin(TAU*55*t)*0.32+sin(TAU*110*t)*0.18+sin(TAU*165*t)*0.08+smooth_noise*0.08
 				"motorcycle": value = sin(TAU*73*t)*0.28+sin(TAU*146*t)*0.14+sin(TAU*219*t)*0.12+smooth_noise*0.10
 				"yacht": value = sin(TAU*35*t)*0.36+sin(TAU*70*t)*0.17+smooth_noise*0.30
+				"speedboat": value = sin(TAU*58*t)*0.29+sin(TAU*116*t)*0.20+smooth_noise*0.28
 				"helicopter": value = (sin(TAU*60*t)*0.28+smooth_noise*0.43)*(0.55+sin(TAU*18*t)*0.45)
 				"airliner": value = smooth_noise*0.54+sin(TAU*126*t)*0.10+sin(TAU*252*t)*0.04
 				_: value = smooth_noise*0.62+noise*0.05
@@ -495,7 +507,7 @@ func _update_wake(delta:float,in_water:bool) -> void:
 		_wake_time = 0.0
 		var wake: Dictionary = _wake[_wake_cursor]
 		wake.age = 0.0
-		wake.node.global_position = global_position+global_basis.z*6.8
+		wake.node.global_position = global_position+global_basis.z*float(boat_profile.get("wake_z",6.8))
 		wake.node.global_position.y = 0.05
 		wake.node.global_rotation = Vector3(0,rotation.y,0)
 		wake.node.visible = true
@@ -513,7 +525,7 @@ func _animate(delta:float) -> void:
 		_moving.rider.visible = occupied
 	var forward_speed := linear_velocity.dot(-global_basis.z)
 	for wheel in _moving.get("wheels",[]):
-		wheel.rotate_x(-forward_speed*delta/0.4)
+		wheel.rotate_x(-forward_speed*delta/float(wheel.get_meta("radius",0.4)))
 	for rotor in _moving.get("rotors",[]):
 		rotor.rotate_y(delta*(2.0+throttle*44.0))
 	for prop in _moving.get("propellers",[]):
@@ -534,6 +546,8 @@ func _animate(delta:float) -> void:
 		_moving.material.albedo_color = _base_paint.lerp(Color("343c3e"),(1.0-health/100.0)*0.62)
 
 func get_exit_position() -> Vector3:
+	if kind in ["yacht","speedboat"] and boat_profile.has("exit"):
+		return to_global(boat_profile.exit)
 	var offset := Vector3(-2.3,0.85,0)
 	match kind:
 		"motorcycle": offset = Vector3(-1.4,0.8,0)
@@ -545,6 +559,7 @@ func get_exit_position() -> Vector3:
 	return to_global(offset)
 
 func get_camera_distance() -> float:
+	if kind in ["yacht","speedboat"]: return float(boat_profile.get("camera_distance",23.0 if kind=="speedboat" else 38.0))
 	match kind:
 		"motorcycle": return 6.5
 		"yacht": return 20.0
@@ -553,6 +568,12 @@ func get_camera_distance() -> float:
 		"helicopter": return 17.0
 		"airliner": return 84.0
 	return 9.0
+
+func get_camera_height() -> float:
+	if kind in ["yacht","speedboat"]: return float(boat_profile.get("camera_height",2.2 if kind=="speedboat" else 4.5))
+	if kind=="car": return 0.40
+	if kind=="motorcycle": return 0.65
+	return 3.0 if kind=="airliner" else 1.5
 
 func repair() -> void:
 	health = 100.0
@@ -564,7 +585,7 @@ func repair() -> void:
 
 func get_state() -> Dictionary:
 	var q := global_basis.get_rotation_quaternion()
-	return {"version":1,"kind":kind,"id":vehicle_id,"position":[global_position.x,global_position.y,global_position.z],"quaternion":[q.x,q.y,q.z,q.w],"velocity":[linear_velocity.x,linear_velocity.y,linear_velocity.z],"angular_velocity":[angular_velocity.x,angular_velocity.y,angular_velocity.z],"health":health,"fuel":fuel,"throttle":throttle,"frozen":freeze,"dents":_dents.duplicate(true)}
+	return {"version":1,"model_revision":2,"kind":kind,"id":vehicle_id,"position":[global_position.x,global_position.y,global_position.z],"quaternion":[q.x,q.y,q.z,q.w],"velocity":[linear_velocity.x,linear_velocity.y,linear_velocity.z],"angular_velocity":[angular_velocity.x,angular_velocity.y,angular_velocity.z],"health":health,"fuel":fuel,"throttle":throttle,"frozen":freeze,"dents":_dents.duplicate(true)}
 
 func apply_state(data:Dictionary) -> void:
 	if not _built:

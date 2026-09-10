@@ -1,0 +1,159 @@
+{
+  "checks": [
+    {
+      "name": "tall OSM hollow collision shell detected semantically",
+      "passed": true
+    },
+    {
+      "name": "actual courtyard hole remains usable",
+      "passed": true
+    },
+    {
+      "name": "courtyard edge crossing masonry is rejected",
+      "passed": true
+    },
+    {
+      "name": "concave courtyard must contain entire footprint not just corners",
+      "passed": true
+    },
+    {
+      "name": "overhead building part leaves ground open",
+      "passed": true
+    },
+    {
+      "name": "custom bank closed trimesh interior detected",
+      "passed": true
+    },
+    {
+      "name": "custom metro solid column interior detected",
+      "passed": true
+    },
+    {
+      "name": "custom raised architecture does not fill public ground",
+      "passed": true
+    },
+    {
+      "name": "summon rejects complete enclosure in custom solid shell",
+      "passed": true
+    },
+    {
+      "name": "pitched building uses two actual wall groups instead of three total-height groups",
+      "passed": true
+    },
+    {
+      "name": "uppermost real wall group remains occupied below eaves",
+      "passed": true
+    },
+    {
+      "name": "pitched roof interior is detected independently of wall height",
+      "passed": true
+    },
+    {
+      "name": "empty space above low eaves is not filled to ridge bounding height",
+      "passed": true
+    },
+    {
+      "name": "roof ridge crossing wide box detected when every box corner is outside",
+      "passed": true
+    },
+    {
+      "name": "destroyed upper wall leaves its actual interval empty under intact roof",
+      "passed": true
+    },
+    {
+      "name": "lower wall survives independent upper wall destruction",
+      "passed": true
+    },
+    {
+      "name": "roof survives independent wall destruction",
+      "passed": true
+    },
+    {
+      "name": "destroyed roof leaves pitched interior empty",
+      "passed": true
+    },
+    {
+      "name": "roof destruction preserves independently intact upper wall",
+      "passed": true
+    },
+    {
+      "name": "repair restores separate wall and pitched roof occupancy",
+      "passed": true
+    },
+    {
+      "name": "player relocation exits tall shell rather than returning same floor",
+      "passed": true
+    },
+    {
+      "name": "replacement has grounded full-height clearance",
+      "passed": true
+    },
+    {
+      "name": "on-foot migration updates safe position without changing view heading",
+      "passed": true
+    },
+    {
+      "name": "wide aircraft migration finds nearby flat field with full footprint clearance",
+      "passed": true
+    },
+    {
+      "name": "wide aircraft migration preserves ID health fuel and parked state",
+      "passed": true
+    },
+    {
+      "name": "destroyed mapped building is not an occupied volume",
+      "passed": true
+    },
+    {
+      "name": "QA revision fixture writes",
+      "passed": true
+    },
+    {
+      "name": "load preserves all fleet IDs and count",
+      "passed": true
+    },
+    {
+      "name": "migration preserves independent health and fuel",
+      "passed": true
+    },
+    {
+      "name": "safe and courtyard copies retain exact saved position",
+      "passed": true
+    },
+    {
+      "name": "each displaced copy stays near its own saved neighborhood",
+      "passed": true
+    },
+    {
+      "name": "original occupied copy restored after relocation",
+      "passed": true
+    },
+    {
+      "name": "spawn waypoint remains on its original new-copy ID",
+      "passed": true
+    },
+    {
+      "name": "load reports migration to player",
+      "passed": true
+    },
+    {
+      "name": "loading does not rewrite source save",
+      "passed": true
+    },
+    {
+      "name": "save persists current map revision",
+      "passed": true
+    },
+    {
+      "name": "current revision reload does not migrate twice or create copies",
+      "passed": true
+    },
+    {
+      "name": "current revision does not rewrite deliberately saved pose",
+      "passed": true
+    }
+  ],
+  "isolated_test_id": "qa_map_migration_203975",
+  "passed": true,
+  "user_saves_touched": false
+}

@@ -1,0 +1,26 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS car_drive_steer_brake {"braked_mps":0.00000000372585384766921,"cruise_mps":37.0683746337891,"health":100.0,"travel_m":120.532928466797,"turn_rad":0.540046453475952}
+PASS save_roundtrip_car {"frozen":false,"fuel":99.956100833332,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+PASS motorcycle_drive_steer_brake {"braked_mps":0.0215311776846647,"cruise_mps":43.8905639648438,"health":100.0,"travel_m":142.795028686523,"turn_rad":0.67153400182724}
+PASS save_roundtrip_motorcycle {"frozen":false,"fuel":99.956100833332,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+PASS yacht_authored_deck_profile {"mass_kg":94000.0,"reference":"Sunseeker 90 Ocean"}
+PASS yacht_buoyancy_and_physical_cargo {"began_in_physical_contact":true,"boat_height_m":0.965318620204926,"cargo_local":[0.349580258131027,1.85999798774719,8.54956436157227],"cargo_mass_kg":120.0,"cargo_physical":true,"cargo_size_m":0.8,"relative_drift_m":0.0000125922833831282,"speed_mps":10.5209493637085}
+PASS save_roundtrip_yacht {"frozen":false,"fuel":99.9248565267345,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+PASS speedboat_authored_deck_profile {"mass_kg":11500.0,"reference":"Riva Rivamare"}
+PASS speedboat_buoyancy_and_physical_cargo {"began_in_physical_contact":true,"boat_height_m":0.903829455375671,"cargo_local":[-0.000206949654966593,0.684994459152222,1.59944152832031],"cargo_mass_kg":30.0,"cargo_physical":true,"cargo_size_m":0.45,"relative_drift_m":0.0000615133467363194,"speed_mps":16.7777938842773}
+PASS speedboat_drive_steer_brake {"braked_mps":1.45521652698517,"cruise_mps":16.0771160125732,"fuel":99.9199999999976,"health":100.0,"travel_m":52.5279655456543,"turn_rad":0.255984544754028}
+PASS save_roundtrip_speedboat {"frozen":false,"fuel":99.9199999999976,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+PASS yacht_transports_unfrozen_parked_car {"began_in_physical_contact":true,"boat_height_m":0.867231607437134,"car_frozen":false,"car_health":100.0,"car_local":[0.000258403830230236,2.13999938964844,9.09965515136719],"car_mass_kg":1480.0,"car_parked_yaw_rad":1.5707963267949,"initial_car_local":[0.000254895945545286,2.13999915122986,9.09950923919678],"payload_relative_movement_m":0.000145954531035386,"speed_mps":9.53435611724854}
+PASS paraglider_unpowered_flight {"distance_m":142.143173217773,"height_m":141.23486328125,"mechanical_energy_final_per_kg":1435.15109100342,"mechanical_energy_initial_per_kg":1608.71827545166,"yaw_rad":-0.678057134151459}
+PASS save_roundtrip_paraglider {"frozen":false,"fuel":100.0,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+PASS glider_unpowered_flight {"distance_m":314.152282714844,"height_m":123.003234863281,"mechanical_energy_final_per_kg":1435.22966003418,"mechanical_energy_initial_per_kg":1809.84172973633,"yaw_rad":-0.475884020328522}
+PASS save_roundtrip_glider {"frozen":false,"fuel":100.0,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+PASS helicopter_collective_cyclic_hover {"altitude_m":57.3611450195312,"forward_m":40.5921897888184,"health":100.0,"hover_vertical_mps":-0.121773339807987}
+PASS save_roundtrip_helicopter {"frozen":false,"fuel":99.6962666666728,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+PASS collision_energy_damage_and_repair {"dent_count":1,"health_after_repair":100.0,"health_before_repair":25.0,"impact_count":1}
+PASS airliner_zero_airspeed_stalls_without_hover {"fuel":0.0,"height_m":136.226593017578,"stall":true,"vertical_mps":-29.0987339019775}
+PASS airliner_parked_on_wheels {"height_m":4.24000072479248,"speed_mps":0.0000153282089740969}
+PASS airliner_takeoff_circuit_return_landing {"elapsed_s":325.833333333366,"final_speed_mps":0.196358770132065,"health":100.0,"landing_cross_track_m":-7.94569873809814,"liftoff_time_s":33.9499999999994,"peak_altitude_m":243.631195068359,"takeoff_run_m":1215.341796875}
+PASS save_roundtrip_airliner {"frozen":false,"fuel":96.7031737296726,"health":100.0,"rotation_velocity_throttle_and_dents_restored":true}
+VEHICLE_QA pass=true checks=23 report=$PROJECT/reports/vehicle-physics.json

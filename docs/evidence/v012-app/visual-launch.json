@@ -1,0 +1,19 @@
+{
+  "mode": "visual",
+  "launch": [
+    "$BUILD_DIR/Harbourlife.app/Contents/MacOS/Harbourlife",
+    "--disable-vsync",
+    "--log-file",
+    "$PROJECT/reports/release-v012-native/visual-runtime.log",
+    "--",
+    "--visual-qa",
+    "--release-v012"
+  ],
+  "started_utc": "2026-09-10T15:24:04Z",
+  "wall_seconds": 36.694,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 10,
+  "passed": true,
+  "screenshots": 10
+}

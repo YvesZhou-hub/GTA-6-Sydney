@@ -2,7 +2,7 @@ extends SceneTree
 const Store=preload("res://scripts/save_store.gd")
 var failures=0
 func _init():
-	var id="qa_store_test"
+	var id="qa_store_"+str(Time.get_ticks_usec())
 	var data={"name":"Persistence QA","mode":"life","life":{"money":1200},"world":{"destroyed":["opera/shell/1/2"]},"vehicles":[{"id":"car","position":[1,2,3]}],"player":[1,2,3]}
 	check("atomic write",Store.write(id,data))
 	check("read data",Store.read(id).world.destroyed==data.world.destroyed)
@@ -22,8 +22,6 @@ func _init():
 	invalid.store_string(JSON.stringify(future))
 	invalid.close()
 	check("future version rejected",Store.read(id).is_empty())
-	for file in [id+".json",id+".json.bak",copy+".json"]:
-		DirAccess.remove_absolute(Store.ROOT+file)
 	quit(failures)
 func check(title:String,ok:bool):
 	print("SAVE_TEST "+title+" "+("PASS" if ok else "FAIL"))

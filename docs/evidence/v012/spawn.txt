@@ -1,0 +1,85 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=15143 reserved=365 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":20780,"custom_landmarks_ms":14151,"mapped_city_ms":13554,"terrain_and_harbour_ms":4316}
+HARBOR_WORLD_READY buildings=15146 structure_components=20864
+PASS new independent car #1
+PASS fleet grows by exactly one car
+PASS summon immediately boards fresh copy car
+PASS full geometry clear of walls/vehicles car
+PASS new independent car #2
+PASS fleet grows by exactly one car
+PASS summon immediately boards fresh copy car
+PASS full geometry clear of walls/vehicles car
+PASS new independent car #3
+PASS fleet grows by exactly one car
+PASS summon immediately boards fresh copy car
+PASS full geometry clear of walls/vehicles car
+PASS new independent car #4
+PASS fleet grows by exactly one car
+PASS summon immediately boards fresh copy car
+PASS full geometry clear of walls/vehicles car
+PASS new independent motorcycle #5
+PASS fleet grows by exactly one motorcycle
+PASS summon immediately boards fresh copy motorcycle
+PASS full geometry clear of walls/vehicles motorcycle
+PASS new independent speedboat #6
+PASS fleet grows by exactly one speedboat
+PASS summon immediately boards fresh copy speedboat
+PASS full geometry clear of walls/vehicles speedboat
+PASS new independent yacht #7
+PASS fleet grows by exactly one yacht
+PASS summon immediately boards fresh copy yacht
+PASS full geometry clear of walls/vehicles yacht
+PASS new independent helicopter #8
+PASS fleet grows by exactly one helicopter
+PASS summon immediately boards fresh copy helicopter
+PASS full geometry clear of walls/vehicles helicopter
+PASS new independent glider #9
+PASS fleet grows by exactly one glider
+PASS summon immediately boards fresh copy glider
+PASS full geometry clear of walls/vehicles glider
+PASS new independent paraglider #10
+PASS fleet grows by exactly one paraglider
+PASS summon immediately boards fresh copy paraglider
+PASS full geometry clear of walls/vehicles paraglider
+PASS new independent airliner #11
+PASS fleet grows by exactly one airliner
+PASS summon immediately boards fresh copy airliner
+PASS full geometry clear of walls/vehicles airliner
+PASS new independent airliner #12
+PASS fleet grows by exactly one airliner
+PASS summon immediately boards fresh copy airliner
+PASS full geometry clear of walls/vehicles airliner
+PASS new independent airliner #13
+PASS fleet grows by exactly one airliner
+PASS summon immediately boards fresh copy airliner
+PASS full geometry clear of walls/vehicles airliner
+PASS new independent airliner #14
+PASS fleet grows by exactly one airliner
+PASS summon immediately boards fresh copy airliner
+PASS full geometry clear of walls/vehicles airliner
+PASS all original and summoned IDs are unique
+PASS same-type copies have no fixed fleet cap
+PASS summoning never relocates an existing instance
+PASS candidate search avoids full-height wall in front
+PASS summoning while occupied transfers driver into new copy
+PASS summoning does not move occupied vehicle
+PASS fresh road vehicle settles gently and rests
+PASS unused road copy enters normal physics sleep
+PASS dynamic fleet save succeeds
+PASS fleet format4 protects new boats and navigation from older app3
+PASS format2 saves migrate without discarding fleet data
+PASS all dynamic copies survive actual load_world
+PASS copy identities, position, independent health and fuel restored
+PASS original occupied copy restored
+PASS new-copy waypoint restored
+PASS saved waiting glider has forward speed when boarded
+PASS airport start explicitly boards a fresh plane
+PASS first airport start uses actual 34L threshold
+PASS second airport start preserves earlier runway aircraft
+PASS large plane uses nearby clear field before distant airport
+PASS indoor summon safely moves player into new outdoor copy
+PASS hangar roof is never treated as widebody parking
+PASS terminal roof is never treated as car parking
+VEHICLE_SPAWN_REPORT {"checks":[{"name":"new independent car #1","passed":true},{"name":"fleet grows by exactly one car","passed":true},{"name":"summon immediately boards fresh copy car","passed":true},{"name":"full geometry clear of walls/vehicles car","passed":true},{"name":"new independent car #2","passed":true},{"name":"fleet grows by exactly one car","passed":true},{"name":"summon immediately boards fresh copy car","passed":true},{"name":"full geometry clear of walls/vehicles car","passed":true},{"name":"new independent car #3","passed":true},{"name":"fleet grows by exactly one car","passed":true},{"name":"summon immediately boards fresh copy car","passed":true},{"name":"full geometry clear of walls/vehicles car","passed":true},{"name":"new independent car #4","passed":true},{"name":"fleet grows by exactly one car","passed":true},{"name":"summon immediately boards fresh copy car","passed":true},{"name":"full geometry clear of walls/vehicles car","passed":true},{"name":"new independent motorcycle #5","passed":true},{"name":"fleet grows by exactly one motorcycle","passed":true},{"name":"summon immediately boards fresh copy motorcycle","passed":true},{"name":"full geometry clear of walls/vehicles motorcycle","passed":true},{"name":"new independent speedboat #6","passed":true},{"name":"fleet grows by exactly one speedboat","passed":true},{"name":"summon immediately boards fresh copy speedboat","passed":true},{"name":"full geometry clear of walls/vehicles speedboat","passed":true},{"name":"new independent yacht #7","passed":true},{"name":"fleet grows by exactly one yacht","passed":true},{"name":"summon immediately boards fresh copy yacht","passed":true},{"name":"full geometry clear of walls/vehicles yacht","passed":true},{"name":"new independent helicopter #8","passed":true},{"name":"fleet grows by exactly one helicopter","passed":true},{"name":"summon immediately boards fresh copy helicopter","passed":true},{"name":"full geometry clear of walls/vehicles helicopter","passed":true},{"name":"new independent glider #9","passed":true},{"name":"fleet grows by exactly one glider","passed":true},{"name":"summon immediately boards fresh copy glider","passed":true},{"name":"full geometry clear of walls/vehicles glider","passed":true},{"name":"new independent paraglider #10","passed":true},{"name":"fleet grows by exactly one paraglider","passed":true},{"name":"summon immediately boards fresh copy paraglider","passed":true},{"name":"full geometry clear of walls/vehicles paraglider","passed":true},{"name":"new independent airliner #11","passed":true},{"name":"fleet grows by exactly one airliner","passed":true},{"name":"summon immediately boards fresh copy airliner","passed":true},{"name":"full geometry clear of walls/vehicles airliner","passed":true},{"name":"new independent airliner #12","passed":true},{"name":"fleet grows by exactly one airliner","passed":true},{"name":"summon immediately boards fresh copy airliner","passed":true},{"name":"full geometry clear of walls/vehicles airliner","passed":true},{"name":"new independent airliner #13","passed":true},{"name":"fleet grows by exactly one airliner","passed":true},{"name":"summon immediately boards fresh copy airliner","passed":true},{"name":"full geometry clear of walls/vehicles airliner","passed":true},{"name":"new independent airliner #14","passed":true},{"name":"fleet grows by exactly one airliner","passed":true},{"name":"summon immediately boards fresh copy airliner","passed":true},{"name":"full geometry clear of walls/vehicles airliner","passed":true},{"name":"all original and summoned IDs are unique","passed":true},{"name":"same-type copies have no fixed fleet cap","passed":true},{"name":"summoning never relocates an existing instance","passed":true},{"name":"candidate search avoids full-height wall in front","passed":true},{"name":"summoning while occupied transfers driver into new copy","passed":true},{"name":"summoning does not move occupied vehicle","passed":true},{"name":"fresh road vehicle settles gently and rests","passed":true},{"name":"unused road copy enters normal physics sleep","passed":true},{"name":"dynamic fleet save succeeds","passed":true},{"name":"fleet format4 protects new boats and navigation from older app3","passed":true},{"name":"format2 saves migrate without discarding fleet data","passed":true},{"name":"all dynamic copies survive actual load_world","passed":true},{"name":"copy identities, position, independent health and fuel restored","passed":true},{"name":"original occupied copy restored","passed":true},{"name":"new-copy waypoint restored","passed":true},{"name":"saved waiting glider has forward speed when boarded","passed":true},{"name":"airport start explicitly boards a fresh plane","passed":true},{"name":"first airport start uses actual 34L threshold","passed":true},{"name":"second airport start preserves earlier runway aircraft","passed":true},{"name":"large plane uses nearby clear field before distant airport","passed":true},{"name":"indoor summon safely moves player into new outdoor copy","passed":true},{"name":"hangar roof is never treated as widebody parking","passed":true},{"name":"terminal roof is never treated as car parking","passed":true}],"failures":0,"test_world":"qa_spawn_68912","user_saves_touched":false}

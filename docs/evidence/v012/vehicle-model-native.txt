@@ -1,0 +1,51 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+PASS car has documented distinct silhouette/detail features
+PASS car has finite mesh vertices and valid triangle indices
+PASS car triangle winding agrees with exterior normals
+PASS car actual physics contacts retain original save ground plane
+PASS car visible tyres meet the same ground plane
+PASS car measured visual length follows manufacturer proportions
+PASS car static details stay within mesh/triangle budget
+PASS car has correct independently animated tyre count
+PASS car all wheel radii and positions agree on contact height
+MODEL_METRICS car { "bounds": [P: (-1.13222, -0.68, -2.4735), S: (2.26444, 1.16, 4.967)], "meshes": 30, "triangles": 26512, "invalid": 0, "bad_normals": 0, "collision_low": -0.68000000715256, "colliders": 6 }
+PASS motorcycle has documented distinct silhouette/detail features
+PASS motorcycle has finite mesh vertices and valid triangle indices
+PASS motorcycle triangle winding agrees with exterior normals
+PASS motorcycle actual physics contacts retain original save ground plane
+PASS motorcycle visible tyres meet the same ground plane
+PASS motorcycle measured visual length follows manufacturer proportions
+PASS motorcycle static details stay within mesh/triangle budget
+PASS motorcycle has correct independently animated tyre count
+PASS motorcycle all wheel radii and positions agree on contact height
+MODEL_METRICS motorcycle { "bounds": [P: (-0.423716, -0.72, -1.0285), S: (0.847431, 1.205, 2.077)], "meshes": 23, "triangles": 19164, "invalid": 0, "bad_normals": 0, "collision_low": -0.72000002861023, "colliders": 3 }
+PASS airliner has documented distinct silhouette/detail features
+PASS airliner has finite mesh vertices and valid triangle indices
+PASS airliner triangle winding agrees with exterior normals
+PASS airliner actual physics contacts retain original save ground plane
+PASS airliner visible tyres meet the same ground plane
+PASS airliner measured visual length follows manufacturer proportions
+PASS airliner static details stay within mesh/triangle budget
+PASS airliner has correct independently animated tyre count
+PASS airliner all wheel radii and positions agree on contact height
+MODEL_METRICS airliner { "bounds": [P: (-30.05, -4.24, -31.4), S: (60.1, 17.0, 62.8)], "meshes": 73, "triangles": 43460, "invalid": 0, "bad_normals": 0, "collision_low": -4.24000024795532, "colliders": 18 }
+PASS supercar mirror width and low 1.16m roof match reference
+PASS superbike tall screen and narrow motorcycle silhouette match reference
+PASS seated rider matches new real-scale seat rather than hovering over tank
+PASS 787-9 has measured 60.1m span and17m ground-to-fin height
+PASS 787 has two independent visible fan assemblies
+PASS spinning one wheel does not transform chassis or other tyres
+MODEL_CAPTURE car-front
+MODEL_CAPTURE car-rear
+MODEL_CAPTURE car-low-front
+MODEL_CAPTURE motorcycle
+MODEL_CAPTURE motorcycle-side
+MODEL_CAPTURE motorcycle-rear
+MODEL_CAPTURE motorcycle-low-front
+MODEL_CAPTURE airliner-front
+MODEL_CAPTURE airliner-rear
+MODEL_CAPTURE airliner-engine
+MODEL_CAPTURE airliner-cockpit
+VEHICLE MODEL COMPLETE checks=33 failures=0

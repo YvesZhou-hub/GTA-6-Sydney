@@ -1,0 +1,17 @@
+{
+  "build_archive_sha256": "cd68e9d4db7ee10897ce6ee3260b605e0511a4e0527179da5f46656ebfbb1cc9",
+  "human_visual_review": {
+    "production_landmark_model_views": 10,
+    "experience_ui_views": 4,
+    "flight_stages": 7,
+    "native_qa_views_inspected": [
+      "03-car",
+      "03-yacht"
+    ]
+  },
+  "os_keyboard_mouse_check": "not performed: macOS locked; no security or lock settings changed",
+  "player_save_files_unchanged": true,
+  "non_qa_file_count": 6,
+  "private_save_names_and_contents_published": false,
+  "fixtures": "unique qa_ worlds retained; no QA or player save deletion"
+}

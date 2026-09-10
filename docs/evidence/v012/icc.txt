@@ -1,0 +1,34 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=15143 reserved=365 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":19390,"custom_landmarks_ms":13592,"mapped_city_ms":13019,"terrain_and_harbour_ms":4177}
+HARBOR_WORLD_READY buildings=15146 structure_components=20864
+PASS three ICC venues built
+PASS separate Convention / Exhibition / entertainment theatre entries
+PASS all exact mapped parts replace parent and ordinary envelopes
+PASS three tiers contain distinct red / grey seat geometry
+PASS build is idempotent
+ICC FIXTURE METRICS structures=20864 meshes=4095 visible_triangles=8080727 seats=2400
+PASS convention public walking route has full capsule clearance: 0
+PASS convention public walking route has continuous physical floor: 0
+PASS convention actual HarborPlayer enters and reaches interior through normal input
+PASS convention actual HarborPlayer walks back out without teleport or jump
+PASS convention interior stays above water
+PASS exhibition public walking route has full capsule clearance: 0
+PASS exhibition public walking route has continuous physical floor: 0
+PASS exhibition actual HarborPlayer enters and reaches interior through normal input
+PASS exhibition actual HarborPlayer walks back out without teleport or jump
+PASS exhibition interior stays above water
+PASS theatre public walking route has full capsule clearance: 0
+PASS theatre public walking route has continuous physical floor: 0
+PASS theatre actual HarborPlayer enters and reaches interior through normal input
+PASS theatre actual HarborPlayer walks back out without teleport or jump
+PASS theatre interior stays above water
+PASS stage-front sightlines hit opaque internal enclosure above/behind seats: 28/28
+PASS auditorium enclosure uses opaque charcoal material independently of exterior glazing
+PASS both public acoustic-room doors retain 6m by 3.6m modeled openings and full human clearance
+PASS theatre glazed foyer actual HarborPlayer enters and reaches interior through normal input
+PASS theatre glazed foyer actual HarborPlayer walks back out without teleport or jump
+PASS theatre glazed foyer interior stays above water
+PASS Moriarty Walk stays clear across the venue group
+ICC CHECK COMPLETE checks=27 failures=0

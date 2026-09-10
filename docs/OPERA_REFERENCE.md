@@ -12,7 +12,7 @@ Reviewed 10 September 2026. This is an original procedural game model based on p
 
 ## Model decisions
 
-The original geographic centre `(421, 4.5, -326)` and site rotation `-12°` are unchanged. The western Concert Hall roof train is larger; the narrower eastern train is offset south. Their tall middle shells open north, the southern foyer roofs face the Monumental Steps, and the small Bennelong restaurant has two opposing shell ends southwest of the halls. Ten shell pairs are used to represent this form; they are game construction groups, not an asserted historic roof-count taxonomy.
+The 11 September [geographic audit](GEOGRAPHIC_ALIGNMENT.md) corrects the site reference to the OSM outer-footprint centroid `(427.29477, 4.5, -321.45441)` and its long-axis yaw `-13.23286°`. The previous `(421, 4.5, -326)` / `-12°` was an approximate placement. The western Concert Hall roof train is larger; the narrower eastern train is offset south. Their tall middle shells open north, the southern foyer roofs face the Monumental Steps, and the small Bennelong restaurant has two opposing shell ends southwest of the halls. Ten shell pairs are used to represent this form; they are game construction groups, not an asserted historic roof-count taxonomy.
 
 Each half-roof lies on a 75.2 m radius sphere. Its central ridge is the circle where that sphere intersects `x = 0`, and the rounded shoulders follow spherical interpolation towards the springing point. Mirrored halves therefore share the same ridge positions. The largest roof reaches approximately 67.00 m above water. The 120 m wide podium and roughly 183 m north–south building/steps envelope preserve real-scale proportions; individual shell cuts, foyer mullions and podium subdivision are photo-based approximations.
 

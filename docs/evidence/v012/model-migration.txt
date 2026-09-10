@@ -1,0 +1,24 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MODEL_MIGRATION PASS safe bridge-underpass car stays on its original floor
+MODEL_MIGRATION PASS stationary airborne aircraft retains exact flight pose
+MODEL_MIGRATION PASS driver identities health fuel and frozen state persist
+MODEL_MIGRATION PASS retired straight approach detected from saved support height
+MODEL_MIGRATION PASS retired unsupported parking moves safely with identity intact
+MODEL_MIGRATION PASS unrelated airborne aircraft still unchanged after map recovery
+MODEL_MIGRATION PASS low flight fixture crosses the exact retired ramp envelope
+MODEL_MIGRATION PASS low-flying aircraft keeps pose velocity and throttle over retired ramp
+MODEL_MIGRATION PASS exactly four unsupported old south parked cars recover
+MODEL_MIGRATION PASS legacy_south_0.25 now has upward south-ramp wheel support
+MODEL_MIGRATION PASS legacy_south_0.5 now has upward south-ramp wheel support
+MODEL_MIGRATION PASS legacy_south_0.75 now has upward south-ramp wheel support
+MODEL_MIGRATION PASS legacy_south_0.9 now has upward south-ramp wheel support
+MODEL_MIGRATION PASS south recovery preserves IDs health fuel freeze and travel heading
+MODEL_MIGRATION PASS moving road vehicle retains pose and velocity over old south plane
+MODEL_MIGRATION PASS normal bridge-underpass parking stays unchanged
+MODEL_MIGRATION PASS low flight over old south plane retains pose velocity throttle
+MODEL_MIGRATION PASS old south pedestrian 0.5 recovers onto actual support
+MODEL_MIGRATION PASS old south pedestrian 0.75 recovers onto actual support
+MODEL_MIGRATION PASS moving pedestrian retains position and velocity
+MODEL_MIGRATION PASS pedestrian below south bridge stays on ground
+MODEL_MIGRATION COMPLETE checks=21 failures=0

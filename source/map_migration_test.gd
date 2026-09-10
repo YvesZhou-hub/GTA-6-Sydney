@@ -169,7 +169,7 @@ func run():
 	check("each displaced copy stays near its own saved neighborhood",relocated_near)
 	check("original occupied copy restored after relocation",is_instance_valid(game.current_vehicle) and game.current_vehicle.vehicle_id=="qa_migration_car_A" and game.current_vehicle.occupied and game.player.global_position.is_equal_approx(game.current_vehicle.global_position))
 	check("spawn waypoint remains on its original new-copy ID",is_instance_valid(game.spawn_target) and game.spawn_target.vehicle_id=="qa_migration_bike_B")
-	check("load reports migration to player",game.toast_label.text.contains("移出建筑"))
+	check("load reports migration to player",game.toast_label.text.contains("安全调整"))
 	check("loading does not rewrite source save",before_bytes==FileAccess.get_file_as_string(Store.ROOT+test_id+".json"))
 	check("save persists current map revision",game.save_world() and Store.read(test_id).map_revision==Migration.REVISION)
 	var positions:Dictionary={}
@@ -191,10 +191,4 @@ func run():
 		if not item.passed:okay=false
 	var file:=FileAccess.open(ProjectSettings.globalize_path("res://../reports/map-migration.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"passed":okay,"checks":checks,"user_saves_touched":false,"isolated_test_id":test_id},"\t"));file.close()
-	for suffix in [".json",".json.bak",".json.tmp"]:
-		var path:String=Store.ROOT+test_id+suffix
-		if FileAccess.file_exists(path):DirAccess.remove_absolute(path)
-	game.queue_free()
-	await process_frame
-	await process_frame
-	quit(0 if okay else 1)
+	game.finish_quit(0 if okay else 1)

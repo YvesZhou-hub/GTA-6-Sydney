@@ -27,7 +27,7 @@ func check() -> void:
 	var world := ProbeWorld.new()
 	root.add_child(world)
 	verify(world.get_meta("opera_shell_pairs",0)==10,"ten roof pairs grouped in two unequal halls and southwest restaurant")
-	verify(Opera.CENTER==Vector3(421,4.5,-326) and is_equal_approx(Opera.ANGLE,-12.0),"existing geographic anchor and orientation retained")
+	verify(Opera.CENTER.distance_to(Vector3(427.294774,4.5,-321.454405))<0.001 and absf(Opera.ANGLE+13.232864688)<0.00001,"geographic reference matches mapped Opera House centroid and axis")
 	var sphere_error := 0.0
 	var mirrored_error := 0.0
 	var ridge_gap := 0.0

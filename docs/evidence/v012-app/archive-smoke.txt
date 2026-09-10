@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=15143 reserved=365 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":16775,"custom_landmarks_ms":11661,"mapped_city_ms":11149,"terrain_and_harbour_ms":3451}
+HARBOR_WORLD_READY buildings=15146 structure_components=20864
+CITY_STARTUP_MS 17435
+INTERACTIVE_QA_READY world=qa_interactive_17943359 components=20864

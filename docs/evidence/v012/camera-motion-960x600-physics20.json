@@ -1,0 +1,69 @@
+{
+	"automatic_render_loop": false,
+	"engine": "4.7.2-stable (official)",
+	"failures": [
+		"walk: insufficient native frames",
+		"walk: native render rate does not sufficiently exceed 20Hz physics",
+		"walk: no adequate repeated raw physics positions to prove mismatched rates",
+		"car: insufficient native frames",
+		"car: native render rate does not sufficiently exceed 20Hz physics",
+		"car: no adequate repeated raw physics positions to prove mismatched rates"
+	],
+	"interpolation": true,
+	"manual_render_each_process": true,
+	"performance_note": "Real elapsed time, one native GPU frame per late process callback, no fixed-fps. Focus is recorded: a locked or obscured screen cannot prove visible presentation or normal foreground product performance. An explicit reduced physics rate checks interpolation against the actual render cadence, not a performance pass.",
+	"physics_hz": 20,
+	"render_cap": 120,
+	"renderer": "forward_plus",
+	"route": "complete production world and camera; controlled airport ground path",
+	"sample_seconds_requested": 5.0,
+	"scenarios": [
+		{
+			"actor_distance_m": 31.5279216766357,
+			"actual_fps": 19.8243960741949,
+			"camera_distance_m": 31.3611927032471,
+			"camera_mean_speed": -1.88550662939431,
+			"camera_speed_std": 0.0273660798355644,
+			"duplicate_physics_ticks": 0,
+			"engine_drawn_frames": 70,
+			"focused_frames": 0,
+			"frames": 70,
+			"interpolated_stationary_frames": 0,
+			"interpolation_evidence": [],
+			"manual_draws": 70,
+			"max_frame_ms": 53.0059999999963,
+			"mean_force_draw_ms": 24.6875072463768,
+			"mean_pitch_velocity_jump": 0.0,
+			"raw_stationary_frames": 0,
+			"sample_seconds": 3.48056,
+			"stage": "walk"
+		},
+		{
+			"actor_distance_m": 77.8349685668945,
+			"actual_fps": 19.915695992962,
+			"camera_distance_m": 76.8860321044922,
+			"camera_mean_speed": -4.65769970538951,
+			"camera_speed_std": 1.29736965285756,
+			"duplicate_physics_ticks": 0,
+			"engine_drawn_frames": 70,
+			"focused_frames": 0,
+			"frames": 70,
+			"interpolated_stationary_frames": 0,
+			"interpolation_evidence": [],
+			"manual_draws": 70,
+			"max_frame_ms": 52.7209999999982,
+			"mean_force_draw_ms": 24.7729565217391,
+			"mean_pitch_velocity_jump": 0.00000508554214245952,
+			"raw_stationary_frames": 0,
+			"sample_seconds": 3.464604,
+			"stage": "car"
+		}
+	],
+	"viewport_size": "(1440.0, 900.0)",
+	"vsync_mode": 0,
+	"warmup_seconds": 1.5,
+	"window_size": [
+		960,
+		600
+	]
+}

@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15143 reserved=365 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":30409,"custom_landmarks_ms":24465,"mapped_city_ms":11018,"terrain_and_harbour_ms":3865}
+HARBOR_WORLD_READY buildings=15146 structure_components=20864
+CITY_STARTUP_MS 30993
+LANDMARK_CAPTURE_READY structures=20864
+LANDMARK_FRAME bridge draw_calls=1239.0
+LANDMARK_FRAME bridge-road draw_calls=1592.0
+LANDMARK_FRAME north-approach draw_calls=1200.0
+LANDMARK_FRAME opera draw_calls=1760.0
+LANDMARK_FRAME opera-ground draw_calls=1441.0
+LANDMARK_FRAME car draw_calls=2885.0
+LANDMARK_FRAME motorcycle draw_calls=2880.0
+LANDMARK_FRAME speedboat draw_calls=3256.0
+LANDMARK_FRAME yacht draw_calls=1375.0
+LANDMARK_FRAME airliner draw_calls=524.0
+LANDMARK_CAPTURE_COMPLETE frames=10 failures=0

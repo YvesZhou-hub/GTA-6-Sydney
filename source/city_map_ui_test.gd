@@ -73,7 +73,8 @@ func run():
 	var position_before:Vector3=game.player.global_position
 	var fleet_before:int=game.vehicles.size()
 	map.show_preset("core")
-	var opera_point:Vector2=map.project_point(game.world.anchors.opera)
+	var opera_record:Dictionary=game.landmark_catalog().filter(func(item):return item.key=="opera")[0]
+	var opera_point:Vector2=map.project_point(opera_record.get("map_position",opera_record.position))
 	var click:=InputEventMouseButton.new()
 	click.button_index=MOUSE_BUTTON_LEFT
 	click.position=opera_point
@@ -111,7 +112,7 @@ func run():
 	var icc_navigation:=true
 	for record in game.world.get_meta("icc_landmarks",[]):
 		game.set_landmark_target(record.id)
-		if game.landmark_target_key!=record.id or game.landmark_target_position.distance_to(record.center)>0.01 or not game.player.global_position.is_equal_approx(position_before):icc_navigation=false
+		if game.landmark_target_key!=record.id or game.landmark_target_position.distance_to(record.arrival)>0.01 or not game.player.global_position.is_equal_approx(position_before):icc_navigation=false
 	check("ICC guidance targets real public entrances without teleport",icc_navigation and game.world.get_meta("icc_landmarks",[]).size()==3)
 
 	var targets_work:=true

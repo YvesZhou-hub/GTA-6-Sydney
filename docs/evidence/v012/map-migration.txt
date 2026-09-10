@@ -1,0 +1,41 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=5 reserved=0 roads=0
+PASS tall OSM hollow collision shell detected semantically
+PASS actual courtyard hole remains usable
+PASS courtyard edge crossing masonry is rejected
+PASS concave courtyard must contain entire footprint not just corners
+PASS overhead building part leaves ground open
+PASS custom bank closed trimesh interior detected
+PASS custom metro solid column interior detected
+PASS custom raised architecture does not fill public ground
+PASS summon rejects complete enclosure in custom solid shell
+PASS pitched building uses two actual wall groups instead of three total-height groups
+PASS uppermost real wall group remains occupied below eaves
+PASS pitched roof interior is detected independently of wall height
+PASS empty space above low eaves is not filled to ridge bounding height
+PASS roof ridge crossing wide box detected when every box corner is outside
+PASS destroyed upper wall leaves its actual interval empty under intact roof
+PASS lower wall survives independent upper wall destruction
+PASS roof survives independent wall destruction
+PASS destroyed roof leaves pitched interior empty
+PASS roof destruction preserves independently intact upper wall
+PASS repair restores separate wall and pitched roof occupancy
+PASS player relocation exits tall shell rather than returning same floor
+PASS replacement has grounded full-height clearance
+PASS on-foot migration updates safe position without changing view heading
+PASS wide aircraft migration finds nearby flat field with full footprint clearance
+PASS wide aircraft migration preserves ID health fuel and parked state
+PASS destroyed mapped building is not an occupied volume
+PASS QA revision fixture writes
+PASS load preserves all fleet IDs and count
+PASS migration preserves independent health and fuel
+PASS safe and courtyard copies retain exact saved position
+PASS each displaced copy stays near its own saved neighborhood
+PASS original occupied copy restored after relocation
+PASS spawn waypoint remains on its original new-copy ID
+PASS load reports migration to player
+PASS loading does not rewrite source save
+PASS save persists current map revision
+PASS current revision reload does not migrate twice or create copies
+PASS current revision does not rewrite deliberately saved pose

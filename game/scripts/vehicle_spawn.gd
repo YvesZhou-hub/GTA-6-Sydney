@@ -49,7 +49,7 @@ static func clear_envelope(game: Node3D, body: RigidBody3D, pose: Transform3D, m
 		if other == body or not is_instance_valid(other): continue
 		if reserved.intersects(other.global_transform*envelope(other).grow(margin)): return false
 	var player_point: Vector3 = game.current_vehicle.global_position if is_instance_valid(game.current_vehicle) else game.player.global_position
-	if reserved.grow(1.2).has_point(player_point): return false
+	if game.current_vehicle!=body and reserved.grow(1.2).has_point(player_point): return false
 	return true
 
 static func _ground_allowed(hit: Dictionary) -> bool:
@@ -71,7 +71,7 @@ static func _ground_allowed(hit: Dictionary) -> bool:
 		if shape_node is CollisionShape3D and shape_node.shape is BoxShape3D and shape_node.shape.size.y>1.5: return false
 	return true
 
-static func _ground_pose(game: Node3D, body: RigidBody3D, at: Vector3, heading: float) -> Dictionary:
+static func _ground_pose(game: Node3D, body: RigidBody3D, at: Vector3, heading: float, support_height: Variant = null) -> Dictionary:
 	var bounds := envelope(body)
 	var basis := Basis(Vector3.UP, heading)
 	var samples := [Vector3.ZERO]
@@ -84,6 +84,9 @@ static func _ground_pose(game: Node3D, body: RigidBody3D, at: Vector3, heading: 
 	for local in samples:
 		var p: Vector3 = at+basis*local
 		var query := PhysicsRayQueryParameters3D.create(p+Vector3.UP*65,p-Vector3.UP*95,15,_excluded(game,body))
+		if support_height != null:
+			query.from=Vector3(p.x,float(support_height)+0.35,p.z)
+			query.to=Vector3(p.x,float(support_height)-0.35,p.z)
 		var hit: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(query)
 		if not _ground_allowed(hit): return {}
 		lowest = minf(lowest,hit.position.y)
@@ -105,9 +108,13 @@ static func _water_pose(game: Node3D, body: RigidBody3D, at: Vector3, heading: f
 	if not clear_envelope(game,body,pose,1.5): return {}
 	return {"transform":pose,"airborne":false,"description":"附近的开阔水面"}
 
-static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false) -> Dictionary:
+static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false, reference_pose: Variant = null) -> Dictionary:
 	var origin: Vector3 = game.current_vehicle.global_position if is_instance_valid(game.current_vehicle) else game.player.global_position
-	var forward := Vector3.FORWARD.rotated(Vector3.UP,game.yaw)
+	var heading:float=game.yaw
+	if reference_pose is Transform3D:
+		origin=reference_pose.origin
+		heading=reference_pose.basis.get_euler().y
+	var forward := Vector3.FORWARD.rotated(Vector3.UP,heading)
 	var bounds := envelope(body)
 	var radius := maxf(bounds.size.x,bounds.size.z)*0.6+6.0
 	if body.kind == "airliner":
@@ -115,7 +122,7 @@ static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false) -
 			for ring in range(3):
 				for angle in [0.0,0.6,-0.6,1.2,-1.2,2.0,-2.0,PI]:
 					var at := origin+forward.rotated(Vector3.UP,angle)*(radius+ring*radius)
-					var nearby := _ground_pose(game,body,at,game.yaw)
+					var nearby := _ground_pose(game,body,at,heading)
 					if not nearby.is_empty(): return nearby
 		var airport = game.airport
 		if not is_instance_valid(airport): return {}
@@ -148,29 +155,28 @@ static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false) -
 						return found
 		return {}
 	if body.kind in ["glider","paraglider"]:
-		# Unpowered wings wait in clear air until the player explicitly chooses to board.
-		# Never teleport on summon; the persistent marker and garage boarding action explain access.
+		# Unpowered wings are held until the atomic placement-and-boarding transaction completes.
 		for ring in range(1,maxi(20,ceili(sqrt(game.vehicles.size()))+10)):
 			for angle in [0.0,0.5,-0.5,1.0,-1.0,2.0,-2.0,PI]:
 				var at := origin+forward.rotated(Vector3.UP,angle)*(radius+ring*10)
 				at.y = maxf(origin.y+15.0,85.0)+floori(ring/8.0)*30.0
-				var pose := Transform3D(Basis(Vector3.UP,game.yaw),at)
+				var pose := Transform3D(Basis(Vector3.UP,heading),at)
 				if clear_envelope(game,body,pose,2.0): return {"transform":pose,"airborne":true,"description":"视野附近的空中待飞点"}
 		return {}
 	for ring in range(0,maxi(12,ceili(sqrt(game.vehicles.size()))+5)):
 		for angle in [0.0,0.4,-0.4,0.8,-0.8,1.3,-1.3,2.0,-2.0,PI]:
 			var at := origin+forward.rotated(Vector3.UP,angle)*(radius+ring*maxf(radius*0.65,7.0))
-			var found := _water_pose(game,body,at,game.yaw) if body.kind == "yacht" else _ground_pose(game,body,at,game.yaw)
+			var found := _water_pose(game,body,at,heading) if body.kind in ["yacht","speedboat"] else _ground_pose(game,body,at,heading)
 			if not found.is_empty(): return found
 	# Search real mapped road segments when the immediate neighborhood is obstructed.
-	if body.kind != "yacht":
+	if not body.kind in ["yacht","speedboat"]:
 		var road_candidates: Array = []
 		for road in game.world.road_segments:
 			var midpoint: Vector2 = (road[0]+road[1])*0.5
 			road_candidates.append(Vector3(midpoint.x,5.0,midpoint.y))
 		road_candidates.sort_custom(func(a,b): return origin.distance_squared_to(a)<origin.distance_squared_to(b))
 		for at in road_candidates:
-			var found := _ground_pose(game,body,at,game.yaw)
+			var found := _ground_pose(game,body,at,heading)
 			if not found.is_empty():
 				found.description = "有足够空间的道路附近"
 				return found
@@ -178,6 +184,6 @@ static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false) -
 		var marina: Vector3 = game.world.anchors.get("marina",Vector3(-240,1,-330))
 		for ring in range(1,45):
 			for angle in [0.0,0.6,-0.6,1.2,-1.2,2.0,-2.0,PI]:
-				var found := _water_pose(game,body,marina+Vector3.FORWARD.rotated(Vector3.UP,angle)*ring*20.0,game.yaw)
+				var found := _water_pose(game,body,marina+Vector3.FORWARD.rotated(Vector3.UP,angle)*ring*20.0,heading)
 				if not found.is_empty(): return found
 	return {}

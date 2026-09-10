@@ -1,6 +1,6 @@
 class_name HarborLife
 extends Node3D
-## The persistent local economy and five repeatable spatial activities.
+## A relaxed persistent economy, spatial jobs and optional local experiences.
 ## All object identifiers are stable across scene construction and save reload.
 
 const CargoScript = preload("res://scripts/harbor_cargo.gd")
@@ -8,8 +8,19 @@ const NpcScript = preload("res://scripts/harbor_npc.gd")
 signal notification(text: String)
 signal money_changed(value: int)
 signal activity_changed
+signal service_completed(result: Dictionary)
 
-var money: int = 1200
+const STARTING_MONEY := 50000
+const ECONOMY_VERSION := 1
+const FREE_VEHICLES := ["car", "motorcycle", "speedboat", "yacht", "paraglider", "glider", "helicopter", "airliner"]
+const SERVICE_NOTICE := "游戏体验与游戏价格 · 非真实订单、演出或预订"
+
+var money: int = STARTING_MONEY
+var economy_version: int = ECONOMY_VERSION
+var welcome_grant: int = 0
+var experience_visits: Dictionary = {}
+var experience_spending: int = 0
+var last_experience: Dictionary = {}
 var active_job: Dictionary = {}
 var status_text: String = "Visit the Harbour Exchange for work, or explore at your own pace."
 var owned_assets: Dictionary = {"workshop": true, "bicycle_tools": true}
@@ -34,6 +45,8 @@ var _mission_crate_id: String = ""
 var _jobs_started: int = 0
 var _hint_timer: float = 0.0
 var _board_node: Node3D
+var _experience_label: Label3D
+var _experience_remaining := 0.0
 
 func setup(world_anchors: Dictionary, sandbox_mode: bool) -> void:
 	_ready_to_work = false
@@ -46,18 +59,26 @@ func setup(world_anchors: Dictionary, sandbox_mode: bool) -> void:
 	active_job = {}
 	completed_jobs = {}
 	owned_assets = {"workshop": true, "bicycle_tools": true}
+	for kind in FREE_VEHICLES: owned_assets[kind] = true
 	lifetime_earnings = 0
+	economy_version = ECONOMY_VERSION
+	welcome_grant = 0
+	experience_visits.clear()
+	experience_spending = 0
+	last_experience.clear()
+	_experience_label = null
+	_experience_remaining = 0.0
 	_jobs_started = 0
 	_mission_crate_id = ""
 	anchors = world_anchors.duplicate(true)
 	sandbox = sandbox_mode
-	money = 50000 if sandbox else 1200
+	money = STARTING_MONEY
 	_build_board()
 	_build_cargo()
 	_build_npcs()
 	_build_marker()
 	_ready_to_work = true
-	status_text = "自由沙盒 · 全部载具免费使用。世界独立保存。" if sandbox else "你的海港工作室已准备好。按 J 找工作，获得收入并维护载具。"
+	status_text = "欢迎来到海港 · $50,000 旅行资金 · 全部载具免费。J 轻松工作 · K 美食与场馆体验。"
 
 func _point(key: String, fallback: Vector3) -> Vector3:
 	var value: Variant = anchors.get(key, fallback)
@@ -215,11 +236,110 @@ func _build_marker() -> void:
 
 func job_catalog() -> Array:
 	return [
-		{"id": "photo", "title": "海港摄影漫步", "description": "步行到三个滨水观景点，站稳后按 E 拍照。", "reward": 240, "mode": "ON FOOT", "duration": "4–8 min"},
-		{"id": "salvage", "title": "旧物回收", "description": "按 G 拿起实体货箱，自选运输方式，送回工作室后按 E 卸货。", "reward": 360, "mode": "CARGO / ANY TRANSPORT", "duration": "3–6 min"},
-		{"id": "harbor", "title": "码头巡检", "description": "驾驶船只到三个海港站点，每站低于 3 m/s 停留两秒。", "reward": 420, "mode": "BOAT", "duration": "4–7 min"},
-		{"id": "air", "title": "空中观察", "description": "使用直升机、滑翔机或客机，依次飞过海港上空的三个观察区域。", "reward": 620, "mode": "AIRCRAFT", "duration": "3–6 min"},
-		{"id": "race", "title": "两岸计时赛", "description": "驾驶汽车或摩托车依次穿过大桥检查点，速度与安全表现决定奖金。", "reward": 380, "mode": "CAR / MOTORCYCLE", "duration": "3–5 min"}]
+		{"id": "photo", "title": "海港摄影漫步", "description": "步行到三个滨水观景点，站稳后按 E 拍照。", "reward": 1500, "mode": "ON FOOT", "duration": "4–8 min"},
+		{"id": "salvage", "title": "旧物回收", "description": "按 G 拿起实体货箱，自选运输方式，送回工作室后按 E 卸货。", "reward": 2000, "mode": "CARGO / ANY TRANSPORT", "duration": "3–6 min"},
+		{"id": "harbor", "title": "码头巡检", "description": "驾驶船只到三个海港站点，每站低于 3 m/s 停留两秒。", "reward": 2200, "mode": "BOAT", "duration": "4–7 min"},
+		{"id": "air", "title": "空中观察", "description": "使用直升机、滑翔机或客机，依次飞过海港上空的三个观察区域。", "reward": 3000, "mode": "AIRCRAFT", "duration": "3–6 min"},
+		{"id": "race", "title": "两岸计时赛", "description": "驾驶汽车或摩托车依次穿过大桥检查点，速度与安全表现决定奖金。", "reward": 2000, "mode": "CAR / MOTORCYCLE", "duration": "3–5 min"}]
+
+func service_catalog() -> Array[Dictionary]:
+	# Coordinates come only from the assembled, source-backed world. Shops use
+	# their public exterior approaches; these are not invented shop interiors.
+	var definitions := [
+		["icc_convention", "icc_convention", "ICC 会展探索", 60, 35, "领取探索印章，继续走进大厅与夹层。", "venue"],
+		["icc_exhibition", "icc_exhibition", "ICC 展览体验", 90, 40, "收集展览印章，沿楼梯探索展厅。", "venue"],
+		["tiktok_show", "tiktok_entertainment", "TikTok 剧场纪念体验", 120, 50, "收到纪念票，可继续探索观众厅与舞台。", "show"],
+		["edition_coffee", "shop_edition", "Edition · 咖啡小憩", 12, 35, "一杯咖啡，准备好继续逛悉尼。", "coffee"],
+		["matcha_break", "shop_matcha", "Matcha-Ya · 抹茶时光", 16, 40, "享用抹茶饮品，收集 Steam Mill Lane 印章。", "tea"],
+		["nakano_meal", "shop_nakano", "Nakano Darling · 晚餐补给", 35, 75, "晚餐已享用，继续沿街探索。", "meal"],
+		["pork_roll", "shop_pork_roll", "Marrickville Pork Roll · 街头午餐", 14, 55, "午餐补给完成。", "meal"],
+		["kuki_treat", "shop_kuki", "KUKI · 甜点小憩", 12, 35, "收到一份甜点与旅行印章。", "sweet"],
+		["kwang_meal", "shop_kwang", "Kwang Jang Pocha · 街区晚餐", 38, 80, "晚餐补给完成。", "meal"],
+		["wingboy_meal", "shop_wingboy", "Wingboy · 美食补给", 28, 70, "美食补给完成。", "meal"],
+		["holy_basil_meal", "shop_holy_basil", "Holy Basil · 滨水晚餐", 36, 80, "晚餐已享用，Darling Square 等你继续探索。", "meal"],
+		["messina_gelato", "shop_messina", "Messina · 冰淇淋时光", 12, 35, "享用冰淇淋，点亮 Little Hay Street 印章。", "sweet"],
+		["kurtosh_cake", "shop_kurtosh", "Kürtősh · 甜点补给", 15, 40, "一份甜点，恢复探索精力。", "sweet"],
+		["dopa_meal", "shop_dopa", "DOPA · 午餐补给", 25, 70, "午餐补给完成。", "meal"],
+		["shortstop_break", "shop_shortstop", "Shortstop · 咖啡与甜点", 18, 50, "咖啡与甜点已享用。", "coffee"],
+		["manly_picnic", "manly_beach", "Manly · 海边野餐", 30, 90, "在海边享用野餐，留下 Manly 旅行印章。", "picnic"]]
+	var result: Array[Dictionary] = []
+	for entry: Array in definitions:
+		var anchor_key := str(entry[1])
+		if not anchors.has(anchor_key): continue
+		var position := _point(anchor_key, Vector3(INF, INF, INF))
+		if not position.is_finite(): continue
+		var service_id := str(entry[0])
+		result.append({"id": service_id, "anchor": anchor_key, "title": str(entry[2]),
+			"position": position, "cost": int(entry[3]), "stamina_restore": int(entry[4]),
+			"description": str(entry[5]), "category": str(entry[6]), "notice": SERVICE_NOTICE,
+			"radius": 18.0 if str(entry[6]) in ["venue", "show", "picnic"] else 7.0,
+			"visits": int(experience_visits.get(service_id, 0))})
+	return result
+
+func nearest_service(player_pos: Vector3) -> Dictionary:
+	var nearest: Dictionary = {}
+	var best := INF
+	for service: Dictionary in service_catalog():
+		var distance := player_pos.distance_to(service.position)
+		if distance <= float(service.radius) and distance < best:
+			nearest = service
+			nearest["distance"] = distance
+			best = distance
+	return nearest
+
+func use_service(service_id: String, player_pos: Vector3, on_foot: bool = true) -> Dictionary:
+	var service: Dictionary = {}
+	for candidate: Dictionary in service_catalog():
+		if candidate.id == service_id:
+			service = candidate
+			break
+	if service.is_empty():
+		return {"ok": false, "message": "此地点暂未提供游戏体验。"}
+	if not player_pos.is_finite() or player_pos.distance_to(service.position) > float(service.radius):
+		return {"ok": false, "message": "先前往 %s；地图可以为你指路。" % service.title}
+	if not on_foot and _speed > 3.0:
+		return {"ok": false, "message": "把载具停稳后即可体验，无需下车。"}
+	var cost := int(service.cost)
+	if money < cost:
+		return {"ok": false, "message": "还差 $%d；一次轻松海港工作可赚 $1,500–3,000，载具始终免费。" % (cost-money)}
+	# Optional experiences spend game currency in either mode. No event, order
+	# or real reservation is created. A successful call delivers exactly once;
+	# loading the journal never replays its charge, signal or stamina reward.
+	money -= cost
+	experience_spending += cost
+	experience_visits[service_id] = int(experience_visits.get(service_id, 0)) + 1
+	last_experience = {"id": service_id, "title": service.title, "cost": cost,
+		"visit": int(experience_visits[service_id])}
+	var message := "%s · -$%d · 耐力 +%d · %d 个旅行印章\n%s" % [service.title,
+		cost, int(service.stamina_restore), experience_visits.size(), service.description]
+	var result := {"ok": true, "id": service_id, "title": service.title, "cost": cost,
+		"position": service.position, "message": message, "notice": SERVICE_NOTICE,
+		"effects": {"stamina_restore": int(service.stamina_restore), "category": service.category},
+		"visit": int(experience_visits[service_id]), "unique_stamps": experience_visits.size()}
+	status_text = message
+	_show_experience(service)
+	money_changed.emit(money)
+	activity_changed.emit()
+	service_completed.emit(result.duplicate(true))
+	notification.emit(message)
+	return result
+
+func _show_experience(service: Dictionary) -> void:
+	if not is_instance_valid(_experience_label):
+		_experience_label = Label3D.new()
+		_experience_label.name = "Life_Travel_Stamp"
+		_experience_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		_experience_label.font_size = 40
+		_experience_label.pixel_size = 0.014
+		_experience_label.outline_size = 8
+		_experience_label.no_depth_test = false
+		add_child(_experience_label)
+	_experience_label.global_position = service.position + Vector3.UP * 3.0
+	_experience_label.text = "%s\n旅行印章 ✓ · 耐力 +%d" % [service.title, int(service.stamina_restore)]
+	_experience_label.modulate = Color("edcc87")
+	_experience_label.visible = true
+	_experience_label.scale = Vector3.ONE
+	_experience_remaining = 5.0
 
 func start_job(job_id: String) -> String:
 	if not active_job.is_empty():
@@ -324,6 +444,11 @@ func tick_context(player_pos: Vector3, player_vehicle: String, speed: float, del
 	for npc in npcs:
 		npc.update_context(player_pos, player_vehicle, speed)
 	_hint_timer += delta
+	if _experience_remaining > 0.0 and is_instance_valid(_experience_label):
+		_experience_remaining = maxf(0.0, _experience_remaining - delta)
+		_experience_label.position.y += delta * 0.15
+		_experience_label.modulate.a = minf(1.0, _experience_remaining)
+		_experience_label.visible = _experience_remaining > 0.0
 	if active_job.is_empty():
 		_marker.visible = false
 		return
@@ -457,6 +582,9 @@ func available_actions(player_pos: Vector3) -> String:
 		return "E  Unload at workshop   G  Put down case"
 	if player_pos.distance_to(_board()) < 6.0:
 		return "E  Harbour Exchange · Choose work"
+	var service := nearest_service(player_pos)
+	if not service.is_empty():
+		return "E  %s · 游戏体验 $%d" % [service.title, int(service.cost)]
 	var npc := _nearest_npc(player_pos)
 	if is_instance_valid(npc):
 		return "E  Talk to " + npc.display_name
@@ -484,6 +612,8 @@ func interact(player_pos: Vector3) -> String:
 		return deposit_cargo(player_pos)
 	if player_pos.distance_to(_board()) < 6.0:
 		return "OPEN_JOBS"
+	if not nearest_service(player_pos).is_empty():
+		return "OPEN_SERVICES"
 	var npc := _nearest_npc(player_pos)
 	if is_instance_valid(npc):
 		return npc.talk(active_job, completed_jobs)
@@ -577,10 +707,15 @@ func _find_cargo(object_id: String) -> HarborCargo:
 	return null
 
 func purchase(asset: String, cost: int) -> bool:
+	# Keep legacy callers and old unlock state compatible: vehicles never cost
+	# money, including a repeated request made with an obsolete purchase price.
+	if asset in FREE_VEHICLES:
+		owned_assets[asset] = true
+		return true
 	if cost < 0:
 		return false
 	if money < cost and not sandbox:
-		notification.emit("You need $%d more. Harbour work pays for ownership and repairs." % (cost - money))
+		notification.emit("还差 $%d。载具免费，完成轻松海港工作可以补充体验资金。" % (cost - money))
 		return false
 	if not sandbox:
 		money -= cost
@@ -611,10 +746,10 @@ func recover_cargo() -> String:
 			recovered += 1
 	return "%d lost cases recovered to your workshop." % recovered
 
-func on_incident(pos: Vector3, severity: float) -> void:
+func on_incident(pos: Vector3, severity: float, player_caused: bool = true) -> void:
 	for npc in npcs:
 		npc.witness_incident(pos, severity)
-	if not active_job.is_empty() and severity > 8.0:
+	if player_caused and not active_job.is_empty() and severity > 8.0:
 		active_job["incidents"] = int(active_job.get("incidents", 0)) + 1
 
 func get_state() -> Dictionary:
@@ -624,15 +759,32 @@ func get_state() -> Dictionary:
 	var npc_states: Array = []
 	for npc in npcs:
 		npc_states.append(npc.get_state())
-	return {"version": 2, "money": money, "active_job": active_job.duplicate(true),
+	return {"version": 3, "economy_version": economy_version, "welcome_grant": welcome_grant,
+		"experience_visits": experience_visits.duplicate(true), "experience_spending": experience_spending,
+		"last_experience": last_experience.duplicate(true), "money": money, "active_job": active_job.duplicate(true),
 		"owned_assets": owned_assets.duplicate(true), "completed_jobs": completed_jobs.duplicate(true),
 		"lifetime_earnings": lifetime_earnings, "jobs_started": _jobs_started,
 		"cargo": cargo_states, "npcs": npc_states}
 
 func apply_state(state: Dictionary) -> void:
-	money = maxi(0, int(state.get("money", 50000 if sandbox else 1200)))
+	money = maxi(0, int(state.get("money", STARTING_MONEY)))
+	economy_version = maxi(0, int(state.get("economy_version", 0)))
+	welcome_grant = maxi(0, int(state.get("welcome_grant", 0)))
+	if economy_version < ECONOMY_VERSION:
+		var grant := maxi(0, STARTING_MONEY - money)
+		money += grant
+		welcome_grant += grant
+		economy_version = ECONOMY_VERSION
+		if grant > 0:
+			notification.emit("欢迎回来 · 一次性旅行补助 +$%d · 全部载具已免费。" % grant)
+	experience_visits = state.get("experience_visits", {}).duplicate(true)
+	experience_spending = maxi(0, int(state.get("experience_spending", 0)))
+	last_experience = state.get("last_experience", {}).duplicate(true)
+	_experience_remaining = 0.0
+	if is_instance_valid(_experience_label): _experience_label.visible = false
 	active_job = state.get("active_job", {}).duplicate(true)
 	owned_assets = state.get("owned_assets", {"workshop": true}).duplicate(true)
+	for kind in FREE_VEHICLES: owned_assets[kind] = true
 	completed_jobs = state.get("completed_jobs", {}).duplicate(true)
 	lifetime_earnings = maxi(0, int(state.get("lifetime_earnings", 0)))
 	_jobs_started = int(state.get("jobs_started", 0))
@@ -662,8 +814,14 @@ func apply_state(state: Dictionary) -> void:
 			if npc.stable_id == str(npc_state.get("id", "")):
 				npc.apply_state(npc_state)
 	if not active_job.is_empty():
+		# An in-progress pre-update job receives the improved base reward too.
+		for job: Dictionary in job_catalog():
+			if str(job.id) == str(active_job.get("id", "")):
+				active_job["reward"] = maxi(int(active_job.get("reward", 0)), int(job.reward))
 		if str(active_job.get("id", "")) == "salvage" and not is_instance_valid(_find_cargo(str(active_job.get("cargo_id", "")))):
 			_prepare_salvage()
 		_update_hint()
+	else:
+		status_text = "自由探索 · 全部载具免费 · 已收集 %d 个旅行印章。J 轻松工作 · K 城市体验。" % experience_visits.size()
 	money_changed.emit(money)
 	activity_changed.emit()

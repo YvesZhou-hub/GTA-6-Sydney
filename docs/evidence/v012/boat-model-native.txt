@@ -1,0 +1,52 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+PASS speedboat hull is watertight: every geometric edge has two triangle faces
+PASS speedboat closed hull winding points outward and encloses positive volume
+PASS yacht hull is watertight: every geometric edge has two triangle faces
+PASS yacht closed hull winding points outward and encloses positive volume
+PASS speedboat direct convex body collider
+PASS speedboat direct convex body collider
+PASS speedboat direct convex body collider
+PASS speedboat finite triangles with consistent clockwise normals
+PASS speedboat full visible dimensions match official length and beam
+PASS speedboat keel matches declared draft and local -0.9m waterline
+PASS speedboat details material-batched within scene budget
+PASS speedboat camera aims at boat and float origin uses agreed waterline
+PASS speedboat exit stands over supported swim platform
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht direct convex body collider
+PASS yacht finite triangles with consistent clockwise normals
+PASS yacht full visible dimensions match official length and beam
+PASS yacht keel matches declared draft and local -0.9m waterline
+PASS yacht details material-batched within scene budget
+PASS yacht camera aims at boat and float origin uses agreed waterline
+PASS yacht exit stands over supported swim platform
+PASS 5m by 2.27m transverse car envelope has nine supported flat aft deck probes
+PASS transverse car envelope clears port stair and all cabin/roof collisions
+PASS flybridge stair has a real open upper deck and 1.94m head clearance along its run
+PASS both swim-platform stairs have continuous physical support across all nine samples
+PASS native screenshot speedboat_bow
+PASS native screenshot speedboat_stern
+PASS native screenshot speedboat_cockpit
+PASS native screenshot yacht_bow
+PASS native screenshot yacht_stern
+PASS native screenshot yacht_flybridge
+PASS native screenshot yacht_cargo
+BOAT MODEL COMPLETE checks=48 failures=0

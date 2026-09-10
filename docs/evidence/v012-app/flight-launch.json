@@ -1,0 +1,20 @@
+{
+  "mode": "flight",
+  "launch": [
+    "$BUILD_DIR/Harbourlife.app/Contents/MacOS/Harbourlife",
+    "--disable-vsync",
+    "--log-file",
+    "$PROJECT/reports/release-v012-native/flight-runtime.log",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--flight-qa",
+    "--qa-fixed-fps=60"
+  ],
+  "started_utc": "2026-09-10T15:27:47Z",
+  "wall_seconds": 818.516,
+  "exit_code": 0,
+  "report_fresh": true,
+  "passed": true,
+  "screenshots": 7
+}

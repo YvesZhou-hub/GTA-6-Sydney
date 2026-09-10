@@ -1,0 +1,95 @@
+{
+  "checks": [
+    {
+      "name": "real geographic cache loaded once",
+      "passed": true
+    },
+    {
+      "name": "minimap and second full map reuse original mesh resources without JSON reload",
+      "passed": true
+    },
+    {
+      "name": "geographic projection round trip (-3200.0, 11500.0)",
+      "passed": true
+    },
+    {
+      "name": "geographic projection round trip (7400.0, -6800.0)",
+      "passed": true
+    },
+    {
+      "name": "geographic projection round trip (-768.5, 1993.5)",
+      "passed": true
+    },
+    {
+      "name": "zoom keeps cursor geographic point",
+      "passed": true
+    },
+    {
+      "name": "building marker selects its separate public entrance destination",
+      "passed": true
+    },
+    {
+      "name": "short empty-map click creates arbitrary metre-accurate pin",
+      "passed": true
+    },
+    {
+      "name": "drag pans without creating or moving pin",
+      "passed": true
+    },
+    {
+      "name": "large release displacement without motion events still cannot pin",
+      "passed": true
+    },
+    {
+      "name": "header and footer cannot create geographic pins",
+      "passed": true
+    },
+    {
+      "name": "rendered OSM place label selects named geographic POI",
+      "passed": true
+    },
+    {
+      "name": "right-click clears target and emits shared clear event",
+      "passed": true
+    },
+    {
+      "name": "visible clear button follows same navigation API",
+      "passed": true
+    },
+    {
+      "name": "north target at top edge with exact distance/bearing",
+      "passed": true
+    },
+    {
+      "name": "east target edge and bearing",
+      "passed": true
+    },
+    {
+      "name": "nearby target stays at its actual map position",
+      "passed": true
+    },
+    {
+      "name": "heading-up rotation uses Godot west-facing yaw correctly",
+      "passed": true
+    },
+    {
+      "name": "arrival at same coordinate has finite centre marker",
+      "passed": true
+    },
+    {
+      "name": "cleared full-map snapshot removes minimap target",
+      "passed": true
+    },
+    {
+      "name": "minimap click requests full map",
+      "passed": true
+    },
+    {
+      "name": "moving minimap transforms cached terrain without rebuilding commands",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "source_reads": 1,
+  "user_saves_touched": false
+}

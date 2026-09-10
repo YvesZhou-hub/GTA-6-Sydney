@@ -1,0 +1,75 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS city_landmarks visible base footprints match independent raw OSM projection (max 0.000136m)
+PASS bank_landmarks visible base footprints match independent raw OSM projection (max 0.000136m)
+PASS quay_landmarks visible base footprints match independent raw OSM projection (max 0.000034m)
+PASS cyber_landmarks visible base footprints match independent raw OSM projection (max 0.000122m)
+PASS manly_landmarks visible base footprints match independent raw OSM projection (max 0.000691m)
+PASS icc_landmarks visible base footprints match independent raw OSM projection (max 0.000660m)
+PASS bridge pylon 142518161 sits at its mapped footprint centroid
+PASS bridge pylon 142518160 sits at its mapped footprint centroid
+PASS bridge pylon 142518163 sits at its mapped footprint centroid
+PASS bridge pylon 142518162 sits at its mapped footprint centroid
+PASS 503m arch midpoint aligns with the four mapped pylons
+PASS pylon pair separation matches actual mapped ~41m, correcting former72m
+PASS south gameplay approach shares corrected span axis
+PASS curved north approach follows independently projected Bradfield carriageway midpoint (max 0.0830m, includes arch connection)
+PASS north approach reaches mapped Bradfield route instead of former eastern ground endpoint
+PASS raw Opera multipolygon outer ways join into one independent footprint
+PASS Opera reconstruction uses independently computed mapped centroid and long-axis bearing
+PASS icc_convention separates model reference and original public arrival
+PASS icc_exhibition separates model reference and original public arrival
+PASS tiktok_entertainment separates model reference and original public arrival
+CITY_MAP buildings=15143 reserved=365 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":19730,"custom_landmarks_ms":13606,"mapped_city_ms":13033,"terrain_and_harbour_ms":4107}
+HARBOR_WORLD_READY buildings=15146 structure_components=20864
+PASS production world reached READY before arrival physics
+PASS runtime exposes geographic catalogue with map/arrival separation
+PASS westpac navigation anchor resolves public arrival, not building centre
+PASS westpac public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS cba_south navigation anchor resolves public arrival, not building centre
+PASS cba_south public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS cba_north navigation anchor resolves public arrival, not building centre
+PASS cba_north public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS tower_one navigation anchor resolves public arrival, not building centre
+PASS tower_one public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS boc navigation anchor resolves public arrival, not building centre
+PASS boc public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS ribbon navigation anchor resolves public arrival, not building centre
+PASS ribbon public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS exchange_haidilao navigation anchor resolves public arrival, not building centre
+PASS exchange_haidilao public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS cybercx_sydney navigation anchor resolves public arrival, not building centre
+PASS cybercx_sydney public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS cloudflare_sydney navigation anchor resolves public arrival, not building centre
+PASS cloudflare_sydney public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS icc_convention navigation anchor resolves public arrival, not building centre
+PASS icc_convention public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS icc_exhibition navigation anchor resolves public arrival, not building centre
+PASS icc_exhibition public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS tiktok_entertainment navigation anchor resolves public arrival, not building centre
+PASS tiktok_entertainment public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS manly_wharf navigation anchor resolves public arrival, not building centre
+PASS manly_wharf public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS hotel_steyne navigation anchor resolves public arrival, not building centre
+PASS hotel_steyne public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS quay_quarter navigation anchor resolves public arrival, not building centre
+PASS quay_quarter public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS salesforce navigation anchor resolves public arrival, not building centre
+PASS salesforce public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS opera navigation anchor resolves public arrival, not building centre
+PASS opera public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS bridge navigation anchor resolves public arrival, not building centre
+PASS bridge public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS barangaroo_metro navigation anchor resolves public arrival, not building centre
+PASS barangaroo_metro public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS martin_place_metro navigation anchor resolves public arrival, not building centre
+PASS martin_place_metro public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS manly_corso navigation anchor resolves public arrival, not building centre
+PASS manly_corso public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS manly_beach navigation anchor resolves public arrival, not building centre
+PASS manly_beach public arrival has ground + unobstructed human/camera capsule (hits=[])
+PASS icc_convention service arrival preserved exactly
+PASS icc_exhibition service arrival preserved exactly
+PASS tiktok_entertainment service arrival preserved exactly
+LANDMARK ALIGNMENT COMPLETE assertions=69 failures=0 footprints=34 max_boundary_error_m=0.00069053395418

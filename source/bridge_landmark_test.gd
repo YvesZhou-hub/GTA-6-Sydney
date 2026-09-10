@@ -35,7 +35,11 @@ func check() -> void:
 		var a: Vector3 = route[1]
 		var b: Vector3 = route[2]
 		var basis := BRIDGE.basis_at(a, b)
-		var count := ceili(a.distance_to(b) / 1.5)
+		var route_length := a.distance_to(b)
+		if route[0] == "north approach":
+			route_length=0.0
+			for segment in range(28): route_length+=BRIDGE.ramp_position("north",float(segment)/28.0).distance_to(BRIDGE.ramp_position("north",float(segment+1)/28.0))
+		var count := ceili(route_length / 1.5)
 		for i in range(count + 1):
 			var fraction := clampf(float(i) / count, 0.001, 0.999)
 			var center := a.lerp(b, fraction)
@@ -81,7 +85,7 @@ func check() -> void:
 		verify(gaps == 0, "dense %.0fm ramp/span join collision continuity (%d gaps)" % [end, gaps])
 		verify(collisions == 0, "dense %.0fm ramp/span join body clearance (%d blocked)" % [end, collisions])
 	# Ground exits must lead away from each ramp without colliding with a house.
-	for route in [[BRIDGE.SOUTH_ENTRY, BRIDGE.SOUTH_EXIT], [BRIDGE.SOUTH_EXIT, Vector3(-310, 4.5, -170)], [BRIDGE.NORTH_ENTRY, Vector3(370, 4.5, -1580)]]:
+	for route in [[BRIDGE.SOUTH_ENTRY, BRIDGE.SOUTH_EXIT], [BRIDGE.SOUTH_EXIT, Vector3(-310, 4.5, -170)], [BRIDGE.NORTH_ENTRY, BRIDGE.NORTH_EXIT]]:
 		var blocked := 0
 		var missing := 0
 		var a: Vector3 = route[0]
@@ -109,7 +113,7 @@ func check() -> void:
 	world.repair_all()
 	for frame in range(3): await physics_frame
 	verify(not _floor(space, deck_probe).is_empty() and not _floor(space, ramp_probe).is_empty(), "repair restores the complete drive surface")
-	verify(world.get_meta("bridge_drive_runs", 0) == 3, "undamaged bridge has only three continuous support runs")
+	verify(world.get_meta("bridge_drive_runs", 0) == 1, "undamaged bridge has one welded continuous support run")
 	for example in obstruction_examples: print("OBSTRUCTION ", example)
 	if "--capture" in OS.get_cmdline_user_args():
 		await _capture(world)
@@ -159,8 +163,8 @@ func _capture(world: Node3D) -> void:
 	var views := [
 		["bridge-profile", Vector3(600, 128, -675), BRIDGE.pos(251.5, 66.0)],
 		["bridge-road", BRIDGE.pos(68, 56.2, 2.15), BRIDGE.pos(245, 70, 2.15)],
-		["bridge-pylon", BRIDGE.pos(-55, 43, 84), BRIDGE.pos(0, 54, 36)],
-		["bridge-north-exit", BRIDGE.pos(490, 60, 9), BRIDGE.NORTH_ENTRY]
+		["bridge-pylon", BRIDGE.PYLON_CENTERS[1]+Vector3(75,75,45), BRIDGE.PYLON_CENTERS[1]+Vector3.UP*62],
+		["bridge-north-exit", Vector3(470,300,-1400), Vector3(170,25,-1370)]
 	]
 	DirAccess.make_dir_recursive_absolute("res://../reports/bridge-refinement")
 	for view in views:

@@ -1,0 +1,138 @@
+{
+  "checks": [
+    {
+      "name": "compiled real city map loaded",
+      "passed": true
+    },
+    {
+      "name": "geographic roads and actual footprints present",
+      "passed": true
+    },
+    {
+      "name": "named OpenStreetMap places retained",
+      "passed": true
+    },
+    {
+      "name": "cached native land and building triangle meshes",
+      "passed": true
+    },
+    {
+      "name": "local building geometry translated to mapped world centre",
+      "passed": true
+    },
+    {
+      "name": "road vectors reach drawing cache",
+      "passed": true
+    },
+    {
+      "name": "map projection roundtrip preserves metres",
+      "passed": true
+    },
+    {
+      "name": "wheel zoom holds cursor world position",
+      "passed": true
+    },
+    {
+      "name": "drag pans geographic frame",
+      "passed": true
+    },
+    {
+      "name": "full overview contains Manly and airport",
+      "passed": true
+    },
+    {
+      "name": "click landmark sets correct live HUD target",
+      "passed": true
+    },
+    {
+      "name": "guidance never teleports player or creates vehicles",
+      "passed": true
+    },
+    {
+      "name": "destination survives reopening map",
+      "passed": true
+    },
+    {
+      "name": "clear removes HUD and map destination",
+      "passed": true
+    },
+    {
+      "name": "city and Manly real landmarks available as destinations",
+      "passed": true
+    },
+    {
+      "name": "researched banks metro entrances and Quay towers have destinations",
+      "passed": true
+    },
+    {
+      "name": "all 12 researched shopfronts have matching navigation anchors",
+      "passed": true
+    },
+    {
+      "name": "cyber_landmarks independent buildings have actual arrival destinations",
+      "passed": true
+    },
+    {
+      "name": "icc_landmarks independent buildings have actual arrival destinations",
+      "passed": true
+    },
+    {
+      "name": "ICC guidance targets real public entrances without teleport",
+      "passed": true
+    },
+    {
+      "name": "every destination guides to its anchor without teleport",
+      "passed": true
+    }
+  ],
+  "counts": {
+    "buildings": 15508,
+    "land": 16,
+    "places": 5103,
+    "roads": 19680
+  },
+  "landmark_keys": [
+    "opera",
+    "bridge",
+    "quay",
+    "ribbon",
+    "tower_one",
+    "boc",
+    "exchange_haidilao",
+    "manly_wharf",
+    "manly_corso",
+    "manly_beach",
+    "hotel_steyne",
+    "airport",
+    "home",
+    "marina",
+    "westpac",
+    "cba_south",
+    "cba_north",
+    "barangaroo_metro",
+    "martin_place_metro",
+    "quay_quarter",
+    "salesforce",
+    "shop_edition",
+    "shop_matcha",
+    "shop_nakano",
+    "shop_pork_roll",
+    "shop_kuki",
+    "shop_kwang",
+    "shop_wingboy",
+    "shop_holy_basil",
+    "shop_messina",
+    "shop_kurtosh",
+    "shop_dopa",
+    "shop_shortstop",
+    "cybercx_sydney",
+    "cloudflare_sydney",
+    "icc_convention",
+    "icc_exhibition",
+    "tiktok_entertainment"
+  ],
+  "passed": true,
+  "renderer": "forward_plus",
+  "screenshots": [],
+  "user_saves_touched": false
+}

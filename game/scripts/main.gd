@@ -4,8 +4,7 @@ const Store = preload("res://scripts/save_store.gd")
 const Player = preload("res://scripts/harbor_player.gd")
 const Sound = preload("res://scripts/harbor_audio.gd")
 const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
-const VEHICLE_NAMES = {"car":"Tide GT · 跑车","motorcycle":"Quay 650 · 摩托车","yacht":"Pelagic 14 · 游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Southern 62 · 宽体客机"}
-const COSTS = {"car":0,"motorcycle":600,"yacht":2200,"paraglider":350,"glider":1600,"helicopter":3800,"airliner":8000}
+const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机"}
 var airport: Node3D
 var world: Node3D
 var player: CharacterBody3D
@@ -35,6 +34,9 @@ var region_label: Label
 var speed_label: Label
 var mode_label: Label
 var map_panel: Control
+var minimap: Control
+var navigation_hud: Control
+var _navigation_tick := 0.0
 var yaw=0.1
 var pitch=-0.16
 var camera_distance=7.0
@@ -70,7 +72,8 @@ var _camera_subject_id := 0
 var _camera_reset := true
 
 func _ready():
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or "--qa" in OS.get_cmdline_user_args() or "--flight-qa" in OS.get_cmdline_user_args()
+	var arguments:=OS.get_cmdline_user_args()
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--visual-qa","--interactive-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -83,8 +86,8 @@ func _ready():
 		airport.process_mode=Node.PROCESS_MODE_PAUSABLE
 		airport.setup()
 		world.anchors.merge(airport.anchors)
-	world.anchors["race_route"]=[Vector3(-320,5,-170),Vector3(-204,30,-428),Vector3(-83,54.5,-662),Vector3(33,54.5,-886),Vector3(149,54.5,-1109),Vector3(247,29,-1310),Vector3(340,5,-1510)]
-	world.anchors["opera"]=Vector3(414,5,-151)
+	var bridge=load("res://scripts/bridge_landmark.gd")
+	world.anchors["race_route"]=[bridge.SOUTH_ENTRY+Vector3.UP*.7,bridge.ramp_position("south",.5)+Vector3.UP*.7,bridge.pos(0)+Vector3.UP*.7,bridge.pos(251.5)+Vector3.UP*.7,bridge.pos(503)+Vector3.UP*.7,bridge.ramp_position("north",.33)+Vector3.UP*.7,bridge.ramp_position("north",.67)+Vector3.UP*.7,bridge.NORTH_ENTRY+Vector3.UP*.7]
 	world.anchors["cargo_delivery"]=Vector3(-330,5,-20)
 	world.anchors["salvage"]=Vector3(-545,1,-490)
 	player=Player.new()
@@ -126,6 +129,12 @@ func _ready():
 		var flight=load("res://scripts/flight_validation.gd").new()
 		add_child(flight)
 		flight.call_deferred("run")
+	elif "--experience-qa" in arguments:
+		add_child(load("res://scripts/experience_validation.gd").new())
+	elif "--visual-qa" in arguments:
+		add_child(load("res://scripts/landmark_validation.gd").new())
+	elif "--interactive-qa" in arguments:
+		call_deferred("start_interactive_qa")
 	elif "--showcase" in OS.get_cmdline_user_args():
 		demo_mode=true
 		new_world("sandbox","QA Showcase",false)
@@ -133,8 +142,13 @@ func _ready():
 		yaw=0.12
 		pitch=-0.16
 
+func start_interactive_qa():
+	new_world("sandbox","Interactive release QA",false)
+	world_id="qa_interactive_"+str(Time.get_ticks_usec())
+	print("INTERACTIVE_QA_READY world=",world_id," components=",world.structures.size())
+
 func setup_input():
-	var bindings={"forward":[KEY_W,KEY_UP],"back":[KEY_S,KEY_DOWN],"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"rise":[KEY_R],"fall":[KEY_F],"brake":[KEY_SPACE],"jump":[KEY_SPACE],"sprint":[KEY_SHIFT],"interact":[KEY_E],"vehicles":[KEY_TAB],"jobs":[KEY_J],"map":[KEY_M],"carry":[KEY_G],"photo":[KEY_P],"save":[KEY_F5],"recover":[KEY_HOME]}
+	var bindings={"forward":[KEY_W,KEY_UP],"back":[KEY_S,KEY_DOWN],"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"rise":[KEY_R],"fall":[KEY_F],"brake":[KEY_SPACE],"jump":[KEY_SPACE],"sprint":[KEY_SHIFT],"interact":[KEY_E],"vehicles":[KEY_TAB],"jobs":[KEY_J],"map":[KEY_M],"experiences":[KEY_K],"carry":[KEY_G],"photo":[KEY_P],"save":[KEY_F5],"recover":[KEY_HOME]}
 	for action in bindings:
 		if not InputMap.has_action(action): InputMap.add_action(action)
 		for key in bindings[action]:
@@ -280,6 +294,22 @@ func setup_ui():
 	map_panel.size=Vector2(780,735)
 	map_panel.visible=false
 	root.add_child(map_panel)
+	map_panel.anchors=world.anchors
+	map_panel.landmarks=landmark_catalog()
+	if is_instance_valid(airport):map_panel.runway_data=airport.runway_data
+	minimap=load("res://scripts/harbor_minimap.gd").new()
+	minimap.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	minimap.position=Vector2(-318,66)
+	minimap.size=Vector2(290,244)
+	hud.add_child(minimap)
+	minimap.configure(map_panel)
+	minimap.clicked.connect(map_menu)
+	map_panel.waypoint_selected.connect(set_map_waypoint)
+	map_panel.navigation_cleared.connect(clear_landmark_target)
+	navigation_hud=load("res://scripts/navigation_guidance.gd").new()
+	navigation_hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	hud.add_child(navigation_hud)
+	life.service_completed.connect(on_service_completed)
 
 func panel_style(color:Color,radius:int) -> StyleBoxFlat:
 	var style=StyleBoxFlat.new()
@@ -318,6 +348,8 @@ func clear_panel(title:String,subtitle:String=""):
 		get_tree().paused=true
 	process_mode=Node.PROCESS_MODE_ALWAYS
 	map_panel.visible=false
+	if is_instance_valid(minimap): minimap.visible=false
+	if is_instance_valid(navigation_hud): navigation_hud.visible=false
 
 func button(text_value:String,action:Callable):
 	var b=Button.new()
@@ -339,7 +371,7 @@ func main_menu():
 	button("开始生活  →",func(): new_world("life",name_edit.text))
 	button("自由沙盒  →",func(): new_world("sandbox",name_edit.text))
 	if is_instance_valid(airport): button("从悉尼机场起飞  ↗",airport_start)
-	modal_content.add_child(label("生活有收入、资产与维修。\n沙盒免费调用全部载具，使用独立存档。",15,Color("b7c4bc")))
+	modal_content.add_child(label("开局 $50,000 · 所有载具免费，新增就直接驾驶。\n轻松赚取旅费，探索美食、场馆与海滨体验。",15,Color("b7c4bc")))
 	var worlds=[] if qa_running else Store.slots()
 	if not worlds.is_empty():
 		modal_content.add_child(label("继续你的世界",21))
@@ -353,6 +385,8 @@ func main_menu():
 func close_panel():
 	modal.visible=false
 	map_panel.visible=false
+	if is_instance_valid(minimap): minimap.visible=active
+	if is_instance_valid(navigation_hud): navigation_hud.visible=active
 	paused=false
 	get_tree().paused=false
 	active_panel=""
@@ -368,7 +402,9 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	world.repair_all()
 	if is_instance_valid(airport) and airport.has_method("repair_all"): airport.repair_all()
 	life.setup(world.anchors,mode=="sandbox")
-	owned=VEHICLE_NAMES.keys() if mode=="sandbox" else ["car"]
+	owned=VEHICLE_NAMES.keys()
+	landmark_target_key=""
+	landmark_target_name=""
 	reset_fleet()
 	player.global_position=world.anchors.get("home",Vector3(-140,6,150))+Vector3(0,1,15)
 	player.last_safe=player.global_position
@@ -381,10 +417,12 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	player.collision_mask=15
 	active=true
 	hud.visible=true
+	minimap.visible=true
+	navigation_hud.visible=true
 	yaw=0
 	pitch=-0.17
 	autosave=0
-	notify("欢迎回家 · WASD 行走，鼠标观察，E 互动，Tab 调用载具，J 找工作")
+	notify("$50,000 已到账 · Tab 免费新增并驾驶 · M 标点探索 · K 城市体验")
 	if save_now: save_world()
 
 func reset_fleet(with_defaults: bool = true):
@@ -399,7 +437,7 @@ func reset_fleet(with_defaults: bool = true):
 	var home=world.anchors.get("home",Vector3(-140,6,150))
 	var marina=world.anchors.get("marina",Vector3(-240,1,-330))
 	var helipad=world.anchors.get("helipad",Vector3(-280,8,-250))
-	var placements={"car":home+Vector3(12,1,6),"motorcycle":home+Vector3(18,1,6),"yacht":Vector3(marina.x-8.5,0.9,marina.z-28),"helicopter":helipad+Vector3(0,3,0),"paraglider":world.anchors.get("north",Vector3(50,5,-1350))+Vector3(40,90,0),"glider":Vector3(700,230,-1600),"airliner":Vector3(-4180,10.78,8600)}
+	var placements={"car":home+Vector3(12,1,6),"motorcycle":home+Vector3(18,1,6),"speedboat":Vector3(marina.x-8.5,0.9,marina.z-28),"yacht":Vector3(marina.x-30,0.9,marina.z-64),"helicopter":helipad+Vector3(0,3,0),"paraglider":world.anchors.get("north",Vector3(50,5,-1350))+Vector3(40,90,0),"glider":Vector3(700,230,-1600),"airliner":Vector3(-4180,10.78,8600)}
 	for kind in VEHICLE_NAMES:
 		var v=make_vehicle(kind,"owned_"+kind,placements[kind])
 		if kind in ["paraglider","glider","airliner"]: v.freeze=true
@@ -414,13 +452,13 @@ func make_vehicle(kind:String,id:String,pos:Vector3):
 	add_child(v)
 	v.global_position=pos
 	v.reset_physics_interpolation()
-	v.impacted.connect(on_impact)
+	v.impacted.connect(on_impact.bind(v))
 	vehicles.append(v)
 	return v
 
-func on_impact(point:Vector3,energy:float):
+func on_impact(point:Vector3,energy:float,source:RigidBody3D=null):
 	world.damage_at(point,energy,clampf(sqrt(energy)*0.005,2,28))
-	life.on_incident(point,energy)
+	life.on_incident(point,energy,is_instance_valid(source) and source==current_vehicle)
 	if is_instance_valid(airport) and airport.has_method("apply_impact"): airport.apply_impact(point,energy)
 	if energy>8000: audio.crash(point)
 
@@ -429,6 +467,7 @@ func save_world() -> bool:
 	var data={"name":world_name,"mode":mode,"player":vec(player.global_position),"yaw":yaw,"pitch":pitch,"owned":owned,"world":world.get_state(),"airport":airport.get_state() if is_instance_valid(airport) else {},"life":life.get_state(),"vehicles":[],"settings":settings,"elapsed":elapsed,"vehicle":current_vehicle.vehicle_id if is_instance_valid(current_vehicle) else "","spawn_target":spawn_target.vehicle_id if is_instance_valid(spawn_target) else ""}
 	for v in vehicles: data.vehicles.append(v.get_state())
 	data["map_revision"]=preload("res://scripts/map_migration.gd").REVISION
+	data["navigation"]={"key":landmark_target_key,"title":landmark_target_name,"position":vec(landmark_target_position)}
 	var ok=Store.write(world_id,data)
 	save_indicator.text="已保存 · "+Time.get_time_string_from_system() if ok else "保存失败"
 	if not ok: notify(Store.last_error,false)
@@ -443,7 +482,8 @@ func load_world(id:String,backup=false):
 	active=false
 	new_world(str(data.get("mode","life")),str(data.get("name","World")),false)
 	world_id=id
-	owned=data.get("owned",["car"])
+	# Every class is available in old and new worlds; saved instances keep their IDs.
+	owned=VEHICLE_NAMES.keys()
 	world.apply_state(data.get("world",{}))
 	if is_instance_valid(airport): airport.apply_state(data.get("airport",{}))
 	life.apply_state(data.get("life",{}))
@@ -466,18 +506,23 @@ func load_world(id:String,backup=false):
 			restored_ids[id_value] = true
 			var v = make_vehicle(kind,id_value,unvec(state.position))
 			v.apply_state(state)
+			v.set_meta("loaded_model_revision",int(state.get("model_revision",0)))
 			v.occupied=false
 	var occupied_id=str(data.get("vehicle",""))
 	var target_id=str(data.get("spawn_target",""))
 	var relocated:=0
 	if int(data.get("map_revision",0))<preload("res://scripts/map_migration.gd").REVISION:
 		relocated=preload("res://scripts/map_migration.gd").apply(self)
+		relocated+=preload("res://scripts/map_migration.gd").repair_old_approach(self,occupied_id)
+	var model_adjustments:Array=preload("res://scripts/vehicle_model_migration.gd").apply(self,occupied_id)
+	set_meta("last_vehicle_model_adjustments",model_adjustments)
 	for v in vehicles:
 		if v.vehicle_id==occupied_id: enter_vehicle(v)
 		if v.vehicle_id==target_id: spawn_target=v
+	restore_navigation(data.get("navigation",{}))
 	player.reset_physics_interpolation()
 	reset_follow_camera()
-	notify("世界已恢复 · 地图更新后，%s 个重叠位置已安全移出建筑"%relocated if relocated>0 else "世界已恢复 · 资产、活动与建筑变化已读取")
+	notify("世界已恢复 · %d 处地图位置、%d 个旧载具停车位已安全调整"%[relocated,model_adjustments.size()] if relocated>0 or not model_adjustments.is_empty() else "世界已恢复 · 载具、目的地与城市足迹已读取")
 
 func vec(value:Vector3) -> Array:
 	return [value.x,value.y,value.z]
@@ -508,6 +553,7 @@ func pause_menu():
 	button("工作与活动",jobs_menu)
 	button("我的载具",vehicles_menu)
 	button("地图与位置",map_menu)
+	button("城市体验 · 美食、场馆与海滨",experiences_menu)
 	button("设置与操作",settings_menu)
 	button("存档与恢复",worlds_menu)
 	button("返回个人空间 · 救援",recover_player)
@@ -542,19 +588,38 @@ func jobs_menu():
 	button("取消当前活动",func(): notify(life.cancel_job()); close_panel())
 	button("返回",close_panel)
 
+func experiences_menu():
+	active_panel="experiences"
+	clear_panel("来悉尼，玩得开心。","口袋里还有 $%d · 载具始终免费。选一个地方去逛逛，留下你的城市足迹。\nK 随时打开体验菜单，M 查看方向与距离。"%life.money)
+	var visits:Dictionary=life.get_state().get("experience_visits",{})
+	modal_content.add_child(label("已体验 %d 个项目 · 每个项目都可再次参与"%visits.size(),17,Color("a2efe0")))
+	var services:Array=life.service_catalog()
+	services.sort_custom(func(a,b): return player.global_position.distance_squared_to(a.position)<player.global_position.distance_squared_to(b.position))
+	for service in services:
+		var distance:float=Vector2(service.position.x-player.global_position.x,service.position.z-player.global_position.z).length()
+		var reachable:bool=player.global_position.distance_to(service.position)<=float(service.radius)
+		var tag:=" · 已体验" if visits.has(str(service.id)) else ""
+		button(str(service.title)+" · $%d"%int(service.cost)+tag,func():
+			if reachable:
+				var result:Dictionary=life.use_service(str(service.id),player.global_position,not is_instance_valid(current_vehicle))
+				if bool(result.get("ok",false)): close_panel()
+				elif not str(result.get("message","")).is_empty(): notify(str(result.message),false)
+			else: set_map_waypoint(service.position,str(service.title)))
+		var detail:=label(("就在附近 · 点击体验" if reachable else (("%.2f km"%(distance/1000)) if distance>=1000 else "%.0f m"%distance)+" · 点击标记前往")+"  /  恢复耐力",14,Color("aac2b9"))
+		modal_content.add_child(detail)
+	button("可重复的轻松工作 · 赚取旅费",jobs_menu)
+	button("继续探索",close_panel)
+
+func on_service_completed(result:Dictionary):
+	var effects:Dictionary=result.get("effects",{})
+	player.stamina=minf(100.0,player.stamina+float(effects.get("stamina_restore",0)))
+	update_hud()
+
 func vehicles_menu():
 	active_panel="vehicles"
-	clear_panel("创造载具 · 海陆空","每次点击都会新增一辆独立副本，已有载具与位置保留。生活模式购买车型后可持续创造；沙盒免费。")
+	clear_panel("新增载具，立即出发。","全部免费 · 点击即生成并入座。自动寻找合适的道路、水面或机场；之前的载具继续保留。")
 	for kind in VEHICLE_NAMES:
-		var is_owned=kind in owned
-		var suffix=" · 新增一辆" if is_owned else " · 解锁 $"+str(COSTS[kind])
-		button(VEHICLE_NAMES[kind]+suffix,func(): request_vehicle(kind))
-	if is_instance_valid(spawn_target):
-		var target=spawn_target
-		var distance=player.global_position.distance_to(target.global_position)
-		button("前往并进入新载具 · %s · %.0f m"%[VEHICLE_NAMES[target.kind],distance],func():
-			close_panel()
-			enter_vehicle(target))
+		button(VEHICLE_NAMES[kind]+" · 免费驾驶",func(): request_vehicle(kind))
 	if is_instance_valid(current_vehicle):
 		button("维修当前载具 · "+("免费" if mode=="sandbox" else "$120"),repair_vehicle)
 	button("机场跑道起飞",airport_start)
@@ -566,7 +631,7 @@ func next_vehicle_id(kind:String) -> String:
 
 func request_vehicle(kind:String):
 	if not VEHICLE_NAMES.has(kind): return null
-	# Find a place before charging for an unlock; summoning leaves the current occupant untouched.
+	# Placement succeeds before changing the driver. Failure preserves the current ride.
 	var v=make_vehicle(kind,next_vehicle_id(kind),Vector3(0,-2000,0))
 	v.freeze=true
 	v.visible=false
@@ -577,17 +642,13 @@ func request_vehicle(kind:String):
 		v.queue_free()
 		notify("附近没有足够的安全空间 · 移到开阔处后重试；现有载具保持原位",false)
 		return null
-	if not kind in owned:
-		if not life.purchase(kind,int(COSTS[kind])):
-			vehicles.erase(v)
-			remove_child(v)
-			v.queue_free()
-			notify("余额不足 · 完成海港活动获得收入",false)
-			return null
-		owned.append(kind)
+	if not kind in owned: owned.append(kind)
 	finish_vehicle_spawn(v,placement)
+	yaw=v.rotation.y
+	pitch=-0.10 if kind in ["car","motorcycle"] else -0.17
+	enter_vehicle(v)
 	close_panel()
-	notify("已新增 %s · %s。跟随黄色指引，靠近按 E；也可 Tab → 前往并进入新载具。"%[VEHICLE_NAMES[kind],placement.description])
+	notify("已免费新增并入座 · %s\n%s · %s"%[VEHICLE_NAMES[kind],placement.description,vehicle_help(kind)])
 	return v
 
 func finish_vehicle_spawn(v:RigidBody3D,placement:Dictionary):
@@ -616,8 +677,8 @@ func update_spawn_marker():
 	var delta_position:Vector3=spawn_target.global_position-player.global_position
 	var distance=delta_position.length()
 	var direction="北" if absf(delta_position.z)>absf(delta_position.x) and delta_position.z<0 else ("南" if absf(delta_position.z)>absf(delta_position.x) else ("东" if delta_position.x>0 else "西"))
-	spawn_marker.text="◆ 新的 %s · %.0f m · %s
-靠近 E 进入 / Tab 前往"%[VEHICLE_NAMES[spawn_target.kind],distance,direction]
+	spawn_marker.text="◆ %s · %.0f m · %s
+靠近 E 再次进入 · Tab 新增载具"%[VEHICLE_NAMES[spawn_target.kind],distance,direction]
 	var screen_size=get_viewport().get_visible_rect().size
 	var point=Vector2(screen_size.x*0.5,100) if camera.is_position_behind(position3d) else camera.unproject_position(position3d)
 	spawn_marker.position=Vector2(clampf(point.x-spawn_marker.size.x*0.5,24,screen_size.x-spawn_marker.size.x-24),clampf(point.y,95,screen_size.y-spawn_marker.size.y-140))
@@ -628,6 +689,8 @@ func nearest_vehicle():
 	for v in vehicles:
 		var dist=player.global_position.distance_to(v.global_position)
 		var allowed=42.0 if v.kind=="airliner" else (12.0 if v.kind=="yacht" else 7.0)
+		if v.kind in ["yacht","speedboat"]:
+			allowed=maxf(allowed,v.get_exit_position().distance_to(v.global_position)+2.0)
 		if dist<allowed and (nearest==null or dist<distance):
 			nearest=v
 			distance=dist
@@ -635,9 +698,7 @@ func nearest_vehicle():
 
 func enter_vehicle(v):
 	if not is_instance_valid(v): return
-	if not v.kind in owned:
-		notify("这辆载具尚未拥有 · Tab 打开车库",false)
-		return
+	if not v.kind in owned: owned.append(v.kind)
 	if is_instance_valid(current_vehicle) and current_vehicle!=v:
 		current_vehicle.occupied=false
 	current_vehicle=v
@@ -651,6 +712,7 @@ func enter_vehicle(v):
 	player.collision_mask=0
 	camera_distance=v.get_camera_distance()
 	player.global_position=v.global_position
+	player.velocity=Vector3.ZERO
 	player.reset_physics_interpolation()
 	v.reset_physics_interpolation()
 	reset_follow_camera()
@@ -661,7 +723,7 @@ func exit_vehicle():
 	var v=current_vehicle
 	v.occupied=false
 	var exit_pos=v.get_exit_position()
-	if v.kind=="yacht":
+	if v.kind in ["yacht","speedboat"]:
 		for side in [1,-1]:
 			var candidate=v.global_position+v.global_basis.x*side*5.5
 			var dock_ray=PhysicsRayQueryParameters3D.create(candidate+Vector3.UP*5,candidate-Vector3.UP*3,1,[v.get_rid(),player.get_rid()])
@@ -740,18 +802,58 @@ func landmark_catalog() -> Array:
 			if group=="metro_entrances": title+=" · Metro 入口厅"
 			if group=="darling_square_frontages" and record.get("evidence","")=="location_verified": title+=" · 店面待核实"
 			catalog.append({"key":key,"title":title,"position":world.anchors[key]})
+	var geography:Dictionary=world.get_meta("landmark_geography",{})
+	for item in catalog:
+		if geography.has(str(item.key)):
+			item.map_position=geography[str(item.key)].map_position
+			item.position=geography[str(item.key)].arrival
 	return catalog
 
 func set_landmark_target(key:String):
 	for landmark in landmark_catalog():
 		if str(landmark.key)!=key: continue
-		landmark_target_key=key
-		landmark_target_name=str(landmark.title)
-		landmark_target_position=landmark.position
-		close_panel()
-		update_landmark_marker()
-		notify("已设置指引 · "+landmark_target_name+"。按 M 可更换目的地。")
+		set_navigation_target(key,str(landmark.title),landmark.position)
 		return
+
+func set_navigation_target(key:String,title:String,position:Vector3):
+	if not position.is_finite(): return
+	landmark_target_key=key
+	landmark_target_name=title.left(100)
+	landmark_target_position=position
+	close_panel()
+	update_navigation(1.0)
+	update_landmark_marker()
+	notify("目的地已标记 · "+landmark_target_name+"\n跟随黄色标记与小地图；M 更换目的地。")
+
+func set_map_waypoint(position:Vector3,title:String="我的标记"):
+	set_navigation_target("map_pin",title,position)
+
+func restore_navigation(data:Dictionary):
+	var key:=str(data.get("key",""))
+	if key.is_empty(): return
+	if key!="map_pin":
+		for landmark in landmark_catalog():
+			if str(landmark.key)==key:
+				landmark_target_key=key
+				landmark_target_name=str(landmark.title)
+				landmark_target_position=landmark.position
+				return
+	var point:=unvec(data.get("position",[0,4.5,0]))
+	if not point.is_finite(): return
+	landmark_target_key="map_pin"
+	landmark_target_name=str(data.get("title","我的标记")).left(100)
+	landmark_target_position=point
+
+func update_navigation(delta:float):
+	var subject:Node3D=current_vehicle if is_instance_valid(current_vehicle) else player
+	var position:Vector3=subject.get_global_transform_interpolated().origin
+	var heading:float=subject.get_global_transform_interpolated().basis.get_euler().y if is_instance_valid(current_vehicle) else yaw
+	var snapshot:={"player_position":position,"player_heading":heading,"target_key":landmark_target_key,"target_position":landmark_target_position,"target_name":landmark_target_name,"camera":camera}
+	if is_instance_valid(navigation_hud): navigation_hud.sync_navigation(snapshot)
+	_navigation_tick+=delta
+	if _navigation_tick>=0.08 and is_instance_valid(minimap):
+		_navigation_tick=0
+		minimap.sync_navigation(snapshot)
 
 func clear_landmark_target():
 	landmark_target_key=""
@@ -759,6 +861,7 @@ func clear_landmark_target():
 	if is_instance_valid(landmark_marker): landmark_marker.visible=false
 	map_panel.target_key=""
 	map_panel.refresh()
+	update_navigation(1.0)
 	notify("地标指引已清除")
 
 func update_landmark_marker():
@@ -779,16 +882,16 @@ func update_landmark_marker():
 	var bearing:float=fposmod(rad_to_deg(atan2(offset.x,-offset.z)),360.0)
 	var direction:String=["北","东北","东","东南","南","西南","西","西北"][int(roundf(bearing/45.0))%8]
 	landmark_marker.text=("◎ 已到达 · "+landmark_target_name+"
-M 选择下一个目的地") if distance<35 else ("◎ %s · %s · %s\n航向 %03d°  ·  M 地图"%[landmark_target_name,("%.2f km"%(distance/1000.0)) if distance>=1000 else ("%.0f m"%distance),direction,int(bearing)])
+K 城市体验  ·  M 选择下一个目的地") if distance<25 and absf(offset.y)<12 else ("◎ %s · %s · %s\n方向 %03d°  ·  M 地图  ·  K 城市体验"%[landmark_target_name,("%.2f km"%(distance/1000.0)) if distance>=1000 else ("%.0f m"%distance),direction,int(bearing)])
 
 func map_menu():
 	active_panel="map"
-	clear_panel("悉尼 · 地图与目的地","岸线、道路和建筑轮廓来自 OpenStreetMap。滚轮缩放，拖动平移；放大后查看街道与地点名称。")
+	clear_panel("悉尼 · 地图与目的地","点击地点或地图任意位置标记；滚轮缩放，拖动平移。右键清除。\n回到城市后，用小地图、屏幕标记和航向条辨认方向。")
 	button("海港与城市核心",func(): map_panel.show_preset("core"))
 	button("机场 ↔ 海港 ↔ Manly 全图",func(): map_panel.show_preset("all"))
 	button("Manly 码头与海滩",func(): map_panel.show_preset("manly"))
 	button("定位到我",func(): map_panel.show_preset("player"))
-	modal_content.add_child(label("选择目的地 · 只设置指引",20,Color("a2efe0")))
+	modal_content.add_child(label("选择目的地 · 开车、飞行或步行前往",20,Color("a2efe0")))
 	var catalog=landmark_catalog()
 	for landmark in catalog:
 		var key:String=landmark.key
@@ -812,7 +915,7 @@ func map_menu():
 
 func settings_menu():
 	active_panel="settings"
-	clear_panel("让操作适合你。","WASD 移动 / 油门转向，鼠标观察，Shift 奔跑\nE 互动 / 上下车，空格跳跃 / 制动\nR / F 飞行升降，G 拿起 / 放下物件\nTab 车库，J 工作，M 地图，P 摄影\nF5 保存，Esc 暂停，Home 返回个人空间")
+	clear_panel("让操作适合你。","WASD 移动 / 油门转向，鼠标观察，Shift 奔跑\nE 互动 / 上下车，空格跳跃 / 制动\nR / F 飞行升降，G 拿起 / 放下物件\nTab 免费新增并入座，J 工作，K 城市体验，M 地图，P 摄影\nF5 保存，Esc 暂停，Home 返回个人空间")
 	modal_content.add_child(label("音量",18))
 	var volume=HSlider.new()
 	volume.min_value=0
@@ -898,10 +1001,12 @@ func _unhandled_input(event):
 			else:
 				var message=life.interact(player.global_position)
 				if message=="OPEN_JOBS": jobs_menu()
+				elif message=="OPEN_SERVICES": experiences_menu()
 				else: notify(message)
 	elif event.is_action_pressed("vehicles"): vehicles_menu()
 	elif event.is_action_pressed("jobs"): jobs_menu()
 	elif event.is_action_pressed("map"): map_menu()
+	elif event.is_action_pressed("experiences"): experiences_menu()
 	elif event.is_action_pressed("save"):
 		if save_world(): notify("世界已保存")
 	elif event.is_action_pressed("recover"): recover_player()
@@ -945,6 +1050,7 @@ func _process(delta):
 		autosave=0
 		save_world()
 	_update_follow_camera(delta)
+	update_navigation(delta)
 	update_spawn_marker()
 	update_landmark_marker()
 	update_hud()
@@ -962,7 +1068,7 @@ func reset_follow_camera():
 func _update_follow_camera(delta: float):
 	var subject: Node3D=current_vehicle if is_instance_valid(current_vehicle) else player
 	var rendered: Transform3D=subject.get_global_transform_interpolated()
-	var height=3.0 if is_instance_valid(current_vehicle) and current_vehicle.kind=="airliner" else (1.5 if is_instance_valid(current_vehicle) else 1.45)
+	var height=current_vehicle.get_camera_height() if is_instance_valid(current_vehicle) else 1.45
 	var target=rendered.origin+Vector3.UP*height
 	if is_instance_valid(current_vehicle) and Input.is_action_pressed("forward") and not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		yaw=lerp_angle(yaw,rendered.basis.get_euler().y,1.0-exp(-delta*0.9))
@@ -993,14 +1099,19 @@ func _update_follow_camera(delta: float):
 func update_hud():
 	mode_label.text="HARBOURLIFE  /  "+("自由沙盒" if mode=="sandbox" else "生活")
 	info.text="$%s    ·    耐力 %d%%    ·    %02d:%02d" %[life.money,player.stamina,16+int(elapsed/3600)%7,int(elapsed/60)%60]
-	var regions={"quay":"Circular Quay · 环形码头","opera":"Bennelong Point · 歌剧院","rocks":"The Rocks · 岩石区","north":"Milsons Point · 北岸","home":"Harbour Studio · 你的家","marina":"Marina · 海港码头","helipad":"Harbour Air · 停机坪","airport":"Sydney Airport · 悉尼机场"}
+	var regions={"quay":"Circular Quay · 环形码头","opera":"Bennelong Point · 歌剧院","rocks":"The Rocks · 岩石区","north":"Milsons Point · 北岸","home":"Harbour Studio · 你的家","marina":"Marina · 海港码头","helipad":"Harbour Air · 停机坪","airport":"Sydney Airport · 悉尼机场","ribbon":"Darling Harbour · 达令港","exchange_haidilao":"Darling Square · 达令广场","icc_convention":"ICC Sydney · 会展中心","icc_exhibition":"ICC Sydney · 展览中心","tiktok_entertainment":"TikTok Entertainment Centre · 演出场馆","tower_one":"Barangaroo · 巴兰加鲁","manly_wharf":"Manly Wharf · 曼利码头","manly_beach":"Manly Beach · 曼利海滩","martin_place_metro":"Martin Place · 马丁广场"}
 	var closest="quay"
 	var distance=INF
 	for key in regions:
 		if world.anchors.has(key):
-			var d=player.global_position.distance_to(world.anchors[key])
+			var delta_position:Vector3=player.global_position-world.anchors[key]
+			var d=Vector2(delta_position.x,delta_position.z).length()
 			if d<distance: distance=d; closest=key
-	region_label.text=regions[closest] if distance<650 else ("Sydney · 未建街区 / 简化地形" if player.global_position.z>1800 else "Port Jackson · 外海")
+	var broad:="Port Jackson · 悉尼海港"
+	if player.global_position.z>500 and player.global_position.z<3600 and player.global_position.x>-1500 and player.global_position.x<1200:broad="Sydney CBD · 悉尼市区"
+	elif player.global_position.z>3600:broad="Sydney · 机场与城市之间"
+	elif player.global_position.x>5700 and player.global_position.z< -4500:broad="Manly · 曼利"
+	region_label.text=regions[closest] if distance<520 else broad
 	if player.global_position.z>7400 and player.global_position.z<12800 and player.global_position.x>-5700 and player.global_position.x<0:
 		region_label.text="Sydney Airport · 悉尼机场"
 	activity_label.text=life.status_text
@@ -1010,7 +1121,7 @@ func update_hud():
 			speed_label.text+="\n推力 %d%% %s" %[current_vehicle.throttle*100,"失速 · 放低机头" if current_vehicle.stalled else ""]
 			var forward=-current_vehicle.global_basis.z
 			info.text="航向 %03d° · 海港 %.1f km" %[fposmod(rad_to_deg(atan2(forward.x,-forward.z)),360),current_vehicle.global_position.distance_to(world.anchors.opera)/1000]
-		context_hint.text=vehicle_help(current_vehicle.kind)+"   E 离开   Tab 车库   Esc 暂停"
+		context_hint.text=vehicle_help(current_vehicle.kind)+"   E 离开   Tab 新增   M 地图   K 体验"
 	else:
 		speed_label.text="游泳" if player.swimming else ""
 		var near=nearest_vehicle()
@@ -1049,11 +1160,11 @@ func run_qa():
 		finish_quit(1)
 		return
 	new_world("sandbox","Automated QA",false)
-	world_id="qa_isolated"
+	world_id="qa_isolated_"+str(Time.get_ticks_usec())
 	qa_report={"engine":Engine.get_version_info().string,"os":OS.get_name(),"cpu":OS.get_processor_name(),"renderer":RenderingServer.get_current_rendering_method(),"resolution":str(get_viewport().get_visible_rect().size),"checks":[],"profiles":[],"manual_render_each_process":qa_manual_render,"performance_note":"Short real-time samples with one explicit render per process to prevent occlusion skipping. Process frame intervals include stalls. No fixed-fps or movie capture; not a sustained benchmark."}
 	await get_tree().create_timer(3).timeout
 	qa_check("world_has_seven_anchors",world.anchors.size()>=7)
-	qa_check("fleet_has_all_categories",vehicles.size()==7)
+	qa_check("fleet_has_all_categories",vehicles.size()==VEHICLE_NAMES.size())
 	qa_check("player_supported",player.is_on_floor())
 	qa_check("npc_population",get_tree().get_nodes_in_group("harbor_npc").size()>0 or life.get_child_count()>3)
 	await qa_capture("01-home")
@@ -1069,7 +1180,7 @@ func run_qa():
 		if is_instance_valid(current_vehicle): exit_vehicle()
 		v.freeze=false
 		var start=world.anchors.get("home",Vector3.ZERO)+Vector3(12,2,8)
-		if v.kind=="yacht": start=Vector3(280,1,-850)
+		if v.kind in ["yacht","speedboat"]: start=Vector3(280 if v.kind=="yacht" else 360,1,-850)
 		elif v.kind in ["paraglider","glider","airliner","helicopter"]: start=Vector3(800,220,-1300)
 		v.global_position=start
 		v.rotation=Vector3.ZERO
@@ -1124,14 +1235,13 @@ func run_qa():
 	await qa_capture("04-damage")
 	qa_check("atomic_save",save_world())
 	var restored=Store.read(world_id)
-	qa_check("save_has_vehicles",restored.get("vehicles",[]).size()==7)
+	qa_check("save_has_vehicles",restored.get("vehicles",[]).size()==VEHICLE_NAMES.size())
 	qa_check("save_has_damage",restored.get("world",{}).get("destroyed",[])==damage_state.get("destroyed",[]))
 	world.repair_all()
 	world.apply_state(restored.world)
 	qa_check("damage_restore",world.get_state().get("destroyed",[])==restored.world.get("destroyed",[]) and world.get_state().get("partial",{})==restored.world.get("partial",{}) and world.get_state().get("rubble",[]).size()==restored.world.get("rubble",[]).size())
 	var copy=Store.duplicate_world(world_id)
 	qa_check("independent_copy",copy!="" and not Store.read(copy).is_empty())
-	if copy!="": DirAccess.remove_absolute(Store.ROOT+copy+".json")
 	var f=FileAccess.open("user://qa-report.json",FileAccess.WRITE)
 	f.store_string(JSON.stringify(qa_report,"\t"))
 	f.close()
@@ -1171,9 +1281,7 @@ func airport_start():
 		notify("机场正在构建",false)
 		return
 	if not active: new_world("sandbox","悉尼机场试飞")
-	if not "airliner" in owned:
-		notify("生活世界需购买客机；可在标题建立独立机场试飞沙盒",false)
-		return
+	if not "airliner" in owned: owned.append("airliner")
 	var v=make_vehicle("airliner",next_vehicle_id("airliner"),Vector3(0,-2000,0))
 	v.freeze=true
 	var placement=VehicleSpawn.find_spawn(self,v,true)
@@ -1194,7 +1302,7 @@ func airport_start():
 func vehicle_help(kind:String) -> String:
 	match kind:
 		"car","motorcycle": return "W/S 加速倒车   A/D 转向   空格 制动"
-		"yacht": return "W/S 双机推力   A/D 船舵   空格 反向推力"
+		"yacht","speedboat": return "W/S 双机推力   A/D 船舵   空格 反向推力"
 		"helicopter": return "W/S 俯仰   A/D 偏航   R/F 升降"
 		"paraglider","glider": return "A/D 转弯   R/F 俯仰   空格 减速板 · 无动力"
 		_: return "W/S 推力   A/D 转弯   R/F 俯仰   空格 减速板"

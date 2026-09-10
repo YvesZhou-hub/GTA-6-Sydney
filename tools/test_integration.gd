@@ -1,11 +1,12 @@
 extends SceneTree
-## Headless integration checks; creates only qa_integration_* save files and removes them.
+## Headless integration checks; uses fresh qa_integration_* save files and retains them for inspection.
 ## Run: Godot --headless --path game --script "$PWD/tools/test_integration.gd"
 const Store = preload("res://scripts/save_store.gd")
 var failures := 0
 var checks := 0
 var app
-var cleanup_ids: Array[String] = []
+var fixture_ids: Array[String] = []
+var qa_prefix:="qa_integration_"+str(Time.get_ticks_usec())+"_"
 var started: int
 
 func _init() -> void:
@@ -18,9 +19,9 @@ func check(title: String, okay: bool, detail: String = "") -> void:
 		failures += 1
 
 func set_qa_id(index: int) -> void:
-	app.world_id = "qa_integration_%d" % index
-	if not app.world_id in cleanup_ids:
-		cleanup_ids.append(app.world_id)
+	app.world_id = qa_prefix+str(index)
+	if not app.world_id in fixture_ids:
+		fixture_ids.append(app.world_id)
 
 func run() -> void:
 	started = Time.get_ticks_msec()
@@ -36,7 +37,7 @@ func run() -> void:
 	var count: int = life.get_child_count()
 	var cargo_count: int = life.cargo.size()
 	var npc_count: int = life.npcs.size()
-	check("initial_life_economy",life.money==1200 and not life.sandbox)
+	check("initial_life_economy",life.money==50000 and not life.sandbox)
 	for cycle in 4:
 		life.money = 87
 		life.completed_jobs["photo"] = 9
@@ -47,7 +48,7 @@ func run() -> void:
 		app.new_world(next_mode,"Integration QA",false)
 		set_qa_id(cycle+1)
 		app.player.enabled = false
-		check("mode_reset_%d"%cycle,life.money==(50000 if next_mode=="sandbox" else 1200) and life.active_job.is_empty() and life.completed_jobs.is_empty() and not life.owned_assets.has("qa_fake_asset") and int(life.npcs[0].memories.accidents)==0)
+		check("mode_reset_%d"%cycle,life.money==50000 and life.active_job.is_empty() and life.completed_jobs.is_empty() and not life.owned_assets.has("qa_fake_asset") and int(life.npcs[0].memories.accidents)==0)
 		check("stable_population_%d"%cycle,life.get_child_count()==count and life.cargo.size()==cargo_count and life.npcs.size()==npc_count)
 		await process_frame
 	# Actual translated catalog IDs must still drive mode-specific spatial jobs.
@@ -99,8 +100,8 @@ func run() -> void:
 	app.player.enabled = false
 	check("new_world_restores_walking_collision",app.player.collision_layer==1 and app.player.collision_mask==15,"layer=%d mask=%d"%[app.player.collision_layer,app.player.collision_mask])
 	# Repeat through persisted on-foot state, starting from an occupied vehicle.
-	var saved_id := "qa_integration_saved_on_foot"
-	cleanup_ids.append(saved_id)
+	var saved_id := qa_prefix+"saved_on_foot"
+	fixture_ids.append(saved_id)
 	Store.write(saved_id,{"name":"Integration QA","mode":"life","player":[-335,6,-13],"life":life.get_state(),"world":{},"airport":{},"vehicles":[],"owned":["car"],"vehicle":""})
 	app.enter_vehicle(app.vehicles[0])
 	app.load_world(saved_id)
@@ -154,9 +155,6 @@ func run() -> void:
 		await physics_frame
 	check("released_cargo_supported_on_boat_layer",fresh.global_position.y>25,"height=%.2f"%fresh.global_position.y)
 	check("loaded_cargo_supported_on_boat_layer",restored.global_position.y>25,"height=%.2f"%restored.global_position.y)
-	for id in cleanup_ids:
-		for suffix in [".json",".json.bak",".json.tmp"]:
-			DirAccess.remove_absolute(Store.ROOT+id+suffix)
 	app.active=false
 	print("INTEGRATION COMPLETE checks=",checks," failures=",failures," elapsed_ms=",Time.get_ticks_msec()-started)
 	quit(failures)

@@ -6,7 +6,7 @@ extends SceneTree
 class Runner extends Node:
 	var stage: Node3D
 	var results: Array = []
-	var report: Dictionary = {"engine":Engine.get_version_info().string,"physics_hz":60,"scope":"Production vehicle physics on deterministic test surfaces; not a city visual or airport geography test","checks":[],"samples":[]}
+	var report: Dictionary = {"engine":Engine.get_version_info().string,"physics_hz":Engine.physics_ticks_per_second,"physics_engine":ProjectSettings.get_setting("physics/3d/physics_engine","DEFAULT"),"scope":"Production vehicle physics on deterministic test surfaces; not a city visual or airport geography test","checks":[],"samples":[]}
 	var plane: RigidBody3D
 	var circuit_time := 0.0
 	var circuit_wp := 0
@@ -53,10 +53,11 @@ class Runner extends Node:
 		stage.add_child(body)
 		return body
 
-	func make(kind:String,pos:Vector3) -> RigidBody3D:
+	func make(kind:String,pos:Vector3,heading:float=0.0) -> RigidBody3D:
 		var body:RigidBody3D=load("res://scripts/harbor_vehicle.gd").new()
 		body.configure(kind,"verify_"+kind)
 		body.position=pos
+		body.rotation.y=heading
 		stage.add_child(body)
 		return body
 
@@ -66,8 +67,8 @@ class Runner extends Node:
 		copy.configure(vehicle.kind,"roundtrip_"+vehicle.kind)
 		copy.apply_state(state) # Also verifies applying data before add_child / _ready.
 		stage.add_child(copy)
-		var okay:bool=copy.position.is_equal_approx(vehicle.position) and copy.linear_velocity.is_equal_approx(vehicle.linear_velocity) and is_equal_approx(copy.health,vehicle.health) and copy.freeze==vehicle.freeze
-		check("save_roundtrip_"+vehicle.kind,okay,{"health":copy.health,"frozen":copy.freeze})
+		var okay:bool=copy.position.is_equal_approx(vehicle.position) and copy.global_basis.is_equal_approx(vehicle.global_basis) and copy.linear_velocity.is_equal_approx(vehicle.linear_velocity) and copy.angular_velocity.is_equal_approx(vehicle.angular_velocity) and is_equal_approx(copy.health,vehicle.health) and is_equal_approx(copy.fuel,vehicle.fuel) and is_equal_approx(copy.throttle,vehicle.throttle) and copy.get_state().dents==vehicle.get_state().dents and copy.freeze==vehicle.freeze
+		check("save_roundtrip_"+vehicle.kind,okay,{"health":copy.health,"fuel":copy.fuel,"frozen":copy.freeze,"rotation_velocity_throttle_and_dents_restored":okay})
 		copy.queue_free()
 
 	func run_cases() -> void:
@@ -87,37 +88,79 @@ class Runner extends Node:
 			await frames(180)
 			check(kind+"_drive_steer_brake",cruise>25.0 and travelled>100.0 and heading>0.2 and vehicle.linear_velocity.length()<2.0 and vehicle.health>95.0,{"cruise_mps":cruise,"travel_m":travelled,"turn_rad":heading,"braked_mps":vehicle.linear_velocity.length(),"health":vehicle.health})
 			save_roundtrip(vehicle)
+		# Payloads use the final authored cargo-deck rectangles. No joints, freeze,
+		# parent-to-boat attachment, velocity matching or transform writes during travel.
+		for kind in ["yacht","speedboat"]:
+			await new_stage(false)
+			var boat:=make(kind,Vector3(0,0.9,0))
+			boat.occupied=true
+			var profile:Dictionary=boat.boat_profile
+			check(kind+"_authored_deck_profile",profile.has("cargo_position") and profile.has("cargo_bounds") and boat.has_meta("boat_spec"),{"reference":boat.get_meta("model_reference","missing"),"mass_kg":boat.mass})
+			if not profile.has("cargo_bounds"):continue
+			await frames(120)
+			var bay:AABB=profile.cargo_bounds
+			var center:Vector3=profile.cargo_position
+			var crate_size:float=.8 if kind=="yacht" else .45
+			var cargo:=RigidBody3D.new()
+			cargo.mass=120.0 if kind=="yacht" else 30.0
+			cargo.collision_layer=8
+			cargo.collision_mask=15
+			cargo.contact_monitor=true
+			cargo.max_contacts_reported=8
+			cargo.transform=boat.global_transform*Transform3D(Basis.IDENTITY,Vector3(center.x,bay.position.y+crate_size*.5+.06,center.z))
+			var cargo_shape:=CollisionShape3D.new()
+			var box:=BoxShape3D.new()
+			box.size=Vector3.ONE*crate_size
+			cargo_shape.shape=box
+			cargo.add_child(cargo_shape)
+			var cargo_friction:=PhysicsMaterial.new()
+			cargo_friction.friction=0.8
+			cargo.physics_material_override=cargo_friction
+			stage.add_child(cargo)
+			await frames(120)
+			var began_on_deck:bool=boat in cargo.get_colliding_bodies()
+			var initial_local:Vector3=boat.to_local(cargo.position)
+			Input.action_press("forward",0.8)
+			await frames(600)
+			var cargo_relative:Vector3=boat.to_local(cargo.position)
+			var horizontal_clear:bool=cargo_relative.x-crate_size*.5>=bay.position.x-.03 and cargo_relative.x+crate_size*.5<=bay.end.x+.03 and cargo_relative.z-crate_size*.5>=bay.position.z-.03 and cargo_relative.z+crate_size*.5<=bay.end.z+.03
+			var vertical_clear:bool=absf(cargo_relative.y-(bay.position.y+crate_size*.5))<.14
+			check(kind+"_buoyancy_and_physical_cargo",boat.position.y>0.15 and boat.position.y<1.4 and boat.linear_velocity.length()>7.0 and began_on_deck and horizontal_clear and vertical_clear and not cargo.freeze,{"boat_height_m":boat.position.y,"speed_mps":boat.linear_velocity.length(),"cargo_local":[cargo_relative.x,cargo_relative.y,cargo_relative.z],"cargo_size_m":crate_size,"cargo_mass_kg":cargo.mass,"relative_drift_m":cargo_relative.distance_to(initial_local),"began_in_physical_contact":began_on_deck,"cargo_physical":not cargo.freeze})
+			if kind=="yacht":save_roundtrip(boat)
 		await new_stage(false)
-		var boat:=make("yacht",Vector3(0,0.9,0))
-		boat.occupied=true
-		var cargo:=RigidBody3D.new()
-		cargo.mass=120.0
-		cargo.collision_layer=8
-		cargo.collision_mask=15
-		cargo.position=Vector3(0,2.2,3.2)
-		var cargo_shape:=CollisionShape3D.new()
-		var box:=BoxShape3D.new()
-		box.size=Vector3.ONE*0.8
-		cargo_shape.shape=box
-		cargo.add_child(cargo_shape)
-		var cargo_friction:=PhysicsMaterial.new()
-		cargo_friction.friction=0.8
-		cargo.physics_material_override=cargo_friction
-		stage.add_child(cargo)
+		var launch:=make("speedboat",Vector3(0,.9,0))
+		launch.occupied=true
 		await frames(120)
-		Input.action_press("forward",0.8)
-		await frames(600)
-		var cargo_relative:=boat.to_local(cargo.position)
-		check("yacht_buoyancy_and_physical_cargo",boat.position.y>0.15 and boat.position.y<1.1 and boat.linear_velocity.length()>7.0 and absf(cargo_relative.x)<2.4 and cargo_relative.z>0.7 and cargo_relative.z<6.5 and cargo_relative.y>0.9 and cargo_relative.y<1.7,{"boat_height_m":boat.position.y,"speed_mps":boat.linear_velocity.length(),"cargo_local":[cargo_relative.x,cargo_relative.y,cargo_relative.z],"cargo_physical":not cargo.freeze})
-		save_roundtrip(boat)
+		Input.action_press("forward")
+		await frames(360)
+		var launch_cruise:float=launch.linear_velocity.length()
+		var launch_travel:float=-launch.position.z
+		Input.action_press("right",.45)
+		await frames(120)
+		var launch_turn:float=absf(launch.rotation.y)
+		release_all()
+		Input.action_press("brake")
+		await frames(360)
+		check("speedboat_drive_steer_brake",launch_cruise>14.0 and launch_travel>40.0 and launch_turn>.2 and launch.linear_velocity.length()<2.0 and launch.health>99.0 and launch.fuel<100.0,{"cruise_mps":launch_cruise,"travel_m":launch_travel,"turn_rad":launch_turn,"braked_mps":launch.linear_velocity.length(),"health":launch.health,"fuel":launch.fuel})
+		save_roundtrip(launch)
 		await new_stage(false)
 		var ferry:=make("yacht",Vector3(0,0.9,0))
-		var loaded_car:=make("car",Vector3(0,2.45,3.2))
 		ferry.occupied=true
+		await frames(120)
+		# The 27.1 x 7.16 m yacht's aft deck has room across its beam, behind
+		# the port stair. This is a game physics payload, not a real yacht rating.
+		var car_position:Vector3=ferry.boat_profile.get("car_position",Vector3(0,1.46,9.1))
+		var car_heading:float=float(ferry.boat_profile.get("car_heading",PI*.5))
+		var loaded_car:=make("car",ferry.to_global(car_position+Vector3.UP*.76),ferry.rotation.y+car_heading)
+		await frames(180)
+		var initial_car_local:Vector3=ferry.to_local(loaded_car.position)
+		var settled_contact:bool=ferry in loaded_car.get_colliding_bodies()
 		Input.action_press("forward",0.6)
 		await frames(900)
-		var car_local:=ferry.to_local(loaded_car.position)
-		check("yacht_transports_unfrozen_parked_car",ferry.linear_velocity.length()>7.0 and absf(car_local.x)<1.0 and car_local.z>1.0 and car_local.z<5.0 and car_local.y>1.1 and car_local.y<1.9 and loaded_car.health>99.0 and not loaded_car.freeze,{"speed_mps":ferry.linear_velocity.length(),"car_local":[car_local.x,car_local.y,car_local.z],"car_health":loaded_car.health,"boat_height_m":ferry.position.y})
+		var car_local:Vector3=ferry.to_local(loaded_car.position)
+		var car_rest_y:float=car_position.y+.68
+		var payload_movement:float=car_local.distance_to(initial_car_local)
+		check("yacht_transports_unfrozen_parked_car",ferry.linear_velocity.length()>7.0 and settled_contact and absf(car_local.x-car_position.x)<.35 and absf(car_local.z-car_position.z)<.35 and absf(car_local.y-car_rest_y)<.15 and payload_movement<.35 and loaded_car.health>99.0 and not loaded_car.freeze and not loaded_car.occupied,{"speed_mps":ferry.linear_velocity.length(),"car_local":[car_local.x,car_local.y,car_local.z],"initial_car_local":[initial_car_local.x,initial_car_local.y,initial_car_local.z],"car_health":loaded_car.health,"car_mass_kg":loaded_car.mass,"car_parked_yaw_rad":car_heading,"payload_relative_movement_m":payload_movement,"began_in_physical_contact":settled_contact,"car_frozen":loaded_car.freeze,"boat_height_m":ferry.position.y})
 		for kind in ["paraglider","glider"]:
 			await new_stage(false)
 			var wing:=make(kind,Vector3(0,160,0))

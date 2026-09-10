@@ -1,0 +1,564 @@
+[
+	{
+		"camera": [
+			680.0,
+			175.0,
+			-630.0
+		],
+		"captured_utc": "2026-09-10T15:24:37",
+		"draw_calls": 1239.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			16.0,
+			72.0,
+			-859.0
+		],
+		"view": "bridge"
+	},
+	{
+		"camera": [
+			-78.3773880004883,
+			56.5,
+			-671.6494140625
+		],
+		"captured_utc": "2026-09-10T15:24:38",
+		"draw_calls": 1592.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			49.5812034606934,
+			56.5,
+			-918.4501953125
+		],
+		"view": "bridge-road"
+	},
+	{
+		"camera": [
+			247.521408081055,
+			48.5022201538086,
+			-1374.1826171875
+		],
+		"captured_utc": "2026-09-10T15:24:38",
+		"draw_calls": 1200.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			187.521408081055,
+			13.50221824646,
+			-1429.1826171875
+		],
+		"view": "north-approach"
+	},
+	{
+		"camera": [
+			677.0,
+			96.0,
+			-100.0
+		],
+		"captured_utc": "2026-09-10T15:24:38",
+		"draw_calls": 1760.0,
+		"headless_view_validation": false,
+		"ray_probes": [
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/@StaticBody3D@49038",
+				"osm_id": "",
+				"pixel": [
+					60,
+					380
+				],
+				"position": [
+					-524.554443359375,
+					20.5917892456055,
+					-33.4876708984375
+				]
+			},
+			{
+				"damage_id": "osm/way/454931141/storey_group/0",
+				"height_source": "inferred; no height/levels in OSM",
+				"node": "/root/Harbourlife/@Node3D@9/osm_way_454931141_storey_group_0",
+				"osm_id": "way/454931141",
+				"pixel": [
+					160,
+					380
+				],
+				"position": [
+					-590.6748046875,
+					10.3962936401367,
+					-133.470230102539
+				]
+			},
+			{
+				"damage_id": "osm/way/353324955/storey_group/0",
+				"height_source": "OSM levels × assumed floor height",
+				"node": "/root/Harbourlife/@Node3D@9/osm_way_353324955_storey_group_0",
+				"osm_id": "way/353324955",
+				"pixel": [
+					280,
+					380
+				],
+				"position": [
+					-427.24755859375,
+					13.9499969482422,
+					-257.422424316406
+				]
+			},
+			{
+				"damage_id": "osm/way/606864764/storey_group/1",
+				"height_source": "OSM tagged height; not independently surveyed",
+				"node": "/root/Harbourlife/@Node3D@9/osm_way_606864764_storey_group_1",
+				"osm_id": "way/606864764",
+				"pixel": [
+					420,
+					380
+				],
+				"position": [
+					-178.752868652344,
+					23.9835052490234,
+					-366.521820068359
+				]
+			},
+			{
+				"damage_id": "bridge/support/south/23/1",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/bridge_support_south_23_1",
+				"osm_id": "",
+				"pixel": [
+					580,
+					380
+				],
+				"position": [
+					-119.608947753906,
+					16.9883728027344,
+					-553.343322753906
+				]
+			},
+			{
+				"damage_id": "opera/shell/2/8",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/opera_shell_2_8",
+				"osm_id": "",
+				"pixel": [
+					720,
+					380
+				],
+				"position": [
+					407.181518554688,
+					64.2815856933594,
+					-338.51953125
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/OSM_Land_1",
+				"osm_id": "",
+				"pixel": [
+					960,
+					380
+				],
+				"position": [
+					145.765625,
+					4.50000762939453,
+					-1067.626953125
+				]
+			},
+			{
+				"damage_id": "osm/way/555341390/storey_group/1",
+				"height_source": "OSM levels × assumed floor height",
+				"node": "/root/Harbourlife/@Node3D@9/osm_way_555341390_storey_group_1",
+				"osm_id": "way/555341390",
+				"pixel": [
+					1220,
+					380
+				],
+				"position": [
+					464.928436279297,
+					22.3622741699219,
+					-1122.46081542969
+				]
+			},
+			{
+				"damage_id": "osm/way/191626163/storey_group/0",
+				"height_source": "OSM levels × assumed floor height",
+				"node": "/root/Harbourlife/@Node3D@9/osm_way_191626163_storey_group_0",
+				"osm_id": "way/191626163",
+				"pixel": [
+					60,
+					500
+				],
+				"position": [
+					258.431243896484,
+					15.6862869262695,
+					-69.4878692626953
+				]
+			},
+			{
+				"damage_id": "osm/way/191626163/storey_group/0",
+				"height_source": "OSM levels × assumed floor height",
+				"node": "/root/Harbourlife/@Node3D@9/osm_way_191626163_storey_group_0",
+				"osm_id": "way/191626163",
+				"pixel": [
+					160,
+					500
+				],
+				"position": [
+					266.205474853516,
+					11.0675506591797,
+					-103.757553100586
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/OSM_Land_6",
+				"osm_id": "",
+				"pixel": [
+					280,
+					500
+				],
+				"position": [
+					275.609680175781,
+					4.5,
+					-150.620162963867
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/OSM_Land_6",
+				"osm_id": "",
+				"pixel": [
+					420,
+					500
+				],
+				"position": [
+					323.641021728516,
+					4.5,
+					-204.954223632812
+				]
+			},
+			{
+				"damage_id": "opera/steps/6",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/opera_steps_6",
+				"osm_id": "",
+				"pixel": [
+					580,
+					500
+				],
+				"position": [
+					406.519866943359,
+					13.0795669555664,
+					-251.386672973633
+				]
+			},
+			{
+				"damage_id": "opera/podium/1",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/opera_podium_1",
+				"osm_id": "",
+				"pixel": [
+					720,
+					500
+				],
+				"position": [
+					457.219543457031,
+					15.6999969482422,
+					-294.285949707031
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/@StaticBody3D@476",
+				"osm_id": "",
+				"pixel": [
+					960,
+					500
+				],
+				"position": [
+					438.175964355469,
+					-34.0,
+					-546.870971679688
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/@StaticBody3D@476",
+				"osm_id": "",
+				"pixel": [
+					1220,
+					500
+				],
+				"position": [
+					564.90966796875,
+					-34.0000152587891,
+					-690.234924316406
+				]
+			},
+			{
+				"damage_id": "osm/way/1363963163/storey_group/0",
+				"height_source": "OSM levels × assumed floor height",
+				"node": "/root/Harbourlife/@Node3D@9/osm_way_1363963163_storey_group_0",
+				"osm_id": "way/1363963163",
+				"pixel": [
+					60,
+					640
+				],
+				"position": [
+					423.663146972656,
+					7.65000152587891,
+					-76.1338348388672
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/OSM_Land_6",
+				"osm_id": "",
+				"pixel": [
+					160,
+					640
+				],
+				"position": [
+					433.927185058594,
+					4.50001525878906,
+					-97.1114501953125
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/OSM_Land_6",
+				"osm_id": "",
+				"pixel": [
+					280,
+					640
+				],
+				"position": [
+					457.082824707031,
+					4.49997711181641,
+					-123.305702209473
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/OSM_Land_6",
+				"osm_id": "",
+				"pixel": [
+					420,
+					640
+				],
+				"position": [
+					484.097900390625,
+					4.5,
+					-153.865661621094
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/@StaticBody3D@476",
+				"osm_id": "",
+				"pixel": [
+					580,
+					640
+				],
+				"position": [
+					446.796600341797,
+					-34.0,
+					-226.151626586914
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/@StaticBody3D@476",
+				"osm_id": "",
+				"pixel": [
+					720,
+					640
+				],
+				"position": [
+					485.178588867188,
+					-33.9999847412109,
+					-269.570159912109
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/@StaticBody3D@476",
+				"osm_id": "",
+				"pixel": [
+					960,
+					640
+				],
+				"position": [
+					550.976257324219,
+					-34.0,
+					-344.001922607422
+				]
+			},
+			{
+				"damage_id": "",
+				"height_source": "",
+				"node": "/root/Harbourlife/@Node3D@9/@StaticBody3D@476",
+				"osm_id": "",
+				"pixel": [
+					1220,
+					640
+				],
+				"position": [
+					622.257080078125,
+					-34.0,
+					-424.636322021484
+				]
+			}
+		],
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			427.0,
+			31.0,
+			-321.0
+		],
+		"view": "opera"
+	},
+	{
+		"camera": [
+			507.0,
+			8.0,
+			-184.0
+		],
+		"captured_utc": "2026-09-10T15:24:38",
+		"draw_calls": 1441.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			430.0,
+			33.0,
+			-317.0
+		],
+		"view": "opera-ground"
+	},
+	{
+		"camera": [
+			-317.0,
+			9.0,
+			-30.0
+		],
+		"captured_utc": "2026-09-10T15:24:39",
+		"draw_calls": 2885.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			-323.0,
+			6.09999990463257,
+			-22.0
+		],
+		"view": "car"
+	},
+	{
+		"camera": [
+			-313.700012207031,
+			7.5,
+			-26.5
+		],
+		"captured_utc": "2026-09-10T15:24:39",
+		"draw_calls": 2880.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			-317.0,
+			6.09999990463257,
+			-22.0
+		],
+		"view": "motorcycle"
+	},
+	{
+		"camera": [
+			353.0,
+			7.90000009536743,
+			-866.0
+		],
+		"captured_utc": "2026-09-10T15:24:39",
+		"draw_calls": 3256.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			340.0,
+			1.89999997615814,
+			-850.0
+		],
+		"view": "speedboat"
+	},
+	{
+		"camera": [
+			308.0,
+			15.8999996185303,
+			-818.0
+		],
+		"captured_utc": "2026-09-10T15:24:40",
+		"draw_calls": 1375.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			280.0,
+			3.90000009536743,
+			-850.0
+		],
+		"view": "yacht"
+	},
+	{
+		"camera": [
+			-4133.2705078125,
+			34.7799987792969,
+			8517.3779296875
+		],
+		"captured_utc": "2026-09-10T15:24:40",
+		"draw_calls": 524.0,
+		"headless_view_validation": false,
+		"ready": true,
+		"saved": true,
+		"startup_ms": 389.708,
+		"startup_scope": "validator activation after main assembly",
+		"target": [
+			-4180.0,
+			12.7799997329712,
+			8600.0
+		],
+		"view": "airliner"
+	}
+]

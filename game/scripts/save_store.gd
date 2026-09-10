@@ -1,6 +1,6 @@
 extends RefCounted
 
-const VERSION = 3
+const VERSION = 4
 const ROOT = "user://worlds/"
 static var last_error = ""
 
@@ -56,7 +56,7 @@ static func read(id: String, backup: bool = false) -> Dictionary:
 	if not data is Dictionary:
 		last_error = "Invalid save. The previous recovery copy may still be available."
 		return {}
-	for key in ["world", "life", "airport", "settings"]:
+	for key in ["world", "life", "airport", "settings", "navigation"]:
 		if data.has(key) and not data[key] is Dictionary:
 			last_error = "Invalid world section: " + key
 			return {}
@@ -90,5 +90,5 @@ static func duplicate_world(id: String) -> String:
 	var data = read(id)
 	if data.is_empty(): return ""
 	data["name"] = str(data.get("name","World")) + " · Copy"
-	var new_id = "world_" + str(Time.get_unix_time_from_system()).replace(".","_")
+	var new_id = ("qa_copy_" if id.begins_with("qa_") else "world_") + str(Time.get_unix_time_from_system()).replace(".","_")
 	return new_id if write(new_id,data) else ""

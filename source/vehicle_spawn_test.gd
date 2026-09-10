@@ -29,7 +29,7 @@ func run():
 		v.freeze=true
 		originals[v.vehicle_id]=v.global_transform
 	var created: Array=[]
-	for kind in ["car","car","car","car","motorcycle","yacht","helicopter","glider","paraglider","airliner","airliner","airliner","airliner"]:
+	for kind in ["car","car","car","car","motorcycle","speedboat","yacht","helicopter","glider","paraglider","airliner","airliner","airliner","airliner"]:
 		var before: Vector3=game.player.global_position
 		var prior_count: int=game.vehicles.size()
 		var vehicle=game.request_vehicle(kind)
@@ -37,18 +37,23 @@ func run():
 		if vehicle==null: continue
 		created.append(vehicle)
 		check(game.vehicles.size()==prior_count+1,"fleet grows by exactly one "+kind)
-		check(game.player.global_position.distance_to(before)<0.001 and game.current_vehicle==null,"summon never moves or boards player "+kind)
+		check(game.player.global_position.distance_to(vehicle.global_position)<0.001 and game.current_vehicle==vehicle and vehicle.occupied and not game.player.enabled,"summon immediately boards fresh copy "+kind)
 		check(Spawn.clear_envelope(game,vehicle,vehicle.global_transform,0.3),"full geometry clear of walls/vehicles "+kind)
 		vehicle.freeze=true
 	var unique:={}
 	for vehicle in game.vehicles: unique[vehicle.vehicle_id]=true
 	check(unique.size()==game.vehicles.size(),"all original and summoned IDs are unique")
-	check(game.vehicles.size()==initial_count+13,"same-type copies have no fixed-seven cap")
+	check(game.vehicles.size()==initial_count+14,"same-type copies have no fixed fleet cap")
 	var originals_preserved:=true
 	for v in game.vehicles:
 		if originals.has(v.vehicle_id) and not v.global_transform.is_equal_approx(originals[v.vehicle_id]): originals_preserved=false
 	check(originals_preserved,"summoning never relocates an existing instance")
 	# Runtime wall test: block the user's entire straight-ahead candidate with a tall wall.
+	game.exit_vehicle()
+	game.player.enabled=false
+	game.player.global_position=Vector3(-545,5,-140)
+	game.player.reset_physics_interpolation()
+	game.yaw=0
 	var wall:=StaticBody3D.new()
 	var wall_shape:=CollisionShape3D.new()
 	var box:=BoxShape3D.new()
@@ -67,18 +72,23 @@ func run():
 	var occupied_before=game.current_vehicle
 	var occupied_pose:Transform3D=occupied_before.global_transform
 	var summon_during_drive=game.request_vehicle("motorcycle")
-	check(summon_during_drive!=null and game.current_vehicle==occupied_before and occupied_before.occupied,"summoning while occupied keeps current driver")
+	check(summon_during_drive!=null and game.current_vehicle==summon_during_drive and summon_during_drive.occupied and not occupied_before.occupied,"summoning while occupied transfers driver into new copy")
 	check(occupied_before.global_transform.is_equal_approx(occupied_pose),"summoning does not move occupied vehicle")
 	if summon_during_drive!=null: summon_during_drive.freeze=true
 	# Runtime ground settling must not create damage/launch impulses.
 	var settle=game.request_vehicle("car")
 	var settle_height:float=settle.global_position.y if settle!=null else 0
-	if settle!=null: settle.freeze=false
+	if settle!=null:
+		game.exit_vehicle()
+		game.player.enabled=false
+		settle.freeze=false
 	for i in 180: await physics_frame
 	check(settle!=null and settle.health==100 and settle.linear_velocity.length()<0.3 and absf(settle.global_position.y-settle_height)<0.5,"fresh road vehicle settles gently and rests")
 	check(settle!=null and settle.sleeping,"unused road copy enters normal physics sleep")
 	if settle!=null: settle.freeze=true
 	for v in game.vehicles: v.freeze=true
+	game.enter_vehicle(created[0])
+	created[0].freeze=true
 	created[1].health=73.0
 	created[2].fuel=42.0
 	var expected_states:={}
@@ -86,7 +96,7 @@ func run():
 	var expected_occupied_id:String=game.current_vehicle.vehicle_id
 	var expected_target_id:String=game.spawn_target.vehicle_id
 	check(game.save_world(),"dynamic fleet save succeeds")
-	check(Store.read(test_id).get("version")==3,"dynamic fleet format3 protects copies from older app2")
+	check(Store.read(test_id).get("version")==4,"fleet format4 protects new boats and navigation from older app3")
 	var legacy=Store.read(test_id)
 	legacy.version=2
 	var legacy_file=FileAccess.open(Store.ROOT+test_id+"_legacy.json",FileAccess.WRITE)
@@ -109,7 +119,7 @@ func run():
 	for v in game.vehicles:
 		if v.kind=="glider" and v.vehicle_id.begins_with("spawn_"): saved_wing=v; break
 	game.enter_vehicle(saved_wing)
-	check(saved_wing!=null and saved_wing.linear_velocity.length()>20,"saved waiting glider launches only on explicit boarding")
+	check(saved_wing!=null and saved_wing.linear_velocity.length()>20,"saved waiting glider has forward speed when boarded")
 	# Fresh airport-start remains the explicit teleport/boarding flow.
 	game.active=false
 	game.new_world("sandbox","QA Runway Spawn",false)
@@ -131,13 +141,16 @@ func run():
 	game.current_vehicle=null
 	game.player.enabled=false
 	game.player.global_position=Vector3(0,5,4000)
+	var field_before:Vector3=game.player.global_position
 	var nearby_plane=game.request_vehicle("airliner")
-	check(nearby_plane!=null and nearby_plane.global_position.distance_to(game.player.global_position)<250,"large plane uses nearby clear field before distant airport")
+	check(nearby_plane!=null and nearby_plane.global_position.distance_to(field_before)<250,"large plane uses nearby clear field before distant airport")
 	if nearby_plane!=null: nearby_plane.freeze=true
+	if is_instance_valid(game.current_vehicle): game.current_vehicle.occupied=false
+	game.current_vehicle=null
 	game.player.global_position=game.world.anchors.home+Vector3.UP
 	var indoors_before:Vector3=game.player.global_position
 	var indoor_car=game.request_vehicle("car")
-	check(indoor_car!=null and game.player.global_position.is_equal_approx(indoors_before) and Spawn.clear_envelope(game,indoor_car,indoor_car.global_transform),"indoor summon creates safe outdoor copy without moving player")
+	check(indoor_car!=null and game.current_vehicle==indoor_car and game.player.global_position.is_equal_approx(indoor_car.global_position) and Spawn.clear_envelope(game,indoor_car,indoor_car.global_transform),"indoor summon safely moves player into new outdoor copy")
 	var roof_probe=game.make_vehicle("airliner",game.next_vehicle_id("airliner"),Vector3(0,-2000,0))
 	roof_probe.freeze=true
 	check(Spawn._ground_pose(game,roof_probe,Vector3(-4510,7,9040),0).is_empty(),"hangar roof is never treated as widebody parking")
@@ -146,9 +159,6 @@ func run():
 	check(Spawn._ground_pose(game,roof_car,Vector3(-2700,7,7990),0).is_empty(),"terminal roof is never treated as car parking")
 	game.active=false
 	game.get_tree().paused=false
-	for suffix in [".json",".json.bak",".json.tmp","_legacy.json"]:
-		var path=Store.ROOT+test_id+suffix
-		if FileAccess.file_exists(path): DirAccess.remove_absolute(path)
 	var report={"checks":checks,"failures":failures,"test_world":test_id,"user_saves_touched":false}
 	var report_path="user://vehicle-spawn-report.json"
 	var file=FileAccess.open(report_path,FileAccess.WRITE)

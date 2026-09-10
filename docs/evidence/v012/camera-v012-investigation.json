@@ -1,0 +1,138 @@
+{
+  "harness_fixes": [
+    "Disabled automatic rendering and draw exactly once at process_priority=2000, after production camera update",
+    "Use actual elapsed time, explicit native draw counters and full actor vectors; retain individual raw/render repeated-tick pairs",
+    "Strengthened gates: >=100 samples, render cadence >1.25x physics, >=10 repeated raw frames and >=10 percent raw repetition, <5 percent interpolated repetition, unchanged pitch-jump <0.01, actor/camera movement >1m"
+  ],
+  "production_files_changed": false,
+  "script": "source/camera_motion_test.gd",
+  "script_sha256": "627c5ffea6535ff034f091925d4206cad04e2e99b74b60e7a9dc888899715c59",
+  "profiles": [
+    {
+      "report": "camera-motion-1440x900-physics20.json",
+      "log": "camera-v012-single-draw.log",
+      "conclusion": "inconclusive: native render cadence does not sufficiently exceed physics",
+      "physics_hz": 20,
+      "window_size": [
+        1440,
+        900
+      ],
+      "logical_viewport_size": "(1440.0, 900.0)",
+      "scenarios": [
+        {
+          "stage": "walk",
+          "frames": 69,
+          "actual_fps": 19.5032018234347,
+          "raw_stationary_frames": 0,
+          "interpolated_stationary_frames": 0,
+          "mean_pitch_velocity_jump": 0.0,
+          "focused_frames": 0,
+          "engine_drawn_frames": 69
+        },
+        {
+          "stage": "car",
+          "frames": 71,
+          "actual_fps": 20.0155892846828,
+          "raw_stationary_frames": 1,
+          "interpolated_stationary_frames": 0,
+          "mean_pitch_velocity_jump": 5.01949789075646e-06,
+          "focused_frames": 0,
+          "engine_drawn_frames": 71
+        }
+      ],
+      "failed_assertions": [
+        "walk: insufficient native frames",
+        "walk: native render rate does not sufficiently exceed 20Hz physics",
+        "walk: no adequate repeated raw physics positions to prove mismatched rates",
+        "car: insufficient native frames",
+        "car: native render rate does not sufficiently exceed 20Hz physics",
+        "car: no adequate repeated raw physics positions to prove mismatched rates"
+      ],
+      "script_errors": []
+    },
+    {
+      "report": "camera-motion-960x600-physics20.json",
+      "log": "camera-v012-compact20.log",
+      "conclusion": "inconclusive: smaller window still does not produce mismatched rates",
+      "physics_hz": 20,
+      "window_size": [
+        960,
+        600
+      ],
+      "logical_viewport_size": "(1440.0, 900.0)",
+      "scenarios": [
+        {
+          "stage": "walk",
+          "frames": 70,
+          "actual_fps": 19.8243960741949,
+          "raw_stationary_frames": 0,
+          "interpolated_stationary_frames": 0,
+          "mean_pitch_velocity_jump": 0.0,
+          "focused_frames": 0,
+          "engine_drawn_frames": 70
+        },
+        {
+          "stage": "car",
+          "frames": 70,
+          "actual_fps": 19.915695992962,
+          "raw_stationary_frames": 0,
+          "interpolated_stationary_frames": 0,
+          "mean_pitch_velocity_jump": 5.08554214245952e-06,
+          "focused_frames": 0,
+          "engine_drawn_frames": 70
+        }
+      ],
+      "failed_assertions": [
+        "walk: insufficient native frames",
+        "walk: native render rate does not sufficiently exceed 20Hz physics",
+        "walk: no adequate repeated raw physics positions to prove mismatched rates",
+        "car: insufficient native frames",
+        "car: native render rate does not sufficiently exceed 20Hz physics",
+        "car: no adequate repeated raw physics positions to prove mismatched rates"
+      ],
+      "script_errors": []
+    },
+    {
+      "report": "camera-motion-960x600-physics10.json",
+      "log": "camera-v012-compact10.log",
+      "conclusion": "passed controlled interpolation stress case; not normal foreground performance",
+      "physics_hz": 10,
+      "window_size": [
+        960,
+        600
+      ],
+      "logical_viewport_size": "(1440.0, 900.0)",
+      "scenarios": [
+        {
+          "stage": "walk",
+          "frames": 151,
+          "actual_fps": 20.0878185861068,
+          "raw_stationary_frames": 76,
+          "interpolated_stationary_frames": 0,
+          "mean_pitch_velocity_jump": 0.0,
+          "focused_frames": 0,
+          "engine_drawn_frames": 151
+        },
+        {
+          "stage": "car",
+          "frames": 153,
+          "actual_fps": 20.2660343663944,
+          "raw_stationary_frames": 77,
+          "interpolated_stationary_frames": 0,
+          "mean_pitch_velocity_jump": 2.46384278141482e-05,
+          "focused_frames": 0,
+          "engine_drawn_frames": 153
+        }
+      ],
+      "failed_assertions": [],
+      "script_errors": []
+    }
+  ],
+  "limits": [
+    "Every sampled window-focus flag was false; root independently reported the Mac was locked",
+    "The two 20Hz physics runs are inconclusive for interpolation and are retained as failures",
+    "Window dimensions differ from the logical viewport dimensions; these records do not establish a GPU fill-rate comparison",
+    "The 10Hz run proves interpolation between physics ticks at the observed ~20Hz native render cadence; normal 60Hz-physics foreground performance is not measured",
+    "No fixed-fps, production script change, lock-screen setting change, user save access, or additional GPU process was used"
+  ]
+}

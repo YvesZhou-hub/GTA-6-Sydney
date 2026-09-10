@@ -35,7 +35,7 @@ var _building_plots: Array[AABB] = []
 var _distant_visual_plots: Array[AABB] = []
 const GROUND := 4.5
 const MAX_RUBBLE := 96
-const BRIDGE_CORRIDOR := [Vector2(-310,-170),Vector2(-336.75,-173.06),Vector2(-325.70848,-194.36771),Vector2(-83,-662),Vector2(149,-1109),Vector2(353.49109,-1502.99791),Vector2(370,-1580)]
+var BRIDGE_CORRIDOR: Array[Vector2] = preload("res://scripts/bridge_landmark.gd").corridor_points()
 const CityMap = preload("res://scripts/city_map.gd")
 const LANDMARK_MODELS = [
 	preload("res://scripts/city_landmarks.gd"),
@@ -76,6 +76,7 @@ func _ready() -> void:
 		if model.has_method("metadata"):
 			for item in model.metadata():
 				if item.has("center") and not anchors.has(item.id): anchors[item.id]=item.get("arrival",item.center)
+	_register_landmark_geography()
 	CityMap.build_vegetation(self,map_snapshot)
 	_build_observatory()
 	_build_helipad()
@@ -90,6 +91,30 @@ func _ready() -> void:
 	print("CITY_BUILD_TIMINGS ",JSON.stringify(timings))
 	_ready_complete = true
 	print("HARBOR_WORLD_READY buildings=%s structure_components=%s" % [_building_count, structures.size()])
+
+func _register_landmark_geography() -> void:
+	# Map icons describe the landmark itself; navigation uses a separately checked
+	# public approach. Never infer an entrance by dropping the player at a centroid.
+	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/landmark_geography.json"))
+	var catalog: Dictionary = {}
+	for record: Dictionary in source.get("landmarks", []):
+		var item := record.duplicate(true)
+		for field in ["map_position", "arrival", "model_reference"]:
+			if item.has(field): item[field] = Vector3(item[field][0], item[field][1], item[field][2])
+		catalog[item.id] = item
+		anchors[item.id] = item.arrival
+		for alias: String in item.get("aliases", []):
+			catalog[alias] = item
+			anchors[alias] = item.arrival
+		var group: String = item.get("group", "")
+		if not group.is_empty() and has_meta(group):
+			var entries: Array = get_meta(group)
+			for entry: Dictionary in entries:
+				if entry.get("id", "") == item.id or entry.get("id", "") in item.get("aliases", []):
+					entry["map_position"] = item.map_position
+					entry["arrival"] = item.arrival
+			set_meta(group, entries)
+	set_meta("landmark_geography", catalog)
 
 func _mat(key: String, color: Color, roughness: float = 0.8, metal: float = 0.0) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
@@ -494,8 +519,7 @@ func _build_streets() -> void:
 
 
 func _bridge_pos(t: float, y: float = 54.0, across: float = 0.0) -> Vector3:
-	var dir := Vector3(232,0,-447).normalized()
-	return Vector3(-83,y,-662)+dir*t+Vector3(-dir.z,0,dir.x)*across
+	return preload("res://scripts/bridge_landmark.gd").pos(t,y,across)
 
 func _build_bridge() -> void:
 	preload("res://scripts/bridge_landmark.gd").build(self)

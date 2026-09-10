@@ -13,7 +13,10 @@ SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geogr
                 'quay_landmark_test.gd', 'manly_landmark_test.gd', 'metro_entrance_test.gd',
                 'darling_square_frontage_test.gd', 'city_map_ui_test.gd', 'map_migration_test.gd',
                 'test_city_data.py', 'city_geometry_test.gd', 'cyber_landmark_test.gd',
-                'icc_landmark_test.gd', 'roof_visual_check.gd', 'road_join_test.gd')
+                'icc_landmark_test.gd', 'roof_visual_check.gd', 'road_join_test.gd',
+                'experience_flow_test.gd', 'landmark_alignment_test.gd', 'life_experience_test.gd',
+                'navigation_map_test.gd', 'vehicle_model_test.gd', 'vehicle_model_migration_test.gd',
+                'boat_model_test.gd', 'interactive_qa.gd')
 
 def public_files(root: Path):
     files = [root / name for name in ROOT_FILES]

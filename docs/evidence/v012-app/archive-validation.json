@@ -1,0 +1,78 @@
+{
+  "checked_at_utc": "2026-09-10T15:25:37.525594+00:00",
+  "archive": "$PROJECT/dist/Harbourlife-macOS-arm64.zip",
+  "extraction_directory": "$EXTRACT_DIR",
+  "checks": {
+    "archive_matches_final_build_manifest": true,
+    "zip_crc": true,
+    "executable_permissions_preserved": true,
+    "version_0_1_2": true,
+    "strict_codesign": true,
+    "arm64_only": true,
+    "pck_and_resources_present": true,
+    "extracted_pck_matches_built_app": true,
+    "all_game_hashes_match_final_build": true,
+    "extracted_app_smoke_ready_without_errors": true
+  },
+  "source_hashes": {
+    "file_count": 90,
+    "build_manifest_file_count": 90,
+    "missing": [],
+    "extra": [],
+    "mismatched": [],
+    "algorithm": "SHA-256; same complete game file set as tools/build.py, excluding .godot cache"
+  },
+  "smoke": {
+    "command": [
+      "$EXTRACT_DIR/Harbourlife.app/Contents/MacOS/Harbourlife",
+      "--headless",
+      "--quit-after",
+      "15",
+      "--log-file",
+      "$EXTRACT_DIR/isolated-engine.log",
+      "--",
+      "--interactive-qa"
+    ],
+    "cwd": "/tmp",
+    "returncode": 0,
+    "elapsed_seconds": 24.17,
+    "stdout_log": "$PROJECT/reports/release-v012-archive-smoke.log",
+    "world_ready_lines": [
+      "HARBOR_WORLD_READY buildings=15146 structure_components=20864"
+    ],
+    "qa_ready_lines": [
+      "INTERACTIVE_QA_READY world=qa_interactive_17943359 components=20864"
+    ],
+    "errors": [],
+    "save_isolation": "Built-in --interactive-qa skips normal save-slot/settings reads and uses a unique qa_interactive world ID; autosave disabled. Existing user saves were not read or deleted.",
+    "graphical_resources": "Headless only; no GPU/native-window test in this audit."
+  },
+  "archive_sha256": "cd68e9d4db7ee10897ce6ee3260b605e0511a4e0527179da5f46656ebfbb1cc9",
+  "archive_entries": 12,
+  "executable_mode": "0o755",
+  "plist": {
+    "CFBundleName": "Harbourlife",
+    "CFBundleExecutable": "Harbourlife",
+    "CFBundleIdentifier": "local.yveszhou.harbourlife",
+    "CFBundleShortVersionString": "0.1.2",
+    "CFBundleVersion": "0.1.2"
+  },
+  "codesign": {
+    "returncode": 0,
+    "output": "$EXTRACT_DIR/Harbourlife.app: valid on disk\n$EXTRACT_DIR/Harbourlife.app: satisfies its Designated Requirement",
+    "kind": "ad-hoc; not notarized"
+  },
+  "architecture": "arm64",
+  "resources": [
+    "Harbourlife.pck",
+    "PLAY_PERMISSION.md",
+    "PrivacyInfo.xcprivacy",
+    "icon.icns",
+    "licenses/ASSET_REGISTER.md",
+    "licenses/GEOGRAPHY.md",
+    "licenses/GODOT_COPYRIGHT.txt",
+    "licenses/GODOT_LICENSE.txt"
+  ],
+  "pck_sha256": "e3394a4b37eb399d6ce56d7ed93a35219032baffed7d24c72d387398029f5c9c",
+  "passed": true
+}

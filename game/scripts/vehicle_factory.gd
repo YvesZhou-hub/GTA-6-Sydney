@@ -34,15 +34,16 @@ static func build(body: Node3D, kind: String) -> Dictionary:
 	mats.light.emission_energy_multiplier = 1.5
 	var moving: Dictionary = {"wheels": [], "rotors": [], "propellers": [], "rider": null, "material": mats.teal}
 	match kind:
-		"car": _car(body, mats, moving)
-		"motorcycle": _motorcycle(body, mats, moving)
-		"yacht": _yacht(body, mats, moving)
+		"car": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
+		"motorcycle": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
+		"speedboat", "yacht": preload("res://scripts/boat_models.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"paraglider": _paraglider(body, mats, moving)
 		"glider": _glider(body, mats, moving)
 		"helicopter": _helicopter(body, mats, moving)
-		"airliner": _airliner(body, mats, moving)
+		"airliner": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
 	if kind in ["motorcycle", "paraglider"]:
 		moving.rider = _seated_rider(body, mats, kind)
+		if kind == "motorcycle": moving.rider.position = Vector3(0,.12,.40)
 	var animated: Array = moving.wheels + moving.rotors + moving.propellers
 	if moving.rider != null: animated.append(moving.rider)
 	for pivot in animated:

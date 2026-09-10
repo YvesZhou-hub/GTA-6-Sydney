@@ -1,0 +1,459 @@
+{
+  "schema": 1,
+  "scope": "v0.1.2 source-runtime validation evidence; exported-app, build and flight evidence maintained separately",
+  "sanitization": "Only local absolute paths replaced with $PROJECT, $USER_DATA or $USER_HOME; numeric telemetry and check results preserved. Embedded JSON extracted only where stated. No world save payloads or reference photos included.",
+  "source_binding_note": "source_sha256 fingerprints the exact original report/log, not a claimed final-release executable or test-time source commit. Repeated native checks overlap headless checks; counts must not be added as independent coverage.",
+  "suites": [
+    {
+      "id": "economy",
+      "title": "经济与真实地点体验",
+      "checks": 40,
+      "passed": true,
+      "mode": "headless",
+      "scope": "独立经济/体验系统、费用奖励和隔离存档。",
+      "test_script": "source/life_experience_test.gd",
+      "evidence": [
+        "economy.txt"
+      ]
+    },
+    {
+      "id": "navigation",
+      "title": "地图与小地图",
+      "checks": 22,
+      "passed": true,
+      "mode": "native Metal; source runtime",
+      "scope": "轻量真实地图UI fixture；共享缓存、拖拽、点选与方位，不构建完整3D城市。",
+      "test_script": "source/navigation_map_test.gd",
+      "evidence": [
+        "navigation.txt",
+        "navigation.json"
+      ]
+    },
+    {
+      "id": "vehicle-model-headless",
+      "title": "跑车/摩托/787 几何",
+      "checks": 33,
+      "passed": true,
+      "mode": "headless",
+      "scope": "三种局部生产车型；尺寸、朝向、轮胎接地和材质合批。",
+      "test_script": "source/vehicle_model_test.gd",
+      "evidence": [
+        "vehicle-model-headless.txt"
+      ]
+    },
+    {
+      "id": "vehicle-model-native",
+      "title": "跑车/摩托/787 原生",
+      "checks": 33,
+      "passed": true,
+      "mode": "native Metal; source runtime",
+      "scope": "同一几何检查及11张原生局部图；不是导出App验收。",
+      "test_script": "source/vehicle_model_test.gd",
+      "evidence": [
+        "vehicle-model-native.txt"
+      ]
+    },
+    {
+      "id": "boat-model-headless",
+      "title": "快艇/游艇 几何",
+      "checks": 41,
+      "passed": true,
+      "mode": "headless",
+      "scope": "闭合壳体、尺度、直接碰撞、楼梯净空和运车甲板支持。",
+      "test_script": "source/boat_model_test.gd",
+      "evidence": [
+        "boat-model-headless.txt"
+      ]
+    },
+    {
+      "id": "boat-model-native",
+      "title": "快艇/游艇 原生",
+      "checks": 48,
+      "passed": true,
+      "mode": "native Metal; source runtime",
+      "scope": "41项几何检查加7张原生局部截图保存检查；不是48项独立物理行为。",
+      "test_script": "source/boat_model_test.gd",
+      "evidence": [
+        "boat-model-native.txt",
+        "boat-model.json"
+      ]
+    },
+    {
+      "id": "spawn",
+      "title": "无限副本与即时驾驶",
+      "checks": 79,
+      "passed": true,
+      "mode": "headless",
+      "scope": "完整main中创建独立副本、立即驾驶、保留原车、完整外包络安全检查。",
+      "test_script": "source/vehicle_spawn_test.gd",
+      "evidence": [
+        "spawn.txt",
+        "spawn.json"
+      ]
+    },
+    {
+      "id": "integration",
+      "title": "系统整合",
+      "checks": 43,
+      "passed": true,
+      "mode": "headless",
+      "scope": "生产系统整合与船甲板货物支持，包含实际物理接触。",
+      "test_script": "tools/test_integration.gd",
+      "evidence": [
+        "integration.txt"
+      ]
+    },
+    {
+      "id": "damage",
+      "title": "世界破坏与修复",
+      "checks": 10,
+      "passed": true,
+      "mode": "headless",
+      "scope": "完整城市中局部视觉/碰撞移除、存档还原及修复。",
+      "test_script": "source/world_damage_probe.gd",
+      "evidence": [
+        "damage.txt"
+      ]
+    },
+    {
+      "id": "airport",
+      "title": "悉尼机场",
+      "checks": 24,
+      "passed": true,
+      "mode": "headless",
+      "scope": "机场地理、跑道、支撑、破坏与存档，不是原生飞行视频。",
+      "test_script": "source/airport_test.gd",
+      "evidence": [
+        "airport.txt"
+      ]
+    },
+    {
+      "id": "icc",
+      "title": "ICC 室内通行",
+      "checks": 27,
+      "passed": true,
+      "mode": "headless",
+      "scope": "--full-world：完整城市中真实HarborPlayer进出三场馆、地面支撑及剧场声学围护。",
+      "test_script": "source/icc_landmark_test.gd",
+      "evidence": [
+        "icc.txt"
+      ]
+    },
+    {
+      "id": "save",
+      "title": "原子保存与恢复",
+      "checks": 8,
+      "passed": true,
+      "mode": "headless",
+      "scope": "隔离保存fixture；原子写入、恢复副本、损坏与未来版本拒绝。",
+      "test_script": "tools/test_save.gd",
+      "evidence": [
+        "save.txt"
+      ]
+    },
+    {
+      "id": "model-migration",
+      "title": "旧载具与南坡迁移",
+      "checks": 21,
+      "passed": true,
+      "mode": "headless",
+      "scope": "最终8项原检查加13项南坡覆盖；含停放恢复、运动/飞行/桥下状态不误迁移。",
+      "test_script": "source/vehicle_model_migration_test.gd",
+      "evidence": [
+        "model-migration.txt"
+      ]
+    },
+    {
+      "id": "map-migration",
+      "title": "地图版本迁移",
+      "checks": 38,
+      "passed": true,
+      "mode": "headless",
+      "scope": "隔离LocalWorld的旧地图迁移、支撑、净空、原保存字节与幂等性；不是完整城市游玩。",
+      "test_script": "source/map_migration_test.gd",
+      "evidence": [
+        "map-migration.txt",
+        "map-migration.json"
+      ]
+    },
+    {
+      "id": "city-map",
+      "title": "完整城市地图接口",
+      "checks": 21,
+      "passed": true,
+      "mode": "headless",
+      "scope": "完整城市的真实道路/footprint/地点数据、入口导航和地图投影。",
+      "test_script": "source/city_map_ui_test.gd",
+      "evidence": [
+        "city-map.txt",
+        "city-map.json"
+      ]
+    },
+    {
+      "id": "physics",
+      "title": "八类载具物理",
+      "checks": 23,
+      "passed": true,
+      "mode": "headless; Jolt 60Hz",
+      "scope": "生产载具在确定性测试地面/水面中的操纵、刹车、保存、货物和未冻结跑车运输；787回路是物理fixture，不是悉尼城市原生飞行证据。",
+      "test_script": "tools/test_vehicles.gd",
+      "evidence": [
+        "physics.txt",
+        "physics.json"
+      ]
+    },
+    {
+      "id": "experience-flow-headless",
+      "title": "完整UI与控制器流程",
+      "checks": 60,
+      "passed": true,
+      "mode": "headless",
+      "scope": "完整main与导出用experience_validation模块；58项原流程加2项事故归属。headless不生成截图，不等于发布App的可见交互。",
+      "test_script": "source/experience_flow_test.gd",
+      "evidence": [
+        "experience-flow-headless.txt",
+        "experience-flow-headless.json"
+      ]
+    }
+  ],
+  "camera_runs": [
+    {
+      "file": "camera-motion-1440x900-physics20.json",
+      "status": "inconclusive: insufficient mismatched physics/render cadence",
+      "physics_hz": 20,
+      "focus": false,
+      "window_size": [
+        1440,
+        900
+      ],
+      "logical_viewport": "(1440.0, 900.0)"
+    },
+    {
+      "file": "camera-motion-960x600-physics20.json",
+      "status": "inconclusive: insufficient mismatched physics/render cadence",
+      "physics_hz": 20,
+      "focus": false,
+      "window_size": [
+        960,
+        600
+      ],
+      "logical_viewport": "(1440.0, 900.0)"
+    },
+    {
+      "file": "camera-motion-960x600-physics10.json",
+      "status": "controlled interpolation mechanism passed",
+      "physics_hz": 10,
+      "focus": false,
+      "window_size": [
+        960,
+        600
+      ],
+      "logical_viewport": "(1440.0, 900.0)"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "economy.txt",
+      "source": "reports/life-experience.log",
+      "source_sha256": "12f655989e587bb30c906f360b22db73559ea4845631ab2c253dcb98373e0c71",
+      "public_sha256": "12f655989e587bb30c906f360b22db73559ea4845631ab2c253dcb98373e0c71",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "navigation.txt",
+      "source": "reports/navigation-map-native.log",
+      "source_sha256": "f97385e98e3520b388e14a53b7625bf072c9ce71851075155f781fcbf8dcea11",
+      "public_sha256": "f97385e98e3520b388e14a53b7625bf072c9ce71851075155f781fcbf8dcea11",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "navigation.json",
+      "source": "reports/navigation-map.json",
+      "source_sha256": "f4a6cc0f452595e0a8e250700c601fa115368b03046a861cc06c6471fe7e8f2b",
+      "public_sha256": "18b697568be927a748930b7abc6a7ada8f7829325237858355422c6dd9f9a4a3",
+      "extraction": "parsed JSON reserialized; fields and values unchanged except absolute-path substitutions"
+    },
+    {
+      "file": "vehicle-model-headless.txt",
+      "source": "reports/vehicle-model-test.log",
+      "source_sha256": "b0332e59ff5822794b59f4f5d778115899e973880c30bbd534749df8b7f6bf2e",
+      "public_sha256": "b0332e59ff5822794b59f4f5d778115899e973880c30bbd534749df8b7f6bf2e",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "vehicle-model-native.txt",
+      "source": "reports/vehicle-model-native.log",
+      "source_sha256": "9cb481c9b217bba6233d1af2be5cda779ce7b13cb5ee0a78b3800ebf562a49fb",
+      "public_sha256": "9cb481c9b217bba6233d1af2be5cda779ce7b13cb5ee0a78b3800ebf562a49fb",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "boat-model-headless.txt",
+      "source": "reports/boat-model-headless.log",
+      "source_sha256": "bb47afd19b44a6da991c97807d133750a396ad11c3e6eb3ba835d25d6367a2d4",
+      "public_sha256": "bb47afd19b44a6da991c97807d133750a396ad11c3e6eb3ba835d25d6367a2d4",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "boat-model.json",
+      "source": "reports/boat-models/model-report.json",
+      "source_sha256": "3b26d9a5772ee1a71a55f04bbee7e0ba1b5252cd112bf69c33a42b5abc0d5d08",
+      "public_sha256": "3b26d9a5772ee1a71a55f04bbee7e0ba1b5252cd112bf69c33a42b5abc0d5d08",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "boat-model-native.txt",
+      "source": "reports/boat-model-native.log",
+      "source_sha256": "68d9d51abbc908c0f4ad8c693c7ba25fd911740a8818353a65cccc301c1dfec1",
+      "public_sha256": "68d9d51abbc908c0f4ad8c693c7ba25fd911740a8818353a65cccc301c1dfec1",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "spawn.txt",
+      "source": "reports/vehicle-spawn-v012.log",
+      "source_sha256": "93f5bc54e3dad7a3e29f33cf912fe73daad80f2165e7809e6d91d4cbd67d7f35",
+      "public_sha256": "93f5bc54e3dad7a3e29f33cf912fe73daad80f2165e7809e6d91d4cbd67d7f35",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "spawn.json",
+      "source": "reports/vehicle-spawn-v012.log",
+      "source_sha256": "93f5bc54e3dad7a3e29f33cf912fe73daad80f2165e7809e6d91d4cbd67d7f35",
+      "public_sha256": "7017df181e5f51c14d233a215899dcf520612b739ae9b2b4625403f6cdf75a74",
+      "extraction": "JSON extracted from VEHICLE_SPAWN_REPORT record; formatting only"
+    },
+    {
+      "file": "integration.txt",
+      "source": "reports/integration-v012.log",
+      "source_sha256": "cd2a73fd30e53dfcb866516e854e57513e051efa2daf248941cea37575028b2c",
+      "public_sha256": "cd2a73fd30e53dfcb866516e854e57513e051efa2daf248941cea37575028b2c",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "damage.txt",
+      "source": "reports/damage-v012.log",
+      "source_sha256": "fae44e701c67c5716b6b1b48a2b2489bf08597b0ab63845ebe0563c9aa91b9d1",
+      "public_sha256": "fae44e701c67c5716b6b1b48a2b2489bf08597b0ab63845ebe0563c9aa91b9d1",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "airport.txt",
+      "source": "reports/airport-v012.log",
+      "source_sha256": "08f7bdb764d0dcf27b935c77525a87fc2c7a32eee6168e193ed4a212f3484a92",
+      "public_sha256": "08f7bdb764d0dcf27b935c77525a87fc2c7a32eee6168e193ed4a212f3484a92",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "icc.txt",
+      "source": "reports/icc-v012.log",
+      "source_sha256": "edfdb15bf5beaffb0402c5178416e9e72335ca9a4078d969d638a4de8917bb6d",
+      "public_sha256": "edfdb15bf5beaffb0402c5178416e9e72335ca9a4078d969d638a4de8917bb6d",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "save.txt",
+      "source": "reports/experience-v012/save.log",
+      "source_sha256": "d0a3d8f0acd2e5833a43227cc5acc56ac09d7bb17db98ae9b6db31d07c6c7d0c",
+      "public_sha256": "d0a3d8f0acd2e5833a43227cc5acc56ac09d7bb17db98ae9b6db31d07c6c7d0c",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "model-migration.txt",
+      "source": "reports/model-migration-v012.log",
+      "source_sha256": "fbc345460f5eade228d77e1e3eda9eaa59c6f9bce66d85e1026437536675c3ed",
+      "public_sha256": "fbc345460f5eade228d77e1e3eda9eaa59c6f9bce66d85e1026437536675c3ed",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "map-migration.txt",
+      "source": "reports/map-migration-v012.log",
+      "source_sha256": "03871be38e50cf52440ef395e68bdb6a1282ae1f0a2551e5f76358a9416b0df7",
+      "public_sha256": "03871be38e50cf52440ef395e68bdb6a1282ae1f0a2551e5f76358a9416b0df7",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "map-migration.json",
+      "source": "reports/map-migration.json",
+      "source_sha256": "385786b9bafbf43abfcebcc3974ac1b68c19c30a367f445acf1d607650d26c6f",
+      "public_sha256": "cfea452aa89963724e55906c8db84201f453ff968a2dc6e6183f26d2d3425ae1",
+      "extraction": "parsed JSON reserialized; fields and values unchanged except absolute-path substitutions"
+    },
+    {
+      "file": "city-map.txt",
+      "source": "reports/city-map-ui-v012.log",
+      "source_sha256": "3e810d8282156e370403d3e95d3609e30ec72515ee7560baeaeb160591a49d18",
+      "public_sha256": "3e810d8282156e370403d3e95d3609e30ec72515ee7560baeaeb160591a49d18",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "city-map.json",
+      "source": "reports/city-map-ui.json",
+      "source_sha256": "fd60f4eb4dbde71d8f85699b973a1593657781f423e066d4e6c5637832c12ad9",
+      "public_sha256": "6eb8c1028a71ac0f6365f341b7617642faa298c99604cf7d2da9bf77c6e14994",
+      "extraction": "parsed JSON reserialized; fields and values unchanged except absolute-path substitutions"
+    },
+    {
+      "file": "physics.json",
+      "source": "reports/vehicle-physics.json",
+      "source_sha256": "6694e8110ed763f6dd96b6f66693a2df4a0ec83ea405b072d312cdf69195846c",
+      "public_sha256": "6694e8110ed763f6dd96b6f66693a2df4a0ec83ea405b072d312cdf69195846c",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "physics.txt",
+      "source": "reports/vehicle-physics.log",
+      "source_sha256": "b25dc9430718b4ee81ba4bea70f305df2bb531625710a2f4283504ff33dbecaa",
+      "public_sha256": "88b1883ac85cd2725d1a5a896b845119494f71cb74d1dcd30f51a8e3991b9549",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "experience-flow-headless.txt",
+      "source": "reports/experience-validator-headless.log",
+      "source_sha256": "ac0ae35c24267bed1fd1a3da69d38d0099f739300ce652ffdcc82fe10145ab97",
+      "public_sha256": "ac0ae35c24267bed1fd1a3da69d38d0099f739300ce652ffdcc82fe10145ab97",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "experience-flow-headless.json",
+      "source": "reports/experience-validator-headless.log",
+      "source_sha256": "ac0ae35c24267bed1fd1a3da69d38d0099f739300ce652ffdcc82fe10145ab97",
+      "public_sha256": "77036110a722588acf08906710227857f3584ca9c998d956c045f997d3447c06",
+      "extraction": "JSON extracted from EXPERIENCE_REPORT record; formatting only"
+    },
+    {
+      "file": "camera-motion-1440x900-physics20.json",
+      "source": "reports/camera-motion-1440x900-physics20.json",
+      "source_sha256": "e99405b18a8961e7f15564b228f8f097c2d6f2a66b6591b5c2cfc5433eb57062",
+      "public_sha256": "e99405b18a8961e7f15564b228f8f097c2d6f2a66b6591b5c2cfc5433eb57062",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "camera-motion-960x600-physics20.json",
+      "source": "reports/camera-motion-960x600-physics20.json",
+      "source_sha256": "b0d897bbebce1132be4f3afcfa915368f56a72cfeb2db5e02337fbf8dbee68ba",
+      "public_sha256": "b0d897bbebce1132be4f3afcfa915368f56a72cfeb2db5e02337fbf8dbee68ba",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "camera-motion-960x600-physics10.json",
+      "source": "reports/camera-motion-960x600-physics10.json",
+      "source_sha256": "3d44f8d90b20ce612617649ff0f748d63a0f6ed05ae79e63a9ab8e4cc6d5d1b7",
+      "public_sha256": "3d44f8d90b20ce612617649ff0f748d63a0f6ed05ae79e63a9ab8e4cc6d5d1b7",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "camera-v012-compact10.txt",
+      "source": "reports/camera-v012-compact10.log",
+      "source_sha256": "22474d5de527bcfecef5e31f0277ac8fabda3146d5c1931af96497aac6d2cb11",
+      "public_sha256": "22474d5de527bcfecef5e31f0277ac8fabda3146d5c1931af96497aac6d2cb11",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    },
+    {
+      "file": "camera-v012-investigation.json",
+      "source": "reports/camera-v012-investigation.json",
+      "source_sha256": "9f01c4d5f98d93d4b53f6efaa3c60d0f9e570532fd7b9e49a62a2b88af000c33",
+      "public_sha256": "9f01c4d5f98d93d4b53f6efaa3c60d0f9e570532fd7b9e49a62a2b88af000c33",
+      "extraction": "verbatim UTF-8 except documented absolute-path substitutions"
+    }
+  ]
+}
