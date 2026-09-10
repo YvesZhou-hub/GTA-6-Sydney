@@ -86,15 +86,15 @@ GitHub 的绿色 **Code → Download ZIP** 下载的是源码，不是可直接�
 
 [下载此版本源码](https://github.com/YvesZhou-hub/harbourlife/archive/refs/tags/v0.1.0-preview.1.zip)，或克隆仓库并切换至 `v0.1.0-preview.1`。可维护的程序化建模源码也是本版本的源资产；地理数据与验证脚本保存在 `source/`。
 
-构建需要 macOS、Python 3，以及固定版本的 **Godot 4.7.2** 编辑器和 macOS 导出模板。工具链不存放在 Git 历史中，可任选一种准备方式：
+构建需要 macOS、Python 3，以及固定版本的 **Godot 4.7.2** 编辑器和 macOS 导出模板。开发工具需从 [Godot 官方 4.7.2-stable 发布页面](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable) 获取，不包含在本项目的玩家下载包或源码 ZIP 中。
 
-- 下载本次发布的 [Harbourlife-toolchain-macOS.zip](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.0-preview.1/Harbourlife-toolchain-macOS.zip)，在项目根目录解压，保留其中的 `tools/runtime/` 路径。
-- 从 [Godot 官方版本档案](https://godotengine.org/download/archive/) 获取 4.7.2 macOS 编辑器及对应导出模板：将编辑器应用内 `Contents/MacOS/Godot` 可执行文件放为 `tools/runtime/godot`，将模板中的 `macos.zip` 放为 `tools/runtime/templates/macos.zip`。
+下载并解压 macOS 编辑器和对应导出模板，创建 `tools/runtime/templates/` 目录。将编辑器应用内 `Contents/MacOS/Godot` 可执行文件放为 `tools/runtime/godot`，将导出模板中的 `macos.zip` 放为 `tools/runtime/templates/macos.zip`。保持编辑器和模板版本一致。
 
 在项目根目录执行：
 
 ```sh
 chmod +x tools/runtime/godot
+codesign --force --sign - tools/runtime/godot
 ./tools/build.sh
 ```
 
@@ -119,6 +119,6 @@ Godot 使用 MIT 许可，OSM 派生地理数据适用 ODbL，OurAirports 跑道
 
 ## English
 
-Harbourlife is a **free experimental, offline single-player Sydney sandbox**. Take off from Sydney Airport, visit the Opera House and Harbour Bridge, or explore on foot and with seven vehicle types. Download the **Apple Silicon Mac application** from the links above; GitHub's source ZIP is not the playable build.
+Harbourlife is a **free experimental, offline single-player Sydney sandbox**. Take off from Sydney Airport, visit the Opera House and Harbour Bridge, or explore on foot and with seven vehicle types. Download the **Apple Silicon Mac application** from the links above to play. The source ZIP is for developers; building requires the editor and export templates from the [official Godot 4.7.2 release](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable).
 
 Tested only on Apple M4, 16 GB RAM, macOS 26.5. The application is ad-hoc signed and **not notarized**. There is no Windows, Intel Mac, or browser release. Art and content remain simplified, and a destruction test showed a 0.52-second stall. Original source and assets are rights-reserved; see [play permission](PLAY_PERMISSION.md) and the separate dependency/data licenses. Commercial landmark clearance remains unresolved.

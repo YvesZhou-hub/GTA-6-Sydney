@@ -5,7 +5,7 @@ root=pathlib.Path(__file__).resolve().parent.parent
 engine=root/'tools/runtime/godot'
 template=root/'tools/runtime/templates/macos.zip'
 if not engine.is_file() or not template.is_file():
- raise SystemExit('Missing Godot toolchain. See README: extract Harbourlife-toolchain-macOS.zip at the project root, or install Godot 4.7.2 and its macOS export template at tools/runtime/.')
+ raise SystemExit('Missing Godot toolchain. See README: install the official Godot 4.7.2 executable and its macOS export template at tools/runtime/.')
 output=pathlib.Path(os.environ.get('HARBOURLIFE_BUILD_DIR',str(pathlib.Path.home()/'Library/Application Support/Harbourlife/builds'))).resolve()
 dist=pathlib.Path(os.environ.get('HARBOURLIFE_DIST_DIR',str(root/'dist'))).resolve()
 reports=pathlib.Path(os.environ.get('HARBOURLIFE_REPORT_DIR',str(root/'reports'))).resolve()

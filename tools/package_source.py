@@ -18,5 +18,5 @@ with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as out
     output.writestr('harbourlife/SOURCE_MANIFEST.json', json.dumps(manifest, ensure_ascii=False, indent=2))
 report = {'archive': archive.name, 'file_count': len(files), 'bytes': archive.stat().st_size,
           'sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
-          'scope': 'Public source, original source assets, attributed geography, tests, public evidence and notices. Toolchain and play builds are separate release assets.'}
+          'scope': 'Public source, original source assets, attributed geography, tests, public evidence and notices. The playable build is a separate release asset; obtain Godot from its official release.'}
 print(json.dumps(report, ensure_ascii=False, indent=2))
