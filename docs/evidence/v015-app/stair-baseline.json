@@ -1,0 +1,66 @@
+{
+  "samples": [
+    {
+      "samples": [
+        {
+          "body": "opera/podium/upper/2/4",
+          "local_z": 65.98,
+          "support_world_y": 15.6999998092651
+        },
+        {
+          "body": "opera/steps/7",
+          "local_z": 66.02,
+          "support_world_y": 15.6924657821655
+        },
+        {
+          "body": "opera/steps/7",
+          "local_z": 67.5,
+          "support_world_y": 15.1354722976685
+        },
+        {
+          "body": "opera/steps/7",
+          "local_z": 69.5,
+          "support_world_y": 14.3827962875366
+        },
+        {
+          "body": "opera/steps/6",
+          "local_z": 70.0,
+          "support_world_y": 14.1946239471436
+        }
+      ],
+      "state": "intact"
+    },
+    {
+      "samples": [
+        {
+          "body": "opera/podium/upper/2/4",
+          "local_z": 65.98,
+          "support_world_y": 15.6999998092651
+        },
+        {
+          "body": "opera/podium/ground",
+          "local_z": 66.02,
+          "support_world_y": 4.5
+        },
+        {
+          "body": "opera/podium/ground",
+          "local_z": 67.5,
+          "support_world_y": 4.5
+        },
+        {
+          "body": "opera/podium/ground",
+          "local_z": 69.5,
+          "support_world_y": 4.5
+        },
+        {
+          "body": "opera/steps/6",
+          "local_z": 70.0,
+          "support_world_y": 14.1946239471436
+        }
+      ],
+      "state": "destroyed_steps_7"
+    }
+  ],
+  "source_sha256": "c42a9e1fdffc4f7e901a72693ae767563fb7be908485b30017348131914d6b26",
+  "user_saves_touched": false
+}

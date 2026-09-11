@@ -7,6 +7,7 @@ const Store=preload("res://scripts/save_store.gd")
 const Tower=preload("res://scripts/sydney_tower_landmark.gd")
 const QuayDetail=preload("res://scripts/circular_quay_detail.gd")
 const DarlingDetail=preload("res://scripts/darling_square_detail.gd")
+const Opera=preload("res://scripts/opera_landmark.gd")
 class LocalWorld:
 	extends "res://scripts/harbor_world.gd"
 	func _ready():
@@ -40,6 +41,12 @@ class LocalWorld:
 		Tower.build(self)
 		QuayDetail.build(self)
 		DarlingDetail.build(self)
+		# Only the production monumental stair, not a full-city/Opera-shell build.
+		_mat("opera_granite",Color("b5a18b"),.86)
+		Opera._build_monumental_stair(self,Opera.site_basis())
+		var promenade:=StaticBody3D.new();promenade.name="OperaMigrationPromenade";add_child(promenade)
+		var support:=CollisionShape3D.new();var pavement:=BoxShape3D.new();pavement.size=Vector3(180,.2,180);support.shape=pavement;promenade.add_child(support)
+		promenade.position=Opera.CENTER+Opera.site_basis()*Vector3(0,-.1,90);promenade.basis=Opera.site_basis()
 		_ready_complete=true
 	func add_block(id:String,center:Vector2,height:float,base:=0.0,holes:Array=[]):
 		var outline=[[-10,-10],[10,-10],[10,10],[-10,10]]
@@ -252,6 +259,7 @@ func run():
 	Store.write(test_id,old_copy)
 	game.load_world(test_id)
 	check("current revision does not rewrite deliberately saved pose",game.current_vehicle.global_position.is_equal_approx(Vector3(2000,5.5,2000)))
+	await opera_stair_revision(game)
 	game.active=false
 	var okay:=true
 	for item in checks:
@@ -259,3 +267,81 @@ func run():
 	var file:=FileAccess.open(ProjectSettings.globalize_path("res://../reports/map-migration.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"passed":okay,"checks":checks,"user_saves_touched":false,"isolated_test_id":test_id},"\t"));file.close()
 	game.finish_quit(0 if okay else 1)
+
+func opera_point(local:Vector3) -> Vector3:return Opera.CENTER+Opera.site_basis()*local
+func opera_stair_revision(game:Node3D):
+	var world:Node3D=game.world
+	check("v015 revision 5 enables a one-time check for revision-4 stair saves",Migration.REVISION==5)
+	for bay in 8:
+		var body:Node3D=world.structures["opera/steps/foundation/%d"%bay].node
+		var collision:CollisionShape3D=body.get_child(1)
+		var faces:PackedVector3Array=collision.shape.get_faces()
+		var x:float=lerpf(-Opera.STAIR_HALF_WIDTH,Opera.STAIR_HALF_WIDTH,(bay+.5)/8.0)
+		var inside:=opera_point(Vector3(x,2,68.5))
+		check("v015 actual stair foundation %d is closed and contains its buried legacy point"%bay,Migration._closed_mesh(faces) and Migration._inside_mesh(collision.global_transform.affine_inverse()*inside,faces) and Migration.overlaps_new_building(world,player_bounds(inside)))
+	game.current_vehicle=null;game.reset_fleet(false);await physics_frame
+	var trapped_player:=opera_point(Vector3(20,2,68.5))
+	var trapped_board_point:=opera_point(Vector3(-18,3,68.5))
+	var safe_ground:=opera_point(Vector3(64,1,78))
+	var safe_air:=opera_point(Vector3(0,140,72))
+	var board=game.make_vehicle("hoverboard","qa_opera_buried_board",trapped_board_point);board.freeze=true;board.health=63;board.fuel=37
+	var ground_board=game.make_vehicle("hoverboard","qa_opera_safe_ground",safe_ground);ground_board.freeze=true;ground_board.health=86;ground_board.fuel=59
+	var air_board=game.make_vehicle("hoverboard","qa_opera_safe_air",safe_air);air_board.freeze=true;air_board.health=72;air_board.fuel=41
+	game.player.global_position=trapped_player;game.player.last_safe=trapped_player
+	check("v015 buried player still requires relocation despite Opera support exception",Migration._player_needs_relocation(game,trapped_player))
+	check("v015 buried hoverboard is fully contained by the production stair foundation",Migration.overlaps_new_building(world,board.global_transform*Spawn.envelope(board)))
+	world.apply_state({"destroyed":["opera/steps/7"]})
+	await physics_frame;await physics_frame
+	var fixture_id:String=test_id+"_opera_revision4"
+	game.world_id=fixture_id
+	check("v015 isolated Opera fixture writes without reading user worlds",game.save_world())
+	var legacy:Dictionary=Store.read(fixture_id);legacy.map_revision=4
+	# Exercise current load_world ordering, including a harmless airborne copy
+	# whose queued velocity must survive because it does not intersect new solid.
+	for state in legacy.vehicles:
+		if state.id=="qa_opera_safe_air":state.frozen=false;state.velocity=[0,0,-18];state.throttle=.35
+	check("v015 revision-4 fixture with retired stair damage is accepted",Store.write(fixture_id,legacy))
+	var before_bytes:String=FileAccess.get_file_as_string(Store.ROOT+fixture_id+".json")
+	game.load_world(fixture_id)
+	var copies:Dictionary={}
+	for body in game.vehicles:copies[body.vehicle_id]=body
+	var moved_board:Node3D=copies["qa_opera_buried_board"]
+	check("v015 actual load migrates a buried player to nearby clear ground",game.player.global_position.distance_to(trapped_player)>.5 and game.player.global_position.distance_to(trapped_player)<120 and not Migration.overlaps_new_building(world,player_bounds(game.player.global_position)) and game.player.last_safe.is_equal_approx(game.player.global_position))
+	check("v015 actual load migrates buried hoverboard outside the filled stair",moved_board.global_position.distance_to(trapped_board_point)>.5 and moved_board.global_position.distance_to(trapped_board_point)<120 and not Migration.overlaps_new_building(world,moved_board.global_transform*Spawn.envelope(moved_board)) and Spawn.clear_envelope(game,moved_board,moved_board.global_transform))
+	check("v015 migration preserves all hoverboard IDs health fuel and copy count",copies.size()==3 and copies["qa_opera_buried_board"].health==63 and copies["qa_opera_buried_board"].fuel==37 and copies["qa_opera_safe_ground"].health==86 and copies["qa_opera_safe_ground"].fuel==59 and copies["qa_opera_safe_air"].health==72 and copies["qa_opera_safe_air"].fuel==41)
+	check("v015 valid ground and airborne hoverboards retain exact saved positions",copies["qa_opera_safe_ground"].global_position.is_equal_approx(safe_ground) and copies["qa_opera_safe_air"].global_position.is_equal_approx(safe_air))
+	check("v015 unrelated airborne hoverboard retains queued saved motion",game.unvec(copies["qa_opera_safe_air"].get_state().velocity).is_equal_approx(Vector3(0,0,-18)) and is_equal_approx(float(copies["qa_opera_safe_air"].get_state().throttle),.35))
+	check("v015 loading retains retired damage history and leaves fixture bytes untouched",world.destroyed.has("opera/steps/7") and not world.destroyed.has("opera/steps/foundation/4") and before_bytes==FileAccess.get_file_as_string(Store.ROOT+fixture_id+".json"))
+	for body in game.vehicles:body.freeze=true;body.stop_motion_after_relocation()
+	var safe_player:=opera_point(Vector3(64,.04,90))
+	var on_stair:=opera_point(Vector3(18,Opera.PODIUM_HEIGHT*(Opera.STAIR_FOOT_Z-72)/(Opera.STAIR_FOOT_Z-Opera.STAIR_HEAD_Z)+.10,72))
+	for valid_pose:Vector3 in [safe_player,on_stair,safe_air]:
+		var stair_pose:bool=valid_pose.is_equal_approx(on_stair)
+		game.player.global_position=valid_pose;game.player.last_safe=valid_pose
+		if stair_pose:
+			game.player.global_position+=Vector3.UP*.35;game.player.enabled=true
+			for frame in 90:await physics_frame
+			game.player.enabled=false;valid_pose=game.player.global_position
+			print("OPERA_MIGRATION_SLOPE_CONTACT position=",valid_pose," floor=",game.player.is_on_floor()," velocity=",game.player.velocity)
+		check("v015 safe player pose does not require relocation at "+str(valid_pose),not Migration._player_needs_relocation(game,valid_pose))
+		var before:Vector3=game.player.global_position
+		Migration.apply(game)
+		check("v015 safe player pose is not relocated at "+str(valid_pose),game.player.global_position.is_equal_approx(before))
+		if stair_pose:
+			check("v015 stair support exemption does not accept a capsule buried four centimetres into the slope",Migration._player_needs_relocation(game,valid_pose-Vector3.UP*.04))
+			check("v015 standing-stair fixture writes",game.save_world())
+			var standing:Dictionary=Store.read(fixture_id);standing.map_revision=4
+			check("v015 standing-stair revision-4 fixture writes",Store.write(fixture_id,standing))
+			game.load_world(fixture_id)
+			check("v015 actual revision-4 load preserves the settled production-player stair pose",game.player.global_position.is_equal_approx(before))
+	game.current_vehicle=null
+	for body in game.vehicles:body.freeze=true;body.stop_motion_after_relocation()
+	check("v015 explicit save records revision 5 after the one-time safety migration",game.save_world() and Store.read(fixture_id).map_revision==5)
+	var positions:Dictionary={}
+	for body in game.vehicles:positions[body.vehicle_id]=body.global_transform
+	var saved_player:Vector3=game.player.global_position
+	game.load_world(fixture_id)
+	var unchanged:bool=game.player.global_position.is_equal_approx(saved_player)
+	for body in game.vehicles:
+		if not body.global_transform.is_equal_approx(positions[body.vehicle_id]):unchanged=false
+	check("v015 current-revision reload performs no second relocation",unchanged and game.vehicles.size()==3)

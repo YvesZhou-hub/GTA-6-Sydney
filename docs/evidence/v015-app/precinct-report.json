@@ -1,0 +1,1827 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "complete production city ready",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "both Opera halls are actually built",
+			"passed": true
+		},
+		{
+			"detail": {
+				"duplicates": []
+			},
+			"name": "authored shop signs replace generic floating labels",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/opera_landmark.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Opera exterior has views of distinct sides",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/opera_interiors.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "both halls and public foyers have interior views",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_box_office",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_concert_hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_joan_sutherland",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_northern_foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/darling_square_detail.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination auvers",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination hakatamon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination chinta_ria",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/darling_public_facilities.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_quarter_waterplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_quarter_octanet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_quarter_slide",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination tumbalong_fountains",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/darling_precinct_businesses.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_789koreanbbq",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bar_bubu",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bendigo_bank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bengongs_tea",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_dragon_hot_pot",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_haven_specialty_coffee",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_lermont_laser_clinic",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_lillianna_gifts_and_home",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_lilong_by_taste_of_shanghai",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_machimachi",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_mcdonalds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_meet_fresh",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_myhealth",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_my_spec",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_pancakes_on_the_rocks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_planet_pop_world",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_puppuccino_pet_spa",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_quikstop",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_starbucks_coffee_company",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_sushi_sei",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_tea_republic",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_thirteen_feet_tattoo",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_uliveto",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_15_cms",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_batch_brewing_co",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bubble_nini",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_darling_nest",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_darling_square_library",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_fishbowl_the_exchange",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_golden_century_bbq",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_hulu_hulu",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_spago",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_sushia",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_the_brothers_cafe",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_toastiesmith",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_ume_burger",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new exterior and interior capture views supplied",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all five Opera and three Darling walking routes supplied",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 6
+			},
+			"name": "continuous player walk Covered concourse to ticket foyer and upper south foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Covered concourse to ticket foyer and upper south foyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 7
+			},
+			"name": "continuous player walk Concert Hall south entrance to front stalls",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Concert Hall south entrance to front stalls",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 8
+			},
+			"name": "continuous player walk Concert Hall harbour promenade through northern foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Concert Hall harbour promenade through northern foyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 7
+			},
+			"name": "continuous player walk Joan Sutherland Theatre entrance to front side aisle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Joan Sutherland Theatre entrance to front side aisle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 10
+			},
+			"name": "continuous player walk Joan Sutherland Theatre northern harbour foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Joan Sutherland Theatre northern harbour foyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 2
+			},
+			"name": "continuous player walk Tumbalong fountain public edge",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Tumbalong fountain public edge",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 3
+			},
+			"name": "continuous player walk Darling Quarter playground west approach",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Darling Quarter playground west approach",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 2
+			},
+			"name": "continuous player walk Wide slide rear steps and slope",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves occupied public space Wide slide rear steps and slope",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-harbour",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-monumental-steps",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-roof-plan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-north-facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-box-office",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-entry-stairs",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-stage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-organ",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-joan-sutherland",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-northern-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-jst-northern-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_waterplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_octanet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_wide_slide",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture tumbalong_fountains",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_playground_plan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_steam_mill_new",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_puppuccino_lillianna",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_tumbalong_restaurants",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_little_pier_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_harbour_street_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_little_hay_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_bendigo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_tattoo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_bubu_detail",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true,
+	"routes": [
+		{
+			"discontinuities": 0,
+			"name": "Covered concourse to ticket foyer and upper south foyer",
+			"origin": [
+				354.808807373047,
+				4.5,
+				-284.054046630859
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						356.8369140625,
+						4.52101564407349,
+						-283.650787353516
+					],
+					"contacts": [],
+					"distance": 0.0978366360068321,
+					"frames": 25,
+					"reached": true,
+					"target": [
+						356.755706787109,
+						4.5,
+						-283.596221923828
+					]
+				},
+				{
+					"actual": [
+						376.321258544922,
+						9.97730159759521,
+						-279.075012207031
+					],
+					"contacts": [],
+					"distance": 0.112140841782093,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						376.224670410156,
+						9.98640060424805,
+						-279.018035888672
+					]
+				},
+				{
+					"actual": [
+						379.657928466797,
+						9.97727870941162,
+						-271.946655273438
+					],
+					"contacts": [],
+					"distance": 0.105281740427017,
+					"frames": 91,
+					"reached": true,
+					"target": [
+						379.718444824219,
+						9.98640060424805,
+						-272.032806396484
+					]
+				},
+				{
+					"actual": [
+						407.040557861328,
+						10.0078592300415,
+						-265.686767578125
+					],
+					"contacts": [],
+					"distance": 0.0912280902266502,
+					"frames": 325,
+					"reached": true,
+					"target": [
+						406.974975585938,
+						9.98640060424805,
+						-265.623352050781
+					]
+				},
+				{
+					"actual": [
+						411.952850341797,
+						15.6908836364746,
+						-287.127258300781
+					],
+					"contacts": [],
+					"distance": 0.10550545156002,
+					"frames": 255,
+					"reached": true,
+					"target": [
+						412.010986328125,
+						15.6999998092651,
+						-287.039215087891
+					]
+				},
+				{
+					"actual": [
+						412.623565673828,
+						15.6908779144287,
+						-290.013488769531
+					],
+					"contacts": [],
+					"distance": 0.0916909202933311,
+					"frames": 31,
+					"reached": true,
+					"target": [
+						412.697723388672,
+						15.6999998092651,
+						-289.959564208984
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Concert Hall south entrance to front stalls",
+			"origin": [
+				389.281829833984,
+				15.6999998092651,
+				-264.647583007812
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						393.56787109375,
+						15.6908779144287,
+						-283.229766845703
+					],
+					"contacts": [],
+					"distance": 0.107309393584728,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						393.631103515625,
+						15.6999998092651,
+						-283.14306640625
+					]
+				},
+				{
+					"actual": [
+						395.970825195312,
+						15.6908779144287,
+						-293.453216552734
+					],
+					"contacts": [],
+					"distance": 0.109472043812275,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						396.03466796875,
+						15.6999998092651,
+						-293.364288330078
+					]
+				},
+				{
+					"actual": [
+						413.651428222656,
+						15.6908779144287,
+						-289.306610107422
+					],
+					"contacts": [],
+					"distance": 0.113588266074657,
+					"frames": 211,
+					"reached": true,
+					"target": [
+						413.556701660156,
+						15.6999998092651,
+						-289.243927001953
+					]
+				},
+				{
+					"actual": [
+						418.419219970703,
+						15.6908779144287,
+						-310.276306152344
+					],
+					"contacts": [],
+					"distance": 0.118962518870831,
+					"frames": 249,
+					"reached": true,
+					"target": [
+						418.478271484375,
+						15.6999998092651,
+						-310.173034667969
+					]
+				},
+				{
+					"actual": [
+						412.556610107422,
+						15.6908779144287,
+						-311.486968994141
+					],
+					"contacts": [],
+					"distance": 0.100498840212822,
+					"frames": 70,
+					"reached": true,
+					"target": [
+						412.637573242188,
+						15.6999998092651,
+						-311.546508789062
+					]
+				},
+				{
+					"actual": [
+						413.018188476562,
+						15.6908769607544,
+						-313.070281982422
+					],
+					"contacts": [],
+					"distance": 0.131351232528687,
+					"frames": 23,
+					"reached": true,
+					"target": [
+						413.026733398438,
+						15.6999998092651,
+						-313.201354980469
+					]
+				},
+				{
+					"actual": [
+						399.271911621094,
+						15.6908779144287,
+						-316.351593017578
+					],
+					"contacts": [],
+					"distance": 0.137766197323799,
+					"frames": 164,
+					"reached": true,
+					"target": [
+						399.3984375,
+						15.6999998092651,
+						-316.406097412109
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Concert Hall harbour promenade through northern foyer",
+			"origin": [
+				389.281829833984,
+				15.6999998092651,
+				-264.647583007812
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						393.56787109375,
+						15.6908779144287,
+						-283.229766845703
+					],
+					"contacts": [],
+					"distance": 0.107309393584728,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						393.631103515625,
+						15.6999998092651,
+						-283.14306640625
+					]
+				},
+				{
+					"actual": [
+						395.970825195312,
+						15.6908779144287,
+						-293.453216552734
+					],
+					"contacts": [],
+					"distance": 0.109472043812275,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						396.03466796875,
+						15.6999998092651,
+						-293.364288330078
+					]
+				},
+				{
+					"actual": [
+						413.651428222656,
+						15.6908779144287,
+						-289.306610107422
+					],
+					"contacts": [],
+					"distance": 0.113588266074657,
+					"frames": 211,
+					"reached": true,
+					"target": [
+						413.556701660156,
+						15.6999998092651,
+						-289.243927001953
+					]
+				},
+				{
+					"actual": [
+						434.232177734375,
+						15.6908779144287,
+						-384.068054199219
+					],
+					"contacts": [],
+					"distance": 0.0887464880943298,
+					"frames": 1120,
+					"reached": true,
+					"target": [
+						434.300750732422,
+						15.6999998092651,
+						-384.01171875
+					]
+				},
+				{
+					"actual": [
+						433.230926513672,
+						15.6909856796265,
+						-385.855895996094
+					],
+					"contacts": [],
+					"distance": 0.062137745320797,
+					"frames": 21,
+					"reached": true,
+					"target": [
+						433.183929443359,
+						15.6999998092651,
+						-385.815246582031
+					]
+				},
+				{
+					"actual": [
+						435.756317138672,
+						15.6909856796265,
+						-397.109649658203
+					],
+					"contacts": [],
+					"distance": 0.116445198655128,
+					"frames": 131,
+					"reached": true,
+					"target": [
+						435.816375732422,
+						15.6999998092651,
+						-397.009887695312
+					]
+				},
+				{
+					"actual": [
+						419.177856445312,
+						15.6909856796265,
+						-400.839630126953
+					],
+					"contacts": [],
+					"distance": 0.109086312353611,
+					"frames": 197,
+					"reached": true,
+					"target": [
+						419.267791748047,
+						15.6999998092651,
+						-400.9013671875
+					]
+				},
+				{
+					"actual": [
+						416.469818115234,
+						17.8887176513672,
+						-388.665924072266
+					],
+					"contacts": [],
+					"distance": 0.0925087034702301,
+					"frames": 145,
+					"reached": true,
+					"target": [
+						416.406402587891,
+						17.8999996185303,
+						-388.733276367188
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Joan Sutherland Theatre entrance to front side aisle",
+			"origin": [
+				434.060424804688,
+				15.6999998092651,
+				-254.117736816406
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						438.346405029297,
+						15.6908779144287,
+						-272.699737548828
+					],
+					"contacts": [],
+					"distance": 0.107172906398773,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						438.409698486328,
+						15.6999998092651,
+						-272.613250732422
+					]
+				},
+				{
+					"actual": [
+						440.749389648438,
+						15.6908779144287,
+						-282.923217773438
+					],
+					"contacts": [],
+					"distance": 0.10934117436409,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						440.813262939453,
+						15.6999998092651,
+						-282.83447265625
+					]
+				},
+				{
+					"actual": [
+						458.126556396484,
+						15.6908779144287,
+						-279.865112304688
+					],
+					"contacts": [],
+					"distance": 0.0799437537789345,
+					"frames": 205,
+					"reached": true,
+					"target": [
+						458.077484130859,
+						15.6999998092651,
+						-279.802001953125
+					]
+				},
+				{
+					"actual": [
+						464.305450439453,
+						15.6908779144287,
+						-306.641235351562
+					],
+					"contacts": [],
+					"distance": 0.0965168029069901,
+					"frames": 318,
+					"reached": true,
+					"target": [
+						464.372497558594,
+						15.6999998092651,
+						-306.571807861328
+					]
+				},
+				{
+					"actual": [
+						459.882690429688,
+						15.6908779144287,
+						-307.548767089844
+					],
+					"contacts": [],
+					"distance": 0.121514551341534,
+					"frames": 53,
+					"reached": true,
+					"target": [
+						459.991973876953,
+						15.6999998092651,
+						-307.601898193359
+					]
+				},
+				{
+					"actual": [
+						460.510803222656,
+						15.7158784866333,
+						-310.195404052734
+					],
+					"contacts": [],
+					"distance": 0.0986921936273575,
+					"frames": 33,
+					"reached": true,
+					"target": [
+						460.587158203125,
+						15.6999998092651,
+						-310.132873535156
+					]
+				},
+				{
+					"actual": [
+						448.830932617188,
+						15.7158794403076,
+						-312.814849853516
+					],
+					"contacts": [],
+					"distance": 0.099059671163559,
+					"frames": 139,
+					"reached": true,
+					"target": [
+						448.90576171875,
+						15.6999998092651,
+						-312.879760742188
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Joan Sutherland Theatre northern harbour foyer",
+			"origin": [
+				434.060424804688,
+				15.6999998092651,
+				-254.117736816406
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						438.346405029297,
+						15.6908779144287,
+						-272.699737548828
+					],
+					"contacts": [],
+					"distance": 0.107172906398773,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						438.409698486328,
+						15.6999998092651,
+						-272.613250732422
+					]
+				},
+				{
+					"actual": [
+						440.749389648438,
+						15.6908779144287,
+						-282.923217773438
+					],
+					"contacts": [],
+					"distance": 0.10934117436409,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						440.813262939453,
+						15.6999998092651,
+						-282.83447265625
+					]
+				},
+				{
+					"actual": [
+						458.126556396484,
+						15.6908779144287,
+						-279.865112304688
+					],
+					"contacts": [],
+					"distance": 0.0799437537789345,
+					"frames": 205,
+					"reached": true,
+					"target": [
+						458.077484130859,
+						15.6999998092651,
+						-279.802001953125
+					]
+				},
+				{
+					"actual": [
+						464.305450439453,
+						15.6908779144287,
+						-306.641235351562
+					],
+					"contacts": [],
+					"distance": 0.0965168029069901,
+					"frames": 318,
+					"reached": true,
+					"target": [
+						464.372497558594,
+						15.6999998092651,
+						-306.571807861328
+					]
+				},
+				{
+					"actual": [
+						473.175842285156,
+						15.6908779144287,
+						-348.721527099609
+					],
+					"contacts": [],
+					"distance": 0.0911675468087196,
+					"frames": 493,
+					"reached": true,
+					"target": [
+						473.242156982422,
+						15.6999998092651,
+						-348.658966064453
+					]
+				},
+				{
+					"actual": [
+						475.304565429688,
+						15.690878868103,
+						-362.100830078125
+					],
+					"contacts": [],
+					"distance": 0.0897792130708694,
+					"frames": 153,
+					"reached": true,
+					"target": [
+						475.358978271484,
+						15.6999998092651,
+						-362.029418945312
+					]
+				},
+				{
+					"actual": [
+						474.282684326172,
+						15.6909856796265,
+						-365.975891113281
+					],
+					"contacts": [],
+					"distance": 0.10714191198349,
+					"frames": 43,
+					"reached": true,
+					"target": [
+						474.213256835938,
+						15.6999998092651,
+						-365.894287109375
+					]
+				},
+				{
+					"actual": [
+						475.742279052734,
+						15.6909856796265,
+						-372.318389892578
+					],
+					"contacts": [],
+					"distance": 0.132135733962059,
+					"frames": 72,
+					"reached": true,
+					"target": [
+						475.798522949219,
+						15.6999998092651,
+						-372.198822021484
+					]
+				},
+				{
+					"actual": [
+						463.456939697266,
+						15.6909856796265,
+						-375.019073486328
+					],
+					"contacts": [],
+					"distance": 0.0994631201028824,
+					"frames": 146,
+					"reached": true,
+					"target": [
+						463.533081054688,
+						15.6999998092651,
+						-375.083068847656
+					]
+				},
+				{
+					"actual": [
+						461.429290771484,
+						17.8928127288818,
+						-365.817230224609
+					],
+					"contacts": [],
+					"distance": 0.073136143386364,
+					"frames": 110,
+					"reached": true,
+					"target": [
+						461.358428955078,
+						17.8999996185303,
+						-365.835327148438
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Tumbalong fountain public edge",
+			"origin": [
+				-802.0,
+				4.5,
+				1874.0
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-802.0,
+						4.49087715148926,
+						1846.88415527344
+					],
+					"contacts": [],
+					"distance": 0.1158447265625,
+					"frames": 314,
+					"reached": true,
+					"target": [
+						-802.0,
+						4.5,
+						1847.0
+					]
+				},
+				{
+					"actual": [
+						-802.0,
+						4.49087715148926,
+						1823.87451171875
+					],
+					"contacts": [],
+					"distance": 0.12548828125,
+					"frames": 262,
+					"reached": true,
+					"target": [
+						-802.0,
+						4.5,
+						1824.0
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Darling Quarter playground west approach",
+			"origin": [
+				-857.299987792969,
+				4.5,
+				1630.0
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-858.763000488281,
+						4.54587697982788,
+						1642.12536621094
+					],
+					"contacts": [],
+					"distance": 0.130708634853363,
+					"frames": 142,
+					"reached": true,
+					"target": [
+						-858.799987792969,
+						4.5,
+						1642.0
+					]
+				},
+				{
+					"actual": [
+						-852.020690917969,
+						4.54587697982788,
+						1648.97509765625
+					],
+					"contacts": [],
+					"distance": 0.0323765464127064,
+					"frames": 109,
+					"reached": true,
+					"target": [
+						-852.0,
+						4.5,
+						1649.0
+					]
+				},
+				{
+					"actual": [
+						-844.213012695312,
+						4.54587697982788,
+						1660.07434082031
+					],
+					"contacts": [],
+					"distance": 0.0754690021276474,
+					"frames": 155,
+					"reached": true,
+					"target": [
+						-844.200012207031,
+						4.5,
+						1660.0
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Wide slide rear steps and slope",
+			"origin": [
+				-841.165100097656,
+				4.5,
+				1637.73474121094
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-843.377563476562,
+						7.15993547439575,
+						1642.12390136719
+					],
+					"contacts": [],
+					"distance": 0.106748722493649,
+					"frames": 59,
+					"reached": true,
+					"target": [
+						-843.473999023438,
+						7.18000030517578,
+						1642.16967773438
+					]
+				},
+				{
+					"actual": [
+						-846.582580566406,
+						4.54587697982788,
+						1648.31689453125
+					],
+					"contacts": [],
+					"distance": 0.0822479724884033,
+					"frames": 78,
+					"reached": true,
+					"target": [
+						-846.660278320312,
+						4.5,
+						1648.28991699219
+					]
+				}
+			]
+		}
+	],
+	"scope": "Exportable production-world validator. Route starts are isolated setup; subsequent walks use production player physics and forward input actions. Native manual frames capture authored buildings in the complete city. This is not an OS hardware-input or real-world survey-accuracy claim.",
+	"screenshots": [
+		{
+			"camera": [
+				310.288940429688,
+				64.5,
+				-501.005615234375
+			],
+			"file": "opera-harbour.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				424.087707519531,
+				32.5,
+				-325.290374755859
+			]
+		},
+		{
+			"camera": [
+				395.478698730469,
+				21.5,
+				-168.680923461914
+			],
+			"file": "opera-monumental-steps.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				424.5478515625,
+				30.5,
+				-309.773040771484
+			]
+		},
+		{
+			"camera": [
+				298.071472167969,
+				214.5,
+				-230.623046875
+			],
+			"file": "opera-roof-plan.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				426.779144287109,
+				26.5,
+				-323.630218505859
+			]
+		},
+		{
+			"camera": [
+				470.563293457031,
+				33.5,
+				-470.507537841797
+			],
+			"file": "opera-north-facade.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				436.335510253906,
+				29.5,
+				-368.637725830078
+			]
+		},
+		{
+			"camera": [
+				381.894256591797,
+				11.75,
+				-272.548461914062
+			],
+			"file": "opera-box-office.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				430.851043701172,
+				11.5,
+				-275.41796875
+			]
+		},
+		{
+			"camera": [
+				398.95849609375,
+				11.8999996185303,
+				-266.481170654297
+			],
+			"file": "opera-entry-stairs.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				412.010986328125,
+				17.5,
+				-287.039215087891
+			]
+		},
+		{
+			"camera": [
+				408.623504638672,
+				27.0,
+				-355.636047363281
+			],
+			"file": "opera-concert-hall.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				398.093658447266,
+				23.5,
+				-310.857421875
+			]
+		},
+		{
+			"camera": [
+				397.635864257812,
+				18.5,
+				-308.910552978516
+			],
+			"file": "opera-concert-stage.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				406.563323974609,
+				22.5,
+				-346.875
+			]
+		},
+		{
+			"camera": [
+				392.537353515625,
+				18.5,
+				-326.5458984375
+			],
+			"file": "opera-concert-organ.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				395.804565429688,
+				24.5,
+				-301.122955322266
+			]
+		},
+		{
+			"camera": [
+				457.466979980469,
+				26.5,
+				-349.286712646484
+			],
+			"file": "opera-joan-sutherland.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				446.937164306641,
+				18.5,
+				-304.508117675781
+			]
+		},
+		{
+			"camera": [
+				404.553955078125,
+				17.5,
+				-386.384033203125
+			],
+			"file": "opera-concert-northern-foyer.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				423.791656494141,
+				18.5,
+				-398.296630859375
+			]
+		},
+		{
+			"camera": [
+				449.73486328125,
+				17.5,
+				-364.459533691406
+			],
+			"file": "opera-jst-northern-foyer.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				468.801483154297,
+				18.0,
+				-371.276000976562
+			]
+		},
+		{
+			"camera": [
+				-799.0,
+				6.80000019073486,
+				1650.0
+			],
+			"file": "darling_waterplay.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-806.0,
+				5.80000019073486,
+				1644.5
+			]
+		},
+		{
+			"camera": [
+				-845.0,
+				24.0,
+				1644.0
+			],
+			"file": "darling_octanet.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-847.0,
+				9.5,
+				1625.0
+			]
+		},
+		{
+			"camera": [
+				-843.0,
+				7.0,
+				1652.0
+			],
+			"file": "darling_wide_slide.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-844.799987792969,
+				6.0,
+				1644.19995117188
+			]
+		},
+		{
+			"camera": [
+				-821.0,
+				20.0,
+				1871.0
+			],
+			"file": "tumbalong_fountains.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-816.5,
+				4.69999980926514,
+				1846.5
+			]
+		},
+		{
+			"camera": [
+				-867.0,
+				75.0,
+				1706.0
+			],
+			"file": "darling_playground_plan.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-842.0,
+				5.0,
+				1651.0
+			]
+		},
+		{
+			"camera": [
+				-850.0,
+				6.59999990463257,
+				2052.0
+			],
+			"file": "darling_steam_mill_new.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-850.0,
+				6.5,
+				2044.0
+			]
+		},
+		{
+			"camera": [
+				-867.0,
+				6.40000009536743,
+				2056.0
+			],
+			"file": "darling_puppuccino_lillianna.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-863.0,
+				6.5,
+				2050.0
+			]
+		},
+		{
+			"camera": [
+				-787.0,
+				7.0,
+				2016.0
+			],
+			"file": "darling_tumbalong_restaurants.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-800.0,
+				6.5,
+				2017.0
+			]
+		},
+		{
+			"camera": [
+				-705.0,
+				7.0,
+				1973.0
+			],
+			"file": "darling_little_pier_shops.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-697.0,
+				6.40000009536743,
+				1988.0
+			]
+		},
+		{
+			"camera": [
+				-656.0,
+				7.0,
+				2041.0
+			],
+			"file": "darling_harbour_street_shops.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-672.0,
+				6.5,
+				2045.0
+			]
+		},
+		{
+			"camera": [
+				-708.0,
+				6.80000019073486,
+				2083.0
+			],
+			"file": "darling_little_hay_shops.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-706.0,
+				6.5,
+				2073.0
+			]
+		},
+		{
+			"camera": [
+				-669.0,
+				6.40000009536743,
+				1999.0
+			],
+			"file": "darling_bendigo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-676.0,
+				6.40000009536743,
+				2000.0
+			]
+		},
+		{
+			"camera": [
+				-697.0,
+				6.69999980926514,
+				2080.0
+			],
+			"file": "darling_tattoo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-696.0,
+				6.59999990463257,
+				2075.0
+			]
+		},
+		{
+			"camera": [
+				-822.0,
+				6.5,
+				2035.0
+			],
+			"file": "darling_bubu_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-820.0,
+				6.5,
+				2041.0
+			]
+		}
+	],
+	"user_saves_touched": false
+}

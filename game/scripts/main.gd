@@ -83,7 +83,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -149,6 +149,8 @@ func _ready():
 		call_deferred("start_interactive_qa")
 	elif "--navigation-input-qa" in arguments:
 		add_child(load("res://scripts/navigation_input_validation.gd").new())
+	elif "--opera-access-qa" in arguments:
+		add_child(load("res://scripts/opera_access_validation.gd").new())
 	elif "--precinct-qa" in arguments:
 		add_child(load("res://scripts/precinct_validation.gd").new())
 	elif "--showcase" in OS.get_cmdline_user_args():

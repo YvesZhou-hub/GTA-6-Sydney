@@ -29,7 +29,7 @@ RESOURCES = [
     "res://scripts/main.gd", "res://scripts/navigation_input_validation.gd",
     "res://scripts/harbor_map.gd", "res://scripts/harbor_minimap.gd",
     "res://scripts/opera_landmark.gd", "res://scripts/opera_interiors.gd",
-    "res://scripts/precinct_validation.gd", "res://scripts/darling_public_facilities.gd",
+    "res://scripts/opera_access_validation.gd", "res://scripts/precinct_validation.gd", "res://scripts/darling_public_facilities.gd",
     "res://scripts/darling_precinct_businesses.gd", "res://assets/darling_precinct_directory.json",
     "res://assets/darling_public_facilities.json", "res://assets/darling_precinct_frontages.json",
     "res://scripts/save_store.gd", "res://scripts/hoverboard_motion.gd",
@@ -155,7 +155,7 @@ def main():
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--archive", type=Path, default=ROOT / "dist/Harbourlife-macOS-arm64.zip")
     parser.add_argument("--source-archive", type=Path)
-    parser.add_argument("--version", default="0.1.4")
+    parser.add_argument("--version", default="0.1.5")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output.resolve() if args.output else ROOT / "reports" / ("archive-audit-preparation.json" if args.prepare_only else "archive-validation.json")

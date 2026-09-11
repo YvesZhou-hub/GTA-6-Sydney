@@ -1,6 +1,6 @@
 extends RefCounted
 ## One-time safety migration when loading a world made before real city geometry.
-const REVISION := 4
+const REVISION := 5 # Closed Opera stair foundations replace the retired thin strips.
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
 const City=preload("res://scripts/city_map.gd")
 
@@ -143,6 +143,31 @@ static func _inside_mesh(point:Vector3,faces:PackedVector3Array) -> bool:
 		if distance-previous>.001:crossings+=1;previous=distance
 	return crossings%2==1
 
+static func _player_needs_relocation(game:Node3D,at:Vector3) -> bool:
+	var bounds:=AABB(at+Vector3(-.32,0,-.32),Vector3(.64,1.8,.64))
+	if not overlaps_new_building(game.world,bounds):return false
+	# A standing capsule clears an uphill tread while the corners of its AABB
+	# enter the slope. Exempt only verified support on the new Opera stairs.
+	var ray:=PhysicsRayQueryParameters3D.create(at+Vector3.UP*.12,at-Vector3.UP*.25,15,[game.player.get_rid()])
+	var hit:Dictionary=game.get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit.is_empty() or hit.normal.y<.9:return true
+	var id:String=str(hit.collider.get_meta("damage_id",""))
+	if not (id.begins_with("opera/steps/foundation/") or id.begins_with("opera/steps/tread/")):return true
+	if game.world.destroyed.has(id) or at.y<hit.position.y-.002 or at.y-hit.position.y>.10:return true
+	var capsule:CollisionShape3D=null
+	for child in game.player.get_children():
+		if child is CollisionShape3D and child.shape is CapsuleShape3D:
+			capsule=child;break
+	if capsule==null:return true
+	var query:=PhysicsShapeQueryParameters3D.new()
+	query.shape=capsule.shape;query.transform=capsule.global_transform
+	query.transform.origin+=at-game.player.global_position
+	query.collision_mask=15;query.exclude=[game.player.get_rid()];query.margin=0.0
+	if not game.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():return true
+	# Retain closed-solid containment checks for the torso/head. Only the empty
+	# AABB corners below the rounded capsule foot may overlap its support slope.
+	return overlaps_new_building(game.world,AABB(at+Vector3(-.32,.25,-.32),Vector3(.64,1.55,.64)))
+
 static func _player_pose(game: Node3D, near: Vector3) -> Vector3:
 	var capsule:=CapsuleShape3D.new()
 	capsule.radius=0.34
@@ -185,7 +210,7 @@ static func apply(game: Node3D) -> int:
 		shifted+=1
 	game.player.global_position=saved_player
 	game.yaw=saved_yaw
-	if overlaps_new_building(game.world,AABB(saved_player+Vector3(-0.32,0,-0.32),Vector3(0.64,1.8,0.64))):
+	if _player_needs_relocation(game,saved_player):
 		var replacement:=_player_pose(game,saved_player)
 		if replacement.is_finite():
 			game.player.global_position=replacement

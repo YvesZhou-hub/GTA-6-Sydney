@@ -1,0 +1,26 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS ten roof pairs grouped in two unequal halls and southwest restaurant
+PASS geographic reference matches mapped Opera House centroid and axis
+PASS roof samples lie on common 75.2m sphere error=0.00001831054688
+PASS paired shells mirror exactly across sharp central ridge error=0.0
+PASS opposing shell halves meet at the same ridge without a longitudinal gap
+PASS all shell feet meet their podium springing points
+PASS 160 independently removable thick spherical shell bands
+PASS curved roof triangle budget=54072
+PASS no degenerate shell faces
+PASS all shell outer, inner and edge triangles face their supplied normals
+PASS ridge and springing-point chunks are closed two-manifold solids nonmanifold=0
+PASS roof silhouette reaches approximately 67m above water high=67.6499404907227
+PASS roof colliders follow visible spherical skin hits=10/10
+PASS roof interior has collision at actual 320mm thickness hits=10/10
+PASS whole monumental stair route has smooth physical support
+PASS both southern entrances have actual 1.8m capsule clearance through the glass
+PASS four Western Foyer openings have ground-level capsule clearance
+PASS upper stairwell and orchestra pit are absent upper-slab geometry
+PASS bronze glass allows harbour visibility instead of an opaque painted facade
+PASS 25 Concert crown/edge samples enclosed above by shell or interstitial surfaces misses=[]
+PASS external shell and bronze infill do not intrude into either occupied acoustic chamber: []
+PASS shell damage removes matching roof, ribs and collider
+PASS new world restores damaged roof collider
+OPERA CHECK COMPLETE checks=23 failures=0 shell_triangles=54072

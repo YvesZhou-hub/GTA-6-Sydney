@@ -8,6 +8,13 @@ extends RefCounted
 const CENTER := Vector3(427.2947742677, 4.5, -321.4544052467)
 const ANGLE := -13.232864688
 const PODIUM_HEIGHT := 11.2
+const STAIR_HALF_WIDTH := 48.5
+const STAIR_FOOT_Z := 95.76
+const STAIR_HEAD_Z := 66.0
+const STAIR_TREADS := 48
+const STAIR_BAYS := 8
+const STAIR_COURSES := 8
+const STAIR_FINISH_THICKNESS := 0.04
 const SPHERE_RADIUS := 75.2
 const SHELL_THICKNESS := 0.32
 const BANDS := 8
@@ -450,30 +457,81 @@ static func _build_podium(world: Node3D, basis: Basis) -> void:
 		var a:=Vector3(base[j].x,5.6,base[j].y);var b:=Vector3(base[(j+1)%base.size()].x,5.6,base[(j+1)%base.size()].y)
 		world._structure_box("opera/podium/perimeter/"+str(j),CENTER+basis*((a+b)*.5),Vector3(.38,11.2,a.distance_to(b)),"opera_granite",250000,basis*Basis.looking_at(b-a,Vector3.UP))
 	world._structure_box("opera/podium/south/stair_back",CENTER+basis*Vector3(0,5.4,65.8),Vector3(97,10.8,.3),"opera_granite",600000,basis)
-	# The 48-tread monumental stair remains traversable on eight smooth ramps.
-	for segment in range(8):
-		var z0:=95.76-segment*3.72;var z1:=z0-3.72
-		var y0:=segment*1.4;var y1:float=(segment+1)*1.4
-		var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
-		var a:=Vector3(-48.5,y0,z0);var b:=Vector3(48.5,y0,z0)
-		var c:=Vector3(-48.5,y1,z1);var d:=Vector3(48.5,y1,z1)
-		var normal:Vector3=(b-a).cross(c-a).normalized()
-		if normal.y<0:normal=-normal
-		_triangle(st,a,b,c,normal);_triangle(st,c,b,d,normal)
-		var body:Node3D=world._structure_mesh("opera/steps/%s"%segment,st.commit(),CENTER,"opera_granite",360000,basis)
-		body.get_child(0).mesh=_steps_mesh(segment)
+	_build_monumental_stair(world,basis)
 	# Bennelong is an independent hollow base; no solid volume beneath the shells.
 	world._structure_box("opera/podium/restaurant_floor",CENTER+basis*Vector3(-41,11.06,82),Vector3(26,.28,36),"opera_granite",600000,basis)
 	for x in [-54.0,-28.0]:world._structure_box("opera/podium/restaurant_side/"+str(x),CENTER+basis*Vector3(x,5.5,82),Vector3(.3,11.0,36),"opera_granite",240000,basis)
 	world.set_meta("opera_exterior_openings",{"western":[[-42,-36],[-10,-4],[25,33],[49,57]],"upper_stair":Rect2(-10.5,37,7,22.5),"orchestra_pit":Rect2(15,4,16,4),"ground_y":0.0,"upper_y":11.2})
 
-static func _steps_mesh(segment: int) -> ArrayMesh:
+static func _build_monumental_stair(world:Node3D,basis:Basis) -> void:
+	# Retire opera/steps/0..7: each old ID removed an entire 97m-wide thin strip.
+	# apply_state preserves those retired damage IDs without deleting these new
+	# load-bearing solids. No save payload is changed or discarded here.
+	var run:=STAIR_FOOT_Z-STAIR_HEAD_Z
+	var rise:=PODIUM_HEIGHT/STAIR_TREADS
+	var tread:=run/STAIR_TREADS
+	var core_profile:=PackedVector2Array([Vector2(STAIR_FOOT_Z,-.35)])
+	for step in STAIR_TREADS:
+		var y:float=(step+1)*rise-STAIR_FINISH_THICKNESS
+		core_profile.append(Vector2(STAIR_FOOT_Z-step*tread,y))
+		core_profile.append(Vector2(STAIR_FOOT_Z-(step+1)*tread,y))
+	# The exposed core's last tread continues 80mm beneath the upper slab.
+	# Its surface is 40mm below the finished landing, never coplanar with it.
+	core_profile.append(Vector2(STAIR_HEAD_Z-.08,PODIUM_HEIGHT-STAIR_FINISH_THICKNESS))
+	core_profile.append(Vector2(STAIR_HEAD_Z-.08,-.35))
+	var core_collision:=PackedVector2Array([
+		Vector2(STAIR_FOOT_Z,-.35),Vector2(STAIR_FOOT_Z,-STAIR_FINISH_THICKNESS),
+		Vector2(STAIR_HEAD_Z,PODIUM_HEIGHT-STAIR_FINISH_THICKNESS),
+		Vector2(STAIR_HEAD_Z-.08,PODIUM_HEIGHT-STAIR_FINISH_THICKNESS),
+		Vector2(STAIR_HEAD_Z-.08,-.35)])
+	for bay in STAIR_BAYS:
+		var x0:=lerpf(-STAIR_HALF_WIDTH,STAIR_HALF_WIDTH,float(bay)/STAIR_BAYS)
+		var x1:=lerpf(-STAIR_HALF_WIDTH,STAIR_HALF_WIDTH,float(bay+1)/STAIR_BAYS)
+		# Closed granite stair foundations remain visible when the finish breaks.
+		# Smooth support approximates each real tread by at most one 233mm riser,
+		# as on the original walking ramps; it is not a detached collision bridge.
+		var core:Node3D=world._structure_mesh("opera/steps/foundation/%d"%bay,_stair_profile_mesh(core_collision,x0,x1),CENTER,"opera_granite",24000000.0,basis)
+		core.get_child(0).mesh=_stair_profile_mesh(core_profile,x0,x1)
+		core.set_meta("load_bearing_stair",true)
+		for course in STAIR_COURSES:
+			var z0:=STAIR_FOOT_Z-float(course)*run/STAIR_COURSES
+			var z1:=STAIR_FOOT_Z-float(course+1)*run/STAIR_COURSES
+			var y0:=float(course)*PODIUM_HEIGHT/STAIR_COURSES
+			var y1:=float(course+1)*PODIUM_HEIGHT/STAIR_COURSES
+			var finish_collision:=PackedVector2Array([
+				Vector2(z0,y0-STAIR_FINISH_THICKNESS),Vector2(z0,y0),
+				Vector2(z1,y1),Vector2(z1,y1-STAIR_FINISH_THICKNESS)])
+			var finish:Node3D=world._structure_mesh("opera/steps/tread/%d/%d"%[bay,course],_stair_profile_mesh(finish_collision,x0,x1),CENTER,"opera_granite",360000.0,basis)
+			finish.get_child(0).mesh=_steps_mesh(course,x0,x1)
+
+static func _stair_profile_mesh(profile:PackedVector2Array,x0:float,x1:float) -> ArrayMesh:
+	# Extrude the (z,y) stair section across x, including both end caps and base.
+	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var indices:=Geometry2D.triangulate_polygon(profile)
+	for x in [x0,x1]:
+		for i in range(0,indices.size(),3):
+			var a:Vector2=profile[indices[i]];var b:Vector2=profile[indices[i+1]];var c:Vector2=profile[indices[i+2]]
+			_triangle(st,Vector3(x,a.y,a.x),Vector3(x,b.y,b.x),Vector3(x,c.y,c.x),Vector3.LEFT if x==x0 else Vector3.RIGHT)
+	var area:=0.0
+	for i in profile.size():area+=profile[i].cross(profile[(i+1)%profile.size()])
+	for i in profile.size():
+		var a:Vector2=profile[i];var b:Vector2=profile[(i+1)%profile.size()]
+		var normal:=Vector3(0,a.x-b.x,b.y-a.y).normalized()*signf(area)
+		var p:=Vector3(x0,a.y,a.x);var q:=Vector3(x0,b.y,b.x)
+		var r:=Vector3(x1,b.y,b.x);var s:=Vector3(x1,a.y,a.x)
+		_triangle(st,p,q,r,normal);_triangle(st,p,r,s,normal)
+	return st.commit()
+
+static func _steps_mesh(segment: int,x0:float=-STAIR_HALF_WIDTH,x1:float=STAIR_HALF_WIDTH) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for step in range(segment*6,segment*6+6):
+	var rise:=PODIUM_HEIGHT/STAIR_TREADS
+	var tread:=(STAIR_FOOT_Z-STAIR_HEAD_Z)/STAIR_TREADS
+	var per_course:=STAIR_TREADS/STAIR_COURSES
+	for step in range(segment*per_course,(segment+1)*per_course):
 		var mesh := BoxMesh.new()
-		mesh.size = Vector3(97.0,1.4/6.0,0.62)
-		st.append_from(mesh,0,Transform3D(Basis.IDENTITY,Vector3(0,(step+0.5)*1.4/6.0,95.45-step*0.62)))
+		mesh.size = Vector3(x1-x0,STAIR_FINISH_THICKNESS,tread)
+		st.append_from(mesh,0,Transform3D(Basis.IDENTITY,Vector3((x0+x1)*.5,(step+1)*rise-STAIR_FINISH_THICKNESS*.5,STAIR_FOOT_Z-(step+.5)*tread)))
 	return st.commit()
 
 static func _build_promenade(world: Node3D, basis: Basis) -> void:

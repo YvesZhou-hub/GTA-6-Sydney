@@ -1,0 +1,27 @@
+{
+  "archive_sha256": "5837b657e7a7775f62f3f944f9fe0bd7092046343e9e789a021212832a1b9fc7",
+  "method": "All three final exported-App native screenshots were directly opened and visually inspected. No photo editing or scene-geometry changes were made for these views.",
+  "images": [
+    {
+      "file": "opera-stair-join-intact.png",
+      "sha256": "bc0358b0c89df61b4fe8a5de9428edefc20a2a46970de5515e2f37f3c60f290a"
+    },
+    {
+      "file": "opera-stair-join-legacy-save.png",
+      "sha256": "84326f8ddde317985da3240b4c76d84bb35b1168dc6b34d159cb0f6fd6f7242f"
+    },
+    {
+      "file": "opera-stair-join-after-impact.png",
+      "sha256": "f141134b3527515383be37547c772270c7260663009acc488e3fdd3159039eeb"
+    }
+  ],
+  "observations": [
+    "The stair head meets the upper platform across the visible width; the former long open slot is absent.",
+    "Loading retired stair-damage IDs produces the same intact support appearance.",
+    "The local impact view shows loose finish debris, with visible steps and supporting granite remaining underneath."
+  ],
+  "limitations": [
+    "Thin bright raster seams remain visible on some step edges; physical continuity is checked separately by rays and actual controllers.",
+    "The rest of the Opera reconstruction is unchanged by this support fix."
+  ]
+}

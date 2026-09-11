@@ -10,9 +10,9 @@ import time
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct"))
+    parser.add_argument("mode", choices=("experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access"))
     parser.add_argument("--app", type=Path, default=Path("dist/Harbourlife.app"))
-    parser.add_argument("--output", type=Path, default=Path("reports/release-v014-native"))
+    parser.add_argument("--output", type=Path, default=Path("reports/release-v015-native"))
     args = parser.parse_args()
     app = args.app.resolve() / "Contents/MacOS/Harbourlife"
     user_data = Path.home() / "Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港"
@@ -24,6 +24,7 @@ def main():
         "mobility": (["--mobility-qa"], "mobility-qa/report.json", "mobility-qa"),
         "air-vehicle": (["--air-vehicle-qa"], "air-vehicle-qa/report.json", "air-vehicle-qa"),
         "navigation-input": (["--navigation-input-qa"], "navigation-input-qa/report.json", "navigation-input-qa"),
+        "opera-access": (["--opera-access-qa"], "opera-access-qa/report.json", "opera-access-qa"),
         "precinct": (["--precinct-qa"], "precinct-qa/report.json", "precinct-qa"),
     }
     flags, report_name, images_name = cases[args.mode]
@@ -32,7 +33,7 @@ def main():
     log = out / (args.mode + "-runtime.log")
     console_path = out / (args.mode + "-console.log")
     command = [str(app), "--disable-vsync", "--log-file", str(log)]
-    if args.mode in ("flight", "mobility", "air-vehicle", "precinct"):
+    if args.mode in ("flight", "mobility", "air-vehicle", "precinct", "opera-access"):
         command += ["--fixed-fps", "60"]
     command += ["--"] + flags
     started = time.time()

@@ -1,0 +1,37 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15121 reserved=387 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":79368,"custom_landmarks_ms":70188,"mapped_city_ms":38308,"terrain_and_harbour_ms":29496}
+HARBOR_WORLD_READY buildings=15123 structure_components=21641
+CITY_STARTUP_MS 80697
+OPERA_ACCESS PASS complete production city ready {}
+OPERA_ACCESS PASS intact full-width stair and landing support {"first_failures":[],"maximum_height_error_m":0.000016331416304638,"samples":672}
+OPERA_ACCESS PASS intact upper join uphill x=-24.0 {"actual_local":[-24.0823001861572,11.1908779144287,63.8040046691895],"below_surface_frames":0,"discontinuities":0,"frames":84,"name":"intact upper join uphill x=-24.0","passed":true,"target_local":[-24.0,11.2,64.0]}
+OPERA_ACCESS PASS intact upper join downhill x=-24.0 {"actual_local":[-23.9185581207275,9.28592872619629,71.1177978515625],"below_surface_frames":0,"discontinuities":0,"frames":83,"name":"intact upper join downhill x=-24.0","passed":true,"target_local":[-24.0,9.31827956989247,71.0]}
+OPERA_ACCESS PASS intact upper join uphill x=0.0 {"actual_local":[-0.0822954177856445,11.1908779144287,63.8046112060547],"below_surface_frames":0,"discontinuities":0,"frames":84,"name":"intact upper join uphill x=0.0","passed":true,"target_local":[0.0,11.2,64.0]}
+OPERA_ACCESS PASS intact upper join downhill x=0.0 {"actual_local":[0.0813932418823242,9.28583240509033,71.1179122924805],"below_surface_frames":0,"discontinuities":0,"frames":83,"name":"intact upper join downhill x=0.0","passed":true,"target_local":[0.0,9.31827956989247,71.0]}
+OPERA_ACCESS PASS intact upper join uphill x=23.0 {"actual_local":[22.9177398681641,11.1908779144287,63.8052291870117],"below_surface_frames":0,"discontinuities":0,"frames":84,"name":"intact upper join uphill x=23.0","passed":true,"target_local":[23.0,11.2,64.0]}
+OPERA_ACCESS PASS intact upper join downhill x=23.0 {"actual_local":[23.0814037322998,9.28627872467041,71.1177520751953],"below_surface_frames":0,"discontinuities":0,"frames":83,"name":"intact upper join downhill x=23.0","passed":true,"target_local":[23.0,9.31827956989247,71.0]}
+OPERA_ACCESS PASS intact upper join uphill x=46.0 {"actual_local":[45.9177017211914,11.1908779144287,63.805248260498],"below_surface_frames":0,"discontinuities":0,"frames":84,"name":"intact upper join uphill x=46.0","passed":true,"target_local":[46.0,11.2,64.0]}
+OPERA_ACCESS PASS intact upper join downhill x=46.0 {"actual_local":[46.081413269043,9.28596305847168,71.1177291870117],"below_surface_frames":0,"discontinuities":0,"frames":83,"name":"intact upper join downhill x=46.0","passed":true,"target_local":[46.0,9.31827956989247,71.0]}
+OPERA_ACCESS PASS intact full stair uphill {"actual_local":[-0.0818815231323242,11.1908779144287,63.8385009765625],"below_surface_frames":0,"discontinuities":0,"frames":349,"name":"intact full stair uphill","passed":true,"target_local":[0.0,11.2,64.0]}
+OPERA_ACCESS PASS intact full stair downhill {"actual_local":[0.0819511413574219,0.627225875854492,94.1255264282227],"below_surface_frames":0,"discontinuities":0,"frames":348,"name":"intact full stair downhill","passed":true,"target_local":[0.0,0.662365591397851,94.0]}
+OPERA_ACCESS PASS intact hoverboard uphill {"actual_local":[-0.0000791549682617188,12.1914253234863,63.9250679016113],"below_surface_frames":0,"discontinuities":0,"frames":113,"health":100.0,"last_impact":{},"name":"intact hoverboard uphill","passed":true,"target_z":64.0}
+OPERA_ACCESS PASS intact hoverboard downhill {"actual_local":[23.0001087188721,7.47429847717285,80.0002593994141],"below_surface_frames":0,"discontinuities":0,"frames":154,"health":100.0,"last_impact":{},"name":"intact hoverboard downhill","passed":true,"target_z":80.0}
+OPERA_ACCESS PASS native screenshot opera-stair-join-intact {}
+OPERA_ACCESS PASS old stair destruction history survives reload {}
+OPERA_ACCESS PASS loaded legacy stair damage full-width stair and landing support {"first_failures":[],"maximum_height_error_m":0.000016331416304638,"samples":672}
+OPERA_ACCESS PASS legacy damage full stair uphill {"actual_local":[-0.0818815231323242,11.1908779144287,63.8385009765625],"below_surface_frames":0,"discontinuities":0,"frames":349,"name":"legacy damage full stair uphill","passed":true,"target_local":[0.0,11.2,64.0]}
+OPERA_ACCESS PASS legacy damage full stair downhill {"actual_local":[0.0819511413574219,0.627225875854492,94.1255264282227],"below_surface_frames":0,"discontinuities":0,"frames":348,"name":"legacy damage full stair downhill","passed":true,"target_local":[0.0,0.662365591397851,94.0]}
+OPERA_ACCESS PASS legacy damage hoverboard uphill {"actual_local":[-0.0000791549682617188,12.1914253234863,63.9250679016113],"below_surface_frames":0,"discontinuities":0,"frames":113,"health":100.0,"last_impact":{},"name":"legacy damage hoverboard uphill","passed":true,"target_z":64.0}
+OPERA_ACCESS PASS legacy damage hoverboard downhill {"actual_local":[23.0001087188721,7.47429847717285,80.0002593994141],"below_surface_frames":0,"discontinuities":0,"frames":154,"health":100.0,"last_impact":{},"name":"legacy damage hoverboard downhill","passed":true,"target_z":80.0}
+OPERA_ACCESS PASS native screenshot opera-stair-join-legacy-save {}
+OPERA_ACCESS PASS local impact removes finish without destroying its foundation {"removed_finish":["opera/steps/tread/3/7","opera/steps/tread/4/7"],"removed_foundations":[]}
+OPERA_ACCESS PASS after local 450kJ impact full-width stair and landing support {"first_failures":[],"maximum_height_error_m":0.0400087356567376,"samples":672}
+OPERA_ACCESS PASS post-impact join uphill {"actual_local":[-0.0822954177856445,11.1908779144287,63.8046112060547],"below_surface_frames":0,"discontinuities":0,"frames":84,"name":"post-impact join uphill","passed":true,"target_local":[0.0,11.2,64.0]}
+OPERA_ACCESS PASS post-impact join downhill {"actual_local":[0.0813407897949219,9.28618144989014,71.1176910400391],"below_surface_frames":0,"discontinuities":0,"frames":83,"name":"post-impact join downhill","passed":true,"target_local":[0.0,9.31827956989247,71.0]}
+OPERA_ACCESS PASS post-impact hoverboard uphill {"actual_local":[-0.0000791549682617188,12.1961879730225,63.9250679016113],"below_surface_frames":0,"discontinuities":0,"frames":113,"health":100.0,"last_impact":{},"name":"post-impact hoverboard uphill","passed":true,"target_z":64.0}
+OPERA_ACCESS PASS post-impact hoverboard downhill {"actual_local":[0.0122509002685547,7.44076633453369,80.0838394165039],"below_surface_frames":0,"discontinuities":0,"frames":157,"health":100.0,"last_impact":{},"name":"post-impact hoverboard downhill","passed":true,"target_z":80.0}
+OPERA_ACCESS PASS native screenshot opera-stair-join-after-impact {}
+OPERA_ACCESS_COMPLETE checks=29 passed=true

@@ -1,0 +1,18 @@
+{
+  "archive_sha256": "5837b657e7a7775f62f3f944f9fe0bd7092046343e9e789a021212832a1b9fc7",
+  "source": "Fresh exported App via --opera-access-qa, same actual scene and camera in intact / legacy damage / localized impact states; unmodified PNG files.",
+  "screenshots": [
+    {
+      "file": "docs/screenshots/v015/opera-stair-join-after-impact.png",
+      "sha256": "f141134b3527515383be37547c772270c7260663009acc488e3fdd3159039eeb"
+    },
+    {
+      "file": "docs/screenshots/v015/opera-stair-join-intact.png",
+      "sha256": "bc0358b0c89df61b4fe8a5de9428edefc20a2a46970de5515e2f37f3c60f290a"
+    },
+    {
+      "file": "docs/screenshots/v015/opera-stair-join-legacy-save.png",
+      "sha256": "84326f8ddde317985da3240b4c76d84bb35b1168dc6b34d159cb0f6fd6f7242f"
+    }
+  ]
+}
