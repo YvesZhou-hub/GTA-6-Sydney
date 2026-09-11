@@ -1,0 +1,30 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS three runway pairs built
+PASS runway 0 exact published length
+PASS runway 1 exact published length
+PASS runway 2 exact published length
+PASS 34L start is geographic south threshold
+PASS 34L points northwest at true348deg
+PASS usable airport anchors exposed
+PASS runway has ground collision under aircraft start
+PASS terrain top collider at (0.0, 20.0, 4000.0)
+terrain_normal=(0.0, 1.0, 0.0) collider=Simplified_City_Corridor
+PASS terrain top collider at (-3120.0, 20.0, 10200.0)
+terrain_normal=(0.0, 1.0, 0.0) collider=Main_Runway_Peninsula
+PASS terrain top collider at (-1550.0, 20.0, 12200.0)
+terrain_normal=(0.0, 1.0, 0.0) collider=Asphalt
+PASS flush runway wheel lanes 16R_34L max_error=0.00000003814697
+PASS flush runway wheel lanes 16L_34R max_error=0.00000003814697
+PASS flush runway wheel lanes 07_25 max_error=0.00000003814697
+PASS flush apron International_Apron
+PASS flush apron Domestic_Apron
+PASS flush apron Hangar_Apron
+PASS all taxi and exit colliders flush count=27
+PASS reported takeoff seam now flush
+PASS runway spawn anchors use physical surface datum
+PASS airport collision removes local facade geometry
+PASS new world restores airport panels
+PASS airport damage restores from JSON
+PASS important airport debris survives JSON save
+AIRPORT CHECK COMPLETE failures=0 nodes=263

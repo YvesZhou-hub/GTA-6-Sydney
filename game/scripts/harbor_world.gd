@@ -100,7 +100,7 @@ func _register_landmark_geography() -> void:
 	# Map icons describe the landmark itself; navigation uses a separately checked
 	# public approach. Never infer an entrance by dropping the player at a centroid.
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/landmark_geography.json"))
-	for group in ["sydney_tower_landmark","circular_quay_detail","darling_square_detail"]:
+	for group in ["sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses"]:
 		for record:Dictionary in get_meta(group,[]):
 			if not record.has("map_position") or not record.has("arrival"):continue
 			var entry:=record.duplicate(true)
@@ -312,7 +312,7 @@ func _rebuild_visual_cell(cell: Vector2i) -> void:
 				target[key].set_uv(uv[index])
 				target[key].add_vertex(vertices[index])
 		for child in node.get_children():
-			if not child is MeshInstance3D: continue
+			if not child is MeshInstance3D or child.get_meta("collision_only",false): continue
 			var target: Dictionary=groups[bool(child.get_meta("near_facade",false))]
 			var material: Material = child.material_override
 			var key: int = material.get_instance_id()
@@ -541,6 +541,7 @@ func _destruct_beam(id: String, a: Vector3, b: Vector3, width: float, strength: 
 
 func _build_opera() -> void:
 	preload("res://scripts/opera_landmark.gd").build(self)
+	preload("res://scripts/opera_interiors.gd").build(self)
 
 func _local_beam(parent: Node3D, a: Vector3, b: Vector3, width: float, key: String) -> void:
 	var d := b-a
@@ -991,6 +992,7 @@ func apply_state(data: Dictionary) -> void:
 	repair_all()
 	for id in data.get("destroyed",[]):
 		if structures.has(id): _destroy_component(id,Vector3.ZERO,0,false)
+		else: destroyed[id]=true # Keep retired component IDs when geometry changes between releases.
 	partial_damage = data.get("partial",{}).duplicate()
 	for id in partial_damage:
 		if not structures.has(id): continue

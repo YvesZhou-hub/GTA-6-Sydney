@@ -2,11 +2,14 @@ extends SceneTree
 
 const Opera = preload("res://scripts/opera_landmark.gd")
 var failures := 0
+var checks:Array[Dictionary]=[]
 
 class ProbeWorld extends "res://scripts/harbor_world.gd":
 	func _ready() -> void:
 		_make_materials()
 		Opera.build(self)
+		if "--with-interiors" in OS.get_cmdline_user_args():
+			load("res://scripts/opera_interiors.gd").build(self)
 		_flush_batches()
 		for id in structures:
 			for child in structures[id].node.get_children():
@@ -15,6 +18,7 @@ class ProbeWorld extends "res://scripts/harbor_world.gd":
 		_ready_complete = true
 
 func verify(value: bool, message: String) -> void:
+	checks.append({"name":message,"passed":value})
 	if value: print("PASS ",message)
 	else:
 		failures += 1
@@ -37,8 +41,8 @@ func check() -> void:
 	var degenerate := 0
 	var highest := -INF
 	for spec: Array in Opera.ROOFS:
-		var right := Opera.sphere_patch(spec[2],spec[3],spec[4],1)
-		var left := Opera.sphere_patch(spec[2],spec[3],spec[4],-1)
+		var right := Opera.surface_for(spec,1)
+		var left := Opera.surface_for(spec,-1)
 		for u in [0.0,0.17,0.5,0.89,1.0]:
 			for v in [0.0,0.21,0.5,0.87,1.0]:
 				var rp := Opera.shell_point(right,u,v)
@@ -73,9 +77,9 @@ func check() -> void:
 	verify(reversed_normals==0,"all shell outer, inner and edge triangles face their supplied normals")
 	var boundary_edges := 0
 	for side in [-1,1]:
-		var surface := Opera.sphere_patch(25.2,68.0,50.15,side)
+		var surface := Opera.surface_for(Opera.ROOFS[2],side)
 		for band in [0,7]:
-			var mesh := Opera.shell_mesh(surface,float(band)/8.0,float(band+1)/8.0)
+			var mesh := Opera.shell_mesh(surface,float(band)/8.0,float(band+1)/8.0,2)
 			var points: PackedVector3Array = mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 			var edges: Dictionary = {}
 			var bins: Dictionary = {}
@@ -101,10 +105,16 @@ func check() -> void:
 	var expected := 0
 	for index in range(Opera.ROOFS.size()):
 		var spec: Array = Opera.ROOFS[index]
-		var surface := Opera.sphere_patch(spec[2],spec[3],spec[4],1)
+		var surface := Opera.surface_for(spec,1)
 		var basis := Opera.site_basis()*Basis(Vector3.UP,deg_to_rad(spec[5]))
 		var origin := Opera.CENTER+Opera.site_basis()*Vector3(spec[0],Opera.PODIUM_HEIGHT,spec[1])
-		var sample := Opera.shell_point(surface,0.46,0.55)
+		var sample:=Vector3.ZERO
+		var found_exposed:=false
+		for uv in [Vector2(.46,.55),Vector2(.46,.20),Vector2(.3,.2),Vector2(.3,.8),Vector2(.6,.8)]:
+			var candidate:=Opera.shell_point(surface,uv.x,uv.y)
+			if Opera._exposed(index,candidate) and Opera._exposed(index,Opera.shell_point(surface,uv.x-.025,uv.y-.025)) and Opera._exposed(index,Opera.shell_point(surface,uv.x+.025,uv.y+.025)):
+				sample=candidate;found_exposed=true;break
+		if not found_exposed:continue
 		var normal: Vector3 = (sample-surface.center).normalized()
 		var at := origin+basis*sample
 		var outward := basis*normal
@@ -124,6 +134,53 @@ func check() -> void:
 		var hit := space.intersect_ray(query)
 		if not hit.is_empty() and str(hit.collider.get_meta("damage_id","")).begins_with("opera/steps/"): stairs += 1
 	verify(stairs==48,"whole monumental stair route has smooth physical support")
+	var capsule:=CapsuleShape3D.new();capsule.radius=.34;capsule.height=1.8
+	var entrances_clear:=true
+	for cx in [-26.0,23.0]:
+		for z_step in range(50,65):
+			var q:=PhysicsShapeQueryParameters3D.new();q.shape=capsule
+			q.transform.origin=Opera.CENTER+Opera.site_basis()*Vector3(cx,Opera.PODIUM_HEIGHT+.97,z_step)
+			if not space.intersect_shape(q,1).is_empty():entrances_clear=false
+	verify(entrances_clear,"both southern entrances have actual 1.8m capsule clearance through the glass")
+	var western_clear:=true
+	for z in [-39.0,-7.0,29.0,53.0]:
+		var q:=PhysicsShapeQueryParameters3D.new();q.shape=capsule
+		q.transform.origin=Opera.CENTER+Opera.site_basis()*Vector3(-59.8,.97,z)
+		if not space.intersect_shape(q,1).is_empty():western_clear=false
+	verify(western_clear,"four Western Foyer openings have ground-level capsule clearance")
+	var holes_clear:=true
+	for p in [Vector3(-7,11.35,50),Vector3(23,11.35,6)]:
+		var at:Vector3=Opera.CENTER+Opera.site_basis()*p
+		var hit:=space.intersect_ray(PhysicsRayQueryParameters3D.create(at,at-Vector3.UP*.8))
+		if not hit.is_empty() and str(hit.collider.get_meta("damage_id","")).begins_with("opera/podium/upper/"):holes_clear=false
+	verify(holes_clear,"upper stairwell and orchestra pit are absent upper-slab geometry")
+	var glass:StandardMaterial3D=world.materials.opera_glass
+	verify(glass.transparency==BaseMaterial3D.TRANSPARENCY_ALPHA and glass.albedo_color.a<.4,"bronze glass allows harbour visibility instead of an opaque painted facade")
+	var cover_misses:Array=[]
+	var Interior=load("res://scripts/opera_interiors.gd")
+	for x in [-18.0,-12.0,0.0,12.0,18.0]:
+		for z in [-37.0,-20.0,0.0,14.0,30.9]:
+			var ceiling_y:float=Interior._concert_ceiling_y(x,z)+.40
+			var at:Vector3=Opera.CENTER+Opera.site_basis()*Vector3(-26+x,ceiling_y,z)
+			var q:=PhysicsRayQueryParameters3D.create(at,at+Vector3.UP*80.0)
+			q.hit_back_faces=true
+			var hit:=space.intersect_ray(q)
+			if hit.is_empty() or not (str(hit.collider.get_meta("damage_id","")).begins_with("opera/shell/") or str(hit.collider.get_meta("damage_id","")).begins_with("opera/infill/")):
+				cover_misses.append({"x":x,"z":z,"ceiling_y":ceiling_y,"hit":"none" if hit.is_empty() else str(hit.collider.get_meta("damage_id",""))})
+	verify(cover_misses.is_empty(),"25 Concert crown/edge samples enclosed above by shell or interstitial surfaces misses="+str(cover_misses))
+	var intrusions:Array=[]
+	for id:String in world.structures:
+		if not (id.begins_with("opera/shell/") or id.begins_with("opera/infill/")):continue
+		var body:Node3D=world.structures[id].node
+		var mesh:Mesh=body.get_child(0).mesh
+		var bad:=0
+		for point:Vector3 in mesh.get_faces():
+			var p:Vector3=Opera.site_basis().inverse()*(body.transform*point-Opera.CENTER)
+			if p.x< -43.6 or (p.x> -8.4 and p.x<8.6) or p.x>37.4:continue
+			if p.z< -36.5 or p.z>30.5:continue
+			if p.y>Opera.PODIUM_HEIGHT+.5 and p.y<Opera._room_clearance(p)-.9:bad+=1
+		if bad>0:intrusions.append({"id":id,"vertices":bad})
+	verify(intrusions.is_empty(),"external shell and bronze infill do not intrude into either occupied acoustic chamber: "+str(intrusions))
 	var destroyed_id: String = shell_ids[37]
 	world._destroy_component(destroyed_id,Vector3.ZERO,0,false)
 	await physics_frame
@@ -133,7 +190,9 @@ func check() -> void:
 	verify(not world.destroyed.has(destroyed_id) and not world.structures[destroyed_id].node.get_child(1).disabled,"new world restores damaged roof collider")
 	if "--visual" in OS.get_cmdline_user_args():
 		await capture(world)
-	print("OPERA CHECK COMPLETE failures=",failures," shell_triangles=",triangle_count)
+	var report_path:=ProjectSettings.globalize_path("res://../reports/opera-v014-exterior.json")
+	FileAccess.open(report_path,FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures,"shell_triangles":triangle_count,"highest_world_y":highest,"native_capture":"--visual" in OS.get_cmdline_user_args(),"includes_interiors":"--with-interiors" in OS.get_cmdline_user_args(),"source_sha256":FileAccess.get_sha256("res://scripts/opera_landmark.gd"),"scope":"Original procedural exterior based on official CMP photos/plans; shell coordinates are inferred, not a surveyed BIM"},"  "))
+	print("OPERA CHECK COMPLETE checks=",checks.size()," failures=",failures," shell_triangles=",triangle_count)
 	quit(failures)
 
 func weld_index(point: Vector3, bins: Dictionary, welded: Array[Vector3]) -> int:
@@ -172,11 +231,12 @@ func capture(world: Node3D) -> void:
 	camera.current = true
 	camera.fov = 50
 	camera.far = 2000
-	var views := {"northwest":Vector3(235,40,-500),"aerial":Vector3(421,270,-222),"steps":Vector3(440,8,-174),"tiles":Vector3(391,70,-345)}
-	DirAccess.make_dir_recursive_absolute("/tmp/harbourlife-opera-review")
-	for label: String in views:
-		camera.position = views[label]
-		camera.look_at(Opera.CENTER+Vector3(0,25,0))
+	var views:=Opera.capture_views()
+	var folder:=ProjectSettings.globalize_path("res://../reports/opera-v014-connected")
+	DirAccess.make_dir_recursive_absolute(folder)
+	for view in views:
+		camera.position=view[1]
+		camera.look_at(view[2])
 		for i in range(12): await process_frame
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("/tmp/harbourlife-opera-review/"+label+".png")
+		root.get_texture().get_image().save_png(folder+"/"+view[0]+".png")

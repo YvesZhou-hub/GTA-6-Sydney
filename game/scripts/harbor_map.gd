@@ -4,6 +4,7 @@ extends Control
 signal landmark_selected(key: String)
 signal waypoint_selected(position: Vector3, title: String)
 signal navigation_cleared
+signal close_requested
 class MapInk extends Node2D:
 	var owner_map
 	func _draw(): owner_map.paint(self)
@@ -40,6 +41,7 @@ var _press_position:=Vector2.ZERO
 var _labels:Array[Rect2]=[]
 var _label_hits:Array[Dictionary]=[]
 var _clear_button:Button
+var _close_button:Button
 # Resource and packed-array references are shared by all map views. Only the
 # first full map reads the geographic JSON and constructs its meshes.
 static var _shared_geometry:Dictionary={}
@@ -59,6 +61,12 @@ func _ready():
 	_clear_button.custom_minimum_size=Vector2(104,34)
 	_clear_button.pressed.connect(clear_navigation)
 	add_child(_clear_button)
+	_close_button=Button.new()
+	_close_button.text="返回游戏 ×"
+	_close_button.custom_minimum_size=Vector2(126,34)
+	_close_button.tooltip_text="M / Esc · 关闭地图并恢复视角控制"
+	_close_button.pressed.connect(func(): close_requested.emit())
+	add_child(_close_button)
 	resized.connect(refresh)
 	visibility_changed.connect(func(): _dragging=false)
 	load_map_data()
@@ -200,9 +208,12 @@ func sync_navigation(snapshot:Dictionary):
 func refresh():
 	_label_hits.clear()
 	if is_instance_valid(_clear_button):
-		_clear_button.position=Vector2(size.x-122,10)
+		_clear_button.position=Vector2(size.x-260,10)
 		_clear_button.size=Vector2(104,34)
 		_clear_button.disabled=target_key.is_empty()
+	if is_instance_valid(_close_button):
+		_close_button.position=Vector2(size.x-144,10)
+		_close_button.size=Vector2(126,34)
 	if is_instance_valid(_ink): _ink.queue_redraw()
 
 func _append_hatching(polygon:PackedVector2Array):
@@ -229,6 +240,23 @@ func project_point(point:Vector3) -> Vector2: return project_flat(Vector2(point.
 func unproject_point(point:Vector2) -> Vector2: return (point-view_center())/pixels_per_metre+map_center
 func map_rect() -> Rect2: return Rect2(Vector2(10,62),Vector2(maxf(0,size.x-20),maxf(0,size.y-FOOTER_HEIGHT-69)))
 func landmark_point(landmark:Dictionary) -> Vector3: return landmark.get("map_position",landmark.position)
+
+func search_destinations(query:String,limit:int=40) -> Array[Dictionary]:
+	var result:Array[Dictionary]=[]
+	var needle:=query.strip_edges().to_lower()
+	for landmark:Dictionary in landmarks:
+		if not needle.is_empty() and not needle in (str(landmark.title)+" "+str(landmark.key)).to_lower(): continue
+		result.append({"key":str(landmark.key),"title":str(landmark.title),"position":landmark.position,"landmark":true})
+	# Unfiltered browsing prioritizes the curated destinations. Search also finds
+	# named places from the same offline OSM snapshot drawn on the map.
+	if needle.is_empty(): return result
+	for place:Dictionary in _places:
+		if not needle in str(place.name).to_lower(): continue
+		var position:=Vector3(place.point.x,4.5,place.point.y)
+		var duplicate:=result.any(func(item):return item.title.to_lower()==str(place.name).to_lower() and item.position.distance_to(position)<60)
+		if not duplicate: result.append({"title":str(place.name),"position":position,"landmark":false})
+		if result.size()>=limit: break
+	return result.slice(0,limit)
 
 func destination_at(screen_point:Vector2) -> Dictionary:
 	if not map_rect().has_point(screen_point): return {}

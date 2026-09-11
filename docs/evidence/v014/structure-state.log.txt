@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+STRUCTURE_STATE PASS existing component still receives saved destruction
+STRUCTURE_STATE PASS retired Opera component ID remains in exported state
+STRUCTURE_STATE PASS retired partial damage remains intact
+STRUCTURE_STATE PASS repeat restoration preserves known and retired damage
+STRUCTURE_STATE PASS explicit repair clears current and retired damage

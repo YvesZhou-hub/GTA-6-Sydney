@@ -1,0 +1,24 @@
+{
+  "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec",
+  "method": "All three unmodified final exported-App PNGs individually inspected. Not a completed OS hardware-mouse walkthrough.",
+  "images": [
+    {
+      "image": "01-map-pointer-pin.png",
+      "sha256": "2d35a7d0205b00a6842b1f130426070045b91d7b608d4640133f6fcbb9bf02ee",
+      "reviewed": true,
+      "observations": "Final App map UI has readable controls, selected pin or search result and return/clear buttons. Terrain and airport connection reflect current anchors. A viewport screenshot omits the OS pointer; actual event behavior is separately tested by 35 routed-input checks."
+    },
+    {
+      "image": "02-map-top-close.png",
+      "sha256": "2095e3f3569170070cd25bbc53f7b2b49dd7176702530b25e4de985639ac3e7e",
+      "reviewed": true,
+      "observations": "Final App map UI has readable controls, selected pin or search result and return/clear buttons. Terrain and airport connection reflect current anchors. A viewport screenshot omits the OS pointer; actual event behavior is separately tested by 35 routed-input checks."
+    },
+    {
+      "image": "03-map-search-manly.png",
+      "sha256": "2e2eba2605c3e1566b14f905ca03090680a215fd7632d681553ea009e533f987",
+      "reviewed": true,
+      "observations": "Final App map UI has readable controls, selected pin or search result and return/clear buttons. Terrain and airport connection reflect current anchors. A viewport screenshot omits the OS pointer; actual event behavior is separately tested by 35 routed-input checks."
+    }
+  ]
+}

@@ -123,7 +123,10 @@ func run():
 		if str(id).begins_with("darling_detail/canopy/post/"):post_id=str(id);break
 	var post:Dictionary=world.structures[post_id]
 	check("v013 Darling public canopy post is an occupied solid",Migration.overlaps_new_building(world,AABB(post.position-Vector3.ONE*.02,Vector3.ONE*.04)))
-	check("Darling public canopy centre remains an open walk route",not Migration.overlaps_new_building(world,player_bounds(DarlingDetail.CANOPY_A.lerp(DarlingDetail.CANOPY_B,.5)+Vector3.UP*.1)))
+	var canopy_center:Vector3=DarlingDetail.CANOPY_A.lerp(DarlingDetail.CANOPY_B,.5)
+	var canopy_floor:Dictionary=world.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(canopy_center+Vector3.UP*.75,canopy_center-Vector3.UP*.5,15))
+	# Stand on the actual paving top, not 2 cm inside its raised surface.
+	check("Darling public canopy centre remains an open walk route",not canopy_floor.is_empty() and not Migration.overlaps_new_building(world,player_bounds(canopy_floor.position+Vector3.UP*.04)))
 	var enclosed_wing=game.make_vehicle("paraglider","qa_enclosed_wing",Vector3(2240,20,2000));enclosed_wing.freeze=true
 	check("summon rejects complete enclosure in custom solid shell",not Spawn.clear_envelope(game,enclosed_wing,enclosed_wing.global_transform))
 	game.reset_fleet(false)

@@ -6,6 +6,7 @@ signal impacted(point: Vector3, energy: float)
 const Models = preload("res://scripts/vehicle_factory.gd")
 const G := 9.8
 const TOP_SPEED_KMH := {"car":420.0,"motorcycle":320.0,"airliner":800.0,"helicopter":350.0}
+const GLIDE_TRIM_SPEED := {"glider":28.0,"paraglider":11.5}
 const NAMES := {"car":"Veloce V12", "motorcycle":"Apex RR", "speedboat":"Riviera 39", "yacht":"Ocean 90", "paraglider":"Thermal 9", "glider":"Southern Arc", "helicopter":"Harbour H6", "airliner":"Dreamliner 787-9", "hoverboard":"Aether X1"}
 var kind: String = "car"
 var vehicle_id: String = ""
@@ -291,22 +292,28 @@ func stop_motion_after_relocation() -> void:
 	angular_velocity=Vector3.ZERO
 	throttle=0.0
 
+func glide_trim_speed() -> float:
+	return float(GLIDE_TRIM_SPEED.get(kind,0.0))
+
 func prepare_for_boarding(was_frozen:bool=false) -> void:
 	# Jolt can replace a velocity written while a newly added body is frozen.
 	# Apply launch energy inside its first live integration step, exactly once.
 	if not kind in ["glider","paraglider"] or global_position.y<30:return
 	if _restored and not was_frozen:return
 	if not was_frozen and linear_velocity.length()>4.0:return
-	var trim:=28.0 if kind=="glider" else 9.5
+	# Launch at the same airspeed used to size lift. A slower launch makes the
+	# wing drop before gravity can accelerate it to its normal glide condition.
+	var trim:=glide_trim_speed()
 	if linear_velocity.length()>trim*1.5:return
-	_launch_velocity=-global_basis.z*trim+Vector3.DOWN*(.9 if kind=="glider" else 1.1)
+	var drop := 0.22 if kind=="glider" else 0.52
+	_launch_velocity=-global_basis.z*trim+Vector3.DOWN*drop
 	_launch_pending=true
 
 func _gliding(_delta:float,f:Vector3,r:Vector3,u:Vector3,steer:float,pitch:float,brake:bool) -> void:
 	grounded = not _ground_probe(0.85).is_empty()
 	var speed := maxf(0.0,linear_velocity.dot(f))
-	var target_speed := 9.5 if kind=="paraglider" else 28.0
-	var min_speed := 5.2 if kind=="paraglider" else 18.0
+	var target_speed := glide_trim_speed()
+	var min_speed := 7.2 if kind=="paraglider" else 18.0
 	stalled = speed<min_speed and not grounded
 	var local_velocity := global_basis.inverse()*linear_velocity
 	var angle_of_attack := atan2(-local_velocity.y,maxf(speed,0.1))
@@ -315,13 +322,13 @@ func _gliding(_delta:float,f:Vector3,r:Vector3,u:Vector3,steer:float,pitch:float
 	if effective_up.y<0.1:
 		effective_up = u
 	apply_central_force(effective_up*mass*G*lift_ratio*(0.73 if brake else 0.995))
-	var drag_coefficient := 0.010 if kind=="paraglider" else 0.0005
+	var drag_coefficient := 0.0065 if kind=="paraglider" else 0.0005
 	apply_central_force(-linear_velocity*linear_velocity.length()*mass*drag_coefficient*(2.7 if brake else 1.0))
 	apply_central_force(-r*linear_velocity.dot(r)*mass*0.75)
 	# Gravity powers both wings. Nose-down trim trades height for forward speed.
-	var wanted_pitch := -0.14 + pitch*0.28 if kind=="paraglider" else -0.025+pitch*0.23
+	var wanted_pitch := -0.10 + pitch*0.28 if kind=="paraglider" else -0.025+pitch*0.23
 	if stalled:
-		wanted_pitch = -0.32
+		wanted_pitch = -0.20
 	var current_pitch := asin(clampf(f.y,-1.0,1.0))
 	var roll_target := -steer*(0.30 if kind=="paraglider" else 0.52)
 	var desired_up := (Vector3.UP+r*(-roll_target)).normalized()

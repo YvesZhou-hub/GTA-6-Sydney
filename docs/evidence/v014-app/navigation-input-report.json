@@ -1,0 +1,212 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "assembled world and actual map UI ready",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new world captures pointer for camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "normal gameplay mouse still turns camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "M enters paused map and visibly releases pointer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map hides gameplay HUD and toasts behind the controls",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "moving across map does not change yaw or enable camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "viewport-routed click creates correct world waypoint",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "pin selection keeps map open and cursor usable",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "pin selection preserves player and existing fleet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real GUI drag pans map without turning camera or changing pin",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "viewport-routed wheel zooms map",
+			"passed": true
+		},
+		{
+			"detail": {
+				"events": 8
+			},
+			"name": "map GUI received genuine routed pointer events",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "M closes paused map even with a focused GUI button",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "camera turns again after closing map",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "key-repeat does not repeatedly toggle the map",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Esc also closes map and restores captured gameplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Alt Option hold releases pointer while minimap stays visible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "released cursor does not rotate camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "actual small-map click opens full map",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "releasing Alt inside map never steals its cursor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "visible clear button clears navigation without closing map",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "visible top close button restores gameplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map pointer cannot turn or replace occupied car",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "closing map preserves driver and resumes car",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map pointer cannot turn or replace occupied airliner",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "closing map preserves driver and resumes airliner",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Esc pause menu releases mouse",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "M can open map directly from pause",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "typing M into destination search does not close map",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "typed query filters real destination buttons",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "search result click marks destination and keeps vehicle in place",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Esc exits searched map and restores camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "losing window focus clears Option even without a key-up event",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "returning from another window restores gameplay camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "refocusing an open map keeps its pointer and pause",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true,
+	"qa_fixtures_retained": true,
+	"scope": "Full production world; Viewport.push_input enters Node input, focused GUI dispatch and unhandled camera routing. Window focus notifications are injected through Object.notification. No direct calls to menu or map click handlers. This is engine event automation, not an OS hardware-input claim.",
+	"screenshots": [
+		{
+			"file": "01-map-pointer-pin.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"file": "02-map-top-close.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"file": "03-map-search-manly.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		}
+	],
+	"user_saves_touched": false
+}

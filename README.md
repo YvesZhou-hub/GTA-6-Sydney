@@ -1,16 +1,18 @@
 # Harbourlife · 悉尼海港
 
-**v0.1.3-preview.1 · 悬浮出行与城市细节更新**
+**v0.1.4-preview.1 · 歌剧院、公共空间与地图操作更新**
 
-[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.3-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
+[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.4-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-本轮修复滑翔机生成后初速丢失，新增 200 km/h 的反重力平衡车，提高跑车、摩托、客机和直升机极速，取消刺耳的脚步声。滑翔机、滑翔伞和直升机补做独立模型；W Sydney、ICC、悉尼塔、环形码头和达令广场继续按实景资料细化。详见 [更新说明](docs/FIXES_0.1.3.md)。公开下载包面向 **Apple Silicon Mac（M 系列芯片）**；目前验证环境为 Apple M4 / 16 GB / macOS 26.5，没有 Windows、Intel Mac 或浏览器玩家版本。
+本轮重做歌剧院的外壳与可进入的公共内部，按地图位置补充 Darling Quarter 水上游乐、攀爬设施和 Tumbalong 喷泉，并继续扩展 Darling Square 商户。地图新增明确的鼠标释放、名称搜索和返回游戏操作；小地图改用图像缓存，降低移动时的绘图开销。滑翔机与滑翔伞的出生速度、配平与初始下沉也已统一调整。详见 [更新说明](docs/FIXES_0.1.4.md)。公开下载包面向 **Apple Silicon Mac（M 系列芯片）**；目前验证环境为 Apple M4 / 16 GB / macOS 26.5，没有 Windows、Intel Mac 或浏览器玩家版本。
 
 ![海港大桥的实际游戏画面](docs/screenshots/v013/bridge.png)
 
-![悉尼歌剧院的实际游戏画面](docs/screenshots/v013/opera.png)
+![本版歌剧院外部，最终导出 App 实际画面](docs/screenshots/v014/opera-harbour.png)
+
+![本版音乐厅，最终导出 App 实际画面](docs/screenshots/v014/opera-concert-hall.png)
 
 ## 下载后直接试飞
 
@@ -27,10 +29,13 @@
 
 ## 用 M 找城市里的地点
 
-常驻小地图显示当前位置、朝向和目的地方向。按 M 打开大地图，可缩放、拖动，点击地点或任意空白处标点；右键或清除按钮取消。地图显示真实岸线、道路与建筑轮廓，导航同时提供屏幕标记、罗盘方向和距离，存档后保留目的地。可以选择机场、歌剧院、大桥、银行总部所在楼、Darling Square 店面、Manly 码头与海滩，以及已制作的地铁入口。
+常驻小地图显示当前位置、朝向和目的地方向。按 **M** 打开大地图后角色与载具暂停、鼠标显示，可搜索名称、缩放、拖动，点击地点或任意空白处标点；选点后地图保持打开，右键或清除按钮取消标记。按 **M / Esc** 或右上角 **返回游戏** 继续原来的步行或驾驶。游玩中也可按住 **Alt / Option** 显示鼠标、点击小地图，松开后恢复观察。
+
+地图显示真实岸线、道路与建筑轮廓，导航同时提供屏幕标记、罗盘方向和直线距离，存档后保留目的地。可以搜索已制作的地标、商户、公共设施及离线 OSM 地点目录。选择地点只设置导航，不会传送人物或改变当前载具；室内与楼层仍需要自己寻找入口和楼梯。
 
 - **CBD 与海港：**HSBC 所在的 Tower One、中国银行 140 Sussex Street、Westpac Place、Commonwealth Bank Place South / North、Quay Quarter Tower 与 Salesforce Tower，均有单独制作的外观。
-- **Darling Harbour / Darling Square：**W Sydney 的 Ribbon 楼体、The Exchange 与其 Level 5 海底捞位置；已列明的 15 家街边店面包含 Matcha-Ya、Nakano Darling、KUKI、Messina，以及本轮新增的 Auvers、Hakatamon、Chinta Ria，逐店记录照片依据与仍属推断的细节。这一轮尚未完成 Darling Square 全部商户。
+- **歌剧院：**重做不同尺度的两列屋壳、大台阶与公共入口，可进入票务大厅、音乐厅、Joan Sutherland 歌剧厅和北侧海港门厅。包含分层座席、舞台、管风琴、木饰面曲顶、18 枚声学反射板与乐池；仍有估算，未制作全部后台。
+- **Darling Harbour / Darling Square：**保留 W Sydney、The Exchange 与海底捞，扩充 23 家定位店面、Exchange 楼栋目录，以及北侧 Darling Quarter 的攀爬网、水上游乐、滑梯、遮阳棚和四处喷泉轮廓。官方 71 条商户记录已分类，部分仍缺可靠位置或外观，具体照片依据及推断范围见 [达令区说明](docs/DARLING_PUBLIC_FACILITIES_REFERENCE.md)。
 - **Circular Quay：**Wharf 2–6 按地图位置和不同朝向分别建造，补候船棚、入口标牌和滨水步道，车站独立还原花岗岩外墙、窗带与开放柱廊；Eastbank、Searock 与 City Extra 按实景补做沿街外观。
 - **Sydney Tower Eye：**独立塔体、金色观景舱、拉索、窗格、观景平台外形与 Market Street 外部到达点；未提供乘电梯上塔的室内游览。
 - **Manly：**真实街道与岸线、Manly Wharf、The Corso、Hotel Steyne 和海滩，可在地图中定位。
@@ -44,9 +49,11 @@
 
 ![Circular Quay 码头和车站，导出 App 实际画面](docs/screenshots/v013/circular-quay.png)
 
-![Darling Square 的实际游戏画面](docs/screenshots/v013/darling-square.png)
+![Darling Quarter 水上游乐区，最终导出 App 实际画面](docs/screenshots/v014/darling_waterplay.png)
 
-![新版地图与自由标点，导出 App 实际画面](docs/screenshots/v013/01-map-pin.png)
+![Darling Square 新增店面，最终导出 App 实际画面](docs/screenshots/v014/darling_bubu_detail.png)
+
+![本版地图与自由标点，最终导出 App 实际画面](docs/screenshots/v014/01-map-pointer-pin.png)
 
 ## 真实地图与建模精度
 
@@ -92,7 +99,8 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 | 工作与活动 | J |
 | 城市体验、美食与旅行印章 | K |
 | 免费新增载具、立即驾驶与维修 | Tab |
-| 地图与目的地 | M |
+| 打开 / 关闭地图与目的地 | M |
+| 临时显示鼠标、点击小地图 | 按住 Alt / Option |
 | 保存截图 / 保存世界 | P / F5 |
 | 暂停、设置、存档与恢复 | Esc |
 | 角色返回个人空间 | Home |
@@ -111,7 +119,7 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 
 ## 源码与本地构建
 
-[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.3-preview.1` 标签对应的源码。
+[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.4-preview.1` 标签对应的源码。
 
 构建需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
 
@@ -135,4 +143,4 @@ Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据�
 
 Harbourlife is a free, offline, single-player Sydney sandbox for **Apple Silicon Mac**. Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
-**v0.1.3-preview.1 · Hover mobility and city detail update.** All nine vehicle classes are free and immediately seat the player. This update fixes glider launch velocity, adds a 200 km/h antigravity board, raises road and aircraft speed limits, and silences footsteps. It also refines the three remaining aircraft and adds source-backed details around W Sydney, ICC, Sydney Tower, Circular Quay and Darling Square. New worlds start with $50,000; optional city experiences, a persistent minimap and saved custom waypoints support exploration. Cars, motorcycles, the 787-size jet and two luxury boats use photo-referenced original geometry. Real map footprints, individually photo-referenced landmarks and inferred building details have different accuracy levels; this is not a full 1:1 city scan. The app is ad-hoc signed and not notarized. Final build-specific results belong in [TESTING.md](docs/TESTING.md). See [play permission](PLAY_PERMISSION.md) and the separate data/dependency licences.
+**v0.1.4-preview.1 · Opera House, public spaces and map controls.** The map now releases the pointer, supports name search and keeps a selected pin editable; M, Esc or the return button resumes the same player or vehicle. Holding Alt/Option also allows a minimap click. Cached minimap terrain reduces rendering overhead during movement. The Opera House's shells and public interiors are rebuilt from public reference material, while mapped playground equipment, fountains and additional Darling Square frontages expand the precinct. Directory coverage and individually researched geometry are documented separately. All nine vehicle classes remain free and immediately seat the player; unpowered glider launch and trim now use consistent speeds. This is an original, source-backed reconstruction with estimated details, not a complete 1:1 city scan. The app is ad-hoc signed and not notarized. Final build-specific results belong in [TESTING.md](docs/TESTING.md). See [play permission](PLAY_PERMISSION.md) and the separate data/dependency licences.

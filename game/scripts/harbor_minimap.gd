@@ -1,6 +1,7 @@
 extends Control
 ## North-up navigation over the full map's shared geographic drawing resources.
-## Terrain commands are recorded once; movement updates only their transform.
+## Geographic vectors are rasterized into a local overscan cache. Ordinary
+## movement transforms one texture, not every road/building in the whole city.
 signal clicked
 
 class TerrainInk extends Node2D:
@@ -23,23 +24,40 @@ var _cache:Dictionary={}
 var _viewport:Control
 var _terrain:TerrainInk
 var _overlay:OverlayInk
+var _terrain_viewport:SubViewport
+var _terrain_image:Sprite2D
+var _cached_center:=Vector2.ZERO
+var _cached_scale:=-1.0
+var cache_update_count:=0
 var _refresh_clock:=0.0
 var _press_position:=Vector2.ZERO
 var _pressed:=false
 var terrain_draw_count:=0
+var cursor_released:=false
 
 func _ready():
 	custom_minimum_size=Vector2(260,288)
 	clip_contents=true
 	mouse_filter=Control.MOUSE_FILTER_STOP
-	tooltip_text="打开地图 · M\n金色箭头指向目的地，距离为直线距离"
+	tooltip_text="M 开关地图 · 按住 Alt / Option 释放鼠标后可点击\n金色箭头指向目的地，距离为直线距离"
 	_viewport=Control.new()
 	_viewport.clip_contents=true
 	_viewport.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	add_child(_viewport)
+	_terrain_viewport=SubViewport.new()
+	_terrain_viewport.size=Vector2i(768,768)
+	_terrain_viewport.disable_3d=true
+	_terrain_viewport.transparent_bg=true
+	_terrain_viewport.world_2d=World2D.new()
+	_terrain_viewport.render_target_update_mode=SubViewport.UPDATE_DISABLED
+	add_child(_terrain_viewport)
 	_terrain=TerrainInk.new()
 	_terrain.minimap=self
-	_viewport.add_child(_terrain)
+	_terrain_viewport.add_child(_terrain)
+	_terrain_image=Sprite2D.new()
+	_terrain_image.texture=_terrain_viewport.get_texture()
+	_terrain_image.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	_viewport.add_child(_terrain_image)
 	_overlay=OverlayInk.new()
 	_overlay.minimap=self
 	add_child(_overlay)
@@ -49,6 +67,7 @@ func _ready():
 func configure(source):
 	map_source=source
 	_cache=source.geometry_cache()
+	_cached_scale=-1.0
 	if is_instance_valid(_terrain): _terrain.queue_redraw()
 	refresh()
 
@@ -88,9 +107,23 @@ func refresh():
 	_viewport.position=rect.position
 	_viewport.size=rect.size
 	var angle:=map_rotation()
-	_terrain.position=rect.size*0.5-Vector2(player_position.x,player_position.z).rotated(angle)*pixels_per_metre
-	_terrain.rotation=angle
-	_terrain.scale=Vector2.ONE*pixels_per_metre
+	var location:=Vector2(player_position.x,player_position.z)
+	# Keep a generous border around the visible circle, including heading-up
+	# rotation. Refresh only on leaving that region, resizing, zoom or teleport.
+	var required_size:=maxi(768,ceili(rect.size.length()+256.0))
+	var resize_cache:bool=_terrain_viewport.size.x!=required_size
+	if resize_cache:_terrain_viewport.size=Vector2i(required_size,required_size)
+	var visible_radius:=rect.size.length()*.5
+	var coverage_left:=float(required_size)*.5-visible_radius-32.0
+	if resize_cache or not is_equal_approx(_cached_scale,pixels_per_metre) or location.distance_to(_cached_center)*pixels_per_metre>coverage_left:
+		_cached_center=location
+		_cached_scale=pixels_per_metre
+		_terrain.position=Vector2.ONE*float(required_size)*.5-location*pixels_per_metre
+		_terrain.scale=Vector2.ONE*pixels_per_metre
+		_terrain_viewport.render_target_update_mode=SubViewport.UPDATE_ONCE
+		cache_update_count+=1
+	_terrain_image.position=rect.size*.5+(_cached_center-location).rotated(angle)*pixels_per_metre
+	_terrain_image.rotation=angle
 	_overlay.queue_redraw()
 	queue_redraw()
 
@@ -169,10 +202,12 @@ func paint_overlay(ink:Node2D):
 	var scale_origin:=rect.end-Vector2(scale_m*pixels_per_metre+8,12)
 	ink.draw_line(scale_origin,scale_origin+Vector2(scale_m*pixels_per_metre,0),Color("e6e0ce"),2,true)
 	_text(ink,scale_origin+Vector2(-2,-5),"%d m"%scale_m,10,Color("e6e0ce"))
-	var title:=target_name if indicator.visible else "点击地图设置目的地"
+	var title:=target_name if indicator.visible else "按 M 选点 · 按住 Alt / Option 点这里"
 	_text(ink,Vector2(10,size.y-32),title,13,Color("f2d18b") if indicator.visible else Color("b1c5bc"),size.x-20)
 	var detail:="北朝上 · OSM" if north_up else "朝向跟随 · OSM"
 	if indicator.visible:
 		detail=("%.2f km"%(indicator.distance/1000.0) if indicator.distance>=1000 else "%.0f m"%indicator.distance)+" · 直线距离"
 		if indicator.distance<35: detail="已到达附近 · "+detail
 	_text(ink,Vector2(10,size.y-13),detail,11,Color("b1c5bc"))
+	if cursor_released:
+		_text(ink,Vector2(12,46),"鼠标已释放 · 点击打开地图",12,Color("b6ffe1"),size.x-24)

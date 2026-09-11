@@ -8,6 +8,8 @@ The files `source/world_osm_reference.json`, `source/world_osm_water.json`, `sou
 
 The same ODbL terms apply to the expanded raw snapshots in `source/map-data/`, the compiled `game/assets/city_map.json`, and OSM-derived coordinate records in `game/assets/darling_square_frontages.json`. `tools/import_city.py` and `source/frontage-data/derive_frontages.py` preserve the conversion process. Detailed coverage, snapshot ages and confidence limits are in [CITY_DATA.md](../docs/CITY_DATA.md). In particular the ordinary Manly extract is dated 6 May 2026; it must not be represented as a fully current September survey.
 
+The 11 September 2026 equipment supplement in `source/precinct-data/darling-play-equipment-osm.json`, and the OSM-derived coordinate/outline fields in `game/assets/darling_public_facilities.json`, `darling_precinct_frontages.json` and `darling_precinct_directory.json`, also retain ODbL terms. The operator directory adds separately attributed factual names and addresses; its modelling/position confidence classifications are documented in [the precinct reference](../docs/DARLING_PUBLIC_FACILITIES_REFERENCE.md).
+
 Queries were made to the Overpass API on 10 September 2026, for the Sydney Harbour area (-33.876,151.187,-33.833,151.241). A second query retrieved water relation members with expanded geometry bounds (-33.880,151.180,-33.830,151.245). This is data access, not extraction of Google/Bing imagery. No map tile artwork, aerial imagery, photogrammetry, satellite texture or third-party 3D building model is in the harbour assets.
 
 ## Original generated world assets

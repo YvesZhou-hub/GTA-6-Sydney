@@ -1,0 +1,23 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SAVE_TEST atomic write PASS
+SAVE_TEST read data PASS
+SAVE_TEST overwrite PASS
+SAVE_TEST previous recovery copy PASS
+SAVE_TEST independent copy PASS
+SAVE_TEST corrupt rejected PASS
+SAVE_TEST backup preserved PASS
+SAVE_TEST future version rejected PASS
+SAVE_TEST legacy reader matches actual v012 source digest PASS
+SAVE_TEST format 1 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST format 2 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST format 3 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST format 4 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST actual v012 reader accepts valid v4 control PASS
+SAVE_TEST saving an upgraded v4 world emits format 5 PASS
+SAVE_TEST v5 reload preserves both independent hoverboards and occupied target PASS
+SAVE_TEST upgrade retains the exact original v4 recovery bytes PASS
+SAVE_TEST actual shipped v012 reader refuses format 5 PASS
+SAVE_TEST old-reader rejection preserves new save and recovery bytes PASS
+SAVE_TEST copying a v5 world keeps format and independent new-class data PASS
+SAVE_TEST COMPLETE checks=20 failures=0 format=5

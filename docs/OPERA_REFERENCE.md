@@ -1,34 +1,38 @@
-# Sydney Opera House exterior revision
+# 悉尼歌剧院外形与公共入口
 
-Reviewed 10 September 2026. This is an original procedural game model based on photographs and architectural references. It is not a measured architectural/BIM model or a scan. No third-party photograph, texture, mesh or logo is redistributed in the game.
+2026 年 9 月 11 日更新。这是根据官方照片、平面和剖面编写的原创程序模型，不是测绘模型、摄影测量或完整 BIM。游戏不包含下载的参考照片、纹理或第三方模型。可进入的售票厅、两主厅和北门厅另见[室内参考与范围](OPERA_INTERIOR_REFERENCE.md)。
 
-## References used
+## 实际查看的主要资料
 
-- [Sydney Opera House: The spherical solution](https://www.sydneyoperahouse.com/our-story/the-spherical-solution): shared spherical geometry, mirrored shell halves, 120 mm ceramic tiles and chevron arrangement.
-- [Sydney Opera House: Dissecting Geometry teacher resource](https://sydneyoperahouse.api.collaboro.com/media/dissecting-geometry-teacher-resource): the official geometry/model and tile explanations, especially PDF pages 9–12.
-- [Sydney Opera House conservation report, Getty Keeping It Modern](https://www.getty.edu/foundation/pdfs/kim/sydney_final_report.pdf): building dimensions of 183 m by 120 m, tallest sail approximately 67 m above sea level, and the exposed rib construction.
-- [Northwest elevation photograph](https://imaginoso.com/australia/sydney/sydney-opera-house-northwest-elevation): directly inspected the real photograph for the rising north-facing shells, curved shoulders, deep soffits, bronze glazing and horizontal podium articulation.
-- [Overhead photograph inspected in the browser](https://i.pinimg.com/originals/43/8e/4b/438e4bb7ecb01bea67545dbd715741cb.jpg): spatial reference only, provenance/licence not asserted. It shows the two unequal longitudinal groups, the narrow axial gap, southwest restaurant and broad southern stair approach.
+[悉尼歌剧院官方 Conservation Management Plan（2017，第 4 版）](https://www.sydneyoperahouse.com/sites/default/files/collaborodam_assets/soh-cmp-interactive-1.pdf) 是本轮主要依据。实际渲染并查看了以下页，页码为纸面印刷页；官方 PDF 将相邻纸页合在一个横向页面中。
 
-## Model decisions
+- 第 10–15 页：屋顶总平面、地面/Podium/Auditorium 平面、两厅纵剖面。用于确认西侧大音乐厅、东侧较小歌剧厅、南侧舞台、北侧门厅以及南侧大台阶的关系。
+- 第 24–27 页：建造期照片、壳体形成示意、球面模型、混凝土肋与瓦片近照。
+- 第 86–91 页：真实俯拍、南北立面、青铜玻璃幕墙、外倾玻璃下部、深退百叶与北门厅照片。用于对照屋壳组合、外形、玻璃和间壳填充。
 
-The 11 September [geographic audit](GEOGRAPHIC_ALIGNMENT.md) corrects the site reference to the OSM outer-footprint centroid `(427.29477, 4.5, -321.45441)` and its long-axis yaw `-13.23286°`. The previous `(421, 4.5, -326)` / `-12°` was an approximate placement. The western Concert Hall roof train is larger; the narrower eastern train is offset south. Their tall middle shells open north, the southern foyer roofs face the Monumental Steps, and the small Bennelong restaurant has two opposing shell ends southwest of the halls. Ten shell pairs are used to represent this form; they are game construction groups, not an asserted historic roof-count taxonomy.
+[官方 Conservation Management Plan 介绍](https://www.sydneyoperahouse.com/about-us/how-we-work/strategies-and-action-plans/conservation-management-plan)提供文档背景。[Getty Keeping It Modern 建筑保护报告](https://www.getty.edu/foundation/pdfs/kim/sydney_final_report.pdf)提供整体体量参考：约 183 × 120 米，最高屋壳约在海平面上 67 米。历史照片用于仍保留的外形；不能据此宣称所有现行设施与饰面均已逐项核实。
 
-Each half-roof lies on a 75.2 m radius sphere. Its central ridge is the circle where that sphere intersects `x = 0`, and the rounded shoulders follow spherical interpolation towards the springing point. Mirrored halves therefore share the same ridge positions. The largest roof reaches approximately 67.00 m above water. The 120 m wide podium and roughly 183 m north–south building/steps envelope preserve real-scale proportions; individual shell cuts, foyer mullions and podium subdivision are photo-based approximations.
+## 本轮实际改动
 
-The roofs have 320 mm geometric thickness with closed boundary faces. Eight bands per half, 160 in total, retain the `opera/shell/` damage namespace. Both visible ceramic skin and collision use the same triangulated surface. Fan ribs and edge strips belong to their matching band and disappear with it. The 61,440 roof triangles are batched through the existing world architecture cells, along with attached trim; details are not thousands of independently rendered roof nodes.
+保留[地理校准](GEOGRAPHIC_ALIGNMENT.md)后的场址中心 `(427.29477, 4.5, -321.45441)` 和长轴旋转 `−13.23286°`。两列屋壳沿同一南北方向组织，西列较大、东列较短，南端是反向门厅壳，西南侧为独立的 Bennelong 壳组。模型仍用 10 组配对壳面作为制作分组，不把它当作历史结构构件数。
 
-The material uses original analytic 120 mm tile cells, a subtle ivory/white chevron pattern and derivative filtering to suppress fine-pattern shimmer at distance. Undersides use a concrete tint and separate fan ribs. Six terminal foyers receive recessed bronze-glass curtains; intermediate roof joins remain roof/soffit geometry instead of enormous glass fin walls. The podium has warm stone, shallow southern steps, inset horizontal foyer glazing, sunshades and side colonnade glazing. The 48 visible shallow stair treads use eight continuous ramp colliders so walking does not repeatedly hit vertical stair faces. They are a navigation approximation, not a claim about the real step count.
+每个半壳使用半径 75.2 米的球面，前后脊高分别控制，替换旧版每片后端都降到基座的重复帆瓣。相邻屋壳按外侧较高包络裁切，去掉埋在另一片壳内、原先会穿入观众厅的残片。切口同时封闭 320 毫米厚度；可见曲面、碰撞与破坏构件共用几何。160 个分片继续使用 `opera/shell/` 编号，附属肋线随其共同损毁。当前壳顶约为海平面上 67.65 米；单片切割、接缝与落脚点仍属基于照片和剖面的推定值。
 
-## Verification
+两厅主壳与南部反向壳在高位脊线上接合，间壳区域加入青铜填充及百叶，并避开声学室体。北玻璃使用带颜色的透视材质，下部近竖直、上部外倾；南侧两个入口保留真实没有玻璃和碰撞的开口。玻璃分格、门洞宽度与部分公众通路是为可玩性整理的近似，不代表官方施工图。
 
-Run from the repository root:
+基座从实心大体块改成外围承重面和薄楼板：保留 4 个西侧入口，给售票厅上楼与歌剧厅乐池留下真正的楼板孔。南侧上板不再覆盖最后一段台阶。48 个视觉踏步配合 8 段连续坡面碰撞，避免角色逐级卡住；这个踏步数是游戏表现选择。
+
+瓦片仍由原创解析着色器生成 120 毫米格与象牙白/米白变化，并对远处细线做过滤。当前模型的整体明暗和部分接缝仍比实物简化，不能称悉尼歌剧院的实测 1:1 复刻。
+
+## 可复现验证
+
+在仓库根目录运行：
 
 ```sh
 ./tools/runtime/godot --headless --path game --script ../source/opera_landmark_test.gd
-./tools/runtime/godot --path game --script ../source/opera_landmark_test.gd -- --visual
+./tools/runtime/godot --path game --script ../source/opera_landmark_test.gd -- --visual --with-interiors
 ```
 
-All 17 native checks pass. They cover the site anchor, spherical error, mirrored ridge closure, springing points, normal/winding direction, triangle budget, closed band boundaries (vertices welded within 0.05 mm), height, ten exterior and ten interior physics rays, all 48 stair stations, and local roof/rib/collider damage and restoration. The visual mode runs Metal Forward+ and saves four actual engine renders under `/tmp/harbourlife-opera-review/` for northwest, aerial, stair and close tile review. Mathematical checks were supplemented with repeated visual comparison: the first radial-projection version was rejected because its mirror ridge separated, and the first glass placement was rejected because the intermediate curtains dominated the silhouette.
+专属外壳测试包括球面误差、镜像脊线、真实裁切分片的闭合边界、面朝向、尺寸、可见表面内外物理射线、全段台阶支撑、南门和西门胶囊净空、楼板孔、玻璃透明参数、音乐厅曲顶 25 个向上包络点、声学厅内的外壳/百叶顶点排查，以及破坏与恢复。报告写入 `reports/opera-v014-exterior.json`。室内测试额外使用密集三角面采样和真实角色往返路线，避免只检查顶点而漏掉跨过房间的长三角面。
 
-Auditorium interiors, exact structural rib schedules, surveyed restoration-era details and full construction-document accuracy are outside this exterior revision. Existing project permissions and third-party rights notices continue to apply.
+四个 `capture_views()` 是海港斜视、南大台阶、屋顶鸟瞰和北立面；局部渲染输出在 `reports/opera-v014-connected/`。完整城市、最终导出 App 和发布验收的结果以[测试记录](TESTING.md)为准，局部几何检查不等同于最终包已经验收。

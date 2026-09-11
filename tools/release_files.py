@@ -1,17 +1,17 @@
 """Explicit public-source allowlist shared by packaging and release checks."""
 from pathlib import Path
 
-ROOT_FILES = ('.gitignore', '.gitattributes', 'README.md', 'PLAY_PERMISSION.md', '启动 Harbourlife.command')
+ROOT_FILES = ('.gitignore', '.gitattributes', 'README.md', 'LICENSE', 'PLAY_PERMISSION.md', '启动 Harbourlife.command')
 TOOL_FILES = ('build.py', 'build.sh', 'package_source.py', 'release_files.py', 'encode_video.py',
-              'test_save.gd', 'test_integration.gd', 'test_vehicles.gd', 'import_city.py', 'city_roofs.py', 'verify_native.py')
+              'test_save.gd', 'test_integration.gd', 'test_vehicles.gd', 'import_city.py', 'city_roofs.py', 'verify_native.py', 'verify_archive.py')
 SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geography.json',
-                'airport-runways.json', 'airport_test.gd', 'world_physics_probe.gd',
+                'airport-runways.json', 'airport_test.gd', 'airport_connector_test.gd', 'world_physics_probe.gd',
                 'world_damage_probe.gd', 'world_road_probe.gd', 'world_winding_check.gd',
                 'camera_motion_test.gd', 'bridge_drive_test.gd', 'bridge_landmark_test.gd',
-                'opera_landmark_test.gd', 'vehicle_spawn_test.gd', 'vehicle_contact_test.gd',
+                'opera_landmark_test.gd', 'opera_interior_test.gd', 'vehicle_spawn_test.gd', 'vehicle_contact_test.gd',
                 'landmark_visual_check.gd', 'city_landmark_test.gd', 'bank_landmark_test.gd',
                 'quay_landmark_test.gd', 'manly_landmark_test.gd', 'metro_entrance_test.gd',
-                'darling_square_frontage_test.gd', 'city_map_ui_test.gd', 'map_migration_test.gd',
+                'darling_square_frontage_test.gd', 'darling_public_facilities_test.gd', 'city_map_ui_test.gd', 'map_migration_test.gd', 'structure_state_test.gd',
                 'test_city_data.py', 'city_geometry_test.gd', 'cyber_landmark_test.gd',
                 'icc_landmark_test.gd', 'roof_visual_check.gd', 'road_join_test.gd',
                 'experience_flow_test.gd', 'landmark_alignment_test.gd', 'life_experience_test.gd',
@@ -28,6 +28,8 @@ def public_files(root: Path):
     files += [root / 'source' / name for name in SOURCE_FILES]
     files += [p for p in (root/'source/map-data').glob('*.json') if p.is_file() and not p.is_symlink()]
     files += [root/'source/frontage-data/derive_frontages.py']
+    files += [p for pattern in ('*.tsv', '*.json', 'derive_darling_businesses.py')
+              for p in (root/'source/precinct-data').glob(pattern) if p.is_file() and not p.is_symlink()]
     files += [root / 'reports' / name for name in ('GEOGRAPHY.md', 'AIRPORT.md')]
     for folder in ('game', 'licenses', 'docs'):
         for path in (root / folder).rglob('*'):

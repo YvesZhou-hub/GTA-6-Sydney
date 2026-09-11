@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15121 reserved=387 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":64131,"custom_landmarks_ms":55394,"mapped_city_ms":28971,"terrain_and_harbour_ms":21624}
+HARBOR_WORLD_READY buildings=15123 structure_components=21577
+CITY_STARTUP_MS 64850
+AIR_FLIGHT PASS production request immediately occupies glider {}
+AIR_FLIGHT PASS saving before first integration retains launch energy glider {"saved_speed":28.0008640289307}
+AIR_FLIGHT PASS newly summoned wing has sustainable launch speed glider {"initial_speed":28.0008640289307,"lowest_speed":27.7277278900146}
+AIR_FLIGHT PASS spawn provides usable flying height glider {"height":180.0}
+AIR_FLIGHT PASS launch immediately settles into glide without a drop glider {"first_second_loss":0.454345703125,"first_three_seconds_loss":2.76121520996094,"stalled_frames_after_activation":0}
+AIR_FLIGHT PASS fifteen seconds unpowered stable flight glider {"altitude_lost":17.8228454589844,"distance":420.747985839844,"health":100.0,"max_roll":0.000000000336156408264898,"worst_sink":-1.44462335109711}
+AIR_FLIGHT PASS gliding does not add mechanical energy glider {"final":1991.27615386963,"initial":2157.42936050415}
+AIR_FLIGHT PASS ordinary reboarding adds no launch energy glider {}
+AIR_FLIGHT PASS airborne save preserves live motion through activation glider {"restored_velocity":[0.00000000328335647559186,-1.15866756439209,-28.2718353271484],"saved_velocity":[0.00000000328334315291556,-1.15872859954834,-28.271785736084]}
+AIR_FLIGHT PASS immediate summon save reload has launch speed glider {}
+AIR_FLIGHT PASS production request immediately occupies paraglider {}
+AIR_FLIGHT PASS saving before first integration retains launch energy paraglider {"saved_speed":11.5117502212524}
+AIR_FLIGHT PASS newly summoned wing has sustainable launch speed paraglider {"initial_speed":11.5117502212524,"lowest_speed":11.1613235473633}
+AIR_FLIGHT PASS spawn provides usable flying height paraglider {"height":120.0}
+AIR_FLIGHT PASS launch immediately settles into glide without a drop paraglider {"first_second_loss":0.551399230957031,"first_three_seconds_loss":3.17599487304688,"stalled_frames_after_activation":0}
+AIR_FLIGHT PASS fifteen seconds unpowered stable flight paraglider {"altitude_lost":17.012580871582,"distance":176.44091796875,"health":100.0,"max_roll":0.0000000000472355592140428,"worst_sink":-1.4637987613678}
+AIR_FLIGHT PASS gliding does not add mechanical energy paraglider {"final":1081.84202018738,"initial":1243.10657165527}
+AIR_FLIGHT PASS ordinary reboarding adds no launch energy paraglider {}
+AIR_FLIGHT PASS airborne save preserves live motion through activation paraglider {"restored_velocity":[-0.000000000913170317140555,-1.13391005992889,-11.907356262207],"saved_velocity":[-0.000000000913169873051345,-1.13391005992889,-11.907356262207]}
+AIR_FLIGHT PASS immediate summon save reload has launch speed paraglider {}

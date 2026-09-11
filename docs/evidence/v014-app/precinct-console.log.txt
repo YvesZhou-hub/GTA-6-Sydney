@@ -1,0 +1,117 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15121 reserved=387 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":56398,"custom_landmarks_ms":48818,"mapped_city_ms":26742,"terrain_and_harbour_ms":19447}
+HARBOR_WORLD_READY buildings=15123 structure_components=21577
+CITY_STARTUP_MS 57131
+PRECINCT_QA PASS complete production city ready
+PRECINCT_QA PASS both Opera halls are actually built
+PRECINCT_QA PASS authored shop signs replace generic floating labels
+PRECINCT_QA PASS authored precinct module loaded res://scripts/opera_landmark.gd
+PRECINCT_QA PASS Opera exterior has views of distinct sides
+PRECINCT_QA PASS authored precinct module loaded res://scripts/opera_interiors.gd
+PRECINCT_QA PASS both halls and public foyers have interior views
+PRECINCT_QA PASS authored place has matching map destination opera_box_office
+PRECINCT_QA PASS authored place has matching map destination opera_concert_hall
+PRECINCT_QA PASS authored place has matching map destination opera_joan_sutherland
+PRECINCT_QA PASS authored place has matching map destination opera_northern_foyer
+PRECINCT_QA PASS authored precinct module loaded res://scripts/darling_square_detail.gd
+PRECINCT_QA PASS authored place has matching map destination auvers
+PRECINCT_QA PASS authored place has matching map destination hakatamon
+PRECINCT_QA PASS authored place has matching map destination chinta_ria
+PRECINCT_QA PASS authored precinct module loaded res://scripts/darling_public_facilities.gd
+PRECINCT_QA PASS authored place has matching map destination darling_quarter_waterplay
+PRECINCT_QA PASS authored place has matching map destination darling_quarter_octanet
+PRECINCT_QA PASS authored place has matching map destination darling_quarter_slide
+PRECINCT_QA PASS authored place has matching map destination tumbalong_fountains
+PRECINCT_QA PASS authored precinct module loaded res://scripts/darling_precinct_businesses.gd
+PRECINCT_QA PASS authored place has matching map destination darling_business_789koreanbbq
+PRECINCT_QA PASS authored place has matching map destination darling_business_bar_bubu
+PRECINCT_QA PASS authored place has matching map destination darling_business_bendigo_bank
+PRECINCT_QA PASS authored place has matching map destination darling_business_bengongs_tea
+PRECINCT_QA PASS authored place has matching map destination darling_business_dragon_hot_pot
+PRECINCT_QA PASS authored place has matching map destination darling_business_haven_specialty_coffee
+PRECINCT_QA PASS authored place has matching map destination darling_business_lermont_laser_clinic
+PRECINCT_QA PASS authored place has matching map destination darling_business_lillianna_gifts_and_home
+PRECINCT_QA PASS authored place has matching map destination darling_business_lilong_by_taste_of_shanghai
+PRECINCT_QA PASS authored place has matching map destination darling_business_machimachi
+PRECINCT_QA PASS authored place has matching map destination darling_business_mcdonalds
+PRECINCT_QA PASS authored place has matching map destination darling_business_meet_fresh
+PRECINCT_QA PASS authored place has matching map destination darling_business_myhealth
+PRECINCT_QA PASS authored place has matching map destination darling_business_my_spec
+PRECINCT_QA PASS authored place has matching map destination darling_business_pancakes_on_the_rocks
+PRECINCT_QA PASS authored place has matching map destination darling_business_planet_pop_world
+PRECINCT_QA PASS authored place has matching map destination darling_business_puppuccino_pet_spa
+PRECINCT_QA PASS authored place has matching map destination darling_business_quikstop
+PRECINCT_QA PASS authored place has matching map destination darling_business_starbucks_coffee_company
+PRECINCT_QA PASS authored place has matching map destination darling_business_sushi_sei
+PRECINCT_QA PASS authored place has matching map destination darling_business_tea_republic
+PRECINCT_QA PASS authored place has matching map destination darling_business_thirteen_feet_tattoo
+PRECINCT_QA PASS authored place has matching map destination darling_business_uliveto
+PRECINCT_QA PASS authored place has matching map destination darling_business_15_cms
+PRECINCT_QA PASS authored place has matching map destination darling_business_batch_brewing_co
+PRECINCT_QA PASS authored place has matching map destination darling_business_bubble_nini
+PRECINCT_QA PASS authored place has matching map destination darling_business_darling_nest
+PRECINCT_QA PASS authored place has matching map destination darling_business_darling_square_library
+PRECINCT_QA PASS authored place has matching map destination darling_business_fishbowl_the_exchange
+PRECINCT_QA PASS authored place has matching map destination darling_business_golden_century_bbq
+PRECINCT_QA PASS authored place has matching map destination darling_business_hulu_hulu
+PRECINCT_QA PASS authored place has matching map destination darling_business_spago
+PRECINCT_QA PASS authored place has matching map destination darling_business_sushia
+PRECINCT_QA PASS authored place has matching map destination darling_business_the_brothers_cafe
+PRECINCT_QA PASS authored place has matching map destination darling_business_toastiesmith
+PRECINCT_QA PASS authored place has matching map destination darling_business_ume_burger
+PRECINCT_QA PASS new exterior and interior capture views supplied
+PRECINCT_QA PASS all five Opera and three Darling walking routes supplied
+PRECINCT_QA PASS continuous player walk Covered concourse to ticket foyer and upper south foyer
+PRECINCT_QA PASS map migration preserves occupied public space Covered concourse to ticket foyer and upper south foyer
+PRECINCT_WALK {"discontinuities":0,"name":"Covered concourse to ticket foyer and upper south foyer","origin":[354.808807373047,4.5,-284.054046630859],"passed":true,"segments":[{"actual":[356.8369140625,4.52101564407349,-283.650787353516],"contacts":[],"distance":0.0978366360068321,"frames":25,"reached":true,"target":[356.755706787109,4.5,-283.596221923828]},{"actual":[376.321258544922,9.97730159759521,-279.075012207031],"contacts":[],"distance":0.112140841782093,"frames":228,"reached":true,"target":[376.224670410156,9.98640060424805,-279.018035888672]},{"actual":[379.657928466797,9.97727870941162,-271.946655273438],"contacts":[],"distance":0.105281740427017,"frames":91,"reached":true,"target":[379.718444824219,9.98640060424805,-272.032806396484]},{"actual":[407.040557861328,10.0078592300415,-265.686767578125],"contacts":[],"distance":0.0912280902266502,"frames":325,"reached":true,"target":[406.974975585938,9.98640060424805,-265.623352050781]},{"actual":[411.952850341797,15.6908836364746,-287.127258300781],"contacts":[],"distance":0.10550545156002,"frames":255,"reached":true,"target":[412.010986328125,15.6999998092651,-287.039215087891]},{"actual":[412.623565673828,15.6908779144287,-290.013488769531],"contacts":[],"distance":0.0916909202933311,"frames":31,"reached":true,"target":[412.697723388672,15.6999998092651,-289.959564208984]}]}
+PRECINCT_QA PASS continuous player walk Concert Hall south entrance to front stalls
+PRECINCT_QA PASS map migration preserves occupied public space Concert Hall south entrance to front stalls
+PRECINCT_WALK {"discontinuities":0,"name":"Concert Hall south entrance to front stalls","origin":[389.281829833984,15.6999998092651,-264.647583007812],"passed":true,"segments":[{"actual":[393.56787109375,15.6908779144287,-283.229766845703],"contacts":[],"distance":0.107309393584728,"frames":221,"reached":true,"target":[393.631103515625,15.6999998092651,-283.14306640625]},{"actual":[395.970825195312,15.6908779144287,-293.453216552734],"contacts":[],"distance":0.109472043812275,"frames":118,"reached":true,"target":[396.03466796875,15.6999998092651,-293.364288330078]},{"actual":[413.651428222656,15.6908779144287,-289.306610107422],"contacts":[],"distance":0.113588266074657,"frames":211,"reached":true,"target":[413.556701660156,15.6999998092651,-289.243927001953]},{"actual":[418.419219970703,15.6908779144287,-310.276306152344],"contacts":[],"distance":0.118962518870831,"frames":249,"reached":true,"target":[418.478271484375,15.6999998092651,-310.173034667969]},{"actual":[412.556610107422,15.6908779144287,-311.486968994141],"contacts":[],"distance":0.100498840212822,"frames":70,"reached":true,"target":[412.637573242188,15.6999998092651,-311.546508789062]},{"actual":[413.018188476562,15.6908769607544,-313.070281982422],"contacts":[],"distance":0.131351232528687,"frames":23,"reached":true,"target":[413.026733398438,15.6999998092651,-313.201354980469]},{"actual":[399.271911621094,15.6908779144287,-316.351593017578],"contacts":[],"distance":0.137766197323799,"frames":164,"reached":true,"target":[399.3984375,15.6999998092651,-316.406097412109]}]}
+PRECINCT_QA PASS continuous player walk Concert Hall harbour promenade through northern foyer
+PRECINCT_QA PASS map migration preserves occupied public space Concert Hall harbour promenade through northern foyer
+PRECINCT_WALK {"discontinuities":0,"name":"Concert Hall harbour promenade through northern foyer","origin":[389.281829833984,15.6999998092651,-264.647583007812],"passed":true,"segments":[{"actual":[393.56787109375,15.6908779144287,-283.229766845703],"contacts":[],"distance":0.107309393584728,"frames":221,"reached":true,"target":[393.631103515625,15.6999998092651,-283.14306640625]},{"actual":[395.970825195312,15.6908779144287,-293.453216552734],"contacts":[],"distance":0.109472043812275,"frames":118,"reached":true,"target":[396.03466796875,15.6999998092651,-293.364288330078]},{"actual":[413.651428222656,15.6908779144287,-289.306610107422],"contacts":[],"distance":0.113588266074657,"frames":211,"reached":true,"target":[413.556701660156,15.6999998092651,-289.243927001953]},{"actual":[434.232177734375,15.6908779144287,-384.068054199219],"contacts":[],"distance":0.0887464880943298,"frames":1120,"reached":true,"target":[434.300750732422,15.6999998092651,-384.01171875]},{"actual":[433.230926513672,15.6909856796265,-385.855895996094],"contacts":[],"distance":0.062137745320797,"frames":21,"reached":true,"target":[433.183929443359,15.6999998092651,-385.815246582031]},{"actual":[435.756317138672,15.6909856796265,-397.109649658203],"contacts":[],"distance":0.116445198655128,"frames":131,"reached":true,"target":[435.816375732422,15.6999998092651,-397.009887695312]},{"actual":[419.177856445312,15.6909856796265,-400.839630126953],"contacts":[],"distance":0.109086312353611,"frames":197,"reached":true,"target":[419.267791748047,15.6999998092651,-400.9013671875]},{"actual":[416.469818115234,17.8887176513672,-388.665924072266],"contacts":[],"distance":0.0925087034702301,"frames":145,"reached":true,"target":[416.406402587891,17.8999996185303,-388.733276367188]}]}
+PRECINCT_QA PASS continuous player walk Joan Sutherland Theatre entrance to front side aisle
+PRECINCT_QA PASS map migration preserves occupied public space Joan Sutherland Theatre entrance to front side aisle
+PRECINCT_WALK {"discontinuities":0,"name":"Joan Sutherland Theatre entrance to front side aisle","origin":[434.060424804688,15.6999998092651,-254.117736816406],"passed":true,"segments":[{"actual":[438.346405029297,15.6908779144287,-272.699737548828],"contacts":[],"distance":0.107172906398773,"frames":221,"reached":true,"target":[438.409698486328,15.6999998092651,-272.613250732422]},{"actual":[440.749389648438,15.6908779144287,-282.923217773438],"contacts":[],"distance":0.10934117436409,"frames":118,"reached":true,"target":[440.813262939453,15.6999998092651,-282.83447265625]},{"actual":[458.126556396484,15.6908779144287,-279.865112304688],"contacts":[],"distance":0.0799437537789345,"frames":205,"reached":true,"target":[458.077484130859,15.6999998092651,-279.802001953125]},{"actual":[464.305450439453,15.6908779144287,-306.641235351562],"contacts":[],"distance":0.0965168029069901,"frames":318,"reached":true,"target":[464.372497558594,15.6999998092651,-306.571807861328]},{"actual":[459.882690429688,15.6908779144287,-307.548767089844],"contacts":[],"distance":0.121514551341534,"frames":53,"reached":true,"target":[459.991973876953,15.6999998092651,-307.601898193359]},{"actual":[460.510803222656,15.7158784866333,-310.195404052734],"contacts":[],"distance":0.0986921936273575,"frames":33,"reached":true,"target":[460.587158203125,15.6999998092651,-310.132873535156]},{"actual":[448.830932617188,15.7158794403076,-312.814849853516],"contacts":[],"distance":0.099059671163559,"frames":139,"reached":true,"target":[448.90576171875,15.6999998092651,-312.879760742188]}]}
+PRECINCT_QA PASS continuous player walk Joan Sutherland Theatre northern harbour foyer
+PRECINCT_QA PASS map migration preserves occupied public space Joan Sutherland Theatre northern harbour foyer
+PRECINCT_WALK {"discontinuities":0,"name":"Joan Sutherland Theatre northern harbour foyer","origin":[434.060424804688,15.6999998092651,-254.117736816406],"passed":true,"segments":[{"actual":[438.346405029297,15.6908779144287,-272.699737548828],"contacts":[],"distance":0.107172906398773,"frames":221,"reached":true,"target":[438.409698486328,15.6999998092651,-272.613250732422]},{"actual":[440.749389648438,15.6908779144287,-282.923217773438],"contacts":[],"distance":0.10934117436409,"frames":118,"reached":true,"target":[440.813262939453,15.6999998092651,-282.83447265625]},{"actual":[458.126556396484,15.6908779144287,-279.865112304688],"contacts":[],"distance":0.0799437537789345,"frames":205,"reached":true,"target":[458.077484130859,15.6999998092651,-279.802001953125]},{"actual":[464.305450439453,15.6908779144287,-306.641235351562],"contacts":[],"distance":0.0965168029069901,"frames":318,"reached":true,"target":[464.372497558594,15.6999998092651,-306.571807861328]},{"actual":[473.175842285156,15.6908779144287,-348.721527099609],"contacts":[],"distance":0.0911675468087196,"frames":493,"reached":true,"target":[473.242156982422,15.6999998092651,-348.658966064453]},{"actual":[475.304565429688,15.690878868103,-362.100830078125],"contacts":[],"distance":0.0897792130708694,"frames":153,"reached":true,"target":[475.358978271484,15.6999998092651,-362.029418945312]},{"actual":[474.282684326172,15.6909856796265,-365.975891113281],"contacts":[],"distance":0.10714191198349,"frames":43,"reached":true,"target":[474.213256835938,15.6999998092651,-365.894287109375]},{"actual":[475.742279052734,15.6909856796265,-372.318389892578],"contacts":[],"distance":0.132135733962059,"frames":72,"reached":true,"target":[475.798522949219,15.6999998092651,-372.198822021484]},{"actual":[463.456939697266,15.6909856796265,-375.019073486328],"contacts":[],"distance":0.0994631201028824,"frames":146,"reached":true,"target":[463.533081054688,15.6999998092651,-375.083068847656]},{"actual":[461.429290771484,17.8928127288818,-365.817230224609],"contacts":[],"distance":0.073136143386364,"frames":110,"reached":true,"target":[461.358428955078,17.8999996185303,-365.835327148438]}]}
+PRECINCT_QA PASS continuous player walk Tumbalong fountain public edge
+PRECINCT_QA PASS map migration preserves occupied public space Tumbalong fountain public edge
+PRECINCT_WALK {"discontinuities":0,"name":"Tumbalong fountain public edge","origin":[-802.0,4.5,1874.0],"passed":true,"segments":[{"actual":[-802.0,4.49087715148926,1846.88415527344],"contacts":[],"distance":0.1158447265625,"frames":314,"reached":true,"target":[-802.0,4.5,1847.0]},{"actual":[-802.0,4.49087715148926,1823.87451171875],"contacts":[],"distance":0.12548828125,"frames":262,"reached":true,"target":[-802.0,4.5,1824.0]}]}
+PRECINCT_QA PASS continuous player walk Darling Quarter playground west approach
+PRECINCT_QA PASS map migration preserves occupied public space Darling Quarter playground west approach
+PRECINCT_WALK {"discontinuities":0,"name":"Darling Quarter playground west approach","origin":[-857.299987792969,4.5,1630.0],"passed":true,"segments":[{"actual":[-858.763000488281,4.54587697982788,1642.12536621094],"contacts":[],"distance":0.130708634853363,"frames":142,"reached":true,"target":[-858.799987792969,4.5,1642.0]},{"actual":[-852.020690917969,4.54587697982788,1648.97509765625],"contacts":[],"distance":0.0323765464127064,"frames":109,"reached":true,"target":[-852.0,4.5,1649.0]},{"actual":[-844.213012695312,4.54587697982788,1660.07434082031],"contacts":[],"distance":0.0754690021276474,"frames":155,"reached":true,"target":[-844.200012207031,4.5,1660.0]}]}
+PRECINCT_QA PASS continuous player walk Wide slide rear steps and slope
+PRECINCT_QA PASS map migration preserves occupied public space Wide slide rear steps and slope
+PRECINCT_WALK {"discontinuities":0,"name":"Wide slide rear steps and slope","origin":[-841.165100097656,4.5,1637.73474121094],"passed":true,"segments":[{"actual":[-843.377563476562,7.15993547439575,1642.12390136719],"contacts":[],"distance":0.106748722493649,"frames":59,"reached":true,"target":[-843.473999023438,7.18000030517578,1642.16967773438]},{"actual":[-846.582580566406,4.54587697982788,1648.31689453125],"contacts":[],"distance":0.0822479724884033,"frames":78,"reached":true,"target":[-846.660278320312,4.5,1648.28991699219]}]}
+PRECINCT_QA PASS native capture opera-harbour
+PRECINCT_QA PASS native capture opera-monumental-steps
+PRECINCT_QA PASS native capture opera-roof-plan
+PRECINCT_QA PASS native capture opera-north-facade
+PRECINCT_QA PASS native capture opera-box-office
+PRECINCT_QA PASS native capture opera-entry-stairs
+PRECINCT_QA PASS native capture opera-concert-hall
+PRECINCT_QA PASS native capture opera-concert-stage
+PRECINCT_QA PASS native capture opera-concert-organ
+PRECINCT_QA PASS native capture opera-joan-sutherland
+PRECINCT_QA PASS native capture opera-concert-northern-foyer
+PRECINCT_QA PASS native capture opera-jst-northern-foyer
+PRECINCT_QA PASS native capture darling_waterplay
+PRECINCT_QA PASS native capture darling_octanet
+PRECINCT_QA PASS native capture darling_wide_slide
+PRECINCT_QA PASS native capture tumbalong_fountains
+PRECINCT_QA PASS native capture darling_playground_plan
+PRECINCT_QA PASS native capture darling_steam_mill_new
+PRECINCT_QA PASS native capture darling_puppuccino_lillianna
+PRECINCT_QA PASS native capture darling_tumbalong_restaurants
+PRECINCT_QA PASS native capture darling_little_pier_shops
+PRECINCT_QA PASS native capture darling_harbour_street_shops
+PRECINCT_QA PASS native capture darling_little_hay_shops
+PRECINCT_QA PASS native capture darling_bendigo_detail
+PRECINCT_QA PASS native capture darling_tattoo_detail
+PRECINCT_QA PASS native capture darling_bubu_detail
+PRECINCT_QA_COMPLETE 101 passed=true

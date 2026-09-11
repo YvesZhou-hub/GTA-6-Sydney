@@ -20,6 +20,19 @@ const SIMPLIFIED_TERRAIN := [
 	{"id":"Main_Runway_Peninsula","outline":[[-3650,9240],[-2980,9000],[-2500,11570],[-2590,11890],[-2870,11940],[-3020,11780]],"elevation":6.25},
 	{"id":"Parallel_Runway_Peninsula","outline":[[-2350,9550],[-1660,9410],[-1190,12180],[-1290,12620],[-1710,12710],[-1820,12330]],"elevation":6.25}
 ]
+# The detailed city ends at latitude -33.892 (z=3562.24). This public road
+# continues slightly beyond that query edge because complete OSM ways are kept.
+# Only this joining endpoint is real; everything south of it below is an
+# explicitly simplified game connection, NOT a Sydney airport driving route.
+const CONNECTOR_SOURCE := {
+	"way":"way/3770421", "node":"node/18802172", "name":"George Street (Redfern)",
+	"lat":-33.8925376, "lon":151.2021819, "snapshot":"2026-09-10T10:26:34Z",
+	"source":"https://www.openstreetmap.org/way/3770421",
+	"city_south_z":3562.24, "width_m":7.0
+}
+const CONNECTOR_ENTRY := Vector3(-768.592,4.5,3622.086)
+const CONNECTOR_PREVIOUS := Vector3(-767.437,4.5,3613.124)
+
 const RUNWAY_SPECS := [
 	{"id": "16R_34L", "a": [-33.92940139770508,151.1719970703125], "b": [-33.964298248291016,151.18099975585938], "length": 3962.0, "width": 45.0, "a_name": "16R", "b_name": "34L"},
 	{"id": "16L_34R", "a": [-33.94960021972656,151.18800354003906], "b": [-33.971099853515625,151.19400024414062], "length": 2438.0, "width": 45.0, "a_name": "16L", "b_name": "34R"},
@@ -57,7 +70,8 @@ func setup() -> void:
 	anchors["airport_approach"] = main.b - direction * 2600.0 + Vector3.UP * 210.0
 	anchors["airport_departure"] = main.a + direction * 800.0 + Vector3.UP * 280.0
 	anchors["airport_runway_heading"] = runway_heading
-	anchors["airport_connector"] = [Vector3(-400,5,1100),Vector3(-1300,5,2600),Vector3(-2600,5,4600),Vector3(-4200,5,6400),Vector3(-4440,6.5,7950)]
+	anchors["airport_connector"] = connector_route()
+	set_meta("airport_connector_geography", CONNECTOR_SOURCE.merged({"simplified_after":CONNECTOR_ENTRY,"scope":"Real OSM street endpoint; unmeasured game road and grade south to the airport"}))
 
 func geo(lat: float, lon: float, elevation: float = AIRFIELD_Y) -> Vector3:
 	return Vector3((lon - ORIGIN_LON) * METRES_LAT * cos(deg_to_rad(ORIGIN_LAT)), elevation, (ORIGIN_LAT - lat) * METRES_LAT)
@@ -399,27 +413,86 @@ func _build_control_tower() -> void:
 	_box(tower,"Radar_Aerial",Vector3(0,61,0),Vector3(7,1.7,0.6),"red")
 	anchors["airport_tower"] = at
 
+static func connector_sections() -> Array:
+	var tangent := (CONNECTOR_ENTRY-CONNECTOR_PREVIOUS).normalized()
+	# Start at the exact rendered residential-road end, retaining its 7m width.
+	# Expand only beyond the mapped city, away from the parallel cycleway.
+	return [
+		{"point":CONNECTOR_ENTRY,"width":7.0,"visual_lift":0.085},
+		{"point":CONNECTOR_ENTRY+tangent*80.0+Vector3.UP*0.085,"width":7.0,"visual_lift":0.0},
+		{"point":Vector3(-860,4.67,3900),"width":12.0,"visual_lift":0.0},
+		{"point":Vector3(-1200,4.8,4180),"width":25.0,"visual_lift":0.0},
+		{"point":Vector3(-1900,4.925,4500),"width":25.0,"visual_lift":0.0},
+		{"point":Vector3(-2600,4.925,4600),"width":25.0,"visual_lift":0.0},
+		{"point":Vector3(-4200,4.925,6400),"width":25.0,"visual_lift":0.0},
+		# Reach the existing raised airport land before its northern edge z=7000.
+		{"point":Vector3(-4261.9355,PAVEMENT_TOP,6800),"width":25.0,"visual_lift":0.0},
+		{"point":Vector3(-4440,PAVEMENT_TOP,7950),"width":25.0,"visual_lift":0.0},
+		{"point":Vector3(-4400,PAVEMENT_TOP,8460),"width":25.0,"visual_lift":0.0}
+	]
+
+static func connector_route() -> Array[Vector3]:
+	var route:Array[Vector3]=[]
+	for section in connector_sections():route.append(section.point)
+	return route
+
+static func connector_edges(sections:Array) -> Array:
+	var edges:Array=[]
+	for i in sections.size():
+		var at:Vector3=sections[i].point
+		var incoming:Vector3=(at-sections[maxi(0,i-1)].point) if i>0 else (sections[1].point-at)
+		var outgoing:Vector3=(sections[mini(i+1,sections.size()-1)].point-at) if i<sections.size()-1 else incoming
+		incoming.y=0;outgoing.y=0
+		incoming=incoming.normalized();outgoing=outgoing.normalized()
+		var previous_side:=Vector3(-incoming.z,0,incoming.x)
+		var next_side:=Vector3(-outgoing.z,0,outgoing.x)
+		var bisector:Vector3=(previous_side+next_side).normalized()
+		var side:Vector3=bisector*(float(sections[i].width)*0.5/maxf(0.5,bisector.dot(next_side)))
+		edges.append([at+side,at-side])
+	return edges
+
+static func _connector_mesh(sections:Array,visible_surface:bool) -> ArrayMesh:
+	# A single indexed ribbon avoids internal box-end collision faces at joins.
+	# First contact follows the city terrain datum (4.5); its visual-only 8.5cm
+	# lift tapers to zero, matching the existing OSM road rendering at the join.
+	var surface:=SurfaceTool.new();surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var edges:=connector_edges(sections)
+	for i in range(sections.size()-1):
+		var a:Vector3=edges[i][0];var b:Vector3=edges[i+1][0]
+		var c:Vector3=edges[i+1][1];var d:Vector3=edges[i][1]
+		if visible_surface:
+			a.y+=sections[i].visual_lift;d.y+=sections[i].visual_lift
+			b.y+=sections[i+1].visual_lift;c.y+=sections[i+1].visual_lift
+		for triangle in [[a,b,c],[a,c,d]]:
+			var normal:Vector3=(triangle[1]-triangle[0]).cross(triangle[2]-triangle[0]).normalized()
+			if normal.y>0:
+				var swap:Vector3=triangle[1];triangle[1]=triangle[2];triangle[2]=swap
+			else:normal=-normal
+			for vertex:Vector3 in triangle:
+				surface.set_normal(normal);surface.set_uv(Vector2(vertex.x,vertex.z)*.05);surface.add_vertex(vertex)
+	surface.index()
+	return surface.commit()
+
 func _build_connector() -> void:
-	var points := [Vector3(-400,4.8,1100),Vector3(-850,4.8,1900),Vector3(-1300,4.8,2600),Vector3(-2600,4.8,4600),Vector3(-4200,4.8,6400),Vector3(-4440,PAVEMENT_TOP-0.125,7950),Vector3(-4400,PAVEMENT_TOP-0.125,8460)]
-	for i in points.size()-1:
-		var a: Vector3 = points[i]
-		var b: Vector3 = points[i+1]
-		_line(self,"Connector_Road_%d"%i,a,b,25,0.25,"asphalt",true)
-		_line(self,"Connector_Centre_%d"%i,a+Vector3.UP*0.14,b+Vector3.UP*0.14,0.35,0.02,"white")
-		var forward := (b-a).normalized()
-		var side := Vector3(forward.z,0,-forward.x)
+	var sections:=connector_sections()
+	var body:=StaticBody3D.new();body.name="Connector_Road"
+	body.set_meta("geography",CONNECTOR_SOURCE)
+	add_child(body)
+	var view:=MeshInstance3D.new();view.mesh=_connector_mesh(sections,true);view.material_override=_materials.asphalt;body.add_child(view)
+	var collision:=CollisionShape3D.new();collision.shape=_connector_mesh(sections,false).create_trimesh_shape();body.add_child(collision)
+	for i in range(sections.size()-1):
+		var a:Vector3=sections[i].point;var b:Vector3=sections[i+1].point
+		# Keep the source residential road's unmarked narrow continuation.
+		if i>=2:_line(self,"Connector_Centre_%d"%i,a+Vector3.UP*.014,b+Vector3.UP*.014,.35,.02,"white")
+		var forward:Vector3=(b-a).normalized();var side:=Vector3(forward.z,0,-forward.x)
 		for distance in range(50,int(a.distance_to(b)),160):
-			var p := a+forward*distance
-			_box(self,"Roadside_Pole",p+side*14+Vector3.UP*4,Vector3(0.18,8,0.18),"steel")
-			_box(self,"Roadside_Lamp",p+side*12+Vector3.UP*8,Vector3(4,0.2,0.6),"white")
-	var info := Label3D.new()
-	info.text = "AIRPORT CONNECTOR\nSimplified open terrain · Airport 10 km"
-	info.position = Vector3(-830,12,1850)
-	info.font_size = 55
-	info.pixel_size = 0.08
-	info.outline_size = 5
-	info.modulate = Color("efdfb2")
-	add_child(info)
+			var p:Vector3=a+forward*distance
+			var half_width:float=lerpf(sections[i].width,sections[i+1].width,float(distance)/a.distance_to(b))*.5
+			_box(self,"Roadside_Pole",p+side*(half_width+1.5)+Vector3.UP*4,Vector3(.18,8,.18),"steel")
+			_box(self,"Roadside_Lamp",p+side*(half_width-.5)+Vector3.UP*8,Vector3(4,.2,.6),"white")
+	# The old 4.4m-high floating development label in Tumbalong is removed.
+	# This route's approximation belongs in map/reference metadata, not a plaza.
+
 	# Distant scrub trees give movement scale, with a single draw per mesh.
 	var trunks: Array[Transform3D] = []
 	var crowns: Array[Transform3D] = []

@@ -1,0 +1,250 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-11T03:21:39Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 10590136157,
+  "lat": -33.8745435,
+  "lon": 151.2014994,
+  "tags": {
+    "playground": "swing"
+  }
+},
+{
+  "type": "node",
+  "id": 10590136159,
+  "lat": -33.8747749,
+  "lon": 151.2013570,
+  "tags": {
+    "playground": "slide"
+  }
+},
+{
+  "type": "node",
+  "id": 10590136162,
+  "lat": -33.8745969,
+  "lon": 151.2013336,
+  "tags": {
+    "playground": "climbingframe"
+  }
+},
+{
+  "type": "node",
+  "id": 10590136169,
+  "lat": -33.8746153,
+  "lon": 151.2014904,
+  "tags": {
+    "playground": "climbingframe"
+  }
+},
+{
+  "type": "node",
+  "id": 10590136175,
+  "lat": -33.8745290,
+  "lon": 151.2010890,
+  "tags": {
+    "playground": "basketswing"
+  }
+},
+{
+  "type": "node",
+  "id": 10590136176,
+  "lat": -33.8748323,
+  "lon": 151.2014684,
+  "tags": {
+    "playground": "slide"
+  }
+},
+{
+  "type": "node",
+  "id": 10590136179,
+  "lat": -33.8748403,
+  "lon": 151.2014223,
+  "tags": {
+    "playground": "slide"
+  }
+},
+{
+  "type": "node",
+  "id": 10590395014,
+  "lat": -33.8750781,
+  "lon": 151.2015857,
+  "tags": {
+    "playground": "sprinkler"
+  }
+},
+{
+  "type": "node",
+  "id": 10696013709,
+  "lat": -33.8747525,
+  "lon": 151.2017731,
+  "tags": {
+    "playground": "pump"
+  }
+},
+{
+  "type": "node",
+  "id": 10696013713,
+  "lat": -33.8750231,
+  "lon": 151.2017127,
+  "tags": {
+    "playground": "archimedes_screw"
+  }
+},
+{
+  "type": "node",
+  "id": 10696013714,
+  "lat": -33.8747971,
+  "lon": 151.2018055,
+  "tags": {
+    "playground": "water_wheel"
+  }
+},
+{
+  "type": "node",
+  "id": 12085003871,
+  "lat": -33.8739981,
+  "lon": 151.2008021,
+  "tags": {
+    "playground": "climbingframe"
+  }
+},
+{
+  "type": "way",
+  "id": 183246961,
+  "bounds": {
+    "minlat": -33.8749596,
+    "minlon": 151.2008011,
+    "maxlat": -33.8745193,
+    "maxlon": 151.2011338
+  },
+  "geometry": [
+    { "lat": -33.8749596, "lon": 151.2011338 },
+    { "lat": -33.8748576, "lon": 151.2009161 },
+    { "lat": -33.8745286, "lon": 151.2008011 },
+    { "lat": -33.8745193, "lon": 151.2008408 },
+    { "lat": -33.8749596, "lon": 151.2011338 }
+  ],
+  "tags": {
+    "natural": "water",
+    "playground": "splash_pad",
+    "water": "reflecting_pool"
+  }
+},
+{
+  "type": "way",
+  "id": 668599850,
+  "bounds": {
+    "minlat": -33.8752061,
+    "minlon": 151.2009203,
+    "maxlat": -33.8748732,
+    "maxlon": 151.2012362
+  },
+  "geometry": [
+    { "lat": -33.8748732, "lon": 151.2009203 },
+    { "lat": -33.8749789, "lon": 151.2011470 },
+    { "lat": -33.8751153, "lon": 151.2012355 },
+    { "lat": -33.8752061, "lon": 151.2012362 },
+    { "lat": -33.8750441, "lon": 151.2009820 },
+    { "lat": -33.8748732, "lon": 151.2009203 }
+  ],
+  "tags": {
+    "natural": "water",
+    "playground": "splash_pad",
+    "water": "reflecting_pool"
+  }
+},
+{
+  "type": "way",
+  "id": 730089774,
+  "bounds": {
+    "minlat": -33.8767927,
+    "minlon": 151.2016171,
+    "maxlat": -33.8766438,
+    "maxlon": 151.2017389
+  },
+  "geometry": [
+    { "lat": -33.8766448, "lon": 151.2016171 },
+    { "lat": -33.8766438, "lon": 151.2017371 },
+    { "lat": -33.8767917, "lon": 151.2017389 },
+    { "lat": -33.8767927, "lon": 151.2016189 },
+    { "lat": -33.8766448, "lon": 151.2016171 }
+  ],
+  "tags": {
+    "intermittent": "yes",
+    "natural": "water",
+    "playground": "splash_pad"
+  }
+},
+{
+  "type": "way",
+  "id": 730089775,
+  "bounds": {
+    "minlat": -33.8765160,
+    "minlon": 151.2015615,
+    "maxlat": -33.8764292,
+    "maxlon": 151.2017057
+  },
+  "geometry": [
+    { "lat": -33.8764303, "lon": 151.2015615 },
+    { "lat": -33.8765160, "lon": 151.2015625 },
+    { "lat": -33.8765149, "lon": 151.2017057 },
+    { "lat": -33.8764292, "lon": 151.2017047 },
+    { "lat": -33.8764303, "lon": 151.2015615 }
+  ],
+  "tags": {
+    "intermittent": "yes",
+    "natural": "water",
+    "playground": "splash_pad"
+  }
+},
+{
+  "type": "way",
+  "id": 1136058495,
+  "bounds": {
+    "minlat": -33.8751396,
+    "minlon": 151.2014870,
+    "maxlat": -33.8747021,
+    "maxlon": 151.2018468
+  },
+  "geometry": [
+    { "lat": -33.8750571, "lon": 151.2017826 },
+    { "lat": -33.8751396, "lon": 151.2015326 },
+    { "lat": -33.8749425, "lon": 151.2014870 },
+    { "lat": -33.8747021, "lon": 151.2017116 },
+    { "lat": -33.8747691, "lon": 151.2018468 },
+    { "lat": -33.8750571, "lon": 151.2017826 }
+  ],
+  "tags": {
+    "area": "yes",
+    "playground": "water"
+  }
+},
+{
+  "type": "way",
+  "id": 1149779572,
+  "bounds": {
+    "minlat": -33.8747839,
+    "minlon": 151.2017731,
+    "maxlat": -33.8747525,
+    "maxlon": 151.2017846
+  },
+  "geometry": [
+    { "lat": -33.8747525, "lon": 151.2017731 },
+    { "lat": -33.8747624, "lon": 151.2017793 },
+    { "lat": -33.8747750, "lon": 151.2017765 },
+    { "lat": -33.8747839, "lon": 151.2017846 }
+  ],
+  "tags": {
+    "playground": "water_channel"
+  }
+}
+
+  ]
+}

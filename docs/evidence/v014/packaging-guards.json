@@ -1,0 +1,49 @@
+{
+  "checked_at_utc": "2026-09-11T06:02:39.816989+00:00",
+  "scope": "Same two isolated regression scenarios plus clean controls; subprocesses stubbed, no App or GPU launched, no real user-data read. Product and tool files were not modified.",
+  "fixture_directory": "/tmp/harbourlife-review-fixed-jra_y7m2",
+  "tool_sha256": {
+    "tools/build.py": "de44e10f59e42052a68364ffee632a325daab3231c879f2d729ed145ced4d7e7",
+    "tools/verify_native.py": "d840b51b8b16f251a2b0d4dcf29ec371e6eefb9a4f1ef2be28c71d6cc8c19440"
+  },
+  "passed": true,
+  "cases": [
+    {
+      "name": "native rejects missing runtime log plus console compilation error",
+      "passed": true,
+      "actual_exit_code": 1,
+      "actual_verdict": false,
+      "runtime_log_fresh": false,
+      "runtime_errors": [
+        "SCRIPT ERROR: Parse Error: Reproduction fixture",
+        "Missing or stale runtime log"
+      ]
+    },
+    {
+      "name": "native accepts clean fresh runtime and console control",
+      "passed": true,
+      "actual_exit_code": 0,
+      "actual_verdict": true,
+      "runtime_log_fresh": true,
+      "runtime_errors": []
+    },
+    {
+      "name": "build rejects source changes after export during smoke",
+      "passed": true,
+      "error": "Game source changed during export or smoke; refusing to package a mismatched PCK. Freeze edits and rebuild.",
+      "manifest_written": false,
+      "archive_written": false,
+      "exported_fixture_bytes": "BEFORE_EXPORT",
+      "current_fixture_bytes": "AFTER_EXPORT"
+    },
+    {
+      "name": "build accepts unchanged source and normalizes temporary export preset",
+      "passed": true,
+      "error": null,
+      "manifest_written": true,
+      "archive_written": true,
+      "exported_fixture_bytes": "BEFORE_EXPORT",
+      "current_fixture_bytes": "BEFORE_EXPORT"
+    }
+  ]
+}

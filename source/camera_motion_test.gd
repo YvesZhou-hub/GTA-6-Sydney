@@ -37,18 +37,23 @@ func run():
 	RenderingServer.render_loop_enabled=false
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	if "--compact" in OS.get_cmdline_user_args(): root.size=Vector2i(960,600)
-	DisplayServer.window_move_to_foreground()
 	game=load("res://main.tscn").instantiate()
 	game.qa_running=true
 	root.add_child(game)
 	game.qa_manual_render=false
+	# The controlled route must not mix live OS mouse/key events with scripted
+	# actions when this window gains focus. Action names remain available for
+	# Input.action_press; only this isolated test process loses hardware bindings.
+	game.set_process_input(false)
+	game.set_process_unhandled_input(false)
+	for action in InputMap.get_actions(): InputMap.action_erase_events(action)
 	probe=EndOfFrameProbe.new()
 	probe.runner=self
 	probe.process_priority=2000
 	root.add_child(probe)
 	await process_frame
 	game.new_world("sandbox","Camera regression - no save",false)
-	DisplayServer.window_move_to_foreground()
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 	var runway: Dictionary=game.airport.runway_data[0]
 	var start: Vector3=runway.a.lerp(runway.b,0.45)
 	# The old city test rectangle became an actual mapped building. Keep a
@@ -72,6 +77,7 @@ func run():
 	car.reset_physics_interpolation()
 	await physics_frame
 	game.enter_vehicle(car)
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 	Input.action_press("forward")
 	await sample("car",sample_seconds)
 	Input.action_release("forward")

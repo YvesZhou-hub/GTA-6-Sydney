@@ -33,7 +33,7 @@ Manly 普通街区来自后备服务较旧的快照，不能声称所有商户�
 | 模型 | 依据与重建范围 |
 | --- | --- |
 | 海港大桥 | 双拱、桥塔、桁架、桥面、轨道、步道与可驾驶引桥；[参考](BRIDGE_REFERENCE.md) |
-| 悉尼歌剧院 | 两组不等长屋顶、球面壳、肋骨、瓷砖、玻璃及台阶；[参考](OPERA_REFERENCE.md) |
+| 悉尼歌剧院 | 重做球面壳、玻璃、台阶及真实入口；新增票务大厅、两座主厅和北侧门厅；[外部](OPERA_REFERENCE.md) · [内部](OPERA_INTERIOR_REFERENCE.md) |
 | HSBC 所在 Tower One、Bank of China、W Sydney、The Exchange / 海底捞 | 不同的塔楼、网格、弧形和木格栅外立面；[参考](CITY_REFERENCE.md) |
 | Westpac Place、Commonwealth Bank Place South / North | 当前总部地址，成组外形和楼顶；[参考](BANK_REFERENCE.md) |
 | Quay Quarter Tower、Salesforce Tower | 分段错动体量、遮阳框、树状结构与电梯侧立面；[参考](QUAY_REFERENCE.md) |
@@ -48,6 +48,12 @@ Manly 普通街区来自后备服务较旧的快照，不能声称所有商户�
 Cyber 专项模型替换 6 个普通 OSM 体量：2 Market Street 的 `1521293802`、`335699164`、`335699165`、`1521293801`，以及 388 George Street 的 `386563854`、`386563852`。相邻 Hooker House 不在替换范围。公司官方地址和物业照片用于核对建筑身份；外立面没有添加未经照片支持的大型公司标志。CyberCX 的澳大利亚总部在墨尔本，这里是其 NSW 办公室。
 
 ICC 三处场馆已通过 `game/scripts/icc_landmarks.gd` 纳入主世界，地图轮廓保存在 `game/assets/icc_geometry.json`。这里的 TikTok 名称指演出场馆，不是公司的办公室。公开平面图和照片支持所列公共区域的重建；整体高度、楼层标高、座椅数量与看台坡度仍有明确估算，未制作完整后台、机房或私人空间。范围与证据见 [ICC 参考说明](ICC_REFERENCE.md)。源码整合及回归结果不代表最终发行包已发布。
+
+## 0.1.4 达令区补充数据
+
+2026-09-11 的补充记录位于 `source/precinct-data/`：18 个 OSM 游乐设备和水体记录、官方目录 71 条商户记录，以及与已有地面建筑轮廓的匹配过程。四座游乐区棚亭/服务设施保留原有轮廓，改用专门的低层或开放模型，避免默认生成 8 米办公楼。
+
+71 条目录分为 15 家既有门面、23 家地址对齐的新增推断门面、14 条 Exchange 楼栋入口、18 条位置未确认和 1 条占用冲突。新增店面中只有 Bendigo Bank、Thirteen Feet Tattoo 和 Bar Bubu 补有专门外观照片支持的细化，其余仍有明显推断。目录记录数不能代替模型精度。详见 [公共空间与商户资料](DARLING_PUBLIC_FACILITIES_REFERENCE.md)。
 
 ## 道路接缝与铺面校验
 

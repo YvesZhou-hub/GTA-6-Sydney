@@ -30,6 +30,12 @@ func run():
 	map.waypoint_selected.connect(func(at,title): pins.append({"at":at,"title":title}))
 	map.navigation_cleared.connect(func(): clears+=1)
 	check("real geographic cache loaded once",map.data_loaded and MAP.source_load_count==1 and map.data_counts.buildings>15000)
+	var public_results:Array=map.search_destinations("PUBLIC")
+	check("case-insensitive landmark search retains public entrance rather than building centre",not public_results.is_empty() and public_results[0].key=="venue" and public_results[0].position.is_equal_approx(Vector3(120,4.5,-70)) and public_results[0].landmark)
+	var source_place:Dictionary=map._places[0]
+	var source_results:Array=map.search_destinations(source_place.name)
+	check("offline place search uses loaded geographic position",source_results.any(func(item):return item.title==source_place.name and item.position.distance_to(Vector3(source_place.point.x,4.5,source_place.point.y))<.01))
+	check("unknown query cannot invent a destination",map.search_destinations("no-real-place-with-this-test-name-xyz").is_empty())
 	var mini=MINI.new()
 	mini.position=Vector2(860,30)
 	mini.size=Vector2(280,300)
@@ -99,10 +105,24 @@ func run():
 	check("minimap click requests full map",opens==1)
 	for i in 3: await process_frame
 	var cached_draws:int=mini.terrain_draw_count
+	var cached_updates:int=mini.cache_update_count
 	for i in 10:
 		mini.player_position.x+=5;mini.refresh()
 		await process_frame
 	check("moving minimap transforms cached terrain without rebuilding commands",mini.terrain_draw_count==cached_draws and MAP.source_load_count==1)
+	check("ordinary movement reuses the rasterized map without another geographic draw",mini.cache_update_count==cached_updates)
+	var aligned:=true
+	for heading_angle in [0.0,.7,-1.9]:
+		mini.player_heading=heading_angle;mini.refresh()
+		var world_point:=Vector3(mini.player_position.x+93,4.5,mini.player_position.z-47)
+		var raster_pixel:Vector2=mini._terrain.transform*Vector2(world_point.x,world_point.z)-Vector2(mini._terrain_viewport.size)*.5
+		var displayed:Vector2=mini._viewport.position+mini._terrain_image.transform*raster_pixel
+		if displayed.distance_to(mini.project_point(world_point))>.02:aligned=false
+	check("cached geographic texture and live markers align while panning and rotating",aligned)
+	mini.player_position+=Vector3(5000,0,5000);mini.refresh()
+	check("teleport refreshes cache at the new geographic location",mini.cache_update_count==cached_updates+1 and mini._cached_center.distance_to(Vector2(mini.player_position.x,mini.player_position.z))<.01)
+	mini.pixels_per_metre=.36;mini.refresh()
+	check("zoom refreshes raster density instead of magnifying stale geography",mini.cache_update_count==cached_updates+2 and is_equal_approx(mini._cached_scale,.36))
 	if DisplayServer.get_name()!="headless":
 		map.map_center=Vector2(-768,1993);map.pixels_per_metre=0.7;map.refresh()
 		mini.north_up=true;mini.sync_navigation({"player_position":Vector3(-768,4.5,1993),"player_heading":-0.4,"target_key":"test","target_position":Vector3(414,4.5,-300),"target_name":"歌剧院"})

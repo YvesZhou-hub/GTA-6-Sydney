@@ -1,0 +1,19 @@
+{
+  "mode": "air-vehicle",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--air-vehicle-qa"
+  ],
+  "started_utc": "2026-09-11T07:23:21.159040+00:00",
+  "wall_seconds": 88.602,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 20,
+  "passed": true,
+  "screenshots": [],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

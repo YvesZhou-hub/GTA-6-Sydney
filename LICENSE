@@ -1,0 +1,148 @@
+Harbourlife — Proprietary License (source-available, not open source)
+Harbourlife 专有许可（源码可见，非开源）
+
+Copyright (c) 2026 YvesZhou-hub. All rights reserved.
+版权所有 (c) 2026 YvesZhou-hub。保留所有权利。
+
+--------------------------------------------------------------------------
+ENGLISH (controlling text)
+--------------------------------------------------------------------------
+
+This repository is SOURCE-AVAILABLE, NOT OPEN SOURCE. The fact that the
+source is publicly readable is not a license to use it. Except for the
+limited permissions in sections 1 and 2, and except for the third-party
+material in section 4, all rights in the original code and original assets
+are reserved by the copyright holder.
+
+1. PERMITTED — PLAYING OFFICIAL BUILDS
+
+   You may download, install and run an official Harbourlife build published
+   by the copyright holder on this repository's GitHub Releases page, for
+   personal, non-commercial play and testing, on hardware you control.
+
+2. PERMITTED — READING AND LOCAL EVALUATION OF SOURCE
+
+   You may view and study the source in this repository, and compile it
+   locally for the sole purpose of evaluating it. You may not distribute the
+   source, any modified form of it, or any build produced from it.
+
+3. RESERVED — NOT PERMITTED WITHOUT PRIOR WRITTEN PERMISSION
+
+   All of the following are reserved to the copyright holder:
+
+   a. Redistributing, mirroring, re-uploading, reselling, renting, lending or
+      sublicensing the original code, the original assets, or any build.
+   b. Creating or publishing derivative works, ports, modifications or forks,
+      in whole or in part, on any platform.
+   c. Any commercial use, including use inside a commercial product, service,
+      advertisement, paid stream, paid course or paid asset pack.
+   d. Using the original code or original assets as training data, or
+      including them in a corpus or dataset for machine learning.
+   e. Removing, obscuring or altering this notice, the in-game attribution,
+      or the notices in PLAY_PERMISSION.md and the licenses/ directory.
+
+   Nothing in this section limits rights you have under applicable law that
+   cannot be excluded by contract, or under GitHub's Terms of Service.
+
+4. THIRD-PARTY MATERIAL — THIS LICENSE DOES NOT APPLY
+
+   This license covers only the copyright holder's own original work. The
+   following retain their own terms, and nothing above restricts the rights
+   those terms grant you:
+
+   a. Godot Engine and its bundled components — MIT and the additional
+      component notices. See licenses/GODOT_LICENSE.txt and
+      licenses/GODOT_COPYRIGHT.txt.
+   b. OpenStreetMap-derived databases — Open Database License 1.0 (ODbL).
+      This includes source/map-data/, source/world_osm_reference.json,
+      source/world_osm_water.json, source/world_geography.json,
+      game/assets/world_geography.json, game/assets/city_map.json and the
+      OSM-derived coordinate records in game/assets/darling_square_frontages.json.
+      © OpenStreetMap contributors. These files are a Derivative Database and
+      remain available under ODbL 1.0; you may use, share and adapt them under
+      those terms, including commercially, subject to ODbL's attribution and
+      share-alike conditions. Section 3 does not and cannot restrict them.
+   c. OurAirports data — public domain.
+
+   See licenses/ASSET_REGISTER.md and licenses/GEOGRAPHY.md for the full
+   register.
+
+5. REAL-WORLD NAMES, LANDMARKS AND TRADEMARKS
+
+   This project is unaffiliated with Sydney Airport, the Sydney Opera House
+   Trust, any transport operator, government body, bank, airline, vehicle
+   manufacturer or venue operator. No endorsement, landmark commercial
+   clearance or third-party approval is claimed or granted. Third-party
+   trademarks and landmark-image rights are held by their respective owners;
+   this license grants no rights in them, and the permissions in sections 1
+   and 2 do not purport to clear them. See licenses/GEOGRAPHY.md.
+
+6. NO WARRANTY
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+   THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+   OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE. Nothing here excludes a guarantee that cannot lawfully be
+   excluded, including under the Australian Consumer Law.
+
+7. TERMINATION
+
+   The permissions in sections 1 and 2 end automatically if you breach this
+   license. On termination you must stop using and delete your copies. This
+   does not affect your rights under section 4.
+
+8. GOVERNING LAW
+
+   New South Wales, Australia.
+
+9. OTHER LICENSING
+
+   For any use not permitted above, contact the copyright holder through this
+   repository to request a separate written license.
+
+--------------------------------------------------------------------------
+中文（参考译文；与英文不一致时以英文为准）
+--------------------------------------------------------------------------
+
+本仓库是"源码可见"，不是开源。源码公开可读不等于授予使用许可。除第 1、2 条
+的有限许可和第 4 条的第三方材料外，原创代码与原创资产的一切权利由版权持有人
+保留。
+
+1. 允许：运行官方构建
+   可以下载、安装并运行版权持有人在本仓库 Releases 页面发布的官方 Harbourlife
+   构建，用于个人非商业的试玩与测试，运行在你自己控制的设备上。
+
+2. 允许：阅读源码与本地评估
+   可以查看和研究本仓库源码，并仅出于评估目的在本地编译。不得分发源码、源码的
+   任何修改形式，或由其产生的任何构建。
+
+3. 保留：未经事先书面许可不得进行
+   a. 再分发、镜像、转载、转售、出租、出借或再许可原创代码、原创资产或任何构建。
+   b. 全部或部分地制作或发布衍生作品、移植版、修改版或分支，不限平台。
+   c. 任何商业使用，包括用于商业产品、服务、广告、付费直播、付费课程或付费素材包。
+   d. 将原创代码或原创资产用作训练数据，或纳入机器学习的语料库或数据集。
+   e. 移除、遮蔽或篡改本声明、游戏内署名，以及 PLAY_PERMISSION.md 与 licenses/
+      目录下的各项声明。
+   本条不限制适用法律中不可通过合同排除的权利，也不限制 GitHub 服务条款下的权利。
+
+4. 第三方材料：本许可不适用
+   本许可仅覆盖版权持有人的原创作品。以下部分各自保留其许可，上述条款不限制这些
+   许可赋予你的权利：
+   a. Godot 引擎及其附带组件：MIT 及附加组件声明，见 licenses/ 目录。
+   b. OpenStreetMap 衍生数据库：ODbL 1.0。包括 source/map-data/ 以及
+      game/assets/city_map.json 等文件。© OpenStreetMap contributors。这些文件
+      属于衍生数据库，持续以 ODbL 1.0 提供，你可以在该许可的署名与相同方式共享
+      条件下使用、分享和改编，包括商业使用。第 3 条不限制、也无法限制这些文件。
+   c. OurAirports 数据：公有领域。
+
+5. 真实名称、地标与商标
+   本项目与悉尼机场、Sydney Opera House Trust、各交通运营方、政府机构、银行、
+   航空公司、车辆制造商及场馆运营方均无关联。不主张也不授予任何背书、地标商业
+   授权或第三方批准。第三方商标与地标形象权利归各自权利人所有，本许可不授予其中
+   任何权利。
+
+6. 无担保；7. 终止；8. 管辖法律为澳大利亚新南威尔士州；9. 其他授权请通过本仓库
+   联系版权持有人另行书面约定。以上各条以英文正文为准。

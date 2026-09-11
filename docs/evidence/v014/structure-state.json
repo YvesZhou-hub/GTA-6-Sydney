@@ -1,0 +1,27 @@
+{
+	"checks": [
+		{
+			"name": "existing component still receives saved destruction",
+			"passed": true
+		},
+		{
+			"name": "retired Opera component ID remains in exported state",
+			"passed": true
+		},
+		{
+			"name": "retired partial damage remains intact",
+			"passed": true
+		},
+		{
+			"name": "repeat restoration preserves known and retired damage",
+			"passed": true
+		},
+		{
+			"name": "explicit repair clears current and retired damage",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"scope": "Small production-world subclass; retired IDs are retained, not geometrically remapped to new model components.",
+	"user_saves_touched": false
+}

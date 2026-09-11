@@ -1,0 +1,254 @@
+{
+	"checks": [
+		{
+			"detail": null,
+			"name": "connector is backed by the retained raw OSM way",
+			"passed": true
+		},
+		{
+			"detail": [
+				-768.592468261719,
+				4.5,
+				3622.08569335938
+			],
+			"name": "entry equals raw source terminal node within projection rounding",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "provenance names the actual final OSM node",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "source is a ground motor road, not the adjacent cycleway",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "entry meets the road actually rendered in the compiled city",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "initial extension preserves the source street terminal tangent",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "7m motor road continuation preserves separation from cycleway",
+			"passed": true
+		},
+		{
+			"detail": 3621.638671875,
+			"name": "entire artificial road ribbon is beyond detailed city south boundary",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no artificial airport road through Darling facility way/183246961",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no artificial airport road through Darling facility way/668599850",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no artificial airport road through Darling facility way/730089774",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no artificial airport road through Darling facility way/730089775",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no artificial airport road through Darling facility way/1136058495",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no artificial airport road through Darling facility way/1149779572",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no artificial airport road through mapped playground perimeter",
+			"passed": true
+		},
+		{
+			"detail": [],
+			"name": "new connection does not cut retained OSM building footprints",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "map line uses the exact corrected physical route stations",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "obsolete giant development label is absent in production scene",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "old city-crossing box roads replaced by one joined ribbon",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "connection still reaches the original airport-side road endpoint",
+			"passed": true
+		},
+		{
+			"detail": {
+				"bad_normals": 0,
+				"max_height_error": 0.00000532800627617291,
+				"missing": 0,
+				"samples": 2499,
+				"unexpected": [],
+				"wrong_body": 0
+			},
+			"name": "three actual collision lanes remain continuous to airport",
+			"passed": true
+		},
+		{
+			"detail": [],
+			"name": "downward rays hit the connector at and beside every bend seam",
+			"passed": true
+		},
+		{
+			"detail": {
+				"health": 100.0,
+				"peak_y_velocity": 0.0589358918368816,
+				"position": [
+					-776.345947265625,
+					5.24404287338257,
+					3681.97973632812
+				],
+				"reached": true
+			},
+			"name": "production car crosses city join city to airport",
+			"passed": true
+		},
+		{
+			"detail": {
+				"health": 100.0,
+				"peak_y_velocity": 0.0402289628982544,
+				"position": [
+					-766.620666503906,
+					5.17965173721313,
+					3607.04345703125
+				],
+				"reached": true
+			},
+			"name": "production car crosses city join airport to city",
+			"passed": true
+		},
+		{
+			"detail": {
+				"airborne_frames": 0,
+				"health": 100.0,
+				"maximum_deviation": 6.80318069458008,
+				"position": [
+					-858.547424316406,
+					5.3484468460083,
+					3896.44165039062
+				],
+				"reached": true,
+				"wrong_support_frames": 0
+			},
+			"name": "production car drives the first widening bend on its real collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"airborne_frames": 0,
+				"position": [
+					-769.454772949219,
+					4.49799489974976,
+					3628.76928710938
+				],
+				"reached": true
+			},
+			"name": "production Player continuously walks across the real city join",
+			"passed": true
+		}
+	],
+	"count": 26,
+	"entry": [
+		-768.591979980469,
+		4.5,
+		3622.0859375
+	],
+	"passed": true,
+	"scope": "Local production airport, raw/compiled OSM alignment, road/landmark intersections, physical surface sweeps and actual input-driven production car in both directions across city boundary; not full-city road or airport-route realism certification.",
+	"simplified_route": [
+		[
+			-768.591979980469,
+			4.5,
+			3622.0859375
+		],
+		[
+			-778.817443847656,
+			4.58500003814697,
+			3701.4296875
+		],
+		[
+			-860.0,
+			4.67000007629395,
+			3900.0
+		],
+		[
+			-1200.0,
+			4.80000019073486,
+			4180.0
+		],
+		[
+			-1900.0,
+			4.92500019073486,
+			4500.0
+		],
+		[
+			-2600.0,
+			4.92500019073486,
+			4600.0
+		],
+		[
+			-4200.0,
+			4.92500019073486,
+			6400.0
+		],
+		[
+			-4261.935546875,
+			6.46000003814697,
+			6800.0
+		],
+		[
+			-4440.0,
+			6.46000003814697,
+			7950.0
+		],
+		[
+			-4400.0,
+			6.46000003814697,
+			8460.0
+		]
+	],
+	"source": {
+		"city_south_z": 3562.24,
+		"lat": -33.8925376,
+		"lon": 151.2021819,
+		"name": "George Street (Redfern)",
+		"node": "node/18802172",
+		"snapshot": "2026-09-10T10:26:34Z",
+		"source": "https://www.openstreetmap.org/way/3770421",
+		"way": "way/3770421",
+		"width_m": 7.0
+	},
+	"user_saves_touched": false
+}

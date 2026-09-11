@@ -1,0 +1,619 @@
+{
+  "checked": "2026-09-11",
+  "scope": "Additional OSM-located, explicitly inferred frontages; original geometry and labels only.",
+  "shops": [
+    {
+      "front": [
+        -799.6577,
+        2019.8432
+      ],
+      "normal": [
+        0.966682,
+        -0.255981
+      ],
+      "building": "way/545749186",
+      "projection_metres": 3.23,
+      "width": 7.0,
+      "id": "darling_business_789koreanbbq",
+      "name": "789 Korean BBQ",
+      "osm": "node/5783556454",
+      "poi": [
+        -802.78,
+        2020.67
+      ],
+      "style": "dining",
+      "accent": "red",
+      "source": "https://www.darlingsq.com/eat-drink-shop/789KoreanBBQ/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "Shop 4/35 Tumbalong Bvd"
+    },
+    {
+      "front": [
+        -820.131,
+        2040.8798
+      ],
+      "normal": [
+        -0.363632,
+        -0.931543
+      ],
+      "building": "way/610783860",
+      "projection_metres": 3.017,
+      "width": 4.8,
+      "id": "darling_business_bar_bubu",
+      "name": "Bar Bubu",
+      "osm": "node/14053356759",
+      "poi": [
+        -819.034,
+        2043.69
+      ],
+      "style": "bar",
+      "accent": "green",
+      "source": "https://www.darlingsq.com/eat-drink-shop/bar-bubu/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "9 Steam Mill Lane",
+      "photo_scope": "open bar visible from street",
+      "photo_source": "https://www.darlingsq.com/eat-drink-shop/bar-bubu/",
+      "photo_notes": "2025 Kera Wong photograph: yellow fluted counter, red high stools, open black lift-up glazing, cubby bottle shelving and gallery wall."
+    },
+    {
+      "front": [
+        -676.0332,
+        2000.1776
+      ],
+      "normal": [
+        0.995119,
+        -0.098683
+      ],
+      "building": "way/614603732",
+      "projection_metres": 6.976,
+      "width": 5.3,
+      "id": "darling_business_bendigo_bank",
+      "name": "Bendigo Bank",
+      "osm": "node/12588832181",
+      "poi": [
+        -682.975,
+        2000.866
+      ],
+      "style": "bank",
+      "accent": "red",
+      "source": "https://www.darlingsq.com/eat-drink-shop/bendigo-bank/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "11 Little Pier St",
+      "photo_scope": "completed branch exterior",
+      "photo_source": "https://www.jodiedangarchitects.com/bendigo-bank",
+      "photo_notes": "Dark brick plinth, curved bronze-framed glass, seven upper louvers, vertical sign and right-hand door; facade length remains an OSM-based approximation."
+    },
+    {
+      "front": [
+        -666.3727,
+        2093.9352
+      ],
+      "normal": [
+        0.995468,
+        -0.0951
+      ],
+      "building": "way/614603728",
+      "projection_metres": 10.13,
+      "width": 5.0,
+      "id": "darling_business_bengongs_tea",
+      "name": "Bengong's Tea",
+      "osm": "node/10689672744",
+      "poi": [
+        -676.488,
+        2093.384
+      ],
+      "style": "bakery",
+      "accent": "cream",
+      "source": "https://www.darlingsq.com/eat-drink-shop/bengongs-tea/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "91 Harbour Street"
+    },
+    {
+      "front": [
+        -851.072,
+        2044.6065
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 5.185,
+      "width": 4.3,
+      "id": "darling_business_dragon_hot_pot",
+      "name": "Dragon Hot Pot",
+      "osm": "node/6539605558",
+      "poi": [
+        -852.917,
+        2039.761
+      ],
+      "style": "dining",
+      "accent": "red",
+      "source": "https://www.darlingsq.com/eat-drink-shop/dragon-hot-pot/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": ""
+    },
+    {
+      "front": [
+        -671.5217,
+        2045.6267
+      ],
+      "normal": [
+        0.995107,
+        -0.098799
+      ],
+      "building": "way/614603732",
+      "projection_metres": 4.963,
+      "width": 6.5,
+      "id": "darling_business_haven_specialty_coffee",
+      "name": "Haven Specialty Coffee",
+      "osm": "node/12117849338",
+      "poi": [
+        -676.46,
+        2046.117
+      ],
+      "style": "cafe",
+      "accent": "cream",
+      "source": "https://www.darlingsq.com/eat-drink-shop/haven-specialty-coffee/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "85 Harbour St"
+    },
+    {
+      "front": [
+        -856.9665,
+        2046.8509
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 4.096,
+      "width": 4.0,
+      "id": "darling_business_lermont_laser_clinic",
+      "name": "Lermont Laser Clinic",
+      "osm": "node/13483075684",
+      "poi": [
+        -858.424,
+        2043.023
+      ],
+      "style": "clinic",
+      "accent": "white",
+      "source": "https://www.darlingsq.com/eat-drink-shop/lermont-laser-clinic/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "6 Steam Mill Lane"
+    },
+    {
+      "front": [
+        -862.9095,
+        2049.1138
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 4.481,
+      "width": 3.9,
+      "id": "darling_business_lillianna_gifts_and_home",
+      "name": "Lillianna Gifts & Home",
+      "osm": "node/6901321285",
+      "poi": [
+        -864.504,
+        2044.926
+      ],
+      "style": "gifts",
+      "accent": "cream",
+      "source": "https://www.darlingsq.com/eat-drink-shop/lillianna-gifts-and-home/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "Shop 2/4 Steam Mill Lane",
+      "photo_scope": "interior display only; exterior remains inferred",
+      "photo_source": "https://www.darlingsq.com/eat-drink-shop/lillianna-gifts-and-home/",
+      "photo_notes": "Official banner photograph shows colour-grouped gift boxes, diffuser bottles and white shelves; does not establish exterior frame or sign."
+    },
+    {
+      "front": [
+        -753.6614,
+        2072.5048
+      ],
+      "normal": [
+        0.211475,
+        -0.977383
+      ],
+      "building": "way/614603728",
+      "projection_metres": 3.97,
+      "width": 6.1,
+      "id": "darling_business_lilong_by_taste_of_shanghai",
+      "name": "Lilong by Taste of Shanghai",
+      "osm": "node/9642576281",
+      "poi": [
+        -754.501,
+        2076.385
+      ],
+      "style": "dining",
+      "accent": "red",
+      "source": "https://www.darlingsq.com/eat-drink-shop/lilong-by-taste-of-shanghai/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "1 Little Hay St"
+    },
+    {
+      "front": [
+        -751.9891,
+        2123.524
+      ],
+      "normal": [
+        -0.967345,
+        0.253462
+      ],
+      "building": "way/614603728",
+      "projection_metres": 4.987,
+      "width": 4.6,
+      "id": "darling_business_machimachi",
+      "name": "machi machi",
+      "osm": "node/10689683738",
+      "poi": [
+        -747.165,
+        2122.26
+      ],
+      "style": "tea",
+      "accent": "cream",
+      "source": "https://www.darlingsq.com/eat-drink-shop/machimachi/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "Shop 14/80 Hay St"
+    },
+    {
+      "front": [
+        -690.4653,
+        1988.0242
+      ],
+      "normal": [
+        0.159179,
+        -0.98725
+      ],
+      "building": "way/614603732",
+      "projection_metres": 7.449,
+      "width": 6.7,
+      "id": "darling_business_mcdonalds",
+      "name": "McDonald’s",
+      "osm": "node/12588832180",
+      "poi": [
+        -691.651,
+        1995.378
+      ],
+      "style": "counter",
+      "accent": "gold",
+      "source": "https://www.darlingsq.com/eat-drink-shop/mcdonalds/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "9 Little Pier Street"
+    },
+    {
+      "front": [
+        -702.9316,
+        1986.0142
+      ],
+      "normal": [
+        0.159179,
+        -0.98725
+      ],
+      "building": "way/614603732",
+      "projection_metres": 7.906,
+      "width": 6.7,
+      "id": "darling_business_meet_fresh",
+      "name": "Meet Fresh",
+      "osm": "node/13475270001",
+      "poi": [
+        -704.19,
+        1993.819
+      ],
+      "style": "dessert",
+      "accent": "ochre",
+      "source": "https://www.darlingsq.com/eat-drink-shop/meet-fresh/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": ""
+    },
+    {
+      "front": [
+        -856.473,
+        2090.9569
+      ],
+      "normal": [
+        -0.940039,
+        0.341068
+      ],
+      "building": "way/545749187",
+      "projection_metres": 3.134,
+      "width": 5.2,
+      "id": "darling_business_myhealth",
+      "name": "myhealth",
+      "osm": "node/11824294647",
+      "poi": [
+        -853.527,
+        2089.888
+      ],
+      "style": "clinic",
+      "accent": "blue",
+      "source": "https://www.darlingsq.com/eat-drink-shop/myhealth/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "Shop 1, Darling One Building, 64 Darling Drive"
+    },
+    {
+      "front": [
+        -719.5041,
+        2079.8954
+      ],
+      "normal": [
+        0.211475,
+        -0.977383
+      ],
+      "building": "way/614603728",
+      "projection_metres": 2.388,
+      "width": 4.6,
+      "id": "darling_business_my_spec",
+      "name": "MySpec",
+      "osm": "node/10689683737",
+      "poi": [
+        -720.009,
+        2082.229
+      ],
+      "style": "optics",
+      "accent": "cream",
+      "source": "https://www.darlingsq.com/eat-drink-shop/my-spec/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "Shop 3/5 Little Hay St"
+    },
+    {
+      "front": [
+        -786.9897,
+        2069.4807
+      ],
+      "normal": [
+        0.959573,
+        -0.28146
+      ],
+      "building": "way/545749185",
+      "projection_metres": 4.439,
+      "width": 8.0,
+      "id": "darling_business_pancakes_on_the_rocks",
+      "name": "Pancakes On The Rocks",
+      "osm": "node/10590350430",
+      "poi": [
+        -791.249,
+        2070.73
+      ],
+      "style": "dining",
+      "accent": "ochre",
+      "source": "https://www.darlingsq.com/eat-drink-shop/pancakes-on-the-rocks/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "55 Tumbalong Boulevard"
+    },
+    {
+      "front": [
+        -836.7219,
+        2039.1426
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 5.211,
+      "width": 4.2,
+      "id": "darling_business_planet_pop_world",
+      "name": "Planet Pop World",
+      "osm": "node/13483086755",
+      "poi": [
+        -838.576,
+        2034.273
+      ],
+      "style": "toys",
+      "accent": "peach",
+      "source": "https://www.darlingsq.com/eat-drink-shop/planet-pop-world/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "35 Tumbalong Bvd"
+    },
+    {
+      "front": [
+        -866.4272,
+        2050.4532
+      ],
+      "normal": [
+        0.355837,
+        0.934548
+      ],
+      "building": "way/545749186",
+      "projection_metres": 4.175,
+      "width": 3.1,
+      "id": "darling_business_puppuccino_pet_spa",
+      "name": "Puppuccino Pet Spa",
+      "osm": "node/14053356760",
+      "poi": [
+        -867.913,
+        2046.551
+      ],
+      "style": "pet",
+      "accent": "cream",
+      "source": "https://www.darlingsq.com/eat-drink-shop/puppuccino-pet-spa/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "NW01/2 Steam Mill Lane",
+      "photo_scope": "interior display only; exterior remains inferred",
+      "photo_source": "https://puppuccino.com.au/locate-us",
+      "photo_notes": "Darling Square-labeled operator photograph: yellow/white striped partition, dark shelves, timber base and pet products. Does not establish the exterior sign or door layout."
+    },
+    {
+      "front": [
+        -835.4748,
+        2046.8693
+      ],
+      "normal": [
+        -0.363632,
+        -0.931543
+      ],
+      "building": "way/610783860",
+      "projection_metres": 2.144,
+      "width": 4.4,
+      "id": "darling_business_quikstop",
+      "name": "Quikstop",
+      "osm": "node/14053356761",
+      "poi": [
+        -834.695,
+        2048.867
+      ],
+      "style": "convenience",
+      "accent": "blue",
+      "source": "https://www.darlingsq.com/eat-drink-shop/quikstop/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": ""
+    },
+    {
+      "front": [
+        -744.8498,
+        1986.3367
+      ],
+      "normal": [
+        -0.993345,
+        0.115178
+      ],
+      "building": "way/614603732",
+      "projection_metres": 4.72,
+      "width": 7.5,
+      "id": "darling_business_starbucks_coffee_company",
+      "name": "Starbucks",
+      "osm": "node/7030291185",
+      "poi": [
+        -740.161,
+        1985.793
+      ],
+      "style": "cafe",
+      "accent": "green",
+      "source": "https://www.darlingsq.com/eat-drink-shop/starbucks-coffee-company/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "Shop NE07, 35 Tumbalong Boulevard"
+    },
+    {
+      "front": [
+        -706.1884,
+        2072.7404
+      ],
+      "normal": [
+        -0.194325,
+        0.980937
+      ],
+      "building": "way/614603732",
+      "projection_metres": 5.102,
+      "width": 5.6,
+      "id": "darling_business_sushi_sei",
+      "name": "Sushi Sei",
+      "osm": "node/10689677826",
+      "poi": [
+        -705.197,
+        2067.736
+      ],
+      "style": "dining",
+      "accent": "coal",
+      "source": "https://www.darlingsq.com/eat-drink-shop/sushi-sei/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "SE04, Little Hay St"
+    },
+    {
+      "front": [
+        -697.1115,
+        2084.745
+      ],
+      "normal": [
+        0.211704,
+        -0.977334
+      ],
+      "building": "way/614603728",
+      "projection_metres": 4.192,
+      "width": 4.5,
+      "id": "darling_business_tea_republic",
+      "name": "Tea Republic",
+      "osm": "node/10689688741",
+      "poi": [
+        -697.999,
+        2088.842
+      ],
+      "style": "tea",
+      "accent": "green",
+      "source": "https://www.darlingsq.com/eat-drink-shop/tea-republic/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "Shop SE.07, 1/19 Little Hay St"
+    },
+    {
+      "front": [
+        -695.7567,
+        2074.8069
+      ],
+      "normal": [
+        -0.194325,
+        0.980937
+      ],
+      "building": "way/614603732",
+      "projection_metres": 4.44,
+      "width": 4.5,
+      "id": "darling_business_thirteen_feet_tattoo",
+      "name": "Thirteen Feet Tattoo",
+      "osm": "node/10689677631",
+      "poi": [
+        -694.894,
+        2070.452
+      ],
+      "style": "tattoo",
+      "accent": "coal",
+      "source": "https://www.darlingsq.com/eat-drink-shop/thirteen-feet-tattoo/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "4/2 Little Hay Street",
+      "photo_scope": "branch exterior; supplier photograph",
+      "photo_source": "https://online.remondis.com.au/article/industries/simplifying-waste-management-for-tattoo-parlours/3v14nmy",
+      "photo_notes": "Black brick, gold fascia, left-hand door, right window neon, framed flash sheets and projecting sign; abstract flash graphics are original, not copied tattoo art."
+    },
+    {
+      "front": [
+        -801.9515,
+        2011.1811
+      ],
+      "normal": [
+        0.966682,
+        -0.255981
+      ],
+      "building": "way/545749186",
+      "projection_metres": 6.16,
+      "width": 7.0,
+      "id": "darling_business_uliveto",
+      "name": "Uliveto",
+      "osm": "node/14053387656",
+      "poi": [
+        -806.744,
+        2007.311
+      ],
+      "style": "cafe",
+      "accent": "green",
+      "source": "https://www.darlingsq.com/eat-drink-shop/uliveto/",
+      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
+      "confidence": "Mapped street wall with inferred retail frontage",
+      "address": "3/35 Tumbalong Boulevard"
+    }
+  ]
+}

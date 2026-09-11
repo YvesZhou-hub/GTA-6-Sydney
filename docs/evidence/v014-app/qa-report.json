@@ -1,0 +1,307 @@
+{
+	"checks": [
+		{
+			"name": "world_has_seven_anchors",
+			"passed": true
+		},
+		{
+			"name": "fleet_has_all_categories",
+			"passed": true
+		},
+		{
+			"name": "player_supported",
+			"passed": true
+		},
+		{
+			"name": "npc_population",
+			"passed": true
+		},
+		{
+			"name": "ground_quay",
+			"passed": true
+		},
+		{
+			"name": "ground_opera",
+			"passed": true
+		},
+		{
+			"name": "ground_north",
+			"passed": true
+		},
+		{
+			"name": "ground_rocks",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_car",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_car",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_motorcycle",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_motorcycle",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_hoverboard",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_hoverboard",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_speedboat",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_speedboat",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_yacht",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_yacht",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_paraglider",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_paraglider",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_glider",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_glider",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_helicopter",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_helicopter",
+			"passed": true
+		},
+		{
+			"name": "vehicle_moves_airliner",
+			"passed": true
+		},
+		{
+			"name": "finite_physics_airliner",
+			"passed": true
+		},
+		{
+			"name": "world_damage_changes_state",
+			"passed": true
+		},
+		{
+			"name": "atomic_save",
+			"passed": true
+		},
+		{
+			"name": "save_has_vehicles",
+			"passed": true
+		},
+		{
+			"name": "save_has_damage",
+			"passed": true
+		},
+		{
+			"name": "damage_restore",
+			"passed": true
+		},
+		{
+			"name": "independent_copy",
+			"passed": true
+		}
+	],
+	"cpu": "Apple M4",
+	"engine": "4.7.2-stable (official)",
+	"manual_render_each_process": true,
+	"os": "macOS",
+	"performance_note": "Short real-time samples with one explicit render per process to prevent occlusion skipping. Process frame intervals include stalls. No fixed-fps or movie capture; not a sustained benchmark.",
+	"profiles": [
+		{
+			"drawn_frames": 129,
+			"fps_mean": 69.1833333333333,
+			"fps_min": 61.0,
+			"frame_ms_median": 14.275,
+			"frame_ms_p95": 15.762,
+			"frame_ms_worst": 57.488,
+			"frames": 120,
+			"position": [
+				-323.0,
+				5.18000030517578,
+				-35.8515663146973
+			],
+			"process_frames": 129,
+			"scenario": "car",
+			"speed": 20.0339889526367
+		},
+		{
+			"drawn_frames": 133,
+			"fps_mean": 66.975,
+			"fps_min": 63.0,
+			"frame_ms_median": 14.321,
+			"frame_ms_p95": 16.121,
+			"frame_ms_worst": 24.553,
+			"frames": 120,
+			"position": [
+				-323.0,
+				5.20304918289185,
+				-38.2849731445312
+			],
+			"process_frames": 134,
+			"scenario": "motorcycle",
+			"speed": 23.0777626037598
+		},
+		{
+			"drawn_frames": 133,
+			"fps_mean": 67.0833333333333,
+			"fps_min": 64.0,
+			"frame_ms_median": 14.215,
+			"frame_ms_p95": 15.299,
+			"frame_ms_worst": 46.83,
+			"frames": 120,
+			"position": [
+				-323.0,
+				5.7698974609375,
+				-59.2255439758301
+			],
+			"process_frames": 134,
+			"scenario": "hoverboard",
+			"speed": 39.5080642700195
+		},
+		{
+			"drawn_frames": 180,
+			"fps_mean": 77.2916666666667,
+			"fps_min": 71.0,
+			"frame_ms_median": 10.419,
+			"frame_ms_p95": 11.645,
+			"frame_ms_worst": 16.344,
+			"frames": 120,
+			"position": [
+				360.000946044922,
+				0.935072660446167,
+				-855.015258789062
+			],
+			"process_frames": 181,
+			"scenario": "speedboat",
+			"speed": 6.05128288269043
+		},
+		{
+			"drawn_frames": 170,
+			"fps_mean": 88.5416666666667,
+			"fps_min": 82.0,
+			"frame_ms_median": 10.924,
+			"frame_ms_p95": 12.068,
+			"frame_ms_worst": 15.034,
+			"frames": 120,
+			"position": [
+				279.999908447266,
+				0.937127113342285,
+				-852.105346679688
+			],
+			"process_frames": 171,
+			"scenario": "yacht",
+			"speed": 2.97317552566528
+		},
+		{
+			"drawn_frames": 178,
+			"fps_mean": 82.2,
+			"fps_min": 71.0,
+			"frame_ms_median": 9.775,
+			"frame_ms_p95": 10.947,
+			"frame_ms_worst": 98.229,
+			"frames": 120,
+			"position": [
+				800.0,
+				218.291885375977,
+				-1322.08068847656
+			],
+			"process_frames": 179,
+			"scenario": "paraglider",
+			"speed": 11.3629884719849
+		},
+		{
+			"drawn_frames": 197,
+			"fps_mean": 96.825,
+			"fps_min": 90.0,
+			"frame_ms_median": 9.362,
+			"frame_ms_p95": 10.803,
+			"frame_ms_worst": 13.029,
+			"frames": 120,
+			"position": [
+				800.0,
+				218.589080810547,
+				-1354.66259765625
+			],
+			"process_frames": 198,
+			"scenario": "glider",
+			"speed": 27.7322940826416
+		},
+		{
+			"drawn_frames": 188,
+			"fps_mean": 95.375,
+			"fps_min": 86.0,
+			"frame_ms_median": 9.862,
+			"frame_ms_p95": 11.004,
+			"frame_ms_worst": 11.668,
+			"frames": 120,
+			"position": [
+				800.0,
+				210.056274414062,
+				-1304.88134765625
+			],
+			"process_frames": 189,
+			"scenario": "helicopter",
+			"speed": 10.3633575439453
+		},
+		{
+			"drawn_frames": 194,
+			"fps_mean": 94.5666666666667,
+			"fps_min": 87.0,
+			"frame_ms_median": 9.506,
+			"frame_ms_p95": 11.116,
+			"frame_ms_worst": 14.217,
+			"frames": 120,
+			"position": [
+				800.0,
+				219.84928894043,
+				-1462.82446289062
+			],
+			"process_frames": 195,
+			"scenario": "airliner",
+			"speed": 82.6916046142578
+		},
+		{
+			"destroyed": 16,
+			"drawn_frames": 118,
+			"fps_mean": 36.1333333333333,
+			"fps_min": 25.0,
+			"frame_ms_median": 24.258,
+			"frame_ms_p95": 25.758,
+			"frame_ms_worst": 367.091,
+			"frames": 180,
+			"process_frames": 118,
+			"rubble": 48,
+			"scenario": "localized_destruction"
+		}
+	],
+	"renderer": "forward_plus",
+	"resolution": "(1440.0, 900.0)"
+}

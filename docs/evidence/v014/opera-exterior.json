@@ -1,0 +1,103 @@
+{
+  "checks": [
+    {
+      "name": "ten roof pairs grouped in two unequal halls and southwest restaurant",
+      "passed": true
+    },
+    {
+      "name": "geographic reference matches mapped Opera House centroid and axis",
+      "passed": true
+    },
+    {
+      "name": "roof samples lie on common 75.2m sphere error=0.00001831054688",
+      "passed": true
+    },
+    {
+      "name": "paired shells mirror exactly across sharp central ridge error=0.0",
+      "passed": true
+    },
+    {
+      "name": "opposing shell halves meet at the same ridge without a longitudinal gap",
+      "passed": true
+    },
+    {
+      "name": "all shell feet meet their podium springing points",
+      "passed": true
+    },
+    {
+      "name": "160 independently removable thick spherical shell bands",
+      "passed": true
+    },
+    {
+      "name": "curved roof triangle budget=54072",
+      "passed": true
+    },
+    {
+      "name": "no degenerate shell faces",
+      "passed": true
+    },
+    {
+      "name": "all shell outer, inner and edge triangles face their supplied normals",
+      "passed": true
+    },
+    {
+      "name": "ridge and springing-point chunks are closed two-manifold solids nonmanifold=0",
+      "passed": true
+    },
+    {
+      "name": "roof silhouette reaches approximately 67m above water high=67.6499404907227",
+      "passed": true
+    },
+    {
+      "name": "roof colliders follow visible spherical skin hits=10/10",
+      "passed": true
+    },
+    {
+      "name": "roof interior has collision at actual 320mm thickness hits=10/10",
+      "passed": true
+    },
+    {
+      "name": "whole monumental stair route has smooth physical support",
+      "passed": true
+    },
+    {
+      "name": "both southern entrances have actual 1.8m capsule clearance through the glass",
+      "passed": true
+    },
+    {
+      "name": "four Western Foyer openings have ground-level capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "upper stairwell and orchestra pit are absent upper-slab geometry",
+      "passed": true
+    },
+    {
+      "name": "bronze glass allows harbour visibility instead of an opaque painted facade",
+      "passed": true
+    },
+    {
+      "name": "25 Concert crown/edge samples enclosed above by shell or interstitial surfaces misses=[]",
+      "passed": true
+    },
+    {
+      "name": "external shell and bronze infill do not intrude into either occupied acoustic chamber: []",
+      "passed": true
+    },
+    {
+      "name": "shell damage removes matching roof, ribs and collider",
+      "passed": true
+    },
+    {
+      "name": "new world restores damaged roof collider",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "highest_world_y": 67.6499404907227,
+  "includes_interiors": true,
+  "native_capture": true,
+  "scope": "Original procedural exterior based on official CMP photos/plans; shell coordinates are inferred, not a surveyed BIM",
+  "shell_triangles": 54072,
+  "source_sha256": "c42a9e1fdffc4f7e901a72693ae767563fb7be908485b30017348131914d6b26"
+}

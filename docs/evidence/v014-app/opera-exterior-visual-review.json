@@ -1,0 +1,98 @@
+{
+  "reviewed_at_utc": "2026-09-11T07:27:33.177545+00:00",
+  "status": "reviewed_with_documented_limitations",
+  "scope": "只读实际查看本次最终导出 App 捕获的四张完整世界歌剧院外景；没有生成或编辑像素，没有启动新引擎进程。",
+  "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec",
+  "build_manifest": "reports/release-v014-native/build.json",
+  "build_manifest_sha256": "8e87868dcd2aefa87eabbb39fb8092349153a1b6286113eeaa7ed4713c236950",
+  "capture_launch": "reports/release-v014-native/precinct-launch.json",
+  "capture_started_utc": "2026-09-11T07:21:03.580090+00:00",
+  "opera_source_sha256": "c42a9e1fdffc4f7e901a72693ae767563fb7be908485b30017348131914d6b26",
+  "capture_context": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "precinct_checks": 101,
+    "passed": true,
+    "exit_code": 0,
+    "runtime_errors": [],
+    "automated_checks_are_not_visual_acceptance": true
+  },
+  "images": [
+    {
+      "path": "reports/release-v014-native/precinct-screenshots/opera-harbour.png",
+      "sha256": "e433dd6e3f91a1d3d6b4e9be757dac32ac232150b555b40fa1036c0272841a14",
+      "width": 1440,
+      "height": 900,
+      "actually_viewed": true,
+      "observations": [
+        "两列大小不同、逐组升高的白色屋壳与较小的 Bennelong 体量可辨；主体未被前景树木或楼房挡住。",
+        "屋壳间有连续的青铜色围护；这张图未见前轮那种大面积敞开裂隙或悬空木质厅顶。",
+        "北端玻璃后可见紫红色门厅平台，岸边通路及基座连续。"
+      ],
+      "limitations": [
+        "青铜色间壳围护面积较大，基座细部仍较简化；不是照片级外形匹配。"
+      ]
+    },
+    {
+      "path": "reports/release-v014-native/precinct-screenshots/opera-monumental-steps.png",
+      "sha256": "59d94e59923f809f317a01cb8bba8fdba1d1b06faaf6be4cc08e2fcd88af9c94",
+      "width": 1440,
+      "height": 900,
+      "actually_viewed": true,
+      "observations": [
+        "宽台阶连续上达两厅南侧入口，正面没有横穿台阶的实体障碍。",
+        "南面玻璃后可见独立声学厅围护，Bennelong 位于前景左侧；较低的前厅罩壳与主厅高壳区分清楚。",
+        "图右侧水边有少量浅色、看似分离的步道条带，属于建筑外围环境，需与主楼几何观察区分。"
+      ],
+      "limitations": [
+        "玻璃后的深色声学箱边角和屋壳接合仍具有程序模型特征；截图不证明实际入口碰撞或楼梯通行。"
+      ]
+    },
+    {
+      "path": "reports/release-v014-native/precinct-screenshots/opera-roof-plan.png",
+      "sha256": "0e7095292b815185185bf1402d56074fca18329a908275173d02257a98ba9c48",
+      "width": 1440,
+      "height": 900,
+      "actually_viewed": true,
+      "observations": [
+        "鸟瞰中可见两列纵向且不等长、不等宽的屋顶组合，中间保留狭窄轴向间隙，西南侧为独立小壳组。",
+        "白色瓷片纹理、南端反向罩壳及青铜色连接部分可见；未发现从木质厅体大面积穿出的屋顶。",
+        "东侧至东南侧岸边可见若干分离的浅色细条；部分条带看似伸到水面上，不能仅凭此图认定其为真实码头设施。"
+      ],
+      "limitations": [
+        "部分屋壳交界仍有深色窄缝和较宽的青铜面；不能据此声称与实测壳片切线、接缝或岸线逐一吻合。"
+      ]
+    },
+    {
+      "path": "reports/release-v014-native/precinct-screenshots/opera-north-facade.png",
+      "sha256": "aa0e3033ff186e2fbd948e03a589d6019d727096c7f677e18ea9a10121389227",
+      "width": 1440,
+      "height": 900,
+      "actually_viewed": true,
+      "observations": [
+        "两厅北端玻璃面、其后的紫红色门厅平台及高低不同的白壳同时可见。",
+        "主体北立面没有被前景楼房、树冠或额外构件遮挡；本视角未见明显木质厅顶穿出白壳。",
+        "北侧基座和岸边通路连续，但大面积基座墙、玻璃框格及岸线转角仍较简化。"
+      ],
+      "limitations": [
+        "外景无法完整检查北门厅内部的海景视线、全部楼梯、座席或声学围护；这些属于单独室内与通行验收范围。"
+      ]
+    }
+  ],
+  "conclusion": "这四个外景中未发现新的严重歌剧院主体遮挡、大面积屋壳缺失或显著厅顶外穿。轮廓、青铜围护、基座及玻璃细节仍为有照片和平面依据的程序化近似，不能称为全建筑实测 1:1 或照片级还原。",
+  "observed_environment_issue": {
+    "views": [
+      "opera-monumental-steps",
+      "opera-roof-plan"
+    ],
+    "description": "歌剧院东至东南侧岸边存在看似分离、部分位于水面上的浅色步道条带。",
+    "assessment": "外围铺装/地图几何疑点；此只读图片审查没有确认源对象或真实设施依据，不将其误称为屋壳碎片，也不据此给整片环境无缺陷结论。"
+  },
+  "limits": [
+    "只检查四个固定外景，不能替代持续移动、全方位遮挡、碰撞或内部通行测试。",
+    "101 项自动验收是本次截图运行背景，不能作为全部视觉细节准确的证明。",
+    "没有把旧局部截图或此前 ZIP 的图片冒充本次最终 App 证据。"
+  ],
+  "game_modified": false,
+  "screenshots_modified": false,
+  "engine_started_by_reviewer": false
+}

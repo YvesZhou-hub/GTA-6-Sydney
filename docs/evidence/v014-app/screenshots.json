@@ -1,0 +1,179 @@
+{
+  "method": "29 unmodified native viewport PNGs from the final exported App; documentation views only change camera and hide HUD/activity guidance, retaining actual model geometry and mapped trees. Independent per-image visual reviews record remaining approximations.",
+  "images": [
+    {
+      "path": "docs/screenshots/v014/01-map-pointer-pin.png",
+      "sha256": "2d35a7d0205b00a6842b1f130426070045b91d7b608d4640133f6fcbb9bf02ee",
+      "source": "final_exported_app_navigation_input",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/02-map-top-close.png",
+      "sha256": "2095e3f3569170070cd25bbc53f7b2b49dd7176702530b25e4de985639ac3e7e",
+      "source": "final_exported_app_navigation_input",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/03-map-search-manly.png",
+      "sha256": "2e2eba2605c3e1566b14f905ca03090680a215fd7632d681553ea009e533f987",
+      "source": "final_exported_app_navigation_input",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_bendigo_detail.png",
+      "sha256": "25ac2b4505f366776d2b6afb2a32168192bb996734725c4bbad8085dd8fec893",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_bubu_detail.png",
+      "sha256": "d73291ed6a60778bff8cea8ce4d7ff76a13a3901d2478fbcbbaeb68a1ea3ed52",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_harbour_street_shops.png",
+      "sha256": "e849a51b31efc56dc6c6eff36a7b6d69bf2b58a029c448272663e634fa158204",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_little_hay_shops.png",
+      "sha256": "e406eaa41379ec25e6241cde6e67d8f2abac7764d99937f3aa5c64d5c3ea5843",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_little_pier_shops.png",
+      "sha256": "43db0d5b40bcfecbf9774a6527453599a8807aac76b6cba8a726b257d0467f96",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_octanet.png",
+      "sha256": "96840f87846d70f1e3d5b30bec43b791a380dc97c9afed1248f5b324560f194e",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_playground_plan.png",
+      "sha256": "f7b702bfe434908deb2ecaec2513efd16b7d79d2ed161954e2ce58d0dc4ade55",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_puppuccino_lillianna.png",
+      "sha256": "2ead4d50228fcb113a84c639ac3bc737a8d0c97530d7e583904c4f3ccf73a11f",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_steam_mill_new.png",
+      "sha256": "b7fed08ff7cea2fed11186a06a6a77ad7b6480504d54da8433ee7242e1c4f56a",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_tattoo_detail.png",
+      "sha256": "6f49a8ffea465e8238b40362c1ed800fd171380bac04b7bf6749ce6898a44577",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_tumbalong_restaurants.png",
+      "sha256": "c14c914c13a035834c6f377cfe7a18d3760fd507da99eddad45d720790e437e4",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_waterplay.png",
+      "sha256": "46fe798f84f1d14b5fb85d660b2e58f9baaa3450a8d553d6687dcfc8711357cc",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/darling_wide_slide.png",
+      "sha256": "0f1be3131efb688aac37a7cf1cc7f6b94c2fda81bcdf05d61a594c74c15af8e9",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-box-office.png",
+      "sha256": "eb39ff5c1d99c0566c887ba62c9112049d6f5a959075c77ff371939ec00c3768",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-concert-hall.png",
+      "sha256": "d87d707ef6c742b38be71cc7505193e31dc4c135580afed1eb708299046ff18c",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-concert-northern-foyer.png",
+      "sha256": "339dbc4c9c02d515c5c7d872b43d75a651aacca1c4e8889ae59243776a3e1a20",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-concert-organ.png",
+      "sha256": "abd90fa59d60612eecdc3f2a9ce9cea8bf18362948f5e4c85ce66b30362b5105",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-concert-stage.png",
+      "sha256": "74f94f5930f297b9ddf349d646396b110ed103ab0ffb817a30fd7edb7cc055cd",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-entry-stairs.png",
+      "sha256": "d35b4436cfd9b2286bcfc09fb6f16e0f4c405aa43232ca9b5824870a998a5766",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-harbour.png",
+      "sha256": "e433dd6e3f91a1d3d6b4e9be757dac32ac232150b555b40fa1036c0272841a14",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-joan-sutherland.png",
+      "sha256": "d2c9ef970ce15fdd9984644b337bfcf997071af7bbd95a51e93f4b2615a8011c",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-jst-northern-foyer.png",
+      "sha256": "34a4342d21061f535bbfe2602822d68bf412da17b4ed482ddce403e50d3a3ddb",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-monumental-steps.png",
+      "sha256": "59d94e59923f809f317a01cb8bba8fdba1d1b06faaf6be4cc08e2fcd88af9c94",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-north-facade.png",
+      "sha256": "aa0e3033ff186e2fbd948e03a589d6019d727096c7f677e18ea9a10121389227",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/opera-roof-plan.png",
+      "sha256": "0e7095292b815185185bf1402d56074fca18329a908275173d02257a98ba9c48",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    },
+    {
+      "path": "docs/screenshots/v014/tumbalong_fountains.png",
+      "sha256": "e931e10517e78e8acca46b74e5379bec0d5ca6a2907179c2619b0bd11a83ffb2",
+      "source": "final_exported_app_precinct",
+      "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec"
+    }
+  ]
+}

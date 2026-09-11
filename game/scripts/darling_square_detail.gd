@@ -38,6 +38,8 @@ static func build(world:Node3D) -> void:
 		world.anchors[item.id]=item.arrival
 		f.body.set_meta("public_arrival",item.arrival)
 	_public_space(world)
+	load("res://scripts/darling_public_facilities.gd").build(world)
+	load("res://scripts/darling_precinct_businesses.gd").build(world)
 	world.set_meta("darling_square_detail",metadata())
 	world.set_meta("darling_square_landscape",{"source":"https://www.aspect-studios.com/projects/darling-square-2","plan":"https://mooool.com/en/darling-square-a-public-space-for-all-by-aspect-studios.html","registration":"Three existing mapped anchors: Exchange centre, Steam Mill/Tumbalong junction, Little Hay/Nicolle junction","precision":"Approximate plan registration; exact furniture/landscape elevations inferred","canopy_ends":[CANOPY_A,CANOPY_B]})
 

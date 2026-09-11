@@ -52,6 +52,8 @@ var owned: Array=["car"]
 var settings={"volume":0.65,"sensitivity":0.003,"quality":1,"invert":false,"large_text":false}
 var active_panel=""
 var name_edit: LineEdit
+var map_search: LineEdit
+var map_results: VBoxContainer
 var font: SystemFont
 var demo_mode=false
 var qa_running=false
@@ -70,6 +72,7 @@ var _camera_orbit := Vector3.ZERO
 var _camera_boom := 0.0
 var _camera_subject_id := 0
 var _camera_reset := true
+var _cursor_held := false
 
 func _ready():
 	var arguments:=OS.get_cmdline_user_args()
@@ -80,7 +83,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -144,6 +147,10 @@ func _ready():
 		add_child(load("res://scripts/landmark_validation.gd").new())
 	elif "--interactive-qa" in arguments:
 		call_deferred("start_interactive_qa")
+	elif "--navigation-input-qa" in arguments:
+		add_child(load("res://scripts/navigation_input_validation.gd").new())
+	elif "--precinct-qa" in arguments:
+		add_child(load("res://scripts/precinct_validation.gd").new())
 	elif "--showcase" in OS.get_cmdline_user_args():
 		demo_mode=true
 		new_world("sandbox","QA Showcase",false)
@@ -164,6 +171,10 @@ func setup_input():
 			var event=InputEventKey.new()
 			event.physical_keycode=key
 			InputMap.action_add_event(action,event)
+	if not InputMap.has_action("cursor"): InputMap.add_action("cursor")
+	var cursor_key:=InputEventKey.new()
+	cursor_key.physical_keycode=KEY_ALT
+	if not InputMap.action_has_event("cursor",cursor_key): InputMap.action_add_event("cursor",cursor_key)
 
 func setup_environment():
 	environment=WorldEnvironment.new()
@@ -315,6 +326,7 @@ func setup_ui():
 	minimap.clicked.connect(map_menu)
 	map_panel.waypoint_selected.connect(set_map_waypoint)
 	map_panel.navigation_cleared.connect(clear_landmark_target)
+	map_panel.close_requested.connect(close_panel)
 	navigation_hud=load("res://scripts/navigation_guidance.gd").new()
 	navigation_hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hud.add_child(navigation_hud)
@@ -338,6 +350,8 @@ func label(text_value:String,sz:int=18,col:Color=Color("f1efdf")) -> Label:
 	return l
 
 func clear_panel(title:String,subtitle:String=""):
+	var scroll:ScrollContainer=modal_content.get_parent()
+	scroll.scroll_vertical=0
 	for child in modal_content.get_children():
 		modal_content.remove_child(child)
 		child.queue_free()
@@ -351,6 +365,7 @@ func clear_panel(title:String,subtitle:String=""):
 	var line=HSeparator.new()
 	modal_content.add_child(line)
 	modal.visible=true
+	hud.visible=false
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 	if active:
 		paused=true
@@ -394,13 +409,22 @@ func main_menu():
 func close_panel():
 	modal.visible=false
 	map_panel.visible=false
+	hud.visible=active
 	if is_instance_valid(minimap): minimap.visible=active
 	if is_instance_valid(navigation_hud): navigation_hud.visible=active
 	paused=false
 	get_tree().paused=false
 	active_panel=""
-	if active: Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	sync_mouse_capture()
 	process_mode=Node.PROCESS_MODE_ALWAYS
+
+func sync_mouse_capture():
+	# Menus own the pointer even if opened while a vehicle or a modifier is active.
+	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED if active and not paused and not modal.visible and not map_panel.visible and not _cursor_held else Input.MOUSE_MODE_VISIBLE
+	if is_instance_valid(minimap): minimap.cursor_released=_cursor_held
+
+func camera_accepts_mouse() -> bool:
+	return active and not paused and not modal.visible and not map_panel.visible and not _cursor_held and Input.mouse_mode==Input.MOUSE_MODE_CAPTURED
 
 func new_world(new_mode:String,new_name:String,save_now=true):
 	if active and not save_world(): return
@@ -425,6 +449,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	player.collision_layer=1
 	player.collision_mask=15
 	active=true
+	sync_mouse_capture()
 	hud.visible=true
 	minimap.visible=true
 	navigation_hud.visible=true
@@ -809,7 +834,7 @@ func landmark_catalog() -> Array:
 				break
 	# The model modules publish their actual IDs and names. This also keeps
 	# new bank/Quay/shop destinations in sync with their verified locations.
-	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks","sydney_tower_landmark","circular_quay_detail","darling_square_detail"]:
+	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks","sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses"]:
 		for record in world.get_meta(group,[]):
 			var key:String=("shop_" if group=="darling_square_frontages" else "")+str(record.get("id",""))
 			if not world.anchors.has(key) or not world.anchors[key] is Vector3: continue
@@ -835,7 +860,13 @@ func set_navigation_target(key:String,title:String,position:Vector3):
 	landmark_target_key=key
 	landmark_target_name=title.left(100)
 	landmark_target_position=position
-	close_panel()
+	map_panel.target_key=key
+	map_panel.target_name=landmark_target_name
+	map_panel.target_position=position
+	map_panel.refresh()
+	# Keep the pointer available to adjust or clear a map pin. Services and other
+	# menus still return to play when they supply a destination.
+	if active_panel!="map": close_panel()
 	update_navigation(1.0)
 	update_landmark_marker()
 	notify("目的地已标记 · "+landmark_target_name+"\n跟随黄色标记与小地图；M 更换目的地。")
@@ -901,16 +932,24 @@ K 城市体验  ·  M 选择下一个目的地") if distance<25 and absf(offset.
 
 func map_menu():
 	active_panel="map"
-	clear_panel("悉尼 · 地图与目的地","点击地点或地图任意位置标记；滚轮缩放，拖动平移。右键清除。\n回到城市后，用小地图、屏幕标记和航向条辨认方向。")
+	clear_panel("悉尼 · 地图与目的地","鼠标已释放 · 左键选点，拖动平移，滚轮缩放，右键清除。\nM / Esc 或右上角「返回游戏」关闭地图，继续步行或驾驶。")
 	button("海港与城市核心",func(): map_panel.show_preset("core"))
 	button("机场 ↔ 海港 ↔ Manly 全图",func(): map_panel.show_preset("all"))
 	button("Manly 码头与海滩",func(): map_panel.show_preset("manly"))
 	button("定位到我",func(): map_panel.show_preset("player"))
 	modal_content.add_child(label("选择目的地 · 开车、飞行或步行前往",20,Color("a2efe0")))
 	var catalog=landmark_catalog()
-	for landmark in catalog:
-		var key:String=landmark.key
-		button(str(landmark.title),func(): set_landmark_target(key))
+	map_panel.landmarks=catalog
+	map_search=LineEdit.new()
+	map_search.placeholder_text="搜索地标、商户或公共设施…"
+	map_search.custom_minimum_size.y=44
+	map_search.clear_button_enabled=true
+	modal_content.add_child(map_search)
+	map_results=VBoxContainer.new()
+	map_results.add_theme_constant_override("separation",8)
+	modal_content.add_child(map_results)
+	map_search.text_changed.connect(refresh_map_results)
+	refresh_map_results("")
 	if not landmark_target_key.is_empty(): button("清除当前目的地指引",clear_landmark_target)
 	button("回到城市",close_panel)
 	map_panel.anchors=world.anchors
@@ -928,9 +967,33 @@ func map_menu():
 	map_panel.show_preset("airport" if player.global_position.z>6500 else ("manly" if player.global_position.x>4000 and player.global_position.z< -3500 else "core"))
 	map_panel.refresh()
 
+func refresh_map_results(query:String):
+	for child in map_results.get_children():
+		map_results.remove_child(child)
+		child.queue_free()
+	var destinations:Array=map_panel.search_destinations(query)
+	if destinations.is_empty():
+		map_results.add_child(label("没有找到该名称。可在右侧地图直接标点。",15,Color("cbd6c9")))
+	for destination:Dictionary in destinations:
+		var choice:=Button.new()
+		choice.text=destination.title
+		choice.custom_minimum_size.y=45
+		choice.alignment=HORIZONTAL_ALIGNMENT_LEFT
+		choice.clip_text=true
+		choice.tooltip_text=destination.title
+		choice.pressed.connect(func():
+			if destination.landmark: set_landmark_target(destination.key)
+			else: set_map_waypoint(destination.position,destination.title)
+			map_panel.map_center=Vector2(destination.position.x,destination.position.z)
+			map_panel.pixels_per_metre=maxf(map_panel.pixels_per_metre,0.65)
+			map_panel.view_name=destination.title.left(22)
+			map_panel.refresh()
+		)
+		map_results.add_child(choice)
+
 func settings_menu():
 	active_panel="settings"
-	clear_panel("让操作适合你。","WASD 移动 / 油门转向，鼠标观察，Shift 奔跑\nE 互动 / 上下车，空格跳跃 / 制动\nR / F 飞行升降，G 拿起 / 放下物件\nTab 免费新增并入座，J 工作，K 城市体验，M 地图，P 摄影\nF5 保存，Esc 暂停，Home 返回个人空间")
+	clear_panel("让操作适合你。","WASD 移动 / 油门转向，鼠标观察，Shift 奔跑\nE 互动 / 上下车，空格跳跃 / 制动\nR / F 飞行升降，G 拿起 / 放下物件\nTab 免费新增并入座，J 工作，K 城市体验，M 开关地图\n按住 Alt / Option 显示鼠标，可点击小地图；松开继续观察\nF5 保存，Esc 暂停，P 摄影，Home 返回个人空间")
 	modal_content.add_child(label("音量",18))
 	var volume=HSlider.new()
 	volume.min_value=0
@@ -999,13 +1062,31 @@ func notify(message:String,sound=true):
 	toast_time=7
 	if sound and is_instance_valid(audio): audio.chime()
 
-func _unhandled_input(event):
+func _input(event):
+	# These shortcuts must run before focused GUI controls and before the paused
+	# gameplay guard. Otherwise M cannot close the very map it opened.
+	if event is InputEventKey and event.echo: return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
 		if modal.visible and active: close_panel()
 		elif active: pause_menu()
+		get_viewport().set_input_as_handled()
 		return
+	if event.is_action("cursor"):
+		_cursor_held=event.is_pressed()
+		sync_mouse_capture()
+		get_viewport().set_input_as_handled()
+		return
+	if not active: return
+	var focus=get_viewport().gui_get_focus_owner()
+	if focus is LineEdit or focus is TextEdit: return
+	if event.is_action_pressed("map"):
+		if active_panel=="map": close_panel()
+		else: map_menu()
+		get_viewport().set_input_as_handled()
+
+func _unhandled_input(event):
 	if not active or paused: return
-	if event is InputEventMouseMotion and Input.mouse_mode==Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and camera_accepts_mouse():
 		yaw-=event.relative.x*float(settings.sensitivity)
 		pitch=clampf(pitch-event.relative.y*float(settings.sensitivity)*(-1 if settings.invert else 1),-1.05,0.65)
 	if event.is_action_pressed("interact"):
@@ -1020,7 +1101,6 @@ func _unhandled_input(event):
 				else: notify(message)
 	elif event.is_action_pressed("vehicles"): vehicles_menu()
 	elif event.is_action_pressed("jobs"): jobs_menu()
-	elif event.is_action_pressed("map"): map_menu()
 	elif event.is_action_pressed("experiences"): experiences_menu()
 	elif event.is_action_pressed("save"):
 		if save_world(): notify("世界已保存")
@@ -1145,6 +1225,13 @@ func update_hud():
 
 func _notification(what):
 	if what==NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
+	elif what==NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		# The OS may release Option in another app without delivering key-up here.
+		_cursor_held=false
+		Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+		if is_instance_valid(minimap):minimap.cursor_released=false
+	elif what==NOTIFICATION_WM_WINDOW_FOCUS_IN:
+		if is_instance_valid(modal) and is_instance_valid(map_panel):sync_mouse_capture()
 
 func quit_game():
 	if quitting: return

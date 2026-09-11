@@ -1,0 +1,241 @@
+{
+  "checked_at_utc": "2026-09-11T07:26:00.061552+00:00",
+  "app_archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec",
+  "archive_sha256_independently_matched": true,
+  "build_manifest": "reports/release-v014-native/build.json",
+  "build_manifest_sha256": "8e87868dcd2aefa87eabbb39fb8092349153a1b6286113eeaa7ed4713c236950",
+  "build_game_source_count": 119,
+  "scope": "Read-only visual inspection: all 14 Darling/Tumbalong PNGs were individually opened and viewed. Images are from the final standalone exported App precinct QA run, not the earlier external-script PCK supplement. No GPU process or product modifications were performed during this review.",
+  "images_viewed": 14,
+  "visual_capture_set_accepted": true,
+  "acceptance_meaning": "The supplied frames now provide usable visual evidence for their stated subjects, including the four corrected public-facility views. Acceptance is not a claim of photographic realism, complete storefront reproduction, full frame visibility, or independently verified navigation/physics.",
+  "blocking_gameplay_defects_confirmed_from_images": [],
+  "capture_recaptures_required": [],
+  "reviewed_with_partial_occlusion": [
+    "darling_bendigo_detail.png"
+  ],
+  "corrected_public_facility_views": [
+    "darling_waterplay.png",
+    "darling_octanet.png",
+    "darling_wide_slide.png",
+    "tumbalong_fountains.png"
+  ],
+  "technical_observations": "The fountain road/label conflict is resolved in the final App images. No fresh missing central facility mesh, airport overlay, torn road triangles or obvious displaced shopfront was confirmed in these supplied frames. Waterwheel and net centres are now visible. Static images do not test temporal jitter or every collision.",
+  "component_qa_context": {
+    "source": "reports/release-v014-native/precinct-launch.json",
+    "sha256": "be84438d978e5425616c1ce559e091a43e159ffdc3e33250a5cf1484595191b0",
+    "reported_passed": true,
+    "checks": 101,
+    "exit_code": 0,
+    "runtime_errors": [],
+    "logs": {
+      "precinct-console.log": {
+        "sha256": "ed28e62168153a9629d07ddb24ffe81e5de4c384ff6b55772674c7a58e918bd5",
+        "error_or_warning_lines": []
+      },
+      "precinct-runtime.log": {
+        "sha256": "ed28e62168153a9629d07ddb24ffe81e5de4c384ff6b55772674c7a58e918bd5",
+        "error_or_warning_lines": []
+      }
+    }
+  },
+  "coverage_limit": "71 directory records are not 71 complete replicas. The implementation distinguishes 15 existing researched frontages, 23 new address-aligned inferred exteriors, Exchange building-level destinations, unresolved directory entries and an occupancy conflict. Three new frontages have stronger exterior/open-bar reference details; two others use interior/display references. Generic host facades, vegetation, water surfaces and unmodelled spaces remain simplified.",
+  "images": [
+    {
+      "file": "darling_bendigo_detail.png",
+      "relative_path": "precinct-screenshots/darling_bendigo_detail.png",
+      "sha256": "25ac2b4505f366776d2b6afb2a32168192bb996734725c4bbad8085dd8fec893",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed_with_partial_occlusion",
+      "observations": "Vertical Bendigo Bank sign, circular B badge, right glass door/handle, dark brick frame and portions of the display glazing are visible. The foreground trunk still covers the middle of the left display window; the visible entrance is to its right.",
+      "remaining_limits": "This image is partial frontage evidence, not an unobstructed record of the complete shopfront. The actual tree remains; a still image cannot confirm entry collision.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_bubu_detail.png",
+      "relative_path": "precinct-screenshots/darling_bubu_detail.png",
+      "sha256": "d73291ed6a60778bff8cea8ce4d7ff76a13a3901d2478fbcbbaeb68a1ea3ed52",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "The yellow-brown open bar, green canopy, framed panels, three rows of bottle forms, three red stools, counter slats and side glass door are distinct and unobstructed. BAR BUBU text is legible.",
+      "remaining_limits": "Bottles/panels are simple authored geometry and the surrounding host facade is generic. This does not prove a complete interior or exact photographed proportions.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_harbour_street_shops.png",
+      "relative_path": "precinct-screenshots/darling_harbour_street_shops.png",
+      "sha256": "e849a51b31efc56dc6c6eff36a7b6d69bf2b58a029c448272663e634fa158204",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Haven Specialty Coffee is visible opposite the roadway with readable shop name, side door, counter/display objects and a clear pavement edge. No duplicated floating POI label overlaps the target.",
+      "remaining_limits": "The frontage is small in the wide frame; this is address-aligned inferred exterior coverage, not a photograph-matched survey. Most of the host facade remains generic.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_little_hay_shops.png",
+      "relative_path": "precinct-screenshots/darling_little_hay_shops.png",
+      "sha256": "e406eaa41379ec25e6241cde6e67d8f2abac7764d99937f3aa5c64d5c3ea5843",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Sushi Sei has a clear sign, side door, three suspended shapes and counter/display panel. The neighbouring tattoo frontage is partially included on the right; the foreground paving has no torn triangles visible in this frame.",
+      "remaining_limits": "An overhead surface crops the upper frame. Only the central shop is fully framed; the repeated frontage layout is inferred.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_little_pier_shops.png",
+      "relative_path": "precinct-screenshots/darling_little_pier_shops.png",
+      "sha256": "43db0d5b40bcfecbf9774a6527453599a8807aac76b6cba8a726b257d0467f96",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Meet Fresh is readable and its door/counter display is exposed; McDonalds is visible farther left. Retained tree crowns overhang the street while leaving the main signs and door planes inspectable.",
+      "remaining_limits": "Wide, shaded view with simplified surrounding ground and generic host walls. This is not evidence that the full street paving, planting or either restaurant interior is reproduced.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_octanet.png",
+      "relative_path": "precinct-screenshots/darling_octanet.png",
+      "sha256": "96840f87846d70f1e3d5b30bec43b791a380dc97c9afed1248f5b324560f194e",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Elevated camera exposes the blue conical rope lattice, central mast, apex and multiple ground anchor ends. Surrounding tree crowns remain, but they no longer mask the principal net structure.",
+      "remaining_limits": "Some rear/base surroundings lie behind foliage. Static imagery does not prove that individual ropes can be climbed; a full climbing controller is outside the implementation.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_playground_plan.png",
+      "relative_path": "precinct-screenshots/darling_playground_plan.png",
+      "sha256": "f7b702bfe434908deb2ecaec2513efd16b7d79d2ed161954e2ce58d0dc4ade55",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Aerial frame shows the relationship of the irregular fountain strips, pale play-area surfaces, blue Octanet, shade structures, retained trees and neighbouring large buildings. No obsolete airport diagonal road or airport development label crosses this area.",
+      "remaining_limits": "Canopies and the high viewpoint conceal most small equipment. This is a layout overview, not full per-equipment inspection, vegetation surveying or complete precinct replication.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_puppuccino_lillianna.png",
+      "relative_path": "precinct-screenshots/darling_puppuccino_lillianna.png",
+      "sha256": "2ead4d50228fcb113a84c639ac3bc737a8d0c97530d7e583904c4f3ccf73a11f",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "The adjacent Puppuccino Pet Spa and Lillianna Gifts & Home names are legible. Paw motif, striped display backing and repeated pet-product forms distinguish Puppuccino; smaller multicolour shelf objects distinguish Lillianna. The lane remains visually open.",
+      "remaining_limits": "The documentary references support interior/display features for these two shops, not their complete street exteriors. Door/frame dimensions and generic host architecture remain inferred.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_steam_mill_new.png",
+      "relative_path": "precinct-screenshots/darling_steam_mill_new.png",
+      "sha256": "b7fed08ff7cea2fed11186a06a6a77ad7b6480504d54da8433ee7242e1c4f56a",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Dragon Hot Pot is fully framed with red fascia, side door, hanging circular forms and display panel. MATCHA-YA is visible to the right, with a sliver of the neighbouring left frontage. The earlier central foreground obstruction is absent.",
+      "remaining_limits": "The crop does not document the entire continuous row. Dragon and most new storefront forms are address-aligned inferred exteriors, with simplified menus and materials.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_tattoo_detail.png",
+      "relative_path": "precinct-screenshots/darling_tattoo_detail.png",
+      "sha256": "6f49a8ffea465e8238b40362c1ed800fd171380bac04b7bf6749ce6898a44577",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Dark brick surround, 13 FEET TATTOO fascia, projecting side sign, glass door/window lettering, vertical graphic panels and a front bench are all visible. No foreground trunk masks the target frontage.",
+      "remaining_limits": "Graphic panels and materials are original simplified interpretations; this is not a complete interior, verified logo artwork copy or surveyed dimensional replica.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_tumbalong_restaurants.png",
+      "relative_path": "precinct-screenshots/darling_tumbalong_restaurants.png",
+      "sha256": "c14c914c13a035834c6f377cfe7a18d3760fd507da99eddad45d720790e437e4",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "789 Korean BBQ and Uliveto appear side by side with distinct fascia colours and display layouts; part of Holy Basil is visible on the left. The broad foreground paving reads as a continuous surface.",
+      "remaining_limits": "The two central shops use inferred frontage geometry and generic enclosing walls. Still imagery cannot validate every surface seam over motion or reproduce all restaurant fitouts.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_waterplay.png",
+      "relative_path": "precinct-screenshots/darling_waterplay.png",
+      "sha256": "46fe798f84f1d14b5fb85d660b2e58f9baaa3450a8d553d6687dcfc8711357cc",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "The adjusted camera clearly exposes the waterwheel hub, radial paddles/rim and supports. The three pump/stand forms and bowls on the raised slatted area behind are also visible. Trees remain on both sides; none now crosses the wheel centre.",
+      "remaining_limits": "The frame covers the wheel and pump cluster only; the screw, whole water-play route and other equipment are outside it. Water machinery interaction and measured material/proportion accuracy are not established by the image.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "darling_wide_slide.png",
+      "relative_path": "precinct-screenshots/darling_wide_slide.png",
+      "sha256": "0f1be3131efb688aac37a7cf1cc7f6b94c2fda81bcdf05d61a594c74c15af8e9",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "The wide blue sliding surface and both raised side lips are clear from the lower approach; its curved transition is readable. No central tree trunk blocks the slope. A retained pale shade membrane occupies the upper part of the frame.",
+      "remaining_limits": "The rear steps and top approach are not independently inspectable from this angle; their traversal belongs to the separate production-player regression. Surrounding crowns and membrane are simplified shapes.",
+      "blocking_defect_confirmed": false
+    },
+    {
+      "file": "tumbalong_fountains.png",
+      "relative_path": "precinct-screenshots/tumbalong_fountains.png",
+      "sha256": "e931e10517e78e8acca46b74e5379bec0d5ca6a2907179c2619b0bd11a83ffb2",
+      "resolution": [
+        1440,
+        900
+      ],
+      "actually_opened_and_viewed": true,
+      "review_status": "reviewed",
+      "observations": "Both separated rectangular fountain areas now show their water/paving surfaces, light borders and thin jets. The old airport asphalt slab, centre stripe and giant AIRPORT CONNECTOR lettering are absent. The path between the fountains and surrounding trees are visible.",
+      "remaining_limits": "The near fountain is cropped at the bottom edge; this frame does not show every perimeter edge. Jet forms, water shading and border widths are simplified, and animation/operation cannot be assessed from a still image.",
+      "blocking_defect_confirmed": false
+    }
+  ]
+}

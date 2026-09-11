@@ -1,11 +1,11 @@
 extends RefCounted
 ## One-time safety migration when loading a world made before real city geometry.
-const REVISION := 3
+const REVISION := 4
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
 const City=preload("res://scripts/city_map.gd")
 
 static func _custom_id(id:String) -> bool:
-	return id.begins_with("city/") or id.begins_with("bank/") or id.begins_with("manly/") or id.begins_with("quay/") or id.begins_with("metro/") or id.begins_with("darling_square/") or id.begins_with("cyber/") or id.begins_with("icc/") or id.begins_with("sydney_tower/") or id.begins_with("circular_quay/") or id.begins_with("darling_detail/")
+	return id.begins_with("city/") or id.begins_with("bank/") or id.begins_with("manly/") or id.begins_with("quay/") or id.begins_with("metro/") or id.begins_with("darling_square/") or id.begins_with("cyber/") or id.begins_with("icc/") or id.begins_with("sydney_tower/") or id.begins_with("circular_quay/") or id.begins_with("darling_detail/") or id.begins_with("opera/")
 
 static func _geometry(world:Node3D) -> Dictionary:
 	if world.has_meta("map_migration_cache"):return world.get_meta("map_migration_cache")

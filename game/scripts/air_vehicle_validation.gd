@@ -26,6 +26,7 @@ func run():
   check("saving before first integration retains launch energy "+kind,initial_speed>(27 if kind=="glider" else 9),{"saved_speed":initial_speed})
   var metrics:Array=[]
   var lowest_speed:=INF;var worst_sink:=0.0;var max_roll:=0.0
+  var first_second_loss:=0.0;var first_three_seconds_loss:=0.0;var stalled_frames:=0
   var initial_energy:=0.0
   for frame in range(900):
    await get_tree().physics_frame
@@ -34,11 +35,16 @@ func run():
     lowest_speed=minf(lowest_speed,wing.linear_velocity.length())
     worst_sink=minf(worst_sink,wing.linear_velocity.y)
     max_roll=maxf(max_roll,absf(wing.rotation.z))
-   if frame in [0,1,2,59,299,599,899]:metrics.append({"frame":frame+1,"position":[wing.position.x,wing.position.y,wing.position.z],"velocity":[wing.linear_velocity.x,wing.linear_velocity.y,wing.linear_velocity.z],"stalled":wing.stalled})
+    if wing.stalled:stalled_frames+=1
+   if frame==59:first_second_loss=start.y-wing.position.y
+   if frame==179:first_three_seconds_loss=start.y-wing.position.y
+   if frame in [0,1,2,59,179,299,599,899]:metrics.append({"frame":frame+1,"position":[wing.position.x,wing.position.y,wing.position.z],"velocity":[wing.linear_velocity.x,wing.linear_velocity.y,wing.linear_velocity.z],"stalled":wing.stalled})
   var distance:=Vector2(wing.position.x-start.x,wing.position.z-start.z).length()
   var final_energy:float=9.81*wing.position.y+.5*wing.linear_velocity.length_squared()
   check("newly summoned wing has sustainable launch speed "+kind,lowest_speed>(14 if kind=="glider" else 6),{"initial_speed":initial_speed,"lowest_speed":lowest_speed})
-  check("fifteen seconds unpowered stable flight "+kind,wing.health==100 and wing.position.y>start.y-(35 if kind=="glider" else 45) and distance>(220 if kind=="glider" else 100) and worst_sink>-4 and max_roll<.2,{"altitude_lost":start.y-wing.position.y,"distance":distance,"worst_sink":worst_sink,"max_roll":max_roll,"health":wing.health})
+  check("spawn provides usable flying height "+kind,start.y>=(180 if kind=="glider" else 120),{"height":start.y})
+  check("launch immediately settles into glide without a drop "+kind,first_second_loss<.8 and first_three_seconds_loss<3.5 and stalled_frames==0,{"first_second_loss":first_second_loss,"first_three_seconds_loss":first_three_seconds_loss,"stalled_frames_after_activation":stalled_frames})
+  check("fifteen seconds unpowered stable flight "+kind,wing.health==100 and wing.position.y>start.y-22 and distance>(220 if kind=="glider" else 100) and worst_sink>-2 and max_roll<.2,{"altitude_lost":start.y-wing.position.y,"distance":distance,"worst_sink":worst_sink,"max_roll":max_roll,"health":wing.health})
   check("gliding does not add mechanical energy "+kind,final_energy<initial_energy*1.01,{"initial":initial_energy,"final":final_energy})
   scenarios.append({"kind":kind,"samples":metrics})
   var before_reentry:Vector3=wing.linear_velocity

@@ -13,21 +13,26 @@ const SHELL_THICKNESS := 0.32
 const BANDS := 8
 const BAND_STEPS := 3
 const LONG_STEPS := 24
+const Geo = preload("res://scripts/city_landmarks.gd")
 const TILE_SHADER = preload("res://shaders/opera_tiles.gdshader")
+static var _roof_fields:Array=[]
 
-# x, z, half width, depth, height over podium, yaw relative to site, hall group.
-# Successive north-facing roofs rise towards the centre; the southern foyer faces the steps.
+# x, z, half width, ridge length, north/front ridge height, yaw, group,
+# rear ridge height, springing-point longitudinal fraction. Metres over upper podium.
+# CMP sections distinguish rising north roof groups, the long dominant hall roof,
+# and a reversed southern foyer hood. Rear ridges remain elevated; they are not
+# repeated full-height petals falling to the podium at every seam.
 const ROOFS := [
-	[-27.0,-52.0,22.0,37.0,28.0,-3.0,"concert"],
-	[-27.0,-29.0,24.0,53.0,39.0,-3.0,"concert"],
-	[-26.0,0.0,25.2,68.0,50.15,-3.0,"concert"],
-	[-24.0,44.0,20.0,43.0,26.0,177.0,"concert"],
-	[24.0,-41.0,18.5,34.0,23.0,3.0,"joan_sutherland"],
-	[24.0,-20.0,20.0,46.0,32.0,3.0,"joan_sutherland"],
-	[23.0,5.0,21.0,57.0,41.0,3.0,"joan_sutherland"],
-	[21.5,43.0,17.0,36.0,22.0,183.0,"joan_sutherland"],
-	[-41.0,72.0,11.0,22.0,15.0,0.0,"bennelong"],
-	[-41.0,86.0,11.0,21.0,14.0,180.0,"bennelong"]
+	[-26.0,-60.0,22.4,36.0,21.5,0.0,"concert",18.0,0.26],
+	[-26.0,-27.5,25.5,63.0,33.0,0.0,"concert",31.0,-0.04],
+	[-26.0,5.0,28.0,78.0,43.1,0.0,"concert",32.0,0.25],
+	[-26.0,54.0,21.0,20.0,24.0,180.0,"concert",32.0,0.10],
+	[23.0,-46.0,18.0,32.0,18.0,0.0,"joan_sutherland",14.5,0.26],
+	[23.0,-24.0,21.0,64.0,27.0,0.0,"joan_sutherland",25.0,0.05],
+	[23.0,7.0,23.0,68.0,36.5,0.0,"joan_sutherland",23.0,0.25],
+	[23.0,49.0,18.4,16.0,20.0,180.0,"joan_sutherland",23.0,0.10],
+	[-41.0,72.0,11.0,22.0,15.0,0.0,"bennelong",7.5,0.20],
+	[-41.0,86.0,11.0,21.0,14.0,180.0,"bennelong",7.5,0.20]
 ]
 
 static func site_basis() -> Basis:
@@ -35,42 +40,52 @@ static func site_basis() -> Basis:
 
 static func build(world: Node3D) -> void:
 	var basis := site_basis()
+	_prepare_fields()
 	var tile := ShaderMaterial.new()
 	tile.shader = TILE_SHADER
 	world.materials["opera_tiles"] = tile
 	world._mat("opera_granite", Color("b5a18b"), 0.86)
 	world._mat("opera_edge", Color("d4cbbb"), 0.72)
-	world._mat("opera_bronze", Color("594d38"), 0.34, 0.64)
-	var glass: StandardMaterial3D = world._mat("opera_glass", Color("344c4b"), 0.40, 0.12)
-	glass.metallic_specular = 0.25
+	world._mat("opera_bronze", Color("877457"), 0.43, 0.28)
+	var glass: StandardMaterial3D = world._mat("opera_glass", Color(0.33,0.39,0.35,0.27), 0.23, 0.03)
+	glass.metallic_specular = 0.35
+	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
 	glass.cull_mode = BaseMaterial3D.CULL_DISABLED
-	world._mat("opera_recess", Color("333b38"), 0.85)
+	world._mat("opera_recess", Color("6d6659"), 0.73)
 	_build_podium(world, basis)
 	for index in range(ROOFS.size()):
 		var spec: Array = ROOFS[index]
 		var origin := CENTER + basis * Vector3(spec[0], PODIUM_HEIGHT, spec[1])
 		var roof_basis := basis * Basis(Vector3.UP, deg_to_rad(spec[5]))
 		for side in [-1, 1]:
-			var surface := sphere_patch(spec[2], spec[3], spec[4], side)
+			var surface := surface_for(spec, side)
 			for band in range(BANDS):
 				var from := float(band) / BANDS
 				var to := float(band + 1) / BANDS
 				var id := "opera/shell/%s/%s" % [index, band + (BANDS if side > 0 else 0)]
-				var body: StaticBody3D = world._structure_mesh(id, shell_mesh(surface, from, to), origin, "opera_tiles", 180000.0, roof_basis)
+				var body: StaticBody3D = world._structure_mesh(id, shell_mesh(surface, from, to,index), origin, "opera_tiles", 180000.0, roof_basis)
 				body.set_meta("shell_group", spec[6])
 				body.set_meta("sphere_radius", SPHERE_RADIUS)
 				body.set_meta("surface_center", surface.center)
-				_add_ribs(world, body, surface, from, to)
+				_add_ribs(world, body, surface, from, to,index)
 		if index in [0,3,4,7,8,9]:
 			_build_foyer(world, index, spec, origin, roof_basis)
+		else:
+			_build_interstitial(world,index,spec,origin,roof_basis)
+	_build_rear_joint(world,2,3)
+	_build_rear_joint(world,6,7)
 	_build_promenade(world, basis)
 	world.set_meta("opera_shell_pairs", ROOFS.size())
-	world.set_meta("opera_reference_revision", "spherical-pairs-2026-09")
+	world.set_meta("opera_reference_revision", "cmp-stepped-ridges-open-foyers-v014")
 
-static func sphere_patch(width: float, depth: float, height: float, side: int) -> Dictionary:
+static func surface_for(spec: Array, side: int) -> Dictionary:
+	return sphere_patch(spec[2],spec[3],spec[4],side,spec[7],spec[8])
+
+static func sphere_patch(width: float, depth: float, height: float, side: int, rear_height: float = 0.8, toe_fraction: float = -0.18) -> Dictionary:
 	var a := Vector3(0.0, height, -depth * 0.5)
-	var b := Vector3(0.0, 0.8, depth * 0.5)
-	var c := Vector3(width * side, 0.0, -depth * 0.18)
+	var b := Vector3(0.0, rear_height, depth * 0.5)
+	var c := Vector3(width * side, 0.0, depth * toe_fraction)
 	var ab := b-a
 	var ac := c-a
 	var cross := ab.cross(ac)
@@ -115,7 +130,8 @@ static func _triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, norma
 			st.set_uv(_uv(surface, point))
 		st.add_vertex(point)
 
-static func shell_mesh(surface: Dictionary, from: float, to: float) -> ArrayMesh:
+static func shell_mesh(surface: Dictionary, from: float, to: float, roof_index:int=-1) -> ArrayMesh:
+	if roof_index>=0:return _trimmed_shell_mesh(surface,from,to,roof_index)
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for layer in range(2):
@@ -153,7 +169,7 @@ static func shell_mesh(surface: Dictionary, from: float, to: float) -> ArrayMesh
 			_triangle(st,c,b,d,normal)
 	return st.commit()
 
-static func _add_ribs(world: Node3D, body: Node3D, surface: Dictionary, from: float, to: float) -> void:
+static func _add_ribs(world: Node3D, body: Node3D, surface: Dictionary, from: float, to: float,roof_index:int=-1) -> void:
 	# Thin rim and fan ribs are one mesh per chunk, so destruction cannot leave floating ribs.
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -165,6 +181,7 @@ static func _add_ribs(world: Node3D, body: Node3D, surface: Dictionary, from: fl
 			var p0 := shell_point(surface,u0,v,-0.027)
 			var p1 := shell_point(surface,u1,v,-0.027)
 			if p0.distance_to(p1)<0.001: continue
+			if roof_index>=0 and (not _exposed(roof_index,p0) or not _exposed(roof_index,p1)):continue
 			var delta := (p1-p0).normalized()
 			var normal: Vector3 = ((p0+p1)*0.5-surface.center).normalized()
 			var offset := normal.cross(delta).normalized() * (0.70 if rib==0 else (0.32 if rib==12 else 0.037))
@@ -181,50 +198,201 @@ static func _add_ribs(world: Node3D, body: Node3D, surface: Dictionary, from: fl
 	mi.material_override = world.materials["opera_edge"]
 	body.add_child(mi)
 
+static func _foyer_base(top:Vector3,spec:Array,index:int) -> Vector3:
+	if index in [0,4]:
+		# The lower northern curtain projects out from the roof, with a near-vertical
+		# public-height base and the pronounced outward-canted upper glazing of CMP.
+		var lateral:=clampf(absf(top.x)/(float(spec[2])*.95),0.0,1.0)
+		var z:=lerpf(-float(spec[3])*.5-3.0,float(spec[3])*float(spec[8]),pow(lateral,8.0))
+		return Vector3(top.x*1.08,.02,z)
+	return Vector3(top.x,.02,top.z-4.0*(1.0-absf(top.x)/float(spec[2])))
+
+static func _foyer_point(top:Vector3,spec:Array,index:int,t:float) -> Vector3:
+	var bottom:=_foyer_base(top,spec,index)
+	if index in [0,4]:
+		var knee:=Vector3(bottom.x,minf(4.0,top.y),bottom.z)
+		return bottom.lerp(knee,t/.30) if t<=.30 else knee.lerp(top,(t-.30)/.70)
+	return bottom.lerp(top,t)
+
 static func _build_foyer(world: Node3D, index: int, spec: Array, origin: Vector3, basis: Basis) -> void:
-	var surface := sphere_patch(spec[2],spec[3],spec[4],1)
-	var st := SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var curves: Array[Vector3] = []
-	for i in range(25):
-		var lateral := (i-12.0)/12.0
-		var point := shell_point(surface, absf(lateral), 0.0)
-		point.x = absf(point.x) * signf(lateral)
-		point.x *= 0.95
-		# The bronze curtain sits behind the concrete arch and its deep ribbed soffit.
-		point.y = maxf(0.2,point.y-2.2-float(spec[4])*0.055*(1.0-absf(lateral)))
-		point.z += 2.5+4.0*(1.0-absf(lateral))
+	var surface:=surface_for(spec,1);var south_entry:=index in [3,7]
+	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var curves:Array[Vector3]=[]
+	for i in range(49):
+		var lateral:float=(i-24.0)/24.0
+		var point:=shell_point(surface,absf(lateral),0.0)
+		point.x=absf(point.x)*signf(lateral)*.95
+		point.y=maxf(.15,point.y-.65)
+		point.z+=2.5+4.0*(1.0-absf(lateral))
 		curves.append(point)
-	for i in range(24):
-		var a: Vector3 = curves[i]
-		var b: Vector3 = curves[i+1]
-		var ba := Vector3(a.x,0.25,a.z-4.0*(1.0-absf(a.x)/float(spec[2])))
-		var bb := Vector3(b.x,0.25,b.z-4.0*(1.0-absf(b.x)/float(spec[2])))
-		if maxf(a.y,b.y)<0.5: continue
-		_triangle(st,ba,bb,a,Vector3.FORWARD)
-		_triangle(st,a,bb,b,Vector3.FORWARD)
-	var id := "opera/glass/%s"%index
-	var body: Node3D = world._structure_mesh(id,st.commit(),origin,"opera_glass",105000.0,basis)
-	# Bronze mullions follow the splayed inclined curtain, rather than filling an unrelated triangle.
-	var frames := SurfaceTool.new()
-	frames.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for i in range(1,24):
-		var top: Vector3 = curves[i]
-		if top.y<1.0: continue
-		var bottom := Vector3(top.x,0.25,top.z-4.0*(1.0-absf(top.x)/float(spec[2])))
-		_beam_mesh(frames,bottom,top,0.16)
-	for row in range(1,6):
-		for i in range(24):
-			var t := float(row)/6.0
-			var a: Vector3 = curves[i]
-			var b: Vector3 = curves[i+1]
-			var ba := Vector3(a.x,0.25,a.z-4.0*(1.0-absf(a.x)/float(spec[2])))
-			var bb := Vector3(b.x,0.25,b.z-4.0*(1.0-absf(b.x)/float(spec[2])))
-			_beam_mesh(frames,ba.lerp(a,t),bb.lerp(b,t),0.10)
-	var mullions := MeshInstance3D.new()
-	mullions.mesh = frames.commit()
-	mullions.material_override = world.materials["opera_bronze"]
-	body.add_child(mullions)
+	var frames:=SurfaceTool.new();frames.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var levels:Array=[0.0,.30,.44,.58,.72,.86,1.0] if index in [0,4] else [0.0,.17,.34,.51,.68,.85,1.0]
+	for i in range(48):
+		var top_a:Vector3=curves[i];var top_b:Vector3=curves[i+1]
+		for row in range(levels.size()-1):
+			var a:=_foyer_point(top_a,spec,index,levels[row]);var b:=_foyer_point(top_b,spec,index,levels[row])
+			var c:=_foyer_point(top_a,spec,index,levels[row+1]);var d:=_foyer_point(top_b,spec,index,levels[row+1])
+			if south_entry and minf(a.x,b.x)<6.2 and maxf(a.x,b.x)>-6.2:
+				if maxf(c.y,d.y)<3.65:continue
+				if a.y<3.65:a=a.lerp(c,clampf((3.65-a.y)/maxf(c.y-a.y,.001),0.0,1.0))
+				if b.y<3.65:b=b.lerp(d,clampf((3.65-b.y)/maxf(d.y-b.y,.001),0.0,1.0))
+			_triangle(st,a,b,c,Vector3.FORWARD);_triangle(st,c,b,d,Vector3.FORWARD)
+			if not south_entry or minf(c.y,d.y)>=3.65 or minf(c.x,d.x)>6.3 or maxf(c.x,d.x)<-6.3:_beam_mesh(frames,c,d,.08)
+	for i in range(1,48,2):
+		var top:Vector3=curves[i]
+		for j in range(levels.size()-1):
+			var a:=_foyer_point(top,spec,index,levels[j]);var b:=_foyer_point(top,spec,index,levels[j+1])
+			if south_entry and absf(top.x)<6.3:
+				if b.y<3.65:continue
+				if a.y<3.65:a=a.lerp(b,clampf((3.65-a.y)/maxf(b.y-a.y,.001),0.0,1.0))
+			_beam_mesh(frames,a,b,.15)
+	var body:Node3D=world._structure_mesh("opera/glass/%s"%index,st.commit(),origin,"opera_glass",105000,basis)
+	var mullions:=MeshInstance3D.new();mullions.mesh=frames.commit();mullions.material_override=world.materials.opera_bronze;body.add_child(mullions)
+
+static func _prepare_fields() -> void:
+	_roof_fields.clear()
+	for spec:Array in ROOFS:
+		var field:Dictionary={"basis":Basis(Vector3.UP,deg_to_rad(spec[5])),"origin":Vector3(spec[0],PODIUM_HEIGHT,spec[1]),"sides":[]}
+		for side in [-1,1]:
+			var surface:=surface_for(spec,side);var outline:=PackedVector2Array()
+			for j in range(25):
+				var q:=shell_point(surface,0.0,float(j)/24.0);outline.append(Vector2(q.x,q.z))
+			for j in range(1,25):
+				var q:=shell_point(surface,float(j)/24.0,1.0);outline.append(Vector2(q.x,q.z))
+			for j in range(23,-1,-1):
+				var q:=shell_point(surface,float(j)/24.0,0.0);outline.append(Vector2(q.x,q.z))
+			field.sides.append({"surface":surface,"outline":outline})
+		_roof_fields.append(field)
+
+static func _field_height(index:int,site_point:Vector3) -> float:
+	if _roof_fields.is_empty():_prepare_fields()
+	var field:Dictionary=_roof_fields[index]
+	var p:Vector3=field.basis.inverse()*(site_point-field.origin)
+	var side:Dictionary=field.sides[1 if p.x>=0.0 else 0]
+	if not Geometry2D.is_point_in_polygon(Vector2(p.x,p.z),side.outline):return -INF
+	var center:Vector3=side.surface.center
+	var remaining:=SPHERE_RADIUS*SPHERE_RADIUS-pow(p.x-center.x,2)-pow(p.z-center.z,2)
+	if remaining<0.0:return -INF
+	return center.y+sqrt(remaining)+PODIUM_HEIGHT
+
+static func _roof_height_at(spec:Array,site_point:Vector3) -> float:
+	return _field_height(ROOFS.find(spec),site_point)
+
+static func _exposed(index:int,p:Vector3) -> bool:
+	var field:Dictionary=_roof_fields[index]
+	var site:Vector3=field.origin+field.basis*p
+	if site.y<_room_clearance(site)+SHELL_THICKNESS:return false
+	for other in range(ROOFS.size()):
+		if other==index or ROOFS[other][6]!=ROOFS[index][6]:continue
+		if _field_height(other,site)>site.y+.035:return false
+	return true
+
+static func _trimmed_shell_mesh(surface:Dictionary,from:float,to:float,index:int) -> ArrayMesh:
+	# Each adjacent shell contributes only the exposed part of the outer envelope.
+	# Marching cell boundaries are capped with the same 320mm inner skin, removing
+	# buried roof fragments that would otherwise cut through the occupied hall.
+	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var boundaries:Dictionary={}
+	for col in BAND_STEPS:
+		for row in LONG_STEPS:
+			var u0:=lerpf(from,to,float(col)/BAND_STEPS);var u1:=lerpf(from,to,float(col+1)/BAND_STEPS)
+			var v0:=float(row)/LONG_STEPS;var v1:=float(row+1)/LONG_STEPS
+			var square:Array[Vector2]=[Vector2(u0,v0),Vector2(u1,v0),Vector2(u1,v1),Vector2(u0,v1)]
+			var poly:Array[Vector2]=[]
+			for k in 4:
+				var a:=square[k];var b:=square[(k+1)%4]
+				var ai:=_exposed(index,shell_point(surface,a.x,a.y));var bi:=_exposed(index,shell_point(surface,b.x,b.y))
+				if ai:poly.append(a)
+				if ai!=bi:
+					var low:=a;var high:=b
+					for iteration in 15:
+						var mid:Vector2=(low+high)*.5
+						if _exposed(index,shell_point(surface,mid.x,mid.y))==ai:low=mid
+						else:high=mid
+					poly.append((low+high)*.5)
+			if poly.size()<3:continue
+			for layer in 2:
+				var inner:=layer==1;var inset:=SHELL_THICKNESS if inner else 0.0
+				var a:=shell_point(surface,poly[0].x,poly[0].y,inset)
+				for k in range(1,poly.size()-1):
+					var b:=shell_point(surface,poly[k].x,poly[k].y,inset);var c:=shell_point(surface,poly[k+1].x,poly[k+1].y,inset)
+					var n:Vector3=((a+b+c)/3.0-surface.center).normalized()*(-1.0 if inner else 1.0)
+					_triangle(st,a,b,c,n,surface,inner)
+			for k in poly.size():
+				var a:=poly[k];var b:=poly[(k+1)%poly.size()]
+				var pa:=shell_point(surface,a.x,a.y);var pb:=shell_point(surface,b.x,b.y)
+				var ak:=Vector3i((pa*10000).round());var bk:=Vector3i((pb*10000).round())
+				if ak==bk:continue
+				var key:=str(ak)+"/"+str(bk) if str(ak)<str(bk) else str(bk)+"/"+str(ak)
+				if boundaries.has(key):boundaries.erase(key)
+				else:boundaries[key]=[a,b]
+	for edge:Array in boundaries.values():
+		var a:=shell_point(surface,edge[0].x,edge[0].y);var b:=shell_point(surface,edge[1].x,edge[1].y)
+		var c:=shell_point(surface,edge[0].x,edge[0].y,SHELL_THICKNESS);var d:=shell_point(surface,edge[1].x,edge[1].y,SHELL_THICKNESS)
+		var n:Vector3=(b-a).cross(c-a).normalized()
+		_triangle(st,a,b,c,n);_triangle(st,c,b,d,n)
+	return st.commit()
+
+static func _room_clearance(p:Vector3) -> float:
+	# Acoustic chamber envelopes are shared with the independent interior module.
+	# The small allowance covers the wooden roof thickness and avoids coplanar faces.
+	if p.x>=-44.4 and p.x<=-7.6 and p.z>=-37.5 and p.z<=31.5:
+		var progress:=smoothstep(-37.0,14.0,p.z)
+		var crown:=lerpf(28.9,37.1,progress);var edge:=lerpf(24.0,28.0,progress)
+		return crown-(crown-edge)*pow(clampf(absf(p.x+26)/18.0,0,1),3.2)+.75
+	if p.x>=7.4 and p.x<=38.6 and p.z>=-39.5 and p.z<=34.5:return 24.65
+	return 0.0
+
+static func _build_interstitial(world:Node3D,index:int,spec:Array,origin:Vector3,basis:Basis) -> void:
+	# CMP 4.7.3: bronze louvres deeply recessed between shell groups. The lower
+	# edge follows the preceding roof instead of duplicating another glass arch.
+	# Where the lower roof ends, enclosure starts above the public circulation band;
+	# the independently authored hall walls/foyers enclose the occupied lower space.
+	var panel:=SurfaceTool.new();panel.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var blades:=SurfaceTool.new();blades.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var surface:=surface_for(spec,1)
+	var previous:Array=ROOFS[index-1]
+	var rows:Array=[]
+	for j in range(193):
+		var t:float=(j-96.0)/96.0
+		var top:=shell_point(surface,absf(t),0.0,SHELL_THICKNESS+.16)
+		top.x=absf(top.x)*signf(t)
+		top.z+=1.15
+		var local_basis:=Basis(Vector3.UP,deg_to_rad(spec[5]))
+		var site:Vector3=Vector3(spec[0],PODIUM_HEIGHT,spec[1])+local_basis*top
+		var lower:=maxf(4.0,_roof_height_at(previous,site)-PODIUM_HEIGHT-.12)
+		lower=maxf(lower,_room_clearance(site)-PODIUM_HEIGHT+1.0)
+		rows.append([top,Vector3(top.x,minf(lower,top.y),top.z)])
+	for j in range(192):
+		var a:Vector3=rows[j][0];var b:Vector3=rows[j+1][0]
+		var lo_a:Vector3=rows[j][1];var lo_b:Vector3=rows[j+1][1]
+		if maxf(a.y-lo_a.y,b.y-lo_b.y)<.01:continue
+		_triangle(panel,lo_a,lo_b,a,Vector3.FORWARD)
+		_triangle(panel,a,lo_b,b,Vector3.FORWARD)
+		for y in range(4,ceili(maxf(a.y,b.y)*4.0)):
+			var h:=float(y)*.25
+			if h<maxf(lo_a.y,lo_b.y) or h>minf(a.y,b.y):continue
+			_beam_mesh(blades,Vector3(a.x,h,a.z-.06),Vector3(b.x,h,b.z-.06),.075)
+	var body:Node3D=world._structure_mesh("opera/infill/louvres/"+str(index),panel.commit(),origin,"opera_recess",140000,basis)
+	var mesh:=MeshInstance3D.new();mesh.mesh=blades.commit();mesh.material_override=world.materials.opera_bronze;body.add_child(mesh)
+
+static func _build_rear_joint(world:Node3D,main_index:int,foyer_index:int) -> void:
+	# Opposing southern roofs meet at the same elevated ridge. A recessed curved
+	# bronze infill joins their two trailing edges down to the separate springings.
+	var main:Array=ROOFS[main_index];var foyer:Array=ROOFS[foyer_index]
+	for side in [-1,1]:
+		var left:=surface_for(main,side);var right:=surface_for(foyer,-side)
+		var first:=Basis(Vector3.UP,deg_to_rad(main[5]));var second:=Basis(Vector3.UP,deg_to_rad(foyer[5]))
+		var a_origin:=Vector3(main[0],PODIUM_HEIGHT,main[1]);var b_origin:=Vector3(foyer[0],PODIUM_HEIGHT,foyer[1])
+		var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for j in range(32):
+			var u0:=float(j)/32;var u1:=float(j+1)/32
+			var a:=a_origin+first*shell_point(left,u0,1.0,SHELL_THICKNESS)
+			var b:=a_origin+first*shell_point(left,u1,1.0,SHELL_THICKNESS)
+			var c:=b_origin+second*shell_point(right,u0,1.0,SHELL_THICKNESS)
+			var d:=b_origin+second*shell_point(right,u1,1.0,SHELL_THICKNESS)
+			_triangle(st,a,b,c,Vector3(side,0,0));_triangle(st,c,b,d,Vector3(side,0,0))
+		world._structure_mesh("opera/infill/rear/%d/%d"%[main_index,side],st.commit(),CENTER,"opera_bronze",140000,site_basis())
 
 static func _beam_mesh(st: SurfaceTool, a: Vector3, b: Vector3, width: float) -> void:
 	if a.distance_to(b)<0.001: return
@@ -250,43 +418,54 @@ static func _prism(poly: PackedVector2Array, height: float) -> ArrayMesh:
 	return st.commit()
 
 static func _build_podium(world: Node3D, basis: Basis) -> void:
+	# Hollow podium, based on CMP ground/upper plans. Interior owns its intermediate
+	# box-office slabs and stairs; these surfaces never occupy the rooms as a solid box.
 	var base := PackedVector2Array([Vector2(-60,-76),Vector2(-47,-89),Vector2(41,-89),Vector2(60,-71),Vector2(60,66),Vector2(49,72),Vector2(-52,72),Vector2(-60,57)])
-	world._structure_mesh("opera/podium/0",_prism(base,3.0),CENTER,"opera_granite",2400000.0,basis)
-	var upper := PackedVector2Array([Vector2(-56,-72),Vector2(-44,-83),Vector2(38,-83),Vector2(56,-67),Vector2(56,61),Vector2(48,66),Vector2(-51,66),Vector2(-56,55)])
-	var podium: Node3D = world._structure_mesh("opera/podium/1",_prism(upper,PODIUM_HEIGHT-3.0),CENTER+Vector3.UP*3.0,"opera_granite",2200000.0,basis)
-	# Long inset foyer windows and cantilevered sunshades articulate the harbour face.
-	for level in range(2):
-		for hall in [-27.0,24.0]:
-			world._box(podium,Vector3(hall,1.8+level*2.1,-82.8),Vector3(35,1.05,0.15),"opera_recess")
-			world._box(podium,Vector3(hall,2.45+level*2.1,-83.2),Vector3(37,0.35,1.2),"opera_edge")
-	# 48 shallow treads, eight removable ramp segments. No tall box steps to snag walking.
+	world._structure_mesh("opera/podium/ground",Geo.prism(base,-.35,0.0),CENTER,"opera_granite",2400000.0,basis)
+	# Split the upper floor into rectangular cells before clipping to the podium,
+	# so holes are real absent triangles in both rendering and collision.
+	var upper_base := PackedVector2Array([Vector2(-60,-76),Vector2(-47,-89),Vector2(41,-89),Vector2(60,-71),Vector2(60,66),Vector2(-52,66),Vector2(-60,57)])
+	var xs := [-60.0,-10.5,-3.5,15.0,31.0,60.0]
+	var zs := [-89.0,4.0,8.0,37.0,59.5,72.0]
+	for ix in xs.size()-1:
+		for iz in zs.size()-1:
+			var mid := Vector2((xs[ix]+xs[ix+1])*.5,(zs[iz]+zs[iz+1])*.5)
+			if (mid.x>-10.5 and mid.x< -3.5 and mid.y>37.0 and mid.y<59.5) or (mid.x>15 and mid.x<31 and mid.y>4 and mid.y<8):continue
+			var cell := PackedVector2Array([Vector2(xs[ix],zs[iz]),Vector2(xs[ix+1],zs[iz]),Vector2(xs[ix+1],zs[iz+1]),Vector2(xs[ix],zs[iz+1])])
+			for poly in Geometry2D.intersect_polygons(upper_base,cell):
+				world._structure_mesh("opera/podium/upper/%d/%d"%[ix,iz],Geo.prism(poly,PODIUM_HEIGHT-.28,PODIUM_HEIGHT),CENTER,"opera_granite",500000.0,basis)
+	# Four accessible Western Foyer doors. Higher granite fascia spans the doors.
+	var west_breaks := [-76.0,-42.0,-36.0,-10.0,-4.0,25.0,33.0,49.0,57.0,66.0]
+	for j in range(0,west_breaks.size()-1,2):
+		var lo:float=west_breaks[j];var hi:float=west_breaks[j+1]
+		world._structure_box("opera/podium/west/wall/%d"%j,CENTER+basis*Vector3(-59.78,1.65,(lo+hi)*.5),Vector3(.44,3.3,hi-lo),"opera_granite",180000,basis)
+	world._structure_box("opera/podium/west/fascia",CENTER+basis*Vector3(-59.78,7.25,-5),Vector3(.44,7.9,142),"opera_granite",360000,basis)
+	for z in [-39.0,-7.0,29.0,53.0]:
+		world._batch_box(CENTER+basis*Vector3(-60.32,3.36,z),Vector3(1.0,.12,7.0),"opera_edge",basis)
+	# Remaining podium perimeter, with the eastern Utzon/public opening preserved.
+	for zrange in [[-71.0,42.0],[49.0,66.0]]:
+		world._structure_box("opera/podium/east/wall/"+str(zrange[0]),CENTER+basis*Vector3(59.78,5.6,(zrange[0]+zrange[1])*.5),Vector3(.44,11.2,zrange[1]-zrange[0]),"opera_granite",300000,basis)
+	world._structure_box("opera/podium/east/lintel",CENTER+basis*Vector3(59.78,9.95,45.5),Vector3(.44,2.5,7.0),"opera_granite",160000,basis)
+	for j in [0,1,2,4,6]:
+		var a:=Vector3(base[j].x,5.6,base[j].y);var b:=Vector3(base[(j+1)%base.size()].x,5.6,base[(j+1)%base.size()].y)
+		world._structure_box("opera/podium/perimeter/"+str(j),CENTER+basis*((a+b)*.5),Vector3(.38,11.2,a.distance_to(b)),"opera_granite",250000,basis*Basis.looking_at(b-a,Vector3.UP))
+	world._structure_box("opera/podium/south/stair_back",CENTER+basis*Vector3(0,5.4,65.8),Vector3(97,10.8,.3),"opera_granite",600000,basis)
+	# The 48-tread monumental stair remains traversable on eight smooth ramps.
 	for segment in range(8):
-		var z0 := 95.76-segment*3.72
-		var z1 := z0-3.72
-		var y0 := segment*1.4
-		var y1 := (segment+1)*1.4
-		var st := SurfaceTool.new()
-		st.begin(Mesh.PRIMITIVE_TRIANGLES)
-		var a := Vector3(-48.5,y0,z0)
-		var b := Vector3(48.5,y0,z0)
-		var c := Vector3(-48.5,y1,z1)
-		var d := Vector3(48.5,y1,z1)
-		var normal := (b-a).cross(c-a).normalized()
-		if normal.y<0: normal = -normal
-		_triangle(st,a,b,c,normal)
-		_triangle(st,c,b,d,normal)
-		var body: Node3D = world._structure_mesh("opera/steps/%s"%segment,st.commit(),CENTER,"opera_granite",360000.0,basis)
-		# Replace the sloping visual with actual horizontal treads; retain the unobstructed smooth collider.
-		body.get_child(0).mesh = _steps_mesh(segment)
-	# Southwest restaurant rests above the lower southern podium extension.
-	world._structure_box("opera/podium/restaurant",CENTER+basis*Vector3(-41,PODIUM_HEIGHT*0.5,82),Vector3(26,PODIUM_HEIGHT,36),"opera_granite",1600000.0,basis)
-	for side in [-1,1]:
-		for z in range(-70,65,9):
-			world._box(podium,Vector3(side*56.03,3.4,z),Vector3(0.08,7.7,0.09),"opera_edge")
-		for z in range(-60,55,5):
-			world._box(podium,Vector3(side*56.06,1.1,z),Vector3(0.1,1.55,4.4),"opera_glass")
-			world._box(podium,Vector3(side*56.18,0.3,z+2.3),Vector3(0.28,2.6,0.24),"opera_bronze")
-		world._box(podium,Vector3(side*56.5,2.05,-2.5),Vector3(1.5,0.25,119),"opera_edge")
+		var z0:=95.76-segment*3.72;var z1:=z0-3.72
+		var y0:=segment*1.4;var y1:float=(segment+1)*1.4
+		var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var a:=Vector3(-48.5,y0,z0);var b:=Vector3(48.5,y0,z0)
+		var c:=Vector3(-48.5,y1,z1);var d:=Vector3(48.5,y1,z1)
+		var normal:Vector3=(b-a).cross(c-a).normalized()
+		if normal.y<0:normal=-normal
+		_triangle(st,a,b,c,normal);_triangle(st,c,b,d,normal)
+		var body:Node3D=world._structure_mesh("opera/steps/%s"%segment,st.commit(),CENTER,"opera_granite",360000,basis)
+		body.get_child(0).mesh=_steps_mesh(segment)
+	# Bennelong is an independent hollow base; no solid volume beneath the shells.
+	world._structure_box("opera/podium/restaurant_floor",CENTER+basis*Vector3(-41,11.06,82),Vector3(26,.28,36),"opera_granite",600000,basis)
+	for x in [-54.0,-28.0]:world._structure_box("opera/podium/restaurant_side/"+str(x),CENTER+basis*Vector3(x,5.5,82),Vector3(.3,11.0,36),"opera_granite",240000,basis)
+	world.set_meta("opera_exterior_openings",{"western":[[-42,-36],[-10,-4],[25,33],[49,57]],"upper_stair":Rect2(-10.5,37,7,22.5),"orchestra_pit":Rect2(15,4,16,4),"ground_y":0.0,"upper_y":11.2})
 
 static func _steps_mesh(segment: int) -> ArrayMesh:
 	var st := SurfaceTool.new()
@@ -307,3 +486,14 @@ static func _build_promenade(world: Node3D, basis: Basis) -> void:
 	for x in [-36.0,-16.0,16.0,36.0]:
 		world._bench(CENTER+basis*Vector3(x,0,115),deg_to_rad(ANGLE))
 	world._sign(Vector3(415,6.6,-151),"SYDNEY OPERA HOUSE  /  BENNELONG POINT",0.0,Color("3b4c4e"))
+
+static func capture_views() -> Array:
+	var views := [
+		["opera-harbour",Vector3(-155,60,-148),Vector3(-4,28,-3)],
+		["opera-monumental-steps",Vector3(4,17,156),Vector3(0,26,12)],
+		["opera-roof-plan",Vector3(-105,210,118),Vector3(-1,22,-2)],
+		["opera-north-facade",Vector3(8,29,-155),Vector3(-2,25,-48)]
+	]
+	var out:Array=[]
+	for v in views:out.append([v[0],CENTER+site_basis()*v[1],CENTER+site_basis()*v[2]])
+	return out

@@ -1,0 +1,43 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15121 reserved=387 roads=67462
+CITY_BUILD_TIMINGS {"complete_ms":57869,"custom_landmarks_ms":48373,"mapped_city_ms":26332,"terrain_and_harbour_ms":19102}
+HARBOR_WORLD_READY buildings=15123 structure_components=21577
+CITY_STARTUP_MS 58633
+POINTER_QA PASS assembled world and actual map UI ready
+POINTER_QA PASS new world captures pointer for camera
+POINTER_QA PASS normal gameplay mouse still turns camera
+POINTER_QA PASS M enters paused map and visibly releases pointer
+POINTER_QA PASS map hides gameplay HUD and toasts behind the controls
+POINTER_QA PASS moving across map does not change yaw or enable camera
+POINTER_QA PASS viewport-routed click creates correct world waypoint
+POINTER_QA PASS pin selection keeps map open and cursor usable
+POINTER_QA PASS pin selection preserves player and existing fleet
+POINTER_QA PASS real GUI drag pans map without turning camera or changing pin
+POINTER_QA PASS viewport-routed wheel zooms map
+POINTER_QA PASS map GUI received genuine routed pointer events
+POINTER_QA PASS M closes paused map even with a focused GUI button
+POINTER_QA PASS camera turns again after closing map
+POINTER_QA PASS key-repeat does not repeatedly toggle the map
+POINTER_QA PASS Esc also closes map and restores captured gameplay
+POINTER_QA PASS Alt Option hold releases pointer while minimap stays visible
+POINTER_QA PASS released cursor does not rotate camera
+POINTER_QA PASS actual small-map click opens full map
+POINTER_QA PASS releasing Alt inside map never steals its cursor
+POINTER_QA PASS visible clear button clears navigation without closing map
+POINTER_QA PASS visible top close button restores gameplay
+POINTER_QA PASS map pointer cannot turn or replace occupied car
+POINTER_QA PASS closing map preserves driver and resumes car
+POINTER_QA PASS map pointer cannot turn or replace occupied airliner
+POINTER_QA PASS closing map preserves driver and resumes airliner
+POINTER_QA PASS Esc pause menu releases mouse
+POINTER_QA PASS M can open map directly from pause
+POINTER_QA PASS typing M into destination search does not close map
+POINTER_QA PASS typed query filters real destination buttons
+POINTER_QA PASS search result click marks destination and keeps vehicle in place
+POINTER_QA PASS Esc exits searched map and restores camera
+POINTER_QA PASS losing window focus clears Option even without a key-up event
+POINTER_QA PASS returning from another window restores gameplay camera
+POINTER_QA PASS refocusing an open map keeps its pointer and pause
+POINTER_QA_COMPLETE 35 passed=true

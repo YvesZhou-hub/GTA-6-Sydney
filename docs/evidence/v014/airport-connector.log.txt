@@ -1,0 +1,29 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS connector is backed by the retained raw OSM way 
+PASS entry equals raw source terminal node within projection rounding [-768.592468261719, 4.5, 3622.08569335938]
+PASS provenance names the actual final OSM node 
+PASS source is a ground motor road, not the adjacent cycleway 
+PASS entry meets the road actually rendered in the compiled city 
+PASS initial extension preserves the source street terminal tangent 
+PASS 7m motor road continuation preserves separation from cycleway 
+PASS entire artificial road ribbon is beyond detailed city south boundary 3621.638671875
+PASS no artificial airport road through Darling facility way/183246961 
+PASS no artificial airport road through Darling facility way/668599850 
+PASS no artificial airport road through Darling facility way/730089774 
+PASS no artificial airport road through Darling facility way/730089775 
+PASS no artificial airport road through Darling facility way/1136058495 
+PASS no artificial airport road through Darling facility way/1149779572 
+PASS no artificial airport road through mapped playground perimeter 
+PASS new connection does not cut retained OSM building footprints []
+PASS map line uses the exact corrected physical route stations 
+PASS obsolete giant development label is absent in production scene 
+PASS old city-crossing box roads replaced by one joined ribbon 
+PASS connection still reaches the original airport-side road endpoint 
+PASS three actual collision lanes remain continuous to airport { "samples": 2499, "missing": 0, "max_height_error": 0.00000532800628, "bad_normals": 0, "wrong_body": 0, "unexpected": [] }
+PASS downward rays hit the connector at and beside every bend seam []
+PASS production car crosses city join city to airport { "reached": true, "health": 100.0, "peak_y_velocity": 0.05893589183688, "position": [-776.345947265625, 5.24404287338257, 3681.97973632812] }
+PASS production car crosses city join airport to city { "reached": true, "health": 100.0, "peak_y_velocity": 0.04022896289825, "position": [-766.620666503906, 5.17965173721313, 3607.04345703125] }
+PASS production car drives the first widening bend on its real collider { "reached": true, "health": 100.0, "airborne_frames": 0, "wrong_support_frames": 0, "maximum_deviation": 6.80318069458008, "position": [-858.547424316406, 5.3484468460083, 3896.44165039062] }
+PASS production Player continuously walks across the real city join { "reached": true, "airborne_frames": 0, "position": [-769.454772949219, 4.49799489974976, 3628.76928710938] }
+AIRPORT_CONNECTOR_COMPLETE 26 checks passed=true

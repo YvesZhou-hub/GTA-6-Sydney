@@ -1,0 +1,1388 @@
+{
+  "checked": "2026-09-11",
+  "source": "https://www.darlingsq.com/eat-drink-shop/",
+  "method": "Actual Chrome page expanded through Load More until Showing 71 of 71 stores; names and street/shop address facts extracted from visible cards. Opening-hour and personal browser tracking fields omitted.",
+  "directory_total": 71,
+  "precision_notice": "Directory contains conflicting addresses and may retain former tenants. Listing alone does not establish simultaneous physical occupation. No unverified street frontage is invented.",
+  "tenants": [
+    {
+      "name": "15cenchi",
+      "listed_address": "The Exchange, Ground Floor, 1 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/15-cms/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_15_cms",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "789 Korean BBQ",
+      "listed_address": "Shop 4/35 Tumbalong Bvd",
+      "source": "https://www.darlingsq.com/eat-drink-shop/789KoreanBBQ/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_789koreanbbq",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/5783556454",
+      "mapped_point": [
+        -802.78,
+        2020.67
+      ],
+      "osm_name": "789 Korean",
+      "frontage": {
+        "front": [
+          -799.6577,
+          2019.8432
+        ],
+        "normal": [
+          0.966682,
+          -0.255981
+        ],
+        "building": "way/545749186",
+        "projection_metres": 3.23,
+        "width": 7.0
+      }
+    },
+    {
+      "name": "Auvers Dining",
+      "listed_address": "Shop 4, 12 Nicolle Walk",
+      "source": "https://www.darlingsq.com/eat-drink-shop/auvers-cafe/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_auvers_cafe",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/10590131122",
+      "mapped_point": [
+        -736.474,
+        2025.846
+      ],
+      "osm_name": "Auvers",
+      "model_id": "auvers"
+    },
+    {
+      "name": "Bar Bubu",
+      "listed_address": "9 Steam Mill Lane",
+      "source": "https://www.darlingsq.com/eat-drink-shop/bar-bubu/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_bar_bubu",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/14053356759",
+      "mapped_point": [
+        -819.034,
+        2043.69
+      ],
+      "osm_name": "Bubu Diner & Bar",
+      "frontage": {
+        "front": [
+          -820.131,
+          2040.8798
+        ],
+        "normal": [
+          -0.363632,
+          -0.931543
+        ],
+        "building": "way/610783860",
+        "projection_metres": 3.017,
+        "width": 4.8
+      },
+      "photo_scope": "open bar visible from street",
+      "photo_source": "https://www.darlingsq.com/eat-drink-shop/bar-bubu/",
+      "photo_notes": "2025 Kera Wong photograph: yellow fluted counter, red high stools, open black lift-up glazing, cubby bottle shelving and gallery wall."
+    },
+    {
+      "name": "Batch Brewing Co.",
+      "listed_address": "1 Little Pier Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/batch-brewing-co/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_batch_brewing_co",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Bendigo Bank",
+      "listed_address": "11 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/bendigo-bank/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_bendigo_bank",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/12588832181",
+      "mapped_point": [
+        -682.975,
+        2000.866
+      ],
+      "osm_name": "Bendigo Bank",
+      "frontage": {
+        "front": [
+          -676.0332,
+          2000.1776
+        ],
+        "normal": [
+          0.995119,
+          -0.098683
+        ],
+        "building": "way/614603732",
+        "projection_metres": 6.976,
+        "width": 5.3
+      },
+      "photo_scope": "completed branch exterior",
+      "photo_source": "https://www.jodiedangarchitects.com/bendigo-bank",
+      "photo_notes": "Dark brick plinth, curved bronze-framed glass, seven upper louvers, vertical sign and right-hand door; facade length remains an OSM-based approximation."
+    },
+    {
+      "name": "Bengong's Tea",
+      "listed_address": "91 Harbour Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/bengongs-tea/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_bengongs_tea",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/10689672744",
+      "mapped_point": [
+        -676.488,
+        2093.384
+      ],
+      "osm_name": "Bengong Black",
+      "frontage": {
+        "front": [
+          -666.3727,
+          2093.9352
+        ],
+        "normal": [
+          0.995468,
+          -0.0951
+        ],
+        "building": "way/614603728",
+        "projection_metres": 10.13,
+        "width": 5.0
+      }
+    },
+    {
+      "name": "Blue Works",
+      "listed_address": "Shop 10/19 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/blueworks/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_blueworks",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Body Haven Massage",
+      "listed_address": "3 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/body-haven/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_body_haven",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Bubble Nini",
+      "listed_address": "Shop 8/1 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/bubble-nini/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_bubble_nini",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/13475274201",
+      "mapped_point": [
+        -762.596,
+        2008.402
+      ],
+      "osm_name": "Bubble Nini",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Century 21",
+      "listed_address": "79 Harbour St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/Century21/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_century21",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Chicken Number 5",
+      "listed_address": "9 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/chicken-number-5/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_chicken_number_5",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Chinta Ria Buddha Love",
+      "listed_address": "14 Nicolle Walk",
+      "source": "https://www.darlingsq.com/eat-drink-shop/chinta-ria/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_chinta_ria",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/11834192053",
+      "mapped_point": [
+        -732.381,
+        2039.126
+      ],
+      "osm_name": "Chinta Ria",
+      "model_id": "chinta_ria"
+    },
+    {
+      "name": "Cinnabon",
+      "listed_address": "85 Hay Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/cinnabon/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_cinnabon",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Darling Nest Child Care Centre",
+      "listed_address": "Level 3, 1 Little Pier Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/darling-nest/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_darling_nest",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "building": "way/614603737",
+      "level": "3 (directory)"
+    },
+    {
+      "name": "Darling Square Library",
+      "listed_address": "",
+      "source": "https://www.darlingsq.com/eat-drink-shop/Darling-Square-library/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_darling_square_library",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/7030232362",
+      "mapped_point": [
+        -768.463,
+        1993.719
+      ],
+      "osm_name": "Darling Square Library",
+      "building": "way/614603737",
+      "level": "1–2 (library operator)"
+    },
+    {
+      "name": "Darlings Life",
+      "listed_address": "Shop 1/35 Tumbalong Bvd",
+      "source": "https://www.darlingsq.com/eat-drink-shop/darlings-life/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_darlings_life",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Don'to",
+      "listed_address": "",
+      "source": "https://www.darlingsq.com/eat-drink-shop/donto/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_donto",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Dopa Donburi & Dessert",
+      "listed_address": "Shop 5-6, 2 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/dopa-donburi-and-dessert/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_dopa_donburi_and_dessert",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/9805973142",
+      "mapped_point": [
+        -676.932,
+        2072.177
+      ],
+      "osm_name": "Dopa",
+      "model_id": "dopa"
+    },
+    {
+      "name": "Dragon Hot Pot",
+      "listed_address": "",
+      "source": "https://www.darlingsq.com/eat-drink-shop/dragon-hot-pot/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_dragon_hot_pot",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/6539605558",
+      "mapped_point": [
+        -852.917,
+        2039.761
+      ],
+      "osm_name": "Dragon Hot Pot",
+      "frontage": {
+        "front": [
+          -851.072,
+          2044.6065
+        ],
+        "normal": [
+          0.355837,
+          0.934548
+        ],
+        "building": "way/545749186",
+        "projection_metres": 5.185,
+        "width": 4.3
+      }
+    },
+    {
+      "name": "Edition Roasters",
+      "listed_address": "60 Darling Dr",
+      "source": "https://www.darlingsq.com/eat-drink-shop/edition-coffee-roasters/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_edition_coffee_roasters",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/7041091585",
+      "mapped_point": [
+        -865.557,
+        2060.4
+      ],
+      "osm_name": "Edition Coffee Roasters",
+      "model_id": "edition"
+    },
+    {
+      "name": "Fishbowl",
+      "listed_address": "12/1 Little Pier Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/fishbowl-the-exchange/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_fishbowl_the_exchange",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/10590136180",
+      "mapped_point": [
+        -767.761,
+        2008.012
+      ],
+      "osm_name": "Fishbowl",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Five Beauty",
+      "listed_address": "Shop 2/2 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/five-beauty/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_five_beauty",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "FREO",
+      "listed_address": "14 Nicolle Walk",
+      "source": "https://www.darlingsq.com/eat-drink-shop/freo/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_freo",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Golden Century BBQ",
+      "listed_address": "The Exchange Ground Floor, 1 Little Pier Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/golden-century-bbq/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_golden_century_bbq",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/12528689300",
+      "mapped_point": [
+        -760.932,
+        1983.188
+      ],
+      "osm_name": "Golden Century BBQ",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Haidilao Hotpot",
+      "listed_address": "Level 5, The Exchange, 1 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/haidilao-hotpot/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_haidilao_hotpot",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/13459500701",
+      "mapped_point": [
+        -760.166,
+        2000.309
+      ],
+      "osm_name": "Haidilao Hotpot Darling Square",
+      "building": "way/614603737",
+      "level": "5 (directory and OSM)"
+    },
+    {
+      "name": "Hakatamon Ramen",
+      "listed_address": "6/8 Nicolle Walk",
+      "source": "https://www.darlingsq.com/eat-drink-shop/hakatamon-ramen/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_hakatamon_ramen",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/9480685417",
+      "mapped_point": [
+        -739.634,
+        2009.259
+      ],
+      "osm_name": "Hakatamon Ramen",
+      "model_id": "hakatamon"
+    },
+    {
+      "name": "Haven Specialty Coffee",
+      "listed_address": "85 Harbour St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/haven-specialty-coffee/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_haven_specialty_coffee",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/12117849338",
+      "mapped_point": [
+        -676.46,
+        2046.117
+      ],
+      "osm_name": "Haven Coffee",
+      "frontage": {
+        "front": [
+          -671.5217,
+          2045.6267
+        ],
+        "normal": [
+          0.995107,
+          -0.098799
+        ],
+        "building": "way/614603732",
+        "projection_metres": 4.963,
+        "width": 6.5
+      }
+    },
+    {
+      "name": "Hello Auntie",
+      "listed_address": "16 Nicolle Walk",
+      "source": "https://www.darlingsq.com/eat-drink-shop/hello-auntie/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_hello_auntie",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Holy Basil",
+      "listed_address": "Shop14/80 Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/holybasil/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_holybasil",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "corrected_address": "SW08, 51 Tumbalong Boulevard",
+      "address_source": "https://holybasil.com.au/darling-square/",
+      "address_note": "Operator or detailed precinct text distinguishes this branch from the conflicting directory card.",
+      "osm": "node/5783581153",
+      "mapped_point": [
+        -800.526,
+        2036.021
+      ],
+      "osm_name": "Holy Basil",
+      "model_id": "holy_basil"
+    },
+    {
+      "name": "Hulu Hulu",
+      "listed_address": "Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/hulu-hulu/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_hulu_hulu",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "IIKO Mazesoba",
+      "listed_address": "SE 13, 86 Hay Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/iiko-mazesoba/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_iiko_mazesoba",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "KAO KAO",
+      "listed_address": "",
+      "source": "https://www.darlingsq.com/eat-drink-shop/kao-kao/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_kao_kao",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "KUKI",
+      "listed_address": "9/18 Steam Mill La",
+      "source": "https://www.darlingsq.com/eat-drink-shop/kuki/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_kuki",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/13028462508",
+      "mapped_point": [
+        -815.772,
+        2025.846
+      ],
+      "osm_name": "Kuki Soft Serve & Cookies",
+      "model_id": "kuki"
+    },
+    {
+      "name": "Kurtosh",
+      "listed_address": "Shop 1, 16 Nicolle Walk",
+      "source": "https://www.darlingsq.com/eat-drink-shop/kurtosh/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_kurtosh",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/10689694170",
+      "mapped_point": [
+        -731.217,
+        2062.882
+      ],
+      "osm_name": "Kürtősh",
+      "model_id": "kurtosh"
+    },
+    {
+      "name": "Kwang Jang Pocha",
+      "listed_address": "Steam Mill La",
+      "source": "https://www.darlingsq.com/eat-drink-shop/kwang-jang-pocha/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_kwang_jang_pocha",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/14053385031",
+      "mapped_point": [
+        -843.529,
+        2052.796
+      ],
+      "osm_name": "Kwang Jang Pocha",
+      "model_id": "kwang"
+    },
+    {
+      "name": "La Cosmetique",
+      "listed_address": "11 Little Hay Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/la-cosmetique/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_la_cosmetique",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Lermont Laser Clinic",
+      "listed_address": "Shop 13/70 Hay Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/lermont-laser-clinic/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_lermont_laser_clinic",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "corrected_address": "6 Steam Mill Lane",
+      "address_source": "https://www.darlingsq.com/eat-drink-shop/lermont-laser-clinic/",
+      "address_note": "Operator or detailed precinct text distinguishes this branch from the conflicting directory card.",
+      "osm": "node/13483075684",
+      "mapped_point": [
+        -858.424,
+        2043.023
+      ],
+      "osm_name": "Lermont Laser Clinic",
+      "frontage": {
+        "front": [
+          -856.9665,
+          2046.8509
+        ],
+        "normal": [
+          0.355837,
+          0.934548
+        ],
+        "building": "way/545749186",
+        "projection_metres": 4.096,
+        "width": 4.0
+      }
+    },
+    {
+      "name": "Lillianna Gifts & Home",
+      "listed_address": "Shop 6/12 Steam Mill La",
+      "source": "https://www.darlingsq.com/eat-drink-shop/lillianna-gifts-and-home/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_lillianna_gifts_and_home",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "corrected_address": "Shop 2/4 Steam Mill Lane",
+      "address_source": "https://lillianna.com.au/pages/contact-us",
+      "address_note": "Operator or detailed precinct text distinguishes this branch from the conflicting directory card.",
+      "osm": "node/6901321285",
+      "mapped_point": [
+        -864.504,
+        2044.926
+      ],
+      "osm_name": "Lilliana Home & Gifts",
+      "frontage": {
+        "front": [
+          -862.9095,
+          2049.1138
+        ],
+        "normal": [
+          0.355837,
+          0.934548
+        ],
+        "building": "way/545749186",
+        "projection_metres": 4.481,
+        "width": 3.9
+      },
+      "photo_scope": "interior display only; exterior remains inferred",
+      "photo_source": "https://www.darlingsq.com/eat-drink-shop/lillianna-gifts-and-home/",
+      "photo_notes": "Official banner photograph shows colour-grouped gift boxes, diffuser bottles and white shelves; does not establish exterior frame or sign."
+    },
+    {
+      "name": "Lilong by Taste of Shanghai",
+      "listed_address": "1 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/lilong-by-taste-of-shanghai/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_lilong_by_taste_of_shanghai",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/9642576281",
+      "mapped_point": [
+        -754.501,
+        2076.385
+      ],
+      "osm_name": "Lilong by Taste of Shanghai",
+      "frontage": {
+        "front": [
+          -753.6614,
+          2072.5048
+        ],
+        "normal": [
+          0.211475,
+          -0.977383
+        ],
+        "building": "way/614603728",
+        "projection_metres": 3.97,
+        "width": 6.1
+      }
+    },
+    {
+      "name": "machi machi",
+      "listed_address": "Shop 14/80 Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/machimachi/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_machimachi",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/10689683738",
+      "mapped_point": [
+        -747.165,
+        2122.26
+      ],
+      "osm_name": "Machi machi",
+      "frontage": {
+        "front": [
+          -751.9891,
+          2123.524
+        ],
+        "normal": [
+          -0.967345,
+          0.253462
+        ],
+        "building": "way/614603728",
+        "projection_metres": 4.987,
+        "width": 4.6
+      }
+    },
+    {
+      "name": "Marrickville Pork Roll",
+      "listed_address": "16 Steam Mill Lane",
+      "source": "https://www.darlingsq.com/eat-drink-shop/marrickville-pork-roll/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_marrickville_pork_roll",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/5783556455",
+      "mapped_point": [
+        -821.168,
+        2028.195
+      ],
+      "osm_name": "Marrickville Pork Roll",
+      "model_id": "pork_roll"
+    },
+    {
+      "name": "Matcha-Ya",
+      "listed_address": "10 Steam Mill Lane",
+      "source": "https://www.darlingsq.com/eat-drink-shop/matchaya/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_matchaya",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/5783072555",
+      "mapped_point": [
+        -844.129,
+        2036.956
+      ],
+      "osm_name": "Matcha Ya",
+      "model_id": "matcha"
+    },
+    {
+      "name": "McDonald’s",
+      "listed_address": "9 Little Pier Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/mcdonalds/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_mcdonalds",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/12588832180",
+      "mapped_point": [
+        -691.651,
+        1995.378
+      ],
+      "osm_name": "McDonald's",
+      "frontage": {
+        "front": [
+          -690.4653,
+          1988.0242
+        ],
+        "normal": [
+          0.159179,
+          -0.98725
+        ],
+        "building": "way/614603732",
+        "projection_metres": 7.449,
+        "width": 6.7
+      }
+    },
+    {
+      "name": "Meet Fresh",
+      "listed_address": "",
+      "source": "https://www.darlingsq.com/eat-drink-shop/meet-fresh/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_meet_fresh",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/13475270001",
+      "mapped_point": [
+        -704.19,
+        1993.819
+      ],
+      "osm_name": "Meet Fresh",
+      "frontage": {
+        "front": [
+          -702.9316,
+          1986.0142
+        ],
+        "normal": [
+          0.159179,
+          -0.98725
+        ],
+        "building": "way/614603732",
+        "projection_metres": 7.906,
+        "width": 6.7
+      }
+    },
+    {
+      "name": "Gelato Messina",
+      "listed_address": "Shop 02, 3 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/gelato-messina/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_gelato_messina",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/6901321187",
+      "mapped_point": [
+        -737.5,
+        2082.708
+      ],
+      "osm_name": "Messina",
+      "model_id": "messina"
+    },
+    {
+      "name": "Moyashi Japanese Hotpot Buffet",
+      "listed_address": "Shop SW 12/63 Tumbalong Bvd",
+      "source": "https://www.darlingsq.com/eat-drink-shop/moyashi-japanese-hotpot-buffet/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_moyashi_japanese_hotpot_buffet",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "myhealth",
+      "listed_address": "Shop 1, Darling One Building, 64 Darling Drive",
+      "source": "https://www.darlingsq.com/eat-drink-shop/myhealth/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_myhealth",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/11824294647",
+      "mapped_point": [
+        -853.527,
+        2089.888
+      ],
+      "osm_name": "MyHealth medical centre",
+      "frontage": {
+        "front": [
+          -856.473,
+          2090.9569
+        ],
+        "normal": [
+          -0.940039,
+          0.341068
+        ],
+        "building": "way/545749187",
+        "projection_metres": 3.134,
+        "width": 5.2
+      }
+    },
+    {
+      "name": "MySpec",
+      "listed_address": "Shop 3/5 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/my-spec/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_my_spec",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/10689683737",
+      "mapped_point": [
+        -720.009,
+        2082.229
+      ],
+      "osm_name": "Myspec",
+      "frontage": {
+        "front": [
+          -719.5041,
+          2079.8954
+        ],
+        "normal": [
+          0.211475,
+          -0.977383
+        ],
+        "building": "way/614603728",
+        "projection_metres": 2.388,
+        "width": 4.6
+      }
+    },
+    {
+      "name": "Nakano Darling",
+      "listed_address": "14 Steam Mill Lane",
+      "source": "https://www.darlingsq.com/eat-drink-shop/nakano-darling/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_nakano_darling",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/11271537769",
+      "mapped_point": [
+        -830.676,
+        2031.768
+      ],
+      "osm_name": "Nakano Darling",
+      "model_id": "nakano"
+    },
+    {
+      "name": "Pancakes On The Rocks",
+      "listed_address": "55 Tumbalong Boulevard",
+      "source": "https://www.darlingsq.com/eat-drink-shop/pancakes-on-the-rocks/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_pancakes_on_the_rocks",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/10590350430",
+      "mapped_point": [
+        -791.249,
+        2070.73
+      ],
+      "osm_name": "Pancakes on the Rocks",
+      "frontage": {
+        "front": [
+          -786.9897,
+          2069.4807
+        ],
+        "normal": [
+          0.959573,
+          -0.28146
+        ],
+        "building": "way/545749185",
+        "projection_metres": 4.439,
+        "width": 8.0
+      }
+    },
+    {
+      "name": "Planet Pop World",
+      "listed_address": "35 Tumbalong Bvd",
+      "source": "https://www.darlingsq.com/eat-drink-shop/planet-pop-world/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_planet_pop_world",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/13483086755",
+      "mapped_point": [
+        -838.576,
+        2034.273
+      ],
+      "osm_name": "Planet Pop World",
+      "frontage": {
+        "front": [
+          -836.7219,
+          2039.1426
+        ],
+        "normal": [
+          0.355837,
+          0.934548
+        ],
+        "building": "way/545749186",
+        "projection_metres": 5.211,
+        "width": 4.2
+      }
+    },
+    {
+      "name": "Puppuccino Pet Spa",
+      "listed_address": "2 Steam Mill Lane",
+      "source": "https://www.darlingsq.com/eat-drink-shop/puppuccino-pet-spa/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_puppuccino_pet_spa",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "corrected_address": "NW01/2 Steam Mill Lane",
+      "address_source": "https://puppuccino.com.au/locate-us",
+      "address_note": "Operator or detailed precinct text distinguishes this branch from the conflicting directory card.",
+      "osm": "node/14053356760",
+      "mapped_point": [
+        -867.913,
+        2046.551
+      ],
+      "osm_name": "Puppuccino Pet Spa",
+      "frontage": {
+        "front": [
+          -866.4272,
+          2050.4532
+        ],
+        "normal": [
+          0.355837,
+          0.934548
+        ],
+        "building": "way/545749186",
+        "projection_metres": 4.175,
+        "width": 3.1
+      },
+      "photo_scope": "interior display only; exterior remains inferred",
+      "photo_source": "https://puppuccino.com.au/locate-us",
+      "photo_notes": "Darling Square-labeled operator photograph: yellow/white striped partition, dark shelves, timber base and pet products. Does not establish the exterior sign or door layout."
+    },
+    {
+      "name": "Quikstop",
+      "listed_address": "",
+      "source": "https://www.darlingsq.com/eat-drink-shop/quikstop/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_quikstop",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/14053356761",
+      "mapped_point": [
+        -834.695,
+        2048.867
+      ],
+      "osm_name": "Quikstop",
+      "frontage": {
+        "front": [
+          -835.4748,
+          2046.8693
+        ],
+        "normal": [
+          -0.363632,
+          -0.931543
+        ],
+        "building": "way/610783860",
+        "projection_metres": 2.144,
+        "width": 4.4
+      }
+    },
+    {
+      "name": "Shortstop Coffee & Donuts",
+      "listed_address": "15 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/shortstop-coffee-donuts/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_shortstop_coffee_donuts",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/7704131106",
+      "mapped_point": [
+        -691.993,
+        2093.54
+      ],
+      "osm_name": "Shortstop Coffee & Donuts",
+      "model_id": "shortstop"
+    },
+    {
+      "name": "SPAGO",
+      "listed_address": "Shop 9/1 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/spago/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_spago",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Starbucks",
+      "listed_address": "Shop NE07, 35 Tumbalong Boulevard",
+      "source": "https://www.darlingsq.com/eat-drink-shop/starbucks-coffee-company/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_starbucks_coffee_company",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/7030291185",
+      "mapped_point": [
+        -740.161,
+        1985.793
+      ],
+      "osm_name": "Starbucks",
+      "frontage": {
+        "front": [
+          -744.8498,
+          1986.3367
+        ],
+        "normal": [
+          -0.993345,
+          0.115178
+        ],
+        "building": "way/614603732",
+        "projection_metres": 4.72,
+        "width": 7.5
+      }
+    },
+    {
+      "name": "SUG Patisserie",
+      "listed_address": "62 Darling Dr",
+      "source": "https://www.darlingsq.com/eat-drink-shop/sug-patisserie/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_sug_patisserie",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Sushi Sei",
+      "listed_address": "SE04, Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/sushi-sei/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_sushi_sei",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/10689677826",
+      "mapped_point": [
+        -705.197,
+        2067.736
+      ],
+      "osm_name": "Sushi Sei by Kuon",
+      "frontage": {
+        "front": [
+          -706.1884,
+          2072.7404
+        ],
+        "normal": [
+          -0.194325,
+          0.980937
+        ],
+        "building": "way/614603732",
+        "projection_metres": 5.102,
+        "width": 5.6
+      }
+    },
+    {
+      "name": "Sushia",
+      "listed_address": "The Exchange, Shop T-12, 35 Tumbalong Bvd",
+      "source": "https://www.darlingsq.com/eat-drink-shop/sushia/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_sushia",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/12528689299",
+      "mapped_point": [
+        -761.644,
+        1988.821
+      ],
+      "osm_name": "Sushia",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Tan Viet Noodle House",
+      "listed_address": "74 Tumbalong Bvd",
+      "source": "https://www.darlingsq.com/eat-drink-shop/tan-viet-noodle-house/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_tan_viet_noodle_house",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Tea Republic",
+      "listed_address": "Shop SE.07, 1/19 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/tea-republic/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_tea_republic",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/10689688741",
+      "mapped_point": [
+        -697.999,
+        2088.842
+      ],
+      "osm_name": "Tea Republic",
+      "frontage": {
+        "front": [
+          -697.1115,
+          2084.745
+        ],
+        "normal": [
+          0.211704,
+          -0.977334
+        ],
+        "building": "way/614603728",
+        "projection_metres": 4.192,
+        "width": 4.5
+      }
+    },
+    {
+      "name": "The Brothers Cafe",
+      "listed_address": "Shop T.03 /1 Little Pier Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/the-brothers-cafe/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_the_brothers_cafe",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/13028462510",
+      "mapped_point": [
+        -767.687,
+        1978.501
+      ],
+      "osm_name": "The Brothers Cafe",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Thirteen Feet Tattoo",
+      "listed_address": "4/2 Little Hay Street",
+      "source": "https://www.darlingsq.com/eat-drink-shop/thirteen-feet-tattoo/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_thirteen_feet_tattoo",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "osm": "node/10689677631",
+      "mapped_point": [
+        -694.894,
+        2070.452
+      ],
+      "osm_name": "Thirteen Feet Tattoo",
+      "frontage": {
+        "front": [
+          -695.7567,
+          2074.8069
+        ],
+        "normal": [
+          -0.194325,
+          0.980937
+        ],
+        "building": "way/614603732",
+        "projection_metres": 4.44,
+        "width": 4.5
+      },
+      "photo_scope": "branch exterior; supplier photograph",
+      "photo_source": "https://online.remondis.com.au/article/industries/simplifying-waste-management-for-tattoo-parlours/3v14nmy",
+      "photo_notes": "Black brick, gold fascia, left-hand door, right window neon, framed flash sheets and projecting sign; abstract flash graphics are original, not copied tattoo art."
+    },
+    {
+      "name": "ToastieSmith",
+      "listed_address": "The Exchange, T05/1 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/toastiesmith/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_toastiesmith",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/13389834403",
+      "mapped_point": [
+        -779.57,
+        2000.944
+      ],
+      "osm_name": "Toastie Smith",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Toby’s Estate",
+      "listed_address": "Shop 2/35 Tumbalong Bvd",
+      "source": "https://www.darlingsq.com/eat-drink-shop/tobys-estate/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_tobys_estate",
+      "location_precision": "unresolved; no fabricated exact destination"
+    },
+    {
+      "name": "Uliveto",
+      "listed_address": "Shop 5-6, 2 Little Hay St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/uliveto/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "mapped_inferred_frontage",
+      "id": "darling_business_uliveto",
+      "location_precision": "mapped OSM branch and exterior wall; facade fittings inferred",
+      "corrected_address": "3/35 Tumbalong Boulevard",
+      "address_source": "https://www.darlingharbour.com/offers/dine-sip-save-20-at-uliveto",
+      "address_note": "Operator or detailed precinct text distinguishes this branch from the conflicting directory card.",
+      "osm": "node/14053387656",
+      "mapped_point": [
+        -806.744,
+        2007.311
+      ],
+      "osm_name": "Uliveto",
+      "frontage": {
+        "front": [
+          -801.9515,
+          2011.1811
+        ],
+        "normal": [
+          0.966682,
+          -0.255981
+        ],
+        "building": "way/545749186",
+        "projection_metres": 6.16,
+        "width": 7.0
+      }
+    },
+    {
+      "name": "Ume Burger",
+      "listed_address": "1 Little Pier Street, Darling Exchange",
+      "source": "https://www.darlingsq.com/eat-drink-shop/ume-burger/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "exchange_building_directory",
+      "id": "darling_business_ume_burger",
+      "location_precision": "Shared Exchange public forecourt; indoor stall/level is not a street door",
+      "osm": "node/10869993140",
+      "mapped_point": [
+        -773.795,
+        1982.821
+      ],
+      "osm_name": "Ume Burger",
+      "building": "way/614603737",
+      "level": "ground food hall or building only; exact counter not reconstructed"
+    },
+    {
+      "name": "Wingboy",
+      "listed_address": "7 Steam Mill La",
+      "source": "https://www.darlingsq.com/eat-drink-shop/wingboy/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "existing_researched_frontage",
+      "id": "darling_business_wingboy",
+      "location_precision": "OSM point projected to documented street wall; see frontage references",
+      "osm": "node/14053356762",
+      "mapped_point": [
+        -826.638,
+        2045.995
+      ],
+      "osm_name": "Wingboy",
+      "model_id": "wingboy"
+    },
+    {
+      "name": "XOPP by Golden Century",
+      "listed_address": "Shop 31/1 Little Pier St",
+      "source": "https://www.darlingsq.com/eat-drink-shop/xopp-by-golden-century/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_conflict_unresolved",
+      "id": "darling_business_xopp_by_golden_century",
+      "location_precision": "Directory retains XOPP; current Haidilao listing also present. No exact current shop assertion.",
+      "building": "way/614603737"
+    },
+    {
+      "name": "YAYOI",
+      "listed_address": "",
+      "source": "https://www.darlingsq.com/eat-drink-shop/YAYOI/",
+      "locality": "Haymarket NSW 2000",
+      "verified_scope": "Official directory entry; tenant listing does not by itself verify a precise shopfront or current occupation.",
+      "model_status": "directory_only_unresolved",
+      "id": "darling_business_yayoi",
+      "location_precision": "unresolved; no fabricated exact destination"
+    }
+  ],
+  "audit_checked": "2026-09-11",
+  "coverage_counts": {
+    "exchange_building_directory": 14,
+    "mapped_inferred_frontage": 23,
+    "existing_researched_frontage": 15,
+    "directory_only_unresolved": 18,
+    "directory_conflict_unresolved": 1
+  },
+  "scope_notice": "All 71 official cards retained and individually classified. Street-front reconstruction is selective; no claim of all stores being exact or accessible indoors. Food-hall and upper-level tenants use building-level arrivals. Unresolved records have no invented door.",
+  "photo_detail_counts": {
+    "new_exterior_or_open_bar": 3,
+    "new_interior_display_only": 2,
+    "other_new_inferred_frontages": 18
+  }
+}

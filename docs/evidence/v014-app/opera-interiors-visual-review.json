@@ -1,0 +1,227 @@
+{
+  "reviewed_utc": "2026-09-11T07:24:53.462750+00:00",
+  "scope": "Read-only visual review of eight new Opera interior captures from the final exported v0.1.4 App in the full city, after the airport-road/fountain correction; four exterior Opera views excluded.",
+  "artifact": {
+    "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec",
+    "hash_kind": "Final App distribution ZIP archive, matching current build.json",
+    "build_manifest": "reports/release-v014-native/build.json"
+  },
+  "result": "All eight final-build images individually inspected. No new blocking visual geometry or view-obstruction defects found; previously recorded minor appearance limitations remain.",
+  "images_reviewed": 8,
+  "blocking_defect_count": 0,
+  "images": [
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-concert-hall.png",
+      "sha256": "d87d707ef6c742b38be71cc7505193e31dc4c135580afed1eb708299046ff18c",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "Unobstructed audience view of raised stage, organ, choir seats and magenta reflector groups.",
+        "Timber ceiling and side enclosures are continuous; the earlier white roof pieces and bronze louvres do not intrude.",
+        "Side aisles and seating terraces remain legible."
+      ],
+      "nonblocking_limitations": [
+        "Timber and seating are visibly simplified procedural geometry; this is not a photographic reproduction."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "d87d707ef6c742b38be71cc7505193e31dc4c135580afed1eb708299046ff18c",
+        "byte_identical": true
+      }
+    },
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-concert-stage.png",
+      "sha256": "74f94f5930f297b9ddf349d646396b110ed103ab0ffb817a30fd7edb7cc055cd",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "Reverse stage view shows the curved stalls, upper seating, side circulation and enclosing rear timber wall.",
+        "No exterior sky, glass or louvre cuts through the audience enclosure."
+      ],
+      "nonblocking_limitations": [
+        "Repeated seating and timber surfaces have relatively uniform material and lighting treatment."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "74f94f5930f297b9ddf349d646396b110ed103ab0ffb817a30fd7edb7cc055cd",
+        "byte_identical": true
+      }
+    },
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-concert-organ.png",
+      "sha256": "abd90fa59d60612eecdc3f2a9ce9cea8bf18362948f5e4c85ce66b30362b5105",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "Organ pipes, choir terrace, reflector suspension and stage access stairs are visible.",
+        "No white shell fragment intersects the organ or timber ceiling in this view."
+      ],
+      "nonblocking_limitations": [
+        "Foreground seats and hanging reflectors naturally crop parts of the view; the organ is a representative pipe array."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "abd90fa59d60612eecdc3f2a9ce9cea8bf18362948f5e4c85ce66b30362b5105",
+        "byte_identical": true
+      }
+    },
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-joan-sutherland.png",
+      "sha256": "d2c9ef970ce15fdd9984644b337bfcf997071af7bbd95a51e93f4b2615a8011c",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "The central rear camera shows the proscenium, stage, two levels of side boxes and audience seating.",
+        "The stage rear and acoustic ceiling are enclosed; the earlier bright exterior window and louvre obstruction are absent."
+      ],
+      "nonblocking_limitations": [
+        "Dark stage lighting and simplified drapery provide limited scenic detail; no live event is depicted."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "d2c9ef970ce15fdd9984644b337bfcf997071af7bbd95a51e93f4b2615a8011c",
+        "byte_identical": true
+      }
+    },
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-box-office.png",
+      "sha256": "eb39ff5c1d99c0566c887ba62c9112049d6f5a959075c77ff371939ec00c3768",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "Ticket counter, broad foyer floor, folded concrete ribs, strip lighting and access stairs are visible.",
+        "The ribs terminate around the upper stair opening; no rib visibly crosses its climbing path."
+      ],
+      "nonblocking_limitations": [
+        "The large foyer has sparse furnishings and simple counter detail."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "eb39ff5c1d99c0566c887ba62c9112049d6f5a959075c77ff371939ec00c3768",
+        "byte_identical": true
+      }
+    },
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-entry-stairs.png",
+      "sha256": "d35b4436cfd9b2286bcfc09fb6f16e0f4c405aa43232ca9b5824870a998a5766",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "The stair flight, handrails and upper opening are clearly visible.",
+        "Decorative concrete ribs stop at the opening, preserving the visible stair path.",
+        "The roof and glazing visible above the opening belong to the upper foyer context."
+      ],
+      "nonblocking_limitations": [
+        "Some fine highlight or shadow speckling is visible near stair edges; a static image cannot establish temporal flicker."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "d35b4436cfd9b2286bcfc09fb6f16e0f4c405aa43232ca9b5824870a998a5766",
+        "byte_identical": true
+      }
+    },
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-concert-northern-foyer.png",
+      "sha256": "339dbc4c9c02d515c5c7d872b43d75a651aacca1c4e8889ae59243776a3e1a20",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "Purple broad steps, railing, landing and harbour-facing glazing are present.",
+        "The water horizon is visible through the glazing, with no opaque auditorium wall blocking the foyer view."
+      ],
+      "nonblocking_limitations": [
+        "Thin bright lines remain between some stair risers.",
+        "Foyer furniture and glazing detail are simplified."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "339dbc4c9c02d515c5c7d872b43d75a651aacca1c4e8889ae59243776a3e1a20",
+        "byte_identical": true
+      }
+    },
+    {
+      "file": "reports/release-v014-native/precinct-screenshots/opera-jst-northern-foyer.png",
+      "sha256": "34a4342d21061f535bbfe2602822d68bf412da17b4ed482ddce403e50d3a3ddb",
+      "size_pixels": [
+        1440,
+        900
+      ],
+      "visually_inspected": true,
+      "blocking_defects": [],
+      "observations": [
+        "Red broad steps, railing and landing sit behind the large glazed harbour frontage.",
+        "Water and distant shoreline context are visible; overhead exterior louvre tips do not block the public floor in this image."
+      ],
+      "nonblocking_limitations": [
+        "Thin bright lines remain between some stair risers.",
+        "Foyer furnishings and materials remain sparse and simplified."
+      ],
+      "fresh_final_capture_inspected": true,
+      "candidate_comparison": {
+        "candidate_sha256": "df12ad53e5818f4bf79e2c00e4b3b96a287eaddc9adad03799defd8bf2749c95",
+        "byte_identical": false
+      }
+    }
+  ],
+  "supporting_run": {
+    "manifest": "reports/release-v014-native/precinct-launch.json",
+    "started_utc": "2026-09-11T07:21:03.580090+00:00",
+    "exit_code": 0,
+    "checks": 101,
+    "passed": true,
+    "runtime_errors": []
+  },
+  "component_triangle_sampling": {
+    "samples": 2960318,
+    "count_semantics": "One shared total of sampled exterior triangle points tested against both room volumes; do not add the repeated Concert and JST log counts.",
+    "sources": [
+      "reports/opera-interiors-final-combined.log",
+      "reports/opera-interiors/report.json"
+    ],
+    "assertions": 42,
+    "failures": 0,
+    "superseded_intermediate_count": 2989313
+  },
+  "review_limits": [
+    "Static screenshots do not independently verify movement, collision, frame rate or every unseen surface.",
+    "The simplified procedural interiors are not represented as a measured, seat-for-seat or photographic reconstruction."
+  ],
+  "game_files_modified": false,
+  "gpu_or_engine_started": false,
+  "user_saves_touched": false,
+  "review_method": "All eight current PNGs were reopened and visually inspected after the final rebuild. Prior candidate observations were rechecked against the new images, not carried forward without inspection.",
+  "candidate_comparison": {
+    "candidate_archive_sha256": "b785b6fc43ff1939f108f6b7bbe32512491fe78fe9373584a8e6df4c783df565",
+    "byte_identical_images": 7,
+    "images_compared": 8,
+    "new_capture_visual_inspection_performed": true
+  }
+}

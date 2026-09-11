@@ -1,0 +1,9 @@
+{
+  "method": "Official Godot runs the source-only camera sampling harness against all 119 game files from the final build manifest. Not the exported App executable.",
+  "source_script_sha256": "0010b3be49f185962cbb1f19c424e8dc91fe9c0bb7be5ccce22bddd32f2424ac",
+  "archive_sha256": "612f8c9c3a99ac06b8681cdfbce91d0024eec9a7fea206e3c8425c38e390bcec",
+  "hardware_input_isolation": "Main input and unhandled input disabled; OS key bindings removed only in isolated test process, action names retained for scripted movement. No changes to production input or user settings.",
+  "prior_attempt": "An unisolated attempt failed walk pitch jitter while live OS input changed the heading. Excluded from pass evidence; original logs retained locally.",
+  "game_files_match": 119,
+  "passed": true
+}

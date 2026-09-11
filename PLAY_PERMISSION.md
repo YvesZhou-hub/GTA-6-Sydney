@@ -1,5 +1,10 @@
 # Free preview / 免费试玩说明
 
+Governing terms are in [LICENSE](LICENSE); this page is the plain-language summary of the
+personal-play permission it grants. Where the two differ, LICENSE controls.
+
+完整条款见 [LICENSE](LICENSE)，本页是其中个人试玩许可的通俗说明；两者不一致时以 LICENSE 为准。
+
 Harbourlife is shared by YvesZhou-hub as a free experimental preview. You may download and run the published game build for personal play and testing. It is provided as-is, without a warranty of fitness, availability or uninterrupted operation.
 
 Original game code and original assets have not been placed under an open-source licence. Other than the personal-play permission above and rights provided by applicable law or GitHub's terms, all rights in those original files are reserved. Public source visibility is not a grant of unrestricted redistribution, resale, sublicensing or commercial reuse.

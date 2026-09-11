@@ -1,0 +1,13 @@
+{
+  "archive_sha256": "b785b6fc43ff1939f108f6b7bbe32512491fe78fe9373584a8e6df4c783df565",
+  "scope": "Candidate before final connector correction; actual App launched with isolated --interactive-qa.",
+  "observations": [
+    "Native app window and game scene visible via computer-use screenshot.",
+    "A system M key press visibly opened the map.",
+    "Coordinate click attempts twice returned computer-use noWindowsAvailable despite subsequent screenshot availability.",
+    "Esc result could not be confirmed visually.",
+    "Cmd-Q exited this isolated App successfully."
+  ],
+  "full_mouse_walkthrough_passed": false,
+  "user_saves_touched": false
+}

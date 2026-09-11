@@ -167,7 +167,7 @@ static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false, r
 				# so a clear start cannot launch directly into a nearby tower.
 				for seconds in [0.0,1.0,2.0,3.0]:
 					var future:=pose
-					future.origin+=forward*(28.0 if body.kind=="glider" else 9.5)*seconds+Vector3.DOWN*seconds
+					future.origin+=forward*body.glide_trim_speed()*seconds+Vector3.DOWN*seconds
 					if not clear_envelope(game,body,future,2.0):departure_clear=false;break
 				if departure_clear:return {"transform":pose,"airborne":true,"description":"已预留起飞净空的空中滑翔点"}
 		return {}

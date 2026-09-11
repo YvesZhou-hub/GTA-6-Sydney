@@ -23,11 +23,18 @@ def run(name,args):
  with (reports/f'{name}.log').open('w') as f:
   subprocess.run([str(x) for x in args],stdout=f,stderr=subprocess.STDOUT,check=True)
  log=(reports/f'{name}.log').read_text()
- if 'SCRIPT ERROR:' in log or (name=='export' and 'ERROR:' in log):
+ if 'ERROR:' in log:
   raise RuntimeError(log[-4000:])
  if name=='bundle-smoke' and 'HARBOR_WORLD_READY' not in log:
   raise RuntimeError('Exported application did not finish assembling the city: '+log[-4000:])
 run('import',[engine,'--headless','--path',root/'game','--editor','--import','--quit'])
+def game_hashes():
+ # The export preset contains a temporary absolute template path during export.
+ # Its public/original bytes are the source identity, consistently in both checks.
+ if preset.read_text() not in (text,original_preset):
+  raise RuntimeError('Export preset changed during the build; refusing mismatched source identity.')
+ return {str(f.relative_to(root)):hashlib.sha256(original_preset.encode() if f==preset else f.read_bytes()).hexdigest() for f in sorted((root/'game').rglob('*')) if f.is_file() and '.godot' not in f.parts}
+build_sources=game_hashes()
 with tempfile.TemporaryDirectory(prefix='.staging-',dir=output) as stage:
  bundle=pathlib.Path(stage)/'Harbourlife.app'
  run('export',[engine,'--headless','--path',root/'game','--export-release','macOS Local',bundle])
@@ -46,11 +53,14 @@ with tempfile.TemporaryDirectory(prefix='.staging-',dir=output) as stage:
   os.replace(str(binary)+'.arm64',binary)
  binary.chmod(0o755)
  shutil.copytree(root/'licenses',bundle/'Contents/Resources/licenses',dirs_exist_ok=True)
- permission=root/'PLAY_PERMISSION.md'
- if permission.is_file(): shutil.copy2(permission,bundle/'Contents/Resources/PLAY_PERMISSION.md')
+ for name in ('LICENSE','PLAY_PERMISSION.md'):
+  permission=root/name
+  if permission.is_file(): shutil.copy2(permission,bundle/'Contents/Resources'/name)
  run('codesign',['codesign','--force','--deep','--sign','-',bundle])
  run('signature',['codesign','--verify','--deep','--strict',bundle])
- run('bundle-smoke',[binary,'--headless','--quit-after','15'])
+ run('bundle-smoke',[binary,'--headless','--quit-after','15','--','--interactive-qa'])
+ if game_hashes()!=build_sources:
+  raise RuntimeError('Game source changed during export or smoke; refusing to package a mismatched PCK. Freeze edits and rebuild.')
  dest=output/'Harbourlife.app'
  if dest.exists(): shutil.rmtree(dest)
  shutil.move(bundle,dest)
@@ -63,6 +73,8 @@ with tempfile.TemporaryDirectory(prefix='.staging-',dir=output) as stage:
   for f in sorted(dest.rglob('*')):
    if f.is_file(): z.write(f,pathlib.Path('Harbourlife.app')/f.relative_to(dest))
  preset.write_text(original_preset)
- report={'engine':subprocess.check_output([str(engine),'--version'],text=True).strip(),'app':str(dest),'architecture':'arm64','archive_sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'signature':'ad-hoc verified; not notarized','source_sha256':{str(f.relative_to(root)):hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted((root/'game').rglob('*')) if f.is_file() and '.godot' not in f.parts}}
+ if game_hashes()!=build_sources:
+  raise RuntimeError('Game source changed during packaging; rebuild before release.')
+ report={'engine':subprocess.check_output([str(engine),'--version'],text=True).strip(),'app':str(dest),'architecture':'arm64','archive_sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'signature':'ad-hoc verified; not notarized','source_sha256':build_sources,'source_frozen_from':'after import, before export; checked again after smoke and ZIP packaging'}
  (reports/'build.json').write_text(json.dumps(report,indent=2))
  print('BUILT '+str(dest))
