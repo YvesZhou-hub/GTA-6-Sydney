@@ -1,0 +1,477 @@
+{
+  "file": "Harbourlife-悉尼开放世界-横屏预告.mp4",
+  "sha256": "b2649fe196a0cc4b69bffc602821ec0e08461ed9e8dbc0560f0158bcde6a6c51",
+  "bytes": 47088206,
+  "width": 1920,
+  "height": 1080,
+  "frames": 1140,
+  "seconds": 38.0,
+  "fps": 30.0,
+  "decoded_metadata": {
+    "ffmpeg_version": "7.1 built with Apple clang version 13.1.6 (clang-1316.0.21.2.5)",
+    "codec": "h264",
+    "pix_fmt": "yuv420p(progressive)",
+    "audio_codec": "aac",
+    "fps": 30.0,
+    "source_size": [
+      1920,
+      1080
+    ],
+    "size": [
+      1920,
+      1080
+    ],
+    "rotate": 0,
+    "duration": 38.0
+  },
+  "audio_probe": [
+    "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 261 kb/s (default)"
+  ],
+  "decoded_loudness": {
+    "input_i": "-15.67",
+    "input_tp": "-1.50",
+    "input_lra": "5.00",
+    "input_thresh": "-25.77",
+    "output_i": "-13.50",
+    "output_tp": "-1.50",
+    "output_lra": "2.60",
+    "output_thresh": "-23.56",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.50"
+  },
+  "audio_source_sha256": {
+    "reports/promo-audio/tank.wav": "ac56dcf970e9bf9516807f40722484db092b679c949b484ee6a4b69f3669b266",
+    "reports/promo-audio/fighter.wav": "fc840c6190b1145a1cd47d78a185cc414d521d682d63356ac8ad893b14d585c2",
+    "reports/promo-audio/impact.wav": "a362583d6af03e1b900e8290364e0a8c1528524f91047124c250681655d5c46f",
+    "game/scripts/weapon_audio.gd": "44614e08ecba3d11fe5cba4eadfec9f47a9402326d1b44ecc081419e4f8ff752",
+    "tools/promo_score.py": "c0901c9b421cba195df55573d6e92aeb426c4772e64e87d66e60b6b54e1aa340",
+    "tools/promo_audio_export.gd": "c0bdcbf69d864e322ee167ad74015d432d8242928c2d184c301bf32f086626fc",
+    "dist/v018/promo/main/original-score.wav": "d82577484f3ff074bc0e9ab96eab32834e941a8713c5d6d5ce5888f12ba94b46",
+    "dist/v018/promo/main/mixed-source.wav": "f9cd4de60c1b72cfaa1f1aae2795e7b2d95514cd8b4eb2ec335df7009d647e79"
+  },
+  "editor_sha256": "1c003adb2adc109c26231b1b8cc137333c4bbd4c15d11958ec53c5e8d81c35d0",
+  "capture_launch": {
+    "executable_name": "Harbourlife",
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "source_recorder_sha256": "89ab7ef866cc1050b97e344dc5c453089e1d2c5a25ebf48cee3bb9a962fef3cd",
+    "preview": false,
+    "fixed_fps": 30,
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "capture_report_sha256": "b7b0a381317db898f39553ff5ea9cea147c7ab222d356630eb12af440e3bfd65",
+  "segments": [
+    {
+      "id": "01_tank_impact",
+      "source_file": "01_tank_impact.mp4",
+      "source_sha256": "f93f18db116900336406ba9f891c13c36cfae47a3cc05f46e6ba368c47be6aa5",
+      "source_start": 0.0,
+      "source_end": 5.0,
+      "output_start": 0.0,
+      "output_end": 5.0,
+      "events": [
+        {
+          "event": "target_selected",
+          "frame": 0,
+          "id": "osm/way/1261789148/storey_group/0",
+          "position": [
+            168.477722167969,
+            8.39601230621338,
+            151.169036865234
+          ]
+        },
+        {
+          "event": "fire",
+          "forward": [
+            0.995136260986328,
+            0.0208716373890638,
+            0.0962710231542587
+          ],
+          "frame": 24,
+          "kind": "tank",
+          "muzzle": [
+            108.853820800781,
+            7.1454815864563,
+            145.400924682617
+          ],
+          "source_velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "time_s": 0.8
+        },
+        {
+          "destroyed_count": 3,
+          "event": "impact",
+          "frame": 28,
+          "position": [
+            168.400192260742,
+            8.30496311187744,
+            151.149307250977
+          ],
+          "substep": 0,
+          "time_s": 0.933333333333333
+        },
+        {
+          "event": "camera_cut",
+          "eye": [
+            148.506713867188,
+            12.4835414886475,
+            149.258682250977
+          ],
+          "frame": 28,
+          "reason": "Close view triggered by actual production collision",
+          "target": [
+            168.400192260742,
+            10.3049631118774,
+            151.149307250977
+          ],
+          "time_s": 0.933333333333333
+        }
+      ]
+    },
+    {
+      "id": "02_harbour_hero",
+      "source_file": "02_harbour_hero.mp4",
+      "source_sha256": "0fe3ebb23441f109a305503342df606082cc36f033bce418335abd88130ae8c8",
+      "source_start": 0.0,
+      "source_end": 5.0,
+      "output_start": 5.0,
+      "output_end": 10.0,
+      "events": []
+    },
+    {
+      "id": "03_street_drive",
+      "source_file": "03_street_drive.mp4",
+      "source_sha256": "a392d570b9c7ff145513576b022e329933d520b9ddd074c75cb6f50f266c70e0",
+      "source_start": 0.0,
+      "source_end": 6.0,
+      "output_start": 10.0,
+      "output_end": 16.0,
+      "events": []
+    },
+    {
+      "id": "04_fighter_rocket",
+      "source_file": "04_fighter_rocket.mp4",
+      "source_sha256": "cf11348dd5fac9fba1afb5e0b975be961a59a381f3d5f93e8dc71a5d9da67baf",
+      "source_start": 0.0,
+      "source_end": 6.0,
+      "output_start": 16.0,
+      "output_end": 22.0,
+      "events": [
+        {
+          "event": "fire",
+          "forward": [
+            -0.750713527202606,
+            0.0,
+            0.660627722740173
+          ],
+          "frame": 30,
+          "kind": "fighter",
+          "muzzle": [
+            935.791564941406,
+            339.920013427734,
+            -599.497802734375
+          ],
+          "source_velocity": [
+            -105.099891662598,
+            0.0,
+            92.487907409668
+          ],
+          "time_s": 1.0
+        },
+        {
+          "event": "fire",
+          "forward": [
+            -0.750713527202606,
+            0.0,
+            0.660627722740173
+          ],
+          "frame": 55,
+          "kind": "fighter",
+          "muzzle": [
+            848.209167480469,
+            339.920013427734,
+            -522.425659179688
+          ],
+          "source_velocity": [
+            -105.099891662598,
+            0.0,
+            92.487907409668
+          ],
+          "time_s": 1.83333333333333
+        },
+        {
+          "event": "fire",
+          "forward": [
+            -0.750713527202606,
+            0.0,
+            0.660627722740173
+          ],
+          "frame": 80,
+          "kind": "fighter",
+          "muzzle": [
+            760.626770019531,
+            339.920013427734,
+            -445.352325439453
+          ],
+          "source_velocity": [
+            -105.099891662598,
+            0.0,
+            92.487907409668
+          ],
+          "time_s": 2.66666666666667
+        }
+      ]
+    },
+    {
+      "id": "05_opera_steps",
+      "source_file": "05_opera_steps.mp4",
+      "source_sha256": "1f14f3240e3485583f8c8863811be6ecfe3a13a8d5c098e1c494c27519899e23",
+      "source_start": 0.0,
+      "source_end": 5.0,
+      "output_start": 22.0,
+      "output_end": 27.0,
+      "events": []
+    },
+    {
+      "id": "06_public_interior",
+      "source_file": "06_public_interior.mp4",
+      "source_sha256": "d5e985a772e970934a47a5e5083c5ec1cd9105061633977517f20f59b7cdcdf0",
+      "source_start": 0.0,
+      "source_end": 5.0,
+      "output_start": 27.0,
+      "output_end": 32.0,
+      "events": []
+    },
+    {
+      "id": "07_summer_sunset",
+      "source_file": "07_summer_sunset.mp4",
+      "source_sha256": "5864307147ca332ccd11512d8e1a373b2f43f42912e421f0ea3be79b7bf8708d",
+      "source_start": 0.0,
+      "source_end": 6.0,
+      "output_start": 32.0,
+      "output_end": 38.0,
+      "events": [
+        {
+          "event": "clock_seek",
+          "frame": 0,
+          "hour": 19.4432813588688,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 0.0
+        },
+        {
+          "event": "clock_seek",
+          "frame": 10,
+          "hour": 19.6563412456298,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 0.333333333333333
+        },
+        {
+          "event": "clock_seek",
+          "frame": 20,
+          "hour": 19.8694011323907,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 0.666666666666667
+        },
+        {
+          "event": "clock_seek",
+          "frame": 30,
+          "hour": 20.0824610191516,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 1.0
+        },
+        {
+          "event": "clock_seek",
+          "frame": 40,
+          "hour": 20.2955209059125,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 1.33333333333333
+        },
+        {
+          "event": "clock_seek",
+          "frame": 50,
+          "hour": 20.5085807926735,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 1.66666666666667
+        },
+        {
+          "event": "clock_seek",
+          "frame": 60,
+          "hour": 20.7216406794344,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 2.0
+        },
+        {
+          "event": "clock_seek",
+          "frame": 70,
+          "hour": 20.9347005661953,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 2.33333333333333
+        },
+        {
+          "event": "clock_seek",
+          "frame": 80,
+          "hour": 21.1477604529563,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 2.66666666666667
+        },
+        {
+          "event": "clock_seek",
+          "frame": 90,
+          "hour": 21.3608203397172,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 3.0
+        },
+        {
+          "event": "clock_seek",
+          "frame": 100,
+          "hour": 21.5738802264781,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 3.33333333333333
+        },
+        {
+          "event": "clock_seek",
+          "frame": 110,
+          "hour": 21.7869401132391,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 3.66666666666667
+        },
+        {
+          "event": "clock_seek",
+          "frame": 120,
+          "hour": 22.0,
+          "scope": "Actual production time-slider API; compressed time-remap, not natural 12x clock playback",
+          "time_s": 4.0
+        }
+      ]
+    }
+  ],
+  "audio_cues": [
+    {
+      "kind": "tank",
+      "output_time_s": 0.8,
+      "source_shot": "01_tank_impact",
+      "production_event": {
+        "event": "fire",
+        "forward": [
+          0.995136260986328,
+          0.0208716373890638,
+          0.0962710231542587
+        ],
+        "frame": 24,
+        "kind": "tank",
+        "muzzle": [
+          108.853820800781,
+          7.1454815864563,
+          145.400924682617
+        ],
+        "source_velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "time_s": 0.8
+      }
+    },
+    {
+      "kind": "impact",
+      "output_time_s": 0.9333333333333333,
+      "source_shot": "01_tank_impact",
+      "production_event": {
+        "destroyed_count": 3,
+        "event": "impact",
+        "frame": 28,
+        "position": [
+          168.400192260742,
+          8.30496311187744,
+          151.149307250977
+        ],
+        "substep": 0,
+        "time_s": 0.933333333333333
+      }
+    },
+    {
+      "kind": "fighter",
+      "output_time_s": 17.0,
+      "source_shot": "04_fighter_rocket",
+      "production_event": {
+        "event": "fire",
+        "forward": [
+          -0.750713527202606,
+          0.0,
+          0.660627722740173
+        ],
+        "frame": 30,
+        "kind": "fighter",
+        "muzzle": [
+          935.791564941406,
+          339.920013427734,
+          -599.497802734375
+        ],
+        "source_velocity": [
+          -105.099891662598,
+          0.0,
+          92.487907409668
+        ],
+        "time_s": 1.0
+      }
+    },
+    {
+      "kind": "fighter",
+      "output_time_s": 17.833333333333332,
+      "source_shot": "04_fighter_rocket",
+      "production_event": {
+        "event": "fire",
+        "forward": [
+          -0.750713527202606,
+          0.0,
+          0.660627722740173
+        ],
+        "frame": 55,
+        "kind": "fighter",
+        "muzzle": [
+          848.209167480469,
+          339.920013427734,
+          -522.425659179688
+        ],
+        "source_velocity": [
+          -105.099891662598,
+          0.0,
+          92.487907409668
+        ],
+        "time_s": 1.83333333333333
+      }
+    },
+    {
+      "kind": "fighter",
+      "output_time_s": 18.666666666666668,
+      "source_shot": "04_fighter_rocket",
+      "production_event": {
+        "event": "fire",
+        "forward": [
+          -0.750713527202606,
+          0.0,
+          0.660627722740173
+        ],
+        "frame": 80,
+        "kind": "fighter",
+        "muzzle": [
+          760.626770019531,
+          339.920013427734,
+          -445.352325439453
+        ],
+        "source_velocity": [
+          -105.099891662598,
+          0.0,
+          92.487907409668
+        ],
+        "time_s": 2.66666666666667
+      }
+    }
+  ],
+  "visuals": "Actual rendered game frames; subtitles/brand only. No generated replacement footage. Automated inputs and authored camera; not a real-time performance benchmark.",
+  "audio": "Original synthesized score plus production weapon samples aligned to actual recorded events; editorial audio mix, not live mixer capture.",
+  "decode_passed": true,
+  "views": "Not published to Douyin or measured; no view-count claim."
+}

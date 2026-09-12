@@ -1,0 +1,340 @@
+{
+  "reviewed_at_utc": "2026-09-12T17:58:14.136912+00:00",
+  "accepted": true,
+  "new_blockers": [],
+  "scope": "Independent visual review of the final exported-App contact sheet and 15 original keyframes from shots 02/03/05/06/07, plus fresh file hashes and container header probes for all seven clips. This is not full motion playback, audio listening, real-time FPS measurement, or survey/1:1 validation. No prior candidate identity is reused.",
+  "capture_source": "reports/trailer-final-v018/capture-report.json",
+  "capture_report_sha256": "b7b0a381317db898f39553ff5ea9cea147c7ab222d356630eb12af440e3bfd65",
+  "build_source": "reports/release-v018-native/build.json",
+  "build_report_sha256": "cd7913624381ea5739dbea28ab7cbe2fd8ebd0c44d1e2d0bb073ab18bb6a0c97",
+  "app_identity": {
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "archive_sha256_from_build": "7726d53f5c6615cfcc13ac9958c432eb93a8fa8c94de9ac98afe4f8db141d995",
+  "native_modes": [
+    {
+      "mode": "ui-font",
+      "source": "reports/release-v018-native/ui-font-launch.json",
+      "sha256": "2ae84b994eb895673483ce085b9c026e4905d0da150756bcf694eb5d83591935",
+      "checks": 30,
+      "passed": true,
+      "app_identity": {
+        "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+        "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+      }
+    },
+    {
+      "mode": "combat",
+      "source": "reports/release-v018-native/combat-launch.json",
+      "sha256": "5b900930be246e6035d2bb2cd015844aaf87fc070a8e36ccf60def96117721ef",
+      "checks": 42,
+      "passed": true,
+      "app_identity": {
+        "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+        "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+      }
+    },
+    {
+      "mode": "navigation-input",
+      "source": "reports/release-v018-native/navigation-input-launch.json",
+      "sha256": "1ac8f639d6b4f7bb9ca1bcb9a439ddadb100f53793d32c430b5636472c241ece",
+      "checks": 35,
+      "passed": true,
+      "app_identity": {
+        "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+        "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+      }
+    },
+    {
+      "mode": "experience",
+      "source": "reports/release-v018-native/experience-launch.json",
+      "sha256": "2598032978fb78d885c561288b46405e19004187135567d3a34442f11ab7a82f",
+      "checks": 82,
+      "passed": true,
+      "app_identity": {
+        "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+        "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+      }
+    }
+  ],
+  "checks": {
+    "actual_app_and_pck_match_build_and_capture": true,
+    "recorder_source_matches_build": true,
+    "capture_passed_without_failures": true,
+    "isolated_no_user_saves": true,
+    "native_not_preview": true,
+    "fixed_step_30": true,
+    "requested_dimensions": true,
+    "seven_expected_unique_shots": true,
+    "all_shot_frames_received_decoded_match": true,
+    "total_1140_frames_38_seconds": true,
+    "all_shots_passed": true,
+    "seven_mp4_hashes_and_bytes_match_capture": true,
+    "seven_container_headers_1080p_30fps": true,
+    "logs_no_script_shader_runtime_errors": true,
+    "time_remap_recorded_as_real_seeks": true,
+    "four_native_modes_same_app_189_passed": true
+  },
+  "check_count": 16,
+  "contact_sheet": {
+    "source": "contact-sheet.jpg",
+    "sha256": "8023cb05b877e3a936b8e715a34490f25e469d677fcaab62205a9f696d93514d",
+    "actually_viewed": true
+  },
+  "clips": [
+    {
+      "id": "01_tank_impact",
+      "source": "01_tank_impact.mp4",
+      "sha256": "f93f18db116900336406ba9f891c13c36cfae47a3cc05f46e6ba368c47be6aa5",
+      "bytes": 2067213,
+      "frames_received": 150,
+      "decoded_frames_reported_by_recorder": 150,
+      "container_probe": {
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": 30.0,
+        "duration": 5.0,
+        "codec": "h264"
+      },
+      "visual_review_scope": "contact sheet only; effects review delegated to separate reviewer",
+      "matches_capture": true
+    },
+    {
+      "id": "02_harbour_hero",
+      "source": "02_harbour_hero.mp4",
+      "sha256": "0fe3ebb23441f109a305503342df606082cc36f033bce418335abd88130ae8c8",
+      "bytes": 3961016,
+      "frames_received": 150,
+      "decoded_frames_reported_by_recorder": 150,
+      "container_probe": {
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": 30.0,
+        "duration": 5.0,
+        "codec": "h264"
+      },
+      "visual_review_scope": "three original keyframes independently viewed",
+      "matches_capture": true
+    },
+    {
+      "id": "03_street_drive",
+      "source": "03_street_drive.mp4",
+      "sha256": "a392d570b9c7ff145513576b022e329933d520b9ddd074c75cb6f50f266c70e0",
+      "bytes": 10834992,
+      "frames_received": 180,
+      "decoded_frames_reported_by_recorder": 180,
+      "container_probe": {
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": 30.0,
+        "duration": 6.0,
+        "codec": "h264"
+      },
+      "visual_review_scope": "three original keyframes independently viewed",
+      "matches_capture": true
+    },
+    {
+      "id": "04_fighter_rocket",
+      "source": "04_fighter_rocket.mp4",
+      "sha256": "cf11348dd5fac9fba1afb5e0b975be961a59a381f3d5f93e8dc71a5d9da67baf",
+      "bytes": 12913939,
+      "frames_received": 180,
+      "decoded_frames_reported_by_recorder": 180,
+      "container_probe": {
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": 30.0,
+        "duration": 6.0,
+        "codec": "h264"
+      },
+      "visual_review_scope": "contact sheet only; effects review delegated to separate reviewer",
+      "matches_capture": true
+    },
+    {
+      "id": "05_opera_steps",
+      "source": "05_opera_steps.mp4",
+      "sha256": "1f14f3240e3485583f8c8863811be6ecfe3a13a8d5c098e1c494c27519899e23",
+      "bytes": 6455594,
+      "frames_received": 150,
+      "decoded_frames_reported_by_recorder": 150,
+      "container_probe": {
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": 30.0,
+        "duration": 5.0,
+        "codec": "h264"
+      },
+      "visual_review_scope": "three original keyframes independently viewed",
+      "matches_capture": true
+    },
+    {
+      "id": "06_public_interior",
+      "source": "06_public_interior.mp4",
+      "sha256": "d5e985a772e970934a47a5e5083c5ec1cd9105061633977517f20f59b7cdcdf0",
+      "bytes": 6317898,
+      "frames_received": 150,
+      "decoded_frames_reported_by_recorder": 150,
+      "container_probe": {
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": 30.0,
+        "duration": 5.0,
+        "codec": "h264"
+      },
+      "visual_review_scope": "three original keyframes independently viewed",
+      "matches_capture": true
+    },
+    {
+      "id": "07_summer_sunset",
+      "source": "07_summer_sunset.mp4",
+      "sha256": "5864307147ca332ccd11512d8e1a373b2f43f42912e421f0ea3be79b7bf8708d",
+      "bytes": 3036097,
+      "frames_received": 180,
+      "decoded_frames_reported_by_recorder": 180,
+      "container_probe": {
+        "size": [
+          1920,
+          1080
+        ],
+        "fps": 30.0,
+        "duration": 6.0,
+        "codec": "h264"
+      },
+      "visual_review_scope": "three original keyframes independently viewed",
+      "matches_capture": true
+    }
+  ],
+  "images": [
+    {
+      "source": "02_harbour_hero-0000.jpg",
+      "sha256": "3f4d530b7a26a332a1d5dbf8b359b6cd3eafb0dd60bb55570d16f8ab1175570f",
+      "accepted": true,
+      "review": "Opera House, Harbour Bridge and CBD are simultaneously clear; authored aerial view has no foreground obstruction. Water shows regular broad ripple bands and a bright solar reflection."
+    },
+    {
+      "source": "02_harbour_hero-0075.jpg",
+      "sha256": "73bc864cc8d6b8eb684b3401bb9b6f8f63730beca3b61c7c5fa9c4296b30d768",
+      "accepted": true,
+      "review": "Camera moves closer while retaining both landmarks; the sun reflection is bright but does not erase their silhouettes. Simplified distant facades remain visible."
+    },
+    {
+      "source": "02_harbour_hero-0149.jpg",
+      "sha256": "abb56a60cad58329a47aae20017bdd2914523a27f0e06e4f8ed5c4d00fbed3a8",
+      "accepted": true,
+      "review": "Bridge span and Opera roof groups remain recognizable and unblocked; no newly exposed floating road or missing foreground land is visible in this frame."
+    },
+    {
+      "source": "03_street_drive-0000.jpg",
+      "sha256": "9c4f165b99fb97a3e9004e2da3c4434fa6847343795cc1f09f2df87aae57d790",
+      "accepted": true,
+      "review": "Green car is completely visible between street trees, with continuous paving and road ahead; coarse tree crowns and repeated ordinary facades show the current stylized scope."
+    },
+    {
+      "source": "03_street_drive-0090.jpg",
+      "sha256": "56e43bf5bc2c055c1e091e2cd347f81a85a4b5b610baf3843eadaf6cb032b923",
+      "accepted": true,
+      "review": "Car remains unobscured at centre despite large upper tree crowns. Road and adjacent walking surface are continuous in the sampled frame."
+    },
+    {
+      "source": "03_street_drive-0179.jpg",
+      "sha256": "68edfb62dd1c2ee0bdd6be8f2f38bb5717ef457edd885ddc33ccb820c161ca1a",
+      "accepted": true,
+      "review": "Car remains visible but has left the road and approaches the left facade/grass verge; the near wall occupies much of the frame. This is a weaker closing composition, not proof of a wall penetration."
+    },
+    {
+      "source": "05_opera_steps-0000.jpg",
+      "sha256": "ad9bf58b851ea9acbb8933fe17fe641735d7e9544ee0c90b95f8c69f75f73a68",
+      "accepted": true,
+      "review": "Player stands on visible stepped geometry. Broad monumental stairs and roof supports are visible; no transverse open stair-to-platform gap is visible."
+    },
+    {
+      "source": "05_opera_steps-0075.jpg",
+      "sha256": "75b4ffb62a5571c95621bb6522eec653f7355fd3a5c5fd00bd7f021b32385b4c",
+      "accepted": true,
+      "review": "Player is higher on the same flight; tread surfaces reach the upper landing continuously in the visible area. Facade and roof detailing remain stylized."
+    },
+    {
+      "source": "05_opera_steps-0149.jpg",
+      "sha256": "f3ac6c21702cc8ce213146f7cb2d756c904882126d51feb25cdfbea33163309d",
+      "accepted": true,
+      "review": "Player reaches the upper platform. Visible top treads meet the platform without the old long open gap; this sampled frame does not replace full damaged-stair traversal tests."
+    },
+    {
+      "source": "06_public_interior-0000.jpg",
+      "sha256": "a47c64bbb1299f8298c8d64719c7262531b03663623481a2c1507fea7650dfe4",
+      "accepted": true,
+      "review": "Concert Hall seats, organ, pink reflectors and curved timber ceiling are all visible. No external white shell or bronze louvre wall cuts across the auditorium."
+    },
+    {
+      "source": "06_public_interior-0075.jpg",
+      "sha256": "603e2e4266431c777188c729b12c28c41656502c7b0419ba322ed4e4ce61ea95",
+      "accepted": true,
+      "review": "Mid camera view keeps the stage and seating readable, without black floor or blown-out timber walls. Repeated seats and simplified acoustic surfaces remain evident."
+    },
+    {
+      "source": "06_public_interior-0149.jpg",
+      "sha256": "10bf902693e5718c3b1b2ca886e0f79b55f57942f464cb412c09d0a8d3db61b7",
+      "accepted": true,
+      "review": "Final view has a clear stage/organ sightline and intact ceiling/side surfaces; visual geometry is original procedural interpretation, not interior survey accuracy."
+    },
+    {
+      "source": "07_summer_sunset-0000.jpg",
+      "sha256": "edcacd85b2bf0823b5c1bc29764bd8a089032e62b8c6c6c97de44b2cef3dddc3",
+      "accepted": true,
+      "review": "Time sequence starts with the low sun, warm reflection and both harbour landmarks visible; the broad ripple pattern remains an existing material limitation."
+    },
+    {
+      "source": "07_summer_sunset-0090.jpg",
+      "sha256": "b6dcb1344622a78a5236d4d254e3a28ca075b933ec0145b527bc457e6a2d254e",
+      "accepted": true,
+      "review": "Real clock seek has reached night: star sky and lit window patterns are visible, while water is almost black and the bridge is mostly silhouette. Night water readability is limited."
+    },
+    {
+      "source": "07_summer_sunset-0179.jpg",
+      "sha256": "5a62561b79751a4fca7c5d793b711c57dbb58c0861fd7fda071cd7752b8e29fc",
+      "accepted": true,
+      "review": "Stable final night frame keeps Opera and Bridge silhouettes readable, but foreground water remains very dark; appropriate as a brief CTA background, not an illuminated-night-city showcase."
+    }
+  ],
+  "event_review": {
+    "summer_time_remap": {
+      "actual_seek_count": 13,
+      "first_hour": 19.4432813588688,
+      "last_hour": 22.0,
+      "last_seek_frame": 120,
+      "remaining_stable_night_seconds": 2,
+      "meaning": "Production clock slider API deliberately compresses time for editing; this is not natural default 12x playback."
+    },
+    "opera_player_vertical_progress_m": 7.85410022735595
+  },
+  "limitations": [
+    "03 closing view is close to the left building after leaving the road; use earlier driving frames if a cleaner road composition is desired.",
+    "07 night water is almost black and landmark night illumination is limited; no newly introduced failure is inferred from this existing visual boundary.",
+    "02/07 water still has conspicuous regular broad ripple bands.",
+    "Simple tree crowns, repeated ordinary facades, Opera shell/interior approximations remain visible; footage must not be promoted as completed whole-region 1:1.",
+    "Only the specified 15 keyframes and new contact sheet were visually reviewed here; firing/effect timing shots 01/04 have a separate review."
+  ],
+  "packaging_script_review": {
+    "scope": "Read-only source inspection; scripts were not executed during this audit.",
+    "exact_kit_allowlist_fixed": true,
+    "kit_internal_mp4_proof_captions_cover_sums_checks_added": true,
+    "source_files": {
+      "reports/assemble_promo_kit.py": "a28b141255fd62ff0b63d697d8ecdfcc6caeabf29ef29253bb5fdfa0fb28e216",
+      "reports/finalize_v018_release.py": "cc764d5927ff12f95dd46104266213f11fca78af7039df03066b5afc827da7f7"
+    },
+    "remaining_blockers": []
+  }
+}

@@ -1,0 +1,38 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15095 reserved=413 roads=64958
+CITY_BUILD_TIMINGS {"complete_ms":64366,"custom_landmarks_ms":59850,"mapped_city_ms":12108,"terrain_and_harbour_ms":9982}
+HARBOR_WORLD_READY buildings=15097 structure_components=21697
+CITY_STARTUP_MS 65966
+UI_FONT_QA PASS Production world finished before UI font validation
+UI_FONT_QA PASS QA does not activate a player slot
+UI_FONT_QA PASS ThemeDB defaults and actual main theme share bundled font
+UI_FONT_QA PASS All four UI faces are bundled FontFiles without system fallback
+UI_FONT_QA PASS Bundled primary CJK font contains enemy glyph
+UI_FONT_QA PASS Actual TextServer glyphs: 无敌坦克
+UI_FONT_QA PASS Actual TextServer glyphs: 无敌战斗机
+UI_FONT_QA PASS Actual TextServer glyphs: 悉尼歌剧院 · 中国银行 · 维多利亚女王大厦
+UI_FONT_QA PASS Actual TextServer glyphs: Kürtősh · ŋ · کابول · 𝕲𝖗𝖆𝖓𝖉
+UI_FONT_QA PASS Actual TextServer glyphs: ✓ → ↗ ↔ ⇅ ╋ × · …
+UI_FONT_QA PASS Missing-glyph negative control remains detectable
+UI_FONT_QA PASS Actual title menu and name editor use bundled font
+UI_FONT_QA PASS Production menu, HUD and auxiliary Controls inherit bundled font
+UI_FONT_QA PASS Complete shaped vehicle label fits: car
+UI_FONT_QA PASS Complete shaped vehicle label fits: motorcycle
+UI_FONT_QA PASS Complete shaped vehicle label fits: hoverboard
+UI_FONT_QA PASS Complete shaped vehicle label fits: speedboat
+UI_FONT_QA PASS Complete shaped vehicle label fits: yacht
+UI_FONT_QA PASS Complete shaped vehicle label fits: paraglider
+UI_FONT_QA PASS Complete shaped vehicle label fits: glider
+UI_FONT_QA PASS Complete shaped vehicle label fits: helicopter
+UI_FONT_QA PASS Complete shaped vehicle label fits: airliner
+UI_FONT_QA PASS Complete shaped vehicle label fits: tank
+UI_FONT_QA PASS Complete shaped vehicle label fits: fighter
+UI_FONT_QA PASS Original tank and fighter names remain exact
+UI_FONT_QA PASS Both enemy labels are fully visible in the real scroll viewport
+UI_FONT_QA PASS Actual map and search entry use bundled font
+UI_FONT_QA PASS Actual minimap and navigation drawing inherit bundled font
+UI_FONT_QA PASS UI font QA preserved inactive slot and empty fleet
+UI_FONT_QA PASS All three actual-App screenshots saved
+UI_FONT_QA_COMPLETE 30 passed=true

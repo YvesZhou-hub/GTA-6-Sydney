@@ -1,0 +1,454 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "complete world before any delivery checks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new life starts with generous funds and all classes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists car",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh car",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet car",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists motorcycle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh motorcycle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet motorcycle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains motorcycle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists hoverboard",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh hoverboard",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet hoverboard",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains hoverboard",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists speedboat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh speedboat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet speedboat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains speedboat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists yacht",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh yacht",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet yacht",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains yacht",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists paraglider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh paraglider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet paraglider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains paraglider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists glider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh glider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet glider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains glider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists helicopter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh helicopter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet helicopter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains helicopter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists airliner",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh airliner",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet airliner",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains airliner",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists tank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh tank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet tank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains tank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free garage action exists fighter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "garage immediately seats fresh fighter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-balance creation preserves fleet fighter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "previous occupied instance remains fighter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid selection leaves current driver untouched",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all initial instance transforms preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "other vehicle collision does not count as player incident",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "occupied vehicle collision counts one player incident",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "arbitrary pin sets destination without moving driver",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "minimap and world marker share destination",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "pin survives reopening big map",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for 01-map-pin",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new fleet navigation save succeeds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "exact occupied fresh instance restored",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "arbitrary destination restored without reselecting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "larger legacy boats retain identity damage and fuel",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "overlapping old berths safely separate new hulls",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "legacy load keeps original save bytes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "legacy parking adjustment preserves occupied aircraft",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clear removes all destination indicators",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "actual mapped city experiences available",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new shop service and map share checked entrance auvers",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new shop service and map share checked entrance hakatamon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new shop service and map share checked entrance chinta_ria",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new shop service and map share checked entrance cq_eastbank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new shop service and map share checked entrance cq_searock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new shop service and map share checked entrance cq_city_extra",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for 02-experiences",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nearby service button is present",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "single UI purchase charges once and returns to play",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "one service signal restores stamina once",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for 03-experience-reward",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "out-of-range elevated service guides rather than claiming reachable",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for 04-live-navigation",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "compass cardinal 0.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "compass cardinal 90.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "compass cardinal 180.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "compass cardinal 270.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "flying over target is not an arrival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nearby ground destination can arrive",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "aft yacht platform permits immediate E reboarding",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"player_saves_touched": false,
+	"save_fixture_retained": true,
+	"screenshots": [
+		{
+			"name": "01-map-pin.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"name": "02-experiences.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"name": "03-experience-reward.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"name": "04-live-navigation.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		}
+	],
+	"test_world": "qa_experience_70322102",
+	"world_components": 21697,
+	"world_ready": true
+}

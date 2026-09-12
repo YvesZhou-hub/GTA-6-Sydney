@@ -1,0 +1,373 @@
+{
+  "release": "v0.1.8-preview.1",
+  "app_identity": {
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "archive_sha256": "7726d53f5c6615cfcc13ac9958c432eb93a8fa8c94de9ac98afe4f8db141d995",
+  "native_modes": {
+    "ui-font": {
+      "checks": 30,
+      "passed": true,
+      "screenshots": [
+        "02-tank-fighter-menu.png",
+        "03-map-fonts.png",
+        "01-title-menu.png"
+      ]
+    },
+    "combat": {
+      "checks": 42,
+      "passed": true,
+      "screenshots": [
+        "tank-impact-flash.png",
+        "fighter-forward-rocket-model.png",
+        "fighter-impact-flash.png",
+        "tank-impact-smoke.png",
+        "tank-city-target-before.png",
+        "tank-articulated-cannon.png",
+        "fighter-impact-smoke.png",
+        "fighter-rocket-in-flight.png"
+      ]
+    },
+    "navigation-input": {
+      "checks": 35,
+      "passed": true,
+      "screenshots": [
+        "01-map-pointer-pin.png",
+        "03-map-search-manly.png",
+        "02-map-top-close.png"
+      ]
+    },
+    "experience": {
+      "checks": 82,
+      "passed": true,
+      "screenshots": [
+        "01-map-pin.png",
+        "04-live-navigation.png",
+        "02-experiences.png",
+        "03-experience-reward.png"
+      ]
+    }
+  },
+  "files": {
+    "docs/evidence/v018-app/build.json": {
+      "original_sha256": "cd7913624381ea5739dbea28ab7cbe2fd8ebd0c44d1e2d0bb073ab18bb6a0c97",
+      "published_sha256": "c8c3a07497ff56a2cfd924bd0a79c5deaee3126464716ddcda87bc12addc87b7",
+      "bytes": 22602,
+      "path_normalized": true
+    },
+    "docs/evidence/v018-app/import.log.txt": {
+      "original_sha256": "1f6afb48483d4997cd847c536fbb5ab3c08008392a93a71193c35c4da347bca3",
+      "published_sha256": "1f6afb48483d4997cd847c536fbb5ab3c08008392a93a71193c35c4da347bca3",
+      "bytes": 1294,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/export.log.txt": {
+      "original_sha256": "b916e1d072da2be616e8be9e717ddfb5649d743e81e10854266963759571cc54",
+      "published_sha256": "b916e1d072da2be616e8be9e717ddfb5649d743e81e10854266963759571cc54",
+      "bytes": 20272,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/signature.log.txt": {
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/bundle-smoke.log.txt": {
+      "original_sha256": "88dbef81fb05866670f366ae50f3b508c8b16a91f955feb5dba2b77fc3e03256",
+      "published_sha256": "88dbef81fb05866670f366ae50f3b508c8b16a91f955feb5dba2b77fc3e03256",
+      "bytes": 395,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/codesign.log.txt": {
+      "original_sha256": "70d3b04d9bd68b32e8ae9edf912a7d2e20abc2cab5be62b6921e3da4fb31d868",
+      "published_sha256": "2519e470c73e18ea75ffc45f4cde04afd3c00ee5743310f38eb3c9c3fd71aee4",
+      "bytes": 124,
+      "path_normalized": true
+    },
+    "docs/evidence/v018-app/ui-font-report.json": {
+      "original_sha256": "c5d5fcbb1abc9907f6d24bc80fb8aef431c1162f0cac1faaec19ae5c0d9e0be0",
+      "published_sha256": "c5d5fcbb1abc9907f6d24bc80fb8aef431c1162f0cac1faaec19ae5c0d9e0be0",
+      "bytes": 5720,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/ui-font-launch.json": {
+      "original_sha256": "2ae84b994eb895673483ce085b9c026e4905d0da150756bcf694eb5d83591935",
+      "published_sha256": "2ae84b994eb895673483ce085b9c026e4905d0da150756bcf694eb5d83591935",
+      "bytes": 649,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/ui-font-runtime.log.txt": {
+      "original_sha256": "cc856b4dcec32196e43862c61778734936f0487057bd6ed6c6cdb4253d538ef2",
+      "published_sha256": "cc856b4dcec32196e43862c61778734936f0487057bd6ed6c6cdb4253d538ef2",
+      "bytes": 2430,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/ui-font-console.log.txt": {
+      "original_sha256": "cc856b4dcec32196e43862c61778734936f0487057bd6ed6c6cdb4253d538ef2",
+      "published_sha256": "cc856b4dcec32196e43862c61778734936f0487057bd6ed6c6cdb4253d538ef2",
+      "bytes": 2430,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/ui-font-02-tank-fighter-menu.png": {
+      "original_sha256": "456941057026b753f0b7bfc8fa6fad53a11373993fffba6e16a2d688b565c418",
+      "published_sha256": "456941057026b753f0b7bfc8fa6fad53a11373993fffba6e16a2d688b565c418",
+      "bytes": 593883,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/ui-font-03-map-fonts.png": {
+      "original_sha256": "aa4302320df4e0679d7b2716dcb31bcd9b4fe00483c77dcc2aaa88d7b364e40b",
+      "published_sha256": "aa4302320df4e0679d7b2716dcb31bcd9b4fe00483c77dcc2aaa88d7b364e40b",
+      "bytes": 440668,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/ui-font-01-title-menu.png": {
+      "original_sha256": "ff7225446073c66d133f15de4874927d1cba917b69eaf07d6b6a644d1dfe5590",
+      "published_sha256": "ff7225446073c66d133f15de4874927d1cba917b69eaf07d6b6a644d1dfe5590",
+      "bytes": 582236,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/combat-report.json": {
+      "original_sha256": "51db957bfe5d1be2421b1dfd1433ca9fef121f01655aae22d29fe8d9f99683ce",
+      "published_sha256": "51db957bfe5d1be2421b1dfd1433ca9fef121f01655aae22d29fe8d9f99683ce",
+      "bytes": 8796,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/combat-launch.json": {
+      "original_sha256": "5b900930be246e6035d2bb2cd015844aaf87fc070a8e36ccf60def96117721ef",
+      "published_sha256": "5b900930be246e6035d2bb2cd015844aaf87fc070a8e36ccf60def96117721ef",
+      "bytes": 863,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/combat-runtime.log.txt": {
+      "original_sha256": "93339f104ea4a2cd312ad6bbc418fd124e9c8e75b2c0569c1804001c9954fd07",
+      "published_sha256": "93339f104ea4a2cd312ad6bbc418fd124e9c8e75b2c0569c1804001c9954fd07",
+      "bytes": 3005,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/combat-console.log.txt": {
+      "original_sha256": "93339f104ea4a2cd312ad6bbc418fd124e9c8e75b2c0569c1804001c9954fd07",
+      "published_sha256": "93339f104ea4a2cd312ad6bbc418fd124e9c8e75b2c0569c1804001c9954fd07",
+      "bytes": 3005,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-tank-impact-flash.png": {
+      "original_sha256": "55e482c479eacb9a2b8c56c19f7e6875dca35ab34da0078f5cfff3a79d6811bb",
+      "published_sha256": "55e482c479eacb9a2b8c56c19f7e6875dca35ab34da0078f5cfff3a79d6811bb",
+      "bytes": 794514,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-fighter-forward-rocket-model.png": {
+      "original_sha256": "8bc3d6568c55d200a927f7e7d021749162e93e78b5e0894d6f1a43b8b8c260e8",
+      "published_sha256": "8bc3d6568c55d200a927f7e7d021749162e93e78b5e0894d6f1a43b8b8c260e8",
+      "bytes": 1232501,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-fighter-impact-flash.png": {
+      "original_sha256": "69735950b5f86d5cf4fc62f95fa5b422d4b76b5d37acb3741b2a90f5b579be7c",
+      "published_sha256": "69735950b5f86d5cf4fc62f95fa5b422d4b76b5d37acb3741b2a90f5b579be7c",
+      "bytes": 830978,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-tank-impact-smoke.png": {
+      "original_sha256": "700266843df548569c9529f60a34febef71889d99dd5f23ef17ea6e62fc40e50",
+      "published_sha256": "700266843df548569c9529f60a34febef71889d99dd5f23ef17ea6e62fc40e50",
+      "bytes": 779372,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-tank-city-target-before.png": {
+      "original_sha256": "cfc6f3e74ab0789aae0a32b1aa805a783c572a05b145e724919a0c29464e14bb",
+      "published_sha256": "cfc6f3e74ab0789aae0a32b1aa805a783c572a05b145e724919a0c29464e14bb",
+      "bytes": 585408,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-tank-articulated-cannon.png": {
+      "original_sha256": "0351ccf66fc689733eb65dac9d3ea86fef611d509a1170197618fa1cb2013494",
+      "published_sha256": "0351ccf66fc689733eb65dac9d3ea86fef611d509a1170197618fa1cb2013494",
+      "bytes": 589108,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-fighter-impact-smoke.png": {
+      "original_sha256": "71f6ff250b2c50421ca46ff5321ca6ea343a1267c677b2a59bc021f5620e0cb7",
+      "published_sha256": "71f6ff250b2c50421ca46ff5321ca6ea343a1267c677b2a59bc021f5620e0cb7",
+      "bytes": 838427,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/combat-fighter-rocket-in-flight.png": {
+      "original_sha256": "fae99240717b0d8ef1b9421fe63980e60ed8116fbc2d082c887d84e1a1325f84",
+      "published_sha256": "fae99240717b0d8ef1b9421fe63980e60ed8116fbc2d082c887d84e1a1325f84",
+      "bytes": 1252361,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/navigation-input-report.json": {
+      "original_sha256": "b62e516c67f1025fc71a542110852eac177344719582dababbab564a16978761",
+      "published_sha256": "b62e516c67f1025fc71a542110852eac177344719582dababbab564a16978761",
+      "bytes": 4484,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/navigation-input-launch.json": {
+      "original_sha256": "1ac8f639d6b4f7bb9ca1bcb9a439ddadb100f53793d32c430b5636472c241ece",
+      "published_sha256": "1ac8f639d6b4f7bb9ca1bcb9a439ddadb100f53793d32c430b5636472c241ece",
+      "bytes": 674,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/navigation-input-runtime.log.txt": {
+      "original_sha256": "0fa39e7e68b72299beb1d53cc713fde9fec6f69a386aeb6660188ad16e6be3ba",
+      "published_sha256": "0fa39e7e68b72299beb1d53cc713fde9fec6f69a386aeb6660188ad16e6be3ba",
+      "bytes": 2667,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/navigation-input-console.log.txt": {
+      "original_sha256": "0fa39e7e68b72299beb1d53cc713fde9fec6f69a386aeb6660188ad16e6be3ba",
+      "published_sha256": "0fa39e7e68b72299beb1d53cc713fde9fec6f69a386aeb6660188ad16e6be3ba",
+      "bytes": 2667,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/navigation-input-01-map-pointer-pin.png": {
+      "original_sha256": "793ed8fc325c17a448ccd5a7f528a5756a29d5d38160cfdf918bcfada6e3db63",
+      "published_sha256": "793ed8fc325c17a448ccd5a7f528a5756a29d5d38160cfdf918bcfada6e3db63",
+      "bytes": 374356,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/navigation-input-03-map-search-manly.png": {
+      "original_sha256": "bbd6d609b5f50473664e9ec2e19da99483dafe674ac784139d071a08e77e8a2c",
+      "published_sha256": "bbd6d609b5f50473664e9ec2e19da99483dafe674ac784139d071a08e77e8a2c",
+      "bytes": 508952,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/navigation-input-02-map-top-close.png": {
+      "original_sha256": "07cf8aed832a2d44fd5613311d69f68d5c81ccb2457557a9fef575028f99a435",
+      "published_sha256": "07cf8aed832a2d44fd5613311d69f68d5c81ccb2457557a9fef575028f99a435",
+      "bytes": 204860,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/experience-report.json": {
+      "original_sha256": "42d338318b7e59a0887f1acf12dd7b353464f771e2f6cf548ccaf8557b739ef5",
+      "published_sha256": "42d338318b7e59a0887f1acf12dd7b353464f771e2f6cf548ccaf8557b739ef5",
+      "bytes": 8910,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/experience-launch.json": {
+      "original_sha256": "2598032978fb78d885c561288b46405e19004187135567d3a34442f11ab7a82f",
+      "published_sha256": "2598032978fb78d885c561288b46405e19004187135567d3a34442f11ab7a82f",
+      "bytes": 683,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/experience-runtime.log.txt": {
+      "original_sha256": "19414b09828d8f3333e9af179c92ce5dee098cb9784f67b5bcc31e786202948d",
+      "published_sha256": "19414b09828d8f3333e9af179c92ce5dee098cb9784f67b5bcc31e786202948d",
+      "bytes": 12276,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/experience-console.log.txt": {
+      "original_sha256": "19414b09828d8f3333e9af179c92ce5dee098cb9784f67b5bcc31e786202948d",
+      "published_sha256": "19414b09828d8f3333e9af179c92ce5dee098cb9784f67b5bcc31e786202948d",
+      "bytes": 12276,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/experience-01-map-pin.png": {
+      "original_sha256": "3eb6cb4877c6e287ed20f13f25f504d815c6719bc2b8057e49ddb7d10a91c6be",
+      "published_sha256": "3eb6cb4877c6e287ed20f13f25f504d815c6719bc2b8057e49ddb7d10a91c6be",
+      "bytes": 410817,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/experience-04-live-navigation.png": {
+      "original_sha256": "ae826ef3bf6b72466c3d4d8827fdff6175e653e47c65eb8cb688b719b99ec960",
+      "published_sha256": "ae826ef3bf6b72466c3d4d8827fdff6175e653e47c65eb8cb688b719b99ec960",
+      "bytes": 529551,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/experience-02-experiences.png": {
+      "original_sha256": "74deb081dfaf31f30b6130acd4ba17ef86288374c286379ef5fff8c469e47d94",
+      "published_sha256": "74deb081dfaf31f30b6130acd4ba17ef86288374c286379ef5fff8c469e47d94",
+      "bytes": 479621,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/experience-03-experience-reward.png": {
+      "original_sha256": "0eff16e67ac6dfe6453a80af6bd78046a80d6cfb4aa28d972b7a8f056d1247e6",
+      "published_sha256": "0eff16e67ac6dfe6453a80af6bd78046a80d6cfb4aa28d972b7a8f056d1247e6",
+      "bytes": 643085,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/ui-font-visual-review.json": {
+      "original_sha256": "a8d9500e17e60652ab722317889db09442639b03d4169ba4ef5421ff10e8448e",
+      "published_sha256": "a8d9500e17e60652ab722317889db09442639b03d4169ba4ef5421ff10e8448e",
+      "bytes": 4094,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/trailer-capture.json": {
+      "original_sha256": "b7b0a381317db898f39553ff5ea9cea147c7ab222d356630eb12af440e3bfd65",
+      "published_sha256": "b7b0a381317db898f39553ff5ea9cea147c7ab222d356630eb12af440e3bfd65",
+      "bytes": 22093,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/main-video-verification.json": {
+      "original_sha256": "d3e6173f3f54e1796c217d5828141c5d45a797fdd1793980a9bd9d5c94d81547",
+      "published_sha256": "d3e6173f3f54e1796c217d5828141c5d45a797fdd1793980a9bd9d5c94d81547",
+      "bytes": 14084,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/teaser-video-verification.json": {
+      "original_sha256": "3bfc2e38cb104bd8c8c2e7631109555018682c053f9ac6e66ffded2e8fe7e2f8",
+      "published_sha256": "3bfc2e38cb104bd8c8c2e7631109555018682c053f9ac6e66ffded2e8fe7e2f8",
+      "bytes": 13153,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/cover-provenance.json": {
+      "original_sha256": "9dc84b96cd0f1ef16506508cf20aecc4f590481ced03dbcfaccca6e9e9bcc81a",
+      "published_sha256": "9dc84b96cd0f1ef16506508cf20aecc4f590481ced03dbcfaccca6e9e9bcc81a",
+      "bytes": 1173,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/trailer-environment-review.json": {
+      "original_sha256": "fd511d312bf47d3e1d31d8fc77dbe543a9e5aa372c6b138c5db7cbdca1854783",
+      "published_sha256": "fd511d312bf47d3e1d31d8fc77dbe543a9e5aa372c6b138c5db7cbdca1854783",
+      "bytes": 14602,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/promo-type-review.json": {
+      "original_sha256": "0c7fb88400be082007269a98d2ef4b1f881c872e52399ee12ea90f2831bd3e89",
+      "published_sha256": "0c7fb88400be082007269a98d2ef4b1f881c872e52399ee12ea90f2831bd3e89",
+      "bytes": 6690,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/trailer-combat-review.json": {
+      "original_sha256": "ced53c14deb888b53ae17752b08c7ad4a4db2a77d834e2c396f9573117c67f5d",
+      "published_sha256": "ced53c14deb888b53ae17752b08c7ad4a4db2a77d834e2c396f9573117c67f5d",
+      "bytes": 6424,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/source-effects.json": {
+      "original_sha256": "20205b7430a30119aa3ab2b21ebead465f0310b29462dbf1ccd0960f92a0b905",
+      "published_sha256": "20205b7430a30119aa3ab2b21ebead465f0310b29462dbf1ccd0960f92a0b905",
+      "bytes": 6070,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/source-weapons.json": {
+      "original_sha256": "d8936fbc0250bea809c662d37552680a347c9f807ebc22c192eeed3ac70efd9d",
+      "published_sha256": "d8936fbc0250bea809c662d37552680a347c9f807ebc22c192eeed3ac70efd9d",
+      "bytes": 6087,
+      "path_normalized": false
+    },
+    "docs/evidence/v018-app/source-combat-state.json": {
+      "original_sha256": "b6276b7ef2365bbe563a17ec145e02f41900da1bd0fcee46a0a3a1cc43740013",
+      "published_sha256": "b6276b7ef2365bbe563a17ec145e02f41900da1bd0fcee46a0a3a1cc43740013",
+      "bytes": 3433,
+      "path_normalized": false
+    },
+    "docs/screenshots/v018/harbour-promo.png": {
+      "original_sha256": "73bc864cc8d6b8eb684b3401bb9b6f8f63730beca3b61c7c5fa9c4296b30d768",
+      "published_sha256": "cacd63e01563001cfb3cafa375f73e9f9f200046496e5397b17ec74acb43bd92",
+      "decoded_JPEG_to_PNG": true
+    },
+    "docs/screenshots/v018/tank-impact.png": {
+      "original_sha256": "e0fadbb570de5abc2e286bbadd52a5d7cf296be02fa2bd019bbd9239c400110e",
+      "published_sha256": "e0fadbb570de5abc2e286bbadd52a5d7cf296be02fa2bd019bbd9239c400110e",
+      "bytes": 1243077,
+      "path_normalized": false
+    }
+  },
+  "scope": "Four final App native suites; archived screenshots unchanged. Text paths normalized. Historical development tests are not represented as final App checks.",
+  "native_check_count": 189
+}

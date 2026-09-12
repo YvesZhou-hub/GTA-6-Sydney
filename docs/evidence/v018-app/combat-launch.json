@@ -1,0 +1,33 @@
+{
+  "app_identity": {
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "app_identity_unchanged": true,
+  "mode": "combat",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--combat-qa"
+  ],
+  "started_utc": "2026-09-12T17:42:58.359715+00:00",
+  "wall_seconds": 75.883,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 42,
+  "passed": true,
+  "screenshots": [
+    "tank-impact-flash.png",
+    "fighter-forward-rocket-model.png",
+    "fighter-impact-flash.png",
+    "tank-impact-smoke.png",
+    "tank-city-target-before.png",
+    "tank-articulated-cannon.png",
+    "fighter-impact-smoke.png",
+    "fighter-rocket-in-flight.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

@@ -1,0 +1,11 @@
+[gd_resource type="FontVariation" load_steps=5 format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSansCJKsc-Regular.otf" id="1_cjk"]
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSans[wdth,wght].ttf" id="2_latin"]
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSansArabic[wdth,wght].ttf" id="3_arabic"]
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSansMath-Regular.ttf" id="4_math"]
+
+[resource]
+resource_name = "Harbourlife bundled multilingual UI"
+base_font = ExtResource("1_cjk")
+fallbacks = Array[Font]([ExtResource("2_latin"), ExtResource("3_arabic"), ExtResource("4_math")])

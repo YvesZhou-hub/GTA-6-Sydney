@@ -1,0 +1,10 @@
+{
+  "artillery_smoke.png": {
+    "origin": "Built-in ImageGen tool; generated for Harbourlife on 2026-09-13",
+    "model": "Tool-managed; no specific model version was exposed or selected",
+    "sha256": "35980e299a6702614b47b45ddf7fb1472de919f427847b95d8aac81982d5fe5c",
+    "use": "Runtime smoke billboard texture for artillery impacts",
+    "prompt": "One isolated volumetric grey-brown turbulent smoke puff, centered on transparent RGBA, soft feathered wispy silhouette and lit billowing lobes; no fire, background, ground, debris, text or watermark. Generated dimensions1254x1254; original alpha preserved.",
+    "reference_images": []
+  }
+}

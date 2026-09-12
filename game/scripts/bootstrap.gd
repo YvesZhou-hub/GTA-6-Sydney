@@ -1,6 +1,8 @@
 extends Control
 ## Present a real loading screen before constructing the native city scene.
 func _ready() -> void:
+	preload("res://scripts/ui_fonts.gd").install_defaults()
+	theme=preload("res://scripts/ui_fonts.gd").make_theme()
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var background:=ColorRect.new()
 	background.color=Color("102b35")

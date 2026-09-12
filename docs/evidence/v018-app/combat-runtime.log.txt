@@ -1,0 +1,50 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15095 reserved=413 roads=64958
+CITY_BUILD_TIMINGS {"complete_ms":64966,"custom_landmarks_ms":60587,"mapped_city_ms":12212,"terrain_and_harbour_ms":10140}
+HARBOR_WORLD_READY buildings=15097 structure_components=21697
+CITY_STARTUP_MS 66504
+COMBAT_QA PASS production city and weapon controller ready
+COMBAT_QA PASS main request creates and enters actual tank
+COMBAT_QA PASS tank model exposes independent turret barrel and muzzle
+COMBAT_QA PASS production gate permits occupied tank
+COMBAT_QA PASS modal gate blocks actual controller
+COMBAT_QA PASS map gate blocks actual controller
+COMBAT_QA PASS production tank barrel rises toward camera within limit
+COMBAT_QA PASS real bound traverse action turns turret independently
+COMBAT_QA PASS predicted reticle point follows actual traversed barrel
+COMBAT_QA PASS near facade stream ready for tank-articulated-cannon
+COMBAT_QA PASS native image tank-articulated-cannon
+COMBAT_QA PASS visible target is an existing mapped city structure
+COMBAT_QA PASS near facade stream ready for tank-city-target-before
+COMBAT_QA PASS native image tank-city-target-before
+COMBAT_QA PASS production fire-button signal dispatches controller
+COMBAT_QA PASS tank projectile reaches actual city collision
+COMBAT_QA PASS tank blast destroys existing world components
+COMBAT_QA PASS near facade stream ready for tank-impact-flash
+COMBAT_QA PASS native image tank-impact-flash
+COMBAT_QA PASS near facade stream ready for tank-impact-smoke
+COMBAT_QA PASS native image tank-impact-smoke
+COMBAT_QA PASS damage state roundtrip preserves destroyed component IDs
+COMBAT_QA PASS main request creates and enters actual fighter
+COMBAT_QA PASS fighter photo pose clears full envelope and100m forward path
+COMBAT_QA PASS fighter forward muzzle exists outside nose
+COMBAT_QA PASS near facade stream ready for fighter-forward-rocket-model
+COMBAT_QA PASS native image fighter-forward-rocket-model
+COMBAT_QA PASS production fire-button signal dispatches controller
+COMBAT_QA PASS fighter has a live forward projectile for launch capture
+COMBAT_QA PASS near facade stream ready for fighter-rocket-in-flight
+COMBAT_QA PASS native image fighter-rocket-in-flight
+COMBAT_QA PASS fighter forward projectile hits while camera faces elsewhere
+COMBAT_QA PASS fighter explosion produces persistent city destruction
+COMBAT_QA PASS near facade stream ready for fighter-impact-flash
+COMBAT_QA PASS native image fighter-impact-flash
+COMBAT_QA PASS near facade stream ready for fighter-impact-smoke
+COMBAT_QA PASS native image fighter-impact-smoke
+COMBAT_QA PASS invulnerable combat vehicles retain health
+COMBAT_QA PASS exiting vehicle disables firing
+COMBAT_QA PASS leaving clears all projectiles and explosions
+COMBAT_QA PASS QA restores original city damage state
+COMBAT_QA PASS all eight intended combat images captured
+COMBAT_QA_COMPLETE 42 passed=true

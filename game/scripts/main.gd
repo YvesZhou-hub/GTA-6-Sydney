@@ -54,7 +54,7 @@ var active_panel=""
 var name_edit: LineEdit
 var map_search: LineEdit
 var map_results: VBoxContainer
-var font: SystemFont
+var font: Font
 var demo_mode=false
 var qa_running=false
 var qa_report: Dictionary={}
@@ -96,7 +96,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -200,6 +200,14 @@ func _ready():
 		validation.call_deferred("run",self)
 	elif "--precinct-qa" in arguments:
 		add_child(load("res://scripts/precinct_validation.gd").new())
+	elif "--trailer-capture" in arguments:
+		var recorder=load("res://scripts/trailer_capture.gd").new()
+		add_child(recorder)
+		recorder.call_deferred("run",self)
+	elif "--ui-font-qa" in arguments:
+		var validation=load("res://scripts/ui_font_validation.gd").new()
+		add_child(validation)
+		validation.call_deferred("run",self)
 	elif "--showcase" in OS.get_cmdline_user_args():
 		demo_mode=true
 		new_world("sandbox","QA Showcase",false)
@@ -238,11 +246,8 @@ func setup_environment():
 func setup_ui():
 	canvas=CanvasLayer.new()
 	add_child(canvas)
-	font=SystemFont.new()
-	font.font_names=PackedStringArray(["Avenir Next","PingFang SC","Arial"])
-	var theme=Theme.new()
-	theme.default_font=font
-	theme.default_font_size=18
+	var theme=preload("res://scripts/ui_fonts.gd").make_theme()
+	font=theme.default_font
 	theme.set_color("font_color","Label",Color("f1f1df"))
 	var button_style=panel_style(Color(0.11,0.22,0.25,0.96),8)
 	button_style.content_margin_left=18
@@ -1167,7 +1172,7 @@ func save_settings():
 func credits_menu():
 	active_panel="credits"
 	clear_panel("关于这片海港","Harbourlife · 开发预览 "+str(ProjectSettings.get_setting("application/config/version"))+"\n原创程序、建筑重建和合成音效；环境资源来源见下方。")
-	var text_value="Godot Engine 4.7.2 · MIT License\nhttps://godotengine.org/license\n\n晴日天空：Rustig Koppie (Pure Sky) · Greg Zaal / Jarod Guest · Poly Haven · CC0\nhttps://polyhaven.com/a/rustig_koppie_puresky\n\n建筑轮廓、道路与岸线：© OpenStreetMap contributors · ODbL 1.0\nhttps://www.openstreetmap.org/copyright\n\n主要地标、总部及所列店面参考建筑师、物业与商户公开资料及真实照片。普通楼体立面、大部分地形高程仍为近似；这不是完整的一比一城市扫描。\n\n各地标依据、数据日期、估算范围与许可附在源码 docs 和 licenses 中。系统字体由本机提供，不分发字体文件。"
+	var text_value="Godot Engine 4.7.2 · MIT License\nhttps://godotengine.org/license\n\n晴日天空：Rustig Koppie (Pure Sky) · Greg Zaal / Jarod Guest · Poly Haven · CC0\nhttps://polyhaven.com/a/rustig_koppie_puresky\n\n建筑轮廓、道路与岸线：© OpenStreetMap contributors · ODbL 1.0\nhttps://www.openstreetmap.org/copyright\n\n主要地标、总部及所列店面参考建筑师、物业与商户公开资料及真实照片。普通楼体立面、大部分地形高程仍为近似；这不是完整的一比一城市扫描。\n\n各地标依据、数据日期、估算范围与许可附在源码 docs 和 licenses 中。界面字体：Noto Sans CJK、Noto Sans、Noto Sans Arabic、Noto Sans Math · SIL OFL 1.1。字体许可随包附在 licenses 中。"
 	var l=label(text_value,17)
 	l.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	l.custom_minimum_size.x=430

@@ -1,0 +1,248 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "Production world finished before UI font validation",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "QA does not activate a player slot",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ThemeDB defaults and actual main theme share bundled font",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "All four UI faces are bundled FontFiles without system fallback",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Bundled primary CJK font contains enemy glyph",
+			"passed": true
+		},
+		{
+			"detail": {
+				"missing": []
+			},
+			"name": "Actual TextServer glyphs: 无敌坦克",
+			"passed": true
+		},
+		{
+			"detail": {
+				"missing": []
+			},
+			"name": "Actual TextServer glyphs: 无敌战斗机",
+			"passed": true
+		},
+		{
+			"detail": {
+				"missing": []
+			},
+			"name": "Actual TextServer glyphs: 悉尼歌剧院 · 中国银行 · 维多利亚女王大厦",
+			"passed": true
+		},
+		{
+			"detail": {
+				"missing": []
+			},
+			"name": "Actual TextServer glyphs: Kürtősh · ŋ · کابول · 𝕲𝖗𝖆𝖓𝖉",
+			"passed": true
+		},
+		{
+			"detail": {
+				"missing": []
+			},
+			"name": "Actual TextServer glyphs: ✓ → ↗ ↔ ⇅ ╋ × · …",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Missing-glyph negative control remains detectable",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Actual title menu and name editor use bundled font",
+			"passed": true
+		},
+		{
+			"detail": {
+				"controls": 54,
+				"mismatches": []
+			},
+			"name": "Production menu, HUD and auxiliary Controls inherit bundled font",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Veloce V12 · 超跑 · 免费驾驶",
+				"text_width": 250.0
+			},
+			"name": "Complete shaped vehicle label fits: car",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Apex RR · 超级运动摩托 · 免费驾驶",
+				"text_width": 300.0
+			},
+			"name": "Complete shaped vehicle label fits: motorcycle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Aether X1 · 反重力平衡车 · 免费驾驶",
+				"text_width": 312.0
+			},
+			"name": "Complete shaped vehicle label fits: hoverboard",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Riviera 39 · 豪华快艇 · 免费驾驶",
+				"text_width": 278.0
+			},
+			"name": "Complete shaped vehicle label fits: speedboat",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Ocean 90 · 豪华游艇 · 免费驾驶",
+				"text_width": 274.0
+			},
+			"name": "Complete shaped vehicle label fits: yacht",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Thermal 9 · 滑翔伞 · 免费驾驶",
+				"text_width": 263.0
+			},
+			"name": "Complete shaped vehicle label fits: paraglider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Southern Arc · 滑翔机 · 免费驾驶",
+				"text_width": 288.0
+			},
+			"name": "Complete shaped vehicle label fits: glider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Harbour H6 · 直升机 · 免费驾驶",
+				"text_width": 276.0
+			},
+			"name": "Complete shaped vehicle label fits: helicopter",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Dreamliner 787-9 · 双发客机 · 免费驾驶",
+				"text_width": 341.0
+			},
+			"name": "Complete shaped vehicle label fits: airliner",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Harbour Bastion · 无敌坦克 · 免费驾驶",
+				"text_width": 334.0
+			},
+			"name": "Complete shaped vehicle label fits: tank",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_width": 482.0,
+				"text": "Aster F-27 · 无敌战斗机 · 免费驾驶",
+				"text_width": 298.0
+			},
+			"name": "Complete shaped vehicle label fits: fighter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Original tank and fighter names remain exact",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Both enemy labels are fully visible in the real scroll viewport",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Actual map and search entry use bundled font",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Actual minimap and navigation drawing inherit bundled font",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "UI font QA preserved inactive slot and empty fleet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "All three actual-App screenshots saved",
+			"passed": true
+		}
+	],
+	"count": 30,
+	"font_family": "Noto Sans CJK SC",
+	"font_resource": "res://assets/fonts/harbour_ui_font.tres",
+	"native": true,
+	"passed": true,
+	"scope": "Actual production title/vehicle/map UI after full-world construction. Direct handlers and scroll visibility request; no physical input or startup-screenshot claim. Runtime resource/shaping assertions work in compiled PCK without source reads.",
+	"screenshots": [
+		{
+			"file": "01-title-menu.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "ff7225446073c66d133f15de4874927d1cba917b69eaf07d6b6a644d1dfe5590"
+		},
+		{
+			"file": "02-tank-fighter-menu.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "456941057026b753f0b7bfc8fa6fad53a11373993fffba6e16a2d688b565c418"
+		},
+		{
+			"file": "03-map-fonts.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "aa4302320df4e0679d7b2716dcb31bcd9b4fe00483c77dcc2aaa88d7b364e40b"
+		}
+	],
+	"settings_files_written": false,
+	"user_saves_touched": false
+}

@@ -168,7 +168,7 @@ func run():
 	before = game.impacts.size()
 	for index in 100: controller.impact_effect(Vector3(index, 10, 0))
 	check("effect-only API never applies world damage", game.impacts.size() == before)
-	check("100 explosions reuse bounded12slot pool", controller.stats().effects.active == 12 and controller.stats().effects.allocated == 12 and controller.effects.get_child_count() == 12)
+	check("100 explosions reuse bounded12slot pool", controller.stats().effects.active == 12 and controller.stats().effects.allocated == 12 and controller.effects.get_child_count() == 13)
 	controller.effects.tick(.5)
 	var fx: Dictionary = controller.effects._slots[0]
 	check("smoke persists after short flash and light end", not fx.core.visible and not fx.light.visible and fx.smoke.multimesh.get_instance_color(0).a > .1)
@@ -193,7 +193,7 @@ func run():
 	check("repeated setup reuses both pools", controller.get_child_count() == allocated_children and controller.stats().effects.allocated == 12)
 	var passed := checks.all(func(c): return c.passed)
 	var report := {"passed":passed,"count":checks.size(),"checks":checks,"engine":Engine.get_version_info().string,"headless":DisplayServer.get_name()=="headless", "scope":"Small real Jolt space plus production harbor_world damage/save-state component fixture. No main UI, native visuals, full city or user save accessed.","user_saves_touched":false,"source_sha256":{}}
-	for path in ["res://scripts/vehicle_weapons.gd","res://scripts/combat_effects.gd","res://../source/combat_weapons_test.gd"]: report.source_sha256[path] = FileAccess.get_sha256(path)
+	for path in ["res://scripts/vehicle_weapons.gd","res://scripts/combat_effects.gd","res://scripts/weapon_audio.gd","res://shaders/combat_cloud.gdshader","res://shaders/combat_pressure.gdshader","res://assets/fx/artillery_smoke.png","res://../source/combat_weapons_test.gd"]: report.source_sha256[path] = FileAccess.get_sha256(path)
 	DirAccess.make_dir_recursive_absolute("res://../reports/combat-weapons")
 	FileAccess.open("res://../reports/combat-weapons/headless.json",FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))
 	print("COMBAT_WEAPONS_COMPLETE ", checks.size(), " passed=", passed)

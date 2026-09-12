@@ -26,6 +26,10 @@ import zipfile
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 RESOURCES = [
+    "res://scripts/ui_fonts.gd", "res://assets/fonts/harbour_ui_font.tres",
+    "res://scripts/ui_font_validation.gd", "res://scripts/trailer_capture.gd",
+    "res://scripts/weapon_audio.gd", "res://shaders/combat_cloud.gdshader",
+    "res://shaders/combat_pressure.gdshader", "res://assets/fx/artillery_smoke.png",
     "res://scripts/tank_models.gd", "res://scripts/tank_motion.gd", "res://scripts/fighter_models.gd",
     "res://scripts/fighter_motion.gd", "res://scripts/vehicle_weapons.gd", "res://scripts/combat_effects.gd",
     "res://scripts/arcade_impact.gd", "res://scripts/combat_validation.gd",

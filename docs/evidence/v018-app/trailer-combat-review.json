@@ -1,0 +1,123 @@
+{
+  "reviewed_utc": "2026-09-12T18:17:35.558793+00:00",
+  "passed": true,
+  "blocking_defects": [],
+  "scope": "Actual visual inspection with view_image of all seven newly extracted corrected capture frames, not inherited approval of the earlier candidate. Game files were not modified and no GPU process was launched for this review.",
+  "app_archive_sha256": "7726d53f5c6615cfcc13ac9958c432eb93a8fa8c94de9ac98afe4f8db141d995",
+  "build_report": {
+    "path": "reports/release-v018-native/build.json",
+    "sha256": "cd7913624381ea5739dbea28ab7cbe2fd8ebd0c44d1e2d0bb073ab18bb6a0c97",
+    "app_identity": {
+      "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+      "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+    }
+  },
+  "capture_report": {
+    "path": "reports/trailer-final-v018/capture-report.json",
+    "sha256": "b7b0a381317db898f39553ff5ea9cea147c7ab222d356630eb12af440e3bfd65"
+  },
+  "source_videos": [
+    {
+      "path": "reports/trailer-final-v018/01_tank_impact.mp4",
+      "sha256": "f93f18db116900336406ba9f891c13c36cfae47a3cc05f46e6ba368c47be6aa5",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "fps": 30,
+      "scope": "actual production weapon events in a controlled capture; no live-frame-rate claim"
+    },
+    {
+      "path": "reports/trailer-final-v018/04_fighter_rocket.mp4",
+      "sha256": "cf11348dd5fac9fba1afb5e0b975be961a59a381f3d5f93e8dc71a5d9da67baf",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "fps": 30,
+      "scope": "actual production weapon events in a controlled capture; no live-frame-rate claim"
+    }
+  ],
+  "frames": [
+    {
+      "path": "reports/final-combat-review-v2/01_tank_impact-0024.png",
+      "source_video": "reports/trailer-final-v018/01_tank_impact.mp4",
+      "frame_zero_based": 24,
+      "sha256": "519adcb9ad8b61c9a4fbb896de5b9a1edd2f14abdd381b831599114a03b9bb8b",
+      "actually_viewed": true,
+      "accepted": true,
+      "review": "Actual muzzle discharge is unobstructed: irregular warm flame tongues project ahead of the barrel, with a brief local ground light. The tank remains readable; no opaque explosion sphere or rectangular smoke-card edge is visible."
+    },
+    {
+      "path": "reports/final-combat-review-v2/01_tank_impact-0029.png",
+      "source_video": "reports/trailer-final-v018/01_tank_impact.mp4",
+      "frame_zero_based": 29,
+      "sha256": "c330ff4cd67ae7a07cc3ef72a0d2e410296aa69695987c758647990a3f62cffa",
+      "actually_viewed": true,
+      "accepted": true,
+      "review": "The collision-triggered close view shows a bright broken flame cluster, airborne building fragments and gold streaks radiating at different angles from the actual hit. The former parallel horizontal streak defect is absent."
+    },
+    {
+      "path": "reports/final-combat-review-v2/01_tank_impact-0034.png",
+      "source_video": "reports/trailer-final-v018/01_tank_impact.mp4",
+      "frame_zero_based": 34,
+      "sha256": "e0fadbb570de5abc2e286bbadd52a5d7cf296be02fa2bd019bbd9239c400110e",
+      "actually_viewed": true,
+      "accepted": true,
+      "review": "Strongest damage/effect evidence: elongated sparks follow outward trajectories at visibly different angles; tumbling fragments, patchy fire and transparent dust leave the destroyed centre and surviving building readable. No directional scaling defect is visible."
+    },
+    {
+      "path": "reports/final-combat-review-v2/01_tank_impact-0044.png",
+      "source_video": "reports/trailer-final-v018/01_tank_impact.mp4",
+      "frame_zero_based": 44,
+      "sha256": "36596bd5d60617509434dd84598ad2b907be019fab834772fcc2fc3613ba5801",
+      "actually_viewed": true,
+      "accepted": true,
+      "review": "The initial fire has ended. Thin textured grey/cream smoke has soft alpha edges; decaying sparks and fragments remain visible and the destroyed centre is exposed. No opaque orb or rectangular fringe hides the damage."
+    },
+    {
+      "path": "reports/final-combat-review-v2/04_fighter_rocket-0031.png",
+      "source_video": "reports/trailer-final-v018/04_fighter_rocket.mp4",
+      "frame_zero_based": 31,
+      "sha256": "027af45ca486ead783102f63e3d949cb62ecb1e12f2701d3cf8b115e4157b531",
+      "actually_viewed": true,
+      "accepted": true,
+      "review": "The complete fighter is visible against the harbour. The bright projectile ahead of the nose is now inclined along its projected travel direction rather than stretched horizontally. This is a launch view, not an impact view."
+    },
+    {
+      "path": "reports/final-combat-review-v2/04_fighter_rocket-0032.png",
+      "source_video": "reports/trailer-final-v018/04_fighter_rocket.mp4",
+      "frame_zero_based": 32,
+      "sha256": "ed0807b0cad641a949002392c925504f9195c25ed42c0a1f6f50b70f91cc05ea",
+      "actually_viewed": true,
+      "accepted": true,
+      "review": "Compared with frame31 the projectile has advanced toward the distant city while retaining alignment with its trajectory. Aircraft silhouette and wing/tail components remain unobstructed."
+    },
+    {
+      "path": "reports/final-combat-review-v2/04_fighter_rocket-0056.png",
+      "source_video": "reports/trailer-final-v018/04_fighter_rocket.mp4",
+      "frame_zero_based": 56,
+      "sha256": "38fe843c4d659e7effee61a819962989f604c388cfde4ff3e4b47908339bd88a",
+      "actually_viewed": true,
+      "accepted": true,
+      "review": "The repeated launch after frame55 again produces a forward-aligned bright projectile. The fighter is readable without visible missing geometry or foreground occlusion. The projectile is intentionally small in this landscape shot."
+    }
+  ],
+  "production_events": {
+    "tank_fire_frame": 24,
+    "tank_impact_frame": 28,
+    "tank_destroyed_components": 3,
+    "fighter_fire_frames": [
+      30,
+      55,
+      80
+    ],
+    "fighter_impact_events": 0
+  },
+  "limitations": [
+    "The aerial clip demonstrates launch visibility and corrected projectile orientation, not missile impact; collision/damage is covered by the separate native combat QA.",
+    "The cinematic capture uses controlled simulation and camera framing and is not a performance benchmark.",
+    "The source capture clips are identified separately from the exported App; the App combat report independently passed 42 checks."
+  ],
+  "recommended_evidence": "reports/final-combat-review-v2/01_tank_impact-0034.png"
+}

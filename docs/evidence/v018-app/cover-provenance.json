@@ -1,0 +1,12 @@
+{
+  "file": "Harbourlife-横屏宣传封面.png",
+  "sha256": "77d3ee528549cc71c29fb9f64fb66bb870eaefd790136ca4c14f327085af41f9",
+  "mode": "Built-in ImageGen image editing/compositing; actual model version not exposed",
+  "type": "Designed promotional cover, not an unedited gameplay screenshot",
+  "references": [
+    "docs/screenshots/v017/harbour-golden.png",
+    "reports/trailer-preview-05/tank-detail-24.jpg"
+  ],
+  "observed_changes": "Large Chinese title and separate tank inset; generated sky, reflections and subtle scene restyling. Use as a designed cover only. The main video uses actual game capture.",
+  "prompt": "Create a premium16:9 Chinese indie-game project thumbnail from supplied actual game screenshots. Harbor screenshot as background preserving Sydney landmarks/model style, tank screenshot in separate lower-right orange-bordered editorial inset. Large two-line text: 我把悉尼 / 做成了开放世界. Brand HARBOURLIFE. Supporting text 免费试玩 · 持续开发中. Cream heavy sans-serif with navy outline/shadow, orange underline. Avoid fake play counts, invented features, game UI, watermark and photorealistic replacement geometry."
+}

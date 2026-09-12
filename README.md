@@ -1,17 +1,19 @@
 # Harbourlife · 悉尼海港
 
-**v0.1.7-preview.1 · 夏季日夜、公共空间与战斗载具**
+**v0.1.8-preview.1 · 中文字体修复、炮击反馈与横屏宣传片**
 
-[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.7-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
+[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-本轮把 106 处有明确地图边界的步行广场改为完整铺面，并同步大小地图；细化 Manly 码头公共大厅、Corso 步行街和 Hotel Steyne 外观，加入 QVB 街侧入口与首层公共通廊。室外和公开室内一起核对实照、入口与通行，具体依据及未完成部分见 [本轮说明](docs/FIXES_0.1.7.md)。歌剧院大台阶实体基座、免费载具与原有内容继续保留。公开试玩包面向 **Apple Silicon Mac（M 系列芯片）**；目前验证环境为 Apple M4 / 16 GB / macOS 26.5，没有 Windows、Intel Mac 或浏览器玩家版本。
+本轮修复“无敌坦克”“无敌战斗机”的中文缺字，随包提供完整许可的 Noto 字体；强化炮口喷焰、后坐、命中尘浪、碎片、烟尘与空间音效。横屏宣传片展示真实玩法和海港探索，具体见 [本轮说明](docs/FIXES_0.1.8.md) 与 [宣传片制作](docs/PROMO.md)。公开试玩包面向 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费；没有 Windows、Intel Mac 或浏览器玩家版本。
 
-![v0.1.7 悉尼夏季金色时刻 · 最终导出 App 实际画面](docs/screenshots/v017/harbour-golden.png)
+[观看 38 秒横屏宣传片](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Sydney-Trailer-1080p.mp4) · [16.5 秒短版](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Sydney-Teaser-1080p.mp4) · [下载宣传素材包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Promo-Kit.zip)
+
+![v0.1.8 悉尼海港金色时刻 · 最终导出 App 实机镜头](docs/screenshots/v018/harbour-promo.png)
 
 
-![海港大桥的实际游戏画面](docs/screenshots/v013/bridge.png)
+![v0.1.8 坦克炮击与构件损坏 · 最终导出 App 实机镜头](docs/screenshots/v018/tank-impact.png)
 
 ![v0.1.6 歌剧院幕墙细节 · 最终导出 App 实际画面](docs/screenshots/v016/opera-north-curtain-detail.png)
 
@@ -131,7 +133,7 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 
 ## 源码与本地构建
 
-[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.7-preview.1` 标签对应的源码。
+[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.8-preview.1` 标签对应的源码。
 
 构建需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
 
@@ -155,4 +157,4 @@ Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据�
 
 Harbourlife is a free, offline, single-player Sydney sandbox for **Apple Silicon Mac**. Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
-**v0.1.7-preview.1 · Public spaces and connected visits.** This update renders 106 explicitly mapped pedestrian areas as filled polygons in the city and both maps; improves the Manly wharf public concourse, Corso street furniture and Hotel Steyne exterior; and adds QVB's publicly accessible ground-floor arcade with photo-informed facades and domes. Map revision 7 checks legacy occupied poses while retaining old damage IDs. Official terrain reference extraction is documented separately and is not yet a replacement for the flat game terrain. This remains an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon app is ad-hoc signed and not notarized. Final build-specific results are in [TESTING.md](docs/TESTING.md); exact sources and limits are in [the update notes](docs/FIXES_0.1.7.md).
+**v0.1.8-preview.1 · Readable Chinese UI and stronger artillery feedback.** The game bundles licensed Noto fonts to fix missing Chinese glyphs, adds pooled muzzle/recoil/impact effects and procedural spatial weapon audio, and ships a landscape project trailer recorded from this exact App. Existing public spaces, free vehicles, navigation and Sydney's summer day/night cycle remain available. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Final build-specific results are in [TESTING.md](docs/TESTING.md); capture, editing and factual scope are in [PROMO.md](docs/PROMO.md).

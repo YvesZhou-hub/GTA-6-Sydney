@@ -1,0 +1,26 @@
+{
+  "app_identity": {
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "app_identity_unchanged": true,
+  "mode": "navigation-input",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--navigation-input-qa"
+  ],
+  "started_utc": "2026-09-12T17:44:14.351636+00:00",
+  "wall_seconds": 77.55,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 35,
+  "passed": true,
+  "screenshots": [
+    "01-map-pointer-pin.png",
+    "03-map-search-manly.png",
+    "02-map-top-close.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

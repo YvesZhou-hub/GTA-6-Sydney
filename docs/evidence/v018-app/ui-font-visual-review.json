@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-09-12T17:51:08.475165+00:00",
+  "accepted": true,
+  "scope": "Visual review of all three fresh screenshots from the rebuilt exported App UI font mode, after full-world readiness. This covers the visible typography and layout only, not combat, physical input, world fidelity or frame-rate claims.",
+  "app_identity": {
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "archive_sha256": "7726d53f5c6615cfcc13ac9958c432eb93a8fa8c94de9ac98afe4f8db141d995",
+  "evidence": {
+    "build": {
+      "source": "build.json",
+      "sha256": "cd7913624381ea5739dbea28ab7cbe2fd8ebd0c44d1e2d0bb073ab18bb6a0c97"
+    },
+    "report": {
+      "source": "ui-font-report.json",
+      "sha256": "c5d5fcbb1abc9907f6d24bc80fb8aef431c1162f0cac1faaec19ae5c0d9e0be0",
+      "checks": 30,
+      "passed": true
+    },
+    "launch": {
+      "source": "ui-font-launch.json",
+      "sha256": "2ae84b994eb895673483ce085b9c026e4905d0da150756bcf694eb5d83591935",
+      "passed": true,
+      "app_identity_unchanged": true,
+      "exit_code": 0,
+      "runtime_errors": []
+    }
+  },
+  "images": [
+    {
+      "source": "ui-font-screenshots/01-title-menu.png",
+      "sha256": "ff7225446073c66d133f15de4874927d1cba917b69eaf07d6b6a644d1dfe5590",
+      "resolution": [
+        1440,
+        900
+      ],
+      "accepted": true,
+      "review": "实际查看新 App 标题页。属于你的海港、我的悉尼、开始生活、自由沙盒、从悉尼机场起飞、存档与恢复、操作与设置等中文完整，箭头与中英文组合正常，v0.1.8 可见；主要可见按钮均未截字。制作与资料来源仅部分进入当前滚动窗口，属于该截图的滚动位置，不据此声称该行已完整可见。",
+      "inspection_method": "tools.view_image; each new PNG was opened and visually inspected"
+    },
+    {
+      "source": "ui-font-screenshots/02-tank-fighter-menu.png",
+      "sha256": "456941057026b753f0b7bfc8fa6fad53a11373993fffba6e16a2d688b565c418",
+      "resolution": [
+        1440,
+        900
+      ],
+      "accepted": true,
+      "review": "实际查看新 App 滚动后的载具菜单。Harbour Bastion · 无敌坦克 · 免费驾驶 与 Aster F-27 · 无敌战斗机 · 免费驾驶 两行均完整，敌字明确有正常笔画，没有缺字框；两按钮均在滚动窗口内，上下和右侧有余量。其余当前可见载具中文与拉丁名称清晰，没有相互覆盖。推荐此图作为缺字修复的主要展示图。",
+      "inspection_method": "tools.view_image; each new PNG was opened and visually inspected"
+    },
+    {
+      "source": "ui-font-screenshots/03-map-fonts.png",
+      "sha256": "aa4302320df4e0679d7b2716dcb31bcd9b4fe00483c77dcc2aaa88d7b364e40b",
+      "resolution": [
+        1440,
+        900
+      ],
+      "accepted": true,
+      "review": "实际查看新 App 地图界面。悉尼 · 地图与目的地、操作说明、海港与城市核心、机场 ↔ 海港 ↔ Manly 全图、Manly 码头与海滩、返回游戏 × 等中文及符号完整。右侧地图标题、比例尺和图例正常；市中心地名在当前全景缩放下较密，有部分文字重叠，不能由此图宣称所有地图标签排布都已优化。",
+      "inspection_method": "tools.view_image; each new PNG was opened and visually inspected"
+    }
+  ],
+  "best_image": "ui-font-screenshots/02-tank-fighter-menu.png",
+  "blockers": [],
+  "limitations": [
+    "Only the visible text and layouts in these three 1440x900 images were visually judged; the compiled runtime report separately covers its stated glyph checks.",
+    "Map labels remain dense and partly overlap at the pictured overview zoom; this is not a missing-glyph blocker.",
+    "The title image was taken after full-world readiness, not during initial import/loading.",
+    "UI font QA uses direct menu handlers and scroll positioning; it does not demonstrate physical mouse or keyboard operation."
+  ]
+}

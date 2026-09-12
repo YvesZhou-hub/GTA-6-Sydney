@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-09-12T18:11:20.241664+00:00",
+  "accepted": true,
+  "status": "final_video_sampled_typography_review",
+  "scope": "All six requested timestamps were freshly decoded from the final rebuilt-App videos and actually viewed. Acceptance covers visible Chinese glyphs, caption obstruction and full-landscape safe areas at those six frames.",
+  "app_identity": {
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "build": {
+    "source": "reports/release-v018-native/build.json",
+    "sha256": "cd7913624381ea5739dbea28ab7cbe2fd8ebd0c44d1e2d0bb073ab18bb6a0c97"
+  },
+  "videos": {
+    "main": {
+      "source": "dist/v018/promo/main/Harbourlife-悉尼开放世界-横屏预告.mp4",
+      "sha256": "b2649fe196a0cc4b69bffc602821ec0e08461ed9e8dbc0560f0158bcde6a6c51",
+      "verification_source": "dist/v018/promo/main/video-verification.json",
+      "verification_sha256": "d3e6173f3f54e1796c217d5828141c5d45a797fdd1793980a9bd9d5c94d81547",
+      "width": 1920,
+      "height": 1080,
+      "frames": 1140,
+      "seconds": 38.0,
+      "fps": 30.0
+    },
+    "teaser": {
+      "source": "dist/v018/promo/teaser/Harbourlife-坦克钩子-短版.mp4",
+      "sha256": "b65bdcb4de5b9b9ad8e8f58721ca477d730c9eb15d141862b7831455396450fa",
+      "verification_source": "dist/v018/promo/teaser/video-verification.json",
+      "verification_sha256": "3bfc2e38cb104bd8c8c2e7631109555018682c053f9ac6e66ffded2e8fe7e2f8",
+      "width": 1920,
+      "height": 1080,
+      "frames": 495,
+      "seconds": 16.5,
+      "fps": 30.0
+    }
+  },
+  "images": [
+    {
+      "video": "dist/v018/promo/main/Harbourlife-悉尼开放世界-横屏预告.mp4",
+      "video_sha256": "b2649fe196a0cc4b69bffc602821ec0e08461ed9e8dbc0560f0158bcde6a6c51",
+      "time_s": 0.5,
+      "source": "reports/final-promo-type-review-v2/main-00.5s.png",
+      "sha256": "3a65ab117736ff5648674531ee7f1d848871d5341399f6ed3f2d64c533d8499b",
+      "accepted": true,
+      "review": "重新抽取并实际查看最终主片 0.5 秒。首标题“我把悉尼，做成了开放世界”和说明“坦克开火 · 建筑可以被破坏”完整，无缺字框或截字；左下文字未盖住坦克车体、炮塔或炮口。",
+      "inspection_method": "tools.view_image; all six newly extracted final-video PNGs individually viewed at full frame"
+    },
+    {
+      "video": "dist/v018/promo/main/Harbourlife-悉尼开放世界-横屏预告.mp4",
+      "video_sha256": "b2649fe196a0cc4b69bffc602821ec0e08461ed9e8dbc0560f0158bcde6a6c51",
+      "time_s": 11.5,
+      "source": "reports/final-promo-type-review-v2/main-11.5s.png",
+      "sha256": "bc7038ad756039a42ea3940854872e17f337c0ad2722d35384dc29493db52651",
+      "accepted": true,
+      "review": "重新抽取并实际查看最终主片 11.5 秒。“想开就开，载具全部免费”和车型说明完整，省略号正常；白字深描边在阴影地面仍清楚，文字没有挡住居中的跑车。",
+      "inspection_method": "tools.view_image; all six newly extracted final-video PNGs individually viewed at full frame"
+    },
+    {
+      "video": "dist/v018/promo/main/Harbourlife-悉尼开放世界-横屏预告.mp4",
+      "video_sha256": "b2649fe196a0cc4b69bffc602821ec0e08461ed9e8dbc0560f0158bcde6a6c51",
+      "time_s": 23.0,
+      "source": "reports/final-promo-type-review-v2/main-23.0s.png",
+      "sha256": "73932776a8c789cdba4475b36f72591a6f8a3438dafe02d24ad77c9a99c49d5c",
+      "accepted": true,
+      "review": "重新抽取并实际查看最终主片 23 秒。“从天上，回到街头”及台阶说明笔画完整，在亮色台阶上仍有足够描边对比。文字位于人物下方，没有遮挡人物或歌剧院主体。",
+      "inspection_method": "tools.view_image; all six newly extracted final-video PNGs individually viewed at full frame"
+    },
+    {
+      "video": "dist/v018/promo/main/Harbourlife-悉尼开放世界-横屏预告.mp4",
+      "video_sha256": "b2649fe196a0cc4b69bffc602821ec0e08461ed9e8dbc0560f0158bcde6a6c51",
+      "time_s": 36.5,
+      "source": "reports/final-promo-type-review-v2/main-36.5s.png",
+      "sha256": "0f980578817d1d209ec9a924da2bf38f22293a18f73e0a2cce296b81ca4b255e",
+      "accepted": true,
+      "review": "重新抽取并实际查看最终主片 36.5 秒。CTA“关注我，评论「悉尼」领试玩”居中完整，次行 macOS 试玩版与中文说明清晰，四周有充足边距。文字盖住部分远景，但桥拱与歌剧院仍可辨；夜景较暗不影响字幕阅读。",
+      "inspection_method": "tools.view_image; all six newly extracted final-video PNGs individually viewed at full frame"
+    },
+    {
+      "video": "dist/v018/promo/teaser/Harbourlife-坦克钩子-短版.mp4",
+      "video_sha256": "b65bdcb4de5b9b9ad8e8f58721ca477d730c9eb15d141862b7831455396450fa",
+      "time_s": 0.5,
+      "source": "reports/final-promo-type-review-v2/teaser-00.5s.png",
+      "sha256": "168679ef65db6e45a410fa5b33c3b4d252059f3d97ef202e37ce981957f75847",
+      "accepted": true,
+      "review": "重新抽取并实际查看最终短版 0.5 秒。“在悉尼开坦克，是什么体验？”和开发中游戏说明完整，问号、逗号正常；左下标题未覆盖坦克主体，左侧与底部留有空间。",
+      "inspection_method": "tools.view_image; all six newly extracted final-video PNGs individually viewed at full frame"
+    },
+    {
+      "video": "dist/v018/promo/teaser/Harbourlife-坦克钩子-短版.mp4",
+      "video_sha256": "b65bdcb4de5b9b9ad8e8f58721ca477d730c9eb15d141862b7831455396450fa",
+      "time_s": 15.0,
+      "source": "reports/final-promo-type-review-v2/teaser-15.0s.png",
+      "sha256": "6f39470933c040778f7c208eddbc7174f62eab0ca37ec5775cbe630e99421656",
+      "accepted": true,
+      "review": "重新抽取并实际查看最终短版 15 秒。CTA、中文引号及下一行 macOS 试玩版文字完整，未碰到两侧边界或品牌行。夜景对比让文字清楚，未发现缺字或截断。",
+      "inspection_method": "tools.view_image; all six newly extracted final-video PNGs individually viewed at full frame"
+    }
+  ],
+  "blockers": [],
+  "limitations": [
+    "Six requested still-frame samples, not an every-frame, motion or audio-listening review.",
+    "Safe-area judgment is for uncropped 1920x1080 landscape; platform UI overlays and portrait crops were not tested.",
+    "Night skyline is dark in both closing frames, while CTA remains clear.",
+    "No city-scale 1:1 fidelity, real-time FPS or audience-performance approval is implied."
+  ]
+}

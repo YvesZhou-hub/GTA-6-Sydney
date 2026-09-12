@@ -1,0 +1,418 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "production city and weapon controller ready",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "main request creates and enters actual tank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank model exposes independent turret barrel and muzzle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production gate permits occupied tank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "modal gate blocks actual controller",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map gate blocks actual controller",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production tank barrel rises toward camera within limit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real bound traverse action turns turret independently",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "predicted reticle point follows actual traversed barrel",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for tank-articulated-cannon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image tank-articulated-cannon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"target": "osm/way/335687068/storey_group/0"
+			},
+			"name": "visible target is an existing mapped city structure",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for tank-city-target-before",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image tank-city-target-before",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production fire-button signal dispatches controller",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank projectile reaches actual city collision",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank blast destroys existing world components",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for tank-impact-flash",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image tank-impact-flash",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for tank-impact-smoke",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image tank-impact-smoke",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "damage state roundtrip preserves destroyed component IDs",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "main request creates and enters actual fighter",
+			"passed": true
+		},
+		{
+			"detail": {
+				"distance": 189.736633300781
+			},
+			"name": "fighter photo pose clears full envelope and100m forward path",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter forward muzzle exists outside nose",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for fighter-forward-rocket-model",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image fighter-forward-rocket-model",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production fire-button signal dispatches controller",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter has a live forward projectile for launch capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for fighter-rocket-in-flight",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image fighter-rocket-in-flight",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter forward projectile hits while camera faces elsewhere",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter explosion produces persistent city destruction",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for fighter-impact-flash",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image fighter-impact-flash",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for fighter-impact-smoke",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native image fighter-impact-smoke",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invulnerable combat vehicles retain health",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "exiting vehicle disables firing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "leaving clears all projectiles and explosions",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "QA restores original city damage state",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all eight intended combat images captured",
+			"passed": true
+		}
+	],
+	"count": 42,
+	"native": true,
+	"passed": true,
+	"save_written": false,
+	"scope": "Full main and existing OSM city collision; production spawn, weapon button and bound traverse action. Vehicles frozen for poses, fixed-step projectile controller for repeatable effect capture; not a driving/flight or frame-rate benchmark.",
+	"screenshots": [
+		{
+			"detail": {
+				"elevation_deg": 69.9999996711977,
+				"posed_frozen_for_capture": true
+			},
+			"eye": [
+				83.0,
+				12.5853357315063,
+				194.128692626953
+			],
+			"file": "tank-articulated-cannon.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "0351ccf66fc689733eb65dac9d3ea86fef611d509a1170197618fa1cb2013494",
+			"target": [
+				70.0,
+				7.58533573150635,
+				177.128692626953
+			]
+		},
+		{
+			"detail": {
+				"target_component": "osm/way/335687068/storey_group/0"
+			},
+			"eye": [
+				82.0,
+				12.5853357315063,
+				192.128692626953
+			],
+			"file": "tank-city-target-before.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "cfc6f3e74ab0789aae0a32b1aa805a783c572a05b145e724919a0c29464e14bb",
+			"target": [
+				90.5230178833008,
+				10.5261001586914,
+				213.982360839844
+			]
+		},
+		{
+			"detail": {
+				"effect_age_seconds": 0.0166666666666667,
+				"fixed_step_controller": true
+			},
+			"eye": [
+				113.541801452637,
+				22.493070602417,
+				240.904602050781
+			],
+			"file": "tank-impact-flash.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "55e482c479eacb9a2b8c56c19f7e6875dca35ab34da0078f5cfff3a79d6811bb",
+			"target": [
+				90.5418014526367,
+				10.493070602417,
+				213.904602050781
+			]
+		},
+		{
+			"detail": {
+				"effect_age_seconds": 0.616666666666667,
+				"persistent_destroyed_components": 2
+			},
+			"eye": [
+				113.541801452637,
+				22.493070602417,
+				240.904602050781
+			],
+			"file": "tank-impact-smoke.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "700266843df548569c9529f60a34febef71889d99dd5f23ef17ea6e62fc40e50",
+			"target": [
+				90.5418014526367,
+				10.493070602417,
+				213.904602050781
+			]
+		},
+		{
+			"detail": {
+				"flight_stability_tested_elsewhere": true,
+				"posed_frozen_for_capture": true
+			},
+			"eye": [
+				171.747848510742,
+				87.9186248779297,
+				29.2968101501465
+			],
+			"file": "fighter-forward-rocket-model.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "8bc3d6568c55d200a927f7e7d021749162e93e78b5e0894d6f1a43b8b8c260e8",
+			"target": [
+				180.523010253906,
+				70.5261001586914,
+				58.0977935791016
+			]
+		},
+		{
+			"detail": {
+				"actual_projectile_slot": true,
+				"fixed_step_seconds": 0.0166666666666667
+			},
+			"eye": [
+				165.513153076172,
+				87.6024017333984,
+				34.0956192016602
+			],
+			"file": "fighter-rocket-in-flight.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "fae99240717b0d8ef1b9421fe63980e60ed8116fbc2d082c887d84e1a1325f84",
+			"target": [
+				171.98486328125,
+				64.8339996337891,
+				72.8863067626953
+			]
+		},
+		{
+			"detail": {
+				"effect_age_seconds": 0.0166666666666667,
+				"fixed_step_controller": true
+			},
+			"eye": [
+				66.5418472290039,
+				23.4417762756348,
+				242.904602050781
+			],
+			"file": "fighter-impact-flash.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "69735950b5f86d5cf4fc62f95fa5b422d4b76b5d37acb3741b2a90f5b579be7c",
+			"target": [
+				90.5418472290039,
+				10.4417762756348,
+				213.904602050781
+			]
+		},
+		{
+			"detail": {
+				"effect_age_seconds": 0.816666666666667
+			},
+			"eye": [
+				66.5418472290039,
+				23.4417762756348,
+				242.904602050781
+			],
+			"file": "fighter-impact-smoke.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "71f6ff250b2c50421ca46ff5321ca6ea343a1267c677b2a59bc021f5620e0cb7",
+			"target": [
+				90.5418472290039,
+				10.4417762756348,
+				213.904602050781
+			]
+		}
+	],
+	"source_sha256": {
+		"res://scripts/combat_effects.gd": "",
+		"res://scripts/combat_validation.gd": "",
+		"res://scripts/fighter_models.gd": "",
+		"res://scripts/main.gd": "",
+		"res://scripts/tank_models.gd": "",
+		"res://scripts/vehicle_weapons.gd": ""
+	},
+	"target_component": "osm/way/335687068/storey_group/0",
+	"user_saves_touched": false,
+	"world_ready": true
+}

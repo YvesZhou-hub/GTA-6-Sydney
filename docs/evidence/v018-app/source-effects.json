@@ -1,0 +1,233 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "preallocated separate impact and discharge capacities",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "120 repeated emissions reuse exact Nodes Meshes MultiMeshes Materials",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "overflow remains bounded with no projectile or physical debris allocation",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nonfinite emissions rejected without consuming pool",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "impact pressure surface follows wall normal",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "impact fire uses open textured cards instead of sphere",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "smoke uses supplied alpha asset and bounded108particles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "impact light is local no shadow map",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "muzzle and impact bright stages overlap early",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "bright phase ends before sustained smoke",
+			"passed": true
+		},
+		{
+			"detail": {
+				"alpha": 0.235708519816399,
+				"position": "(-9.599608, -2.490998, 0.475)"
+			},
+			"name": "dust perimeter is outside central hole",
+			"passed": true
+		},
+		{
+			"detail": {
+				"alpha": 0.346903920173645
+			},
+			"name": "smoke per-particle opacity is below .43",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid or zero time never alters particle snapshot",
+			"passed": true
+		},
+		{
+			"detail": {
+				"dust_alpha": 0.0,
+				"smoke_alpha": 0.0937242656946182
+			},
+			"name": "dust disappears while thin smoke continues",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all visual stages finish and lights extinguish",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clear silences both pools and hides every transient",
+			"passed": true
+		},
+		{
+			"detail": {
+				"peak": 0.82977294921875,
+				"rms": 0.0807098908041435,
+				"seconds": 1.8
+			},
+			"name": "tank original PCM is audible bounded cached and DC stable",
+			"passed": true
+		},
+		{
+			"detail": {
+				"peak": 0.514556884765625,
+				"rms": 0.0546756790082177,
+				"seconds": 0.9
+			},
+			"name": "fighter original PCM is audible bounded cached and DC stable",
+			"passed": true
+		},
+		{
+			"detail": {
+				"peak": 0.76788330078125,
+				"rms": 0.0811443781704463,
+				"seconds": 2.29995833333333
+			},
+			"name": "impact original PCM is audible bounded cached and DC stable",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "cannon and impact have distinct original waveforms",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "cold and cached tank provide independent recoil mesh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real tank accepted shot starts discharge",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "cooldown rejection produces no phantom muzzle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "visible barrel retracts .30m while cached neighbour stays independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "recoil never changes logical chamber muzzle or aim",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "game pause freezes recoil with projectiles and effects",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "switched-away vehicle finishes recoil without drift",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "second cached vehicle also fires independently",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clear restores active cached barrel to exact authored position",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clear restores poses plus sounds and keeps resources",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "freed shooter can finish recoil safely",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "17 accepted distinct shots bound recoil to16 and restore evicted pose",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clear restores every surviving recoil after pool reuse",
+			"passed": true
+		},
+		{
+			"detail": {
+				"directions": 384,
+				"max_angle_degrees": 0.000668623472068597
+			},
+			"name": "384 production spark long axes follow measured particle motion",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_axis_error": 0.0000019073486328125
+			},
+			"name": "12 arbitrary hit planes keep circular pressure ring tangent and normal",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_normalized_axis_dot": 0.000000178813934326172
+			},
+			"name": "240 tumbling chips retain perpendicular local axes without shear",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_angle_degrees": 0.00000341509397433988
+			},
+			"name": "12 production projectile meshes align long axis with velocity",
+			"passed": true
+		}
+	],
+	"count": 37,
+	"engine": "4.7.2-stable (official)",
+	"headless": true,
+	"passed": true,
+	"scope": "Real cached/cold HarborVehicle tank, weapon pool and PCM/particle lifecycle. Particle assertions observe submitted values because Dummy RenderingServer getters return defaults. No native visual/audio listening claim, no full city or user saves.",
+	"source_sha256": {
+		"res://../source/combat_effects_test.gd": "fa0642655ae0beb17511762d6a6039863f1d78e0866299dd853dcf9dd62fc329",
+		"res://assets/fx/artillery_smoke.png": "35980e299a6702614b47b45ddf7fb1472de919f427847b95d8aac81982d5fe5c",
+		"res://scripts/combat_effects.gd": "e096bda1ee734d796bc1782aa5b331f8d25fbc2caef2569aa79a7f0b81265d7e",
+		"res://scripts/vehicle_factory.gd": "d65f3ee8d9a55f86c40cfacd6e4ed2dff738560723c5665bce1d50a206a736f2",
+		"res://scripts/vehicle_weapons.gd": "62f430e4b757a07fb2773cd87358c70359ccf5af65e876ccec0ad86ec6cd66e9",
+		"res://scripts/weapon_audio.gd": "44614e08ecba3d11fe5cba4eadfec9f47a9402326d1b44ecc081419e4f8ff752",
+		"res://shaders/combat_cloud.gdshader": "25751a0faf6850db6d685e2dc9961271b43edabd3ac36106992f60a862aaf782",
+		"res://shaders/combat_pressure.gdshader": "c29d92e22adb813722650df523fbbd66843a3186585869d5d8feeaf53423d513"
+	}
+}

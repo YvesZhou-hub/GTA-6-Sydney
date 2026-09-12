@@ -1,0 +1,27 @@
+{
+  "app_identity": {
+    "executable_sha256": "db79b1b102e9a069cee765b8a26cf329d574ef2e8391236d2985a50c0eb11994",
+    "pck_sha256": "078718563050a8baaad0ae86b5c08fd2e66f4ede5e94ce0c4e04ec509827ad33"
+  },
+  "app_identity_unchanged": true,
+  "mode": "experience",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--experience-qa"
+  ],
+  "started_utc": "2026-09-12T17:45:32.022501+00:00",
+  "wall_seconds": 79.79,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 82,
+  "passed": true,
+  "screenshots": [
+    "01-map-pin.png",
+    "04-live-navigation.png",
+    "02-experiences.png",
+    "03-experience-reward.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

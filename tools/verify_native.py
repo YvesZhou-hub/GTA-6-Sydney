@@ -18,15 +18,16 @@ def digest(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access", "combat", "diagnostics", "daylight"))
+    parser.add_argument("mode", choices=("experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access", "combat", "diagnostics", "daylight", "ui-font"))
     parser.add_argument("--app", type=Path, default=Path("dist/Harbourlife.app"))
-    parser.add_argument("--output", type=Path, default=Path("reports/release-v017-native"))
+    parser.add_argument("--output", type=Path, default=Path("reports/release-v018-native"))
     args = parser.parse_args()
     app = args.app.resolve() / "Contents/MacOS/Harbourlife"
     pck = args.app.resolve() / "Contents/Resources/Harbourlife.pck"
     identity = {"executable_sha256": digest(app), "pck_sha256": digest(pck)}
     user_data = Path.home() / "Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港"
     cases = {
+        "ui-font": (["--ui-font-qa"], "ui-font-qa/report.json", "ui-font-qa"),
         "daylight": (["--daylight-qa"], "daylight-qa/report.json", "daylight-qa"),
         "diagnostics": (["--diagnostics-qa"], "diagnostics-qa/report.json", "diagnostics-qa"),
         "combat": (["--combat-qa"], "combat-qa/report.json", "combat-qa"),

@@ -8,6 +8,8 @@ const PROFILES := {
 }
 const MIN_ELEVATION := deg_to_rad(-12.0)
 const MAX_ELEVATION := deg_to_rad(70.0)
+const RECOIL_CAPACITY := 16
+const RECOIL_DURATION := 0.46
 var game: Node
 var effects: Node3D
 var _game_properties: Dictionary = {}
@@ -22,6 +24,7 @@ var _hits := 0
 var _expired := 0
 var _pool_rejections := 0
 var _muzzle_overlap := SphereShape3D.new()
+var _recoils: Array[Dictionary] = []
 
 func setup(owner_game: Node) -> void:
 	clear()
@@ -209,10 +212,14 @@ func fire_current() -> bool:
 	slot.exclude = exclude
 	slot.view.visible = true
 	_fired += 1
+	# Presentation starts only after a shot is accepted. The logical chamber,
+	# muzzle and saved aim never recoil; only this vehicle's mesh nodes move.
+	effects.emit_muzzle(from, direction, str(vehicle.get("kind")))
+	if str(vehicle.get("kind")) == "tank": _begin_recoil(vehicle)
 	# Check the gun chamber-to-muzzle path as well: a long barrel penetrating a
 	# thin wall cannot teleport the shot to the far side of that wall.
 	var obstruction := _initial_obstruction(vehicle, marker, exclude)
-	if not obstruction.is_empty(): _impact(slot, obstruction.position)
+	if not obstruction.is_empty(): _impact(slot, obstruction.position, obstruction.get("normal", Vector3.UP))
 	else: _show_projectile(slot, 0.01)
 	return true
 
@@ -221,9 +228,9 @@ func _show_projectile(slot: Dictionary, delta: float) -> void:
 	var direction: Vector3 = slot.velocity / maxf(speed, 0.001)
 	var view: MeshInstance3D = slot.view
 	var up := Vector3.RIGHT if absf(direction.dot(Vector3.UP)) > 0.98 else Vector3.UP
-	view.global_transform = Transform3D(Basis.looking_at(direction, up).scaled(Vector3(1, 1, clampf(speed * delta * 0.5, 0.6, 12))), slot.position)
+	view.global_transform = Transform3D(Basis.looking_at(direction, up).scaled_local(Vector3(1, 1, clampf(speed * delta * 0.5, 0.6, 12))), slot.position)
 
-func _impact(slot: Dictionary, point: Vector3) -> void:
+func _impact(slot: Dictionary, point: Vector3, normal: Vector3 = Vector3.UP) -> void:
 	if not slot.active: return
 	slot.active = false
 	slot.view.visible = false
@@ -231,15 +238,47 @@ func _impact(slot: Dictionary, point: Vector3) -> void:
 	var source = slot.source.get_ref() if slot.source is WeakRef else null
 	if is_instance_valid(game) and game.has_method("apply_combat_blast"):
 		game.call("apply_combat_blast", point, float(slot.profile.energy), float(slot.profile.radius), source)
-	impact_effect(point, float(slot.profile.effect))
+	impact_effect(point, float(slot.profile.effect), normal)
 
-func impact_effect(point: Vector3, size: float = 1.0) -> void:
-	if is_instance_valid(effects): effects.emit_blast(point, size)
+func impact_effect(point: Vector3, size: float = 1.0, normal: Vector3 = Vector3.UP) -> void:
+	if is_instance_valid(effects): effects.emit_blast(point, size, normal)
+
+func _restore_recoil(record: Dictionary) -> void:
+	for item: Dictionary in record.meshes:
+		var mesh = item.ref.get_ref()
+		if is_instance_valid(mesh) and not mesh.is_queued_for_deletion(): mesh.position = item.origin
+
+func _begin_recoil(vehicle: RigidBody3D) -> void:
+	var barrel: Node3D = _moving(vehicle).get("barrel")
+	if not is_instance_valid(barrel): return
+	for index in range(_recoils.size()-1, -1, -1):
+		if _recoils[index].id == vehicle.get_instance_id():
+			_restore_recoil(_recoils[index]); _recoils.remove_at(index)
+	if _recoils.size() >= RECOIL_CAPACITY: _restore_recoil(_recoils.pop_front())
+	var meshes: Array[Dictionary] = []
+	for node: Node in barrel.get_children():
+		if node is MeshInstance3D and not node.is_queued_for_deletion():
+			meshes.append({"ref":weakref(node),"origin":node.position})
+	if not meshes.is_empty(): _recoils.append({"id":vehicle.get_instance_id(),"age":0.0,"meshes":meshes})
+
+func _tick_recoil(delta: float) -> void:
+	for index in range(_recoils.size()-1, -1, -1):
+		var record: Dictionary = _recoils[index]
+		record.age += delta
+		if record.age >= RECOIL_DURATION:
+			_restore_recoil(record); _recoils.remove_at(index); continue
+		var attack := minf(1.0, record.age / .028)
+		var recovery := 1.0 - smoothstep(.065, RECOIL_DURATION, record.age)
+		for item: Dictionary in record.meshes:
+			var mesh = item.ref.get_ref()
+			if is_instance_valid(mesh) and not mesh.is_queued_for_deletion():
+				mesh.position = item.origin + Vector3.BACK * (.30 * attack * recovery)
 
 func _physics_process(delta: float) -> void:
 	if not _simulation_running(): return
 	_clock += delta
 	update_aim(delta)
+	_tick_recoil(delta)
 	for slot: Dictionary in _projectiles:
 		if not slot.active: continue
 		var dt := minf(delta, slot.life)
@@ -250,7 +289,7 @@ func _physics_process(delta: float) -> void:
 		for rid: RID in slot.exclude: exclude.append(rid)
 		var hit := _ray(from, to, exclude)
 		if not hit.is_empty():
-			_impact(slot, hit.position)
+			_impact(slot, hit.position, hit.get("normal", Vector3.UP))
 			continue
 		slot.position = to
 		slot.velocity += acceleration * dt
@@ -265,6 +304,8 @@ func _physics_process(delta: float) -> void:
 		if _cooldowns[id].source.get_ref() == null: _cooldowns.erase(id)
 
 func clear() -> void:
+	for record: Dictionary in _recoils: _restore_recoil(record)
+	_recoils.clear()
 	for slot: Dictionary in _projectiles:
 		slot.active = false
 		if is_instance_valid(slot.view): slot.view.visible = false
@@ -296,4 +337,5 @@ func stats() -> Dictionary:
 		if slot.active: active += 1
 	return {"projectile_capacity":PROJECTILE_CAPACITY, "projectiles_allocated":_projectiles.size(),
 		"active_projectiles":active, "fired":_fired, "hits":_hits, "expired":_expired,
+		"active_recoils":_recoils.size(), "recoil_capacity":RECOIL_CAPACITY,
 		"pool_rejections":_pool_rejections, "effects":effects.stats() if is_instance_valid(effects) else {}}
