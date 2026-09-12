@@ -24,6 +24,7 @@ class LocalWorld:
 var world:Node3D
 var checks:Array=[]
 var blocked:Array=[]
+var mesh_index_records:Array=[]
 var capsule:=CapsuleShape3D.new()
 var output_dir:="res://../reports/darling-v014"
 func _initialize():call_deferred("run")
@@ -66,6 +67,7 @@ func run():
 				var p:Vector3=a.lerp(b,step/float(steps));count+=1
 				if not clear(p) or not supported(p):good=false
 		check(route.id+" continuous capsule and ground sweep",good,str(count)+" samples")
+	mesh_index_checks()
 	await walk_slide()
 	var faces:=0;var bad:=0;var details:=0
 	for id in world.structures:
@@ -85,7 +87,7 @@ func run():
 	check("Wide slide has full-width collision and a stair approach",wide.half.x*2>7.5 and wide.half.z*2>8.0,str(wide.half))
 	var net:Dictionary=world.structures["darling_detail/playground/octanet"]
 	check("Octanet damage bounds cover documented 11m mast",net.half.y*2>=10.95 and net.half.x*2>14.5,str(net.half))
-	for id in ["darling_detail/playground/octanet","darling_detail/waterplay/wheel","darling_detail/fountain/730089774","darling_square/darling_business_bendigo_bank/frontage"]:
+	for id in ["darling_detail/waterplay/channels","darling_detail/waterplay/pump","darling_detail/waterplay/archimedes_screw","darling_detail/shelter/door/1241018457","darling_detail/playground/octanet","darling_detail/waterplay/wheel","darling_detail/fountain/730089774","darling_square/darling_business_bendigo_bank/frontage"]:
 		var item:Dictionary=world.structures[id];var node:Node3D=item.node;var original:Array=[]
 		for child in node.get_children():
 			if child is MeshInstance3D:original.append(child.material_override)
@@ -106,7 +108,7 @@ func run():
 	if "--capture" in OS.get_cmdline_user_args():await capture()
 	var passed:bool=checks.all(func(c):return c.passed)
 	DirAccess.make_dir_recursive_absolute(output_dir)
-	FileAccess.open(output_dir+"/checks.json",FileAccess.WRITE).store_string(JSON.stringify({"passed":passed,"checks":checks,"blocked":blocked,"headless":DisplayServer.get_name()=="headless","counts":counts,"scope":"Mapped local city context; capsule sweeps are geometry checks, not a complete production-player walk or surveyed facsimile"},"\t"))
+	FileAccess.open(output_dir+"/checks.json",FileAccess.WRITE).store_string(JSON.stringify({"passed":passed,"checks":checks,"blocked":blocked,"headless":DisplayServer.get_name()=="headless","counts":counts,"mesh_index_records":mesh_index_records,"sha256":{"game/scripts/darling_public_facilities.gd":FileAccess.get_sha256("res://scripts/darling_public_facilities.gd"),"game/scripts/city_landmarks.gd":FileAccess.get_sha256("res://scripts/city_landmarks.gd"),"source/darling_public_facilities_test.gd":FileAccess.get_sha256("res://../source/darling_public_facilities_test.gd")},"scope":"Mapped local city context; capsule sweeps are geometry checks, not a complete production-player walk or surveyed facsimile"},"\t"))
 	print("DARLING_COMPONENT_TEST ",checks.size()," checks; ","PASS" if passed else "FAIL")
 	quit(0 if passed else 1)
 func check_photo_frontages():
@@ -222,3 +224,63 @@ func capture():
 	for v in Facilities.capture_views()+Businesses.capture_views():
 		camera.position=v[1];camera.look_at(v[2]);await process_frame;await process_frame;RenderingServer.force_draw(false);await RenderingServer.frame_post_draw
 		root.get_texture().get_image().save_png(output_dir+"/"+v[0]+".png")
+
+func mesh_index_checks():
+	# Expected faces are the sum of the original manual boxes and primitive
+	# triangles; the shape coordinates and collision definitions are unchanged.
+	var expected:Dictionary={"darling_detail/waterplay/channels":948,"darling_detail/waterplay/pump":1008,"darling_detail/waterplay/archimedes_screw":2088,"darling_detail/shelter/door/1241018457":204}
+	for id:String in expected:
+		var body:Node3D=world.structures[id].node
+		var visible:=PackedVector3Array();var omitted:=0;var records:Array=[]
+		for child in body.get_children():
+			if not child is MeshInstance3D:continue
+			for surface in child.mesh.get_surface_count():
+				var arrays:Array=child.mesh.surface_get_arrays(surface)
+				var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+				var indices=arrays[Mesh.ARRAY_INDEX]
+				var unused:=0
+				if indices!=null and not indices.is_empty():
+					var used:Dictionary={}
+					for index in indices:used[index]=true
+					unused=vertices.size()-used.size()
+				omitted+=unused
+				records.append({"vertices":vertices.size(),"indices":indices.size() if indices!=null else 0,"omitted":unused})
+			for vertex:Vector3 in child.mesh.get_faces():visible.append(child.transform*vertex)
+		check(id+" all originally authored triangles survive mixed primitive append",visible.size()/3==expected[id] and omitted==0,str({"actual_faces":visible.size()/3,"expected_faces":expected[id],"unused_vertices":omitted}))
+		var samples:=0;var misses:=0;var collision:Array=[]
+		for child in body.get_children():
+			if not child is CollisionShape3D:continue
+			var locations:Array[Vector3]=[];var normals:Array[Vector3]=[]
+			if child.shape is BoxShape3D:
+				for n in [Vector3.LEFT,Vector3.RIGHT,Vector3.UP,Vector3.DOWN,Vector3.FORWARD,Vector3.BACK]:locations.append(n*child.shape.size*.5);normals.append(n)
+				collision.append({"kind":"box","size":str(child.shape.size),"pose":str(child.transform)})
+			elif child.shape is CylinderShape3D:
+				for n in [Vector3.LEFT,Vector3.RIGHT,Vector3.FORWARD,Vector3.BACK]:locations.append(n*child.shape.radius);normals.append(n)
+				locations.append_array([Vector3.UP*child.shape.height*.5,Vector3.DOWN*child.shape.height*.5]);normals.append_array([Vector3.UP,Vector3.DOWN])
+				collision.append({"kind":"cylinder","radius":child.shape.radius,"height":child.shape.height,"pose":str(child.transform)})
+			for i in locations.size():
+				var at:Vector3=child.transform*locations[i];var normal:Vector3=child.basis*normals[i]
+				var found:=false;samples+=1
+				for triangle in range(0,visible.size(),3):
+					if Geometry3D.segment_intersects_triangle(at+normal*.015,at-normal*.015,visible[triangle],visible[triangle+1],visible[triangle+2])!=null:found=true;break
+				if not found:misses+=1
+		check(id+" physical support faces have matching rendered surfaces",samples>=6 and misses==0,str({"samples":samples,"missing_visible_faces":misses}))
+		mesh_index_records.append({"id":id,"visible_triangles":visible.size()/3,"expected_triangles":expected[id],"surfaces":records,"collision_face_samples":samples,"missing_visible_faces":misses,"collision_signature":collision})
+	for order in ["box-cylinder-box","cylinder-box-cylinder"]:
+		var fixture=Facilities.Part.new(world,"qa/append_"+order,Vector3(-1200,4.5,2300))
+		var cylinder:=CylinderMesh.new();cylinder.top_radius=.4;cylinder.bottom_radius=.4;cylinder.height=1.0;cylinder.radial_segments=12;cylinder.rings=1
+		var expected_faces:=0;var step:=0
+		for primitive in order.split("-"):
+			if primitive=="box":fixture.box(Vector3(step*2,1,0),Vector3.ONE,"steel");expected_faces+=12
+			else:fixture.append(cylinder,Transform3D(Basis(Vector3.UP,.31),Vector3(step*2,1.07,0)),"steel");expected_faces+=cylinder.get_faces().size()/3
+			step+=1
+		fixture.finish()
+		var actual:=0;var uv_count:=0;var vertex_count:=0
+		for child in fixture.body.get_children():
+			if child is MeshInstance3D and child.get_index()>=2:
+				actual+=child.mesh.get_faces().size()/3
+				var arrays:Array=child.mesh.surface_get_arrays(0)
+				vertex_count+=arrays[Mesh.ARRAY_VERTEX].size()
+				if arrays[Mesh.ARRAY_TEX_UV]!=null:uv_count+=arrays[Mesh.ARRAY_TEX_UV].size()
+		check("Part mixed order "+order+" keeps every triangle and consistent UV format",actual==expected_faces and uv_count==vertex_count,str({"actual":actual,"expected":expected_faces,"uv":uv_count,"vertices":vertex_count}))
+		world.structures.erase(fixture.body.get_meta("damage_id"));fixture.body.queue_free()

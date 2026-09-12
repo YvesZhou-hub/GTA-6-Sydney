@@ -14,6 +14,12 @@ Queries were made to the Overpass API on 10 September 2026, for the Sydney Harbo
 
 ## Original generated world assets
 
+### NSW elevation reference samples (v0.1.7)
+
+`source/elevation-data/` contains three cropped windows from Sydney-DEM-AHD_56_5m, extracted **2026-09-12**. Attribution required by the original package: **© Department Customer Service**, DCS Spatial Services. Licensed under [CC BY 3.0 Australia](https://creativecommons.org/licenses/by/3.0/au/). The original heights are unchanged; only the spatial windows and serialization have been changed. Original download URL, file hash, licence and extraction notice are retained in `source/elevation-data/provenance.json` and each window.
+
+These are offline development references; **the game does not yet use this DEM for its terrain**. The large original ZIP and downloaded reference images are not redistributed. Acquisition dates vary and are not established by the 2026 retrieval date. Details and reproduction commands: [ELEVATION_REFERENCE.md](../docs/ELEVATION_REFERENCE.md).
+
 The reusable world modeling source is `game/scripts/harbor_world.gd`; original procedural facade/water shaders are `game/assets/world_facade.gdshader` and `game/shaders/water.gdshader`. Building shells, bridge pieces, studio furnishings, shop signs, poles, benches, garden vegetation and tile textures are generated from these authored algorithms. No resource pack, marketplace download, image-generator output, font download, or paid art service was used for the world geometry. Godot's engine/default font licensing is recorded separately by the project.
 
 Architecture/factual sources are listed in `reports/GEOGRAPHY.md`. Reading a publicly available architectural description does not grant a licence to that site's photography or drawings. None of those media is redistributed here.

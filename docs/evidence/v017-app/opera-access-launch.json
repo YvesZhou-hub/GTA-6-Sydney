@@ -1,0 +1,28 @@
+{
+  "app_identity": {
+    "executable_sha256": "40bbc952001fe6ed3cabf7850863e03593bb230d51366bb2728df137c128fa19",
+    "pck_sha256": "2284250735312eb864f95b17f362273143fa5c3f6342017eb37210bc0e3abd94"
+  },
+  "app_identity_unchanged": true,
+  "mode": "opera-access",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--opera-access-qa"
+  ],
+  "started_utc": "2026-09-12T13:00:06.183043+00:00",
+  "wall_seconds": 79.173,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 32,
+  "passed": true,
+  "screenshots": [
+    "opera-stair-join-legacy-save.png",
+    "opera-stair-join-after-impact.png",
+    "opera-stair-join-intact.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

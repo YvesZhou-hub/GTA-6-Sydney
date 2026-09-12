@@ -75,6 +75,6 @@ with tempfile.TemporaryDirectory(prefix='.staging-',dir=output) as stage:
  preset.write_text(original_preset)
  if game_hashes()!=build_sources:
   raise RuntimeError('Game source changed during packaging; rebuild before release.')
- report={'engine':subprocess.check_output([str(engine),'--version'],text=True).strip(),'app':str(dest),'architecture':'arm64','archive_sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'signature':'ad-hoc verified; not notarized','source_sha256':build_sources,'source_frozen_from':'after import, before export; checked again after smoke and ZIP packaging'}
+ report={'engine':subprocess.check_output([str(engine),'--version'],text=True).strip(),'app':str(dest),'architecture':'arm64','archive_sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'app_identity':{'executable_sha256':hashlib.sha256((dest/'Contents/MacOS/Harbourlife').read_bytes()).hexdigest(),'pck_sha256':hashlib.sha256((dest/'Contents/Resources/Harbourlife.pck').read_bytes()).hexdigest()},'signature':'ad-hoc verified; not notarized','source_sha256':build_sources,'source_frozen_from':'after import, before export; checked again after smoke and ZIP packaging'}
  (reports/'build.json').write_text(json.dumps(report,indent=2))
  print('BUILT '+str(dest))

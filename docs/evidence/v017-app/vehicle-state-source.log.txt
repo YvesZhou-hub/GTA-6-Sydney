@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS production tank kind and moving hierarchy survive the factory merge {}
+PASS production tank retains authored model triangles in88drawmeshes {"meshes":88,"triangles":23596}
+PASS tank serialized state carries top-level aim and revision4 {}
+PASS pre-ready restore preserves actual muzzle world pose {"muzzle_error_m":0.0}
+PASS tank JSON roundtrip retains velocity angular velocity throttle and frozen state {}
+PASS tank restore wraps yaw clamps elevation and restores100hp100fuel {}
+PASS tank negative elevation clamps at12degrees depression {}
+PASS state without tank aim fields defaults to neutral aim {}
+PASS production factory recognises fighter and builds its model {}
+PASS fighter save retains speed above old240mps guard {"saved_speed_mps":555.13330078125}
+PASS fighter pre-ready JSON restoration keeps speed throttle identity and100hp100fuel {}
+PASS save taken before physics restoration preserves pending high speed {}
+PASS actual rigid-body integration restores fighter high speed {"position_z":290.750061035156,"speed_mps":555.132751464844}
+PASS fighter corrupt excessive speed remains bounded at620mps {}
+PASS ordinary car keeps240mps guard and finite health fuel {}
+PASS fighter health and fuel remain100on subsequent production ticks {}
+PASS actual occupied HarborVehicle dispatch drives tank from Input actions {"position_z":14.9750890731812,"speed_kmh":81.9863456726074}
+PASS production tank differential drive animates wheels while pivoting {}
+COMBAT_VEHICLE_STATE_COMPLETE checks=18 failures=0

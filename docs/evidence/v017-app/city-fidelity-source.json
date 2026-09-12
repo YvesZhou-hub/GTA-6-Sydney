@@ -1,0 +1,332 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "__main__.FidelityTests.test_annotation_is_idempotent_and_only_surface_fields_change",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_area_area_overlap_has_stable_id_ownership",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_closed_line_and_roundabout_are_not_inferred_as_areas",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_concave_area_does_not_become_convex_hull",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_elevated_or_underground_areas_do_not_get_flattened",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_excavation_overlap_with_source_hole_not_double_subtracted",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_explicit_interior_ring_remains_a_hole",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_fidelity_audit_does_not_modify_the_snapshot",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_full_square_interior_is_filled",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_fully_excavated_area_stays_marked_empty",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_input_source_and_excavations_are_immutable_for_single_compile",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_invalid_area_report_does_not_mutate_record",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_invalid_excavation_fails_instead_of_sealing_real_hole",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_nonfinite_and_three_dimensional_source_coordinates_rejected",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_open_and_self_intersecting_areas_rejected_without_repair",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_source_holes_do_not_claim_neighbours_inner_area",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_two_excavations_are_actual_removed_geometry",
+      "passed": true
+    },
+    {
+      "name": "__main__.FidelityTests.test_winding_reversal_keeps_same_physical_coverage",
+      "passed": true
+    },
+    {
+      "name": "__main__.ProductionSnapshotTests.test_all_106_ground_pedestrian_areas_compile_without_geometry_rejection",
+      "passed": true
+    },
+    {
+      "name": "__main__.ProductionSnapshotTests.test_area_union_is_completely_covered_without_double_area",
+      "passed": true
+    },
+    {
+      "name": "__main__.ProductionSnapshotTests.test_known_excavations_are_still_excluded_from_all_compiled_triangles",
+      "passed": true
+    },
+    {
+      "name": "__main__.ProductionSnapshotTests.test_missing_relation_holes_are_explicitly_not_claimed",
+      "passed": true
+    },
+    {
+      "name": "__main__.ProductionSnapshotTests.test_pitt_street_mall_is_full_surface_inside_original_boundary",
+      "passed": true
+    },
+    {
+      "name": "__main__.ProductionSnapshotTests.test_source_asset_bytes_and_source_points_remain_unchanged",
+      "passed": true
+    }
+  ],
+  "count": 24,
+  "seconds": 1.887,
+  "hashes": {
+    "source/city_fidelity_test.py": "5f5689396e54454a596e5fd94f854e99d175e4a2e93210ab676d6805c14e7ca7",
+    "tools/city_fidelity.py": "99c4fa80083c533833d153db7c4cc6cd97c721e9a21a09156af0daf1cf74f110",
+    "game/assets/city_map.json": "c4708c54e233efce7a1a0c5fd37bab5d60c2420af521c726c3e59a384f50d632"
+  },
+  "production_coverage": {
+    "source_fields": {
+      "roads": 19680,
+      "ground_renderable_roads_before_custom_replacements": 17910,
+      "road_fields": {
+        "area": {
+          "roads_with_tag": 152,
+          "ground_renderable_with_tag": 114,
+          "runtime_usage": "Previously ignored: closed pedestrian areas buffered as boundary lines."
+        },
+        "surface": {
+          "roads_with_tag": 12458,
+          "ground_renderable_with_tag": 11769,
+          "runtime_usage": "Preserved in source; current renderer chooses material by highway class only."
+        },
+        "oneway": {
+          "roads_with_tag": 3438,
+          "ground_renderable_with_tag": 2527,
+          "runtime_usage": "Preserved; current visual centre dash and road_segments ignore direction."
+        },
+        "lanes": {
+          "roads_with_tag": 2508,
+          "ground_renderable_with_tag": 2121,
+          "runtime_usage": "Used for width fallback on five major road classes; not for lane-divider count."
+        },
+        "lanes:forward": {
+          "roads_with_tag": 276,
+          "ground_renderable_with_tag": 267,
+          "runtime_usage": "Preserved; current runtime does not use directional lane split."
+        },
+        "lanes:backward": {
+          "roads_with_tag": 270,
+          "ground_renderable_with_tag": 261,
+          "runtime_usage": "Preserved; current runtime does not use directional lane split."
+        },
+        "width": {
+          "roads_with_tag": 694,
+          "ground_renderable_with_tag": 677,
+          "runtime_usage": "Numeric values used and clamped by runtime; road widths are not surveyed here."
+        },
+        "layer": {
+          "roads_with_tag": 941,
+          "ground_renderable_with_tag": 31,
+          "runtime_usage": "Nonzero layers skipped; ordinal layer is not a metric elevation."
+        },
+        "bridge": {
+          "roads_with_tag": 818,
+          "ground_renderable_with_tag": 1,
+          "runtime_usage": "Non-no bridges skipped; no height inferred from bridge tag."
+        },
+        "min_height": {
+          "roads_with_tag": 0,
+          "ground_renderable_with_tag": 0,
+          "runtime_usage": "No such road tags in this snapshot; do not confuse maxheight clearance with elevation."
+        }
+      },
+      "building_fields": {
+        "height": 230,
+        "min_height": 74,
+        "building:levels": 7668,
+        "building:min_level": 22,
+        "roof:direction": 9,
+        "roof:height": 8
+      },
+      "building_field_usage": {
+        "height/min_height": "Already parsed in import_city; missing dimensions remain inferred.",
+        "building:levels/building:min_level": "Already used with assumed storey heights.",
+        "roof:direction": "Not consumed by city_roofs; only nine tagged records, separate future fix.",
+        "roof:height": "Consumed by city_roofs with envelope caps; not independently surveyed."
+      },
+      "loaded_road_records_with_interior_rings": 0,
+      "highway_multipolygon_relations_loaded": 0
+    },
+    "compiler": {
+      "candidate_areas": 106,
+      "compiled_areas": 106,
+      "by_region": {
+        "city": 97,
+        "manly": 3,
+        "north": 6
+      },
+      "triangles": 2279,
+      "mapped_area_m2": 99680.02645,
+      "rendered_area_m2": 99680.026447,
+      "excavation_removed_m2": 0.0,
+      "overlap_trim_m2": 0.0,
+      "rejected": [],
+      "source_area_sum_m2": 99680.02645,
+      "mapped_area_union_m2": 99680.026446,
+      "rendered_area_union_m2": 99680.026446,
+      "excavation_removed_union_m2": 0.0
+    },
+    "coverage_before": {
+      "compiled_explicit_areas": 106,
+      "unfilled_source_union_m2": 37244.361297,
+      "buffer_outside_source_union_m2": 79390.971757
+    },
+    "coverage_after": {
+      "compiled_explicit_areas": 106,
+      "unfilled_source_union_m2": 0.0,
+      "mesh_outside_source_union_m2": 0.0,
+      "duplicate_area_mesh_m2": -0.0
+    },
+    "coverage_metric_scope": "Union of accepted source areas versus union of their legacy rounded boundary buffers, with known excavations removed. Largest-improvement examples are individual-area metrics. This is not whole-city net ground coverage: unrelated road/park meshes and runtime carriageway subtraction are excluded.",
+    "largest_improvements": [
+      {
+        "id": "way/1269031982",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 6667.988,
+        "legacy_unfilled_interior_m2": 3805.843
+      },
+      {
+        "id": "way/558628860",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 7124.728,
+        "legacy_unfilled_interior_m2": 2854.998
+      },
+      {
+        "id": "way/1269637940",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 4351.347,
+        "legacy_unfilled_interior_m2": 2673.16
+      },
+      {
+        "id": "way/1264767589",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 5005.165,
+        "legacy_unfilled_interior_m2": 2663.861
+      },
+      {
+        "id": "way/353552750",
+        "name": "Pitt Street Mall",
+        "region": "city",
+        "mapped_area_m2": 3865.747,
+        "legacy_unfilled_interior_m2": 1955.706
+      },
+      {
+        "id": "way/546705242",
+        "name": null,
+        "region": "manly",
+        "mapped_area_m2": 2933.651,
+        "legacy_unfilled_interior_m2": 1891.359
+      },
+      {
+        "id": "way/1259577404",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 3321.072,
+        "legacy_unfilled_interior_m2": 1849.159
+      },
+      {
+        "id": "way/353199709",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 5337.512,
+        "legacy_unfilled_interior_m2": 1555.53
+      },
+      {
+        "id": "way/485107713",
+        "name": "Henry Deane Plaza",
+        "region": "city",
+        "mapped_area_m2": 2377.282,
+        "legacy_unfilled_interior_m2": 1549.973
+      },
+      {
+        "id": "way/148331270",
+        "name": "The Quadrant",
+        "region": "city",
+        "mapped_area_m2": 2637.387,
+        "legacy_unfilled_interior_m2": 1430.852
+      },
+      {
+        "id": "way/250878060",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 3194.011,
+        "legacy_unfilled_interior_m2": 1304.757
+      },
+      {
+        "id": "way/1265424008",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 3462.99,
+        "legacy_unfilled_interior_m2": 1253.013
+      },
+      {
+        "id": "way/1326239891",
+        "name": null,
+        "region": "manly",
+        "mapped_area_m2": 2096.991,
+        "legacy_unfilled_interior_m2": 1151.124
+      },
+      {
+        "id": "way/152762894",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 3198.212,
+        "legacy_unfilled_interior_m2": 1121.396
+      },
+      {
+        "id": "way/151419534",
+        "name": null,
+        "region": "city",
+        "mapped_area_m2": 3771.989,
+        "legacy_unfilled_interior_m2": 1062.675
+      }
+    ],
+    "runtime_integration_required": [
+      "Use area triangles, skip boundary strips/joins/road_segments.",
+      "Subtract actual vehicle-road masks from all pedestrian surfaces.",
+      "Deduplicate area + linear pedestrian surfaces together.",
+      "Fill these areas in 2D map; retain original ID and points for selection."
+    ],
+    "sources": [
+      "https://wiki.openstreetmap.org/wiki/Key:area",
+      "https://wiki.openstreetmap.org/wiki/Tag:highway%3Dpedestrian"
+    ]
+  },
+  "engine_or_gpu_run": false,
+  "production_asset_modified": false
+}

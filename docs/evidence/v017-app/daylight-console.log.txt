@@ -1,0 +1,59 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15095 reserved=413 roads=64958
+CITY_BUILD_TIMINGS {"complete_ms":69960,"custom_landmarks_ms":65473,"mapped_city_ms":12511,"terrain_and_harbour_ms":10460}
+HARBOR_WORLD_READY buildings=15097 structure_components=21697
+CITY_STARTUP_MS 71532
+DAYLIGHT_QA PASS internal QA guard precedes isolated world setup
+DAYLIGHT_QA PASS complete production city and real summer clock ready
+DAYLIGHT_QA PASS native renderer required for final App visual validation
+DAYLIGHT_QA PASS licensed source sky bound panorama
+DAYLIGHT_QA PASS licensed source sky bound sunset_panorama
+DAYLIGHT_QA PASS licensed source sky bound night_panorama
+DAYLIGHT_QA PASS real city facades use clock driven night-window parameter
+DAYLIGHT_QA PASS clock submits fresh matching night-window parameter for sunrise
+DAYLIGHT_QA PASS real clock immediately updates sky for sunrise
+DAYLIGHT_QA PASS solar light and rendered disc share direction for sunrise
+DAYLIGHT_QA PASS night blend follows real summer elevation for sunrise
+DAYLIGHT_QA PASS apparent summer horizon for sunrise
+DAYLIGHT_QA PASS production facade stream ready for harbour-sunrise
+DAYLIGHT_QA PASS native production image harbour-sunrise
+DAYLIGHT_QA PASS clock submits fresh matching night-window parameter for noon
+DAYLIGHT_QA PASS real clock immediately updates sky for noon
+DAYLIGHT_QA PASS solar light and rendered disc share direction for noon
+DAYLIGHT_QA PASS night blend follows real summer elevation for noon
+DAYLIGHT_QA PASS summer solar noon is high in the north
+DAYLIGHT_QA PASS production facade stream ready for harbour-noon
+DAYLIGHT_QA PASS native production image harbour-noon
+DAYLIGHT_QA PASS clock submits fresh matching night-window parameter for golden
+DAYLIGHT_QA PASS real clock immediately updates sky for golden
+DAYLIGHT_QA PASS solar light and rendered disc share direction for golden
+DAYLIGHT_QA PASS night blend follows real summer elevation for golden
+DAYLIGHT_QA PASS golden hour is before actual summer sunset
+DAYLIGHT_QA PASS production facade stream ready for harbour-golden
+DAYLIGHT_QA PASS native production image harbour-golden
+DAYLIGHT_QA PASS clock submits fresh matching night-window parameter for sunset
+DAYLIGHT_QA PASS real clock immediately updates sky for sunset
+DAYLIGHT_QA PASS solar light and rendered disc share direction for sunset
+DAYLIGHT_QA PASS night blend follows real summer elevation for sunset
+DAYLIGHT_QA PASS apparent summer horizon for sunset
+DAYLIGHT_QA PASS production facade stream ready for harbour-sunset
+DAYLIGHT_QA PASS native production image harbour-sunset
+DAYLIGHT_QA PASS clock submits fresh matching night-window parameter for night
+DAYLIGHT_QA PASS real clock immediately updates sky for night
+DAYLIGHT_QA PASS solar light and rendered disc share direction for night
+DAYLIGHT_QA PASS night blend follows real summer elevation for night
+DAYLIGHT_QA PASS night has zero direct sunlight and enabled window blend
+DAYLIGHT_QA PASS production facade stream ready for harbour-night
+DAYLIGHT_QA PASS native production image harbour-night
+DAYLIGHT_QA PASS production facade stream ready for cbd-george-street-night
+DAYLIGHT_QA PASS native production image cbd-george-street-night
+DAYLIGHT_QA PASS actual public ICC foyer viewpoint is available
+DAYLIGHT_QA PASS public lighting module provides bounded active night lights
+DAYLIGHT_QA PASS ICC foyer has separate non-emissive tiled finish without geometry change
+DAYLIGHT_QA PASS production facade stream ready for icc-public-foyer-night
+DAYLIGHT_QA PASS native production image icc-public-foyer-night
+DAYLIGHT_QA PASS clock remains frozen during camera and streaming waits
+DAYLIGHT_QA PASS all seven final city images exist
+DAYLIGHT_QA_COMPLETE 51 passed=true

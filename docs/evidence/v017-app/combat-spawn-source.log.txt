@@ -1,0 +1,80 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=15095 reserved=413 roads=64958
+CITY_BUILD_TIMINGS {"complete_ms":13255,"custom_landmarks_ms":10578,"mapped_city_ms":9012,"terrain_and_harbour_ms":6331}
+HARBOR_WORLD_READY buildings=15097 structure_components=21697
+PASS Complete authored city and airport are live {"startup_seconds":16.251807,"structures":21697}
+PASS city sandbox tank creates fresh tank {"count":12,"milliseconds":23.442}
+PASS city sandbox tank immediately occupies new tank {}
+PASS city sandbox tank charges no vehicle money {"after":50000,"before":50000}
+PASS city sandbox tank preserves all previous copies and their poses {}
+PASS city sandbox tank returns unique independent identity {"id":"spawn_tank_16478918_1_830e74a1e1fc"}
+PASS city sandbox tank entire model and collider envelope starts clear {"bounds":"[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]","distance_from_origin":12.1428079605103,"position":"(-545.0, 5.58532, -182.1287)"}
+PASS city sandbox tank physical tank starts outside all solid buildings {}
+PASS city sandbox tank tank settles without fall or impact damage {"health":100.0,"position":"(-545.0, 5.46, -182.1287)","speed_mps":0.0000140673346322728}
+PASS city duplicate tank creates fresh tank {"count":13,"milliseconds":12.941}
+PASS city duplicate tank immediately occupies new tank {}
+PASS city duplicate tank charges no vehicle money {"after":50000,"before":50000}
+PASS city duplicate tank preserves all previous copies and their poses {}
+PASS city duplicate tank returns unique independent identity {"id":"spawn_tank_16644774_2_17ae26b95a3f"}
+PASS city duplicate tank entire model and collider envelope starts clear {"bounds":"[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]","distance_from_origin":12.1293392181396,"position":"(-545.0, 5.58532, -194.2574)"}
+PASS city duplicate tank physical tank starts outside all solid buildings {}
+PASS city duplicate tank tank settles without fall or impact damage {"health":100.0,"position":"(-545.0, 5.46, -194.2574)","speed_mps":0.0000140679667310906}
+PASS city occupied tank to fighter creates fresh fighter {"count":14,"milliseconds":78.16}
+PASS city occupied tank to fighter immediately occupies new fighter {}
+PASS city occupied tank to fighter charges no vehicle money {"after":50000,"before":50000}
+PASS city occupied tank to fighter preserves all previous copies and their poses {}
+PASS city occupied tank to fighter returns unique independent identity {"id":"spawn_fighter_16788636_3_a978ece525cd"}
+PASS city occupied tank to fighter entire model and collider envelope starts clear {"bounds":"[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]","distance_from_origin":163.085922241211,"position":"(-545.0, 160.0, -246.3574)"}
+PASS city occupied tank to fighter complete 420m departure corridor remains clear {"first_blocked_m":-1,"samples":85,"step_m":5}
+PASS city occupied tank to fighter nearby launch stays above minimum clear altitude {"origin":"(-545.0, 5.46, -194.2574)","spawn":"(-545.0, 160.0, -246.3574)"}
+PASS city occupied tank to fighter first-frame state contains launch speed {"velocity":[0.0,0.0,-140.0]}
+PASS city occupied tank to fighter real three-second departure flies without drop or collision {"distance":415.333038330078,"minimum_speed_mps":140.0,"minimum_y":160.0,"ram_hits":0,"start_y":160.0}
+PASS city duplicate fighter creates fresh fighter {"count":15,"milliseconds":77.015}
+PASS city duplicate fighter immediately occupies new fighter {}
+PASS city duplicate fighter charges no vehicle money {"after":50000,"before":50000}
+PASS city duplicate fighter preserves all previous copies and their poses {}
+PASS city duplicate fighter returns unique independent identity {"id":"spawn_fighter_17121367_4_a6cb89f08ac5"}
+PASS city duplicate fighter entire model and collider envelope starts clear {"bounds":"[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]","distance_from_origin":103.992340087891,"position":"(-545.0, 250.0, -716.1418)"}
+PASS city duplicate fighter complete 420m departure corridor remains clear {"first_blocked_m":-1,"samples":85,"step_m":5}
+PASS city duplicate fighter nearby launch stays above minimum clear altitude {"origin":"(-545.0, 160.0, -664.0418)","spawn":"(-545.0, 250.0, -716.1418)"}
+PASS city duplicate fighter first-frame state contains launch speed {"velocity":[0.0,0.0,-140.0]}
+PASS city duplicate fighter real three-second departure flies without drop or collision {"distance":415.33251953125,"minimum_speed_mps":140.0,"minimum_y":250.0,"ram_hits":0,"start_y":250.0}
+PASS indoor origin tank safe outside creates fresh tank {"count":16,"milliseconds":15.743}
+PASS indoor origin tank safe outside immediately occupies new tank {}
+PASS indoor origin tank safe outside charges no vehicle money {"after":50000,"before":50000}
+PASS indoor origin tank safe outside preserves all previous copies and their poses {}
+PASS indoor origin tank safe outside returns unique independent identity {"id":"spawn_tank_17420622_5_c63034196da2"}
+PASS indoor origin tank safe outside entire model and collider envelope starts clear {"bounds":"[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]","distance_from_origin":20.0166511535645,"position":"(-335.0, 5.58532, -48.01236)"}
+PASS indoor origin tank safe outside physical tank starts outside all solid buildings {}
+PASS indoor origin tank safe outside tank settles without fall or impact damage {"health":100.0,"position":"(-335.0, 5.46, -48.01236)","speed_mps":0.0000140635993375327}
+PASS airport life mode tank creates fresh tank {"count":17,"milliseconds":15.247}
+PASS airport life mode tank immediately occupies new tank {}
+PASS airport life mode tank charges no vehicle money {"after":50000,"before":50000}
+PASS airport life mode tank preserves all previous copies and their poses {}
+PASS airport life mode tank returns unique independent identity {"id":"spawn_tank_17565975_6_bbabb0df667c"}
+PASS airport life mode tank entire model and collider envelope starts clear {"bounds":"[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]","distance_from_origin":12.1628818511963,"position":"(-2754.779, 7.54532, 11480.87)"}
+PASS airport life mode tank physical tank starts outside all solid buildings {}
+PASS airport life mode tank tank settles without fall or impact damage {"health":100.0,"position":"(-2754.779, 7.42, 11480.87)","speed_mps":0.0000122120127343806}
+PASS airport life mode fighter creates fresh fighter {"count":18,"milliseconds":75.578}
+PASS airport life mode fighter immediately occupies new fighter {}
+PASS airport life mode fighter charges no vehicle money {"after":50000,"before":50000}
+PASS airport life mode fighter preserves all previous copies and their poses {}
+PASS airport life mode fighter returns unique independent identity {"id":"spawn_fighter_17666793_7_99e73c3e18f6"}
+PASS airport life mode fighter entire model and collider envelope starts clear {"bounds":"[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]","distance_from_origin":161.229919433594,"position":"(-2765.692, 160.0, 11429.92)"}
+PASS airport life mode fighter complete 420m departure corridor remains clear {"first_blocked_m":-1,"samples":85,"step_m":5}
+PASS airport life mode fighter nearby launch stays above minimum clear altitude {"origin":"(-2754.779, 7.42, 11480.87)","spawn":"(-2765.692, 160.0, 11429.92)"}
+PASS airport life mode fighter first-frame state contains launch speed {"velocity":[-29.3263645172119,0.0,-136.893981933594]}
+PASS airport life mode fighter real three-second departure flies without drop or collision {"distance":415.278137207031,"minimum_speed_mps":140.0,"minimum_y":160.0,"ram_hits":0,"start_y":160.0}
+PASS airport duplicate fighter creates fresh fighter {"count":19,"milliseconds":75.168}
+PASS airport duplicate fighter immediately occupies new fighter {}
+PASS airport duplicate fighter charges no vehicle money {"after":50000,"before":50000}
+PASS airport duplicate fighter preserves all previous copies and their poses {}
+PASS airport duplicate fighter returns unique independent identity {"id":"spawn_fighter_17928058_8_6f7c30f1306e"}
+PASS airport duplicate fighter entire model and collider envelope starts clear {"bounds":"[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]","distance_from_origin":103.992462158203,"position":"(-2864.099, 250.0, 10970.62)"}
+PASS airport duplicate fighter complete 420m departure corridor remains clear {"first_blocked_m":-1,"samples":85,"step_m":5}
+PASS airport duplicate fighter nearby launch stays above minimum clear altitude {"origin":"(-2853.186, 160.0, 11021.56)","spawn":"(-2864.099, 250.0, 10970.62)"}
+PASS airport duplicate fighter first-frame state contains launch speed {"velocity":[-29.3263645172119,0.0,-136.893981933594]}
+PASS airport duplicate fighter real three-second departure flies without drop or collision {"distance":415.278137207031,"minimum_speed_mps":140.0,"minimum_y":250.0,"ram_hits":0,"start_y":250.0}
+PASS All eight new copies remain with unique IDs {"base":11,"final":19,"new":8}
+COMBAT_SPAWN_COMPLETE 74 passed=true max_summon_ms=78.16

@@ -78,6 +78,17 @@ void fragment(){
  ALBEDO=mix(vec3(0.53,0.53,0.48)*(0.97+n*0.055),vec3(0.36,0.36,0.33),joint*0.45); ROUGHNESS=0.65; }
 """
 	var floor_mat:=ShaderMaterial.new();floor_mat.shader=floor_shader;w.materials.icc_floor=floor_mat
+	# One original slab/collider/damage ID. A world-space material boundary
+	# separates the public tiled foyer from the charcoal acoustic room without
+	# coplanar overlays or a replacement floor. Works after world mesh batching.
+	var theatre_shader:=Shader.new()
+	theatre_shader.code=floor_shader.code.replace("varying vec3 p;", "uniform vec3 venue_origin; uniform vec3 venue_east; uniform vec3 venue_south; varying vec3 p;").replace("ROUGHNESS=0.65;", "vec3 delta=p-venue_origin; float x=dot(delta,venue_east); float z=dot(delta,venue_south); if(x<42.20 || z< -36.0 || z>36.0){ALBEDO=vec3(0.0194,0.0242,0.0296);} ROUGHNESS=0.72;")
+	var theatre_mat:=ShaderMaterial.new();theatre_mat.shader=theatre_shader
+	theatre_mat.set_shader_parameter("venue_origin",THEATRE)
+	theatre_mat.set_shader_parameter("venue_east",EAST)
+	theatre_mat.set_shader_parameter("venue_south",SOUTH)
+	w.materials.icc_theatre_floor=theatre_mat
+	w.set_meta("icc_theatre_floor_finish",{"owner":"icc/theatre/floor","foyer_x_min":42.20,"foyer_z_min":-36.0,"foyer_z_max":36.0,"top":0.035,"geometry_changed":false,"normal_source":"original upward prism cap","finish":"warm grey non-emissive tile; charcoal auditorium"})
 	w.materials.icc_light.emission_enabled=true;w.materials.icc_light.emission=Color("fbe9c7");w.materials.icc_light.emission_energy_multiplier=0.75
 	var mesh_shader:=Shader.new()
 	mesh_shader.code="""shader_type spatial;
@@ -318,7 +329,7 @@ static func _theatre(w: Node3D) -> void:
 	var root:=_root(w,"TikTokTheatreDetails",THEATRE);var batch:=_start()
 	var poly:=_poly(487371417,THEATRE)
 	_shell(w,"theatre",THEATRE,poly,37.3,[{"edge":16,"t":0.2,"width":10.0},{"edge":12,"t":0.5,"width":9.0}],"theatre",batch)
-	_slab(w,"theatre/floor",THEATRE,poly,-0.215,0.035,"dark")
+	_slab(w,"theatre/floor",THEATRE,poly,-0.215,0.035,"theatre_floor")
 	_slab(w,"theatre/roof",THEATRE,poly,37.1,38.0,"dark")
 	# Layered dark facade surrounds the photographed tall northern glass mouth.
 	# Keep the acoustic room opaque inside; the public outer foyer can be seen.

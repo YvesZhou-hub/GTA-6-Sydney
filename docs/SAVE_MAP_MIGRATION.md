@@ -1,6 +1,6 @@
 # Map revision migration
 
-The current v0.1.6 city records `map_revision: 6`. New writes use save format 5 and the reader accepts formats 1–4. Saves older than map revision 6 run the map relocation pass; a current revision save is restored without repeated relocation. Vehicle model revision 3 is recorded independently. Revision 2 below describes the retained bridge compatibility rules.
+The current v0.1.7 city records `map_revision: 7`. New writes use save format 5 and the reader accepts formats 1–4. Saves older than map revision 7 run the map relocation pass; a current revision save is restored without repeated relocation. Vehicle model revision 3 is recorded independently. Revision 2 below describes the retained bridge compatibility rules.
 
 `map_migration.gd` checks the full stored vehicle envelope and the player's capsule-sized bounds against live mapped building solids. Polygon intersection and courtyard subtraction preserve concave outlines and holes. Building-part base heights preserve public ground under elevated structures. Destroyed storey components are excluded. Custom city, bank, Quay, Manly, metro and frontage structures use their real collision shapes; closed trimesh containment catches an object entirely inside a shell. Open meshes are not automatically considered solid interiors.
 
@@ -52,3 +52,7 @@ The initial Opera-slope regression also exposed the same foot-origin issue on fl
 ### v0.1.6 Man O’War 连接桥
 
 同一地图修订 6 加入两条真实地图连接桥的实体坡面。码头、平地与门厅共同使用上述实际支撑核对；正常站姿不会因胶囊脚底原点的小偏差而被搬走，真正埋入结构的角色仍由原安全落点流程恢复。独立码头夹具检查六个真实落稳脚位、六个下埋 6 cm 反例及两条连接桥的完整往返。
+
+## v0.1.7 public interiors
+
+Map revision 7 also checks old poses against the new QVB arcade and Manly public furniture. QVB retains its legacy OSM component damage keys, but their authored collision shells replace the old solid building extrusion. Exact IDs in `City.CUSTOM_IDS` therefore participate in custom-shape occupancy checks; unrelated mapped buildings retain their closed-volume handling. Source fixtures exercise loading both revision 5 and 6, with save-byte and fleet-identity preservation. Current-revision loads still skip repeated relocation.

@@ -12,7 +12,7 @@ signal service_completed(result: Dictionary)
 
 const STARTING_MONEY := 50000
 const ECONOMY_VERSION := 1
-const FREE_VEHICLES := ["car", "motorcycle", "hoverboard", "speedboat", "yacht", "paraglider", "glider", "helicopter", "airliner"]
+const FREE_VEHICLES := ["car", "motorcycle", "hoverboard", "speedboat", "yacht", "paraglider", "glider", "helicopter", "airliner", "tank", "fighter"]
 const SERVICE_NOTICE := "游戏体验与游戏价格 · 非真实订单、演出或预订"
 
 var money: int = STARTING_MONEY

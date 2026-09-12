@@ -4,7 +4,7 @@ const Store = preload("res://scripts/save_store.gd")
 const Player = preload("res://scripts/harbor_player.gd")
 const Sound = preload("res://scripts/harbor_audio.gd")
 const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
-const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机"}
+const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 无敌坦克","fighter":"Aster F-27 · 无敌战斗机"}
 var airport: Node3D
 var world: Node3D
 var player: CharacterBody3D
@@ -73,6 +73,19 @@ var _camera_boom := 0.0
 var _camera_subject_id := 0
 var _camera_reset := true
 var _cursor_held := false
+var weapons: Node3D
+var fire_button: Button
+var combat_reticle: Label
+var _combat_aim_clock:=0.0
+var _combat_aim_point:=Vector3.ZERO
+var diagnostics_panel:Control
+var _diagnostics_previous_pause:=false
+var city_clock:Node
+var public_lighting:Node3D
+var time_slider:HSlider
+var time_label:Label
+var time_running:CheckButton
+var time_speed:OptionButton
 
 func _ready():
 	var arguments:=OS.get_cmdline_user_args()
@@ -83,11 +96,12 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
 	world=load("res://scripts/harbor_world.gd").new()
+	world.set_meta("stream_details",true)
 	add_child(world)
 	world.process_mode=Node.PROCESS_MODE_PAUSABLE
 	if ResourceLoader.exists("res://scripts/airport_world.gd"):
@@ -96,6 +110,11 @@ func _ready():
 		airport.process_mode=Node.PROCESS_MODE_PAUSABLE
 		airport.setup()
 		world.anchors.merge(airport.anchors)
+	# Measured first summon spent about one second building immutable footprint
+	# lookup data. Pay that once behind the existing loading screen.
+	var occupancy_started:=Time.get_ticks_usec()
+	preload("res://scripts/map_migration.gd")._geometry(world)
+	set_meta("occupancy_preload_ms",(Time.get_ticks_usec()-occupancy_started)/1000.0)
 	var bridge=load("res://scripts/bridge_landmark.gd")
 	world.anchors["race_route"]=[bridge.SOUTH_ENTRY+Vector3.UP*.7,bridge.ramp_position("south",.5)+Vector3.UP*.7,bridge.pos(0)+Vector3.UP*.7,bridge.pos(251.5)+Vector3.UP*.7,bridge.pos(503)+Vector3.UP*.7,bridge.ramp_position("north",.33)+Vector3.UP*.7,bridge.ramp_position("north",.67)+Vector3.UP*.7,bridge.NORTH_ENTRY+Vector3.UP*.7]
 	world.anchors["cargo_delivery"]=Vector3(-330,5,-20)
@@ -124,8 +143,26 @@ func _ready():
 	life.setup(world.anchors,false)
 	life.connect("notification",func(t): notify(t))
 	setup_ui()
+	weapons=load("res://scripts/vehicle_weapons.gd").new()
+	add_child(weapons)
+	weapons.setup(self)
 	if not qa_running: load_settings()
 	else: apply_settings()
+	city_clock=load("res://scripts/city_clock.gd").new()
+	add_child(city_clock)
+	city_clock.setup(self)
+	public_lighting=load("res://scripts/public_lighting.gd").new()
+	add_child(public_lighting)
+	public_lighting.setup(self)
+	city_clock.changed.connect(func(_state):public_lighting.apply_cycle(city_clock.solar_state()))
+	# QA orchestration owns time explicitly, keeping fixed-camera evidence stable.
+	city_clock.set_process(not qa_running)
+	var diagnostics=get_node("/root/RuntimeDiagnostics")
+	diagnostics.setup(self)
+	diagnostics_panel=load("res://scripts/diagnostics_panel.gd").new()
+	canvas.add_child(diagnostics_panel)
+	diagnostics_panel.setup(self,diagnostics)
+	diagnostics_panel.toggled.connect(_diagnostics_toggled)
 	main_menu()
 	if "--qa" in OS.get_cmdline_user_args():
 		qa_running=true
@@ -151,6 +188,16 @@ func _ready():
 		add_child(load("res://scripts/navigation_input_validation.gd").new())
 	elif "--opera-access-qa" in arguments:
 		add_child(load("res://scripts/opera_access_validation.gd").new())
+	elif "--combat-qa" in arguments:
+		add_child(load("res://scripts/combat_validation.gd").new())
+	elif "--diagnostics-qa" in arguments:
+		var validation=load("res://scripts/diagnostics_validation.gd").new()
+		add_child(validation)
+		validation.call_deferred("run",self)
+	elif "--daylight-qa" in arguments:
+		var validation=load("res://scripts/daylight_validation.gd").new()
+		add_child(validation)
+		validation.call_deferred("run",self)
 	elif "--precinct-qa" in arguments:
 		add_child(load("res://scripts/precinct_validation.gd").new())
 	elif "--showcase" in OS.get_cmdline_user_args():
@@ -166,13 +213,16 @@ func start_interactive_qa():
 	print("INTERACTIVE_QA_READY world=",world_id," components=",world.structures.size())
 
 func setup_input():
-	var bindings={"forward":[KEY_W,KEY_UP],"back":[KEY_S,KEY_DOWN],"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"rise":[KEY_R],"fall":[KEY_F],"brake":[KEY_SPACE],"jump":[KEY_SPACE],"sprint":[KEY_SHIFT],"interact":[KEY_E],"vehicles":[KEY_TAB],"jobs":[KEY_J],"map":[KEY_M],"experiences":[KEY_K],"carry":[KEY_G],"photo":[KEY_P],"save":[KEY_F5],"recover":[KEY_HOME]}
+	var bindings={"forward":[KEY_W,KEY_UP],"back":[KEY_S,KEY_DOWN],"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"rise":[KEY_R],"fall":[KEY_F],"brake":[KEY_SPACE],"jump":[KEY_SPACE],"sprint":[KEY_SHIFT],"interact":[KEY_E],"vehicles":[KEY_TAB],"jobs":[KEY_J],"map":[KEY_M],"experiences":[KEY_K],"carry":[KEY_G],"photo":[KEY_P],"save":[KEY_F5],"recover":[KEY_HOME],"fire":[KEY_X],"combat_yaw_left":[KEY_Q],"combat_yaw_right":[KEY_Z],"combat_raise":[KEY_R],"combat_lower":[KEY_F]}
 	for action in bindings:
 		if not InputMap.has_action(action): InputMap.add_action(action)
 		for key in bindings[action]:
 			var event=InputEventKey.new()
 			event.physical_keycode=key
 			InputMap.action_add_event(action,event)
+	var trigger:=InputEventMouseButton.new()
+	trigger.button_index=MOUSE_BUTTON_LEFT
+	if not InputMap.action_has_event("fire",trigger): InputMap.action_add_event("fire",trigger)
 	if not InputMap.has_action("cursor"): InputMap.add_action("cursor")
 	var cursor_key:=InputEventKey.new()
 	cursor_key.physical_keycode=KEY_ALT
@@ -180,35 +230,9 @@ func setup_input():
 
 func setup_environment():
 	environment=WorldEnvironment.new()
-	var env=Environment.new()
-	env.background_mode=Environment.BG_SKY
-	var sky=Sky.new()
-	var mat=ProceduralSkyMaterial.new()
-	mat.sky_top_color=Color("477b9c")
-	mat.sky_horizon_color=Color("cad6d7")
-	mat.ground_horizon_color=Color("c1caca")
-	mat.ground_bottom_color=Color("566b6a")
-	mat.sky_curve=0.18
-	mat.sun_angle_max=12
-	sky.sky_material=mat
-	env.sky=sky
-	env.ambient_light_source=Environment.AMBIENT_SOURCE_SKY
-	env.ambient_light_energy=0.7
-	env.tonemap_mode=Environment.TONE_MAPPER_FILMIC
-	env.tonemap_exposure=0.9
-	env.fog_enabled=true
-	env.fog_light_color=Color("bccdd1")
-	env.fog_density=0.00004
-	env.fog_sky_affect=0.2
-	environment.environment=env
+	environment.environment=preload("res://scripts/daylight_environment.gd").make_environment()
 	add_child(environment)
-	sun=DirectionalLight3D.new()
-	sun.rotation_degrees=Vector3(-37,-32,0)
-	sun.light_color=Color("ffe3b7")
-	sun.light_energy=0.9
-	sun.shadow_enabled=true
-	sun.directional_shadow_max_distance=450
-	sun.directional_shadow_mode=DirectionalLight3D.SHADOW_PARALLEL_4_SPLITS
+	sun=preload("res://scripts/daylight_environment.gd").make_sun()
 	add_child(sun)
 
 func setup_ui():
@@ -332,6 +356,24 @@ func setup_ui():
 	navigation_hud=load("res://scripts/navigation_guidance.gd").new()
 	navigation_hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hud.add_child(navigation_hud)
+	fire_button=Button.new()
+	fire_button.text="发射  ·  X / 鼠标左键"
+	fire_button.tooltip_text="按住 Option / Alt 可直接点击；松开继续瞄准"
+	fire_button.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)
+	fire_button.position=Vector2(-256,90)
+	fire_button.size=Vector2(226,58)
+	fire_button.focus_mode=Control.FOCUS_NONE
+	fire_button.visible=false
+	fire_button.pressed.connect(func(): if can_fire_weapon(): weapons.fire_current())
+	hud.add_child(fire_button)
+	combat_reticle=label("╋",32,Color("ffe9ae"))
+	combat_reticle.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	combat_reticle.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	combat_reticle.position=Vector2(-18,-25)
+	combat_reticle.size=Vector2(36,50)
+	combat_reticle.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	combat_reticle.visible=false
+	hud.add_child(combat_reticle)
 	life.service_completed.connect(on_service_completed)
 
 func panel_style(color:Color,radius:int) -> StyleBoxFlat:
@@ -386,6 +428,7 @@ func button(text_value:String,action:Callable):
 	return b
 
 func main_menu():
+	if is_instance_valid(weapons): weapons.clear()
 	active_panel="main"
 	hud.visible=false
 	clear_panel("属于你的海港。","A life by the water.\n悉尼核心海港 · 单人离线世界 · v"+str(ProjectSettings.get_setting("application/config/version")))
@@ -420,6 +463,19 @@ func close_panel():
 	sync_mouse_capture()
 	process_mode=Node.PROCESS_MODE_ALWAYS
 
+func _diagnostics_toggled(opened:bool):
+	if opened:
+		_diagnostics_previous_pause=paused
+		paused=true
+		get_tree().paused=true
+		_cursor_held=false
+		fire_button.visible=false
+		combat_reticle.visible=false
+	else:
+		paused=_diagnostics_previous_pause
+		get_tree().paused=paused
+	sync_mouse_capture()
+
 func sync_mouse_capture():
 	# Menus own the pointer even if opened while a vehicle or a modifier is active.
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED if active and not paused and not modal.visible and not map_panel.visible and not _cursor_held else Input.MOUSE_MODE_VISIBLE
@@ -434,6 +490,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	world_id="world_"+str(Time.get_unix_time_from_system()).replace(".","_")
 	world_name=new_name.strip_edges() if not new_name.strip_edges().is_empty() else "我的悉尼"
 	mode=new_mode
+	if is_instance_valid(city_clock):city_clock.apply_state({})
 	world.repair_all()
 	if is_instance_valid(airport) and airport.has_method("repair_all"): airport.repair_all()
 	life.setup(world.anchors,mode=="sandbox")
@@ -462,6 +519,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	if save_now: save_world()
 
 func reset_fleet(with_defaults: bool = true):
+	if is_instance_valid(weapons): weapons.clear()
 	current_vehicle=null
 	for v in vehicles:
 		remove_child(v)
@@ -473,16 +531,16 @@ func reset_fleet(with_defaults: bool = true):
 	var home=world.anchors.get("home",Vector3(-140,6,150))
 	var marina=world.anchors.get("marina",Vector3(-240,1,-330))
 	var helipad=world.anchors.get("helipad",Vector3(-280,8,-250))
-	var placements={"car":home+Vector3(12,1,6),"motorcycle":home+Vector3(18,1,6),"hoverboard":home+Vector3(22,1,6),"speedboat":Vector3(marina.x-8.5,0.9,marina.z-28),"yacht":Vector3(marina.x-30,0.9,marina.z-64),"helicopter":helipad+Vector3(0,3,0),"paraglider":world.anchors.get("north",Vector3(50,5,-1350))+Vector3(40,90,0),"glider":Vector3(700,230,-1600),"airliner":Vector3(-4180,10.78,8600)}
+	var placements={"car":home+Vector3(12,1,6),"motorcycle":home+Vector3(18,1,6),"hoverboard":home+Vector3(22,1,6),"speedboat":Vector3(marina.x-8.5,0.9,marina.z-28),"yacht":Vector3(marina.x-30,0.9,marina.z-64),"helicopter":helipad+Vector3(0,3,0),"paraglider":world.anchors.get("north",Vector3(50,5,-1350))+Vector3(40,90,0),"glider":Vector3(700,230,-1600),"airliner":Vector3(-4180,10.78,8600),"tank":home+Vector3(35,2,6),"fighter":Vector3(680,250,-1600)}
 	for kind in VEHICLE_NAMES:
 		var v=make_vehicle(kind,"owned_"+kind,placements[kind])
 		# Place parked contact geometry just above its authored support surface.
 		# The new world has not necessarily flushed its Jolt broad phase yet.
-		if kind in ["car","motorcycle","helicopter"]:
+		if kind in ["car","motorcycle","helicopter","tank"]:
 			var support:float=helipad.y-.20 if kind=="helicopter" else world.GROUND
 			v.position.y=support-VehicleSpawn.envelope(v).position.y+.12
 			v.reset_physics_interpolation()
-		if kind in ["paraglider","glider","airliner"]: v.freeze=true
+		if kind in ["paraglider","glider","airliner","fighter"]: v.freeze=true
 		if kind=="airliner" and is_instance_valid(airport):
 			v.rotation.y=airport.runway_heading
 			v.throttle=0.0
@@ -490,6 +548,7 @@ func reset_fleet(with_defaults: bool = true):
 func make_vehicle(kind:String,id:String,pos:Vector3):
 	var v=load("res://scripts/harbor_vehicle.gd").new()
 	v.configure(kind,id)
+	v.combat_owner=self
 	v.process_mode=Node.PROCESS_MODE_PAUSABLE
 	add_child(v)
 	v.global_position=pos
@@ -504,12 +563,56 @@ func on_impact(point:Vector3,energy:float,source:RigidBody3D=null):
 	if is_instance_valid(airport) and airport.has_method("apply_impact"): airport.apply_impact(point,energy)
 	if energy>8000: audio.crash(point)
 
+func can_fire_weapon() -> bool:
+	return active and not paused and not modal.visible and not map_panel.visible and is_instance_valid(current_vehicle) and current_vehicle.occupied and current_vehicle.kind in ["tank","fighter"]
+
+func apply_combat_blast(point:Vector3,energy:float,radius:float,source:RigidBody3D) -> void:
+	world.damage_at(point,energy,radius)
+	if is_instance_valid(airport): airport.apply_impact(point,energy)
+	_allow_combat_debris_passage(source)
+	life.on_incident(point,energy,source==current_vehicle)
+	audio.crash(point)
+
+func break_combat_contact(source:RigidBody3D,collider:Object,point:Vector3) -> bool:
+	if not is_instance_valid(collider) or not source.is_invincible(): return false
+	if collider.has_meta("damage_id"):
+		var id:=str(collider.get_meta("damage_id"))
+		if not world.structures.has(id): return false
+		if world.destroyed.has(id): return true
+		world._destroy_component(id,point,maxf(10000000.0,source.mass*source.linear_velocity.length_squared()),true)
+		_allow_combat_debris_passage(source)
+		return true
+	if collider.has_meta("airport_damage_id") and is_instance_valid(airport):
+		var id:=str(collider.get_meta("airport_damage_id"))
+		if not airport._panels.has(id): return false
+		airport._break_panel(id,true)
+		_allow_combat_debris_passage(source)
+		return true
+	# Physical rubble can be pushed aside; terrain and anonymous support remain solid.
+	return false
+
+func _allow_combat_debris_passage(source:RigidBody3D) -> void:
+	if not is_instance_valid(source) or not source.is_invincible(): return
+	# Fresh fragments otherwise spawn inside the moving hull before their first broad phase.
+	# These bounded rubble bodies stay physical for other traffic and the player.
+	for piece in world.rubble:
+		if is_instance_valid(piece): piece.add_collision_exception_with(source)
+	if is_instance_valid(airport):
+		for piece in airport._fragments:
+			if is_instance_valid(piece): piece.add_collision_exception_with(source)
+
+func combat_ram_feedback(source:RigidBody3D,point:Vector3,count:int) -> void:
+	if is_instance_valid(weapons): weapons.impact_effect(point,1.0+minf(count,5)*0.12)
+	life.on_incident(point,10000000.0,source==current_vehicle)
+	audio.crash(point)
+
 func save_world() -> bool:
 	if not active or world_id=="": return false
 	var data={"name":world_name,"mode":mode,"player":vec(player.global_position),"yaw":yaw,"pitch":pitch,"owned":owned,"world":world.get_state(),"airport":airport.get_state() if is_instance_valid(airport) else {},"life":life.get_state(),"vehicles":[],"settings":settings,"elapsed":elapsed,"vehicle":current_vehicle.vehicle_id if is_instance_valid(current_vehicle) else "","spawn_target":spawn_target.vehicle_id if is_instance_valid(spawn_target) else ""}
 	for v in vehicles: data.vehicles.append(v.get_state())
 	data["map_revision"]=preload("res://scripts/map_migration.gd").REVISION
 	data["navigation"]={"key":landmark_target_key,"title":landmark_target_name,"position":vec(landmark_target_position)}
+	if is_instance_valid(city_clock):data["city_clock"]=city_clock.get_state()
 	var ok=Store.write(world_id,data)
 	save_indicator.text="已保存 · "+Time.get_time_string_from_system() if ok else "保存失败"
 	if not ok: notify(Store.last_error,false)
@@ -535,6 +638,7 @@ func load_world(id:String,backup=false):
 	yaw=float(data.get("yaw",0))
 	pitch=float(data.get("pitch",-0.17))
 	elapsed=float(data.get("elapsed",0))
+	if is_instance_valid(city_clock):city_clock.apply_state(data.get("city_clock",{}))
 	# Restore the actual fleet, including every independent user-created instance.
 	# Saves from the fixed-seven version already include kind/id and need no migration.
 	if data.has("vehicles"):
@@ -595,6 +699,7 @@ func pause_menu():
 	button("工作与活动",jobs_menu)
 	button("我的载具",vehicles_menu)
 	button("地图与位置",map_menu)
+	button("时间与晚霞  ·  T",time_menu)
 	button("城市体验 · 美食、场馆与海滨",experiences_menu)
 	button("设置与操作",settings_menu)
 	button("存档与恢复",worlds_menu)
@@ -673,11 +778,19 @@ func next_vehicle_id(kind:String) -> String:
 
 func request_vehicle(kind:String):
 	if not VEHICLE_NAMES.has(kind): return null
+	var request_started:=Time.get_ticks_usec()
 	# Placement succeeds before changing the driver. Failure preserves the current ride.
 	var v=make_vehicle(kind,next_vehicle_id(kind),Vector3(0,-2000,0))
 	v.freeze=true
 	v.visible=false
+	var model_finished:=Time.get_ticks_usec()
+	var geometry_started:=Time.get_ticks_usec()
+	preload("res://scripts/map_migration.gd")._geometry(world)
+	var geometry_finished:=Time.get_ticks_usec()
 	var placement=VehicleSpawn.find_spawn(self,v)
+	var placement_finished:=Time.get_ticks_usec()
+	set_meta("last_spawn_profile",{"kind":kind,"model_ms":(model_finished-request_started)/1000.0,"occupancy_cache_ms":(geometry_finished-geometry_started)/1000.0,"placement_ms":(placement_finished-geometry_finished)/1000.0,"ready":not placement.is_empty()})
+	get_meta("last_spawn_profile")["factory"]=v.get_meta("vehicle_factory_profile",{}).duplicate(true)
 	if placement.is_empty():
 		vehicles.erase(v)
 		remove_child(v)
@@ -690,6 +803,7 @@ func request_vehicle(kind:String):
 	pitch=-0.10 if kind in ["car","motorcycle","hoverboard"] else -0.17
 	enter_vehicle(v)
 	close_panel()
+	get_meta("last_spawn_profile")["total_ms"]=(Time.get_ticks_usec()-request_started)/1000.0
 	notify("已免费新增并入座 · %s\n%s · %s"%[VEHICLE_NAMES[kind],placement.description,vehicle_help(kind)])
 	return v
 
@@ -744,6 +858,7 @@ func enter_vehicle(v):
 	if is_instance_valid(current_vehicle) and current_vehicle!=v:
 		current_vehicle.occupied=false
 	current_vehicle=v
+	_combat_aim_clock=0.0
 	var was_frozen:bool=v.freeze
 	v.freeze=false
 	v.prepare_for_boarding(was_frozen)
@@ -836,7 +951,7 @@ func landmark_catalog() -> Array:
 				break
 	# The model modules publish their actual IDs and names. This also keeps
 	# new bank/Quay/shop destinations in sync with their verified locations.
-	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks","sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses","manowar_detail"]:
+	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks","sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses","manowar_detail","qvb_public"]:
 		for record in world.get_meta(group,[]):
 			var key:String=("shop_" if group=="darling_square_frontages" else "")+str(record.get("id",""))
 			if not world.anchors.has(key) or not world.anchors[key] is Vector3: continue
@@ -1039,6 +1154,7 @@ func load_settings():
 
 func apply_settings():
 	AudioServer.set_bus_volume_db(0,linear_to_db(maxf(float(settings.volume),0.001)))
+	preload("res://scripts/daylight_environment.gd").apply_quality(environment.environment,int(settings.quality))
 	sun.shadow_enabled=int(settings.quality)>0
 	sun.directional_shadow_max_distance=700 if int(settings.quality)==2 else 350
 	context_hint.add_theme_font_size_override("font_size",20 if settings.large_text else 16)
@@ -1050,8 +1166,8 @@ func save_settings():
 
 func credits_menu():
 	active_panel="credits"
-	clear_panel("关于这片海港","Harbourlife · 开发预览 "+str(ProjectSettings.get_setting("application/config/version"))+"\n原创程序、建筑重建、材质和合成音效。")
-	var text_value="Godot Engine 4.7.2 · MIT License\nhttps://godotengine.org/license\n\n建筑轮廓、道路与岸线：© OpenStreetMap contributors · ODbL 1.0\nhttps://www.openstreetmap.org/copyright\n\n主要地标、总部及所列店面参考建筑师、物业与商户公开资料及真实照片。普通楼体立面、大部分地形高程仍为近似；这不是完整的一比一城市扫描。\n\n各地标依据、数据日期、估算范围与许可附在源码 docs 和 licenses 中。系统字体由本机提供，不分发字体文件。"
+	clear_panel("关于这片海港","Harbourlife · 开发预览 "+str(ProjectSettings.get_setting("application/config/version"))+"\n原创程序、建筑重建和合成音效；环境资源来源见下方。")
+	var text_value="Godot Engine 4.7.2 · MIT License\nhttps://godotengine.org/license\n\n晴日天空：Rustig Koppie (Pure Sky) · Greg Zaal / Jarod Guest · Poly Haven · CC0\nhttps://polyhaven.com/a/rustig_koppie_puresky\n\n建筑轮廓、道路与岸线：© OpenStreetMap contributors · ODbL 1.0\nhttps://www.openstreetmap.org/copyright\n\n主要地标、总部及所列店面参考建筑师、物业与商户公开资料及真实照片。普通楼体立面、大部分地形高程仍为近似；这不是完整的一比一城市扫描。\n\n各地标依据、数据日期、估算范围与许可附在源码 docs 和 licenses 中。系统字体由本机提供，不分发字体文件。"
 	var l=label(text_value,17)
 	l.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	l.custom_minimum_size.x=430
@@ -1064,10 +1180,22 @@ func notify(message:String,sound=true):
 	toast_time=7
 	if sound and is_instance_valid(audio): audio.chime()
 
+func time_menu():
+	preload("res://scripts/time_panel.gd").build(self)
+
 func _input(event):
 	# These shortcuts must run before focused GUI controls and before the paused
 	# gameplay guard. Otherwise M cannot close the very map it opened.
 	if event is InputEventKey and event.echo: return
+	if event is InputEventKey and event.pressed and event.physical_keycode==KEY_F3:
+		if is_instance_valid(diagnostics_panel): diagnostics_panel.toggle()
+		get_viewport().set_input_as_handled()
+		return
+	if is_instance_valid(diagnostics_panel) and diagnostics_panel.visible:
+		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE:
+			diagnostics_panel.close()
+			get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
 		if modal.visible and active: close_panel()
 		elif active: pause_menu()
@@ -1081,6 +1209,11 @@ func _input(event):
 	if not active: return
 	var focus=get_viewport().gui_get_focus_owner()
 	if focus is LineEdit or focus is TextEdit: return
+	if event is InputEventKey and event.pressed and (event.physical_keycode==KEY_T or event.keycode==KEY_T):
+		if active_panel=="time":close_panel()
+		else:time_menu()
+		get_viewport().set_input_as_handled()
+		return
 	if event.is_action_pressed("map"):
 		if active_panel=="map": close_panel()
 		else: map_menu()
@@ -1091,6 +1224,11 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion and camera_accepts_mouse():
 		yaw-=event.relative.x*float(settings.sensitivity)
 		pitch=clampf(pitch-event.relative.y*float(settings.sensitivity)*(-1 if settings.invert else 1),-1.05,0.65)
+	if event.is_action_pressed("fire") and can_fire_weapon():
+		if not event is InputEventMouseButton or camera_accepts_mouse():
+			weapons.fire_current()
+			get_viewport().set_input_as_handled()
+		return
 	if event.is_action_pressed("interact"):
 		if is_instance_valid(current_vehicle): exit_vehicle()
 		else:
@@ -1138,6 +1276,7 @@ func _process(delta):
 		menu_orbit+=delta*0.015
 		camera.global_position=Vector3(690+sin(menu_orbit)*35,170,-15)
 		camera.look_at(Vector3(0,50,-650))
+		world.stream_view(camera.global_position,Vector3.ZERO,delta)
 		return
 	if paused: return
 	elapsed+=delta
@@ -1147,10 +1286,12 @@ func _process(delta):
 		autosave=0
 		save_world()
 	_update_follow_camera(delta)
+	world.stream_view(camera.global_position,current_vehicle.linear_velocity if is_instance_valid(current_vehicle) else player.velocity,delta)
 	update_navigation(delta)
 	update_spawn_marker()
 	update_landmark_marker()
 	update_hud()
+	update_combat_reticle(delta)
 	if qa_manual_render:
 		qa_render_count+=1
 		RenderingServer.force_draw(true,delta)
@@ -1167,7 +1308,7 @@ func _update_follow_camera(delta: float):
 	var rendered: Transform3D=subject.get_global_transform_interpolated()
 	var height=current_vehicle.get_camera_height() if is_instance_valid(current_vehicle) else 1.45
 	var target=rendered.origin+Vector3.UP*height
-	if is_instance_valid(current_vehicle) and Input.is_action_pressed("forward") and not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+	if is_instance_valid(current_vehicle) and current_vehicle.kind!="tank" and Input.is_action_pressed("forward") and not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		yaw=lerp_angle(yaw,rendered.basis.get_euler().y,1.0-exp(-delta*0.9))
 	var orbit=Vector3(0,0,camera_distance).rotated(Vector3.RIGHT,pitch).rotated(Vector3.UP,yaw)+Vector3.UP*1.3
 	var snap=_camera_reset or _camera_subject_id!=subject.get_instance_id() or _camera_focus.distance_to(target)>400.0
@@ -1193,9 +1334,31 @@ func _update_follow_camera(delta: float):
 	camera.global_position=_camera_focus+direction*_camera_boom
 	if camera.global_position.distance_to(_camera_focus)>0.1: camera.look_at(_camera_focus)
 
+func update_combat_reticle(delta:float):
+	if not can_fire_weapon():
+		combat_reticle.visible=false
+		return
+	_combat_aim_clock-=delta
+	if _combat_aim_clock<=0.0:
+		_combat_aim_clock=0.1
+		_combat_aim_point=weapons.aim_point()
+	combat_reticle.visible=not _cursor_held and not camera.is_position_behind(_combat_aim_point)
+	if combat_reticle.visible:
+		combat_reticle.position=camera.unproject_position(_combat_aim_point)-combat_reticle.size*.5
+	var status:Dictionary=weapons.aim_status()
+	fire_button.disabled=not status.get("ready",false)
+	if fire_button.disabled: fire_button.text="装填 %.1f s"%status.get("cooldown_remaining",0.0)
+	if current_vehicle.kind=="tank":
+		speed_label.text+="\n炮管 %+.0f°"%status.get("elevation_deg",0.0)
+
 func update_hud():
+	var combat_active:=can_fire_weapon()
+	fire_button.visible=combat_active
+	combat_reticle.visible=combat_active and not _cursor_held
+	if combat_active:
+		fire_button.text="发射炮弹  ·  X / 左键" if current_vehicle.kind=="tank" else "发射火箭  ·  X / 左键"
 	mode_label.text="HARBOURLIFE  /  "+("自由沙盒" if mode=="sandbox" else "生活")
-	info.text="$%s    ·    耐力 %d%%    ·    %02d:%02d" %[life.money,player.stamina,16+int(elapsed/3600)%7,int(elapsed/60)%60]
+	info.text="$%s    ·    耐力 %d%%    ·    %s" %[life.money,player.stamina,city_clock.display_time() if is_instance_valid(city_clock) else "16:00"]
 	var regions={"quay":"Circular Quay · 环形码头","opera":"Bennelong Point · 歌剧院","rocks":"The Rocks · 岩石区","north":"Milsons Point · 北岸","home":"Harbour Studio · 你的家","marina":"Marina · 海港码头","helipad":"Harbour Air · 停机坪","airport":"Sydney Airport · 悉尼机场","ribbon":"Darling Harbour · 达令港","exchange_haidilao":"Darling Square · 达令广场","icc_convention":"ICC Sydney · 会展中心","icc_exhibition":"ICC Sydney · 展览中心","tiktok_entertainment":"TikTok Entertainment Centre · 演出场馆","tower_one":"Barangaroo · 巴兰加鲁","manly_wharf":"Manly Wharf · 曼利码头","manly_beach":"Manly Beach · 曼利海滩","martin_place_metro":"Martin Place · 马丁广场"}
 	var closest="quay"
 	var distance=INF
@@ -1218,12 +1381,12 @@ func update_hud():
 			speed_label.text+="\n推力 %d%% %s" %[current_vehicle.throttle*100,"失速 · 放低机头" if current_vehicle.stalled else ""]
 			var forward=-current_vehicle.global_basis.z
 			info.text="航向 %03d° · 海港 %.1f km" %[fposmod(rad_to_deg(atan2(forward.x,-forward.z)),360),current_vehicle.global_position.distance_to(world.anchors.opera)/1000]
-		context_hint.text=vehicle_help(current_vehicle.kind)+"   E 离开   Tab 新增   M 地图   K 体验"
+		context_hint.text=vehicle_help(current_vehicle.kind)+"   E 离开   Tab 新增   M 地图   T 时间"
 	else:
 		speed_label.text="游泳" if player.swimming else ""
 		var near=nearest_vehicle()
 		var hint="E 进入 "+VEHICLE_NAMES[near.kind] if near else life.available_actions(player.global_position)
-		context_hint.text=(hint+"   ·   " if hint!="" else "")+"WASD 行走   Shift 奔跑   G 搬运   J 工作   Tab 车库   M 地图"
+		context_hint.text=(hint+"   ·   " if hint!="" else "")+"WASD 行走   Shift 奔跑   Tab 车库   M 地图   T 时间   F3 调试"
 
 func _notification(what):
 	if what==NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
@@ -1405,6 +1568,8 @@ func airport_start():
 
 func vehicle_help(kind:String) -> String:
 	match kind:
+		"tank": return "W/S 履带 · A/D 转向 · 鼠标瞄准 · Q/Z 旋塔 · R/F 俯仰 · X/左键 发射 · 无敌"
+		"fighter": return "W/S 推力 · A/D 转弯 · R/F 俯仰 · X/左键 发射 · 2000 km/h · 无敌"
 		"car": return "W/S 加速倒车   A/D 转向   空格 制动 · 极速 420 km/h"
 		"motorcycle": return "W/S 加速倒车   A/D 转向   空格 制动 · 极速 320 km/h"
 		"yacht","speedboat": return "W/S 双机推力   A/D 船舵   空格 反向推力"

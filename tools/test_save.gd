@@ -5,20 +5,27 @@ const LEGACY_SHA256="da9a206bdd26938774f91353aafb7db701ca7658b7f45498a31d590c060
 var failures=0
 var checks:Array=[]
 func _init():
-	var id="qa_store_"+str(Time.get_ticks_usec())
+	var id="qa_store_"+str(Time.get_unix_time_from_system()).replace(".","_")+"_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
 	var data={"name":"Persistence QA","mode":"life","life":{"money":1200},"world":{"destroyed":["opera/shell/1/2"]},"vehicles":[{"id":"car","position":[1,2,3]}],"player":[1,2,3]}
+	data["city_clock"]={"version":1,"season":"sydney_average_summer","hour":19.7,"speed":12,"running":false,"cycles":7}
 	check("atomic write",Store.write(id,data))
 	check("read data",Store.read(id).world.destroyed==data.world.destroyed)
+	check("saved summer time survives actual production store",Store.read(id).city_clock==JSON.parse_string(JSON.stringify(data.city_clock)))
 	data.life.money=843
 	check("overwrite",Store.write(id,data))
 	check("previous recovery copy",Store.read(id,true).life.money==1200)
 	var copy=Store.duplicate_world(id)
 	check("independent copy",copy!=id and Store.read(copy).life.money==843)
+	check("world copy retains independent summer time",Store.read(copy).city_clock==Store.read(id).city_clock)
 	var invalid=FileAccess.open(Store.ROOT+id+".json",FileAccess.WRITE)
 	invalid.store_string("{broken")
 	invalid.close()
 	check("corrupt rejected",Store.read(id).is_empty())
 	check("backup preserved",Store.read(id,true).life.money==1200)
+	var malformed=data.duplicate(true);malformed.city_clock="sunset"
+	invalid=FileAccess.open(Store.ROOT+id+".json",FileAccess.WRITE)
+	invalid.store_string(JSON.stringify(malformed));invalid.close()
+	check("invalid optional clock section is rejected before runtime load",Store.read(id).is_empty() and Store.last_error=="Invalid world section: city_clock")
 	var future=data.duplicate(true)
 	future.version=999
 	invalid=FileAccess.open(Store.ROOT+id+".json",FileAccess.WRITE)
@@ -26,7 +33,8 @@ func _init():
 	invalid.close()
 	check("future version rejected",Store.read(id).is_empty())
 	version_compatibility(id+"_compat")
-	var report={"passed":failures==0,"checks":checks,"current_format":Store.VERSION,"legacy_reader":{"format":LegacyV012.VERSION,"source":"source/fixtures/save_store_v012.gd","commit":"d6ddb4d","sha256":LEGACY_SHA256,"provenance":"Byte-identical save_store.gd from the v0.1.2 final build manifest"},"user_saves_touched":false,"qa_fixtures_retained":true,"scope":"Actual production save API and immutable v0.1.2 reader; unique qa_store files only; no slots() calls or non-QA save access."}
+	optional_numeric_fields(id+"_numeric")
+	var report={"passed":failures==0,"checks":checks,"current_format":Store.VERSION,"source_hashes":{"res://scripts/save_store.gd":FileAccess.get_sha256("res://scripts/save_store.gd"),"res://../tools/test_save.gd":FileAccess.get_sha256("res://../tools/test_save.gd")},"legacy_reader":{"format":LegacyV012.VERSION,"source":"source/fixtures/save_store_v012.gd","commit":"d6ddb4d","sha256":LEGACY_SHA256,"provenance":"Byte-identical save_store.gd from the v0.1.2 final build manifest"},"user_saves_touched":false,"qa_fixtures_retained":true,"scope":"Actual production save API and immutable v0.1.2 reader; unique qa_store files only; no slots() calls or non-QA save access."}
 	var output:=FileAccess.open("res://../reports/save-v013-format5.json",FileAccess.WRITE)
 	output.store_string(JSON.stringify(report,"\t"));output.close()
 	print("SAVE_TEST COMPLETE checks=",checks.size()," failures=",failures," format=",Store.VERSION)
@@ -35,6 +43,35 @@ func check(title:String,ok:bool):
 	checks.append({"name":title,"passed":ok})
 	print("SAVE_TEST "+title+" "+("PASS" if ok else "FAIL"))
 	if not ok: failures+=1
+
+func optional_numeric_fields(prefix:String):
+	# Raw JSON retains exponent overflow instead of JSON.stringify turning INF
+	# into null. Read rejection must preserve both the slot and its recovery copy.
+	for field in ["yaw","pitch","elapsed"]:
+		var id:String=prefix+"_"+field
+		var path:String=Store.ROOT+id+".json"
+		var recovery:="{\"version\":1,\"name\":\"Numeric recovery QA\",\"player\":[1,2,3]}"
+		var backup:=FileAccess.open(path+".bak",FileAccess.WRITE)
+		backup.store_string(recovery);backup.close()
+		for raw in ["{}","1.8e308"]:
+			var contents:="{\"version\":1,\"player\":[1,2,3],\"%s\":%s}"%[field,raw]
+			var writer:=FileAccess.open(path,FileAccess.WRITE)
+			writer.store_string(contents);writer.close()
+			var rejected:bool=Store.read(id).is_empty() and Store.last_error=="Invalid numeric world field: "+field
+			check("%s %s rejected before runtime load without changing save or backup"%[field,"wrong type" if raw=="{}" else "nonfinite number"],rejected and FileAccess.get_file_as_string(path)==contents and FileAccess.get_file_as_string(path+".bak")==recovery)
+	for with_fields in [false,true]:
+		var id:=prefix+("_valid" if with_fields else "_absent")
+		var path:String=Store.ROOT+id+".json"
+		var data:={"version":1,"name":"Optional camera legacy QA","player":[1,2,3]}
+		if with_fields:data.merge({"yaw":1.25,"pitch":-0.4,"elapsed":123})
+		var contents:=JSON.stringify(data)
+		var writer:=FileAccess.open(path,FileAccess.WRITE)
+		writer.store_string(contents);writer.close()
+		var loaded:Dictionary=Store.read(id)
+		var okay:bool=not loaded.is_empty() and loaded.version==Store.VERSION
+		for field in ["yaw","pitch","elapsed"]:
+			okay=okay and (loaded.get(field)==data[field] if with_fields else not loaded.has(field))
+		check("valid legacy camera numbers remain exact" if with_fields else "absent legacy camera numbers remain absent for runtime defaults",okay and FileAccess.get_file_as_string(path)==contents)
 
 func version_compatibility(prefix:String):
 	# This is the shipped v0.1.2 implementation, not the current reader with a

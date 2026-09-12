@@ -1,0 +1,190 @@
+{
+	"actual_city_builder": true,
+	"actual_worker_thread_pool": true,
+	"checks": [
+		{
+			"evidence": {},
+			"name": "known real tiny footprint is present in current city source",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "initial city build stores deferred descriptors without generating near arrays",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "base facade mesh collision and stable damage IDs already exist",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"observed": [
+					"3673/0",
+					"3674/1"
+				]
+			},
+			"name": "same-material batching retains distinct immutable OSM UV2 IDs and usage",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "real production physics hits the base shell before detail streaming",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"base_collision_resident": true,
+				"builds": 1,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 0,
+				"last_upload_ms": 0.817,
+				"last_worker_ms": 0.826,
+				"limit": 64,
+				"max_upload_ms": 0.817,
+				"pending_worker": 0,
+				"resident": 1,
+				"resident_cells": [
+					[
+						25,
+						25
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 1
+			},
+			"name": "distance tick builds nearby relief using a real worker and combined mesh",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "distant cells keep detail unloaded",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "completed uploads release CPU near arrays but retain source descriptors",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "moving beyond retain radius unloads old relief and loads destination",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "detail eviction preserves exact base mesh collider resource and structure ID",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "evicted base shell still supports actual physics queries",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "returning regenerates the same combined relief geometry",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "production destruction immediately invalidates resident detail and collision",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_vertices": 576,
+				"before_vertices": 1152
+			},
+			"name": "destroyed component stays absent after unload and reload while intact neighbor remains",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "destroyed base shell does not reappear in physics",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"source_id": "way/556844015"
+			},
+			"name": "real narrow footprint returns genuinely empty relief arrays",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "empty worker result completes cleanly without uploading an empty mesh",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "empty relief is remembered so the same cell is not rebuilt every frame",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "fast-jump regression starts with a real pending worker",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "completed old worker cannot commit after a fast camera jump",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "high altitude evicts all near detail while base shell and IDs remain",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "close safely joins a pending worker and releases world/output references",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"maximum": 64,
+				"resident": 64
+			},
+			"name": "64-cell retained cache uses real uploaded worker meshes",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"evictions": 1,
+				"resident": 64
+			},
+			"name": "new commit evicts an unneeded cell before exceeding the hard 64 limit",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"actual_detail_meshes": 64
+			},
+			"name": "hard cache limit counts actual live detail meshes as well as dictionary entries",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "completed job is rejected when every resident slot is still wanted",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "capacity rejection does not retain uploaded CPU arrays",
+			"passed": true
+		}
+	],
+	"count": 27,
+	"failures": 0,
+	"full_city_run": false,
+	"gpu_run": false,
+	"hashes": {
+		"res://../source/facade_stream_test.gd": "a1cbc074b9c44f50d4b3c7ebf33c7cb19e3a1aaf95956094445dbc2f4e614689",
+		"res://scripts/city_map.gd": "f5bf1c4f69635fcc9da4d97ee991fd4b668226e0cc49c988d8d9a3caa5d5e6e5",
+		"res://scripts/facade_stream.gd": "a0bc53fcbb344253beb340ac6e13fed8e763e8adb76cd42fd989a576e7e9c0c8",
+		"res://scripts/harbor_world.gd": "0279630cf2bd03a0142dbf7209fa9598909b8b09a0045460b2b1417e80a7fc88"
+	},
+	"passed": true
+}

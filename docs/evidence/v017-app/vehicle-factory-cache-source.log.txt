@@ -1,0 +1,134 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FACTORY_CACHE PASS car cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":1.59,"cache_capture_ms":3.266,"cache_hit":false,"cache_stored":true,"extract_ms":1.295,"final_commit_ms":0.454,"geometry_ms":10.645,"index_ms":1.311,"kind":"car","materials_ms":0.047,"merge_ms":5.513,"merged_meshes":30,"source_meshes":107,"source_surfaces":107,"temporary_commit_ms":0.402,"temporary_mesh_commits":107,"total_ms":19.475},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":1.126,"kind":"car","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":1.126}}
+FACTORY_CACHE PASS car cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS car moving references belong only to their own fresh nodes {"node_references":4}
+FACTORY_CACHE PASS car identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS car authored node names survive caching {}
+FACTORY_CACHE PASS car immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":30}
+FACTORY_CACHE PASS car collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS car paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS car damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS car wheel animation cannot move another copy {}
+FACTORY_CACHE PASS car cache survives releasing first instance {}
+FACTORY_CACHE PASS motorcycle cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":1.903,"cache_capture_ms":2.796,"cache_hit":false,"cache_stored":true,"extract_ms":1.429,"final_commit_ms":0.588,"geometry_ms":27.985,"index_ms":2.438,"kind":"motorcycle","materials_ms":0.088,"merge_ms":7.214,"merged_meshes":28,"source_meshes":70,"source_surfaces":70,"temporary_commit_ms":0.463,"temporary_mesh_commits":70,"total_ms":38.085},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":1.081,"kind":"motorcycle","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":1.081}}
+FACTORY_CACHE PASS motorcycle cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS motorcycle moving references belong only to their own fresh nodes {"node_references":3}
+FACTORY_CACHE PASS motorcycle identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS motorcycle authored node names survive caching {}
+FACTORY_CACHE PASS motorcycle immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":28}
+FACTORY_CACHE PASS motorcycle collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS motorcycle paint aliasing within each vehicle is preserved {"paint_meshes":2}
+FACTORY_CACHE PASS motorcycle damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS motorcycle wheel animation cannot move another copy {}
+FACTORY_CACHE PASS motorcycle boarding shows only its own rider {}
+FACTORY_CACHE PASS motorcycle cache survives releasing first instance {}
+FACTORY_CACHE PASS speedboat cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":1.8,"cache_capture_ms":1.561,"cache_hit":false,"cache_stored":true,"extract_ms":1.285,"final_commit_ms":0.412,"geometry_ms":4.318,"index_ms":0.65,"kind":"speedboat","materials_ms":0.03,"merge_ms":5.184,"merged_meshes":12,"source_meshes":232,"source_surfaces":232,"temporary_commit_ms":0.49,"temporary_mesh_commits":232,"total_ms":11.096},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":0.904,"kind":"speedboat","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":0.904}}
+FACTORY_CACHE PASS speedboat cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS speedboat moving references belong only to their own fresh nodes {"node_references":0}
+FACTORY_CACHE PASS speedboat identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS speedboat authored node names survive caching {}
+FACTORY_CACHE PASS speedboat immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":12}
+FACTORY_CACHE PASS speedboat collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS speedboat paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS speedboat damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS speedboat mutable boat profile is not shared {}
+FACTORY_CACHE PASS speedboat cache survives releasing first instance {}
+FACTORY_CACHE PASS yacht cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":4.07599999999998,"cache_capture_ms":2.023,"cache_hit":false,"cache_stored":true,"extract_ms":2.87999999999998,"final_commit_ms":0.98,"geometry_ms":7.381,"index_ms":1.192,"kind":"yacht","materials_ms":0.031,"merge_ms":11.697,"merged_meshes":10,"source_meshes":566,"source_surfaces":566,"temporary_commit_ms":1.15899999999999,"temporary_mesh_commits":566,"total_ms":21.134},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":1.322,"kind":"yacht","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":1.322}}
+FACTORY_CACHE PASS yacht cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS yacht moving references belong only to their own fresh nodes {"node_references":0}
+FACTORY_CACHE PASS yacht identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS yacht authored node names survive caching {}
+FACTORY_CACHE PASS yacht immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":10}
+FACTORY_CACHE PASS yacht collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS yacht paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS yacht damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS yacht mutable boat profile is not shared {}
+FACTORY_CACHE PASS yacht cache survives releasing first instance {}
+FACTORY_CACHE PASS paraglider cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":2.407,"cache_capture_ms":1.499,"cache_hit":false,"cache_stored":true,"extract_ms":2.27199999999999,"final_commit_ms":0.776,"geometry_ms":25.003,"index_ms":2.513,"kind":"paraglider","materials_ms":0.027,"merge_ms":9.069,"merged_meshes":12,"source_meshes":126,"source_surfaces":126,"temporary_commit_ms":0.572,"temporary_mesh_commits":126,"total_ms":35.602},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":0.677,"kind":"paraglider","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":0.677}}
+FACTORY_CACHE PASS paraglider cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS paraglider moving references belong only to their own fresh nodes {"node_references":1}
+FACTORY_CACHE PASS paraglider identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS paraglider authored node names survive caching {}
+FACTORY_CACHE PASS paraglider immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":12}
+FACTORY_CACHE PASS paraglider collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS paraglider paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS paraglider damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS paraglider boarding shows only its own rider {}
+FACTORY_CACHE PASS paraglider cache survives releasing first instance {}
+FACTORY_CACHE PASS glider cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":2.289,"cache_capture_ms":3.207,"cache_hit":false,"cache_stored":true,"extract_ms":1.476,"final_commit_ms":0.434,"geometry_ms":11.976,"index_ms":0.979,"kind":"glider","materials_ms":0.035,"merge_ms":6.103,"merged_meshes":23,"source_meshes":116,"source_surfaces":116,"temporary_commit_ms":0.443,"temporary_mesh_commits":116,"total_ms":21.323},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":3.359,"kind":"glider","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":3.359}}
+FACTORY_CACHE PASS glider cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS glider moving references belong only to their own fresh nodes {"node_references":3}
+FACTORY_CACHE PASS glider identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS glider authored node names survive caching {}
+FACTORY_CACHE PASS glider immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":23}
+FACTORY_CACHE PASS glider collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS glider paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS glider damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS glider wheel animation cannot move another copy {}
+FACTORY_CACHE PASS glider boarding shows only its own rider {}
+FACTORY_CACHE PASS glider cache survives releasing first instance {}
+FACTORY_CACHE PASS helicopter cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":2.352,"cache_capture_ms":4.751,"cache_hit":false,"cache_stored":true,"extract_ms":2.06899999999999,"final_commit_ms":0.646,"geometry_ms":14.843,"index_ms":1.517,"kind":"helicopter","materials_ms":0.033,"merge_ms":7.874,"merged_meshes":36,"source_meshes":169,"source_surfaces":169,"temporary_commit_ms":0.591,"temporary_mesh_commits":169,"total_ms":27.504},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":3.654,"kind":"helicopter","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":3.654}}
+FACTORY_CACHE PASS helicopter cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS helicopter moving references belong only to their own fresh nodes {"node_references":6}
+FACTORY_CACHE PASS helicopter identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS helicopter authored node names survive caching {}
+FACTORY_CACHE PASS helicopter immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":36}
+FACTORY_CACHE PASS helicopter collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS helicopter paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS helicopter damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS helicopter wheel animation cannot move another copy {}
+FACTORY_CACHE PASS helicopter rotors animate without sharing pivots {}
+FACTORY_CACHE PASS helicopter propellers animate without sharing pivots {}
+FACTORY_CACHE PASS helicopter cache survives releasing first instance {}
+FACTORY_CACHE PASS airliner cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":3.189,"cache_capture_ms":7.231,"cache_hit":false,"cache_stored":true,"extract_ms":2.56199999999999,"final_commit_ms":0.891,"geometry_ms":32.473,"index_ms":4.058,"kind":"airliner","materials_ms":0.034,"merge_ms":12.359,"merged_meshes":73,"source_meshes":155,"source_surfaces":155,"temporary_commit_ms":0.769,"temporary_mesh_commits":155,"total_ms":52.098},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":3.413,"kind":"airliner","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":3.413}}
+FACTORY_CACHE PASS airliner cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS airliner moving references belong only to their own fresh nodes {"node_references":12}
+FACTORY_CACHE PASS airliner identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS airliner authored node names survive caching {}
+FACTORY_CACHE PASS airliner immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":73}
+FACTORY_CACHE PASS airliner collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS airliner paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS airliner damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS airliner wheel animation cannot move another copy {}
+FACTORY_CACHE PASS airliner propellers animate without sharing pivots {}
+FACTORY_CACHE PASS airliner cache survives releasing first instance {}
+FACTORY_CACHE PASS hoverboard cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":1.209,"cache_capture_ms":1.412,"cache_hit":false,"cache_stored":true,"extract_ms":0.658,"final_commit_ms":0.256,"geometry_ms":1.108,"index_ms":0.026,"kind":"hoverboard","materials_ms":0.031,"merge_ms":2.704,"merged_meshes":12,"source_meshes":90,"source_surfaces":90,"temporary_commit_ms":0.259,"temporary_mesh_commits":90,"total_ms":5.258},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":0.545,"kind":"hoverboard","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":0.545}}
+FACTORY_CACHE PASS hoverboard cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS hoverboard moving references belong only to their own fresh nodes {"node_references":1}
+FACTORY_CACHE PASS hoverboard identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS hoverboard authored node names survive caching {}
+FACTORY_CACHE PASS hoverboard immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":12}
+FACTORY_CACHE PASS hoverboard collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS hoverboard paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS hoverboard damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS hoverboard boarding shows only its own rider {}
+FACTORY_CACHE PASS hoverboard cache survives releasing first instance {}
+FACTORY_CACHE PASS tank cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":2.60299999999995,"cache_capture_ms":7.76,"cache_hit":false,"cache_stored":true,"extract_ms":2.01499999999999,"final_commit_ms":0.642,"geometry_ms":5.155,"index_ms":0.104,"kind":"tank","materials_ms":0.032,"merge_ms":8.596,"merged_meshes":88,"source_meshes":824,"source_surfaces":824,"temporary_commit_ms":1.07499999999999,"temporary_mesh_commits":824,"total_ms":21.545},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":2.059,"kind":"tank","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":2.059}}
+FACTORY_CACHE PASS tank cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS tank moving references belong only to their own fresh nodes {"node_references":21}
+FACTORY_CACHE PASS tank identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS tank authored node names survive caching {}
+FACTORY_CACHE PASS tank immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":88}
+FACTORY_CACHE PASS tank collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS tank paint aliasing within each vehicle is preserved {"paint_meshes":21}
+FACTORY_CACHE PASS tank damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS tank wheel animation cannot move another copy {}
+FACTORY_CACHE PASS Tank cached pivot hierarchy and muzzle remain independent {}
+FACTORY_CACHE PASS Cached tank supports ordinary saved aim restoration {}
+FACTORY_CACHE PASS tank cache survives releasing first instance {}
+FACTORY_CACHE PASS fighter cold creates one recipe and hot skips all mesh extraction/commit {"cold":{"append_ms":2.238,"cache_capture_ms":5.116,"cache_hit":false,"cache_stored":true,"extract_ms":1.919,"final_commit_ms":0.609,"geometry_ms":17.917,"index_ms":1.629,"kind":"fighter","materials_ms":0.027,"merge_ms":7.695,"merged_meshes":32,"source_meshes":171,"source_surfaces":171,"temporary_commit_ms":0.615,"temporary_mesh_commits":171,"total_ms":30.757},"hot":{"append_ms":0.0,"cache_hit":true,"extract_ms":0.0,"final_commit_ms":0.0,"index_ms":0.0,"instantiate_ms":6.142,"kind":"fighter","merged_meshes":0,"source_meshes":0,"source_surfaces":0,"temporary_commit_ms":0.0,"temporary_mesh_commits":0,"total_ms":6.142}}
+FACTORY_CACHE PASS fighter cached geometry, normals, UVs, indices, collider shapes and local transforms are exact {}
+FACTORY_CACHE PASS fighter moving references belong only to their own fresh nodes {"node_references":6}
+FACTORY_CACHE PASS fighter identities and runtime physics material stay independent {}
+FACTORY_CACHE PASS fighter authored node names survive caching {}
+FACTORY_CACHE PASS fighter immutable mesh buffers are reused by fresh MeshInstance nodes {"meshes":32}
+FACTORY_CACHE PASS fighter collision resources and runtime smoke stay per-instance {}
+FACTORY_CACHE PASS fighter paint aliasing within each vehicle is preserved {"paint_meshes":1}
+FACTORY_CACHE PASS fighter damaged first vehicle cannot poison later fresh paint or geometry {}
+FACTORY_CACHE PASS fighter wheel animation cannot move another copy {}
+FACTORY_CACHE PASS Fighter exhaust and forward muzzle are freshly mapped {}
+FACTORY_CACHE PASS fighter cache survives releasing first instance {}
+FACTORY_CACHE PASS Cache stays bounded by vehicle kinds, not spawned copies {"entries":11,"kinds":["car","motorcycle","speedboat","yacht","paraglider","glider","helicopter","airliner","hoverboard","tank","fighter"],"scope":"immutable merged mesh resources and authored node descriptions; no live vehicle state"}
+FACTORY_CACHE PASS Explicit cache cleanup releases all recipes {}
+FACTORY_CACHE_COMPLETE 131 passed=true

@@ -1,0 +1,170 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "CC0 panorama remains the source texture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "explicit photograph mapping shader remains intact",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ACES keeps exposure fixed across profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "colour adjustment stays modest",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glow only processes HDR highlights",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality0 AO capability gate",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality0 SSR reserved for fine Forward+",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality0 glow and clear-air setting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality1 AO capability gate",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality1 SSR reserved for fine Forward+",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality1 glow and clear-air setting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality2 AO capability gate",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality2 SSR reserved for fine Forward+",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality2 glow and clear-air setting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "quality switches reuse sky and preserve exposure",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "mist requires explicit high-quality Forward+ opt-in",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "lower profile clears expensive effects",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "numeric diagnostics clamp known safe ranges",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "runtime snapshot exposes actual toggles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sun still matches unchanged HDR solar core",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "water stays opaque for depth and SSR",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "water uses dielectric material",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "small-wave normal has pixel-footprint filtering",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "world-space phase preserves neighbouring tile continuity",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "both real metro dry rectangles remain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "original total wave amplitude stays455mm",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "water exposes numeric diagnostic uniform normal_strength",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "water exposes numeric diagnostic uniform ripple_strength",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "water exposes numeric diagnostic uniform base_roughness",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "water exposes numeric diagnostic uniform specular_strength",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "water exposes numeric diagnostic uniform time_override",
+			"passed": true
+		}
+	],
+	"count": 31,
+	"images": [],
+	"native_capture_requested": false,
+	"passed": true,
+	"renderer": "forward_plus",
+	"scope": "Small calibration scene and property/source contracts. Headless cannot prove compiled GPU shader appearance, reflection correctness, shimmer or final city performance.",
+	"source_sha256": {
+		"res://../source/render_environment_test.gd": "48439dedbdcf7fddfbc592fd0aa0b0094f22d17759bdb211fd0e9e33f2b70eac",
+		"res://scripts/daylight_environment.gd": "1ec40c20defdf7c76e61cf38049f4c26e98c8550dfd7bb11439fe018a0b68a77",
+		"res://shaders/water.gdshader": "a19530af5fc9342c2fd028401b9b542117fd7f27972669e993ef13e7cf445604"
+	}
+}

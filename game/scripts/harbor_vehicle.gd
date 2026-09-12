@@ -5,9 +5,9 @@ signal impacted(point: Vector3, energy: float)
 
 const Models = preload("res://scripts/vehicle_factory.gd")
 const G := 9.8
-const TOP_SPEED_KMH := {"car":420.0,"motorcycle":320.0,"airliner":800.0,"helicopter":350.0}
+const TOP_SPEED_KMH := {"car":420.0,"motorcycle":320.0,"airliner":800.0,"helicopter":350.0,"tank":110.0,"fighter":2000.0}
 const GLIDE_TRIM_SPEED := {"glider":28.0,"paraglider":11.5}
-const NAMES := {"car":"Veloce V12", "motorcycle":"Apex RR", "speedboat":"Riviera 39", "yacht":"Ocean 90", "paraglider":"Thermal 9", "glider":"Southern Arc", "helicopter":"Harbour H6", "airliner":"Dreamliner 787-9", "hoverboard":"Aether X1"}
+const NAMES := {"car":"Veloce V12", "motorcycle":"Apex RR", "speedboat":"Riviera 39", "yacht":"Ocean 90", "paraglider":"Thermal 9", "glider":"Southern Arc", "helicopter":"Harbour H6", "airliner":"Dreamliner 787-9", "hoverboard":"Aether X1", "tank":"Harbour Bastion", "fighter":"Aster F-27"}
 var kind: String = "car"
 var vehicle_id: String = ""
 var occupied: bool = false
@@ -44,6 +44,14 @@ var _launch_velocity := Vector3.ZERO
 var _restore_motion_pending := false
 var _restore_linear := Vector3.ZERO
 var _restore_angular := Vector3.ZERO
+var combat_owner: Node3D
+var _arcade_impact = preload("res://scripts/arcade_impact.gd").new()
+
+func is_invincible() -> bool:
+	return kind in ["tank","fighter"]
+
+func velocity_guard() -> float:
+	return 620.0 if kind=="fighter" else 240.0
 
 func configure(type: String, id: String) -> void:
 	kind = type if NAMES.has(type) else "car"
@@ -69,6 +77,8 @@ func _ready() -> void:
 	surface.bounce = 0.08
 	physics_material_override = surface
 	match kind:
+		"tank": preload("res://scripts/tank_motion.gd").setup(self)
+		"fighter": preload("res://scripts/fighter_motion.gd").setup(self)
 		"hoverboard": preload("res://scripts/hoverboard_motion.gd").setup(self)
 		"car":
 			linear_damp = 0.0
@@ -130,6 +140,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_impact_cooldown = maxf(0.0,_impact_cooldown-delta)
 	_visual_time += delta
+	if is_invincible():
+		health=100.0
+		fuel=100.0
 	if occupied != _was_occupied and kind in ["car", "motorcycle"]:
 		physics_material_override.friction = 0.07 if occupied else 0.85
 	if occupied and not _was_occupied:
@@ -167,11 +180,14 @@ func _physics_process(delta: float) -> void:
 		pitch = Input.get_axis("fall","rise")
 		braking = Input.is_action_pressed("brake")
 		sleeping = false
+	if is_invincible(): _arcade_impact.tick(self,combat_owner,delta)
 	var operable: float = clampf(health/50.0,0.0,1.0) if fuel>0.0 else 0.0
 	if health <= 0.0 and kind != "hoverboard":
 		power = 0.0
 		pitch = 0.0
 	match kind:
+		"tank": preload("res://scripts/tank_motion.gd").tick(self,delta,forward,right,up,power,steer,pitch,braking)
+		"fighter": preload("res://scripts/fighter_motion.gd").tick(self,delta,forward,right,up,power,steer,pitch,braking)
 		"hoverboard": preload("res://scripts/hoverboard_motion.gd").tick(self,delta,forward,right,up,power,steer,pitch,braking)
 		"car", "motorcycle": _road(delta,forward,right,up,power*operable,steer,braking or not occupied)
 		"yacht", "speedboat": _boat(delta,forward,right,up,power*operable,steer,braking)
@@ -183,7 +199,7 @@ func _physics_process(delta: float) -> void:
 		var immersion := clampf(-global_position.y/2.5,0.0,1.0)
 		apply_central_force(-linear_velocity*mass*immersion*1.8)
 		apply_central_force(Vector3.UP*mass*G*immersion*0.72)
-		if immersion>0.4:
+		if immersion>0.4 and not is_invincible():
 			health = maxf(0.0,health-delta*3.0)
 		_torque_accel(-angular_velocity*immersion*2.0)
 	if not linear_velocity.is_finite():
@@ -191,8 +207,8 @@ func _physics_process(delta: float) -> void:
 	if not angular_velocity.is_finite():
 		angular_velocity = Vector3.ZERO
 	# Caps are numerical recovery guards above normal performance, not movement control.
-	if linear_velocity.length()>240.0:
-		linear_velocity = linear_velocity.limit_length(240.0)
+	if linear_velocity.length()>velocity_guard():
+		linear_velocity = linear_velocity.limit_length(velocity_guard())
 	if angular_velocity.length()>5.0:
 		angular_velocity = angular_velocity.limit_length(5.0)
 	speed_kmh = linear_velocity.length()*3.6
@@ -298,14 +314,15 @@ func glide_trim_speed() -> float:
 func prepare_for_boarding(was_frozen:bool=false) -> void:
 	# Jolt can replace a velocity written while a newly added body is frozen.
 	# Apply launch energy inside its first live integration step, exactly once.
-	if not kind in ["glider","paraglider"] or global_position.y<30:return
+	if not kind in ["glider","paraglider","fighter"] or global_position.y<30:return
 	if _restored and not was_frozen:return
 	if not was_frozen and linear_velocity.length()>4.0:return
 	# Launch at the same airspeed used to size lift. A slower launch makes the
 	# wing drop before gravity can accelerate it to its normal glide condition.
-	var trim:=glide_trim_speed()
+	var trim:=140.0 if kind=="fighter" else glide_trim_speed()
 	if linear_velocity.length()>trim*1.5:return
-	var drop := 0.22 if kind=="glider" else 0.52
+	var drop := 0.0 if kind=="fighter" else 0.22 if kind=="glider" else 0.52
+	if kind=="fighter": throttle=140.0/(2000.0/3.6)
 	_launch_velocity=-global_basis.z*trim+Vector3.DOWN*drop
 	_launch_pending=true
 
@@ -450,7 +467,7 @@ func _integrate_forces(state:PhysicsDirectBodyState3D) -> void:
 		_impact_cooldown = 0.30
 		var energy := 0.5*mass*worst_speed*worst_speed
 		var damage := clampf((worst_speed-3.5)*2.8,0.0,75.0)
-		health = maxf(0.0,health-damage)
+		if not is_invincible(): health = maxf(0.0,health-damage)
 		last_impact_info = {"collider":worst_collider,"point":[worst_point.x,worst_point.y,worst_point.z],"normal":[worst_normal.x,worst_normal.y,worst_normal.z],"closing_mps":worst_speed,"energy_j":energy,"health":health}
 		last_impact_info.merge(worst_contact)
 		call_deferred("_show_impact",worst_point,energy)
@@ -460,7 +477,7 @@ func _show_impact(point:Vector3,energy:float) -> void:
 	if _hit_audio:
 		_hit_audio.volume_db = clampf(-20.0+log(maxf(1.0,energy/3000.0))*4.0,-20.0,0.0)
 		_hit_audio.play()
-	if _dents.size()<12:
+	if _dents.size()<12 and not is_invincible():
 		var local_point := to_local(point)
 		_dents.append([local_point.x,local_point.y,local_point.z])
 		_add_dent(local_point)
@@ -594,7 +611,8 @@ func _animate(delta:float) -> void:
 		_moving.rider.visible = occupied
 	var forward_speed := linear_velocity.dot(-global_basis.z)
 	for wheel in _moving.get("wheels",[]):
-		wheel.rotate_x(-forward_speed*delta/float(wheel.get_meta("radius",0.4)))
+		var track_speed:float=get_meta("tank_track_left_speed" if float(wheel.get_meta("tank_side",1))<0 else "tank_track_right_speed",forward_speed) if kind=="tank" else forward_speed
+		wheel.rotate_x(-track_speed*delta/float(wheel.get_meta("tank_radius",wheel.get_meta("radius",0.4))))
 	for rotor in _moving.get("rotors",[]):
 		rotor.rotate_y(delta*(2.0+throttle*44.0))
 	for prop in _moving.get("propellers",[]):
@@ -615,6 +633,8 @@ func _animate(delta:float) -> void:
 		_moving.material.albedo_color = _base_paint.lerp(Color("343c3e"),(1.0-health/100.0)*0.62)
 
 func get_exit_position() -> Vector3:
+	if kind=="tank": return global_position+global_basis.x*3.1+Vector3.UP
+	if kind=="fighter": return global_position+global_basis.x*8.0+Vector3.UP
 	if kind=="hoverboard":return to_global(Vector3(1.4,0,0))
 	if kind in ["yacht","speedboat"] and boat_profile.has("exit"):
 		return to_global(boat_profile.exit)
@@ -629,6 +649,8 @@ func get_exit_position() -> Vector3:
 	return to_global(offset)
 
 func get_camera_distance() -> float:
+	if kind=="tank": return 14.0
+	if kind=="fighter": return 32.0
 	if kind=="hoverboard":return 7.0
 	if kind in ["yacht","speedboat"]: return float(boat_profile.get("camera_distance",23.0 if kind=="speedboat" else 38.0))
 	match kind:
@@ -641,6 +663,8 @@ func get_camera_distance() -> float:
 	return 9.0
 
 func get_camera_height() -> float:
+	if kind=="tank": return 1.8
+	if kind=="fighter": return 2.0
 	if kind=="hoverboard":return 1.1
 	if kind in ["yacht","speedboat"]: return float(boat_profile.get("camera_height",2.2 if kind=="speedboat" else 4.5))
 	if kind=="car": return 0.40
@@ -659,7 +683,7 @@ func get_state() -> Dictionary:
 	var q := global_basis.get_rotation_quaternion()
 	var saved_velocity := _launch_velocity if _launch_pending else _restore_linear if _restore_motion_pending else linear_velocity
 	var saved_angular := _restore_angular if _restore_motion_pending else angular_velocity
-	return {"version":1,"model_revision":3,"kind":kind,"id":vehicle_id,"position":[global_position.x,global_position.y,global_position.z],"quaternion":[q.x,q.y,q.z,q.w],"velocity":[saved_velocity.x,saved_velocity.y,saved_velocity.z],"angular_velocity":[saved_angular.x,saved_angular.y,saved_angular.z],"health":health,"fuel":fuel,"throttle":throttle,"frozen":freeze,"hover_lift_offset":float(get_meta("hover_lift_offset",0.0)),"dents":_dents.duplicate(true)}
+	return {"version":1,"model_revision":4,"kind":kind,"id":vehicle_id,"position":[global_position.x,global_position.y,global_position.z],"quaternion":[q.x,q.y,q.z,q.w],"velocity":[saved_velocity.x,saved_velocity.y,saved_velocity.z],"angular_velocity":[saved_angular.x,saved_angular.y,saved_angular.z],"health":health,"fuel":fuel,"throttle":throttle,"frozen":freeze,"hover_lift_offset":float(get_meta("hover_lift_offset",0.0)),"dents":_dents.duplicate(true),"turret_yaw":_moving.turret.rotation.y if kind=="tank" else 0.0,"barrel_pitch":_moving.barrel.rotation.x if kind=="tank" else 0.0,"weapon_aim_offsets":get_meta("weapon_aim_offsets",{}).duplicate(true)}
 
 func apply_state(data:Dictionary) -> void:
 	if not _built:
@@ -676,11 +700,19 @@ func apply_state(data:Dictionary) -> void:
 		if q.length_squared()>0.001:
 			global_basis = Basis(q.normalized())
 	if vel.size()==3:
-		linear_velocity = Vector3(float(vel[0]),float(vel[1]),float(vel[2])).limit_length(240.0)
+		linear_velocity = Vector3(float(vel[0]),float(vel[1]),float(vel[2])).limit_length(velocity_guard())
 	if ang.size()==3:
 		angular_velocity = Vector3(float(ang[0]),float(ang[1]),float(ang[2])).limit_length(5.0)
 	health = clampf(float(data.get("health",100.0)),0.0,100.0)
 	fuel = clampf(float(data.get("fuel",100.0)),0.0,100.0)
+	if is_invincible():
+		health=100.0; fuel=100.0
+	if kind=="tank":
+		_moving.turret.rotation.y=wrapf(float(data.get("turret_yaw",0)),-PI,PI)
+		_moving.barrel.rotation.x=clampf(float(data.get("barrel_pitch",0)),deg_to_rad(-12),deg_to_rad(70))
+		var offsets=data.get("weapon_aim_offsets",{})
+		if offsets is Dictionary: set_meta("weapon_aim_offsets",offsets.duplicate(true))
+		if data.has("turret_yaw") or data.has("barrel_pitch"): set_meta("combat_restore_pose",true)
 	throttle = clampf(float(data.get("throttle",0.68 if kind=="airliner" else 0.0)),-1.0,1.0)
 	for node in _dent_nodes:
 		if is_instance_valid(node): node.queue_free()
@@ -700,6 +732,7 @@ func apply_state(data:Dictionary) -> void:
 	reset_physics_interpolation()
 
 func _exit_tree() -> void:
+	_arcade_impact.clear(self)
 	if is_instance_valid(_engine):
 		_engine.stop()
 		_engine.stream = null

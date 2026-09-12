@@ -789,7 +789,16 @@ static func _triangle(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, 
 static func _append_box(surface: SurfaceTool, position: Vector3, size: Vector3, basis: Basis) -> void:
 	var box := BoxMesh.new()
 	box.size=size
-	surface.append_from(box,0,Transform3D(basis,position))
+	_append_mesh_triangles(surface,box,Transform3D(basis,position))
+
+static func _append_mesh_triangles(surface:SurfaceTool,mesh:Mesh,pose:=Transform3D.IDENTITY) -> void:
+	# A SurfaceTool containing primitive indices silently omits subsequently
+	# added manual vertices from its draw list. Expand each incoming mesh first,
+	# preserving its normals/UVs and winding before mixing triangle sources.
+	var expanded:=SurfaceTool.new()
+	expanded.create_from(mesh,0)
+	expanded.deindex()
+	surface.append_from(expanded.commit(),0,pose)
 
 static func _append_beam(surface: SurfaceTool, a: Vector3, b: Vector3, width: float, depth: float) -> void:
 	var delta := b-a

@@ -1,0 +1,269 @@
+{
+  "archive_sha256": "b0b6f8dc09e20f39f971ec6bdc805e5756efb7176bc1fc0f394318f0fd2f057b",
+  "artifact_hashes": {
+    "executable_sha256": "40bbc952001fe6ed3cabf7850863e03593bb230d51366bb2728df137c128fa19",
+    "pck_sha256": "2284250735312eb864f95b17f362273143fa5c3f6342017eb37210bc0e3abd94"
+  },
+  "source": "Selected unmodified final-App native PNGs. Ordinary distance culling and near-facade streaming remain active.",
+  "screenshots": [
+    {
+      "file": "docs/screenshots/v017/harbour-sunrise.png",
+      "source": "daylight-screenshots/harbour-sunrise.png",
+      "mode": "daylight",
+      "sha256": "fe9bec74d607fdbc9f2306a1e22896937be860694ddc4b0e7b35b8c56a32b573",
+      "review": "West-facing harbour frame has a restrained cool blue/lilac dawn, readable skyline/Opera/bridge silhouette and dark blue water. No clipped sky field or opaque glow veil. Limitations: This fixed west-facing camera does not show the rising sun itself; low-light water and ordinary building detail remain subdued."
+    },
+    {
+      "file": "docs/screenshots/v017/harbour-noon.png",
+      "source": "daylight-screenshots/harbour-noon.png",
+      "mode": "daylight",
+      "sha256": "43f7c774fe7cd2fb5ea0b0d2e4c0e61670e2fb1ff4e102c7ce8c28159a7686aa",
+      "review": "Blue sky retains pale cloud detail; white roof shells, bridge steel and shoreline remain distinct. Water is blue with visible fine surface texture. Limitations: Long regular wave bands remain apparent and distant ordinary facades are simplified. This is not a measured city-lighting or sea-state reconstruction."
+    },
+    {
+      "file": "docs/screenshots/v017/harbour-golden.png",
+      "source": "daylight-screenshots/harbour-golden.png",
+      "mode": "daylight",
+      "sha256": "7337633c9db0afd2ccdae0ffe2f84398a25d1023d9428d5b148de67cabb7e057",
+      "review": "Low white solar disc and a narrow warm vertical water highlight are visible against a cooler sky. The Opera, skyline and bridge remain legible; the previous whole-sky white wash is absent. Limitations: The reflection core is intentionally very bright/clipped locally; broad regular wave bands remain. The image does not independently establish physically calibrated radiometry."
+    },
+    {
+      "file": "docs/screenshots/v017/harbour-sunset.png",
+      "source": "daylight-screenshots/harbour-sunset.png",
+      "mode": "daylight",
+      "sha256": "ae7bf6a3e4066dfc2400291dbf7f96d8565a1555dbd997160cb8a894f86eba6e",
+      "review": "Peach/orange horizon grades into a cooler muted upper sky without a full-screen magenta tint. Harbour silhouettes and muted water retain a consistent dusk appearance. Limitations: The sunset is restrained rather than a detailed cloud-rich Sydney weather reconstruction; this is a fixed average-summer profile, not live weather."
+    },
+    {
+      "file": "docs/screenshots/v017/harbour-night.png",
+      "source": "daylight-screenshots/harbour-night.png",
+      "mode": "daylight",
+      "sha256": "7c0e697585a574d2713b3fc4e84eef416bd4006a9369468bdd162f7b91f1fffd",
+      "review": "Blue night sky and stars separate from the skyline; selected Opera roof faces have restrained local white wash, and nearby buildings show lit windows. No broad daylight-like brightening of the whole scene. Limitations: Near foreground water is very dark, and bridge steel remains mainly a silhouette. This is limited architectural/public lighting, not a complete real Sydney night-light installation or nighttime water-navigation validation."
+    },
+    {
+      "file": "docs/screenshots/v017/icc-public-foyer-night.png",
+      "source": "daylight-screenshots/icc-public-foyer-night.png",
+      "mode": "daylight",
+      "sha256": "0c587774785db6f6a432db4212b06956d65ba5ab740726281bd43d3a0561621e",
+      "review": "The formerly black public floor is now continuously readable warm grey tile with joint detail, including the near camera area. Timber battens and localized warm wall cones are visible; the bright fittings do not wash out the entire foyer. Glass still shows the night exterior. Limitations: The red ceiling remains intentionally dark and external venue labels are visible through the end glazing. Light distribution and reflectance are authored estimates, not a surveyed photometric match or lighting-compliance test."
+    },
+    {
+      "file": "docs/screenshots/v017/cbd-george-street-night.png",
+      "source": "daylight-screenshots/cbd-george-street-night.png",
+      "mode": "daylight",
+      "sha256": "7238ab8b49dccb49e30c58fa569ca433f420b1c09f5331a58857d50cfe2e3b68",
+      "review": "Window patterns show both warm and cool lit panes. Pavement joints, tree trunks and building edges remain readable; there is no full-frame bloom or artificial daylight wash. Limitations: The central road is near-black and tree canopies are dark. No new verified lamp-pole locations were introduced here, so this view does not demonstrate complete street-light coverage."
+    },
+    {
+      "file": "docs/screenshots/v017/01-f3-live-counters.png",
+      "source": "diagnostics-screenshots/01-f3-live-counters.png",
+      "mode": "diagnostics",
+      "sha256": "708b4efcea07f416522dccdeccd868141930af1e5170fa3101f6126330e77809",
+      "review": "实际F3面板显示世界、渲染、生成阶段和时钟计数。截图是暂停场景中的瞬时值，不作为帧率基准。"
+    },
+    {
+      "file": "docs/screenshots/v017/02-f3-material-tuning.png",
+      "source": "diagnostics-screenshots/02-f3-material-tuning.png",
+      "mode": "diagnostics",
+      "sha256": "773a705fcf3fa402b24d369df439438f267241acd6113ab347924d7c707ba170",
+      "review": "实际滚动后的数值调参控件可读；材质与曝光数值已响应操作，完整交互由43项原生检查验证。"
+    },
+    {
+      "file": "docs/screenshots/v017/03-time-sunset.png",
+      "source": "diagnostics-screenshots/03-time-sunset.png",
+      "mode": "diagnostics",
+      "sha256": "a17754c2f54b887c4a4cb724ca24bbe54fc93ebb9d10475e16e3668816abe87e",
+      "review": "T面板展示实际19:59日落时刻、12倍速度和跳时按钮；底部返回按钮需向下滚动，T/Esc同样可返回。"
+    },
+    {
+      "file": "docs/screenshots/v017/04-time-night.png",
+      "source": "diagnostics-screenshots/04-time-night.png",
+      "mode": "diagnostics",
+      "sha256": "4647e3b3f0d0854a4526eee500f351252eb7b3a799b3f0c65e30dfc71c5c444c",
+      "review": "实际跳到22:00，窗灯开启，速度选择已变为60倍；当前街道仍较暗，非完整全城照明。"
+    },
+    {
+      "file": "docs/screenshots/v017/01-map-pointer-pin.png",
+      "source": "navigation-input-screenshots/01-map-pointer-pin.png",
+      "mode": "navigation-input",
+      "sha256": "83622fa710d64220fe7732d295ac65fa3357b37bd8ea3b2545d449457eddf3f3",
+      "review": "地图已释放鼠标，任意地点标记、返回按钮与比例尺清楚可见。"
+    },
+    {
+      "file": "docs/screenshots/v017/03-map-search-manly.png",
+      "source": "navigation-input-screenshots/03-map-search-manly.png",
+      "mode": "navigation-input",
+      "sha256": "fd2ba90ef661ca47d11a694b9ef362099a298bb3245b99cd4961317d8faa5b92",
+      "review": "搜索Manly并选定码头后的实际地图及导航连线；连线为直线指引。"
+    },
+    {
+      "file": "docs/screenshots/v017/opera-stair-join-intact.png",
+      "source": "opera-access-screenshots/opera-stair-join-intact.png",
+      "mode": "opera-access",
+      "sha256": "fb8ab61fdd1df916a69251ee7d40d6fbbffc4021e85936a744d3dbce59e38953",
+      "review": "原楼梯顶部至前厅平台连续，未见先前大横缝；通行由32项原生检查另证。"
+    },
+    {
+      "file": "docs/screenshots/v017/qvb-grand-walk.png",
+      "source": "precinct-screenshots/qvb-grand-walk.png",
+      "mode": "precinct",
+      "sha256": "416e9b387fc71b746f7eedbc8323058c07147fb1a3eb1b4cd6822f92e6e59ac1",
+      "review": "两侧拱廊、分格玻璃屋顶及连续地砖形成完整围合，中央红色穹顶和彩玻璃局部可见，旧天空大缝及侵入遮环没有再出现。灯具和白柱较亮但边缘/阴影仍可读，商铺仍是概括公开通廊外壳。"
+    },
+    {
+      "file": "docs/screenshots/v017/qvb-central-dome.png",
+      "source": "precinct-screenshots/qvb-central-dome.png",
+      "mode": "precinct",
+      "sha256": "34f412d1e161d9463bb49e3db863994b1a97560b0b6fbff847659d6a9e24047f",
+      "review": "中央彩玻璃小穹顶与红色周边圆顶完整可见，粗米色侵入环不再遮住玻璃；相邻天窗玻璃和细杆连续，未见天空漏缝。彩玻璃格纹和墙体造型仍是程序近似。"
+    },
+    {
+      "file": "docs/screenshots/v017/qvb-market-entry.png",
+      "source": "precinct-screenshots/qvb-market-entry.png",
+      "mode": "precinct",
+      "sha256": "e5caca6c8ae76e847c5691b65124132979aa3b38a90398848b0aa685a4340074",
+      "review": "突出圆拱、柱脚和门内长廊纵深可见，拱洞没有被实墙封死；门内灰色顶面可读为较低门厅上缘，未见侵入人物通道的大封堵。镜头裁掉上层顶部，立面材质和路缘绿带仍较概括。"
+    },
+    {
+      "file": "docs/screenshots/v017/qvb-george-dome.png",
+      "source": "precinct-screenshots/qvb-george-dome.png",
+      "mode": "precinct",
+      "sha256": "61937bf3f382fcf4d0ae19f4bf1ff51e9987db480ac3d5fb5ce06220ded54b8a",
+      "review": "主铜穹顶、鼓座、灯笼与两侧小顶层级清楚，长廊屋顶和拱窗连成完整外壳，未见漏画面。右侧真实邻楼遮住部分末端；石材与天窗材质仍简化，不据截图宣称全楼1:1。"
+    },
+    {
+      "file": "docs/screenshots/v017/manly_corso_seating.png",
+      "source": "precinct-screenshots/manly_corso_seating.png",
+      "mode": "precinct",
+      "sha256": "e787d6408f74103161a8cffbcdfbce867befd1d2d67b22cd90701746225c955e",
+      "review": "中央棕榈冠叶、树围座椅和步行通廊完整，未见地面漏空。右侧黄色墙很亮；已实看旧同机位，同一墙原本就高饱和，本次日光把它提亮，属于局部颜色限制。"
+    },
+    {
+      "file": "docs/screenshots/v017/manly_wharf_front_detail.png",
+      "source": "precinct-screenshots/manly_wharf_front_detail.png",
+      "mode": "precinct",
+      "sha256": "8cd8ac23f49b8346515aad2f1e57d9d4cbc893f0315d51bac53400c8fb1a8a3d",
+      "review": "码头低矮屋顶、钟塔及贯通的透明大厅结构完整，街前道路没有明显断裂；建筑在画面中较小、白色名称与天空对比偏弱。仍有泛化草地，近景细节不宜据此过度评价。"
+    },
+    {
+      "file": "docs/screenshots/v017/manly_wharf_public_hall.png",
+      "source": "precinct-screenshots/manly_wharf_public_hall.png",
+      "mode": "precinct",
+      "sha256": "f349401f34f590c60bcf5b3bdb2e0f1d544cfc46290be51bd47599385915e955",
+      "review": "公共大厅的连续瓷砖地面、顶棚、梁柱和座椅清楚，右侧海港出口可见；未重现先前绿色地面穿出瓷砖的共面patch。远处店名为游戏POI标签、店铺壳体仍概括，不能当作私有店内复刻。"
+    },
+    {
+      "file": "docs/screenshots/v017/manly_steyne_beach_detail.png",
+      "source": "precinct-screenshots/manly_steyne_beach_detail.png",
+      "mode": "precinct",
+      "sha256": "b63bd7ae6f746f7a6b4d5d78c7c6089a3769b6f06d6297b35201b4949dc51547",
+      "review": "Steyne酒店砖墙、窗框、檐篷和角部连续，松树保留并遮挡部分立面；人行线连接可见，未见新缺面。道路铺装、入口细节与植被仍简化。"
+    },
+    {
+      "file": "docs/screenshots/v017/manly_steyne_corso_detail.png",
+      "source": "precinct-screenshots/manly_steyne_corso_detail.png",
+      "mode": "precinct",
+      "sha256": "60bc27850abed64b7d11714629c9369a582c75a7480ef1461465dd3d604b3560",
+      "review": "酒店两层立面、女儿墙、转角和雨棚均完整，前景通行面平整连续；地面装饰条大幅简化，不能视为实际铺砖测绘。没有本版新增阻断。"
+    },
+    {
+      "file": "docs/screenshots/v017/manly_forecourt_paving.png",
+      "source": "precinct-screenshots/manly_forecourt_paving.png",
+      "mode": "precinct",
+      "sha256": "2989f3e2ea6776526b99f8b4b7821807d606bef72a1ebd37d26ce2bb6227cc2f",
+      "review": "广场填面、街角边界和两侧车道关系完整，行人区域没有明显跨车道盖面；树群在场，没有为拍摄隐藏。周边普通楼宇及部分绿地仍是概括模型。"
+    },
+    {
+      "file": "docs/screenshots/v017/pitt_street_mall_paving.png",
+      "source": "precinct-screenshots/pitt_street_mall_paving.png",
+      "mode": "precinct",
+      "sha256": "6bd32adc68fa922170724d5ddf44372585ec0d395b7d1f98605f6fbd479770d9",
+      "review": "商场步行轴浅色铺面连续进入树列，没有可见断路或大三角缺面；右侧近铺面和前景树面存在颗粒，单图不足判断动态闪烁。两侧泛化草地和普通楼宇仍限制实际街景精度。"
+    },
+    {
+      "file": "docs/screenshots/v017/henry_deane_plaza_paving.png",
+      "source": "precinct-screenshots/henry_deane_plaza_paving.png",
+      "mode": "precinct",
+      "sha256": "470c034782db2f24f661f20236b6cd6870b6a715b2103dc28db052eee1b2f93e",
+      "review": "浅色广场真实多边形轮廓及砖纹可见，与左侧机动车道分开，未见面覆盖车道或明显三角缺口。建筑边缘尚有泛化绿色余地；这是面积覆盖证据，不是广场家具或高程复刻。"
+    },
+    {
+      "file": "docs/screenshots/v017/darling_waterplay.png",
+      "source": "precinct-screenshots/darling_waterplay.png",
+      "mode": "precinct",
+      "sha256": "135175bbbee1d2f2497d0d92df6fe9d0b7e04891149678281488395f5a0c6e28",
+      "review": "水轮辐条、轮缘侧面、三组水具、槽壁和长凳完整，未重现过去混合索引漏画的大片缺面。周边树冠较密、材料仍偏简单；此机位可用于水具修复证据。"
+    },
+    {
+      "file": "docs/screenshots/v017/darling_octanet.png",
+      "source": "precinct-screenshots/darling_octanet.png",
+      "mode": "precinct",
+      "sha256": "3f239913cde5e6affe340c6cb2acc09a795acdf9ab968c07c605616c327cc7d2",
+      "review": "蓝色攀爬网、中央桅杆和地面支点完整，没有消失的大三角面；树冠遮住外围，细绳存在像素级锯齿。适合证明器械轮廓，不能证明每条绳的实测精度。"
+    },
+    {
+      "file": "docs/screenshots/v017/tumbalong_fountains.png",
+      "source": "precinct-screenshots/tumbalong_fountains.png",
+      "mode": "precinct",
+      "sha256": "03b4c346e3df065ca94e72a80c655f413fb84125e714b5cfe5fe8de892eafa83",
+      "review": "两处池盆、水面、白色喷水柱及外围通路都可见，池边连续，没有看到地面穿过池体或整片水面缺失。 Limitations: 喷水柱很细，水面有重复条纹和阴影边缘细噪点；这是静态水景检查，不验证流体真实性或动态效果。"
+    },
+    {
+      "file": "docs/screenshots/v017/quay-qqt-rebated-frames.png",
+      "source": "precinct-screenshots/quay-qqt-rebated-frames.png",
+      "mode": "precinct",
+      "sha256": "65744e8240e1ac34d4c7aa855f9294007c559df9726dc330d72febab3c039f62",
+      "review": "退台、折返白色框边及蓝灰幕墙完整，凸出楼层下缘和小露台绿化可辨，未见索引丢面形成的空洞。 Limitations: 底层与屋顶均未完整入镜；周边高楼存在旧有简化体量。"
+    },
+    {
+      "file": "docs/screenshots/v017/cba_south_timber_facade.png",
+      "source": "precinct-screenshots/cba_south_timber_facade.png",
+      "mode": "precinct",
+      "sha256": "7fa77103ed4f7ee624187ab4d821f6fbfc052719991097ce02228a014cad1177",
+      "review": "弧形立面、连续竖片和雨棚弯折节奏清楚，蓝色玻璃与浅色遮阳材质区分正常。 Limitations: 重复百叶远看有细纹；不代表材料反射率或建筑尺寸达到测绘精度。"
+    },
+    {
+      "file": "docs/screenshots/v017/icc-theatre-red-foyer.png",
+      "source": "precinct-screenshots/icc-theatre-red-foyer.png",
+      "mode": "precinct",
+      "sha256": "cfc90ca2d32a5acaec16ea02547fde30b902297a4c58c004a4eed99d8dc69946",
+      "review": "The public tiled floor is continuously readable in daylight with retained joints and no broad clipped-white patch. Warm wall-light cones, wood battens, red ceiling and exterior glazing remain distinct. Limitations: L; i; g; h; t;  ; v; a; l; u; e; s;  ; a; n; d;  ; f; l; o; o; r;  ; r; e; f; l; e; c; t; a; n; c; e;  ; a; r; e;  ; e; s; t; i; m; a; t; e; d; .;  ; E; x; t; e; r; n; a; l;  ; v; e; n; u; e;  ; l; a; b; e; l; s;  ; s; e; e; n;  ; t; h; r; o; u; g; h;  ; t; h; e;  ; e; n; d;  ; g; l; a; z; i; n; g;  ; a; r; e;  ; n; o; t;  ; a;  ; r; e; c; o; n; s; t; r; u; c; t; e; d;  ; i; n; d; o; o; r;  ; t; e; n; a; n; c; y;  ; l; i; s; t; ."
+    },
+    {
+      "file": "docs/screenshots/v017/opera-concert-northern-foyer.png",
+      "source": "precinct-screenshots/opera-concert-northern-foyer.png",
+      "mode": "precinct",
+      "sha256": "1317b243c99fa0d5c90afd6c42bf44bbc6477c710591345d7cdb0afde1add9c3",
+      "review": "Glazing shows water and distant shore. Purple curved flight, upper landing and handrail remain visible without an opaque glass or shell barrier across the public view. Limitations: E; x; a; c; t;  ; c; u; r; t; a; i; n;  ; g; e; o; m; e; t; r; y; ,;  ; f; u; r; n; i; s; h; i; n; g;  ; p; o; s; i; t; i; o; n; s;  ; a; n; d;  ; c; a; r; p; e; t;  ; r; e; f; l; e; c; t; a; n; c; e;  ; r; e; m; a; i; n;  ; e; s; t; i; m; a; t; e; s; ."
+    },
+    {
+      "file": "docs/screenshots/v017/opera-monumental-steps.png",
+      "source": "precinct-screenshots/opera-monumental-steps.png",
+      "mode": "precinct",
+      "sha256": "97d6516be8b142e2a50e0abc4c9ef3d99a00ed8fb906a8428af4b479947d9cff",
+      "review": "Continuous broad visible treads reach the upper platform; no full-width missing band like the previously reported stair gap is visible. Both large entrance volumes and side stair remain visible. Limitations: S; t; a; t; i; c;  ; i; n; t; a; c; t; -; s; t; a; t; e;  ; i; m; a; g; e;  ; c; a; n; n; o; t;  ; r; e; p; l; a; c; e;  ; d; e; s; t; r; u; c; t; i; v; e; -; s; a; v; e; /; i; m; p; a; c; t;  ; a; n; d;  ; a; c; t; u; a; l;  ; p; l; a; y; e; r;  ; t; r; a; v; e; r; s; a; l;  ; t; e; s; t; s; .;  ; F; o; r; e; c; o; u; r; t;  ; g; r; a; s; s; /; p; a; v; i; n; g;  ; a; n; d;  ; b; l; a; n; k;  ; p; o; d; i; u; m;  ; w; a; l; l; s;  ; r; e; m; a; i; n;  ; s; i; m; p; l; i; f; i; e; d; ."
+    },
+    {
+      "file": "docs/screenshots/v017/fighter-forward-rocket-model.png",
+      "source": "combat-screenshots/fighter-forward-rocket-model.png",
+      "mode": "combat",
+      "sha256": "4a1ccc7ae272eee6776bc560b1465d4f2e491f64e00a40dbfbf52a88dfad5f0e",
+      "review": "双垂尾、灰色机身和翼面、蓝色座舱、尾喷口及轮组可辨；没有明显模型缺面，飞机与相邻楼面在此角度无可确认穿插。 Limitations: 这是冻结的QA摄影姿态，不能用截图证明飞行稳定或极速；镜头较远，进气与轮组小细节不易验收。"
+    },
+    {
+      "file": "docs/screenshots/v017/fighter-impact-smoke.png",
+      "source": "combat-screenshots/fighter-impact-smoke.png",
+      "mode": "combat",
+      "sha256": "8e96d6c9b7dc3165c09cfc02c33780aaa8801b56bd406e12e3a21ad7eed13ce8",
+      "review": "与 fighter flash 相同机位可见更大的灰褐色烟团、散射橙色火花和碎块；战机、坦克及城市背景仍正常显示。 Limitations: 烟雾球体层叠可见，不是体积流体；没有同机位未损坏基线，真实毁坏ID与恢复检查依赖combat报告。"
+    },
+    {
+      "file": "docs/screenshots/v017/tank-impact-flash.png",
+      "source": "combat-screenshots/tank-impact-flash.png",
+      "mode": "combat",
+      "sha256": "8446b798069c1c605f855d58a876eed1ba6322f07cde59197b0b6ede97e94027",
+      "review": "命中区域出现亮黄色核心、局部暖色照明和小圈，近处已有飞散立方体/条状碎块；没有整屏异常白化或缺贴图色。 Limitations: 闪光为简化程序几何；需结合报告中的真实结构ID/命中断言确认破坏来源，单图不能排除纯特效解释。"
+    }
+  ]
+}

@@ -49,13 +49,16 @@ const LANDMARK_MODELS = [
 	preload("res://scripts/circular_quay_detail.gd"),
 	preload("res://scripts/cyber_landmarks.gd"),
 	preload("res://scripts/icc_landmarks.gd"),
-	preload("res://scripts/sydney_tower_landmark.gd")
+	preload("res://scripts/sydney_tower_landmark.gd"),
+	preload("res://scripts/qvb_public.gd")
 ]
 const FACADE = preload("res://assets/world_facade.gdshader")
 const WATER = preload("res://shaders/water.gdshader")
 const LANDCOVER = preload("res://shaders/world_landcover.gdshader")
 var _box_meshes: Dictionary={}
 var _mesh_array_cache: Dictionary={}
+var facade_stream:RefCounted
+var material_roles=preload("res://scripts/material_roles.gd").new()
 
 func _ready() -> void:
 	var build_started:=Time.get_ticks_msec()
@@ -90,6 +93,11 @@ func _ready() -> void:
 		for child in structures[id]["node"].get_children():
 			if child is MeshInstance3D: child.set_meta("intact_material",child.material_override)
 	_build_structure_batches()
+	for key:String in materials:
+		if materials[key] is Material:material_roles.register_key(materials[key],key)
+	for key in _material_cache:
+		# Some landmark modules keep reusable meshes beside their materials.
+		if _material_cache[key] is Material:material_roles.register_key(_material_cache[key],str(key))
 	timings["complete_ms"]=Time.get_ticks_msec()-build_started
 	set_meta("build_timings",timings)
 	print("CITY_BUILD_TIMINGS ",JSON.stringify(timings))
@@ -100,7 +108,7 @@ func _register_landmark_geography() -> void:
 	# Map icons describe the landmark itself; navigation uses a separately checked
 	# public approach. Never infer an entrance by dropping the player at a centroid.
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/landmark_geography.json"))
-	for group in ["sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses","manowar_detail"]:
+	for group in ["sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses","manowar_detail","qvb_public"]:
 		for record:Dictionary in get_meta(group,[]):
 			if not record.has("map_position") or not record.has("arrival"):continue
 			var entry:=record.duplicate(true)
@@ -132,6 +140,7 @@ func _mat(key: String, color: Color, roughness: float = 0.8, metal: float = 0.0)
 	m.roughness = roughness
 	m.metallic = metal
 	materials[key] = m
+	material_roles.register_key(m,key)
 	return m
 
 func _make_materials() -> void:
@@ -268,6 +277,9 @@ func _beam(a: Vector3, b: Vector3, width: float, key: String, depth: float = -1.
 	_batch_box((a+b)*0.5,Vector3(width,width if depth<0 else depth,delta.length()),key,basis)
 
 func _build_structure_batches() -> void:
+	if get_meta("stream_details",false):
+		facade_stream=preload("res://scripts/facade_stream.gd").new()
+		facade_stream.setup(self)
 	for id in structures:
 		var p: Vector3 = structures[id]["position"]
 		var cell := Vector2i(floori(p.x/160.0),floori(p.z/160.0))
@@ -282,20 +294,31 @@ func _build_structure_batches() -> void:
 			detail.visibility_range_end_margin=60.0
 			detail.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			add_child(detail)
-			_visual_cells[cell] = {"ids":[],"instance":instance,"detail":detail}
+			_visual_cells[cell] = {"ids":[],"instance":instance,"detail":detail,"has_near":false}
 		_visual_cells[cell]["ids"].append(id)
+		for surface:Dictionary in structures[id].get("surfaces",[]):
+			if surface.get("near",false): _visual_cells[cell].has_near=true
 		for child in structures[id]["node"].get_children():
-			if child is MeshInstance3D: child.visible = false
-	for cell in _visual_cells: _rebuild_visual_cell(cell)
+			if child is MeshInstance3D:
+				child.visible = false
+				if child.get_meta("near_facade",false): _visual_cells[cell].has_near=true
+	for cell in _visual_cells: _rebuild_visual_cell(cell,is_instance_valid(facade_stream))
 
-func _rebuild_visual_cell(cell: Vector2i) -> void:
+func _rebuild_visual_cell(cell: Vector2i,base_only:=false,detail_only:=false) -> void:
+	if is_instance_valid(facade_stream) and not detail_only:
+		base_only=true
+		facade_stream.invalidate(cell)
 	var groups: Dictionary = {false:{},true:{}}
 	var data: Dictionary = _visual_cells[cell]
 	for id in data["ids"]:
 		if destroyed.has(id): continue
 		var node: Node3D = structures[id]["node"]
 		for cpu_surface in structures[id].get("surfaces",[]):
-			var target: Dictionary=groups[bool(cpu_surface.get("near",false))]
+			var near:bool=cpu_surface.get("near",false)
+			if (base_only and near) or (detail_only and not near) or not cpu_surface.has("arrays"):continue
+			var arrays: Array=cpu_surface.arrays
+			if arrays.size()!=Mesh.ARRAY_MAX or arrays[Mesh.ARRAY_VERTEX]==null or arrays[Mesh.ARRAY_VERTEX].is_empty():continue
+			var target: Dictionary=groups[near]
 			var material: Material=materials.rubble if float(partial_damage.get(id,0.0))>0.22 else cpu_surface.material
 			var key: int=material.get_instance_id()
 			if not target.has(key):
@@ -303,17 +326,20 @@ func _rebuild_visual_cell(cell: Vector2i) -> void:
 				surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 				surface.set_material(material)
 				target[key]=surface
-			var arrays: Array=cpu_surface.arrays
 			var vertices: PackedVector3Array=node.transform*arrays[Mesh.ARRAY_VERTEX]
 			var normals: PackedVector3Array=Transform3D(node.basis,Vector3.ZERO)*arrays[Mesh.ARRAY_NORMAL]
 			var uv: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV]
+			var uv2:PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV2] if arrays[Mesh.ARRAY_TEX_UV2]!=null else PackedVector2Array()
 			for index in arrays[Mesh.ARRAY_INDEX]:
 				target[key].set_normal(normals[index])
 				target[key].set_uv(uv[index])
+				target[key].set_uv2(uv2[index] if not uv2.is_empty() else Vector2.ZERO)
 				target[key].add_vertex(vertices[index])
 		for child in node.get_children():
 			if not child is MeshInstance3D or child.get_meta("collision_only",false): continue
-			var target: Dictionary=groups[bool(child.get_meta("near_facade",false))]
+			var near:bool=child.get_meta("near_facade",false)
+			if (base_only and near) or (detail_only and not near):continue
+			var target: Dictionary=groups[near]
 			var material: Material = child.material_override
 			var key: int = material.get_instance_id()
 			if not target.has(key):
@@ -328,6 +354,7 @@ func _rebuild_visual_cell(cell: Vector2i) -> void:
 			for arrays in _mesh_array_cache[child.mesh]:
 				_append_cached_arrays(target[key],arrays,node.transform*child.transform)
 	for near in [false,true]:
+		if (base_only and near) or (detail_only and not near):continue
 		var mesh := ArrayMesh.new()
 		for key in groups[near]: groups[near][key].commit(mesh)
 		data["detail" if near else "instance"].mesh = mesh if groups[near].size()>0 else null
@@ -339,11 +366,13 @@ func _append_cached_arrays(surface: SurfaceTool, arrays: Array, pose: Transform3
 	var normal_basis:=pose.basis.inverse().transposed()
 	var normals: PackedVector3Array=Transform3D(normal_basis,Vector3.ZERO)*arrays[Mesh.ARRAY_NORMAL]
 	var uv: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV] if arrays[Mesh.ARRAY_TEX_UV]!=null else PackedVector2Array()
+	var uv2:PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV2] if arrays[Mesh.ARRAY_TEX_UV2]!=null else PackedVector2Array()
 	var indices: PackedInt32Array=arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX]!=null else PackedInt32Array()
 	for cursor in (vertices.size() if indices.is_empty() else indices.size()):
 		var index:int=cursor if indices.is_empty() else indices[cursor]
 		surface.set_normal(normals[index].normalized())
 		surface.set_uv(uv[index] if not uv.is_empty() else Vector2.ZERO)
+		surface.set_uv2(uv2[index] if not uv2.is_empty() else Vector2.ZERO)
 		surface.add_vertex(vertices[index])
 
 func _mark_visual_dirty(id: String) -> void:
@@ -1035,3 +1064,26 @@ func repair_all() -> void:
 		if is_instance_valid(node): node.queue_free()
 	rubble.clear()
 	_queue_bridge_collision_refresh()
+
+func stream_view(position:Vector3,velocity:Vector3,delta:float):
+	if is_instance_valid(facade_stream):facade_stream.tick(position,velocity,delta)
+
+func streaming_stats() -> Dictionary:
+	return facade_stream.stats() if is_instance_valid(facade_stream) else {"enabled":false,"scope":"all_detail_resident","resident":_visual_cells.size()}
+
+func prepare_view(position:Vector3,timeout_seconds:=15.0) -> bool:
+	# Capture validators disable the main follow-camera process. Exercise the same
+	# stream queue explicitly before photographing an unmoving view.
+	if not is_instance_valid(facade_stream):return true
+	var started:=Time.get_ticks_msec()
+	while (Time.get_ticks_msec()-started)/1000.0<timeout_seconds:
+		stream_view(position,Vector3.ZERO,.16)
+		var ready:bool=facade_stream._task<0
+		for cell:Vector2i in facade_stream.wanted:
+			if not facade_stream.resident.has(cell):ready=false
+		if ready:return true
+		await get_tree().process_frame
+	return false
+
+func _exit_tree():
+	if is_instance_valid(facade_stream):facade_stream.close()

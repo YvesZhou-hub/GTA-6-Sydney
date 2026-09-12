@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS both facade resources load as spatial shaders {}
+PASS global city night amount is declared once with daylight default {}
+PASS both shaders execute identical deterministic night functions {}
+PASS window occupancy has no clock camera or object-instance dependency {}
+PASS OSM identity survives interpolation and seed includes facade direction {}
+PASS both shaders filter subpixel windows and suppress roof emission {}
+PASS day albedo expressions retain authored close facade colours {}
+PASS exact shader night functions compile as bounded CPU arithmetic {"compiler":"/usr/bin/clang++","exit":0,"scope":"GLSL pure function bodies with vector/builtin C++ adapters; no GPU shader compiler"}
+PASS compiled CPU mask fixture completes and returns evidence {"exit":0}
+PASS integer hash reference vectors remain fixed {}
+PASS repeated occupied-window masks are bit-identical {}
+PASS different building IDs produce different stable window masks {"changed_random_values":16384.0,"samples":16384.0}
+PASS signed floor and window indices remain finite and bounded {}
+PASS occupancy density matches usage 0 {"fraction":0.378723,"target":0.38}
+PASS occupancy density matches usage 1 {"fraction":0.634094,"target":0.64}
+PASS occupancy density matches usage 2 {"fraction":0.23468,"target":0.24}
+PASS residential occupancy exceeds office and other occupancy {}
+PASS night emission preserves glass exposure and legacy trim cannot amplify it {"maximum_component":0.495595}
+PASS daylight has exactly zero added window emission {}
+PASS resolved walls and mullions cannot emit between panes {}
+PASS twilight is continuous proportional exposure with a fixed mask {}
+PASS global night amount clamps safely outside unit interval {}
+PASS occupied windows include stable warm and cool temperatures {"cool":115.0,"warm":50.0}
+PASS subpixel average preserves sampled emitted energy usage 0 {"filtered":0.155099,"sample_mean":0.154513}
+PASS subpixel average preserves sampled emitted energy usage 1 {"filtered":0.238103,"sample_mean":0.23622}
+PASS subpixel average preserves sampled emitted energy usage 2 {"filtered":0.093623,"sample_mean":0.091734}
+PASS fully filtered windows contain no seed floor or window noise {}
+PASS subpixel exposure respects actual total pane area {}
+PASS derivative transition blends resolved and averaged emission continuously {}
+FACADE_NIGHT_COMPLETE checks=29 failures=0

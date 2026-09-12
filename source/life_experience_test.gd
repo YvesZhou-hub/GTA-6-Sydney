@@ -53,7 +53,7 @@ func run() -> void:
 	var free := true
 	for kind: String in Life.FREE_VEHICLES:
 		free = free and life.purchase(kind,999999) and life.money == 0 and life.owned_assets.has(kind)
-	check(free and Life.FREE_VEHICLES.size() == 9 and "hoverboard" in Life.FREE_VEHICLES, "all nine vehicle types including hoverboard remain free at zero balance")
+	check(free and Life.FREE_VEHICLES.size() == 11 and "hoverboard" in Life.FREE_VEHICLES and "tank" in Life.FREE_VEHICLES and "fighter" in Life.FREE_VEHICLES, "all eleven vehicle types including tank and fighter remain free at zero balance")
 	check(not life.purchase("repair",120) and life.money == 0, "optional paid repairs cannot overdraw the balance")
 	check(not life.spend(-10) and not life.purchase("invalid",-10) and life.money == 0, "negative general transactions cannot mint currency")
 	life.setup(anchors,true)

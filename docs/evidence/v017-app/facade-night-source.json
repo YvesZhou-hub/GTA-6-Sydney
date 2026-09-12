@@ -1,0 +1,193 @@
+{
+	"checks": [
+		{
+			"evidence": {},
+			"name": "both facade resources load as spatial shaders",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "global city night amount is declared once with daylight default",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "both shaders execute identical deterministic night functions",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "window occupancy has no clock camera or object-instance dependency",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "OSM identity survives interpolation and seed includes facade direction",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "both shaders filter subpixel windows and suppress roof emission",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "day albedo expressions retain authored close facade colours",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"compiler": "/usr/bin/clang++",
+				"exit": 0,
+				"scope": "GLSL pure function bodies with vector/builtin C++ adapters; no GPU shader compiler"
+			},
+			"name": "exact shader night functions compile as bounded CPU arithmetic",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"exit": 0
+			},
+			"name": "compiled CPU mask fixture completes and returns evidence",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "integer hash reference vectors remain fixed",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "repeated occupied-window masks are bit-identical",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"changed_random_values": 16384.0,
+				"samples": 16384.0
+			},
+			"name": "different building IDs produce different stable window masks",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "signed floor and window indices remain finite and bounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"fraction": 0.378723,
+				"target": 0.38
+			},
+			"name": "occupancy density matches usage 0",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"fraction": 0.634094,
+				"target": 0.64
+			},
+			"name": "occupancy density matches usage 1",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"fraction": 0.23468,
+				"target": 0.24
+			},
+			"name": "occupancy density matches usage 2",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "residential occupancy exceeds office and other occupancy",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"maximum_component": 0.495595
+			},
+			"name": "night emission preserves glass exposure and legacy trim cannot amplify it",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "daylight has exactly zero added window emission",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "resolved walls and mullions cannot emit between panes",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "twilight is continuous proportional exposure with a fixed mask",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "global night amount clamps safely outside unit interval",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"cool": 115.0,
+				"warm": 50.0
+			},
+			"name": "occupied windows include stable warm and cool temperatures",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"filtered": 0.155099,
+				"sample_mean": 0.154513
+			},
+			"name": "subpixel average preserves sampled emitted energy usage 0",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"filtered": 0.238103,
+				"sample_mean": 0.23622
+			},
+			"name": "subpixel average preserves sampled emitted energy usage 1",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"filtered": 0.093623,
+				"sample_mean": 0.091734
+			},
+			"name": "subpixel average preserves sampled emitted energy usage 2",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "fully filtered windows contain no seed floor or window noise",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "subpixel exposure respects actual total pane area",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "derivative transition blends resolved and averaged emission continuously",
+			"passed": true
+		}
+	],
+	"count": 29,
+	"failures": 0,
+	"gpu_run": false,
+	"hashes": {
+		"res://../source/facade_night_test.gd": "f8e52c51cdc97fd501ea691805460b408762acdaf7ee3ce11fd95b8e86614bcf",
+		"res://assets/world_facade.gdshader": "75b66a79b242ce047c94e34e03f94820c3cb014488c4a060041ce708785def28",
+		"res://project.godot": "73e9b376b36a8f7e1927e84712a0587f0ea54d9c98e946d94dd7af64d139e5e4",
+		"res://shaders/city_facade.gdshader": "0d5d1e398e83c0097685a893f9b29f3b93df3d46c9b2c97a442da5331c7ccfe9"
+	},
+	"method": "Godot headless resource loading and exact GLSL pure functions compiled as CPU C++",
+	"native_shader_compile": false,
+	"passed": true
+}

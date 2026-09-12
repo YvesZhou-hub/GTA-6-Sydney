@@ -1,6 +1,16 @@
 extends RefCounted
 ## Original, metre-scale vehicle assets. All geometry is authored procedurally here.
 ## Local forward = -Z, local up = +Y. No external textures, brands, or models.
+## Cache contains authored build outputs only, never a live Vehicle or its state.
+static var _geometry_cache: Dictionary={}
+static var _build_profile: Dictionary={}
+const MODEL_METADATA := ["vehicle_model","boat_spec","boat_profile","model_reference","model_confidence","fighter_design","tank_ground_offset"]
+
+static func clear_geometry_cache() -> void:
+	_geometry_cache.clear()
+
+static func geometry_cache_stats() -> Dictionary:
+	return {"kinds":_geometry_cache.keys(),"entries":_geometry_cache.size(),"scope":"immutable merged mesh resources and authored node descriptions; no live vehicle state"}
 
 static func make(kind: String, id: String) -> RigidBody3D:
 	var body: RigidBody3D = load("res://scripts/harbor_vehicle.gd").new()
@@ -15,6 +25,14 @@ static func material(color: Color, metal: float = 0.0, roughness: float = 0.45) 
 	return m
 
 static func build(body: Node3D, kind: String) -> Dictionary:
+	var started:=Time.get_ticks_usec()
+	_build_profile={"kind":kind,"cache_hit":_geometry_cache.has(kind),"source_meshes":0,"source_surfaces":0,"merged_meshes":0,"temporary_mesh_commits":0,"extract_ms":0.0,"index_ms":0.0,"temporary_commit_ms":0.0,"append_ms":0.0,"final_commit_ms":0.0}
+	if _geometry_cache.has(kind):
+		var cached_moving: Dictionary=_instantiate_geometry(body,_geometry_cache[kind])
+		_build_profile["instantiate_ms"]=(Time.get_ticks_usec()-started)/1000.0
+		_build_profile["total_ms"]=_build_profile.instantiate_ms
+		body.set_meta("vehicle_factory_profile",_build_profile.duplicate(true))
+		return cached_moving
 	var mats := {
 		"white": material(Color("e6e9e1"), 0.35, 0.26),
 		"dark": material(Color("14212c"), 0.50, 0.32),
@@ -32,8 +50,12 @@ static func build(body: Node3D, kind: String) -> Dictionary:
 	mats.light.emission_enabled = true
 	mats.light.emission = Color("dfefc0")
 	mats.light.emission_energy_multiplier = 1.5
+	_build_profile["materials_ms"]=(Time.get_ticks_usec()-started)/1000.0
+	var geometry_started:=Time.get_ticks_usec()
 	var moving: Dictionary = {"wheels": [], "rotors": [], "propellers": [], "rider": null, "material": mats.teal}
 	match kind:
+		"tank": preload("res://scripts/tank_models.gd").build(body,mats,moving,load("res://scripts/vehicle_factory.gd"))
+		"fighter": preload("res://scripts/fighter_models.gd").build(body,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"hoverboard": preload("res://scripts/hoverboard_models.gd").build(body,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"car": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
 		"motorcycle": preload("res://scripts/vehicle_refinement.gd").build(body,kind,mats,moving,load("res://scripts/vehicle_factory.gd"))
@@ -43,12 +65,108 @@ static func build(body: Node3D, kind: String) -> Dictionary:
 	if kind in ["motorcycle", "paraglider"]:
 		moving.rider = _seated_rider(body, mats, kind)
 		if kind == "motorcycle": moving.rider.position = Vector3(0,.12,.40)
+	_build_profile["geometry_ms"]=(Time.get_ticks_usec()-geometry_started)/1000.0
+	var merge_started:=Time.get_ticks_usec()
 	var animated: Array = moving.wheels + moving.rotors + moving.propellers
 	if moving.rider != null: animated.append(moving.rider)
+	for key in ["turret","barrel","muzzle","weapon_muzzle"]:
+		if moving.has(key): animated.append(moving[key])
 	for pivot in animated:
-		_merge_static_meshes(pivot, [])
+		_merge_static_meshes(pivot, animated)
 	_merge_static_meshes(body, animated)
+	_build_profile["merge_ms"]=(Time.get_ticks_usec()-merge_started)/1000.0
+	var cache_started:=Time.get_ticks_usec()
+	var recipe:=_capture_geometry(body,moving)
+	if not recipe.is_empty(): _geometry_cache[kind]=recipe
+	_build_profile["cache_capture_ms"]=(Time.get_ticks_usec()-cache_started)/1000.0
+	_build_profile["cache_stored"]=not recipe.is_empty()
+	_build_profile["total_ms"]=(Time.get_ticks_usec()-started)/1000.0
+	body.set_meta("vehicle_factory_profile",_build_profile.duplicate(true))
 	return moving
+
+static func _geometry_nodes(parent: Node, found: Array[Node]) -> bool:
+	for child: Node in parent.get_children():
+		# Source primitives remain queued until the end of the first frame.
+		if child.is_queued_for_deletion(): continue
+		if child.get_class() not in ["Node3D","MeshInstance3D","CollisionShape3D","Marker3D"] or child.get_script()!=null: return false
+		found.append(child)
+		if not _geometry_nodes(child,found): return false
+	return true
+
+static func _cache_value(value: Variant, node_ids: Dictionary, resources: Dictionary) -> Variant:
+	if value is Node:
+		return {"__factory_node_index":node_ids.get(value.get_instance_id(),-1)}
+	if value is Material or value is Shape3D:
+		# Capture an independent pristine baseline: the first car's paint can
+		# darken later, and must never become a subsequent car's default paint.
+		var id: int=value.get_instance_id()
+		if not resources.has(id): resources[id]=value.duplicate()
+		return resources[id]
+	if value is Dictionary:
+		var copy: Dictionary={}
+		for key in value: copy[key]=_cache_value(value[key],node_ids,resources)
+		return copy
+	if value is Array:
+		var copy: Array=[]
+		for item in value: copy.append(_cache_value(item,node_ids,resources))
+		return copy
+	return value
+
+static func _capture_geometry(body: Node3D, moving: Dictionary) -> Dictionary:
+	var nodes: Array[Node]=[]
+	if not _geometry_nodes(body,nodes): return {}
+	var ids: Dictionary={}
+	for index in nodes.size(): ids[nodes[index].get_instance_id()]=index
+	var resources: Dictionary={}
+	var records: Array=[]
+	for node: Node in nodes:
+		var properties: Dictionary={}
+		for property: Dictionary in node.get_property_list():
+			var key: String=property.name
+			if not (int(property.usage)&PROPERTY_USAGE_STORAGE) or key=="script" or key.begins_with("metadata/"): continue
+			properties[key]=_cache_value(node.get(key),ids,resources)
+		var metadata: Dictionary={}
+		for key: StringName in node.get_meta_list(): metadata[key]=_cache_value(node.get_meta(key),ids,resources)
+		records.append({"class":node.get_class(),"name":str(node.name),"parent":ids.get(node.get_parent().get_instance_id(),-1),"properties":properties,"metadata":metadata})
+	var root_metadata: Dictionary={}
+	for key: String in MODEL_METADATA:
+		if body.has_meta(key): root_metadata[key]=_cache_value(body.get_meta(key),ids,resources)
+	return {"nodes":records,"moving":_cache_value(moving,ids,resources),"metadata":root_metadata}
+
+static func _instance_value(value: Variant, nodes: Array[Node], resources: Dictionary) -> Variant:
+	if value is Material or value is Shape3D:
+		var id: int=value.get_instance_id()
+		if not resources.has(id): resources[id]=value.duplicate()
+		return resources[id]
+	if value is Dictionary:
+		if value.has("__factory_node_index"):
+			var index: int=value.__factory_node_index
+			return nodes[index] if index>=0 and index<nodes.size() else null
+		var copy: Dictionary={}
+		for key in value: copy[key]=_instance_value(value[key],nodes,resources)
+		return copy
+	if value is Array:
+		var copy: Array=[]
+		for item in value: copy.append(_instance_value(item,nodes,resources))
+		return copy
+	return value
+
+static func _instantiate_geometry(body: Node3D, recipe: Dictionary) -> Dictionary:
+	var nodes: Array[Node]=[]
+	var resources: Dictionary={}
+	for record: Dictionary in recipe.nodes: nodes.append(ClassDB.instantiate(record["class"]))
+	for index in nodes.size():
+		var node: Node=nodes[index]
+		var record: Dictionary=recipe.nodes[index]
+		# Node.name is not a STORAGE property. Preserve authored names while
+		# letting Godot allocate fresh internal @ names for anonymous instances.
+		if not str(record.name).begins_with("@"): node.name=record.name
+		for key: String in record.properties: node.set(key,_instance_value(record.properties[key],nodes,resources))
+		for key: StringName in record.metadata: node.set_meta(key,_instance_value(record.metadata[key],nodes,resources))
+		var parent: Node=nodes[record.parent] if int(record.parent)>=0 else body
+		parent.add_child(node)
+	for key: String in recipe.metadata: body.set_meta(key,_instance_value(recipe.metadata[key],nodes,resources))
+	return _instance_value(recipe.moving,nodes,resources)
 
 static func _box(parent: Node3D, size: Vector3, pos: Vector3, mat: Material, rot: Vector3 = Vector3.ZERO) -> MeshInstance3D:
 	var node := MeshInstance3D.new()
@@ -385,10 +503,12 @@ static func _merge_static_meshes(parent: Node3D, excluded: Array) -> void:
 	# Keep authored detail while batching static geometry to one draw per material.
 	var meshes: Array = []
 	_gather_static_meshes(parent, excluded, meshes)
+	_build_profile["source_meshes"]=int(_build_profile.get("source_meshes",0))+meshes.size()
 	var groups: Dictionary = {}
 	for node in meshes:
 		var relative: Transform3D = parent.global_transform.affine_inverse()*node.global_transform
 		for surface_index in node.mesh.get_surface_count():
+			_build_profile["source_surfaces"]=int(_build_profile.get("source_surfaces",0))+1
 			var mat: Material = node.material_override
 			if mat == null: mat = node.mesh.surface_get_material(surface_index)
 			var key: int = mat.get_instance_id() if mat else 0
@@ -397,13 +517,26 @@ static func _merge_static_meshes(parent: Node3D, excluded: Array) -> void:
 				builder.begin(Mesh.PRIMITIVE_TRIANGLES)
 				groups[key] = {"surface":builder,"material":mat}
 			var indexed_source := SurfaceTool.new()
+			var sample:=Time.get_ticks_usec()
 			indexed_source.create_from(node.mesh,surface_index)
+			_build_profile["extract_ms"]=float(_build_profile.get("extract_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
+			sample=Time.get_ticks_usec()
 			indexed_source.index()
-			groups[key].surface.append_from(indexed_source.commit(),0,relative)
+			_build_profile["index_ms"]=float(_build_profile.get("index_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
+			sample=Time.get_ticks_usec()
+			var temporary_mesh:=indexed_source.commit()
+			_build_profile["temporary_commit_ms"]=float(_build_profile.get("temporary_commit_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
+			_build_profile["temporary_mesh_commits"]=int(_build_profile.get("temporary_mesh_commits",0))+1
+			sample=Time.get_ticks_usec()
+			groups[key].surface.append_from(temporary_mesh,0,relative)
+			_build_profile["append_ms"]=float(_build_profile.get("append_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
 		node.queue_free()
 	for key in groups:
 		var combined := MeshInstance3D.new()
+		var sample:=Time.get_ticks_usec()
 		combined.mesh = groups[key].surface.commit()
+		_build_profile["final_commit_ms"]=float(_build_profile.get("final_commit_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
+		_build_profile["merged_meshes"]=int(_build_profile.get("merged_meshes",0))+1
 		combined.material_override = groups[key].material
 		parent.add_child(combined)
 

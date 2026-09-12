@@ -111,6 +111,26 @@ func run():
 	check("overlapping pedestrian and asphalt surfaces are geometrically disjoint", material_overlap(crossing_world) < .0001)
 	check("pedestrian approach survives outside carriageway", covered(Vector2(-5,-8), triangles(crossing_world,"lightstone")))
 	crossing_world.free()
+	# Explicit area geometry must fill the plaza, retain its surveyed footprint,
+	# and contribute no false road around its perimeter to vehicle placement.
+	var plaza := {"id":"way/qa_plaza","tags":{"highway":"pedestrian","area":"yes"},"points":[[-10,-10],[10,-10],[10,10],[-10,10],[-10,-10]],"surface_geometry":"area","surface_triangles":[[-10,-10],[10,-10],[10,10],[-10,-10],[10,10],[-10,10]]}
+	var plaza_fixture := {"roads":[plaza,{"tags":{"highway":"footway","width":"4"},"points":[[-20,0],[20,0]]}]}
+	var plaza_world := new_world(plaza_fixture)
+	var plaza_faces := triangles(plaza_world, "lightstone")
+	var paved_area := 0.0
+	for face in plaza_faces: paved_area += area(face)
+	check("mapped plaza interior is filled and its boundary is not buffered", covered(Vector2(0,8),plaza_faces) and not covered(Vector2(10.1,8),plaza_faces))
+	check("plaza and crossing footway have no double-painted area", absf(paved_area-480.0)<.001,paved_area)
+	check("plaza does not invent perimeter vehicle spawn segments",plaza_world.road_segments==[[Vector2(-20,0),Vector2(20,0),4.0]])
+	check("connecting footway survives outside the mapped area",covered(Vector2(-18,0),plaza_faces) and covered(Vector2(18,0),plaza_faces))
+	plaza_world.free()
+	var plaza_crossing := plaza_fixture.duplicate(true)
+	plaza_crossing.roads.append({"tags":{"highway":"residential","width":"6"},"points":[[0,-30],[0,30]]})
+	plaza_crossing.excavations=[{"polygon":[[5,5],[7,5],[7,7],[5,7]]}]
+	var plaza_cut := new_world(plaza_crossing)
+	check("mapped plaza yields to carriageway without coplanar overlap",material_overlap(plaza_cut)<.0001)
+	check("mapped plaza retains a real excavation opening",not covered(Vector2(6,6),triangles(plaza_cut)))
+	plaza_cut.free()
 	var snapshot := City.data()
 	for site in [["Fairy Bower Road", Vector2(7418,-6372), 110.0],["Darling pyramidal street",Vector2(-612.303,1973.009),110.0]]:
 		var roads := []
@@ -151,6 +171,10 @@ func run():
 	mixed.free()
 	var start := Time.get_ticks_msec()
 	var full := new_world(snapshot)
+	var expected_areas := 0
+	for road in snapshot.roads:
+		if road.get("surface_geometry", "") == "area" and not road.surface_triangles.is_empty(): expected_areas += 1
+	check("full city renders every nonempty mapped pedestrian area",expected_areas>100 and full.get_meta("real_pedestrian_areas")==expected_areas,expected_areas)
 	var build_ms := Time.get_ticks_msec() - start
 	var bad_heights := 0
 	var bad_winding := 0

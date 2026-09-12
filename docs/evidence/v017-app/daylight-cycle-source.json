@@ -1,0 +1,124 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "clock direction controls actual sunlight",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "day profile maintains readable daytime light",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sky switches to incremental radiance updates",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sky receives the same solar direction",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "120 rapid clock calls do not rebuild120 sky cubes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paused time-menu jump forces immediate sky update",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "forced same-hour restore also refreshes sky",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sunset is dimmer and warmer than daylight",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sunset source dominates near horizon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sunset uses independent licensed panorama",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night has no below-horizon direct sun",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night panorama and blend are selected",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night keeps finite ambient and lower fog light",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clock never toggles expensive effect flags",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "F3 base contract provides all seven controls",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "F3 multipliers survive changes of time",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "legacy numeric tuning is rebased instead of overwritten",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "a sun multiplier cannot create fake moonlight",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "cycle values honor final diagnostic safety limits",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nonfinite solar direction is ignored safely",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sky shader does not force per-frame time filtering",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "dawn and dusk share elevation-driven color profile",
+			"passed": true
+		}
+	],
+	"count": 22,
+	"hashes": {
+		"res://../source/daylight_cycle_test.gd": "407e1b6430dd49da4a2494295edc70e1deaa450ccd42fa92b76b4bfc3c9baa02",
+		"res://assets/environment/daylight.gdshader": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+		"res://scripts/daylight_environment.gd": "1ec40c20defdf7c76e61cf38049f4c26e98c8550dfd7bb11439fe018a0b68a77"
+	},
+	"images": [],
+	"native": false,
+	"passed": true,
+	"scope": "Render-cycle property and fixed-camera calibration fixture. Synthetic solar inputs test the API; they do not validate Sydney astronomy, actual city night lamps or gameplay FPS."
+}

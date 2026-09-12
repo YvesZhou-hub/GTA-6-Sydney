@@ -1,0 +1,71 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS every prior QVB OSM damage component ID is preserved
+PASS legacy manifest agrees with source base wall-height and part policies
+PASS navigation arrival is the tested public Market Street threshold
+PASS exactly 25 existing QVB OSM footprints replaced
+PASS every structural collision mesh matches its visible solid
+PASS every QVB mesh vertex is drawn; no mixed-index vertices are silently omitted
+PASS no degenerate QVB triangles
+PASS all QVB face winding agrees with normals
+PASS bounded QVB mesh triangle count 321332
+PASS production generic building filter reserves all 25 QVB parts
+PASS 93 longitudinal aisle stations have real floor and standing-capsule clearance
+PASS all minor-dome meshes including collar rings stay within their own OSM-centred turret; no misplaced rings intrude into the central dome
+PASS actual retained lantern geometry reaches official nominal 58m above local ground
+PASS actual outer copper shell is19m wide and has35.4m spring/47.9m crown with28cm closed skin, independently of retail floors
+PASS actual separate coloured-glass inner dome is11.3m wide at26.5–32.4m
+PASS retail gallery remains at its independently calibrated floor level 5.7
+PASS retail gallery remains at its independently calibrated floor level 10.9
+PASS 18 interior-to-sky rays hit the actual continuous glass roof collider
+PASS all six former dome-to-arcade sky gaps have physical roof infill
+PASS actual first visible surface above the atrium is coloured inner-dome glass, not an opaque patch
+PASS actual first-visible roof alternates exposed inner framing and glass panes; no grey cover hides the trusses
+PASS central spacer shows sandstone externally and red finish only towards the public inner dome
+PASS George arch relief is actually the first rendered mesh ahead of the full wall
+PASS arched street glazing survives the final mesh index stream
+PASS interior round arch is visible ahead of closed shop volume and glass
+PASS Market doorway has an actual curved opening: lower shoulder clear, upper spandrel solid
+PASS city/qvb/roof_glazing has a closed physical skin
+PASS city/qvb/roof_glazing hides glazing and frames and disables collision together
+PASS city/qvb/roof_transition has a closed physical skin
+PASS city/qvb/roof_transition hides glazing and frames and disables collision together
+PASS qvb_market_druitt_grand_walk outward production HarborPlayer walks continuously without jumping or teleporting
+PASS qvb_market_druitt_grand_walk return production HarborPlayer walks continuously without jumping or teleporting
+PASS qvb_george_york_public_crossing outward production HarborPlayer walks continuously without jumping or teleporting
+PASS qvb_george_york_public_crossing return production HarborPlayer walks continuously without jumping or teleporting
+QVB_POSE (-355.8963, 4.530833, 1225.526) preserved=true buried=true hit=city/qvb/public_floor
+PASS migration preserves settled Grand Walk player (0.0, 0.0, -84.0)
+PASS migration rejects Grand Walk player buried 6 cm (0.0, 0.0, -84.0)
+QVB_POSE (-350.1884, 4.530559, 1274.325) preserved=true buried=true hit=city/qvb/public_floor
+PASS migration preserves settled Grand Walk player (3.6, 0.0, -35.0)
+PASS migration rejects Grand Walk player buried 6 cm (3.6, 0.0, -35.0)
+QVB_POSE (-352.277, 4.530559, 1309.448) preserved=true buried=true hit=city/qvb/public_floor
+PASS migration preserves settled Grand Walk player (0.0, 0.0, 0.0)
+PASS migration rejects Grand Walk player buried 6 cm (0.0, 0.0, 0.0)
+QVB_POSE (-347.1723, 4.530559, 1344.26) preserved=true buried=true hit=city/qvb/public_floor
+PASS migration preserves settled Grand Walk player (3.6, 0.0, 35.0)
+PASS migration rejects Grand Walk player buried 6 cm (3.6, 0.0, 35.0)
+QVB_POSE (-348.6577, 4.530559, 1393.37) preserved=true buried=true hit=city/qvb/public_floor
+PASS migration preserves settled Grand Walk player (0.0, 0.0, 84.0)
+PASS migration rejects Grand Walk player buried 6 cm (0.0, 0.0, 84.0)
+PASS actual QVB roof is rejected as a migration landing (-355.8963, 4.5, 1225.526)
+PASS old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (0.0, 0.0, -84.0)
+PASS migrated production player settles on public tile without later horizontal relocation (0.0, 0.0, -84.0)
+PASS actual QVB roof is rejected as a migration landing (-343.7943, 4.5, 1274.05)
+PASS old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (3.6, 0.0, -35.0)
+PASS migrated production player settles on public tile without later horizontal relocation (3.6, 0.0, -35.0)
+PASS actual QVB roof is rejected as a migration landing (-352.277, 4.5, 1309.448)
+PASS old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (0.0, 0.0, 0.0)
+PASS migrated production player settles on public tile without later horizontal relocation (0.0, 0.0, 0.0)
+PASS actual QVB roof is rejected as a migration landing (-340.7783, 4.5, 1343.985)
+PASS old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (3.6, 0.0, 35.0)
+PASS migrated production player settles on public tile without later horizontal relocation (3.6, 0.0, 35.0)
+PASS actual QVB roof is rejected as a migration landing (-348.6577, 4.5, 1393.37)
+PASS old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (0.0, 0.0, 84.0)
+PASS migrated production player settles on public tile without later horizontal relocation (0.0, 0.0, 84.0)
+PASS public-floor hit inside closed private QVB shop shell is rejected by actual containment
+PASS closed-shop fallback finds clear ground and cannot select its private rooftop
+PASS copper roof and its ribs disappear with the retained upper dome damage ID
+PASS legacy dome damage restores geometry and collision
+QVB_COMPLETE checks=63 failures=0 triangles=321332

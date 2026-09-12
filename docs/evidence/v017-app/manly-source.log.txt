@@ -1,0 +1,114 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS palm crown has 24 green split-fan leaves and 10 hanging old leaves
+PASS folded leaf strips and curved stems have no degenerate triangles
+PASS all leaf lobes and stems have closed surfaces with two incident faces per edge
+PASS all crown surface normals are finite, normalized and agree with front-face winding
+PASS new crown stays above pedestrians and within the bounded radial canopy
+PASS frond 0 has thirteen individual split leaf lobes
+PASS frond 1 has thirteen individual split leaf lobes
+PASS frond 2 has thirteen individual split leaf lobes
+PASS frond 3 has thirteen individual split leaf lobes
+PASS frond 4 has thirteen individual split leaf lobes
+PASS frond 5 has thirteen individual split leaf lobes
+PASS frond 6 has thirteen individual split leaf lobes
+PASS frond 7 has thirteen individual split leaf lobes
+PASS frond 8 has thirteen individual split leaf lobes
+PASS frond 9 has thirteen individual split leaf lobes
+PASS frond 10 has thirteen individual split leaf lobes
+PASS frond 11 has thirteen individual split leaf lobes
+PASS frond 12 has thirteen individual split leaf lobes
+PASS frond 13 has thirteen individual split leaf lobes
+PASS frond 14 has thirteen individual split leaf lobes
+PASS frond 15 has thirteen individual split leaf lobes
+PASS frond 16 has thirteen individual split leaf lobes
+PASS frond 17 has thirteen individual split leaf lobes
+PASS frond 18 has thirteen individual split leaf lobes
+PASS frond 19 has thirteen individual split leaf lobes
+PASS frond 20 has thirteen individual split leaf lobes
+PASS frond 21 has thirteen individual split leaf lobes
+PASS frond 22 has thirteen individual split leaf lobes
+PASS frond 23 has thirteen individual split leaf lobes
+PASS frond 24 has thirteen individual split leaf lobes
+PASS frond 25 has thirteen individual split leaf lobes
+PASS frond 26 has thirteen individual split leaf lobes
+PASS frond 27 has thirteen individual split leaf lobes
+PASS frond 28 has thirteen individual split leaf lobes
+PASS frond 29 has thirteen individual split leaf lobes
+PASS frond 30 has thirteen individual split leaf lobes
+PASS frond 31 has thirteen individual split leaf lobes
+PASS frond 32 has thirteen individual split leaf lobes
+PASS frond 33 has thirteen individual split leaf lobes
+PASS all stalks arch and the ten old central fan tips visibly droop
+PASS leaf tips span multiple crown heights instead of a coplanar umbrella
+PASS actual leaf section has a raised folded ridge, underside and two lateral edges
+PASS crown fixture uses existing actual mapped Corso tree points
+PASS all generated crowns retain exact source tree positions and share two cached meshes
+PASS visual crown refinement creates no collision or persistent building components
+MANLY PALM COMPLETE checks=45 failures=0 triangles=22168 bounds=[P: (-2.975015, 8.52475, -3.014506), S: (6.110126, 4.360322, 6.105902)]
+CITY_MAP buildings=1347 reserved=13 roads=4922
+PASS four canonical Manly navigation destinations integrated
+PASS real OSM Manly tree points populated
+PASS Hotel Steyne real courtyard stays open through roof and storeys
+PASS The Corso has actual supporting pavement
+PASS The Corso central pedestrian route is unobstructed: 0
+PASS Manly Wharf north entrance concourse remains open
+PASS landmarks participate in persistent structural damage
+PASS Manly has four unique canonical IDs and no duplicate Corso icon record
+PASS legacy the_corso alias resolves to the canonical manly_corso destination
+PASS manly_wharf retains mapped centroid and horizontal public arrival; only required paving height changes
+PASS manly_wharf metadata, world registration and anchor share canonical navigation geometry
+PASS manly_wharf public foot arrival has supporting pavement and zero-margin production capsule clearance
+PASS manly_wharf clear legacy-save stance survives production migration without relocation
+PASS manly_wharf settles on its public support and remains migration-safe
+PASS hotel_steyne retains mapped centroid and horizontal public arrival; only required paving height changes
+PASS hotel_steyne metadata, world registration and anchor share canonical navigation geometry
+PASS hotel_steyne public foot arrival has supporting pavement and zero-margin production capsule clearance
+PASS hotel_steyne clear legacy-save stance survives production migration without relocation
+PASS hotel_steyne settles on its public support and remains migration-safe
+PASS hotel_steyne old below-paving save repairs locally without changing its horizontal location
+PASS manly_corso retains mapped centroid and horizontal public arrival; only required paving height changes
+PASS manly_corso metadata, world registration and anchor share canonical navigation geometry
+PASS manly_corso public foot arrival has supporting pavement and zero-margin production capsule clearance
+PASS manly_corso clear legacy-save stance survives production migration without relocation
+PASS manly_corso settles on its public support and remains migration-safe
+PASS manly_corso old below-paving save repairs locally without changing its horizontal location
+PASS manly_beach retains mapped centroid and horizontal public arrival; only required paving height changes
+PASS manly_beach metadata, world registration and anchor share canonical navigation geometry
+PASS manly_beach public foot arrival has supporting pavement and zero-margin production capsule clearance
+PASS manly_beach clear legacy-save stance survives production migration without relocation
+PASS manly_beach settles on its public support and remains migration-safe
+PASS registered live Corso paving is a valid player recovery support
+PASS destroyed Corso paving is rejected even with a stale support hit
+PASS actual information-wall top is not accepted as a public recovery floor
+PASS wharf platform retains mapped XZ and original bottom, only top moves 4cm
+PASS wharf raised top uses exactly the same visible and physical triangle faces
+PASS wharf floor (-4.0, 0.0, -6.0) render and collision agree 4cm above the proven coincident terrain
+PASS wharf floor (-4.0, 0.0, -6.0) valid current stance remains unchanged
+PASS wharf floor (-4.0, 0.0, -6.0) old ground-height save is raised in place without horizontal teleport
+PASS wharf floor (-4.0, 0.0, -31.0) render and collision agree 4cm above the proven coincident terrain
+PASS wharf floor (-4.0, 0.0, -31.0) valid current stance remains unchanged
+PASS wharf floor (-4.0, 0.0, -31.0) old ground-height save is raised in place without horizontal teleport
+PASS wharf floor (-10.0, 0.0, -21.0) render and collision agree 4cm above the proven coincident terrain
+PASS wharf floor (-10.0, 0.0, -21.0) valid current stance remains unchanged
+PASS wharf floor (-10.0, 0.0, -21.0) old ground-height save is raised in place without horizontal teleport
+PASS wharf floor (3.0, 0.0, -22.0) render and collision agree 4cm above the proven coincident terrain
+PASS wharf floor (3.0, 0.0, -22.0) valid current stance remains unchanged
+PASS wharf floor (3.0, 0.0, -22.0) old ground-height save is raised in place without horizontal teleport
+PASS new floor support never exempts an actual overlapping public bench
+PASS destroyed wharf platform rejects stale recovery support and hides/disables matching surfaces
+PASS repair restores the same wharf platform support and visual surface
+PASS photo-informed public wharf waiting/information hall built
+PASS five explicit exterior/interior review views
+PASS public hall has direction panels and information-side display
+PASS actual mapped Corso drinking node 1638701005
+PASS actual mapped Corso drinking node 1638695147
+PASS actual mapped Corso drinking node 1638694159
+PASS all Manly structural mesh faces match their collision shells
+PASS no degenerate Manly structural triangles
+PASS three bubbler structure positions retain mapped nodes without street relocation
+PASS new waiting seat and collision disappear together on damage
+PASS new waiting seat restores after repair
+PASS manly_wharf_hall_to_steyne production Player completes the continuous route without intermediate teleport
+PASS manly_steyne_to_wharf_hall production Player completes the continuous route without intermediate teleport
+MANLY CHECK COMPLETE failures=0 checks=109 triangles=18284 components=261

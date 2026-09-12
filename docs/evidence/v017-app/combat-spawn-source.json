@@ -1,0 +1,648 @@
+{
+  "backend": "Jolt Physics",
+  "checks": [
+    {
+      "metrics": {
+        "startup_seconds": 16.251807,
+        "structures": 21697
+      },
+      "name": "Complete authored city and airport are live",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 12,
+        "milliseconds": 23.442
+      },
+      "name": "city sandbox tank creates fresh tank",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city sandbox tank immediately occupies new tank",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "city sandbox tank charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city sandbox tank preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_tank_16478918_1_830e74a1e1fc"
+      },
+      "name": "city sandbox tank returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]",
+        "distance_from_origin": 12.1428079605103,
+        "position": "(-545.0, 5.58532, -182.1287)"
+      },
+      "name": "city sandbox tank entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city sandbox tank physical tank starts outside all solid buildings",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "health": 100.0,
+        "position": "(-545.0, 5.46, -182.1287)",
+        "speed_mps": 0.0000140673346322728
+      },
+      "name": "city sandbox tank tank settles without fall or impact damage",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 13,
+        "milliseconds": 12.941
+      },
+      "name": "city duplicate tank creates fresh tank",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city duplicate tank immediately occupies new tank",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "city duplicate tank charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city duplicate tank preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_tank_16644774_2_17ae26b95a3f"
+      },
+      "name": "city duplicate tank returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]",
+        "distance_from_origin": 12.1293392181396,
+        "position": "(-545.0, 5.58532, -194.2574)"
+      },
+      "name": "city duplicate tank entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city duplicate tank physical tank starts outside all solid buildings",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "health": 100.0,
+        "position": "(-545.0, 5.46, -194.2574)",
+        "speed_mps": 0.0000140679667310906
+      },
+      "name": "city duplicate tank tank settles without fall or impact damage",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 14,
+        "milliseconds": 78.16
+      },
+      "name": "city occupied tank to fighter creates fresh fighter",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city occupied tank to fighter immediately occupies new fighter",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "city occupied tank to fighter charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city occupied tank to fighter preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_fighter_16788636_3_a978ece525cd"
+      },
+      "name": "city occupied tank to fighter returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]",
+        "distance_from_origin": 163.085922241211,
+        "position": "(-545.0, 160.0, -246.3574)"
+      },
+      "name": "city occupied tank to fighter entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "first_blocked_m": -1,
+        "samples": 85,
+        "step_m": 5
+      },
+      "name": "city occupied tank to fighter complete 420m departure corridor remains clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "origin": "(-545.0, 5.46, -194.2574)",
+        "spawn": "(-545.0, 160.0, -246.3574)"
+      },
+      "name": "city occupied tank to fighter nearby launch stays above minimum clear altitude",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "velocity": [
+          0.0,
+          0.0,
+          -140.0
+        ]
+      },
+      "name": "city occupied tank to fighter first-frame state contains launch speed",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 415.333038330078,
+        "minimum_speed_mps": 140.0,
+        "minimum_y": 160.0,
+        "ram_hits": 0,
+        "start_y": 160.0
+      },
+      "name": "city occupied tank to fighter real three-second departure flies without drop or collision",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 15,
+        "milliseconds": 77.015
+      },
+      "name": "city duplicate fighter creates fresh fighter",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city duplicate fighter immediately occupies new fighter",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "city duplicate fighter charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "city duplicate fighter preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_fighter_17121367_4_a6cb89f08ac5"
+      },
+      "name": "city duplicate fighter returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]",
+        "distance_from_origin": 103.992340087891,
+        "position": "(-545.0, 250.0, -716.1418)"
+      },
+      "name": "city duplicate fighter entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "first_blocked_m": -1,
+        "samples": 85,
+        "step_m": 5
+      },
+      "name": "city duplicate fighter complete 420m departure corridor remains clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "origin": "(-545.0, 160.0, -664.0418)",
+        "spawn": "(-545.0, 250.0, -716.1418)"
+      },
+      "name": "city duplicate fighter nearby launch stays above minimum clear altitude",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "velocity": [
+          0.0,
+          0.0,
+          -140.0
+        ]
+      },
+      "name": "city duplicate fighter first-frame state contains launch speed",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 415.33251953125,
+        "minimum_speed_mps": 140.0,
+        "minimum_y": 250.0,
+        "ram_hits": 0,
+        "start_y": 250.0
+      },
+      "name": "city duplicate fighter real three-second departure flies without drop or collision",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 16,
+        "milliseconds": 15.743
+      },
+      "name": "indoor origin tank safe outside creates fresh tank",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "indoor origin tank safe outside immediately occupies new tank",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "indoor origin tank safe outside charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "indoor origin tank safe outside preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_tank_17420622_5_c63034196da2"
+      },
+      "name": "indoor origin tank safe outside returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]",
+        "distance_from_origin": 20.0166511535645,
+        "position": "(-335.0, 5.58532, -48.01236)"
+      },
+      "name": "indoor origin tank safe outside entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "indoor origin tank safe outside physical tank starts outside all solid buildings",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "health": 100.0,
+        "position": "(-335.0, 5.46, -48.01236)",
+        "speed_mps": 0.0000140635993375327
+      },
+      "name": "indoor origin tank safe outside tank settles without fall or impact damage",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 17,
+        "milliseconds": 15.247
+      },
+      "name": "airport life mode tank creates fresh tank",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "airport life mode tank immediately occupies new tank",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "airport life mode tank charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "airport life mode tank preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_tank_17565975_6_bbabb0df667c"
+      },
+      "name": "airport life mode tank returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-2.0325, -0.965321, -6.4095), S: (4.065, 3.936447, 10.2145)]",
+        "distance_from_origin": 12.1628818511963,
+        "position": "(-2754.779, 7.54532, 11480.87)"
+      },
+      "name": "airport life mode tank entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "airport life mode tank physical tank starts outside all solid buildings",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "health": 100.0,
+        "position": "(-2754.779, 7.42, 11480.87)",
+        "speed_mps": 0.0000122120127343806
+      },
+      "name": "airport life mode tank tank settles without fall or impact damage",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 18,
+        "milliseconds": 75.578
+      },
+      "name": "airport life mode fighter creates fresh fighter",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "airport life mode fighter immediately occupies new fighter",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "airport life mode fighter charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "airport life mode fighter preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_fighter_17666793_7_99e73c3e18f6"
+      },
+      "name": "airport life mode fighter returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]",
+        "distance_from_origin": 161.229919433594,
+        "position": "(-2765.692, 160.0, 11429.92)"
+      },
+      "name": "airport life mode fighter entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "first_blocked_m": -1,
+        "samples": 85,
+        "step_m": 5
+      },
+      "name": "airport life mode fighter complete 420m departure corridor remains clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "origin": "(-2754.779, 7.42, 11480.87)",
+        "spawn": "(-2765.692, 160.0, 11429.92)"
+      },
+      "name": "airport life mode fighter nearby launch stays above minimum clear altitude",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "velocity": [
+          -29.3263645172119,
+          0.0,
+          -136.893981933594
+        ]
+      },
+      "name": "airport life mode fighter first-frame state contains launch speed",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 415.278137207031,
+        "minimum_speed_mps": 140.0,
+        "minimum_y": 160.0,
+        "ram_hits": 0,
+        "start_y": 160.0
+      },
+      "name": "airport life mode fighter real three-second departure flies without drop or collision",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "count": 19,
+        "milliseconds": 75.168
+      },
+      "name": "airport duplicate fighter creates fresh fighter",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "airport duplicate fighter immediately occupies new fighter",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after": 50000,
+        "before": 50000
+      },
+      "name": "airport duplicate fighter charges no vehicle money",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "airport duplicate fighter preserves all previous copies and their poses",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "id": "spawn_fighter_17928058_8_6f7c30f1306e"
+      },
+      "name": "airport duplicate fighter returns unique independent identity",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "bounds": "[P: (-6.8, -2.049976, -9.4), S: (13.6, 6.329976, 18.5)]",
+        "distance_from_origin": 103.992462158203,
+        "position": "(-2864.099, 250.0, 10970.62)"
+      },
+      "name": "airport duplicate fighter entire model and collider envelope starts clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "first_blocked_m": -1,
+        "samples": 85,
+        "step_m": 5
+      },
+      "name": "airport duplicate fighter complete 420m departure corridor remains clear",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "origin": "(-2853.186, 160.0, 11021.56)",
+        "spawn": "(-2864.099, 250.0, 10970.62)"
+      },
+      "name": "airport duplicate fighter nearby launch stays above minimum clear altitude",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "velocity": [
+          -29.3263645172119,
+          0.0,
+          -136.893981933594
+        ]
+      },
+      "name": "airport duplicate fighter first-frame state contains launch speed",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 415.278137207031,
+        "minimum_speed_mps": 140.0,
+        "minimum_y": 250.0,
+        "ram_hits": 0,
+        "start_y": 250.0
+      },
+      "name": "airport duplicate fighter real three-second departure flies without drop or collision",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "base": 11,
+        "final": 19,
+        "new": 8
+      },
+      "name": "All eight new copies remain with unique IDs",
+      "passed": true
+    }
+  ],
+  "count": 74,
+  "engine": "4.7.2-stable (official)",
+  "failures": 0,
+  "gpu_used": false,
+  "maximum_summon_milliseconds": 78.16,
+  "passed": true,
+  "scope": "Production complete main/world/airport, actual request_vehicle and first3s fighter flight, 8 fresh copies across sandbox/life modes; no save calls",
+  "source_hashes_after": {
+    "fighter_models.gd": "73fde383872f939241343fef977ccbae2a3638a609a42f444286143e7ca06304",
+    "fighter_motion.gd": "767a59981ce8dae732879a0a63ad80cf76f05b670e1694891359b35a060fd20e",
+    "harbor_vehicle.gd": "d8b6ee5be970747d265bc5319357ff6a4e4aeb987cc5d103ae77edba07129284",
+    "harbor_world.gd": "0279630cf2bd03a0142dbf7209fa9598909b8b09a0045460b2b1417e80a7fc88",
+    "main.gd": "b01594a143ed3578687a5c0befbbc28638b3330cd282652094cd5a063ada7d6f",
+    "map_migration.gd": "4e03f33a0b352acb0d7326191d5a6b316a25c86903d1b784083b029dc901163b",
+    "project.godot": "73e9b376b36a8f7e1927e84712a0587f0ea54d9c98e946d94dd7af64d139e5e4",
+    "tank_models.gd": "202608e72a1bcf5e9ccbecd0cd6a49702842299bd91dc2840e2b4fb083e43e8d",
+    "tank_motion.gd": "cede0495ee35bd5b61dd92ab5e880e356b4ae95d03c05dd51282bb5134250bf2",
+    "vehicle_factory.gd": "d65f3ee8d9a55f86c40cfacd6e4ed2dff738560723c5665bce1d50a206a736f2",
+    "vehicle_spawn.gd": "bd791fc60d54f8500dc45296c4c48cac5645be29e6da2dfc6d18df12f68c46d5"
+  },
+  "source_hashes_before": {
+    "fighter_models.gd": "73fde383872f939241343fef977ccbae2a3638a609a42f444286143e7ca06304",
+    "fighter_motion.gd": "767a59981ce8dae732879a0a63ad80cf76f05b670e1694891359b35a060fd20e",
+    "harbor_vehicle.gd": "d8b6ee5be970747d265bc5319357ff6a4e4aeb987cc5d103ae77edba07129284",
+    "harbor_world.gd": "0279630cf2bd03a0142dbf7209fa9598909b8b09a0045460b2b1417e80a7fc88",
+    "main.gd": "b01594a143ed3578687a5c0befbbc28638b3330cd282652094cd5a063ada7d6f",
+    "map_migration.gd": "4e03f33a0b352acb0d7326191d5a6b316a25c86903d1b784083b029dc901163b",
+    "project.godot": "73e9b376b36a8f7e1927e84712a0587f0ea54d9c98e946d94dd7af64d139e5e4",
+    "tank_models.gd": "202608e72a1bcf5e9ccbecd0cd6a49702842299bd91dc2840e2b4fb083e43e8d",
+    "tank_motion.gd": "cede0495ee35bd5b61dd92ab5e880e356b4ae95d03c05dd51282bb5134250bf2",
+    "vehicle_factory.gd": "d65f3ee8d9a55f86c40cfacd6e4ed2dff738560723c5665bce1d50a206a736f2",
+    "vehicle_spawn.gd": "bd791fc60d54f8500dc45296c4c48cac5645be29e6da2dfc6d18df12f68c46d5"
+  },
+  "source_unchanged": true,
+  "summon_times": [
+    {
+      "context": "city sandbox tank",
+      "kind": "tank",
+      "milliseconds": 23.442
+    },
+    {
+      "context": "city duplicate tank",
+      "kind": "tank",
+      "milliseconds": 12.941
+    },
+    {
+      "context": "city occupied tank to fighter",
+      "kind": "fighter",
+      "milliseconds": 78.16
+    },
+    {
+      "context": "city duplicate fighter",
+      "kind": "fighter",
+      "milliseconds": 77.015
+    },
+    {
+      "context": "indoor origin tank safe outside",
+      "kind": "tank",
+      "milliseconds": 15.743
+    },
+    {
+      "context": "airport life mode tank",
+      "kind": "tank",
+      "milliseconds": 15.247
+    },
+    {
+      "context": "airport life mode fighter",
+      "kind": "fighter",
+      "milliseconds": 75.578
+    },
+    {
+      "context": "airport duplicate fighter",
+      "kind": "fighter",
+      "milliseconds": 75.168
+    }
+  ],
+  "test_sha256": "1b7d475044c352acd3066932f71917074434e10dcc0b04cef219826a091a50c0",
+  "user_saves_touched": false
+}

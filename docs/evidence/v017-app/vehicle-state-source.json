@@ -1,0 +1,120 @@
+{
+	"checks": [
+		{
+			"evidence": {},
+			"name": "production tank kind and moving hierarchy survive the factory merge",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"meshes": 88,
+				"triangles": 23596
+			},
+			"name": "production tank retains authored model triangles in88drawmeshes",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "tank serialized state carries top-level aim and revision4",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"muzzle_error_m": 0.0
+			},
+			"name": "pre-ready restore preserves actual muzzle world pose",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "tank JSON roundtrip retains velocity angular velocity throttle and frozen state",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "tank restore wraps yaw clamps elevation and restores100hp100fuel",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "tank negative elevation clamps at12degrees depression",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "state without tank aim fields defaults to neutral aim",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "production factory recognises fighter and builds its model",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"saved_speed_mps": 555.13330078125
+			},
+			"name": "fighter save retains speed above old240mps guard",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "fighter pre-ready JSON restoration keeps speed throttle identity and100hp100fuel",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "save taken before physics restoration preserves pending high speed",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position_z": 290.750061035156,
+				"speed_mps": 555.132751464844
+			},
+			"name": "actual rigid-body integration restores fighter high speed",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "fighter corrupt excessive speed remains bounded at620mps",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "ordinary car keeps240mps guard and finite health fuel",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "fighter health and fuel remain100on subsequent production ticks",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position_z": 14.9750890731812,
+				"speed_kmh": 81.9863456726074
+			},
+			"name": "actual occupied HarborVehicle dispatch drives tank from Input actions",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "production tank differential drive animates wheels while pivoting",
+			"passed": true
+		}
+	],
+	"count": 18,
+	"failures": 0,
+	"hashes": {
+		"res://../source/combat_vehicle_state_test.gd": "65959f0425d286b404a72c5624a6250bc5b5529bd5aa0f4069b89ce051e4d38b",
+		"res://scripts/fighter_models.gd": "73fde383872f939241343fef977ccbae2a3638a609a42f444286143e7ca06304",
+		"res://scripts/fighter_motion.gd": "767a59981ce8dae732879a0a63ad80cf76f05b670e1694891359b35a060fd20e",
+		"res://scripts/harbor_vehicle.gd": "d8b6ee5be970747d265bc5319357ff6a4e4aeb987cc5d103ae77edba07129284",
+		"res://scripts/tank_models.gd": "202608e72a1bcf5e9ccbecd0cd6a49702842299bd91dc2840e2b4fb083e43e8d",
+		"res://scripts/tank_motion.gd": "cede0495ee35bd5b61dd92ab5e880e356b4ae95d03c05dd51282bb5134250bf2",
+		"res://scripts/vehicle_factory.gd": "d65f3ee8d9a55f86c40cfacd6e4ed2dff738560723c5665bce1d50a206a736f2"
+	},
+	"passed": true,
+	"scope": "Production Factory.make and HarborVehicle get_state/apply_state, JSON roundtrip, real Jolt restoration; no whole-city or GPU run"
+}

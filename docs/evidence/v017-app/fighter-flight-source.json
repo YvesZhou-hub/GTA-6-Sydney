@@ -1,0 +1,331 @@
+{
+  "backend": "Jolt Physics",
+  "checks": [
+    {
+      "metrics": {},
+      "name": "Factory registers actual production fighter",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "angular_velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "barrel_pitch": 0.0,
+        "dents": [],
+        "frozen": false,
+        "fuel": 100.0,
+        "health": 100.0,
+        "hover_lift_offset": 0.0,
+        "id": "fighter_flight_fixture",
+        "kind": "fighter",
+        "model_revision": 4,
+        "position": [
+          0.0,
+          1000.0,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "throttle": 0.252,
+        "turret_yaw": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          -140.0
+        ],
+        "version": 1,
+        "weapon_aim_offsets": {}
+      },
+      "name": "Saving immediately after boarding preserves pending launch",
+      "passed": true
+    },
+    {
+      "metrics": {},
+      "name": "Real Jolt backend and live collision body",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "colliders": 31,
+        "collision_max": "(6.8, 4.28, 9.1)",
+        "collision_min": "(-6.8, -2.05, -9.4)",
+        "max": "(6.8, 4.28, 9.1)",
+        "meshes": 32,
+        "min": "(-6.8, -2.049999, -9.4)",
+        "triangles": 41492
+      },
+      "name": "Original model has independent detailed twin-engine geometry",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "colliders": 31,
+        "collision_max": "(6.8, 4.28, 9.1)",
+        "collision_min": "(-6.8, -2.05, -9.4)",
+        "max": "(6.8, 4.28, 9.1)",
+        "meshes": 32,
+        "min": "(-6.8, -2.049999, -9.4)",
+        "triangles": 41492
+      },
+      "name": "Wings, tail and nose fit declared metre envelope",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "colliders": 31,
+        "collision_max": "(6.8, 4.28, 9.1)",
+        "collision_min": "(-6.8, -2.05, -9.4)",
+        "max": "(6.8, 4.28, 9.1)",
+        "meshes": 32,
+        "min": "(-6.8, -2.049999, -9.4)",
+        "triangles": 41492
+      },
+      "name": "Three real landing wheels preserve exact ground plane",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "muzzle": "(0.0, -0.08, -9.8)"
+      },
+      "name": "Muzzle is beyond nose and points forward",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "speed_mps": 140.0
+      },
+      "name": "Pending first-integrator launch actually applies",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 2100.01245117188,
+        "final_speed_mps": 140.0,
+        "height_change": 0.0,
+        "max_angular_speed": 0.0,
+        "max_pitch_rad": 0.0,
+        "max_roll_rad": 0.0,
+        "max_speed_mps": 140.0,
+        "max_y": 1000.0,
+        "maximum_frame_distance_m": 2.3333740234375,
+        "min_speed_mps": 140.0,
+        "min_y": 1000.0,
+        "seconds": 15.0
+      },
+      "name": "Hands-off first fifteen seconds do not drop or stall",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 6944.11767578125,
+        "final_speed_mps": 555.554748535156,
+        "height_change": 0.0,
+        "max_angular_speed": 0.0,
+        "max_pitch_rad": 0.0,
+        "max_roll_rad": 0.0,
+        "max_speed_mps": 555.554748535156,
+        "max_y": 1000.0,
+        "maximum_frame_distance_m": 9.25927734375,
+        "min_speed_mps": 140.0,
+        "min_y": 1000.0,
+        "seconds": 15.0
+      },
+      "name": "W accelerates through real forces to 2000 km/h",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "throttle": 1.0,
+        "velocity": [
+          0.0,
+          0.0,
+          -555.554748535156
+        ]
+      },
+      "name": "Production save guard preserves 2000 km/h",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 2777.63671875,
+        "final_speed_mps": 555.554748535156,
+        "height_change": 0.0,
+        "max_angular_speed": 0.0,
+        "max_pitch_rad": 0.0,
+        "max_roll_rad": 0.0,
+        "max_speed_mps": 555.554748535156,
+        "max_y": 1000.0,
+        "maximum_frame_distance_m": 9.2587890625,
+        "min_speed_mps": 555.554748535156,
+        "min_y": 1000.0,
+        "seconds": 5.0
+      },
+      "name": "Released throttle holds full-speed level flight",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 3714.76318359375,
+        "final_speed_mps": 554.344482421875,
+        "heading_change_rad": 1.02199804782867,
+        "height_change": -2.68316650390625,
+        "max_angular_speed": 0.591595828533173,
+        "max_pitch_rad": 0.00471377348867645,
+        "max_roll_rad": 0.383649706840515,
+        "max_speed_mps": 555.554748535156,
+        "max_y": 1000.0,
+        "maximum_frame_distance_m": 9.2591609954834,
+        "min_speed_mps": 554.344482421875,
+        "min_y": 997.311279296875,
+        "seconds": 7.0
+      },
+      "name": "Coordinated high-speed turn changes actual heading",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 3331.97802734375,
+        "final_speed_mps": 555.555358886719,
+        "height_change": 0.612060546875,
+        "max_angular_speed": 0.579809010028839,
+        "max_pitch_rad": 0.00119761033672268,
+        "max_roll_rad": 0.37064453959465,
+        "max_speed_mps": 555.555358886719,
+        "max_y": 997.928894042969,
+        "maximum_frame_distance_m": 9.2598123550415,
+        "min_speed_mps": 554.344482421875,
+        "min_y": 997.316833496094,
+        "seconds": 6.0
+      },
+      "name": "Release steering smoothly levels the airframe",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 2686.4140625,
+        "final_speed_mps": 555.548095703125,
+        "height_change": 1401.71905517578,
+        "max_angular_speed": 0.692313492298126,
+        "max_pitch_rad": 0.711977129687277,
+        "max_roll_rad": 0.00000625121492703329,
+        "max_speed_mps": 555.555358886719,
+        "max_y": 2399.64794921875,
+        "maximum_frame_distance_m": 9.25918769836426,
+        "min_speed_mps": 546.380126953125,
+        "min_y": 997.928894042969,
+        "seconds": 5.0
+      },
+      "name": "R input produces an actual sustained climb",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "pitch": 0.0000156740061363104,
+        "vertical_mps": 0.0088198259472847
+      },
+      "name": "Release pitch returns to stable level flight",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 1638.48974609375,
+        "final_speed_mps": 555.387329101562,
+        "height_change": -505.67626953125,
+        "max_angular_speed": 0.563117504119873,
+        "max_pitch_rad": 0.458274811890979,
+        "max_roll_rad": 0.000000132808267494511,
+        "max_speed_mps": 555.554748535156,
+        "max_y": 2826.79565429688,
+        "maximum_frame_distance_m": 9.26108360290527,
+        "min_speed_mps": 549.828491210938,
+        "min_y": 2321.11938476562,
+        "seconds": 3.0
+      },
+      "name": "F input produces a controlled descent",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 1216.75927734375,
+        "final_speed_mps": 70.0503158569336,
+        "height_change": 0.0,
+        "max_angular_speed": 0.0000199582373170415,
+        "max_pitch_rad": 0.0000110879145724992,
+        "max_roll_rad": 0.0000000000186446431210685,
+        "max_speed_mps": 555.555053710938,
+        "max_y": 2089.62182617188,
+        "maximum_frame_distance_m": 9.21820259094238,
+        "min_speed_mps": 70.0503158569336,
+        "min_y": 2089.62182617188,
+        "seconds": 6.0
+      },
+      "name": "Space airbrake reduces real speed without a fall",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 826.166442871094,
+        "final_speed_mps": 70.5409774780273,
+        "height_change": 0.0,
+        "max_angular_speed": 0.0000199582373170415,
+        "max_pitch_rad": 0.0000110879145724992,
+        "max_roll_rad": 0.0000000000186446431210685,
+        "max_speed_mps": 233.928375244141,
+        "max_y": 2089.62182617188,
+        "maximum_frame_distance_m": 3.89862394332886,
+        "min_speed_mps": 70.0503158569336,
+        "min_y": 2089.62182617188,
+        "seconds": 6.0
+      },
+      "name": "S reduces throttle and retains assisted low-speed flight",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "max_frame_distance_m": 9.26108360290527,
+        "max_speed_kmh": 1999.99929199219,
+        "per_frame_limit_m": 9.27925925925926
+      },
+      "name": "No instability, overspeed or position discontinuity observed",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "distance": 1111.0546875,
+        "final_speed_mps": 555.554748535156,
+        "height_change": 0.0,
+        "max_angular_speed": 0.0,
+        "max_pitch_rad": 0.0,
+        "max_roll_rad": 0.0,
+        "max_speed_mps": 555.554748535156,
+        "max_y": 1000.0,
+        "maximum_frame_distance_m": 9.2587890625,
+        "min_speed_mps": 555.554748535156,
+        "min_y": 1000.0,
+        "seconds": 2.0
+      },
+      "name": "Restored production aircraft preserves full-speed flight",
+      "passed": true
+    }
+  ],
+  "count": 21,
+  "engine": "4.7.2-stable (official)",
+  "engine_velocity_limit": 650.0,
+  "factory_sha256": "d65f3ee8d9a55f86c40cfacd6e4ed2dff738560723c5665bce1d50a206a736f2",
+  "failures": 0,
+  "model_sha256": "73fde383872f939241343fef977ccbae2a3638a609a42f444286143e7ca06304",
+  "motion_sha256": "767a59981ce8dae732879a0a63ad80cf76f05b670e1694891359b35a060fd20e",
+  "passed": true,
+  "physics_hz": 60,
+  "project_sha256": "73e9b376b36a8f7e1927e84712a0587f0ea54d9c98e946d94dd7af64d139e5e4",
+  "scope": "Actual production HarborVehicle/Factory/Models/Motion, isolated real Jolt scene and Input actions; frozen new copy boarded through production pending launch, no pose or velocity writes while flying. Immediate save and 2000 km/h save/reload included; city spawning, destruction and weapons integration tested by root",
+  "test_sha256": "f07d20b9043f3f40c2752b34a31c39c51096a834467ab6348513a455025c5dbe",
+  "vehicle_sha256": "d8b6ee5be970747d265bc5319357ff6a4e4aeb987cc5d103ae77edba07129284"
+}

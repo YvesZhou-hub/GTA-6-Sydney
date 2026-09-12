@@ -1,0 +1,911 @@
+{
+	"checks": [
+		{
+			"name": "every prior QVB OSM damage component ID is preserved",
+			"passed": true
+		},
+		{
+			"name": "legacy manifest agrees with source base wall-height and part policies",
+			"passed": true
+		},
+		{
+			"name": "navigation arrival is the tested public Market Street threshold",
+			"passed": true
+		},
+		{
+			"name": "exactly 25 existing QVB OSM footprints replaced",
+			"passed": true
+		},
+		{
+			"name": "every structural collision mesh matches its visible solid",
+			"passed": true
+		},
+		{
+			"name": "every QVB mesh vertex is drawn; no mixed-index vertices are silently omitted",
+			"passed": true
+		},
+		{
+			"name": "no degenerate QVB triangles",
+			"passed": true
+		},
+		{
+			"name": "all QVB face winding agrees with normals",
+			"passed": true
+		},
+		{
+			"name": "bounded QVB mesh triangle count 321332",
+			"passed": true
+		},
+		{
+			"name": "production generic building filter reserves all 25 QVB parts",
+			"passed": true
+		},
+		{
+			"name": "93 longitudinal aisle stations have real floor and standing-capsule clearance",
+			"passed": true
+		},
+		{
+			"name": "all minor-dome meshes including collar rings stay within their own OSM-centred turret; no misplaced rings intrude into the central dome",
+			"passed": true
+		},
+		{
+			"name": "actual retained lantern geometry reaches official nominal 58m above local ground",
+			"passed": true
+		},
+		{
+			"name": "actual outer copper shell is19m wide and has35.4m spring/47.9m crown with28cm closed skin, independently of retail floors",
+			"passed": true
+		},
+		{
+			"name": "actual separate coloured-glass inner dome is11.3m wide at26.5–32.4m",
+			"passed": true
+		},
+		{
+			"name": "retail gallery remains at its independently calibrated floor level 5.7",
+			"passed": true
+		},
+		{
+			"name": "retail gallery remains at its independently calibrated floor level 10.9",
+			"passed": true
+		},
+		{
+			"name": "18 interior-to-sky rays hit the actual continuous glass roof collider",
+			"passed": true
+		},
+		{
+			"name": "all six former dome-to-arcade sky gaps have physical roof infill",
+			"passed": true
+		},
+		{
+			"name": "actual first visible surface above the atrium is coloured inner-dome glass, not an opaque patch",
+			"passed": true
+		},
+		{
+			"name": "actual first-visible roof alternates exposed inner framing and glass panes; no grey cover hides the trusses",
+			"passed": true
+		},
+		{
+			"name": "central spacer shows sandstone externally and red finish only towards the public inner dome",
+			"passed": true
+		},
+		{
+			"name": "George arch relief is actually the first rendered mesh ahead of the full wall",
+			"passed": true
+		},
+		{
+			"name": "arched street glazing survives the final mesh index stream",
+			"passed": true
+		},
+		{
+			"name": "interior round arch is visible ahead of closed shop volume and glass",
+			"passed": true
+		},
+		{
+			"name": "Market doorway has an actual curved opening: lower shoulder clear, upper spandrel solid",
+			"passed": true
+		},
+		{
+			"name": "city/qvb/roof_glazing has a closed physical skin",
+			"passed": true
+		},
+		{
+			"name": "city/qvb/roof_glazing hides glazing and frames and disables collision together",
+			"passed": true
+		},
+		{
+			"name": "city/qvb/roof_transition has a closed physical skin",
+			"passed": true
+		},
+		{
+			"name": "city/qvb/roof_transition hides glazing and frames and disables collision together",
+			"passed": true
+		},
+		{
+			"name": "qvb_market_druitt_grand_walk outward production HarborPlayer walks continuously without jumping or teleporting",
+			"passed": true
+		},
+		{
+			"name": "qvb_market_druitt_grand_walk return production HarborPlayer walks continuously without jumping or teleporting",
+			"passed": true
+		},
+		{
+			"name": "qvb_george_york_public_crossing outward production HarborPlayer walks continuously without jumping or teleporting",
+			"passed": true
+		},
+		{
+			"name": "qvb_george_york_public_crossing return production HarborPlayer walks continuously without jumping or teleporting",
+			"passed": true
+		},
+		{
+			"name": "migration preserves settled Grand Walk player (0.0, 0.0, -84.0)",
+			"passed": true
+		},
+		{
+			"name": "migration rejects Grand Walk player buried 6 cm (0.0, 0.0, -84.0)",
+			"passed": true
+		},
+		{
+			"name": "migration preserves settled Grand Walk player (3.6, 0.0, -35.0)",
+			"passed": true
+		},
+		{
+			"name": "migration rejects Grand Walk player buried 6 cm (3.6, 0.0, -35.0)",
+			"passed": true
+		},
+		{
+			"name": "migration preserves settled Grand Walk player (0.0, 0.0, 0.0)",
+			"passed": true
+		},
+		{
+			"name": "migration rejects Grand Walk player buried 6 cm (0.0, 0.0, 0.0)",
+			"passed": true
+		},
+		{
+			"name": "migration preserves settled Grand Walk player (3.6, 0.0, 35.0)",
+			"passed": true
+		},
+		{
+			"name": "migration rejects Grand Walk player buried 6 cm (3.6, 0.0, 35.0)",
+			"passed": true
+		},
+		{
+			"name": "migration preserves settled Grand Walk player (0.0, 0.0, 84.0)",
+			"passed": true
+		},
+		{
+			"name": "migration rejects Grand Walk player buried 6 cm (0.0, 0.0, 84.0)",
+			"passed": true
+		},
+		{
+			"name": "actual QVB roof is rejected as a migration landing (-355.8963, 4.5, 1225.526)",
+			"passed": true
+		},
+		{
+			"name": "old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (0.0, 0.0, -84.0)",
+			"passed": true
+		},
+		{
+			"name": "migrated production player settles on public tile without later horizontal relocation (0.0, 0.0, -84.0)",
+			"passed": true
+		},
+		{
+			"name": "actual QVB roof is rejected as a migration landing (-343.7943, 4.5, 1274.05)",
+			"passed": true
+		},
+		{
+			"name": "old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (3.6, 0.0, -35.0)",
+			"passed": true
+		},
+		{
+			"name": "migrated production player settles on public tile without later horizontal relocation (3.6, 0.0, -35.0)",
+			"passed": true
+		},
+		{
+			"name": "actual QVB roof is rejected as a migration landing (-352.277, 4.5, 1309.448)",
+			"passed": true
+		},
+		{
+			"name": "old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (0.0, 0.0, 0.0)",
+			"passed": true
+		},
+		{
+			"name": "migrated production player settles on public tile without later horizontal relocation (0.0, 0.0, 0.0)",
+			"passed": true
+		},
+		{
+			"name": "actual QVB roof is rejected as a migration landing (-340.7783, 4.5, 1343.985)",
+			"passed": true
+		},
+		{
+			"name": "old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (3.6, 0.0, 35.0)",
+			"passed": true
+		},
+		{
+			"name": "migrated production player settles on public tile without later horizontal relocation (3.6, 0.0, 35.0)",
+			"passed": true
+		},
+		{
+			"name": "actual QVB roof is rejected as a migration landing (-348.6577, 4.5, 1393.37)",
+			"passed": true
+		},
+		{
+			"name": "old Y4.5 save migrates vertically onto QVB Y4.54 floor at identical XZ (0.0, 0.0, 84.0)",
+			"passed": true
+		},
+		{
+			"name": "migrated production player settles on public tile without later horizontal relocation (0.0, 0.0, 84.0)",
+			"passed": true
+		},
+		{
+			"name": "public-floor hit inside closed private QVB shop shell is rejected by actual containment",
+			"passed": true
+		},
+		{
+			"name": "closed-shop fallback finds clear ground and cannot select its private rooftop",
+			"passed": true
+		},
+		{
+			"name": "copper roof and its ribs disappear with the retained upper dome damage ID",
+			"passed": true
+		},
+		{
+			"name": "legacy dome damage restores geometry and collision",
+			"passed": true
+		}
+	],
+	"continuous_walks": true,
+	"counts": {
+		"checks": 63,
+		"components": 43,
+		"legacy_ids": 39,
+		"triangles": 321332
+	},
+	"hashes": {
+		"res://../source/qvb_public_test.gd": "eb3705044d1d63dbf3dbaf54ffed658b01899bc1db5027d6aa640149bf54473a",
+		"res://scripts/city_map.gd": "f5bf1c4f69635fcc9da4d97ee991fd4b668226e0cc49c988d8d9a3caa5d5e6e5",
+		"res://scripts/map_migration.gd": "4e03f33a0b352acb0d7326191d5a6b316a25c86903d1b784083b029dc901163b",
+		"res://scripts/qvb_public.gd": "fc55d0f93a4c513a13be456c1b47b6e3089ffc61af5c6f999302a6372edf978d"
+	},
+	"migration": [
+		{
+			"at": [
+				-355.896301269531,
+				4.53083276748657,
+				1225.52600097656
+			],
+			"buried_rejected": true,
+			"preserved": true
+		},
+		{
+			"at": [
+				-350.188385009766,
+				4.53055906295776,
+				1274.32543945312
+			],
+			"buried_rejected": true,
+			"preserved": true
+		},
+		{
+			"at": [
+				-352.277008056641,
+				4.53055906295776,
+				1309.44799804688
+			],
+			"buried_rejected": true,
+			"preserved": true
+		},
+		{
+			"at": [
+				-347.172332763672,
+				4.53055906295776,
+				1344.26037597656
+			],
+			"buried_rejected": true,
+			"preserved": true
+		},
+		{
+			"at": [
+				-348.65771484375,
+				4.53055906295776,
+				1393.36999511719
+			],
+			"buried_rejected": true,
+			"preserved": true
+		}
+	],
+	"old_floor_recovery": [
+		{
+			"floor_id": "city/qvb/public_floor",
+			"relocated": [
+				-355.896301269531,
+				4.57999992370605,
+				1225.52600097656
+			],
+			"roof_id": "osm/way/568422315/storey_group/0",
+			"roof_probe": [
+				-355.896301269531,
+				4.5,
+				1225.52600097656
+			],
+			"roof_rejected": true,
+			"same_xz": true,
+			"saved": [
+				-355.896301269531,
+				4.5,
+				1225.52600097656
+			],
+			"settled": [
+				-355.896301269531,
+				4.53145694732666,
+				1225.52600097656
+			],
+			"settled_safe": true,
+			"shifted": 1
+		},
+		{
+			"floor_id": "city/qvb/public_floor",
+			"relocated": [
+				-350.188385009766,
+				4.57999992370605,
+				1274.32543945312
+			],
+			"roof_id": "osm/way/40717424/storey_group/0",
+			"roof_probe": [
+				-343.794342041016,
+				4.5,
+				1274.04968261719
+			],
+			"roof_rejected": true,
+			"same_xz": true,
+			"saved": [
+				-350.188385009766,
+				4.5,
+				1274.32543945312
+			],
+			"settled": [
+				-350.188385009766,
+				4.53145694732666,
+				1274.32543945312
+			],
+			"settled_safe": true,
+			"shifted": 1
+		},
+		{
+			"floor_id": "city/qvb/public_floor",
+			"relocated": [
+				-352.277008056641,
+				4.57999992370605,
+				1309.44799804688
+			],
+			"roof_id": "osm/way/568422351/storey_group/1",
+			"roof_probe": [
+				-352.277008056641,
+				4.5,
+				1309.44799804688
+			],
+			"roof_rejected": true,
+			"same_xz": true,
+			"saved": [
+				-352.277008056641,
+				4.5,
+				1309.44799804688
+			],
+			"settled": [
+				-352.277008056641,
+				4.53145694732666,
+				1309.44799804688
+			],
+			"settled_safe": true,
+			"shifted": 1
+		},
+		{
+			"floor_id": "city/qvb/public_floor",
+			"relocated": [
+				-347.172332763672,
+				4.57999992370605,
+				1344.26037597656
+			],
+			"roof_id": "osm/way/40717424/storey_group/0",
+			"roof_probe": [
+				-340.778259277344,
+				4.5,
+				1343.98461914062
+			],
+			"roof_rejected": true,
+			"same_xz": true,
+			"saved": [
+				-347.172332763672,
+				4.5,
+				1344.26037597656
+			],
+			"settled": [
+				-347.172332763672,
+				4.53145694732666,
+				1344.26037597656
+			],
+			"settled_safe": true,
+			"shifted": 1
+		},
+		{
+			"floor_id": "city/qvb/public_floor",
+			"relocated": [
+				-348.65771484375,
+				4.57999992370605,
+				1393.36999511719
+			],
+			"roof_id": "osm/way/568422314/storey_group/0",
+			"roof_probe": [
+				-348.65771484375,
+				4.5,
+				1393.36999511719
+			],
+			"roof_rejected": true,
+			"same_xz": true,
+			"saved": [
+				-348.65771484375,
+				4.5,
+				1393.36999511719
+			],
+			"settled": [
+				-348.65771484375,
+				4.53145694732666,
+				1393.36999511719
+			],
+			"settled_safe": true,
+			"shifted": 1
+		}
+	],
+	"passed": true,
+	"visual_geometry": [
+		{
+			"first_physical_id": "city/qvb/roof_transition",
+			"kind": "dome_roof_infill",
+			"local_probe": [
+				-7.0,
+				12.0,
+				-8.0
+			]
+		},
+		{
+			"first_physical_id": "city/qvb/roof_transition",
+			"kind": "dome_roof_infill",
+			"local_probe": [
+				7.0,
+				12.0,
+				-8.0
+			]
+		},
+		{
+			"first_physical_id": "city/qvb/roof_transition",
+			"kind": "dome_roof_infill",
+			"local_probe": [
+				-7.0,
+				12.0,
+				8.0
+			]
+		},
+		{
+			"first_physical_id": "city/qvb/roof_transition",
+			"kind": "dome_roof_infill",
+			"local_probe": [
+				7.0,
+				12.0,
+				8.0
+			]
+		},
+		{
+			"first_physical_id": "city/qvb/roof_glazing",
+			"kind": "dome_roof_infill",
+			"local_probe": [
+				0.0,
+				12.0,
+				-12.0
+			]
+		},
+		{
+			"first_physical_id": "city/qvb/roof_glazing",
+			"kind": "dome_roof_infill",
+			"local_probe": [
+				0.0,
+				12.0,
+				12.0
+			]
+		},
+		{
+			"first_id": "osm/way/568422349/storey_group/0",
+			"first_material": "qvb_green",
+			"kind": "inner_dome_first_visible_surface",
+			"local_probe": [
+				1.39999997615814,
+				3.0,
+				1.60000002384186
+			]
+		},
+		{
+			"first_id": "osm/way/568422349/storey_group/0",
+			"first_material": "qvb_green",
+			"kind": "inner_dome_first_visible_surface",
+			"local_probe": [
+				0.0,
+				3.0,
+				-3.5
+			]
+		},
+		{
+			"first_id": "osm/way/568422349/storey_group/0",
+			"first_material": "qvb_green",
+			"kind": "inner_dome_first_visible_surface",
+			"local_probe": [
+				5.0,
+				3.0,
+				0.0
+			]
+		}
+	],
+	"walks": [
+		{
+			"airborne_frames": 0,
+			"name": "qvb_market_druitt_grand_walk outward",
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-355.907043457031,
+						4.53087711334229,
+						1225.65808105469
+					],
+					"frames": 165,
+					"reached": true,
+					"target": [
+						-355.896301269531,
+						4.53999996185303,
+						1225.52600097656
+					]
+				},
+				{
+					"actual": [
+						-351.794006347656,
+						4.53087711334229,
+						1237.53515625
+					],
+					"frames": 142,
+					"reached": true,
+					"target": [
+						-351.782592773438,
+						4.53999996185303,
+						1237.35974121094
+					]
+				},
+				{
+					"actual": [
+						-350.199432373047,
+						4.53087711334229,
+						1274.46594238281
+					],
+					"frames": 423,
+					"reached": true,
+					"target": [
+						-350.188385009766,
+						4.53999996185303,
+						1274.32543945312
+					]
+				},
+				{
+					"actual": [
+						-352.265472412109,
+						4.53087711334229,
+						1309.64392089844
+					],
+					"frames": 403,
+					"reached": true,
+					"target": [
+						-352.277008056641,
+						4.53999996185303,
+						1309.44799804688
+					]
+				},
+				{
+					"actual": [
+						-347.195892333984,
+						4.53087711334229,
+						1344.43957519531
+					],
+					"frames": 402,
+					"reached": true,
+					"target": [
+						-347.172332763672,
+						4.53999996185303,
+						1344.26037597656
+					]
+				},
+				{
+					"actual": [
+						-345.587921142578,
+						4.53087711334229,
+						1381.39489746094
+					],
+					"frames": 423,
+					"reached": true,
+					"target": [
+						-345.578125,
+						4.53999996185303,
+						1381.22607421875
+					]
+				},
+				{
+					"actual": [
+						-348.631225585938,
+						4.53087711334229,
+						1393.53308105469
+					],
+					"frames": 141,
+					"reached": true,
+					"target": [
+						-348.65771484375,
+						4.53999996185303,
+						1393.36999511719
+					]
+				},
+				{
+					"actual": [
+						-348.064361572266,
+						4.49087715148926,
+						1407.51013183594
+					],
+					"frames": 158,
+					"reached": true,
+					"target": [
+						-348.054504394531,
+						4.53999996185303,
+						1407.35693359375
+					]
+				}
+			]
+		},
+		{
+			"airborne_frames": 0,
+			"name": "qvb_market_druitt_grand_walk return",
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-348.647888183594,
+						4.53087711334229,
+						1393.23803710938
+					],
+					"frames": 177,
+					"reached": true,
+					"target": [
+						-348.65771484375,
+						4.53999996185303,
+						1393.36999511719
+					]
+				},
+				{
+					"actual": [
+						-345.614044189453,
+						4.53087711334229,
+						1381.09973144531
+					],
+					"frames": 141,
+					"reached": true,
+					"target": [
+						-345.578125,
+						4.53999996185303,
+						1381.22607421875
+					]
+				},
+				{
+					"actual": [
+						-347.164001464844,
+						4.53087711334229,
+						1344.06848144531
+					],
+					"frames": 424,
+					"reached": true,
+					"target": [
+						-347.172332763672,
+						4.53999996185303,
+						1344.26037597656
+					]
+				},
+				{
+					"actual": [
+						-352.2529296875,
+						4.53087711334229,
+						1309.27233886719
+					],
+					"frames": 402,
+					"reached": true,
+					"target": [
+						-352.277008056641,
+						4.53999996185303,
+						1309.44799804688
+					]
+				},
+				{
+					"actual": [
+						-350.203277587891,
+						4.53087711334229,
+						1274.18579101562
+					],
+					"frames": 402,
+					"reached": true,
+					"target": [
+						-350.188385009766,
+						4.53999996185303,
+						1274.32543945312
+					]
+				},
+				{
+					"actual": [
+						-351.771575927734,
+						4.53087711334229,
+						1237.22595214844
+					],
+					"frames": 423,
+					"reached": true,
+					"target": [
+						-351.782592773438,
+						4.53999996185303,
+						1237.35974121094
+					]
+				},
+				{
+					"actual": [
+						-355.885314941406,
+						4.53096628189087,
+						1225.34936523438
+					],
+					"frames": 142,
+					"reached": true,
+					"target": [
+						-355.896301269531,
+						4.53999996185303,
+						1225.52600097656
+					]
+				},
+				{
+					"actual": [
+						-356.489013671875,
+						4.49087715148926,
+						1211.38610839844
+					],
+					"frames": 158,
+					"reached": true,
+					"target": [
+						-356.49951171875,
+						4.53999996185303,
+						1211.5390625
+					]
+				}
+			]
+		},
+		{
+			"airborne_frames": 0,
+			"name": "qvb_george_york_public_crossing outward",
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-342.466156005859,
+						4.53087711334229,
+						1309.00842285156
+					],
+					"frames": 108,
+					"reached": true,
+					"target": [
+						-342.286285400391,
+						4.53999996185303,
+						1309.01708984375
+					]
+				},
+				{
+					"actual": [
+						-352.462524414062,
+						4.53087711334229,
+						1309.43884277344
+					],
+					"frames": 112,
+					"reached": true,
+					"target": [
+						-352.277008056641,
+						4.53999996185303,
+						1309.44799804688
+					]
+				},
+				{
+					"actual": [
+						-362.458709716797,
+						4.53087711334229,
+						1309.86999511719
+					],
+					"frames": 112,
+					"reached": true,
+					"target": [
+						-362.267730712891,
+						4.53999996185303,
+						1309.87890625
+					]
+				},
+				{
+					"actual": [
+						-371.415985107422,
+						4.49087715148926,
+						1310.25610351562
+					],
+					"frames": 100,
+					"reached": true,
+					"target": [
+						-371.259368896484,
+						4.53999996185303,
+						1310.2666015625
+					]
+				}
+			]
+		},
+		{
+			"airborne_frames": 0,
+			"name": "qvb_george_york_public_crossing return",
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-362.0888671875,
+						4.53087711334229,
+						1309.88623046875
+					],
+					"frames": 120,
+					"reached": true,
+					"target": [
+						-362.267730712891,
+						4.53999996185303,
+						1309.87890625
+					]
+				},
+				{
+					"actual": [
+						-352.092437744141,
+						4.53087711334229,
+						1309.45715332031
+					],
+					"frames": 112,
+					"reached": true,
+					"target": [
+						-352.277008056641,
+						4.53999996185303,
+						1309.44799804688
+					]
+				},
+				{
+					"actual": [
+						-342.096252441406,
+						4.53087711334229,
+						1309.02600097656
+					],
+					"frames": 112,
+					"reached": true,
+					"target": [
+						-342.286285400391,
+						4.53999996185303,
+						1309.01708984375
+					]
+				},
+				{
+					"actual": [
+						-333.138854980469,
+						4.49087715148926,
+						1308.63989257812
+					],
+					"frames": 100,
+					"reached": true,
+					"target": [
+						-333.294647216797,
+						4.53999996185303,
+						1308.62939453125
+					]
+				}
+			]
+		}
+	]
+}

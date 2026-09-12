@@ -1,40 +1,66 @@
-# v0.1.6-preview.1 验证记录
+# v0.1.7-preview.1 验证记录
 
-这轮覆盖歌剧院、悉尼塔、码头与连接桥、W Sydney、ICC 场馆、银行与写字楼、部分达令广场店面。环境：Apple M4 / 16 GB、macOS 26.5、Godot 4.7.2、Metal / Forward+、Jolt。旧版记录保留在 [v0.1.5](TESTING_0.1.5.md)，未混入本次计数。
+本轮覆盖公共建筑与通道、地图步行区域、坦克与战斗机、撞毁及射击、共享材质调参、近景立面加载，以及悉尼夏季 12 倍连续昼夜和日落。实际引擎、启动参数、源文件与 App 身份以证据清单为准。[v0.1.6 记录](TESTING_0.1.6.md)保留原版本身份。
 
 ## 最终下载包
 
-Apple Silicon 原生离线应用，ad-hoc 签名，未公证。ZIP 大小 32,940,060 字节，SHA-256：
+macOS Apple Silicon 离线预览 App；签名情况见构建清单，不把 ad-hoc 签名称为公证。ZIP 共 42,470,888 字节，SHA-256：
 
 ```text
-9269a3f9a39c79b23ef1a2ac349cad535a4d275d37866f3a5c10d236948b33e8
+b0b6f8dc09e20f39f971ec6bdc805e5756efb7176bc1fc0f394318f0fd2f057b
 ```
 
-[构建清单](evidence/v016-app/build.json)核对 124 个游戏文件，导出前冻结，启动与打包后再次比对。最终全新解压、签名、版本、PCK 资源和源码 ZIP 对应检查在发布资产 [release-validation.json](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.6-preview.1/release-validation.json)。
+[构建清单](evidence/v017-app/build.json)的 172 个游戏文件均与当前源码一致。七个原生启动记录的可执行文件与 PCK 哈希均匹配此 ZIP 中的实际文件。[证据索引](evidence/v017-app/evidence-index.json)记录原始报告、日志和各源码夹具依赖哈希。归档解压、版本与签名审计另由 `tools/verify_archive.py` 执行，本汇总不代替该审计。
 
-## 最终 App 实测
+## 最终 App 原生自动验证
 
 | 流程 | 通过检查 | 证据 |
 |---|---:|---|
-| 完整城市、公共路线、地图目的地与新增模型原生画面 | 188 | [启动](evidence/v016-app/precinct-launch.json) · [结果](evidence/v016-app/precinct-report.json) |
-| 歌剧院大台阶完整、旧损坏重载与撞击后人物/平衡车通行 | 29 | [启动](evidence/v016-app/opera-access-launch.json) · [结果](evidence/v016-app/opera-access-report.json) |
-| 免费新增载具、即时乘坐、地图/体验与存档回归 | 70 | [启动](evidence/v016-app/experience-launch.json) · [结果](evidence/v016-app/experience-report.json) |
+| 完整城市、公共路线与建筑画面 | 295 | [报告](evidence/v017-app/precinct-report.json) · [启动](evidence/v017-app/precinct-launch.json) |
+| 歌剧院台阶与人物/平衡车通行 | 32 | [报告](evidence/v017-app/opera-access-report.json) · [启动](evidence/v017-app/opera-access-launch.json) |
+| 新增载具与城市体验 | 82 | [报告](evidence/v017-app/experience-report.json) · [启动](evidence/v017-app/experience-launch.json) |
+| 地图输入与返回游戏 | 35 | [报告](evidence/v017-app/navigation-input-report.json) · [启动](evidence/v017-app/navigation-input-launch.json) |
+| 坦克、战斗机、瞄准开火与撞毁 | 42 | [报告](evidence/v017-app/combat-report.json) · [启动](evidence/v017-app/combat-launch.json) |
+| F3 诊断、材质调参与 T 时间控制 | 43 | [报告](evidence/v017-app/diagnostics-report.json) · [启动](evidence/v017-app/diagnostics-launch.json) |
+| 最终 App 昼夜、日落与夜窗画面 | 51 | [报告](evidence/v017-app/daylight-report.json) · [启动](evidence/v017-app/daylight-launch.json) |
 
-合计 287 项自动检查，均正常退出，无运行时 ERROR / WARNING；计数包括截图保存和重复覆盖。街区专项包含 22 条实际控制器连续行走路线、63 张原生截图。只在路线起点设置人物位置，随后使用生产输入与物理移动。这不是 OS 硬件输入人工验收，也不代表所有载具的每条长途航线均重测。
+合计 **580 项**原生检查；各流程正常退出，报告和日志新鲜且无 ERROR/WARNING。街区流程记录 28 条连续路线及 75 张截图。检查可能重复覆盖同一行为，数量不表示独立功能数或全区覆盖率。自动输入也不等同于人工硬件输入测试。
 
-## 源码夹具与视觉核对
+## 源码夹具与数据检查
 
-- 地图修订 6：87 项通过，包含上一版 revision 5 的实际加载、固体占用恢复、正常位置与源存档字节保留。[结果](evidence/v016-app/map-migration-source.json)
-- 码头及沿街局部场景：83 项通过，含五个入口多偏移胶囊通行、每个码头 41 点连续支撑、14 个原地图雨棚与网格朝向。[结果](evidence/v016-app/quay-source.json)
-- 歌剧院局部：外部 24 项、内部完整往返路线 49 项；另跑新增相机与几何 52 项、坡中迁移 22 项，修复前六个安全站位误判、修复后全部通过。这几次是不同范围的独立跑次。[全路线](evidence/v016-app/opera-interior-full-source.json) · [坡中存档](evidence/v016-app/opera-slope-source.json)
-- 达令广场与公共设施局部：130 项通过，包含四家本分店照片细化、已定位入口和损坏归属。[结果](evidence/v016-app/darling-source.json)
-- Man O’War 码头：30 项通过，包含两座浮码头、两条连接桥的完整往返和坡中存档正反例。[结果](evidence/v016-app/manowar-source.json)
-- ICC 三馆：50 项通过，保留公共路线与结构损坏关系。[结果](evidence/v016-app/icc-source.json)
-- W Sydney、HSBC Tower One、中国银行及保留的 Exchange：56 项通过，包含中国银行柱廊与 W 入口的生产控制器双向行走。[结果](evidence/v016-app/city-buildings-source.json)
-- Westpac / CBA 三栋：93 项通过，三条生产角色连续公共路径、雨棚净空及损坏归属。[结果](evidence/v016-app/bank-source.json)
-- Quay Quarter / Salesforce 两塔：28 项通过，149 个结构、138,552 个三角形；贴附细节随原结构损坏和修复。[结果](evidence/v016-app/quay-towers-source.json)
-- 悉尼塔：30 项通过，33 个结构 ID、121,772 个三角形，检查平台几何、窗格、损坏/恢复、行人落点；另有局部原生五视图。[日志](evidence/v016-app/tower-source.log.txt)
+以下数量来自各自实际报告/完成日志，按夹具声明及直接 load/preload/extends 引用的依赖哈希与最终源码核对；不宣称完整追踪所有传递依赖。来源可为局部场景或 headless 源码世界；它们不计入上面的最终 App 原生总数，彼此覆盖可能重叠，因此不另求和。
 
-[63 张画面的视觉核对](evidence/v016-app/visual-review.json)记录最终图片哈希与观察；其中 [19 张代表画面](evidence/v016-app/screenshots.json)原样收入公开源码。历史图片保留原版本标识。可见几何已对照真实参考照片，但没有用自动检查证明现实中的厘米级准确性；场景范围与估算尺寸见 [更新说明](FIXES_0.1.6.md)。
+| 范围 | 通过检查 | 证据 |
+|---|---:|---|
+| QVB 公共首层、屋顶与旧存档 | 63 | [报告](evidence/v017-app/qvb-source.json) · [日志](evidence/v017-app/qvb-source.log.txt) |
+| Manly 公共大厅、通道与地面恢复 | 109 | [报告](evidence/v017-app/manly-source.json) · [日志](evidence/v017-app/manly-source.log.txt) |
+| 索引与手工三角网格合并 | 9 | [报告](evidence/v017-app/mesh-composition-source.json) · [日志](evidence/v017-app/mesh-composition-source.log.txt) |
+| 步行区域与道路真实裁切 | 24 | [报告](evidence/v017-app/roads-source.json) · [日志](evidence/v017-app/roads-source.log.txt) |
+| 大小地图共享填面与导航 | 30 | [报告](evidence/v017-app/navigation-map-source.json) · [日志](evidence/v017-app/navigation-map-source.log.txt) |
+| 生活玩法与公共到达点 | 40 | [日志](evidence/v017-app/life-experience-source.log.txt) |
+| 步行面积源数据编译器 | 24 | [报告](evidence/v017-app/city-fidelity-source.json) · [日志](evidence/v017-app/city-fidelity-source.log.txt) |
+| 旧存档地面恢复与姿态保护 | 91 | [报告](evidence/v017-app/map-migration-source.json) · [日志](evidence/v017-app/map-migration-source.log.txt) |
+| 达令公共设施网格与损坏回归 | 148 | [报告](evidence/v017-app/darling-source.json) · [日志](evidence/v017-app/darling-source.log.txt) |
+| 坦克地面驾驶、坡道与制动 | 19 | [报告](evidence/v017-app/tank-motion-source.json) · [日志](evidence/v017-app/tank-motion-source.log.txt) |
+| 战斗载具存档与姿态恢复 | 18 | [报告](evidence/v017-app/vehicle-state-source.json) · [日志](evidence/v017-app/vehicle-state-source.log.txt) |
+| 履带支撑与撞毁负例 | 6 | [报告](evidence/v017-app/crush-envelope-source.json) · [日志](evidence/v017-app/crush-envelope-source.log.txt) |
+| 战斗机生产飞行与高速恢复 | 21 | [报告](evidence/v017-app/fighter-flight-source.json) · [日志](evidence/v017-app/fighter-flight-source.log.txt) |
+| 武器弹道、损坏与瞄准存档 | 49 | [报告](evidence/v017-app/combat-weapons-source.json) · [日志](evidence/v017-app/combat-weapons-source.log.txt) |
+| 完整源码世界中的载具复制与起飞 | 74 | [报告](evidence/v017-app/combat-spawn-source.json) · [日志](evidence/v017-app/combat-spawn-source.log.txt) |
+| 生产碰撞扫掠与撞毁回调 | 10 | [报告](evidence/v017-app/combat-crush-source.json) · [日志](evidence/v017-app/combat-crush-source.log.txt) |
+| 载具模型缓存、独立状态与碰撞一致性 | 131 | [报告](evidence/v017-app/vehicle-factory-cache-source.json) · [日志](evidence/v017-app/vehicle-factory-cache-source.log.txt) |
+| 生产存档读写、旧版本兼容与时钟保存 | 31 | [报告](evidence/v017-app/save-source.json) · [日志](evidence/v017-app/save-source.log.txt) |
+| 共享材质角色与精确恢复 | 41 | [报告](evidence/v017-app/material-roles-source.json) · [日志](evidence/v017-app/material-roles-source.log.txt) |
+| 稳定夜窗与数值曝光 | 29 | [报告](evidence/v017-app/facade-night-source.json) · [日志](evidence/v017-app/facade-night-source.log.txt) |
+| 近景立面加载、损坏持久性与容量 | 27 | [报告](evidence/v017-app/facade-stream-source.json) · [日志](evidence/v017-app/facade-stream-source.log.txt) |
+| 运行时诊断与昼夜调参恢复 | 84 | [报告](evidence/v017-app/runtime-diagnostics-source.json) · [日志](evidence/v017-app/runtime-diagnostics-source.log.txt) |
+| 悉尼夏季时钟、暂停与存档 | 29 | [报告](evidence/v017-app/city-clock-source.json) · [日志](evidence/v017-app/city-clock-source.log.txt) |
+| 光照周期资源接口与参数 | 22 | [报告](evidence/v017-app/daylight-cycle-source.json) · [日志](evidence/v017-app/daylight-cycle-source.log.txt) |
+| 公共前厅与入口的夜间照明 | 31 | [报告](evidence/v017-app/public-lighting-source.json) · [日志](evidence/v017-app/public-lighting-source.log.txt) |
+| 环境与水面数值参数 | 31 | [报告](evidence/v017-app/render-environment-source.json) · [日志](evidence/v017-app/render-environment-source.log.txt) |
 
-复现：`python3 tools/verify_native.py precinct --app <Harbourlife.app路径>`；另可选 `opera-access` 或 `experience`。证据路径处理见 [来源说明](evidence/v016-app/provenance.md)。
+夜窗数值夹具使用 CPU 编译的实际纯着色器函数，不能证明 GPU 画面。近景加载只覆盖 160 m 格子的立面细节，最多驻留 64 格；基础外壳和碰撞仍常驻。检查通过不证明 FPS、内存节省或完整飞行路线没有卡顿。[加载范围](CITY_STREAMING.md) · [材质与夜窗范围](MATERIAL_ROLES.md)。
+
+[最终 App 原图与逐图说明](evidence/v017-app/screenshots.json)保留未经编辑的截图。普通距离裁剪与近景加载照常生效。当前普通楼宇、高程、地下网络及大量公开室内仍有简化；本记录不宣称全区 1:1、真实照片完整复刻或每条道路均已人工验收。[本版范围](FIXES_0.1.7.md)
+
+复现：`python3 tools/verify_native.py <mode> --app <Harbourlife.app路径>`，mode 为 precinct, opera-access, experience, navigation-input, combat, diagnostics, daylight。各源测试入口及依赖列在证据索引中。源图、私有设置和玩家存档不应加入发布证据。

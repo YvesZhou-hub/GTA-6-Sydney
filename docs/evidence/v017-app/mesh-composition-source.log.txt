@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MESH_COMPOSITION PASS legacy indexed primitive plus manual triangle reproduces missing face
+MESH_COMPOSITION PASS both append orders preserve all 13 triangles true
+MESH_COMPOSITION PASS cube and independent triangle retain 24.5 square metres true
+MESH_COMPOSITION PASS transformed normals remain finite and normalized true
+MESH_COMPOSITION PASS both append orders preserve all 13 triangles false
+MESH_COMPOSITION PASS cube and independent triangle retain 24.5 square metres false
+MESH_COMPOSITION PASS transformed normals remain finite and normalized false
+MESH_COMPOSITION PASS indexed cylinder retains every source face alongside manual geometry
+MESH_COMPOSITION PASS cylinder transformation preserves surface area

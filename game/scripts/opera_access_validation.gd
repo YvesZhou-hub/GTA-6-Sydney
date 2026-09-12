@@ -101,6 +101,7 @@ func hover(label:String,x:float,start_z:float,end_z:float):
 func capture(name:String,eye:Vector3,target:Vector3):
 	if DisplayServer.get_name()=="headless":return
 	game.camera.global_position=point(eye);game.camera.look_at(point(target))
+	check("near facade stream ready for "+name,await game.world.prepare_view(game.camera.global_position))
 	for i in 6:
 		RenderingServer.force_draw(false)
 		await get_tree().process_frame

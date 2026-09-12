@@ -1,0 +1,87 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS Missing world and environment are explicitly unavailable {}
+PASS Missing environment rejects changes safely {}
+PASS Missing environment reset is safe {}
+PASS Performance source truth: fps {"engine":1.0,"snapshot":1.0}
+PASS Performance source truth: process_seconds {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: physics_seconds {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: objects {"engine":1502.0,"snapshot":1502.0}
+PASS Performance source truth: nodes {"engine":10.0,"snapshot":10.0}
+PASS Performance source truth: resources {"engine":4.0,"snapshot":4.0}
+PASS Performance source truth: render_objects {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: render_primitives {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: draw_calls {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: video_memory_bytes {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: texture_memory_bytes {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: buffer_memory_bytes {"engine":0.0,"snapshot":0.0}
+PASS Live memory counter lies between immediate before/after engine samples {"after":58760150.0,"before":58745554.0,"snapshot":58746726.0}
+PASS Performance source truth: static_memory_max_bytes {"engine":66054167.0,"snapshot":66054167.0}
+PASS Performance source truth: active_physics_bodies {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: physics_collision_pairs {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: physics_islands {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: pipeline_canvas {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: pipeline_mesh {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: pipeline_surface {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: pipeline_draw {"engine":0.0,"snapshot":0.0}
+PASS Performance source truth: pipeline_specialization {"engine":0.0,"snapshot":0.0}
+PASS Headless marks rendering unavailable rather than valid zero FPS {}
+PASS Absent city clock is reported as unavailable {}
+PASS City clock snapshot reports actual current time and solar numeric state {}
+PASS Solar direction is a JSON numeric array instead of a stringified Vector3 {}
+PASS Release-only memory limitation is explicitly reported {}
+PASS World distinguishes live destroyed structures from retired history {"architecture_mesh_batches":1,"available":true,"destroyed_history_ids":2,"destroyed_registered":1,"material_roles":null,"provided":{"pending_tiles":2,"resident_tiles":7},"resident_tiles":7,"streaming":{"base_collision_resident":true,"enabled":true,"last_upload_ms":0.8,"last_worker_ms":2.5,"limit":64,"resident":7,"scope":"near_facade_only","wanted":9},"structure_cells":1,"structures":3}
+PASS Architecture batches count actual resident meshes {}
+PASS Optional world tile provider is used without inventing a count {}
+PASS Live facade streaming stats preserve scope and immutable collision state {}
+PASS Last vehicle spawn timings expose actual supplied profiling phases {}
+PASS Absent airport retains unavailable counts {}
+PASS Vehicle, player and weapon pools use live owner state {}
+PASS Supported numerical tuning changes the real Environment {}
+PASS Sun energy changes the existing directional light only {}
+PASS Tuning synchronizes in-memory settings without touching unrelated keys {}
+PASS Numerical changes never enable disabled render features {}
+PASS Finite out-of-range values are clamped with disclosed results {"applied":{"ambient":0.0,"exposure":3.0,"fog_density":0.002,"glow_intensity":0.0},"clamped":{"ambient":{"applied":0.0,"requested":-12.0},"exposure":{"applied":3.0,"requested":999.0},"fog_density":{"applied":0.002,"requested":10.0},"glow_intensity":{"applied":0.0,"requested":-1.0}},"ok":true,"rejected":{},"values":{"ambient":0.0,"exposure":3.0,"fog_density":0.0020000000949949,"fog_light_energy":0.899999976158142,"glow_intensity":0.0,"ssao_intensity":1.39999997615814,"sun_energy":2.20000004768372}}
+PASS NaN, infinity, strings, booleans and unknown/structural keys are rejected {"ambient":"finite number required","exposure":"finite number required","fog_density":"finite number required","glow_intensity":"finite number required","ssao_enabled":"unknown or structural setting","ssr_max_steps":"unknown or structural setting","unknown":"unknown or structural setting"}
+PASS Reset restores every exact original numerical value {}
+PASS Original reset preserves feature flags {}
+PASS Repeated setup cannot accidentally replace the original preset {}
+PASS A fresh setup reapplies previously stored numerical preferences {}
+PASS Untuned diverse glass is reported per-material without an invented shared value {}
+PASS Glass sliders update actual landmark and ordinary city shader resources {}
+PASS Glass role numerical tuning preserves structural material flags {}
+PASS Newly registered materials adopt current shared numerical profile {}
+PASS Glass reset restores distinct per-resource and raw shader defaults {}
+PASS Late streamed-in glass also restores its authored values {}
+PASS Reset removes shared glass overrides from in-memory preferences {}
+PASS Panel starts closed and does no background process {}
+PASS F3 panel exposes live state and notifies owner without taking pause ownership {}
+PASS Disabled glow shows actual disabled status and cannot be edited by slider {}
+PASS Glass controls are enabled while visibly preserving per-material initial values {}
+PASS Real slider callback updates Environment and displayed value {}
+PASS Panel reset uses original production numerical preset {}
+PASS Close releases panel processing and emits owner hook {}
+PASS Real GUI wheel reaches reset without changing numerical settings {}
+PASS Real GUI scroll and click can close the top button after visiting bottom controls {"button_rect":"[P: (1356.0, 36.0), S: (40.0, 33.0)]","click_injected":true,"panel_visible":false,"scroll_rect":"[P: (893.0, 36.0), S: (511.0, 828.0)]","scroll_vertical":0}
+PASS Time-cycle tuning saves proportional overrides while applying requested absolute values {}
+PASS Time-cycle multipliers use separate in-memory preferences {}
+PASS Changed time-of-day baseline preserves the user's relative adjustment {}
+PASS Cycle reset restores current time baseline instead of flashing old noon lighting {}
+PASS Zero night sun cannot silently create an invalid multiplier or artificial daylight {}
+PASS Nighttime zero-baseline slider explains why it cannot be changed {}
+PASS Stored multipliers validate finite known values and survive a zero current baseline {}
+PASS Restored nighttime sun multiplier remains available at next sunrise {}
+PASS Legacy absolute tuning migrates to cycle ratios while preserving material settings {}
+PASS Remote Inspector numerical request uses the same validated runtime API {}
+PASS Remote Inspector snapshot exposes actual current owner values {}
+PASS Remote Inspector reset restores current baseline safely {}
+PASS Actual Daylight resource preserves Diagnostics multipliers at dusk {}
+PASS Actual Daylight night remains dark in direct sun despite retained multiplier {}
+PASS Actual Daylight transition clamps tuned fog energy to the shared slider range {"fog_light_energy":2.0,"maximum":2.0}
+PASS Actual Daylight reset restores current daylight profile {}
+PASS Rejected missing-sun tuning cannot silently change cycle metadata {}
+PASS Reattached sun never receives a previously rejected adjustment {}
+PASS Setup before initial daylight baseline preserves saved ratios over legacy absolute values {}
+PASS Reset before initial daylight cancels deferred ratios and their saved preferences {}
+PASS Freed game owner is handled without stale references {}
+RUNTIME_DIAGNOSTICS_COMPLETE 84 passed=true

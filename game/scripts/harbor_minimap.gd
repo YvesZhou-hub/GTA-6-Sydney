@@ -153,6 +153,7 @@ func paint_terrain(ink:Node2D):
 	if _cache.is_empty(): return
 	if _cache.simplified!=null: ink.draw_mesh(_cache.simplified,null,Transform2D.IDENTITY,Color("625e4b"))
 	if _cache.land!=null: ink.draw_mesh(_cache.land,null,Transform2D.IDENTITY,Color("3e5950"))
+	if _cache.get("pedestrian_areas")!=null: ink.draw_mesh(_cache.pedestrian_areas,null,Transform2D.IDENTITY,Color("7c8d76"))
 	if _cache.buildings!=null: ink.draw_mesh(_cache.buildings,null,Transform2D.IDENTITY,Color("748277"))
 	if not _cache.coast.is_empty(): ink.draw_multiline(_cache.coast,Color("a4b3a1"),4.0,true)
 	for category in ["path","street","major","rail"]:

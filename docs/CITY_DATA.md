@@ -41,7 +41,8 @@ Manly 普通街区来自后备服务较旧的快照，不能声称所有商户�
 | Darling Square 15 家店面与广场景观 | 逐店记录地址、门面朝向、照片证据与未核实部分；[参考](DARLING_SQUARE_REFERENCE.md) |
 | Circular Quay Wharf 2–6、Eastbank、Searock、City Extra | 保留各码头顶棚与亭廊真实平面，分开制作三家店面、步道和街具；[参考](QUAY_REFERENCE.md) |
 | Sydney Tower Eye | 309m 塔体、金色观景舱、56 条拉索、420 块窗格及临街基座；[参考](SYDNEY_TOWER_REFERENCE.md) |
-| Manly Wharf、Hotel Steyne、The Corso | 码头屋盖、真实院落、阳台、步行街和真实树位；[参考](MANLY_REFERENCE.md) |
+| Manly Wharf、Hotel Steyne、The Corso | 码头公共前厅、真实院落、街侧阳台、步行街、饮水节点和真实树位；[参考](MANLY_REFERENCE.md) |
+| QVB / Queen Victoria Building | 独立穹顶、街侧拱窗与首层公共通廊，25 个原地图轮廓/分体使用专属几何；[参考](QVB_REFERENCE.md) |
 | Barangaroo、Martin Place 北入口 | 地面出入口、扶梯和第一层地下门厅，可实际往返；[参考](METRO_REFERENCE.md) |
 | ICC Sydney Convention Centre、Exhibition Centre、TikTok Entertainment Centre | 独立场馆外形、Convention 公共门厅及夹层、Exhibition 下层四展厅、Theatre 门厅与简化观众席/舞台；[参考](ICC_REFERENCE.md) |
 
@@ -59,7 +60,13 @@ ICC 三处场馆已通过 `game/scripts/icc_landmarks.gd` 纳入主世界，地�
 
 普通道路现在使用沿原中心线的连续平面路带，共享节点和转角补圆角；没有移动真实中心线或抬高地面来遮住缺口。机动车路面优先占用其轮廓，人行铺面在重合部分做几何相减，避免同一高度的两种材质互相闪烁。铺面裁边保留 2mm 数值容差，吸收公里级投影坐标的浮点误差；路面本身的宽度和高度不因此改变。地铁洞口对路带和新增连接面都真实裁切。
 
-`source/road_join_test.gd` 的 17 项几何检查通过，包含最初 14 项接缝/洞口检查和新增 3 项跨材质覆盖检查。Fairy Bower Road 与 Darling 样本中复现的 131 + 185 个旧接缝采样点已全部覆盖；Darling 样本中两种铺面材质的三角形交叠面积、两处真实地铁洞口的路面侵入面积均为零。检查报告见 [道路几何结果](evidence/road-joins.json)。这些结果验证模型的覆盖与裁切，不是道路现场测绘精度，也不能代替原生画面的独立复核。
+`source/road_join_test.gd` 当前的 24 项几何检查通过：保留此前 17 项接缝、洞口与跨材质检查，新增 7 项完整步行区域、车辆候选和区域交叠检查。Fairy Bower Road 与 Darling 样本中复现的 131 + 185 个旧接缝采样点已全部覆盖；Darling 样本中两种铺面材质的三角形交叠面积、两处真实地铁洞口的路面侵入面积均为零。检查报告见 [本版道路几何结果](evidence/v017-app/roads-source.json)。这些结果验证模型的覆盖与裁切，不是道路现场测绘精度，也不能代替原生画面的独立复核。
+
+## 0.1.7 完整步行区域与高程准备
+
+106 条明确 `highway=pedestrian + area=yes` 地面区域由源轮廓生成完整铺面：CBD 97、北岸 6、Manly 3，共 99,680.026 m²、2,279 个三角形。区域与其他人行/车行铺面实际裁切，车辆选位不把区域边缘当作道路。大地图和小地图共享填充几何。所有原道路 ID、坐标和标签保留；本轮不获取缺失的步行 multipolygon relations。[更新范围](FIXES_0.1.7.md) · [编译检查](evidence/v017-app/city-fidelity-source.json)
+
+另加入可复现的官方 NSW 5m DEM 离线提取工具和三个小窗口，采用 EPSG:28356 / AHD71，并明确许可、原始文件校验和及采集年代不确定性。这些是开发参考，本版地形尚未使用，不能据裸地 DEM 虚构楼高或地下空间。[高程说明](ELEVATION_REFERENCE.md)
 
 ## 当前仍有的近似
 

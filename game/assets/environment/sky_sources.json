@@ -1,0 +1,69 @@
+{
+  "assets": [
+    {
+      "asset": "rustig_koppie_puresky",
+      "file": "rustig_koppie_puresky_2k.hdr",
+      "authors": {
+        "Greg Zaal": "Original",
+        "Jarod Guest": "Sky Edits"
+      },
+      "source": "https://polyhaven.com/a/rustig_koppie_puresky",
+      "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/rustig_koppie_puresky_2k.hdr",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "retrieved": "2026-09-12",
+      "original_pixels_unchanged": true,
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 4047254,
+      "sha256": "e70bf97a44982db07fb952b1f74c07e818649c2bbdfeb6ad4f98af7b4431a38f",
+      "local_md5": "08c11a244add6ef1c3e027234c1fdd22"
+    },
+    {
+      "asset": "qwantani_sunset_puresky",
+      "file": "qwantani_sunset_puresky_2k.hdr",
+      "authors": {
+        "Greg Zaal": "Photography",
+        "Jarod Guest": "Processing"
+      },
+      "source": "https://polyhaven.com/a/qwantani_sunset_puresky",
+      "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/qwantani_sunset_puresky_2k.hdr",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "retrieved": "2026-09-12",
+      "original_pixels_unchanged": true,
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 4171959,
+      "sha256": "d66e08231e9c09ca40c6d035214ae8efb638782745c82addbb2a063fa32cabef",
+      "local_md5": "b918af5fefb341535961ffdad5fab7bc"
+    },
+    {
+      "asset": "qwantani_night_puresky",
+      "file": "qwantani_night_puresky_2k.hdr",
+      "authors": {
+        "Greg Zaal": "Photography",
+        "Jarod Guest": "Processing"
+      },
+      "source": "https://polyhaven.com/a/qwantani_night_puresky",
+      "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/qwantani_night_puresky_2k.hdr",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "retrieved": "2026-09-12",
+      "original_pixels_unchanged": true,
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 5461210,
+      "sha256": "d458fe7f20969d89eedbb7ae12d346abf68c86d844235696e7d70baad3e04cf0",
+      "local_md5": "a2ef5b92f49f77b5bad15add5dad4feb"
+    }
+  ],
+  "scope": "Artistic lighting assets, not photographs of Sydney or real-time local weather. Sun location is controlled separately by the summer city clock.",
+  "verification": "Original asset pages confirm authors and CC0. New Qwantani file digests were computed locally; official API returned403 and was not used to certify the hashes."
+}

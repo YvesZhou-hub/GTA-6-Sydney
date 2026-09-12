@@ -27,6 +27,7 @@ var data_counts:={"land":0,"roads":0,"buildings":0,"places":0}
 var _ink:MapInk
 var _land_mesh:ArrayMesh
 var _building_mesh:ArrayMesh
+var _pedestrian_area_mesh:ArrayMesh
 var _simplified_mesh:ArrayMesh
 var _simplified_lines:=PackedVector2Array()
 var _simplified_hatching:=PackedVector2Array()
@@ -106,6 +107,7 @@ func load_map_data():
 	data_loaded=not data.is_empty()
 	var land_vertices:=PackedVector2Array()
 	var building_vertices:=PackedVector2Array()
+	var pedestrian_area_vertices:=PackedVector2Array()
 	var simplified_vertices:=PackedVector2Array()
 	_simplified_lines.clear()
 	_simplified_hatching.clear()
@@ -120,7 +122,7 @@ func load_map_data():
 	_road_lines={"major":PackedVector2Array(),"street":PackedVector2Array(),"path":PackedVector2Array(),"rail":PackedVector2Array()}
 	_named_roads.clear()
 	_places.clear()
-	data_counts={"land":0,"roads":0,"buildings":0,"places":0}
+	data_counts={"land":0,"roads":0,"buildings":0,"places":0,"pedestrian_areas":0}
 	if data_loaded:
 		for land in data.get("land",[]):
 			var outline:=_points(land.get("outline",[]))
@@ -144,9 +146,14 @@ func load_map_data():
 		var tags:Dictionary=road.get("tags",{})
 		var highway:=str(tags.get("highway","residential"))
 		var category:="major" if highway in ["motorway","motorway_link","trunk","trunk_link","primary","primary_link","secondary"] else ("path" if highway in ["footway","path","steps","pedestrian","cycleway"] else ("rail" if tags.has("railway") else "street"))
-		var lines:PackedVector2Array=_road_lines[category]
-		_append_lines(lines,points)
-		_road_lines[category]=lines
+		if road.get("surface_geometry", "") == "area":
+			var triangles:=_points(road.get("surface_triangles",[]))
+			if triangles.size()%3 == 0: pedestrian_area_vertices.append_array(triangles)
+			data_counts.pedestrian_areas+=1
+		else:
+			var lines:PackedVector2Array=_road_lines[category]
+			_append_lines(lines,points)
+			_road_lines[category]=lines
 		var road_name:=str(road.get("name",tags.get("name","")))
 		if not road_name.is_empty(): _named_roads.append({"point":points[points.size()/2],"name":road_name})
 		data_counts.roads+=1
@@ -174,7 +181,8 @@ func load_map_data():
 		data_counts.places+=1
 	_land_mesh=_mesh(land_vertices)
 	_building_mesh=_mesh(building_vertices)
-	_shared_geometry={"land":_land_mesh,"buildings":_building_mesh,"simplified":_simplified_mesh,"simplified_lines":_simplified_lines,"hatching":_simplified_hatching,"roads":_road_lines,"coast":_coast_lines,"footprints":_footprint_lines,"places":_places,"named_roads":_named_roads,"counts":data_counts,"loaded":data_loaded}
+	_pedestrian_area_mesh=_mesh(pedestrian_area_vertices)
+	_shared_geometry={"land":_land_mesh,"buildings":_building_mesh,"pedestrian_areas":_pedestrian_area_mesh,"simplified":_simplified_mesh,"simplified_lines":_simplified_lines,"hatching":_simplified_hatching,"roads":_road_lines,"coast":_coast_lines,"footprints":_footprint_lines,"places":_places,"named_roads":_named_roads,"counts":data_counts,"loaded":data_loaded}
 	refresh()
 
 func geometry_cache() -> Dictionary:
@@ -183,6 +191,7 @@ func geometry_cache() -> Dictionary:
 func _use_geometry(cache:Dictionary):
 	_land_mesh=cache.land
 	_building_mesh=cache.buildings
+	_pedestrian_area_mesh=cache.get("pedestrian_areas")
 	_simplified_mesh=cache.simplified
 	_simplified_lines=cache.simplified_lines
 	_simplified_hatching=cache.hatching
@@ -392,6 +401,7 @@ func paint(ink:Node2D):
 		ink.draw_multiline(_simplified_hatching,Color("827962"),0.8/pixels_per_metre,true)
 		ink.draw_multiline(_simplified_lines,Color("a99b7e"),1.0/pixels_per_metre,true)
 	if _land_mesh!=null: ink.draw_mesh(_land_mesh,null,Transform2D.IDENTITY,Color("496e65"))
+	if _pedestrian_area_mesh!=null: ink.draw_mesh(_pedestrian_area_mesh,null,Transform2D.IDENTITY,Color("92a68c"))
 	if pixels_per_metre>0.08 and _building_mesh!=null: ink.draw_mesh(_building_mesh,null,Transform2D.IDENTITY,Color("729080"))
 	if not _coast_lines.is_empty(): ink.draw_multiline(_coast_lines,Color("b4c7ac"),maxf(1.0/pixels_per_metre,1.0),true)
 	if pixels_per_metre>0.55 and not _footprint_lines.is_empty(): ink.draw_multiline(_footprint_lines,Color("a6b69d"),0.65/pixels_per_metre,true)

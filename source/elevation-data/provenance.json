@@ -1,0 +1,23 @@
+{
+  "title": "Eastern New South Wales (Zone 56) 5 metre Resolution Digital Elevation Model; SYDNEY mapsheet 9130",
+  "publisher": "DCS Spatial Services, NSW Department of Customer Service",
+  "download_url": "https://portal.spatial.nsw.gov.au/download/dem/56/Sydney-DEM-AHD_56_5m.zip",
+  "catalog_url": "https://portal.spatial.nsw.gov.au/portal/home/item.html?id=437c0697e6524d8ebf10ad0d915bc219",
+  "license": "CC-BY-3.0-AU",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/au/",
+  "attribution": "© Department Customer Service. Source: DCS Spatial Services. Extracted 2026-09-12; cropped to a 505 m window; no source height values changed.",
+  "additional_terms": "Derived products must clearly mark the extraction date. The metadata also requires Spatial Services intellectual property to remain unchanged, maintained and preserved when loaded onto external cloud platforms; retain this attribution and the original license.",
+  "extraction_date_utc": "2026-09-12",
+  "capture_start": "Varies per source tile; not specified for this mapsheet",
+  "capture_end": "Varies per source tile; not specified for this mapsheet",
+  "capture_date_warning": "2026 HTTP modification and 2023 catalog currency are not survey acquisition dates.",
+  "metadata_member": "Eastern-DEM-AHD_56_5m_Metadata.html",
+  "metadata_sha256": "209191a607bf60653a8178ae13c28450d3959f6a7f74bf8b2d34cfaaa997d043",
+  "crs": "EPSG:28356; GDA94 / MGA zone 56",
+  "vertical_datum": "AHD71 using local geoid model, as stated by source metadata",
+  "grid_resolution_m": 5,
+  "horizontal_accuracy_m_95pct_open_ground": 1.25,
+  "vertical_accuracy_m_95pct_open_ground": 0.9,
+  "surface": "Bare-earth DEM, TIN-derived mixture of 1m/2m LiDAR DEMs and 5m photogrammetric DEMs; not a DSM or building-height product; not hydrologically enforced.",
+  "not_integrated_into_game": true
+}

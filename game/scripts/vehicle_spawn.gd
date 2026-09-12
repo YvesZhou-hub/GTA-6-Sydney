@@ -155,6 +155,21 @@ static func find_spawn(game: Node3D, body: RigidBody3D, runway_start := false, r
 						found.description = "机场附近的开阔空地"
 						return found
 		return {}
+	if body.kind=="fighter":
+		for level in range(6):
+			for angle in [0.0,0.5,-0.5,1.0,-1.0,PI]:
+				var direction:=forward.rotated(Vector3.UP,angle)
+				var at:=origin+direction*(radius+35.0)
+				at.y=maxf(origin.y+90.0,160.0)+level*80.0
+				var pose:=Transform3D(Basis(Vector3.UP,heading+angle),at)
+				var departure_clear:=true
+				# A continuous corridor reserves three seconds of the initial flight.
+				for distance in range(0,421,10):
+					var future:=pose
+					future.origin+=direction*distance
+					if not clear_envelope(game,body,future,3.0): departure_clear=false; break
+				if departure_clear: return {"transform":pose,"airborne":true,"description":"附近已检查净空的战机航线 · 已带初始空速"}
+		return {}
 	if body.kind in ["glider","paraglider"]:
 		# Unpowered wings are held until the atomic placement-and-boarding transaction completes.
 		for ring in range(1,maxi(20,ceili(sqrt(game.vehicles.size()))+10)):

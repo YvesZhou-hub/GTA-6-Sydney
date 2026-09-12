@@ -1,0 +1,38 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS fixed finite light budget includes production ICC, Opera and bridge owners
+PASS all light sources use existing intact damage owners
+PASS setup replaces old nodes instead of accumulating lights
+PASS 101 cycle updates change no positions, node identities or light feature flags
+PASS all new lights keep shadows disabled and stay visible
+PASS night lights have finite positive energies
+PASS architectural and bridge lights have zero energy in daylight
+PASS public indoor lamps remain active during day
+PASS foyer shader uses transformed venue axes and original non-emissive finish
+PASS auditorium dark region remains outside explicit foyer boundary
+PASS original theatre slab collision vertices and old damage ID are unchanged
+PASS foyer floor row x=42.5 has physical upward support at original level
+PASS existing ceiling strip x=42.5 has unobstructed downward light path
+PASS foyer floor row x=48.6 has physical upward support at original level
+PASS existing ceiling strip x=48.6 has unobstructed downward light path
+PASS foyer floor row x=54.8 has physical upward support at original level
+PASS existing ceiling strip x=54.8 has unobstructed downward light path
+PASS opera_wash_-58_-26 is above an intact upper platform, not buried in podium
+OPERA_WASH_FIRST_HIT opera_wash_-58_-26 opera/shell/1/6
+PASS opera_wash_-58_-26 reaches a roof surface without passing through the podium
+PASS opera_wash_-58_21 is above an intact upper platform, not buried in podium
+OPERA_WASH_FIRST_HIT opera_wash_-58_21 opera/shell/2/10
+PASS opera_wash_-58_21 reaches a roof surface without passing through the podium
+PASS opera_wash_58_-23 is above an intact upper platform, not buried in podium
+OPERA_WASH_FIRST_HIT opera_wash_58_-23 opera/shell/5/12
+PASS opera_wash_58_-23 reaches a roof surface without passing through the podium
+PASS opera_wash_58_19 is above an intact upper platform, not buried in podium
+OPERA_WASH_FIRST_HIT opera_wash_58_19 opera/shell/6/14
+PASS opera_wash_58_19 reaches a roof surface without passing through the podium
+PASS destroyed ceiling support extinguishes all 12 foyer lights without clock tick
+PASS other venues are unaffected by local damage
+PASS old destroyed floor ID still removes real support, no hidden overlay remains
+PASS repair restores ceiling light energies
+PASS repair preserves the dedicated foyer material
+PASS clear removes all owned fixtures and references
+PUBLIC_LIGHTING_COMPLETE 31 passed=true

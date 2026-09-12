@@ -1,0 +1,1533 @@
+{
+	"checks": [
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 1.59,
+					"cache_capture_ms": 3.266,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 1.295,
+					"final_commit_ms": 0.454,
+					"geometry_ms": 10.645,
+					"index_ms": 1.311,
+					"kind": "car",
+					"materials_ms": 0.047,
+					"merge_ms": 5.513,
+					"merged_meshes": 30,
+					"source_meshes": 107,
+					"source_surfaces": 107,
+					"temporary_commit_ms": 0.402,
+					"temporary_mesh_commits": 107,
+					"total_ms": 19.475
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 1.126,
+					"kind": "car",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 1.126
+				}
+			},
+			"name": "car cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 4
+			},
+			"name": "car moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 30
+			},
+			"name": "car immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "car paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car wheel animation cannot move another copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 1.903,
+					"cache_capture_ms": 2.796,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 1.429,
+					"final_commit_ms": 0.588,
+					"geometry_ms": 27.985,
+					"index_ms": 2.438,
+					"kind": "motorcycle",
+					"materials_ms": 0.088,
+					"merge_ms": 7.214,
+					"merged_meshes": 28,
+					"source_meshes": 70,
+					"source_surfaces": 70,
+					"temporary_commit_ms": 0.463,
+					"temporary_mesh_commits": 70,
+					"total_ms": 38.085
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 1.081,
+					"kind": "motorcycle",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 1.081
+				}
+			},
+			"name": "motorcycle cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 3
+			},
+			"name": "motorcycle moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 28
+			},
+			"name": "motorcycle immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 2
+			},
+			"name": "motorcycle paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle wheel animation cannot move another copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle boarding shows only its own rider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 1.8,
+					"cache_capture_ms": 1.561,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 1.285,
+					"final_commit_ms": 0.412,
+					"geometry_ms": 4.318,
+					"index_ms": 0.65,
+					"kind": "speedboat",
+					"materials_ms": 0.03,
+					"merge_ms": 5.184,
+					"merged_meshes": 12,
+					"source_meshes": 232,
+					"source_surfaces": 232,
+					"temporary_commit_ms": 0.49,
+					"temporary_mesh_commits": 232,
+					"total_ms": 11.096
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 0.904,
+					"kind": "speedboat",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 0.904
+				}
+			},
+			"name": "speedboat cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 0
+			},
+			"name": "speedboat moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 12
+			},
+			"name": "speedboat immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "speedboat paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat mutable boat profile is not shared",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 4.07599999999998,
+					"cache_capture_ms": 2.023,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 2.87999999999998,
+					"final_commit_ms": 0.98,
+					"geometry_ms": 7.381,
+					"index_ms": 1.192,
+					"kind": "yacht",
+					"materials_ms": 0.031,
+					"merge_ms": 11.697,
+					"merged_meshes": 10,
+					"source_meshes": 566,
+					"source_surfaces": 566,
+					"temporary_commit_ms": 1.15899999999999,
+					"temporary_mesh_commits": 566,
+					"total_ms": 21.134
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 1.322,
+					"kind": "yacht",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 1.322
+				}
+			},
+			"name": "yacht cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 0
+			},
+			"name": "yacht moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 10
+			},
+			"name": "yacht immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "yacht paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht mutable boat profile is not shared",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 2.407,
+					"cache_capture_ms": 1.499,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 2.27199999999999,
+					"final_commit_ms": 0.776,
+					"geometry_ms": 25.003,
+					"index_ms": 2.513,
+					"kind": "paraglider",
+					"materials_ms": 0.027,
+					"merge_ms": 9.069,
+					"merged_meshes": 12,
+					"source_meshes": 126,
+					"source_surfaces": 126,
+					"temporary_commit_ms": 0.572,
+					"temporary_mesh_commits": 126,
+					"total_ms": 35.602
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 0.677,
+					"kind": "paraglider",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 0.677
+				}
+			},
+			"name": "paraglider cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 1
+			},
+			"name": "paraglider moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 12
+			},
+			"name": "paraglider immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "paraglider paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider boarding shows only its own rider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 2.289,
+					"cache_capture_ms": 3.207,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 1.476,
+					"final_commit_ms": 0.434,
+					"geometry_ms": 11.976,
+					"index_ms": 0.979,
+					"kind": "glider",
+					"materials_ms": 0.035,
+					"merge_ms": 6.103,
+					"merged_meshes": 23,
+					"source_meshes": 116,
+					"source_surfaces": 116,
+					"temporary_commit_ms": 0.443,
+					"temporary_mesh_commits": 116,
+					"total_ms": 21.323
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 3.359,
+					"kind": "glider",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 3.359
+				}
+			},
+			"name": "glider cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 3
+			},
+			"name": "glider moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 23
+			},
+			"name": "glider immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "glider paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider wheel animation cannot move another copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider boarding shows only its own rider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 2.352,
+					"cache_capture_ms": 4.751,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 2.06899999999999,
+					"final_commit_ms": 0.646,
+					"geometry_ms": 14.843,
+					"index_ms": 1.517,
+					"kind": "helicopter",
+					"materials_ms": 0.033,
+					"merge_ms": 7.874,
+					"merged_meshes": 36,
+					"source_meshes": 169,
+					"source_surfaces": 169,
+					"temporary_commit_ms": 0.591,
+					"temporary_mesh_commits": 169,
+					"total_ms": 27.504
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 3.654,
+					"kind": "helicopter",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 3.654
+				}
+			},
+			"name": "helicopter cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 6
+			},
+			"name": "helicopter moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 36
+			},
+			"name": "helicopter immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "helicopter paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter wheel animation cannot move another copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter rotors animate without sharing pivots",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter propellers animate without sharing pivots",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 3.189,
+					"cache_capture_ms": 7.231,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 2.56199999999999,
+					"final_commit_ms": 0.891,
+					"geometry_ms": 32.473,
+					"index_ms": 4.058,
+					"kind": "airliner",
+					"materials_ms": 0.034,
+					"merge_ms": 12.359,
+					"merged_meshes": 73,
+					"source_meshes": 155,
+					"source_surfaces": 155,
+					"temporary_commit_ms": 0.769,
+					"temporary_mesh_commits": 155,
+					"total_ms": 52.098
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 3.413,
+					"kind": "airliner",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 3.413
+				}
+			},
+			"name": "airliner cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 12
+			},
+			"name": "airliner moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 73
+			},
+			"name": "airliner immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "airliner paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner wheel animation cannot move another copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner propellers animate without sharing pivots",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 1.209,
+					"cache_capture_ms": 1.412,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 0.658,
+					"final_commit_ms": 0.256,
+					"geometry_ms": 1.108,
+					"index_ms": 0.026,
+					"kind": "hoverboard",
+					"materials_ms": 0.031,
+					"merge_ms": 2.704,
+					"merged_meshes": 12,
+					"source_meshes": 90,
+					"source_surfaces": 90,
+					"temporary_commit_ms": 0.259,
+					"temporary_mesh_commits": 90,
+					"total_ms": 5.258
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 0.545,
+					"kind": "hoverboard",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 0.545
+				}
+			},
+			"name": "hoverboard cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 1
+			},
+			"name": "hoverboard moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 12
+			},
+			"name": "hoverboard immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "hoverboard paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard boarding shows only its own rider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 2.60299999999995,
+					"cache_capture_ms": 7.76,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 2.01499999999999,
+					"final_commit_ms": 0.642,
+					"geometry_ms": 5.155,
+					"index_ms": 0.104,
+					"kind": "tank",
+					"materials_ms": 0.032,
+					"merge_ms": 8.596,
+					"merged_meshes": 88,
+					"source_meshes": 824,
+					"source_surfaces": 824,
+					"temporary_commit_ms": 1.07499999999999,
+					"temporary_mesh_commits": 824,
+					"total_ms": 21.545
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 2.059,
+					"kind": "tank",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 2.059
+				}
+			},
+			"name": "tank cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 21
+			},
+			"name": "tank moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 88
+			},
+			"name": "tank immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 21
+			},
+			"name": "tank paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank wheel animation cannot move another copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Tank cached pivot hierarchy and muzzle remain independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Cached tank supports ordinary saved aim restoration",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cold": {
+					"append_ms": 2.238,
+					"cache_capture_ms": 5.116,
+					"cache_hit": false,
+					"cache_stored": true,
+					"extract_ms": 1.919,
+					"final_commit_ms": 0.609,
+					"geometry_ms": 17.917,
+					"index_ms": 1.629,
+					"kind": "fighter",
+					"materials_ms": 0.027,
+					"merge_ms": 7.695,
+					"merged_meshes": 32,
+					"source_meshes": 171,
+					"source_surfaces": 171,
+					"temporary_commit_ms": 0.615,
+					"temporary_mesh_commits": 171,
+					"total_ms": 30.757
+				},
+				"hot": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 6.142,
+					"kind": "fighter",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 6.142
+				}
+			},
+			"name": "fighter cold creates one recipe and hot skips all mesh extraction/commit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter cached geometry, normals, UVs, indices, collider shapes and local transforms are exact",
+			"passed": true
+		},
+		{
+			"detail": {
+				"node_references": 6
+			},
+			"name": "fighter moving references belong only to their own fresh nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter identities and runtime physics material stay independent",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter authored node names survive caching",
+			"passed": true
+		},
+		{
+			"detail": {
+				"meshes": 32
+			},
+			"name": "fighter immutable mesh buffers are reused by fresh MeshInstance nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter collision resources and runtime smoke stay per-instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"paint_meshes": 1
+			},
+			"name": "fighter paint aliasing within each vehicle is preserved",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter damaged first vehicle cannot poison later fresh paint or geometry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter wheel animation cannot move another copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Fighter exhaust and forward muzzle are freshly mapped",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter cache survives releasing first instance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"entries": 11,
+				"kinds": [
+					"car",
+					"motorcycle",
+					"speedboat",
+					"yacht",
+					"paraglider",
+					"glider",
+					"helicopter",
+					"airliner",
+					"hoverboard",
+					"tank",
+					"fighter"
+				],
+				"scope": "immutable merged mesh resources and authored node descriptions; no live vehicle state"
+			},
+			"name": "Cache stays bounded by vehicle kinds, not spawned copies",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Explicit cache cleanup releases all recipes",
+			"passed": true
+		}
+	],
+	"count": 131,
+	"engine": "4.7.2-stable (official)",
+	"factory_sha256": "d65f3ee8d9a55f86c40cfacd6e4ed2dff738560723c5665bce1d50a206a736f2",
+	"failures": 0,
+	"native": false,
+	"passed": true,
+	"profiles": {
+		"airliner": {
+			"cold": {
+				"append_ms": 3.189,
+				"cache_capture_ms": 7.231,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 2.56199999999999,
+				"final_commit_ms": 0.891,
+				"geometry_ms": 32.473,
+				"index_ms": 4.058,
+				"kind": "airliner",
+				"materials_ms": 0.034,
+				"merge_ms": 12.359,
+				"merged_meshes": 73,
+				"source_meshes": 155,
+				"source_surfaces": 155,
+				"temporary_commit_ms": 0.769,
+				"temporary_mesh_commits": 155,
+				"total_ms": 52.098
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 3.413,
+				"kind": "airliner",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 3.413
+			}
+		},
+		"car": {
+			"cold": {
+				"append_ms": 1.59,
+				"cache_capture_ms": 3.266,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 1.295,
+				"final_commit_ms": 0.454,
+				"geometry_ms": 10.645,
+				"index_ms": 1.311,
+				"kind": "car",
+				"materials_ms": 0.047,
+				"merge_ms": 5.513,
+				"merged_meshes": 30,
+				"source_meshes": 107,
+				"source_surfaces": 107,
+				"temporary_commit_ms": 0.402,
+				"temporary_mesh_commits": 107,
+				"total_ms": 19.475
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 1.126,
+				"kind": "car",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 1.126
+			}
+		},
+		"fighter": {
+			"cold": {
+				"append_ms": 2.238,
+				"cache_capture_ms": 5.116,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 1.919,
+				"final_commit_ms": 0.609,
+				"geometry_ms": 17.917,
+				"index_ms": 1.629,
+				"kind": "fighter",
+				"materials_ms": 0.027,
+				"merge_ms": 7.695,
+				"merged_meshes": 32,
+				"source_meshes": 171,
+				"source_surfaces": 171,
+				"temporary_commit_ms": 0.615,
+				"temporary_mesh_commits": 171,
+				"total_ms": 30.757
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 6.142,
+				"kind": "fighter",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 6.142
+			}
+		},
+		"glider": {
+			"cold": {
+				"append_ms": 2.289,
+				"cache_capture_ms": 3.207,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 1.476,
+				"final_commit_ms": 0.434,
+				"geometry_ms": 11.976,
+				"index_ms": 0.979,
+				"kind": "glider",
+				"materials_ms": 0.035,
+				"merge_ms": 6.103,
+				"merged_meshes": 23,
+				"source_meshes": 116,
+				"source_surfaces": 116,
+				"temporary_commit_ms": 0.443,
+				"temporary_mesh_commits": 116,
+				"total_ms": 21.323
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 3.359,
+				"kind": "glider",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 3.359
+			}
+		},
+		"helicopter": {
+			"cold": {
+				"append_ms": 2.352,
+				"cache_capture_ms": 4.751,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 2.06899999999999,
+				"final_commit_ms": 0.646,
+				"geometry_ms": 14.843,
+				"index_ms": 1.517,
+				"kind": "helicopter",
+				"materials_ms": 0.033,
+				"merge_ms": 7.874,
+				"merged_meshes": 36,
+				"source_meshes": 169,
+				"source_surfaces": 169,
+				"temporary_commit_ms": 0.591,
+				"temporary_mesh_commits": 169,
+				"total_ms": 27.504
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 3.654,
+				"kind": "helicopter",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 3.654
+			}
+		},
+		"hoverboard": {
+			"cold": {
+				"append_ms": 1.209,
+				"cache_capture_ms": 1.412,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 0.658,
+				"final_commit_ms": 0.256,
+				"geometry_ms": 1.108,
+				"index_ms": 0.026,
+				"kind": "hoverboard",
+				"materials_ms": 0.031,
+				"merge_ms": 2.704,
+				"merged_meshes": 12,
+				"source_meshes": 90,
+				"source_surfaces": 90,
+				"temporary_commit_ms": 0.259,
+				"temporary_mesh_commits": 90,
+				"total_ms": 5.258
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 0.545,
+				"kind": "hoverboard",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 0.545
+			}
+		},
+		"motorcycle": {
+			"cold": {
+				"append_ms": 1.903,
+				"cache_capture_ms": 2.796,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 1.429,
+				"final_commit_ms": 0.588,
+				"geometry_ms": 27.985,
+				"index_ms": 2.438,
+				"kind": "motorcycle",
+				"materials_ms": 0.088,
+				"merge_ms": 7.214,
+				"merged_meshes": 28,
+				"source_meshes": 70,
+				"source_surfaces": 70,
+				"temporary_commit_ms": 0.463,
+				"temporary_mesh_commits": 70,
+				"total_ms": 38.085
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 1.081,
+				"kind": "motorcycle",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 1.081
+			}
+		},
+		"paraglider": {
+			"cold": {
+				"append_ms": 2.407,
+				"cache_capture_ms": 1.499,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 2.27199999999999,
+				"final_commit_ms": 0.776,
+				"geometry_ms": 25.003,
+				"index_ms": 2.513,
+				"kind": "paraglider",
+				"materials_ms": 0.027,
+				"merge_ms": 9.069,
+				"merged_meshes": 12,
+				"source_meshes": 126,
+				"source_surfaces": 126,
+				"temporary_commit_ms": 0.572,
+				"temporary_mesh_commits": 126,
+				"total_ms": 35.602
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 0.677,
+				"kind": "paraglider",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 0.677
+			}
+		},
+		"speedboat": {
+			"cold": {
+				"append_ms": 1.8,
+				"cache_capture_ms": 1.561,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 1.285,
+				"final_commit_ms": 0.412,
+				"geometry_ms": 4.318,
+				"index_ms": 0.65,
+				"kind": "speedboat",
+				"materials_ms": 0.03,
+				"merge_ms": 5.184,
+				"merged_meshes": 12,
+				"source_meshes": 232,
+				"source_surfaces": 232,
+				"temporary_commit_ms": 0.49,
+				"temporary_mesh_commits": 232,
+				"total_ms": 11.096
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 0.904,
+				"kind": "speedboat",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 0.904
+			}
+		},
+		"tank": {
+			"cold": {
+				"append_ms": 2.60299999999995,
+				"cache_capture_ms": 7.76,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 2.01499999999999,
+				"final_commit_ms": 0.642,
+				"geometry_ms": 5.155,
+				"index_ms": 0.104,
+				"kind": "tank",
+				"materials_ms": 0.032,
+				"merge_ms": 8.596,
+				"merged_meshes": 88,
+				"source_meshes": 824,
+				"source_surfaces": 824,
+				"temporary_commit_ms": 1.07499999999999,
+				"temporary_mesh_commits": 824,
+				"total_ms": 21.545
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 2.059,
+				"kind": "tank",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 2.059
+			}
+		},
+		"yacht": {
+			"cold": {
+				"append_ms": 4.07599999999998,
+				"cache_capture_ms": 2.023,
+				"cache_hit": false,
+				"cache_stored": true,
+				"extract_ms": 2.87999999999998,
+				"final_commit_ms": 0.98,
+				"geometry_ms": 7.381,
+				"index_ms": 1.192,
+				"kind": "yacht",
+				"materials_ms": 0.031,
+				"merge_ms": 11.697,
+				"merged_meshes": 10,
+				"source_meshes": 566,
+				"source_surfaces": 566,
+				"temporary_commit_ms": 1.15899999999999,
+				"temporary_mesh_commits": 566,
+				"total_ms": 21.134
+			},
+			"hot": {
+				"append_ms": 0.0,
+				"cache_hit": true,
+				"extract_ms": 0.0,
+				"final_commit_ms": 0.0,
+				"index_ms": 0.0,
+				"instantiate_ms": 1.322,
+				"kind": "yacht",
+				"merged_meshes": 0,
+				"source_meshes": 0,
+				"source_surfaces": 0,
+				"temporary_commit_ms": 0.0,
+				"temporary_mesh_commits": 0,
+				"total_ms": 1.322
+			}
+		}
+	},
+	"scope": "Isolated production Vehicle/Factory builds for every kind. Exact cold/hot arrays and authored collider properties; independent node/material/mutable metadata, first-copy damage, saved tank aim and release/recreate. CPU headless timings are not native GPU-performance claims.",
+	"test_sha256": "7710ecf96d6ffa63eb036d51d4726a76fb5682eb065a2fd0faf6dc79a69664e7",
+	"vehicle_sha256": "d8b6ee5be970747d265bc5319357ff6a4e4aeb987cc5d103ae77edba07129284"
+}

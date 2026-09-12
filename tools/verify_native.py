@@ -1,22 +1,35 @@
 """Run bundled validators in the exported macOS application, retaining fresh evidence."""
 import argparse
 import datetime
+import hashlib
 import json
 from pathlib import Path
 import shutil
 import subprocess
 import time
 
+def digest(path):
+    result = hashlib.sha256()
+    with path.open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            result.update(block)
+    return result.hexdigest()
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access"))
+    parser.add_argument("mode", choices=("experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access", "combat", "diagnostics", "daylight"))
     parser.add_argument("--app", type=Path, default=Path("dist/Harbourlife.app"))
-    parser.add_argument("--output", type=Path, default=Path("reports/release-v016-native"))
+    parser.add_argument("--output", type=Path, default=Path("reports/release-v017-native"))
     args = parser.parse_args()
     app = args.app.resolve() / "Contents/MacOS/Harbourlife"
+    pck = args.app.resolve() / "Contents/Resources/Harbourlife.pck"
+    identity = {"executable_sha256": digest(app), "pck_sha256": digest(pck)}
     user_data = Path.home() / "Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港"
     cases = {
+        "daylight": (["--daylight-qa"], "daylight-qa/report.json", "daylight-qa"),
+        "diagnostics": (["--diagnostics-qa"], "diagnostics-qa/report.json", "diagnostics-qa"),
+        "combat": (["--combat-qa"], "combat-qa/report.json", "combat-qa"),
         "experience": (["--experience-qa"], "experience-flow-report.json", "experience-qa"),
         "visual": (["--visual-qa", "--release-v013"], "update-v013-views/capture-evidence.json", "update-v013-views"),
         "qa": (["--qa"], "qa-report.json", "qa-screenshots"),
@@ -33,7 +46,7 @@ def main():
     log = out / (args.mode + "-runtime.log")
     console_path = out / (args.mode + "-console.log")
     command = [str(app), "--disable-vsync", "--log-file", str(log)]
-    if args.mode in ("flight", "mobility", "air-vehicle", "precinct", "opera-access"):
+    if args.mode in ("flight", "mobility", "air-vehicle", "precinct", "opera-access", "combat"):
         command += ["--fixed-fps", "60"]
     command += ["--"] + flags
     started = time.time()
@@ -42,6 +55,8 @@ def main():
         result = subprocess.run(command, stdout=console, stderr=subprocess.STDOUT, timeout=2400)
     report = user_data / report_name
     record = {
+        "app_identity": identity,
+        "app_identity_unchanged": identity == {"executable_sha256": digest(app), "pck_sha256": digest(pck)},
         "mode": args.mode,
         "launch_flags": ["--disable-vsync"] + (["--fixed-fps", "60"] if "--fixed-fps" in command else []) + ["--"] + flags,
         "started_utc": datetime.datetime.fromtimestamp(started, datetime.timezone.utc).isoformat(),
@@ -74,7 +89,7 @@ def main():
     record["runtime_errors"] = sorted(set(line for line in logged.splitlines() if "ERROR:" in line or "WARNING:" in line))
     if not record["runtime_log_fresh"]:
         record["runtime_errors"].append("Missing or stale runtime log")
-    record["passed"] = bool(record.get("passed")) and result.returncode == 0 and not record["runtime_errors"]
+    record["passed"] = bool(record.get("passed")) and result.returncode == 0 and not record["runtime_errors"] and record["app_identity_unchanged"]
     (out / (args.mode + "-launch.json")).write_text(json.dumps(record, ensure_ascii=False, indent=2))
     print(json.dumps(record, ensure_ascii=False), flush=True)
     return 0 if record["passed"] else 1

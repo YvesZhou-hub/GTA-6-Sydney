@@ -26,7 +26,17 @@ import zipfile
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 RESOURCES = [
+    "res://scripts/tank_models.gd", "res://scripts/tank_motion.gd", "res://scripts/fighter_models.gd",
+    "res://scripts/fighter_motion.gd", "res://scripts/vehicle_weapons.gd", "res://scripts/combat_effects.gd",
+    "res://scripts/arcade_impact.gd", "res://scripts/combat_validation.gd",
     "res://scripts/main.gd", "res://scripts/navigation_input_validation.gd",
+    "res://scripts/daylight_environment.gd", "res://assets/environment/daylight.gdshader",
+    "res://assets/environment/rustig_koppie_puresky_2k.hdr",
+    "res://assets/environment/qwantani_sunset_puresky_2k.hdr", "res://assets/environment/qwantani_night_puresky_2k.hdr",
+    "res://scripts/city_clock.gd", "res://scripts/time_panel.gd", "res://assets/sydney_summer.json",
+    "res://scripts/runtime_diagnostics.gd", "res://scripts/diagnostics_panel.gd", "res://scripts/diagnostics_validation.gd",
+    "res://scripts/material_roles.gd", "res://scripts/facade_stream.gd", "res://shaders/city_facade.gdshader", "res://assets/world_facade.gdshader",
+    "res://scripts/daylight_validation.gd", "res://scripts/public_lighting.gd", "res://assets/environment/sky_sources.json",
     "res://scripts/harbor_map.gd", "res://scripts/harbor_minimap.gd",
     "res://scripts/opera_landmark.gd", "res://scripts/opera_interiors.gd",
     "res://scripts/opera_access_validation.gd", "res://scripts/precinct_validation.gd", "res://scripts/darling_public_facilities.gd",
@@ -43,6 +53,7 @@ RESOURCES = [
     "res://scripts/manowar_detail.gd", "res://assets/manowar_piers.json",
     "res://scripts/city_landmarks.gd", "res://scripts/icc_landmarks.gd",
     "res://scripts/bank_landmarks.gd", "res://scripts/quay_landmarks.gd",
+    "res://scripts/manly_landmarks.gd", "res://scripts/qvb_public.gd",
 ]
 
 
@@ -158,7 +169,7 @@ def main():
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--archive", type=Path, default=ROOT / "dist/Harbourlife-macOS-arm64.zip")
     parser.add_argument("--source-archive", type=Path)
-    parser.add_argument("--version", default="0.1.6")
+    parser.add_argument("--version", default="0.1.7")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output.resolve() if args.output else ROOT / "reports" / ("archive-audit-preparation.json" if args.prepare_only else "archive-validation.json")
@@ -213,7 +224,7 @@ def main():
             record["pck_sha256"] = pck_hash
             record["checks"]["extracted_pck_matches_built_app"] = pck_hash == digest(Path(manifest["app"]) / "Contents/Resources/Harbourlife.pck")
             script = extracted / "resource_probe.gd"
-            script.write_text('extends SceneTree\nfunc _initialize():\n\tvar failed:=false\n\tfor path in ' + json.dumps(RESOURCES) + ':\n\t\tvar okay:bool=(ResourceLoader.exists(path) and load(path)!=null) if str(path).ends_with(".gd") else FileAccess.file_exists(path)\n\t\tprint("ARCHIVE_RESOURCE ",path," ",okay)\n\t\tif not okay:failed=true\n\tvar packed_store=load("res://scripts/save_store.gd")\n\tprint("ARCHIVE_SAVE_FORMAT ",packed_store.VERSION)\n\tif packed_store.VERSION!=5:failed=true\n\tquit(1 if failed else 0)\n')
+            script.write_text('extends SceneTree\nfunc _initialize():\n\tvar failed:=false\n\tfor path in ' + json.dumps(RESOURCES) + ':\n\t\tvar okay:bool=FileAccess.file_exists(path) if str(path).ends_with(".json") else (ResourceLoader.exists(path) and load(path)!=null)\n\t\tprint("ARCHIVE_RESOURCE ",path," ",okay)\n\t\tif not okay:failed=true\n\tvar packed_store=load("res://scripts/save_store.gd")\n\tprint("ARCHIVE_SAVE_FORMAT ",packed_store.VERSION)\n\tif packed_store.VERSION!=5:failed=true\n\tquit(1 if failed else 0)\n')
             # Release templates do not support the tools-only --script flag.
             # The matching official toolchain loads this exact extracted PCK;
             # the App itself is tested separately through its bundled QA flag.

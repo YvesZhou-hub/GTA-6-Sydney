@@ -1,0 +1,566 @@
+{
+  "version": 1,
+  "label": "Sydney fixed average summer",
+  "latitude": -33.8568,
+  "longitude": 151.2153,
+  "timezone": "Australia/Sydney",
+  "fixed_utc_offset": 11,
+  "sample_start": "2026-12-01",
+  "sample_end": "2027-02-28",
+  "samples": 90,
+  "sunrise_hour": 6.037201158130355,
+  "sunset_hour": 19.99328135886882,
+  "solar_noon_hour": 13.015241258499588,
+  "daylight_hours": 13.956080200738466,
+  "declination_radians": -0.33655142342217337,
+  "time_scale": 12,
+  "real_seconds_per_day": 7200,
+  "sources": [
+    "https://gml.noaa.gov/grad/solcalc/solareqns.PDF",
+    "https://www.bom.gov.au/news-and-media/solstices-equinoxes-and-the-seasons",
+    "https://www.judcom.nsw.gov.au/publications/benchbks/local/perpetual_calendar.html"
+  ],
+  "scope": "Arithmetic average of 90 computed summer days at a fixed AEDT offset. Flat astronomical horizon; no terrain, weather or live wall-clock synchronization.",
+  "daily_samples": [
+    {
+      "date": "2026-12-01",
+      "sunrise_hour": 5.633802605556717,
+      "sunset_hour": 19.847191495286655,
+      "declination_radians": -0.37858165141705025
+    },
+    {
+      "date": "2026-12-02",
+      "sunrise_hour": 5.631356681485076,
+      "sunset_hour": 19.861843474471474,
+      "declination_radians": -0.38131161191100715
+    },
+    {
+      "date": "2026-12-03",
+      "sunrise_hour": 5.629415499038071,
+      "sunset_hour": 19.876280059027962,
+      "declination_radians": -0.38391911702935544
+    },
+    {
+      "date": "2026-12-04",
+      "sunrise_hour": 5.627980185507837,
+      "sunset_hour": 19.890488482286806,
+      "declination_radians": -0.3864029118742794
+    },
+    {
+      "date": "2026-12-05",
+      "sunrise_hour": 5.627051509615537,
+      "sunset_hour": 19.90445604121026,
+      "declination_radians": -0.3887617934388544
+    },
+    {
+      "date": "2026-12-06",
+      "sunrise_hour": 5.626629870378908,
+      "sunset_hour": 19.918170120719616,
+      "declination_radians": -0.3909946119769921
+    },
+    {
+      "date": "2026-12-07",
+      "sunrise_hour": 5.626715286387638,
+      "sunset_hour": 19.931618217938926,
+      "declination_radians": -0.39310027232146216
+    },
+    {
+      "date": "2026-12-08",
+      "sunrise_hour": 5.627307385565651,
+      "sunset_hour": 19.9447879662601,
+      "declination_radians": -0.3950777351472575
+    },
+    {
+      "date": "2026-12-09",
+      "sunrise_hour": 5.628405395500066,
+      "sunset_hour": 19.957667159133642,
+      "declination_radians": -0.39692601817768597
+    },
+    {
+      "date": "2026-12-10",
+      "sunrise_hour": 5.630008134416525,
+      "sunset_hour": 19.97024377348872,
+      "declination_radians": -0.398644197330679
+    },
+    {
+      "date": "2026-12-11",
+      "sunrise_hour": 5.6321140028800025,
+      "sunset_hour": 19.982505992686814,
+      "declination_radians": -0.4002314078029426
+    },
+    {
+      "date": "2026-12-12",
+      "sunrise_hour": 5.634720976298678,
+      "sunset_hour": 19.994442228914252,
+      "declination_radians": -0.4016868450896926
+    },
+    {
+      "date": "2026-12-13",
+      "sunrise_hour": 5.637826598306415,
+      "sunset_hour": 20.006041144920705,
+      "declination_radians": -0.40300976593785826
+    },
+    {
+      "date": "2026-12-14",
+      "sunrise_hour": 5.641427975096326,
+      "sunset_hour": 20.017291675013567,
+      "declination_radians": -0.40419948923077403
+    },
+    {
+      "date": "2026-12-15",
+      "sunrise_hour": 5.645521770774437,
+      "sunset_hour": 20.028183045221343,
+      "declination_radians": -0.40525539680252265
+    },
+    {
+      "date": "2026-12-16",
+      "sunrise_hour": 5.650104203797953,
+      "sunset_hour": 20.038704792543427,
+      "declination_radians": -0.40617693418024603
+    },
+    {
+      "date": "2026-12-17",
+      "sunrise_hour": 5.655171044557634,
+      "sunset_hour": 20.048846783208546,
+      "declination_radians": -0.4069636112528855
+    },
+    {
+      "date": "2026-12-18",
+      "sunrise_hour": 5.660717614158023,
+      "sunset_hour": 20.058599229869547,
+      "declination_radians": -0.40761500286497837
+    },
+    {
+      "date": "2026-12-19",
+      "sunrise_hour": 5.66673878444295,
+      "sunset_hour": 20.06795270766861,
+      "declination_radians": -0.4081307493342889
+    },
+    {
+      "date": "2026-12-20",
+      "sunrise_hour": 5.673228979306757,
+      "sunset_hour": 20.07689816911358,
+      "declination_radians": -0.40851055689222204
+    },
+    {
+      "date": "2026-12-21",
+      "sunrise_hour": 5.680182177324319,
+      "sunset_hour": 20.08542695771352,
+      "declination_radians": -0.40875419804612767
+    },
+    {
+      "date": "2026-12-22",
+      "sunrise_hour": 5.687591915725075,
+      "sunset_hour": 20.09353082032932,
+      "declination_radians": -0.40886151186277603
+    },
+    {
+      "date": "2026-12-23",
+      "sunrise_hour": 5.695451295728051,
+      "sunset_hour": 20.101201918203323,
+      "declination_radians": -0.4088324041724486
+    },
+    {
+      "date": "2026-12-24",
+      "sunrise_hour": 5.7037529892463885,
+      "sunset_hour": 20.108432836640343,
+      "declination_radians": -0.4086668476932635
+    },
+    {
+      "date": "2026-12-25",
+      "sunrise_hour": 5.712489246961293,
+      "sunset_hour": 20.115216593321193,
+      "declination_radians": -0.4083648820755246
+    },
+    {
+      "date": "2026-12-26",
+      "sunrise_hour": 5.7216519077564545,
+      "sunset_hour": 20.121546645238404,
+      "declination_radians": -0.4079266138660541
+    },
+    {
+      "date": "2026-12-27",
+      "sunrise_hour": 5.731232409495361,
+      "sunset_hour": 20.127416894252725,
+      "declination_radians": -0.4073522163926411
+    },
+    {
+      "date": "2026-12-28",
+      "sunrise_hour": 5.741221801115256,
+      "sunset_hour": 20.132821691277655,
+      "declination_radians": -0.40664192956891065
+    },
+    {
+      "date": "2026-12-29",
+      "sunrise_hour": 5.7516107560029734,
+      "sunset_hour": 20.13775583910769,
+      "declination_radians": -0.4057960596200862
+    },
+    {
+      "date": "2026-12-30",
+      "sunrise_hour": 5.762389586609754,
+      "sunset_hour": 20.142214593914417,
+      "declination_radians": -0.4048149787302913
+    },
+    {
+      "date": "2026-12-31",
+      "sunrise_hour": 5.773548260254381,
+      "sunset_hour": 20.146193665442272,
+      "declination_radians": -0.4036991246121978
+    },
+    {
+      "date": "2027-01-01",
+      "sunrise_hour": 5.7850764160564445,
+      "sunset_hour": 20.149689215943553,
+      "declination_radians": -0.402449
+    },
+    {
+      "date": "2027-01-02",
+      "sunrise_hour": 5.796963382934882,
+      "sunset_hour": 20.152697857899078,
+      "declination_radians": -0.4010651720668524
+    },
+    {
+      "date": "2027-01-03",
+      "sunrise_hour": 5.8091981986004475,
+      "sunset_hour": 20.15521665057746,
+      "declination_radians": -0.3995482717680689
+    },
+    {
+      "date": "2027-01-04",
+      "sunrise_hour": 5.821769629465318,
+      "sunset_hour": 20.157243095491804,
+      "declination_radians": -0.39789899311154203
+    },
+    {
+      "date": "2027-01-05",
+      "sunrise_hour": 5.834666191387872,
+      "sunset_hour": 20.15877513081777,
+      "declination_radians": -0.39611809235698475
+    },
+    {
+      "date": "2027-01-06",
+      "sunrise_hour": 5.8478761711665985,
+      "sunset_hour": 20.159811124841525,
+      "declination_radians": -0.39420638714575845
+    },
+    {
+      "date": "2027-01-07",
+      "sunrise_hour": 5.861387648693469,
+      "sunset_hour": 20.160349868509854,
+      "declination_radians": -0.392164755563181
+    },
+    {
+      "date": "2027-01-08",
+      "sunrise_hour": 5.875188519674349,
+      "sunset_hour": 20.16039056715759,
+      "declination_radians": -0.38999413513536
+    },
+    {
+      "date": "2027-01-09",
+      "sunrise_hour": 5.889266518822165,
+      "sunset_hour": 20.15993283149017,
+      "declination_radians": -0.38769552176272365
+    },
+    {
+      "date": "2027-01-10",
+      "sunrise_hour": 5.903609243427115,
+      "sunset_hour": 20.158976667900223,
+      "declination_radians": -0.3852699685925496
+    },
+    {
+      "date": "2027-01-11",
+      "sunrise_hour": 5.918204177207922,
+      "sunset_hour": 20.157522468198298,
+      "declination_radians": -0.3827185848329227
+    },
+    {
+      "date": "2027-01-12",
+      "sunrise_hour": 5.933038714348258,
+      "sunset_hour": 20.155570998837728,
+      "declination_radians": -0.38004253451065706
+    },
+    {
+      "date": "2027-01-13",
+      "sunrise_hour": 5.94810018362344,
+      "sunset_hour": 20.15312338971316,
+      "declination_radians": -0.37724303517583996
+    },
+    {
+      "date": "2027-01-14",
+      "sunrise_hour": 5.963375872524146,
+      "sunset_hour": 20.15018112261102,
+      "declination_radians": -0.3743213565557503
+    },
+    {
+      "date": "2027-01-15",
+      "sunrise_hour": 5.978853051286026,
+      "sunset_hour": 20.14674601938845,
+      "declination_radians": -0.3712788191610034
+    },
+    {
+      "date": "2027-01-16",
+      "sunrise_hour": 5.994518996736995,
+      "sunset_hour": 20.142820229954822,
+      "declination_radians": -0.36811679284686655
+    },
+    {
+      "date": "2027-01-17",
+      "sunrise_hour": 6.010361015877155,
+      "sunset_hour": 20.138406220127123,
+      "declination_radians": -0.3648366953327642
+    },
+    {
+      "date": "2027-01-18",
+      "sunrise_hour": 6.026366469110178,
+      "sunset_hour": 20.133506759427213,
+      "declination_radians": -0.36143999068307425
+    },
+    {
+      "date": "2027-01-19",
+      "sunrise_hour": 6.04252279304908,
+      "sunset_hour": 20.128124908885248,
+      "declination_radians": -0.357928187752378
+    },
+    {
+      "date": "2027-01-20",
+      "sunrise_hour": 6.0588175228238,
+      "sunset_hour": 20.122264008909617,
+      "declination_radians": -0.3543028385983858
+    },
+    {
+      "date": "2027-01-21",
+      "sunrise_hour": 6.075238313822868,
+      "sunset_hour": 20.115927667279344,
+      "declination_radians": -0.35056553686581415
+    },
+    {
+      "date": "2027-01-22",
+      "sunrise_hour": 6.091772962806341,
+      "sunset_hour": 20.109119747310594,
+      "declination_radians": -0.34671791614452807
+    },
+    {
+      "date": "2027-01-23",
+      "sunrise_hour": 6.108409428332437,
+      "sunset_hour": 20.101844356244136,
+      "declination_radians": -0.34276164830529954
+    },
+    {
+      "date": "2027-01-24",
+      "sunrise_hour": 6.12513585044557,
+      "sunset_hour": 20.094105833895963,
+      "declination_radians": -0.3386984418165583
+    },
+    {
+      "date": "2027-01-25",
+      "sunrise_hour": 6.1419405695787725,
+      "sunset_hour": 20.085908741608517,
+      "declination_radians": -0.33453004004552855
+    },
+    {
+      "date": "2027-01-26",
+      "sunrise_hour": 6.1588121446288735,
+      "sunset_hour": 20.07725785153508,
+      "declination_radians": -0.33025821954715295
+    },
+    {
+      "date": "2027-01-27",
+      "sunrise_hour": 6.175739370168133,
+      "sunset_hour": 20.068158136285383,
+      "declination_radians": -0.32588478834420814
+    },
+    {
+      "date": "2027-01-28",
+      "sunrise_hour": 6.192711292761171,
+      "sunset_hour": 20.058614758955567,
+      "declination_radians": -0.3214115842020073
+    },
+    {
+      "date": "2027-01-29",
+      "sunrise_hour": 6.209717226361182,
+      "sunset_hour": 20.04863306356149,
+      "declination_radians": -0.3168404729010685
+    },
+    {
+      "date": "2027-01-30",
+      "sunrise_hour": 6.226746766764375,
+      "sunset_hour": 20.038218565889682,
+      "declination_radians": -0.3121733465111044
+    },
+    {
+      "date": "2027-01-31",
+      "sunrise_hour": 6.243789805106307,
+      "sunset_hour": 20.027376944776396,
+      "declination_radians": -0.30741212166965537
+    },
+    {
+      "date": "2027-02-01",
+      "sunrise_hour": 6.260836540388358,
+      "sunset_hour": 20.01611403382112,
+      "declination_radians": -0.30255873786864923
+    },
+    {
+      "date": "2027-02-02",
+      "sunrise_hour": 6.277877491026879,
+      "sunset_hour": 20.004435813537253,
+      "declination_radians": -0.2976151557521187
+    },
+    {
+      "date": "2027-02-03",
+      "sunrise_hour": 6.294903505421663,
+      "sunset_hour": 19.992348403939268,
+      "declination_radians": -0.2925833554282546
+    },
+    {
+      "date": "2027-02-04",
+      "sunrise_hour": 6.311905771544204,
+      "sunset_hour": 19.979858057562435,
+      "declination_radians": -0.2874653347989078
+    },
+    {
+      "date": "2027-02-05",
+      "sunrise_hour": 6.328875825549669,
+      "sunset_hour": 19.966971152908325,
+      "declination_radians": -0.2822631079095794
+    },
+    {
+      "date": "2027-02-06",
+      "sunrise_hour": 6.345805559419951,
+      "sunset_hour": 19.95369418830667,
+      "declination_radians": -0.27697870332286373
+    },
+    {
+      "date": "2027-02-07",
+      "sunrise_hour": 6.362687227647987,
+      "sunset_hour": 19.940033776181814,
+      "declination_radians": -0.2716141625182161
+    },
+    {
+      "date": "2027-02-08",
+      "sunrise_hour": 6.3795134529763935,
+      "sunset_hour": 19.925996637709922,
+      "declination_radians": -0.26617153832083257
+    },
+    {
+      "date": "2027-02-09",
+      "sunrise_hour": 6.396277231205848,
+      "sunset_hour": 19.911589597851282,
+      "declination_radians": -0.2606528933623247
+    },
+    {
+      "date": "2027-02-10",
+      "sunrise_hour": 6.412971935090872,
+      "sunset_hour": 19.896819580740548,
+      "declination_radians": -0.25506029857576545
+    },
+    {
+      "date": "2027-02-11",
+      "sunrise_hour": 6.429591317342581,
+      "sunset_hour": 19.88169360541646,
+      "declination_radians": -0.2493958317275755
+    },
+    {
+      "date": "2027-02-12",
+      "sunrise_hour": 6.446129512759671,
+      "sunset_hour": 19.866218781871524,
+      "declination_radians": -0.2436615759885977
+    },
+    {
+      "date": "2027-02-13",
+      "sunrise_hour": 6.462581039510365,
+      "sunset_hour": 19.85040230740143,
+      "declination_radians": -0.23785961854658716
+    },
+    {
+      "date": "2027-02-14",
+      "sunrise_hour": 6.47894079958923,
+      "sunset_hour": 19.834251463233258,
+      "declination_radians": -0.23199204926221517
+    },
+    {
+      "date": "2027-02-15",
+      "sunrise_hour": 6.495204078473836,
+      "sunset_hour": 19.817773611411308,
+      "declination_radians": -0.22606095937055368
+    },
+    {
+      "date": "2027-02-16",
+      "sunrise_hour": 6.511366544007006,
+      "sunset_hour": 19.800976191919133,
+      "declination_radians": -0.22006844022987104
+    },
+    {
+      "date": "2027-02-17",
+      "sunrise_hour": 6.527424244531065,
+      "sunset_hour": 19.783866720016324,
+      "declination_radians": -0.2140165821194254
+    },
+    {
+      "date": "2027-02-18",
+      "sunrise_hour": 6.543373606300933,
+      "sunset_hour": 19.76645278376889,
+      "declination_radians": -0.20790747308780408
+    },
+    {
+      "date": "2027-02-19",
+      "sunrise_hour": 6.5592114302032,
+      "sunset_hour": 19.748742041752234,
+      "declination_radians": -0.20174319785320272
+    },
+    {
+      "date": "2027-02-20",
+      "sunrise_hour": 6.574934887808552,
+      "sunset_hour": 19.730742220906322,
+      "declination_radians": -0.19552583675689383
+    },
+    {
+      "date": "2027-02-21",
+      "sunrise_hour": 6.590541516784875,
+      "sunset_hour": 19.712461114523123,
+      "declination_radians": -0.18925746477097713
+    },
+    {
+      "date": "2027-02-22",
+      "sunrise_hour": 6.606029215698299,
+      "sunset_hour": 19.693906580347054,
+      "declination_radians": -0.18294015056135243
+    },
+    {
+      "date": "2027-02-23",
+      "sunrise_hour": 6.621396238229335,
+      "sunset_hour": 19.675086538770078,
+      "declination_radians": -0.17657595560669806
+    },
+    {
+      "date": "2027-02-24",
+      "sunrise_hour": 6.636641186830903,
+      "sunset_hour": 19.656008971103695,
+      "declination_radians": -0.1701669333740803
+    },
+    {
+      "date": "2027-02-25",
+      "sunrise_hour": 6.651763005854758,
+      "sunset_hour": 19.636681917911282,
+      "declination_radians": -0.16371512855166226
+    },
+    {
+      "date": "2027-02-26",
+      "sunrise_hour": 6.66676097417238,
+      "sunset_hour": 19.617113477384866,
+      "declination_radians": -0.15722257633882195
+    },
+    {
+      "date": "2027-02-27",
+      "sunrise_hour": 6.681634697316009,
+      "sunset_hour": 19.59731180375175,
+      "declination_radians": -0.1506913017938284
+    },
+    {
+      "date": "2027-02-28",
+      "sunrise_hour": 6.696384099164884,
+      "sunset_hour": 19.57728510569717,
+      "declination_radians": -0.14412331923907148
+    }
+  ]
+}

@@ -1,0 +1,580 @@
+{
+  "checks": [
+    {
+      "evidence": {},
+      "name": "Missing world and environment are explicitly unavailable",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Missing environment rejects changes safely",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Missing environment reset is safe",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 1.0,
+        "snapshot": 1.0
+      },
+      "name": "Performance source truth: fps",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: process_seconds",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: physics_seconds",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 1502.0,
+        "snapshot": 1502.0
+      },
+      "name": "Performance source truth: objects",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 10.0,
+        "snapshot": 10.0
+      },
+      "name": "Performance source truth: nodes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 4.0,
+        "snapshot": 4.0
+      },
+      "name": "Performance source truth: resources",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: render_objects",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: render_primitives",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: draw_calls",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: video_memory_bytes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: texture_memory_bytes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: buffer_memory_bytes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "after": 58760150.0,
+        "before": 58745554.0,
+        "snapshot": 58746726.0
+      },
+      "name": "Live memory counter lies between immediate before/after engine samples",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 66054167.0,
+        "snapshot": 66054167.0
+      },
+      "name": "Performance source truth: static_memory_max_bytes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: active_physics_bodies",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: physics_collision_pairs",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: physics_islands",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: pipeline_canvas",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: pipeline_mesh",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: pipeline_surface",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: pipeline_draw",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine": 0.0,
+        "snapshot": 0.0
+      },
+      "name": "Performance source truth: pipeline_specialization",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Headless marks rendering unavailable rather than valid zero FPS",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Absent city clock is reported as unavailable",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "City clock snapshot reports actual current time and solar numeric state",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Solar direction is a JSON numeric array instead of a stringified Vector3",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Release-only memory limitation is explicitly reported",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "architecture_mesh_batches": 1,
+        "available": true,
+        "destroyed_history_ids": 2,
+        "destroyed_registered": 1,
+        "material_roles": null,
+        "provided": {
+          "pending_tiles": 2,
+          "resident_tiles": 7
+        },
+        "resident_tiles": 7,
+        "streaming": {
+          "base_collision_resident": true,
+          "enabled": true,
+          "last_upload_ms": 0.8,
+          "last_worker_ms": 2.5,
+          "limit": 64,
+          "resident": 7,
+          "scope": "near_facade_only",
+          "wanted": 9
+        },
+        "structure_cells": 1,
+        "structures": 3
+      },
+      "name": "World distinguishes live destroyed structures from retired history",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Architecture batches count actual resident meshes",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Optional world tile provider is used without inventing a count",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Live facade streaming stats preserve scope and immutable collision state",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Last vehicle spawn timings expose actual supplied profiling phases",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Absent airport retains unavailable counts",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Vehicle, player and weapon pools use live owner state",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Supported numerical tuning changes the real Environment",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Sun energy changes the existing directional light only",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Tuning synchronizes in-memory settings without touching unrelated keys",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Numerical changes never enable disabled render features",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "applied": {
+          "ambient": 0.0,
+          "exposure": 3.0,
+          "fog_density": 0.002,
+          "glow_intensity": 0.0
+        },
+        "clamped": {
+          "ambient": {
+            "applied": 0.0,
+            "requested": -12.0
+          },
+          "exposure": {
+            "applied": 3.0,
+            "requested": 999.0
+          },
+          "fog_density": {
+            "applied": 0.002,
+            "requested": 10.0
+          },
+          "glow_intensity": {
+            "applied": 0.0,
+            "requested": -1.0
+          }
+        },
+        "ok": true,
+        "rejected": {},
+        "values": {
+          "ambient": 0.0,
+          "exposure": 3.0,
+          "fog_density": 0.0020000000949949,
+          "fog_light_energy": 0.899999976158142,
+          "glow_intensity": 0.0,
+          "ssao_intensity": 1.39999997615814,
+          "sun_energy": 2.20000004768372
+        }
+      },
+      "name": "Finite out-of-range values are clamped with disclosed results",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "ambient": "finite number required",
+        "exposure": "finite number required",
+        "fog_density": "finite number required",
+        "glow_intensity": "finite number required",
+        "ssao_enabled": "unknown or structural setting",
+        "ssr_max_steps": "unknown or structural setting",
+        "unknown": "unknown or structural setting"
+      },
+      "name": "NaN, infinity, strings, booleans and unknown/structural keys are rejected",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Reset restores every exact original numerical value",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Original reset preserves feature flags",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Repeated setup cannot accidentally replace the original preset",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "A fresh setup reapplies previously stored numerical preferences",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Untuned diverse glass is reported per-material without an invented shared value",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Glass sliders update actual landmark and ordinary city shader resources",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Glass role numerical tuning preserves structural material flags",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Newly registered materials adopt current shared numerical profile",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Glass reset restores distinct per-resource and raw shader defaults",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Late streamed-in glass also restores its authored values",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Reset removes shared glass overrides from in-memory preferences",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Panel starts closed and does no background process",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "F3 panel exposes live state and notifies owner without taking pause ownership",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Disabled glow shows actual disabled status and cannot be edited by slider",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Glass controls are enabled while visibly preserving per-material initial values",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Real slider callback updates Environment and displayed value",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Panel reset uses original production numerical preset",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Close releases panel processing and emits owner hook",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Real GUI wheel reaches reset without changing numerical settings",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "button_rect": "[P: (1356.0, 36.0), S: (40.0, 33.0)]",
+        "click_injected": true,
+        "panel_visible": false,
+        "scroll_rect": "[P: (893.0, 36.0), S: (511.0, 828.0)]",
+        "scroll_vertical": 0
+      },
+      "name": "Real GUI scroll and click can close the top button after visiting bottom controls",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Time-cycle tuning saves proportional overrides while applying requested absolute values",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Time-cycle multipliers use separate in-memory preferences",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Changed time-of-day baseline preserves the user's relative adjustment",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Cycle reset restores current time baseline instead of flashing old noon lighting",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Zero night sun cannot silently create an invalid multiplier or artificial daylight",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Nighttime zero-baseline slider explains why it cannot be changed",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Stored multipliers validate finite known values and survive a zero current baseline",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Restored nighttime sun multiplier remains available at next sunrise",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Legacy absolute tuning migrates to cycle ratios while preserving material settings",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Remote Inspector numerical request uses the same validated runtime API",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Remote Inspector snapshot exposes actual current owner values",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Remote Inspector reset restores current baseline safely",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Actual Daylight resource preserves Diagnostics multipliers at dusk",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Actual Daylight night remains dark in direct sun despite retained multiplier",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fog_light_energy": 2.0,
+        "maximum": 2.0
+      },
+      "name": "Actual Daylight transition clamps tuned fog energy to the shared slider range",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Actual Daylight reset restores current daylight profile",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Rejected missing-sun tuning cannot silently change cycle metadata",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Reattached sun never receives a previously rejected adjustment",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Setup before initial daylight baseline preserves saved ratios over legacy absolute values",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Reset before initial daylight cancels deferred ratios and their saved preferences",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Freed game owner is handled without stale references",
+      "passed": true
+    }
+  ],
+  "clock_sha256": "08c1ab941e76cc0db1ddac9f1430da53181860f6be0831f95c512446bafe1468",
+  "count": 84,
+  "daylight_sha256": "1ec40c20defdf7c76e61cf38049f4c26e98c8550dfd7bb11439fe018a0b68a77",
+  "diagnostics_sha256": "f80a58c042cbd66f3da8899ecdcc9a62142e77f5914936cefc875d25b48bffc3",
+  "engine": "4.7.2-stable (official)",
+  "failures": 0,
+  "gpu_used": false,
+  "panel_sha256": "6fa6246bf2ab37be41fbcf282c7b1c918ed0ceaeb6e5ec34c0385c8d91ad452c",
+  "passed": true,
+  "roles_sha256": "153792865871ca8b7a6d1f83c77cef0e8b90068eee5155ce9458d5b62743b6f7",
+  "scope": "Isolated headless live Performance and Environment resource truth, optional owner data, clamps/rejection/reset/in-memory settings, exact heterogeneous landmark+city shader glass restore including late members, sun energy, time-cycle metadata contract, real production Daylight resource day/dusk/night/reset integration and actual Control slider callbacks; parent owns F3/aim/cursor, clock schedule and native appearance",
+  "test_sha256": "211a67625368e951d6bd09c10ef99e8859db70eb3f0d4d2d3f4c2fdd914a443d",
+  "ui_validation_sha256": "8f319525507621aee8567feffd93fc4fc7e2b32312fc58594f74661175e54f8e"
+}

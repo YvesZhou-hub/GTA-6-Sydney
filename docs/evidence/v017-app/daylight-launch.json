@@ -1,0 +1,30 @@
+{
+  "app_identity": {
+    "executable_sha256": "40bbc952001fe6ed3cabf7850863e03593bb230d51366bb2728df137c128fa19",
+    "pck_sha256": "2284250735312eb864f95b17f362273143fa5c3f6342017eb37210bc0e3abd94"
+  },
+  "app_identity_unchanged": true,
+  "mode": "daylight",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--daylight-qa"
+  ],
+  "started_utc": "2026-09-12T12:56:40.548596+00:00",
+  "wall_seconds": 83.536,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 51,
+  "passed": true,
+  "screenshots": [
+    "harbour-golden.png",
+    "cbd-george-street-night.png",
+    "harbour-noon.png",
+    "harbour-sunset.png",
+    "harbour-sunrise.png",
+    "icc-public-foyer-night.png",
+    "harbour-night.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

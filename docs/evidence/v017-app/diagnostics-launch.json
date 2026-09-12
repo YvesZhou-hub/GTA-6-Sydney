@@ -1,0 +1,27 @@
+{
+  "app_identity": {
+    "executable_sha256": "40bbc952001fe6ed3cabf7850863e03593bb230d51366bb2728df137c128fa19",
+    "pck_sha256": "2284250735312eb864f95b17f362273143fa5c3f6342017eb37210bc0e3abd94"
+  },
+  "app_identity_unchanged": true,
+  "mode": "diagnostics",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--diagnostics-qa"
+  ],
+  "started_utc": "2026-09-12T13:05:24.014869+00:00",
+  "wall_seconds": 78.98,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 43,
+  "passed": true,
+  "screenshots": [
+    "02-f3-material-tuning.png",
+    "03-time-sunset.png",
+    "04-time-night.png",
+    "01-f3-live-counters.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

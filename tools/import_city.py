@@ -14,6 +14,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 from city_roofs import add_roof
+from city_fidelity import annotate_pedestrian_areas
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'source/map-data'
@@ -249,6 +250,7 @@ def compile_map():
         if 'width' not in tags and number(tags.get('lanes')) and kind in ('primary','secondary','tertiary','trunk','motorway'): width=number(tags['lanes'])*3.15
         surface=LineString(road['points']).buffer(width/2,cap_style=2,join_style=2)
         if surface.intersects(holes): road['surface_triangles']=flat_triangles(surface.difference(holes))
+    out['pedestrian_area_coverage'] = annotate_pedestrian_areas(out['roads'], excavations)
     for area in out['parks']+out['beaches']:
         surface=Polygon(area['points']).buffer(0)
         if surface.intersects(holes): area['surface_triangles']=flat_triangles(surface.difference(holes))

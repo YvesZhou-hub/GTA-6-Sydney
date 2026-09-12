@@ -1,0 +1,25 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+RENDER_ENVIRONMENT PASS clock direction controls actual sunlight
+RENDER_ENVIRONMENT PASS day profile maintains readable daytime light
+RENDER_ENVIRONMENT PASS sky switches to incremental radiance updates
+RENDER_ENVIRONMENT PASS sky receives the same solar direction
+RENDER_ENVIRONMENT PASS 120 rapid clock calls do not rebuild120 sky cubes
+RENDER_ENVIRONMENT PASS paused time-menu jump forces immediate sky update
+RENDER_ENVIRONMENT PASS forced same-hour restore also refreshes sky
+RENDER_ENVIRONMENT PASS sunset is dimmer and warmer than daylight
+RENDER_ENVIRONMENT PASS sunset source dominates near horizon
+RENDER_ENVIRONMENT PASS sunset uses independent licensed panorama
+RENDER_ENVIRONMENT PASS night has no below-horizon direct sun
+RENDER_ENVIRONMENT PASS night panorama and blend are selected
+RENDER_ENVIRONMENT PASS night keeps finite ambient and lower fog light
+RENDER_ENVIRONMENT PASS clock never toggles expensive effect flags
+RENDER_ENVIRONMENT PASS F3 base contract provides all seven controls
+RENDER_ENVIRONMENT PASS F3 multipliers survive changes of time
+RENDER_ENVIRONMENT PASS legacy numeric tuning is rebased instead of overwritten
+RENDER_ENVIRONMENT PASS a sun multiplier cannot create fake moonlight
+RENDER_ENVIRONMENT PASS cycle values honor final diagnostic safety limits
+RENDER_ENVIRONMENT PASS nonfinite solar direction is ignored safely
+RENDER_ENVIRONMENT PASS sky shader does not force per-frame time filtering
+RENDER_ENVIRONMENT PASS dawn and dusk share elevation-driven color profile
+DAYLIGHT_CYCLE_COMPLETE 22 passed=true

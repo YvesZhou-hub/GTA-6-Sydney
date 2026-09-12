@@ -1,0 +1,371 @@
+{
+	"checks": [
+		{
+			"name": "tall OSM hollow collision shell detected semantically",
+			"passed": true
+		},
+		{
+			"name": "actual courtyard hole remains usable",
+			"passed": true
+		},
+		{
+			"name": "courtyard edge crossing masonry is rejected",
+			"passed": true
+		},
+		{
+			"name": "concave courtyard must contain entire footprint not just corners",
+			"passed": true
+		},
+		{
+			"name": "overhead building part leaves ground open",
+			"passed": true
+		},
+		{
+			"name": "custom bank closed trimesh interior detected",
+			"passed": true
+		},
+		{
+			"name": "custom metro solid column interior detected",
+			"passed": true
+		},
+		{
+			"name": "custom raised architecture does not fill public ground",
+			"passed": true
+		},
+		{
+			"name": "v013 actual tower base is a closed solid containing the legacy roof region",
+			"passed": true
+		},
+		{
+			"name": "v013 tower interior is detected despite replacing reserved OSM geometry",
+			"passed": true
+		},
+		{
+			"name": "reserved original tower OSM pieces are not double-counted as migration solids",
+			"passed": true
+		},
+		{
+			"name": "v013 tower Market Street public arrival remains outside closed geometry",
+			"passed": true
+		},
+		{
+			"name": "summon rejects a complete hoverboard enclosure in the new tower base",
+			"passed": true
+		},
+		{
+			"name": "destroyed tower base floor leaves its actual interior usable",
+			"passed": true
+		},
+		{
+			"name": "v013 real mapped Circular Quay kiosk closed interior is rejected",
+			"passed": true
+		},
+		{
+			"name": "all five Circular Quay public arrivals remain open below overhead roofs",
+			"passed": true
+		},
+		{
+			"name": "v013 Darling public canopy post is an occupied solid",
+			"passed": true
+		},
+		{
+			"name": "Darling public canopy centre remains an open walk route",
+			"passed": true
+		},
+		{
+			"name": "summon rejects complete enclosure in custom solid shell",
+			"passed": true
+		},
+		{
+			"name": "pitched building uses two actual wall groups instead of three total-height groups",
+			"passed": true
+		},
+		{
+			"name": "uppermost real wall group remains occupied below eaves",
+			"passed": true
+		},
+		{
+			"name": "pitched roof interior is detected independently of wall height",
+			"passed": true
+		},
+		{
+			"name": "empty space above low eaves is not filled to ridge bounding height",
+			"passed": true
+		},
+		{
+			"name": "roof ridge crossing wide box detected when every box corner is outside",
+			"passed": true
+		},
+		{
+			"name": "destroyed upper wall leaves its actual interval empty under intact roof",
+			"passed": true
+		},
+		{
+			"name": "lower wall survives independent upper wall destruction",
+			"passed": true
+		},
+		{
+			"name": "roof survives independent wall destruction",
+			"passed": true
+		},
+		{
+			"name": "destroyed roof leaves pitched interior empty",
+			"passed": true
+		},
+		{
+			"name": "roof destruction preserves independently intact upper wall",
+			"passed": true
+		},
+		{
+			"name": "repair restores separate wall and pitched roof occupancy",
+			"passed": true
+		},
+		{
+			"name": "player relocation exits tall shell rather than returning same floor",
+			"passed": true
+		},
+		{
+			"name": "replacement has grounded full-height clearance",
+			"passed": true
+		},
+		{
+			"name": "on-foot migration updates safe position without changing view heading",
+			"passed": true
+		},
+		{
+			"name": "wide aircraft migration finds nearby flat field with full footprint clearance",
+			"passed": true
+		},
+		{
+			"name": "wide aircraft migration preserves ID health fuel and parked state",
+			"passed": true
+		},
+		{
+			"name": "relocated loaded car clears queued velocity before same-frame save",
+			"passed": true
+		},
+		{
+			"name": "first physics integration cannot restore pre-migration driving momentum",
+			"passed": true
+		},
+		{
+			"name": "non-overlapping live flight keeps queued saved velocity during map migration",
+			"passed": true
+		},
+		{
+			"name": "unmigrated flight resumes saved motion after normal boarding integration",
+			"passed": true
+		},
+		{
+			"name": "destroyed mapped building is not an occupied volume",
+			"passed": true
+		},
+		{
+			"name": "QA revision fixture writes",
+			"passed": true
+		},
+		{
+			"name": "load preserves all fleet IDs and count",
+			"passed": true
+		},
+		{
+			"name": "migration preserves independent health and fuel",
+			"passed": true
+		},
+		{
+			"name": "safe and courtyard copies retain exact saved position",
+			"passed": true
+		},
+		{
+			"name": "each displaced copy stays near its own saved neighborhood",
+			"passed": true
+		},
+		{
+			"name": "original occupied copy restored after relocation",
+			"passed": true
+		},
+		{
+			"name": "spawn waypoint remains on its original new-copy ID",
+			"passed": true
+		},
+		{
+			"name": "load reports migration to player",
+			"passed": true
+		},
+		{
+			"name": "loading does not rewrite source save",
+			"passed": true
+		},
+		{
+			"name": "save persists current map revision",
+			"passed": true
+		},
+		{
+			"name": "current revision reload does not migrate twice or create copies",
+			"passed": true
+		},
+		{
+			"name": "current revision does not rewrite deliberately saved pose",
+			"passed": true
+		},
+		{
+			"name": "current revision 7 enables a one-time check for older geometry saves",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 0 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 1 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 2 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 3 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 4 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 5 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 6 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 actual stair foundation 7 is closed and contains its buried legacy point",
+			"passed": true
+		},
+		{
+			"name": "v015 buried player still requires relocation despite Opera support exception",
+			"passed": true
+		},
+		{
+			"name": "v015 buried hoverboard is fully contained by the production stair foundation",
+			"passed": true
+		},
+		{
+			"name": "v015 isolated Opera fixture writes without reading user worlds",
+			"passed": true
+		},
+		{
+			"name": "v015 revision-4 fixture with retired stair damage is accepted",
+			"passed": true
+		},
+		{
+			"name": "v015 actual load migrates a buried player to nearby clear ground",
+			"passed": true
+		},
+		{
+			"name": "v015 actual load migrates buried hoverboard outside the filled stair",
+			"passed": true
+		},
+		{
+			"name": "v015 migration preserves all hoverboard IDs health fuel and copy count",
+			"passed": true
+		},
+		{
+			"name": "v015 valid ground and airborne hoverboards retain exact saved positions",
+			"passed": true
+		},
+		{
+			"name": "v015 unrelated airborne hoverboard retains queued saved motion",
+			"passed": true
+		},
+		{
+			"name": "v015 loading retains retired damage history and leaves fixture bytes untouched",
+			"passed": true
+		},
+		{
+			"name": "v015 safe player pose does not require relocation at (468.9936, 4.54, -219.1939)",
+			"passed": true
+		},
+		{
+			"name": "v015 safe player pose is not relocated at (468.9936, 4.54, -219.1939)",
+			"passed": true
+		},
+		{
+			"name": "v015 safe player pose does not require relocation at (428.3354, 13.45423, -247.2458)",
+			"passed": true
+		},
+		{
+			"name": "v015 safe player pose is not relocated at (428.3354, 13.45423, -247.2458)",
+			"passed": true
+		},
+		{
+			"name": "v015 stair support exemption does not accept a capsule buried four centimetres into the slope",
+			"passed": true
+		},
+		{
+			"name": "v015 standing-stair fixture writes",
+			"passed": true
+		},
+		{
+			"name": "v015 standing-stair revision-4 fixture writes",
+			"passed": true
+		},
+		{
+			"name": "v015 actual revision-4 load preserves the settled production-player stair pose",
+			"passed": true
+		},
+		{
+			"name": "v015 safe player pose does not require relocation at (410.8133, 144.5, -251.3662)",
+			"passed": true
+		},
+		{
+			"name": "v015 safe player pose is not relocated at (410.8133, 144.5, -251.3662)",
+			"passed": true
+		},
+		{
+			"name": "explicit save records current revision after the one-time safety migration",
+			"passed": true
+		},
+		{
+			"name": "v015 current-revision reload performs no second relocation",
+			"passed": true
+		},
+		{
+			"name": "isolated revision-5 fixture saves",
+			"passed": true
+		},
+		{
+			"name": "revision-5 fixture writes",
+			"passed": true
+		},
+		{
+			"name": "revision-5 load runs solid-geometry recovery",
+			"passed": true
+		},
+		{
+			"name": "revision-5 load leaves source save and fleet identities intact",
+			"passed": true
+		},
+		{
+			"name": "isolated revision-6 fixture saves",
+			"passed": true
+		},
+		{
+			"name": "revision-6 fixture writes",
+			"passed": true
+		},
+		{
+			"name": "revision-6 load runs solid-geometry recovery",
+			"passed": true
+		},
+		{
+			"name": "revision-6 load leaves source save and fleet identities intact",
+			"passed": true
+		}
+	],
+	"isolated_test_id": "qa_map_migration_365222",
+	"passed": true,
+	"user_saves_touched": false
+}

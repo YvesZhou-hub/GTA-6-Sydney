@@ -13,6 +13,7 @@ func check(name:String,passed:bool,detail:Dictionary={}):
 	print("EXPERIENCE ","PASS " if passed else "FAIL ",name)
 func capture(name:String):
 	if DisplayServer.get_name()=="headless":return
+	check("near facade stream ready for "+name,await game.world.prepare_view(game.camera.global_position))
 	for i in 4:await get_tree().process_frame
 	RenderingServer.force_draw(true,1.0/60)
 	DirAccess.make_dir_recursive_absolute("user://experience-qa")

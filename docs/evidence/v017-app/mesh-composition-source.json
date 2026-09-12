@@ -1,0 +1,45 @@
+{
+	"checks": [
+		{
+			"name": "legacy indexed primitive plus manual triangle reproduces missing face",
+			"passed": true
+		},
+		{
+			"name": "both append orders preserve all 13 triangles true",
+			"passed": true
+		},
+		{
+			"name": "cube and independent triangle retain 24.5 square metres true",
+			"passed": true
+		},
+		{
+			"name": "transformed normals remain finite and normalized true",
+			"passed": true
+		},
+		{
+			"name": "both append orders preserve all 13 triangles false",
+			"passed": true
+		},
+		{
+			"name": "cube and independent triangle retain 24.5 square metres false",
+			"passed": true
+		},
+		{
+			"name": "transformed normals remain finite and normalized false",
+			"passed": true
+		},
+		{
+			"name": "indexed cylinder retains every source face alongside manual geometry",
+			"passed": true
+		},
+		{
+			"name": "cylinder transformation preserves surface area",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"sha256": {
+		"game/scripts/city_landmarks.gd": "9da41df654d1b9ba948ecb60e1e5949ed7a392a7a7ccaacd60670493b4cc1e40",
+		"source/mesh_composition_test.gd": "571c90e38565a01b2b7a7439a3d91fbad3c12c1deac477d71c82e8348a4ba437"
+	}
+}

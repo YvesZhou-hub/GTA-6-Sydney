@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS tank crushes extremely strong wall through actual swept contact {"hits":1,"position":"(-0.0, 0.96, -19.13142)"}
+PASS tank physically traverses wall without losing health {"health":100.0,"position":"(-0.0, 0.96, -19.13142)"}
+PASS tank retains ground contact and collision mask {"height":0.959999620914459}
+PASS repair restores the destroyed wall collider {}
+PASS world save reload restores actual destroyed mesh and collider {}
+PASS 2000 km/h sweep destroys thin wall struck by wing outside centre ray {"hits":2}
+PASS same high speed traversal hits subsequent thin wall {"position":"(0.0, 25.0, -64.81483)","speed_kmh":2000.00017089844}
+PASS fighter remains physical and invincible after building traversal {}
+PASS temporary exceptions clear after deferred collision removal {"count":0}
+PASS initial shape overlap is handled before cast_motion {"hits":1}
+COMBAT_CRUSH_COMPLETE 10 passed=true

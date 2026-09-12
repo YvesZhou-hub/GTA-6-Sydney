@@ -1,0 +1,219 @@
+{
+	"checks": [
+		{
+			"evidence": {},
+			"name": "registration preserves authored numeric values and actual resource identity",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "same resource is registered once despite many users",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "one role update changes two distinct glass resources in place",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "role changes preserve colour alpha texture UV specular and shader flags",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "identical tuning is an idempotent no-op",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "newly registered existing material inherits active numeric role overrides",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "metallic and roughness clamp to valid unit range",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "non-numeric nonfinite forbidden and non-light energy inputs are ignored",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "booleans and infinity cannot masquerade as numeric material properties",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "unknown role neither registers nor changes material",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "conflicting semantic ownership of same resource is rejected",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "custom shaders and null resources are explicitly unsupported",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "light feature may initialize once at explicit material creation",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "light runtime tuning clamps energy and never re-enables feature flags",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "energy zero does not switch the emission shader feature",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "registering an existing light without creation flag leaves emission disabled",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "vertical fins and steel aliases share the metal role",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "source-reviewed colour exceptions classify by substance",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "ambiguous or custom shader keys do not silently become glass or metal",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "dynamic OSM roof colours retain separate roof classification",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "stats exposes actual role counts and isolated override snapshots",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "registry weak references do not keep released materials alive",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "unregister detaches future role updates without cloning or clearing material",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "world reset clears membership and overrides",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "snapshot restores each material exact original roughness and metallic",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "restoring an absent profile removes temporary overrides",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "snapshot restores prior role profile as well as per-material values",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "materials registered during preview restore authored baseline and prior profile",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "unknown wrong-role and foreign-registry snapshots fail without mutation",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "malformed snapshot rejects atomically without changing values or profile",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "snapshots do not retain released materials and restore skips them",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "snapshot from before registry clear is rejected",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "exact-path facade resources register glass and stone without duplication",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "shader snapshots distinguish unset defaults and explicit default overrides",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "glass role edits only mapped facade glass uniforms",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "stone role changes wall roughness without changing facade glass or adding uniforms",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "shader restore returns null to defaults and explicit originals exactly",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "independent stone restore clears only its temporary wall override",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "facade tuning preserves resource identity shader code and authored colour pattern parameters",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "water shader remains unregistered despite a glass-like material key",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "duplicate facade registration remains idempotent for both memberships",
+			"passed": true
+		}
+	],
+	"count": 41,
+	"failures": 0,
+	"hashes": {
+		"res://../source/material_roles_test.gd": "a9e6a4009539b09abdae71b84969175e50a4e6abe865fdab5c35705539c5a017",
+		"res://assets/world_facade.gdshader": "75b66a79b242ce047c94e34e03f94820c3cb014488c4a060041ce708785def28",
+		"res://scripts/material_roles.gd": "153792865871ca8b7a6d1f83c77cef0e8b90068eee5155ce9458d5b62743b6f7",
+		"res://shaders/city_facade.gdshader": "0d5d1e398e83c0097685a893f9b29f3b93df3d46c9b2c97a442da5331c7ccfe9"
+	},
+	"passed": true,
+	"scope": "Bounded StandardMaterial3D and exact-path ShaderMaterial resource tests; no GPU or full city"
+}

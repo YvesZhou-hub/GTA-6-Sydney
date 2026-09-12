@@ -1,0 +1,51 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15095 reserved=413 roads=64958
+CITY_BUILD_TIMINGS {"complete_ms":69026,"custom_landmarks_ms":64656,"mapped_city_ms":12404,"terrain_and_harbour_ms":10353}
+HARBOR_WORLD_READY buildings=15097 structure_components=21697
+CITY_STARTUP_MS 70498
+DIAGNOSTICS_QA PASS Production world completed construction before any UI checks
+DIAGNOSTICS_QA PASS Complete production world and an actual armed vehicle exist
+DIAGNOSTICS_QA PASS Native production tank request profile 1
+DIAGNOSTICS_QA PASS Native production tank request profile 2
+DIAGNOSTICS_QA PASS Gameplay initially owns the camera and weapon input
+DIAGNOSTICS_QA PASS F3 opens real panel and pauses physics with visible cursor
+DIAGNOSTICS_QA PASS F3 blocks weapon firing and hides targeting overlays
+DIAGNOSTICS_QA PASS Panel mouse motion and weapon key do not rotate or fire
+DIAGNOSTICS_QA PASS Held F3 key repeat does not close the panel
+DIAGNOSTICS_QA PASS Facade stream settled for 01-f3-live-counters
+DIAGNOSTICS_QA PASS Actual F3 pointer drag changes live exposure
+DIAGNOSTICS_QA PASS Ambient slider changes actual environment light
+DIAGNOSTICS_QA PASS F3 stores proportional cycle settings separately
+DIAGNOSTICS_QA PASS Actual glass slider reaches registered city and landmark materials
+DIAGNOSTICS_QA PASS Control GUI received routed pointer events
+DIAGNOSTICS_QA PASS Tuning preserves all live render feature flags
+DIAGNOSTICS_QA PASS Facade stream settled for 02-f3-material-tuning
+DIAGNOSTICS_QA PASS F3 closes with a focused slider and resumes camera and weapon control
+DIAGNOSTICS_QA PASS T opens time controls, pauses gameplay and releases pointer
+DIAGNOSTICS_QA PASS Real time-slider drag immediately seeks current clock
+DIAGNOSTICS_QA PASS Paused time seek updates actual sky rather than waiting for game ticks
+DIAGNOSTICS_QA PASS Sunset preset button uses the real Sydney cycle baseline
+DIAGNOSTICS_QA PASS Earlier F3 adjustments survive T sunset seek
+DIAGNOSTICS_QA PASS Facade stream settled for 03-time-sunset
+DIAGNOSTICS_QA PASS F3 can inspect paused time controls without losing their state
+DIAGNOSTICS_QA PASS Real reset button clears multipliers and restores current sunset light
+DIAGNOSTICS_QA PASS Reset restores heterogeneous glass profile without structural changes
+DIAGNOSTICS_QA PASS Closing F3 over T preserves original pause and visible pointer
+DIAGNOSTICS_QA PASS Cycle checkbox changes actual running state
+DIAGNOSTICS_QA PASS Speed selector opens a real GUI popup
+DIAGNOSTICS_QA PASS Popup uses the production embedded-window input route
+DIAGNOSTICS_QA PASS Popup keyboard selection sets real cycle speed to 60x
+DIAGNOSTICS_QA PASS T closes with focused time controls and restores camera
+DIAGNOSTICS_QA PASS Disabled cycle stays at selected time after gameplay resumes
+DIAGNOSTICS_QA PASS Cycle can be resumed through its visible checkbox
+DIAGNOSTICS_QA PASS Night preset seeks 22:00 and removes direct sunlight
+DIAGNOSTICS_QA PASS Night F3 correctly disables zero-baseline sunlight slider
+DIAGNOSTICS_QA PASS Facade stream settled for 04-time-night
+DIAGNOSTICS_QA PASS Esc resumes running cycle and the camera
+DIAGNOSTICS_QA PASS Visible F3 close button also restores gameplay
+DIAGNOSTICS_QA PASS All GUI actions preserve vehicle identity, pose, fleet and money
+DIAGNOSTICS_QA PASS No slider, popup or preset action fires a projectile
+DIAGNOSTICS_QA PASS All requested native screenshots saved
+DIAGNOSTICS_QA_COMPLETE 43 passed=true

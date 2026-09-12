@@ -1,0 +1,466 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "Production world completed construction before any UI checks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Complete production world and an actual armed vehicle exist",
+			"passed": true
+		},
+		{
+			"detail": {
+				"counter_delta": {
+					"pipeline_draw": 0.0,
+					"pipeline_mesh": 0.0,
+					"pipeline_surface": 0.0
+				},
+				"counters_after_six_render_frames": {
+					"pipeline_draw": 0.0,
+					"pipeline_mesh": 0.0,
+					"pipeline_surface": 171.0
+				},
+				"counters_before": {
+					"pipeline_draw": 0.0,
+					"pipeline_mesh": 0.0,
+					"pipeline_surface": 171.0
+				},
+				"kind": "tank",
+				"profile": {
+					"factory": {
+						"append_ms": 0.0,
+						"cache_hit": true,
+						"extract_ms": 0.0,
+						"final_commit_ms": 0.0,
+						"index_ms": 0.0,
+						"instantiate_ms": 8.548,
+						"kind": "tank",
+						"merged_meshes": 0,
+						"source_meshes": 0,
+						"source_surfaces": 0,
+						"temporary_commit_ms": 0.0,
+						"temporary_mesh_commits": 0,
+						"total_ms": 8.548
+					},
+					"kind": "tank",
+					"model_ms": 14.436,
+					"occupancy_cache_ms": 0.012,
+					"placement_ms": 65.416,
+					"ready": true,
+					"total_ms": 84.427
+				},
+				"request": 1,
+				"request_wall_ms": 87.035,
+				"sample_end_usec": 75421332,
+				"sample_start_usec": 75241729
+			},
+			"name": "Native production tank request profile 1",
+			"passed": true
+		},
+		{
+			"detail": {
+				"counter_delta": {
+					"pipeline_draw": 0.0,
+					"pipeline_mesh": 0.0,
+					"pipeline_surface": 0.0
+				},
+				"counters_after_six_render_frames": {
+					"pipeline_draw": 0.0,
+					"pipeline_mesh": 0.0,
+					"pipeline_surface": 171.0
+				},
+				"counters_before": {
+					"pipeline_draw": 0.0,
+					"pipeline_mesh": 0.0,
+					"pipeline_surface": 171.0
+				},
+				"kind": "tank",
+				"profile": {
+					"factory": {
+						"append_ms": 0.0,
+						"cache_hit": true,
+						"extract_ms": 0.0,
+						"final_commit_ms": 0.0,
+						"index_ms": 0.0,
+						"instantiate_ms": 2.514,
+						"kind": "tank",
+						"merged_meshes": 0,
+						"source_meshes": 0,
+						"source_surfaces": 0,
+						"temporary_commit_ms": 0.0,
+						"temporary_mesh_commits": 0,
+						"total_ms": 2.514
+					},
+					"kind": "tank",
+					"model_ms": 8.369,
+					"occupancy_cache_ms": 0.002,
+					"placement_ms": 4.429,
+					"ready": true,
+					"total_ms": 17.938
+				},
+				"request": 2,
+				"request_wall_ms": 20.963,
+				"sample_end_usec": 75669570,
+				"sample_start_usec": 75563032
+			},
+			"name": "Native production tank request profile 2",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Gameplay initially owns the camera and weapon input",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "F3 opens real panel and pauses physics with visible cursor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "F3 blocks weapon firing and hides targeting overlays",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Panel mouse motion and weapon key do not rotate or fire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Held F3 key repeat does not close the panel",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Facade stream settled for 01-f3-live-counters",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Actual F3 pointer drag changes live exposure",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Ambient slider changes actual environment light",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "F3 stores proportional cycle settings separately",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Actual glass slider reaches registered city and landmark materials",
+			"passed": true
+		},
+		{
+			"detail": {
+				"events": 24
+			},
+			"name": "Control GUI received routed pointer events",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Tuning preserves all live render feature flags",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Facade stream settled for 02-f3-material-tuning",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "F3 closes with a focused slider and resumes camera and weapon control",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "T opens time controls, pauses gameplay and releases pointer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Real time-slider drag immediately seeks current clock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Paused time seek updates actual sky rather than waiting for game ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Sunset preset button uses the real Sydney cycle baseline",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Earlier F3 adjustments survive T sunset seek",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Facade stream settled for 03-time-sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "F3 can inspect paused time controls without losing their state",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Real reset button clears multipliers and restores current sunset light",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Reset restores heterogeneous glass profile without structural changes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Closing F3 over T preserves original pause and visible pointer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Cycle checkbox changes actual running state",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Speed selector opens a real GUI popup",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Popup uses the production embedded-window input route",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Popup keyboard selection sets real cycle speed to 60x",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "T closes with focused time controls and restores camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Disabled cycle stays at selected time after gameplay resumes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Cycle can be resumed through its visible checkbox",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Night preset seeks 22:00 and removes direct sunlight",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Night F3 correctly disables zero-baseline sunlight slider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Facade stream settled for 04-time-night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Esc resumes running cycle and the camera",
+			"passed": true
+		},
+		{
+			"detail": {
+				"button_rect": "[P: (1356.0, 36.0), S: (40.0, 33.0)]",
+				"camera_accepts_mouse": true,
+				"click_injected": true,
+				"game_paused": false,
+				"mouse_mode": 2,
+				"panel_visible": false,
+				"tree_paused": false
+			},
+			"name": "Visible F3 close button also restores gameplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "All GUI actions preserve vehicle identity, pose, fleet and money",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 0,
+				"before": 0
+			},
+			"name": "No slider, popup or preset action fires a projectile",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "All requested native screenshots saved",
+			"passed": true
+		}
+	],
+	"count": 43,
+	"native": true,
+	"passed": true,
+	"scope": "Production world and controls. Viewport.push_input routes keys, pointer drags, wheel scrolling and embedded PopupMenu navigation through actual GUI; no direct menu handlers, value setters or signal emission for UI assertions. Native runs first profile two direct production tank requests, sampling actual phase times and cumulative pipeline counters after six render frames; these are observations, not an attribution to shaders or an FPS benchmark. QA disables automatic city-clock updates; two controlled 0.25-second clock._process updates verify stopped/resumed behavior. Native screenshots are visual evidence only; not an OS hardware input claim.",
+	"screenshots": [
+		{
+			"file": "01-f3-live-counters.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "708b4efcea07f416522dccdeccd868141930af1e5170fa3101f6126330e77809"
+		},
+		{
+			"file": "02-f3-material-tuning.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "773a705fcf3fa402b24d369df439438f267241acd6113ab347924d7c707ba170"
+		},
+		{
+			"file": "03-time-sunset.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "a17754c2f54b887c4a4cb724ca24bbe54fc93ebb9d10475e16e3668816abe87e"
+		},
+		{
+			"file": "04-time-night.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "4647e3b3f0d0854a4526eee500f351252eb7b3a799b3f0c65e30dfc71c5c444c"
+		}
+	],
+	"settings_files_written": false,
+	"source_sha256": {
+		"city_clock.gd": "",
+		"daylight_environment.gd": "",
+		"diagnostics_panel.gd": "",
+		"diagnostics_validation.gd": "",
+		"main.gd": "",
+		"material_roles.gd": "",
+		"runtime_diagnostics.gd": "",
+		"time_panel.gd": ""
+	},
+	"spawn_profiles": [
+		{
+			"counter_delta": {
+				"pipeline_draw": 0.0,
+				"pipeline_mesh": 0.0,
+				"pipeline_surface": 0.0
+			},
+			"counters_after_six_render_frames": {
+				"pipeline_draw": 0.0,
+				"pipeline_mesh": 0.0,
+				"pipeline_surface": 171.0
+			},
+			"counters_before": {
+				"pipeline_draw": 0.0,
+				"pipeline_mesh": 0.0,
+				"pipeline_surface": 171.0
+			},
+			"kind": "tank",
+			"profile": {
+				"factory": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 8.548,
+					"kind": "tank",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 8.548
+				},
+				"kind": "tank",
+				"model_ms": 14.436,
+				"occupancy_cache_ms": 0.012,
+				"placement_ms": 65.416,
+				"ready": true,
+				"total_ms": 84.427
+			},
+			"request": 1,
+			"request_wall_ms": 87.035,
+			"sample_end_usec": 75421332,
+			"sample_start_usec": 75241729
+		},
+		{
+			"counter_delta": {
+				"pipeline_draw": 0.0,
+				"pipeline_mesh": 0.0,
+				"pipeline_surface": 0.0
+			},
+			"counters_after_six_render_frames": {
+				"pipeline_draw": 0.0,
+				"pipeline_mesh": 0.0,
+				"pipeline_surface": 171.0
+			},
+			"counters_before": {
+				"pipeline_draw": 0.0,
+				"pipeline_mesh": 0.0,
+				"pipeline_surface": 171.0
+			},
+			"kind": "tank",
+			"profile": {
+				"factory": {
+					"append_ms": 0.0,
+					"cache_hit": true,
+					"extract_ms": 0.0,
+					"final_commit_ms": 0.0,
+					"index_ms": 0.0,
+					"instantiate_ms": 2.514,
+					"kind": "tank",
+					"merged_meshes": 0,
+					"source_meshes": 0,
+					"source_surfaces": 0,
+					"temporary_commit_ms": 0.0,
+					"temporary_mesh_commits": 0,
+					"total_ms": 2.514
+				},
+				"kind": "tank",
+				"model_ms": 8.369,
+				"occupancy_cache_ms": 0.002,
+				"placement_ms": 4.429,
+				"ready": true,
+				"total_ms": 17.938
+			},
+			"request": 2,
+			"request_wall_ms": 20.963,
+			"sample_end_usec": 75669570,
+			"sample_start_usec": 75563032
+		}
+	],
+	"user_saves_touched": false
+}

@@ -1,0 +1,1054 @@
+{
+	"checks": [
+		{
+			"name": "palm crown has 24 green split-fan leaves and 10 hanging old leaves",
+			"passed": true
+		},
+		{
+			"name": "folded leaf strips and curved stems have no degenerate triangles",
+			"passed": true
+		},
+		{
+			"name": "all leaf lobes and stems have closed surfaces with two incident faces per edge",
+			"passed": true
+		},
+		{
+			"name": "all crown surface normals are finite, normalized and agree with front-face winding",
+			"passed": true
+		},
+		{
+			"name": "new crown stays above pedestrians and within the bounded radial canopy",
+			"passed": true
+		},
+		{
+			"name": "frond 0 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 1 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 2 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 3 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 4 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 5 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 6 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 7 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 8 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 9 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 10 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 11 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 12 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 13 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 14 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 15 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 16 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 17 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 18 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 19 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 20 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 21 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 22 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 23 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 24 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 25 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 26 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 27 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 28 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 29 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 30 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 31 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 32 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "frond 33 has thirteen individual split leaf lobes",
+			"passed": true
+		},
+		{
+			"name": "all stalks arch and the ten old central fan tips visibly droop",
+			"passed": true
+		},
+		{
+			"name": "leaf tips span multiple crown heights instead of a coplanar umbrella",
+			"passed": true
+		},
+		{
+			"name": "actual leaf section has a raised folded ridge, underside and two lateral edges",
+			"passed": true
+		},
+		{
+			"name": "crown fixture uses existing actual mapped Corso tree points",
+			"passed": true
+		},
+		{
+			"name": "all generated crowns retain exact source tree positions and share two cached meshes",
+			"passed": true
+		},
+		{
+			"name": "visual crown refinement creates no collision or persistent building components",
+			"passed": true
+		},
+		{
+			"name": "four canonical Manly navigation destinations integrated",
+			"passed": true
+		},
+		{
+			"name": "real OSM Manly tree points populated",
+			"passed": true
+		},
+		{
+			"name": "Hotel Steyne real courtyard stays open through roof and storeys",
+			"passed": true
+		},
+		{
+			"name": "The Corso has actual supporting pavement",
+			"passed": true
+		},
+		{
+			"name": "The Corso central pedestrian route is unobstructed: 0",
+			"passed": true
+		},
+		{
+			"name": "Manly Wharf north entrance concourse remains open",
+			"passed": true
+		},
+		{
+			"name": "landmarks participate in persistent structural damage",
+			"passed": true
+		},
+		{
+			"name": "Manly has four unique canonical IDs and no duplicate Corso icon record",
+			"passed": true
+		},
+		{
+			"name": "legacy the_corso alias resolves to the canonical manly_corso destination",
+			"passed": true
+		},
+		{
+			"name": "manly_wharf retains mapped centroid and horizontal public arrival; only required paving height changes",
+			"passed": true
+		},
+		{
+			"name": "manly_wharf metadata, world registration and anchor share canonical navigation geometry",
+			"passed": true
+		},
+		{
+			"name": "manly_wharf public foot arrival has supporting pavement and zero-margin production capsule clearance",
+			"passed": true
+		},
+		{
+			"name": "manly_wharf clear legacy-save stance survives production migration without relocation",
+			"passed": true
+		},
+		{
+			"name": "manly_wharf settles on its public support and remains migration-safe",
+			"passed": true
+		},
+		{
+			"name": "hotel_steyne retains mapped centroid and horizontal public arrival; only required paving height changes",
+			"passed": true
+		},
+		{
+			"name": "hotel_steyne metadata, world registration and anchor share canonical navigation geometry",
+			"passed": true
+		},
+		{
+			"name": "hotel_steyne public foot arrival has supporting pavement and zero-margin production capsule clearance",
+			"passed": true
+		},
+		{
+			"name": "hotel_steyne clear legacy-save stance survives production migration without relocation",
+			"passed": true
+		},
+		{
+			"name": "hotel_steyne settles on its public support and remains migration-safe",
+			"passed": true
+		},
+		{
+			"name": "hotel_steyne old below-paving save repairs locally without changing its horizontal location",
+			"passed": true
+		},
+		{
+			"name": "manly_corso retains mapped centroid and horizontal public arrival; only required paving height changes",
+			"passed": true
+		},
+		{
+			"name": "manly_corso metadata, world registration and anchor share canonical navigation geometry",
+			"passed": true
+		},
+		{
+			"name": "manly_corso public foot arrival has supporting pavement and zero-margin production capsule clearance",
+			"passed": true
+		},
+		{
+			"name": "manly_corso clear legacy-save stance survives production migration without relocation",
+			"passed": true
+		},
+		{
+			"name": "manly_corso settles on its public support and remains migration-safe",
+			"passed": true
+		},
+		{
+			"name": "manly_corso old below-paving save repairs locally without changing its horizontal location",
+			"passed": true
+		},
+		{
+			"name": "manly_beach retains mapped centroid and horizontal public arrival; only required paving height changes",
+			"passed": true
+		},
+		{
+			"name": "manly_beach metadata, world registration and anchor share canonical navigation geometry",
+			"passed": true
+		},
+		{
+			"name": "manly_beach public foot arrival has supporting pavement and zero-margin production capsule clearance",
+			"passed": true
+		},
+		{
+			"name": "manly_beach clear legacy-save stance survives production migration without relocation",
+			"passed": true
+		},
+		{
+			"name": "manly_beach settles on its public support and remains migration-safe",
+			"passed": true
+		},
+		{
+			"name": "registered live Corso paving is a valid player recovery support",
+			"passed": true
+		},
+		{
+			"name": "destroyed Corso paving is rejected even with a stale support hit",
+			"passed": true
+		},
+		{
+			"name": "actual information-wall top is not accepted as a public recovery floor",
+			"passed": true
+		},
+		{
+			"name": "wharf platform retains mapped XZ and original bottom, only top moves 4cm",
+			"passed": true
+		},
+		{
+			"name": "wharf raised top uses exactly the same visible and physical triangle faces",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-4.0, 0.0, -6.0) render and collision agree 4cm above the proven coincident terrain",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-4.0, 0.0, -6.0) valid current stance remains unchanged",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-4.0, 0.0, -6.0) old ground-height save is raised in place without horizontal teleport",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-4.0, 0.0, -31.0) render and collision agree 4cm above the proven coincident terrain",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-4.0, 0.0, -31.0) valid current stance remains unchanged",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-4.0, 0.0, -31.0) old ground-height save is raised in place without horizontal teleport",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-10.0, 0.0, -21.0) render and collision agree 4cm above the proven coincident terrain",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-10.0, 0.0, -21.0) valid current stance remains unchanged",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (-10.0, 0.0, -21.0) old ground-height save is raised in place without horizontal teleport",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (3.0, 0.0, -22.0) render and collision agree 4cm above the proven coincident terrain",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (3.0, 0.0, -22.0) valid current stance remains unchanged",
+			"passed": true
+		},
+		{
+			"name": "wharf floor (3.0, 0.0, -22.0) old ground-height save is raised in place without horizontal teleport",
+			"passed": true
+		},
+		{
+			"name": "new floor support never exempts an actual overlapping public bench",
+			"passed": true
+		},
+		{
+			"name": "destroyed wharf platform rejects stale recovery support and hides/disables matching surfaces",
+			"passed": true
+		},
+		{
+			"name": "repair restores the same wharf platform support and visual surface",
+			"passed": true
+		},
+		{
+			"name": "photo-informed public wharf waiting/information hall built",
+			"passed": true
+		},
+		{
+			"name": "five explicit exterior/interior review views",
+			"passed": true
+		},
+		{
+			"name": "public hall has direction panels and information-side display",
+			"passed": true
+		},
+		{
+			"name": "actual mapped Corso drinking node 1638701005",
+			"passed": true
+		},
+		{
+			"name": "actual mapped Corso drinking node 1638695147",
+			"passed": true
+		},
+		{
+			"name": "actual mapped Corso drinking node 1638694159",
+			"passed": true
+		},
+		{
+			"name": "all Manly structural mesh faces match their collision shells",
+			"passed": true
+		},
+		{
+			"name": "no degenerate Manly structural triangles",
+			"passed": true
+		},
+		{
+			"name": "three bubbler structure positions retain mapped nodes without street relocation",
+			"passed": true
+		},
+		{
+			"name": "new waiting seat and collision disappear together on damage",
+			"passed": true
+		},
+		{
+			"name": "new waiting seat restores after repair",
+			"passed": true
+		},
+		{
+			"name": "manly_wharf_hall_to_steyne production Player completes the continuous route without intermediate teleport",
+			"passed": true
+		},
+		{
+			"name": "manly_steyne_to_wharf_hall production Player completes the continuous route without intermediate teleport",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"headless": true,
+	"manly_components": 261,
+	"manly_structure_triangles": 18284,
+	"navigation": [
+		{
+			"arrival": [
+				6809.8798828125,
+				4.5,
+				-6753.7841796875
+			],
+			"capsule_hits": 0,
+			"id": "manly_wharf",
+			"map_position": [
+				6827.1201171875,
+				4.5,
+				-6676.82958984375
+			],
+			"settled": [
+				6809.8798828125,
+				4.49006938934326,
+				-6753.7841796875
+			],
+			"support_id": "OSM_Land_0",
+			"support_y": 4.5
+		},
+		{
+			"arrival": [
+				7157.30419921875,
+				4.59499979019165,
+				-6999.8017578125
+			],
+			"capsule_hits": 0,
+			"id": "hotel_steyne",
+			"legacy_floor_repair": {
+				"moved": 1,
+				"position": [
+					7157.30419921875,
+					4.63499975204468,
+					-6999.8017578125
+				]
+			},
+			"map_position": [
+				7127.76611328125,
+				4.5,
+				-7016.64404296875
+			],
+			"settled": [
+				7157.30419921875,
+				4.58512878417969,
+				-6999.8017578125
+			],
+			"support_id": "manly/corso/paving",
+			"support_y": 4.59499979019165
+		},
+		{
+			"arrival": [
+				7070.38330078125,
+				4.59499979019165,
+				-6927.154296875
+			],
+			"capsule_hits": 0,
+			"id": "manly_corso",
+			"legacy_floor_repair": {
+				"moved": 1,
+				"position": [
+					7070.38330078125,
+					4.63500022888184,
+					-6927.154296875
+				]
+			},
+			"map_position": [
+				7070.38330078125,
+				4.5,
+				-6927.154296875
+			],
+			"settled": [
+				7070.38330078125,
+				4.58512878417969,
+				-6927.154296875
+			],
+			"support_id": "manly/corso/paving",
+			"support_y": 4.59499979019165
+		},
+		{
+			"arrival": [
+				7194.29150390625,
+				4.5,
+				-7007.66064453125
+			],
+			"capsule_hits": 0,
+			"id": "manly_beach",
+			"map_position": [
+				7194.29150390625,
+				4.5,
+				-7007.66064453125
+			],
+			"settled": [
+				7194.29150390625,
+				4.49012899398804,
+				-7007.66064453125
+			],
+			"support_id": "OSM_Land_0",
+			"support_y": 4.5
+		}
+	],
+	"passed": true,
+	"routes": [
+		{
+			"name": "manly_wharf_hall_to_steyne",
+			"passed": true,
+			"physics_frames": 5743,
+			"physics_hz": 60,
+			"segments": [
+				{
+					"actual": [
+						6819.55126953125,
+						4.53087711334229,
+						-6712.96875
+					],
+					"frames": 293,
+					"passed": true,
+					"target": [
+						6819.55126953125,
+						4.53999996185303,
+						-6712.92724609375
+					]
+				},
+				{
+					"actual": [
+						6810.51513671875,
+						4.49087715148926,
+						-6726.0048828125
+					],
+					"frames": 181,
+					"passed": true,
+					"target": [
+						6810.55126953125,
+						4.5,
+						-6725.92724609375
+					]
+				},
+				{
+					"actual": [
+						6806.568359375,
+						4.49087715148926,
+						-6745.041015625
+					],
+					"frames": 222,
+					"passed": true,
+					"target": [
+						6806.55126953125,
+						4.5,
+						-6744.92724609375
+					]
+				},
+				{
+					"actual": [
+						6840.189453125,
+						4.49087715148926,
+						-6760.08349609375
+					],
+					"frames": 429,
+					"passed": true,
+					"target": [
+						6840.11328125,
+						4.5,
+						-6760.0849609375
+					]
+				},
+				{
+					"actual": [
+						6847.3271484375,
+						4.49087715148926,
+						-6767.56982421875
+					],
+					"frames": 118,
+					"passed": true,
+					"target": [
+						6847.3203125,
+						4.5,
+						-6767.5546875
+					]
+				},
+				{
+					"actual": [
+						6861.69091796875,
+						4.49087715148926,
+						-6781.43603515625
+					],
+					"frames": 228,
+					"passed": true,
+					"target": [
+						6861.6240234375,
+						4.5,
+						-6781.36962890625
+					]
+				},
+				{
+					"actual": [
+						6897.70654296875,
+						4.49087715148926,
+						-6814.39208984375
+					],
+					"frames": 560,
+					"passed": true,
+					"target": [
+						6897.63232421875,
+						4.5,
+						-6814.33154296875
+					]
+				},
+				{
+					"actual": [
+						6902.58935546875,
+						4.49087858200073,
+						-6818.8623046875
+					],
+					"frames": 74,
+					"passed": true,
+					"target": [
+						6902.55712890625,
+						4.5,
+						-6818.83984375
+					]
+				},
+				{
+					"actual": [
+						6924.53369140625,
+						4.49087715148926,
+						-6835.09033203125
+					],
+					"frames": 312,
+					"passed": true,
+					"target": [
+						6924.4560546875,
+						4.5,
+						-6835.0478515625
+					]
+				},
+				{
+					"actual": [
+						6952.26171875,
+						4.49087715148926,
+						-6854.5703125
+					],
+					"frames": 389,
+					"passed": true,
+					"target": [
+						6952.17578125,
+						4.5,
+						-6854.52880859375
+					]
+				},
+				{
+					"actual": [
+						6980.00341796875,
+						4.49087715148926,
+						-6862.705078125
+					],
+					"frames": 332,
+					"passed": true,
+					"target": [
+						6979.95166015625,
+						4.59499979019165,
+						-6862.7333984375
+					]
+				},
+				{
+					"actual": [
+						6982.58935546875,
+						4.58694696426392,
+						-6864.59326171875
+					],
+					"frames": 36,
+					"passed": true,
+					"target": [
+						6982.57568359375,
+						4.59499979019165,
+						-6864.59228515625
+					]
+				},
+				{
+					"actual": [
+						7070.41064453125,
+						4.58587741851807,
+						-6927.15625
+					],
+					"frames": 1238,
+					"passed": true,
+					"target": [
+						7070.38330078125,
+						4.59499979019165,
+						-6927.154296875
+					]
+				},
+				{
+					"actual": [
+						7138.25146484375,
+						4.58587741851807,
+						-6974.77197265625
+					],
+					"frames": 954,
+					"passed": true,
+					"target": [
+						7138.16796875,
+						4.59499979019165,
+						-6974.732421875
+					]
+				},
+				{
+					"actual": [
+						7165.28955078125,
+						4.58587741851807,
+						-6993.5244140625
+					],
+					"frames": 377,
+					"passed": true,
+					"target": [
+						7165.21337890625,
+						4.59499979019165,
+						-6993.48974609375
+					]
+				}
+			]
+		},
+		{
+			"name": "manly_steyne_to_wharf_hall",
+			"passed": true,
+			"physics_frames": 5740,
+			"physics_hz": 60,
+			"segments": [
+				{
+					"actual": [
+						7138.13623046875,
+						4.58587741851807,
+						-6974.728515625
+					],
+					"frames": 382,
+					"passed": true,
+					"target": [
+						7138.16796875,
+						4.59499979019165,
+						-6974.732421875
+					]
+				},
+				{
+					"actual": [
+						7070.3046875,
+						4.58587741851807,
+						-6927.1171875
+					],
+					"frames": 954,
+					"passed": true,
+					"target": [
+						7070.38330078125,
+						4.59499979019165,
+						-6927.154296875
+					]
+				},
+				{
+					"actual": [
+						6982.5390625,
+						4.58587694168091,
+						-6864.58349609375
+					],
+					"frames": 1237,
+					"passed": true,
+					"target": [
+						6982.57568359375,
+						4.59499979019165,
+						-6864.59228515625
+					]
+				},
+				{
+					"actual": [
+						6979.8837890625,
+						4.49087715148926,
+						-6862.703125
+					],
+					"frames": 35,
+					"passed": true,
+					"target": [
+						6979.95166015625,
+						4.59499979019165,
+						-6862.7333984375
+					]
+				},
+				{
+					"actual": [
+						6952.06201171875,
+						4.49087715148926,
+						-6854.5390625
+					],
+					"frames": 333,
+					"passed": true,
+					"target": [
+						6952.17578125,
+						4.5,
+						-6854.52880859375
+					]
+				},
+				{
+					"actual": [
+						6924.37548828125,
+						4.49087715148926,
+						-6835.0078125
+					],
+					"frames": 388,
+					"passed": true,
+					"target": [
+						6924.4560546875,
+						4.5,
+						-6835.0478515625
+					]
+				},
+				{
+					"actual": [
+						6902.4931640625,
+						4.49087715148926,
+						-6818.806640625
+					],
+					"frames": 311,
+					"passed": true,
+					"target": [
+						6902.55712890625,
+						4.5,
+						-6818.83984375
+					]
+				},
+				{
+					"actual": [
+						6897.62255859375,
+						4.49087715148926,
+						-6814.3271484375
+					],
+					"frames": 74,
+					"passed": true,
+					"target": [
+						6897.63232421875,
+						4.5,
+						-6814.33154296875
+					]
+				},
+				{
+					"actual": [
+						6861.5615234375,
+						4.49087715148926,
+						-6781.31982421875
+					],
+					"frames": 561,
+					"passed": true,
+					"target": [
+						6861.6240234375,
+						4.5,
+						-6781.36962890625
+					]
+				},
+				{
+					"actual": [
+						6847.27294921875,
+						4.49087715148926,
+						-6767.5078125
+					],
+					"frames": 227,
+					"passed": true,
+					"target": [
+						6847.3203125,
+						4.5,
+						-6767.5546875
+					]
+				},
+				{
+					"actual": [
+						6840.08984375,
+						4.49087715148926,
+						-6760.06005859375
+					],
+					"frames": 117,
+					"passed": true,
+					"target": [
+						6840.11328125,
+						4.5,
+						-6760.0849609375
+					]
+				},
+				{
+					"actual": [
+						6806.46630859375,
+						4.49087715148926,
+						-6744.9248046875
+					],
+					"frames": 426,
+					"passed": true,
+					"target": [
+						6806.55126953125,
+						4.5,
+						-6744.92724609375
+					]
+				},
+				{
+					"actual": [
+						6810.52099609375,
+						4.49087715148926,
+						-6725.8837890625
+					],
+					"frames": 227,
+					"passed": true,
+					"target": [
+						6810.55126953125,
+						4.5,
+						-6725.92724609375
+					]
+				},
+				{
+					"actual": [
+						6819.5869140625,
+						4.53087711334229,
+						-6712.85302734375
+					],
+					"frames": 181,
+					"passed": true,
+					"target": [
+						6819.55126953125,
+						4.53999996185303,
+						-6712.92724609375
+					]
+				},
+				{
+					"actual": [
+						6819.55224609375,
+						4.53087711334229,
+						-6687.8759765625
+					],
+					"frames": 287,
+					"passed": true,
+					"target": [
+						6819.55126953125,
+						4.53999996185303,
+						-6687.92724609375
+					]
+				}
+			]
+		}
+	],
+	"scope": "Manly local context with production mapped terrain/roads/buildings and production Player. Canonical geography registry, actual capsule/support, settled arrivals, temporary legacy-height migration and closed curved palm crown geometry are checked. No user saves read or written. Structural triangles exclude separate instanced trees and street furniture. Full native App visual acceptance is separate.",
+	"sha256": {
+		"game/assets/landmark_geography.json": "b15740fe9f33e40aa123343d25a75b22a54898e6627c969b9691487a7d575348",
+		"game/scripts/manly_landmarks.gd": "7f33bab15a73704a0f263d8dab08d7752fe053368a83cd25377d646843326ab6",
+		"game/scripts/map_migration.gd": "4e03f33a0b352acb0d7326191d5a6b316a25c86903d1b784083b029dc901163b",
+		"source/manly_landmark_test.gd": "5ec3042976481bf0299bd844cc5c8e85716300d124ab72aa48c6a1e2f2bc670a"
+	},
+	"wharf_floor": [
+		{
+			"legacy_repaired": [
+				6819.55126953125,
+				4.57999992370605,
+				-6687.92724609375
+			],
+			"local": [
+				-4.0,
+				0.0,
+				-6.0
+			],
+			"physical_top": 4.53999996185303,
+			"terrain_top": 4.5,
+			"visible_top": 4.53999996185303
+		},
+		{
+			"legacy_repaired": [
+				6819.55126953125,
+				4.57999992370605,
+				-6712.92724609375
+			],
+			"local": [
+				-4.0,
+				0.0,
+				-31.0
+			],
+			"physical_top": 4.53999996185303,
+			"terrain_top": 4.5,
+			"visible_top": 4.53999996185303
+		},
+		{
+			"legacy_repaired": [
+				6813.55126953125,
+				4.57999992370605,
+				-6702.92724609375
+			],
+			"local": [
+				-10.0,
+				0.0,
+				-21.0
+			],
+			"physical_top": 4.53999996185303,
+			"terrain_top": 4.5,
+			"visible_top": 4.53999996185303
+		},
+		{
+			"legacy_repaired": [
+				6826.55126953125,
+				4.57999992370605,
+				-6703.92724609375
+			],
+			"local": [
+				3.0,
+				0.0,
+				-22.0
+			],
+			"physical_top": 4.53999996185303,
+			"terrain_top": 4.5,
+			"visible_top": 4.53999996185303
+		}
+	]
+}

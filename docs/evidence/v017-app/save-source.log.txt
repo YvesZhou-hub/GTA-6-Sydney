@@ -1,0 +1,34 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SAVE_TEST atomic write PASS
+SAVE_TEST read data PASS
+SAVE_TEST saved summer time survives actual production store PASS
+SAVE_TEST overwrite PASS
+SAVE_TEST previous recovery copy PASS
+SAVE_TEST independent copy PASS
+SAVE_TEST world copy retains independent summer time PASS
+SAVE_TEST corrupt rejected PASS
+SAVE_TEST backup preserved PASS
+SAVE_TEST invalid optional clock section is rejected before runtime load PASS
+SAVE_TEST future version rejected PASS
+SAVE_TEST legacy reader matches actual v012 source digest PASS
+SAVE_TEST format 1 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST format 2 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST format 3 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST format 4 loads into v5 without rewriting source or losing existing state PASS
+SAVE_TEST actual v012 reader accepts valid v4 control PASS
+SAVE_TEST saving an upgraded v4 world emits format 5 PASS
+SAVE_TEST v5 reload preserves both independent hoverboards and occupied target PASS
+SAVE_TEST upgrade retains the exact original v4 recovery bytes PASS
+SAVE_TEST actual shipped v012 reader refuses format 5 PASS
+SAVE_TEST old-reader rejection preserves new save and recovery bytes PASS
+SAVE_TEST copying a v5 world keeps format and independent new-class data PASS
+SAVE_TEST yaw wrong type rejected before runtime load without changing save or backup PASS
+SAVE_TEST yaw nonfinite number rejected before runtime load without changing save or backup PASS
+SAVE_TEST pitch wrong type rejected before runtime load without changing save or backup PASS
+SAVE_TEST pitch nonfinite number rejected before runtime load without changing save or backup PASS
+SAVE_TEST elapsed wrong type rejected before runtime load without changing save or backup PASS
+SAVE_TEST elapsed nonfinite number rejected before runtime load without changing save or backup PASS
+SAVE_TEST absent legacy camera numbers remain absent for runtime defaults PASS
+SAVE_TEST valid legacy camera numbers remain exact PASS
+SAVE_TEST COMPLETE checks=31 failures=0 format=5

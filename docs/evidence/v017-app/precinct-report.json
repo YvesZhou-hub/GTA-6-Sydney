@@ -1,0 +1,6027 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "complete production city ready",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "both Opera halls are actually built",
+			"passed": true
+		},
+		{
+			"detail": {
+				"duplicates": []
+			},
+			"name": "authored shop signs replace generic floating labels",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "mapped pedestrian areas compiled into production paving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/opera_landmark.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Opera exterior has views of distinct sides",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/opera_interiors.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "both halls and public foyers have interior views",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_box_office",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_concert_hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_joan_sutherland",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination opera_northern_foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/darling_square_detail.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination auvers",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination hakatamon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination chinta_ria",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/darling_public_facilities.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_quarter_waterplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_quarter_octanet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_quarter_slide",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination tumbalong_fountains",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/darling_precinct_businesses.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_789koreanbbq",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bar_bubu",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bendigo_bank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bengongs_tea",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_dragon_hot_pot",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_haven_specialty_coffee",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_lermont_laser_clinic",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_lillianna_gifts_and_home",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_lilong_by_taste_of_shanghai",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_machimachi",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_mcdonalds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_meet_fresh",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_myhealth",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_my_spec",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_pancakes_on_the_rocks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_planet_pop_world",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_puppuccino_pet_spa",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_quikstop",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_starbucks_coffee_company",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_sushi_sei",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_tea_republic",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_thirteen_feet_tattoo",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_uliveto",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_15_cms",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_batch_brewing_co",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_bubble_nini",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_darling_nest",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_darling_square_library",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_fishbowl_the_exchange",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_golden_century_bbq",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_hulu_hulu",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_spago",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_sushia",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_the_brothers_cafe",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_toastiesmith",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination darling_business_ume_burger",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/circular_quay_detail.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_wharf_2",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_wharf_3",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_wharf_4",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_wharf_5",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_wharf_6",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_station",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_eastbank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_searock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination cq_city_extra",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/sydney_tower_landmark.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination sydney_tower",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/city_landmarks.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/icc_landmarks.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination icc_convention",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination icc_exhibition",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination tiktok_entertainment",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/quay_landmarks.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/bank_landmarks.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/manowar_detail.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination manowar_north",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination manowar_east",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/manly_landmarks.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination manly_wharf",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination hotel_steyne",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination manly_corso",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination manly_beach",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored precinct module loaded res://scripts/qvb_public.gd",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "authored place has matching map destination qvb_public",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new exterior and interior capture views supplied",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Opera, Darling and Quay continuous walking routes supplied",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 9
+			},
+			"name": "continuous player walk pitt_street_mall_north_to_south",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player pitt_street_mall_north_to_south",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 9
+			},
+			"name": "continuous player walk pitt_street_mall_south_to_north",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player pitt_street_mall_south_to_north",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 6
+			},
+			"name": "continuous player walk Covered concourse to ticket foyer and upper south foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Covered concourse to ticket foyer and upper south foyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 7
+			},
+			"name": "continuous player walk Concert Hall south entrance to front stalls",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Concert Hall south entrance to front stalls",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 9
+			},
+			"name": "continuous player walk Concert Hall harbour promenade through northern foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Concert Hall harbour promenade through northern foyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 7
+			},
+			"name": "continuous player walk Joan Sutherland Theatre entrance to front side aisle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Joan Sutherland Theatre entrance to front side aisle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 11
+			},
+			"name": "continuous player walk Joan Sutherland Theatre northern harbour foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Joan Sutherland Theatre northern harbour foyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 2
+			},
+			"name": "continuous player walk Tumbalong fountain public edge",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Tumbalong fountain public edge",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 3
+			},
+			"name": "continuous player walk Darling Quarter playground west approach",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Darling Quarter playground west approach",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 2
+			},
+			"name": "continuous player walk Wide slide rear steps and slope",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player Wide slide rear steps and slope",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 3
+			},
+			"name": "continuous player walk quay_wharf_2_entry_to_berth",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player quay_wharf_2_entry_to_berth",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 3
+			},
+			"name": "continuous player walk quay_wharf_3_entry_to_berth",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player quay_wharf_3_entry_to_berth",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 3
+			},
+			"name": "continuous player walk quay_wharf_5_entry_to_berth",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player quay_wharf_5_entry_to_berth",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 5
+			},
+			"name": "continuous player walk bank_of_china_sussex_colonnade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player bank_of_china_sussex_colonnade",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 2
+			},
+			"name": "continuous player walk w_sydney_public_arrival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player w_sydney_public_arrival",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 6
+			},
+			"name": "continuous player walk icc_convention",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player icc_convention",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 10
+			},
+			"name": "continuous player walk icc_exhibition",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player icc_exhibition",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 9
+			},
+			"name": "continuous player walk icc_theatre",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player icc_theatre",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 4
+			},
+			"name": "continuous player walk icc_theatre_glazed_foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player icc_theatre_glazed_foyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 1
+			},
+			"name": "continuous player walk westpac_public_colonnade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player westpac_public_colonnade",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 8
+			},
+			"name": "continuous player walk cba_south_park_canopy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player cba_south_park_canopy",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 1
+			},
+			"name": "continuous player walk cba_north_park_canopy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player cba_north_park_canopy",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 6
+			},
+			"name": "continuous player walk manowar_north_jetty",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player manowar_north_jetty",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 5
+			},
+			"name": "continuous player walk manowar_east_jetty",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player manowar_east_jetty",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 15
+			},
+			"name": "continuous player walk manly_wharf_hall_to_steyne",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player manly_wharf_hall_to_steyne",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 15
+			},
+			"name": "continuous player walk manly_steyne_to_wharf_hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player manly_steyne_to_wharf_hall",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 8
+			},
+			"name": "continuous player walk qvb_market_druitt_grand_walk",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player qvb_market_druitt_grand_walk",
+			"passed": true
+		},
+		{
+			"detail": {
+				"discontinuities": 0,
+				"segments": 4
+			},
+			"name": "continuous player walk qvb_george_york_public_crossing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "map migration preserves actual settled player qvb_george_york_public_crossing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for pitt_street_mall_paving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture pitt_street_mall_paving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for henry_deane_plaza_paving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture henry_deane_plaza_paving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manly_forecourt_paving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manly_forecourt_paving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-harbour",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-harbour",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-monumental-steps",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-monumental-steps",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-roof-plan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-roof-plan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-north-facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-north-facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-north-curtain-detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-north-curtain-detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-louvre-detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-louvre-detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-box-office",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-box-office",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-entry-stairs",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-entry-stairs",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-concert-hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-concert-stage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-stage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-concert-organ",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-organ",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-joan-sutherland",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-joan-sutherland",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-concert-northern-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-northern-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-concert-curved-stairs",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-concert-curved-stairs",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for opera-jst-northern-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture opera-jst-northern-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_waterplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_waterplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_octanet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_octanet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_wide_slide",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_wide_slide",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for tumbalong_fountains",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture tumbalong_fountains",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_playground_plan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_playground_plan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_steam_mill_new",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_steam_mill_new",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_puppuccino_lillianna",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_puppuccino_lillianna",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_tumbalong_restaurants",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_tumbalong_restaurants",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_little_pier_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_little_pier_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_harbour_street_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_harbour_street_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_little_hay_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_little_hay_shops",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_bendigo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_bendigo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_tattoo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_tattoo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_bubu_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_bubu_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_business_bengongs_tea_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_business_bengongs_tea_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_business_haven_specialty_coffee_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_business_haven_specialty_coffee_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_business_pancakes_on_the_rocks_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_business_pancakes_on_the_rocks_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for darling_business_sushi_sei_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture darling_business_sushi_sei_photo_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay_gate_2",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay_gate_2",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay_wharf_3",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay_wharf_3",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay_wharves",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay_wharves",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay_station",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay_station",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for sydney-tower-whole",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture sydney-tower-whole",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for sydney-tower-skywalk",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture sydney-tower-skywalk",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for sydney-tower-podium",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture sydney-tower-podium",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for w-sydney-harbour",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture w-sydney-harbour",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for w-sydney-ribbon-end",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture w-sydney-ribbon-end",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for w-sydney-arrival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture w-sydney-arrival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for tower-one-whole",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture tower-one-whole",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for tower-one-fins",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture tower-one-fins",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for bank-of-china-sussex",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture bank-of-china-sussex",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for bank-of-china-colonnade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture bank-of-china-colonnade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for icc-crystal-facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture icc-crystal-facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for icc-recessed-meeting-pods",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture icc-recessed-meeting-pods",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for icc-theatre-glazed-mouth",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture icc-theatre-glazed-mouth",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for icc-theatre-red-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture icc-theatre-red-foyer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay-qqt-rebated-frames",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay-qqt-rebated-frames",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay-qqt-stone-podium",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay-qqt-stone-podium",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay-salesforce-tree-shades",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay-salesforce-tree-shades",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for quay-salesforce-glazing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture quay-salesforce-glazing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for westpac_public_colonnade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture westpac_public_colonnade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for westpac_podium_glazing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture westpac_podium_glazing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for cba_south_canopy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture cba_south_canopy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for cba_south_timber_facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture cba_south_timber_facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for cba_north_canopy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture cba_north_canopy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for cba_north_timber_facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture cba_north_timber_facade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manowar-overview",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manowar-overview",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manowar-gangway",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manowar-gangway",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manly_wharf_front_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manly_wharf_front_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manly_wharf_public_hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manly_wharf_public_hall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manly_corso_seating",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manly_corso_seating",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manly_steyne_corso_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manly_steyne_corso_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for manly_steyne_beach_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture manly_steyne_beach_detail",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for qvb-george-dome",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture qvb-george-dome",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for qvb-market-entry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture qvb-market-entry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for qvb-grand-walk",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture qvb-grand-walk",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "near facade stream ready for qvb-central-dome",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native capture qvb-central-dome",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true,
+	"routes": [
+		{
+			"discontinuities": 0,
+			"name": "pitt_street_mall_north_to_south",
+			"origin": [
+				-202.99299621582,
+				4.5,
+				1005.0
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-203.567138671875,
+						4.49087715148926,
+						1025.09533691406
+					],
+					"contacts": [],
+					"distance": 0.0959539413452148,
+					"frames": 233,
+					"reached": true,
+					"target": [
+						-203.578002929688,
+						4.5,
+						1025.0
+					]
+				},
+				{
+					"actual": [
+						-204.202026367188,
+						4.49087715148926,
+						1045.07104492188
+					],
+					"contacts": [],
+					"distance": 0.072219118475914,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-204.214996337891,
+						4.5,
+						1045.0
+					]
+				},
+				{
+					"actual": [
+						-204.895950317383,
+						4.49087715148926,
+						1065.13330078125
+					],
+					"contacts": [],
+					"distance": 0.133844718337059,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						-204.908004760742,
+						4.5,
+						1065.0
+					]
+				},
+				{
+					"actual": [
+						-205.546981811523,
+						4.49087715148926,
+						1085.10876464844
+					],
+					"contacts": [],
+					"distance": 0.109427250921726,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-205.559005737305,
+						4.5,
+						1085.0
+					]
+				},
+				{
+					"actual": [
+						-206.18635559082,
+						4.49087715148926,
+						1105.08435058594
+					],
+					"contacts": [],
+					"distance": 0.0852937996387482,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-206.199005126953,
+						4.5,
+						1105.0
+					]
+				},
+				{
+					"actual": [
+						-206.848052978516,
+						4.49087715148926,
+						1125.05993652344
+					],
+					"contacts": [],
+					"distance": 0.0615377351641655,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-206.861999511719,
+						4.5,
+						1125.0
+					]
+				},
+				{
+					"actual": [
+						-207.472930908203,
+						4.49087715148926,
+						1145.12219238281
+					],
+					"contacts": [],
+					"distance": 0.122692130506039,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						-207.483993530273,
+						4.5,
+						1145.0
+					]
+				},
+				{
+					"actual": [
+						-208.060791015625,
+						4.49087715148926,
+						1165.09790039062
+					],
+					"contacts": [],
+					"distance": 0.098540686070919,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-208.072006225586,
+						4.5,
+						1165.0
+					]
+				},
+				{
+					"actual": [
+						-208.622512817383,
+						4.49087715148926,
+						1185.07360839844
+					],
+					"contacts": [],
+					"distance": 0.0744997560977936,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-208.634002685547,
+						4.5,
+						1185.0
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "pitt_street_mall_south_to_north",
+			"origin": [
+				-208.634002685547,
+				4.5,
+				1185.0
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-208.08235168457,
+						4.49087715148926,
+						1164.90466308594
+					],
+					"contacts": [],
+					"distance": 0.0958965867757797,
+					"frames": 233,
+					"reached": true,
+					"target": [
+						-208.072006225586,
+						4.5,
+						1165.0
+					]
+				},
+				{
+					"actual": [
+						-207.496017456055,
+						4.49087715148926,
+						1144.92895507812
+					],
+					"contacts": [],
+					"distance": 0.0720552280545235,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-207.483993530273,
+						4.5,
+						1145.0
+					]
+				},
+				{
+					"actual": [
+						-206.872711181641,
+						4.49087715148926,
+						1124.86657714844
+					],
+					"contacts": [],
+					"distance": 0.133852139115334,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						-206.861999511719,
+						4.5,
+						1125.0
+					]
+				},
+				{
+					"actual": [
+						-206.211196899414,
+						4.49087715148926,
+						1104.89099121094
+					],
+					"contacts": [],
+					"distance": 0.109688445925713,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-206.199005126953,
+						4.5,
+						1105.0
+					]
+				},
+				{
+					"actual": [
+						-205.571655273438,
+						4.49087715148926,
+						1084.91540527344
+					],
+					"contacts": [],
+					"distance": 0.0855352431535721,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-205.559005737305,
+						4.5,
+						1085.0
+					]
+				},
+				{
+					"actual": [
+						-204.921646118164,
+						4.49087715148926,
+						1064.93981933594
+					],
+					"contacts": [],
+					"distance": 0.061707366257906,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-204.908004760742,
+						4.5,
+						1065.0
+					]
+				},
+				{
+					"actual": [
+						-204.227447509766,
+						4.49087715148926,
+						1044.87768554688
+					],
+					"contacts": [],
+					"distance": 0.122946560382843,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						-204.214996337891,
+						4.5,
+						1045.0
+					]
+				},
+				{
+					"actual": [
+						-203.590118408203,
+						4.49087715148926,
+						1024.90209960938
+					],
+					"contacts": [],
+					"distance": 0.0986472070217133,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-203.578002929688,
+						4.5,
+						1025.0
+					]
+				},
+				{
+					"actual": [
+						-203.004943847656,
+						4.49087715148926,
+						1004.92633056641
+					],
+					"contacts": [],
+					"distance": 0.0746319741010666,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						-202.99299621582,
+						4.5,
+						1005.0
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Covered concourse to ticket foyer and upper south foyer",
+			"origin": [
+				354.808807373047,
+				4.5,
+				-284.054046630859
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						356.836944580078,
+						4.52102422714233,
+						-283.650787353516
+					],
+					"contacts": [],
+					"distance": 0.0978619679808617,
+					"frames": 25,
+					"reached": true,
+					"target": [
+						356.755706787109,
+						4.5,
+						-283.596221923828
+					]
+				},
+				{
+					"actual": [
+						376.321319580078,
+						9.9773006439209,
+						-279.075012207031
+					],
+					"contacts": [],
+					"distance": 0.112193420529366,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						376.224670410156,
+						9.98640060424805,
+						-279.018035888672
+					]
+				},
+				{
+					"actual": [
+						379.657958984375,
+						9.97727870941162,
+						-271.946594238281
+					],
+					"contacts": [],
+					"distance": 0.105314165353775,
+					"frames": 91,
+					"reached": true,
+					"target": [
+						379.718444824219,
+						9.98640060424805,
+						-272.032806396484
+					]
+				},
+				{
+					"actual": [
+						407.040710449219,
+						10.0078659057617,
+						-265.686767578125
+					],
+					"contacts": [],
+					"distance": 0.0913378447294235,
+					"frames": 325,
+					"reached": true,
+					"target": [
+						406.974975585938,
+						9.98640060424805,
+						-265.623352050781
+					]
+				},
+				{
+					"actual": [
+						411.952880859375,
+						15.6908836364746,
+						-287.127258300781
+					],
+					"contacts": [],
+					"distance": 0.105488635599613,
+					"frames": 255,
+					"reached": true,
+					"target": [
+						412.010986328125,
+						15.6999998092651,
+						-287.039215087891
+					]
+				},
+				{
+					"actual": [
+						412.62353515625,
+						15.6908779144287,
+						-290.013549804688
+					],
+					"contacts": [],
+					"distance": 0.0917515009641647,
+					"frames": 31,
+					"reached": true,
+					"target": [
+						412.697723388672,
+						15.6999998092651,
+						-289.959564208984
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Concert Hall south entrance to front stalls",
+			"origin": [
+				389.281829833984,
+				15.6999998092651,
+				-264.647583007812
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						393.56787109375,
+						15.6908779144287,
+						-283.229766845703
+					],
+					"contacts": [],
+					"distance": 0.107309393584728,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						393.631103515625,
+						15.6999998092651,
+						-283.14306640625
+					]
+				},
+				{
+					"actual": [
+						395.970825195312,
+						15.6908779144287,
+						-293.453216552734
+					],
+					"contacts": [],
+					"distance": 0.109472043812275,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						396.03466796875,
+						15.6999998092651,
+						-293.364288330078
+					]
+				},
+				{
+					"actual": [
+						413.651428222656,
+						15.6908779144287,
+						-289.306610107422
+					],
+					"contacts": [],
+					"distance": 0.113588266074657,
+					"frames": 211,
+					"reached": true,
+					"target": [
+						413.556701660156,
+						15.6999998092651,
+						-289.243927001953
+					]
+				},
+				{
+					"actual": [
+						418.419219970703,
+						15.6908779144287,
+						-310.276306152344
+					],
+					"contacts": [],
+					"distance": 0.118962518870831,
+					"frames": 249,
+					"reached": true,
+					"target": [
+						418.478271484375,
+						15.6999998092651,
+						-310.173034667969
+					]
+				},
+				{
+					"actual": [
+						412.556610107422,
+						15.6908779144287,
+						-311.486968994141
+					],
+					"contacts": [],
+					"distance": 0.100498840212822,
+					"frames": 70,
+					"reached": true,
+					"target": [
+						412.637573242188,
+						15.6999998092651,
+						-311.546508789062
+					]
+				},
+				{
+					"actual": [
+						413.018188476562,
+						15.6908769607544,
+						-313.070281982422
+					],
+					"contacts": [],
+					"distance": 0.131351232528687,
+					"frames": 23,
+					"reached": true,
+					"target": [
+						413.026733398438,
+						15.6999998092651,
+						-313.201354980469
+					]
+				},
+				{
+					"actual": [
+						399.271911621094,
+						15.6908779144287,
+						-316.351593017578
+					],
+					"contacts": [],
+					"distance": 0.137766197323799,
+					"frames": 164,
+					"reached": true,
+					"target": [
+						399.3984375,
+						15.6999998092651,
+						-316.406097412109
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Concert Hall harbour promenade through northern foyer",
+			"origin": [
+				389.281829833984,
+				15.6999998092651,
+				-264.647583007812
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						393.56787109375,
+						15.6908779144287,
+						-283.229766845703
+					],
+					"contacts": [],
+					"distance": 0.107309393584728,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						393.631103515625,
+						15.6999998092651,
+						-283.14306640625
+					]
+				},
+				{
+					"actual": [
+						395.970825195312,
+						15.6908779144287,
+						-293.453216552734
+					],
+					"contacts": [],
+					"distance": 0.109472043812275,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						396.03466796875,
+						15.6999998092651,
+						-293.364288330078
+					]
+				},
+				{
+					"actual": [
+						413.651428222656,
+						15.6908779144287,
+						-289.306610107422
+					],
+					"contacts": [],
+					"distance": 0.113588266074657,
+					"frames": 211,
+					"reached": true,
+					"target": [
+						413.556701660156,
+						15.6999998092651,
+						-289.243927001953
+					]
+				},
+				{
+					"actual": [
+						434.232177734375,
+						15.6908779144287,
+						-384.068054199219
+					],
+					"contacts": [],
+					"distance": 0.0887464880943298,
+					"frames": 1120,
+					"reached": true,
+					"target": [
+						434.300750732422,
+						15.6999998092651,
+						-384.01171875
+					]
+				},
+				{
+					"actual": [
+						433.230926513672,
+						15.6909856796265,
+						-385.855895996094
+					],
+					"contacts": [],
+					"distance": 0.062137745320797,
+					"frames": 21,
+					"reached": true,
+					"target": [
+						433.183929443359,
+						15.6999998092651,
+						-385.815246582031
+					]
+				},
+				{
+					"actual": [
+						435.756317138672,
+						15.6909856796265,
+						-397.109649658203
+					],
+					"contacts": [],
+					"distance": 0.116445198655128,
+					"frames": 131,
+					"reached": true,
+					"target": [
+						435.816375732422,
+						15.6999998092651,
+						-397.009887695312
+					]
+				},
+				{
+					"actual": [
+						419.177856445312,
+						15.6909856796265,
+						-400.839630126953
+					],
+					"contacts": [],
+					"distance": 0.109086312353611,
+					"frames": 197,
+					"reached": true,
+					"target": [
+						419.267791748047,
+						15.6999998092651,
+						-400.9013671875
+					]
+				},
+				{
+					"actual": [
+						416.469879150391,
+						17.8909740447998,
+						-388.665954589844
+					],
+					"contacts": [],
+					"distance": 0.0925283506512642,
+					"frames": 145,
+					"reached": true,
+					"target": [
+						416.406402587891,
+						17.8999996185303,
+						-388.733276367188
+					]
+				},
+				{
+					"actual": [
+						415.838439941406,
+						17.8908767700195,
+						-385.948089599609
+					],
+					"contacts": [],
+					"distance": 0.0941573902964592,
+					"frames": 29,
+					"reached": true,
+					"target": [
+						415.765472412109,
+						17.8999996185303,
+						-386.007598876953
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Joan Sutherland Theatre entrance to front side aisle",
+			"origin": [
+				434.060424804688,
+				15.6999998092651,
+				-254.117736816406
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						438.346405029297,
+						15.6908779144287,
+						-272.699737548828
+					],
+					"contacts": [],
+					"distance": 0.107172906398773,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						438.409698486328,
+						15.6999998092651,
+						-272.613250732422
+					]
+				},
+				{
+					"actual": [
+						440.749389648438,
+						15.6908779144287,
+						-282.923217773438
+					],
+					"contacts": [],
+					"distance": 0.10934117436409,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						440.813262939453,
+						15.6999998092651,
+						-282.83447265625
+					]
+				},
+				{
+					"actual": [
+						458.126556396484,
+						15.6908779144287,
+						-279.865112304688
+					],
+					"contacts": [],
+					"distance": 0.0799437537789345,
+					"frames": 205,
+					"reached": true,
+					"target": [
+						458.077484130859,
+						15.6999998092651,
+						-279.802001953125
+					]
+				},
+				{
+					"actual": [
+						464.305450439453,
+						15.6908779144287,
+						-306.641235351562
+					],
+					"contacts": [],
+					"distance": 0.0965168029069901,
+					"frames": 318,
+					"reached": true,
+					"target": [
+						464.372497558594,
+						15.6999998092651,
+						-306.571807861328
+					]
+				},
+				{
+					"actual": [
+						459.882690429688,
+						15.6908779144287,
+						-307.548767089844
+					],
+					"contacts": [],
+					"distance": 0.121514551341534,
+					"frames": 53,
+					"reached": true,
+					"target": [
+						459.991973876953,
+						15.6999998092651,
+						-307.601898193359
+					]
+				},
+				{
+					"actual": [
+						460.510803222656,
+						15.7158784866333,
+						-310.195404052734
+					],
+					"contacts": [],
+					"distance": 0.0986921936273575,
+					"frames": 33,
+					"reached": true,
+					"target": [
+						460.587158203125,
+						15.6999998092651,
+						-310.132873535156
+					]
+				},
+				{
+					"actual": [
+						448.830932617188,
+						15.7158794403076,
+						-312.814849853516
+					],
+					"contacts": [],
+					"distance": 0.099059671163559,
+					"frames": 139,
+					"reached": true,
+					"target": [
+						448.90576171875,
+						15.6999998092651,
+						-312.879760742188
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Joan Sutherland Theatre northern harbour foyer",
+			"origin": [
+				434.060424804688,
+				15.6999998092651,
+				-254.117736816406
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						438.346405029297,
+						15.6908779144287,
+						-272.699737548828
+					],
+					"contacts": [],
+					"distance": 0.107172906398773,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						438.409698486328,
+						15.6999998092651,
+						-272.613250732422
+					]
+				},
+				{
+					"actual": [
+						440.749389648438,
+						15.6908779144287,
+						-282.923217773438
+					],
+					"contacts": [],
+					"distance": 0.10934117436409,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						440.813262939453,
+						15.6999998092651,
+						-282.83447265625
+					]
+				},
+				{
+					"actual": [
+						458.126556396484,
+						15.6908779144287,
+						-279.865112304688
+					],
+					"contacts": [],
+					"distance": 0.0799437537789345,
+					"frames": 205,
+					"reached": true,
+					"target": [
+						458.077484130859,
+						15.6999998092651,
+						-279.802001953125
+					]
+				},
+				{
+					"actual": [
+						464.305450439453,
+						15.6908779144287,
+						-306.641235351562
+					],
+					"contacts": [],
+					"distance": 0.0965168029069901,
+					"frames": 318,
+					"reached": true,
+					"target": [
+						464.372497558594,
+						15.6999998092651,
+						-306.571807861328
+					]
+				},
+				{
+					"actual": [
+						473.175842285156,
+						15.6908779144287,
+						-348.721527099609
+					],
+					"contacts": [],
+					"distance": 0.0911675468087196,
+					"frames": 493,
+					"reached": true,
+					"target": [
+						473.242156982422,
+						15.6999998092651,
+						-348.658966064453
+					]
+				},
+				{
+					"actual": [
+						475.304565429688,
+						15.690878868103,
+						-362.100830078125
+					],
+					"contacts": [],
+					"distance": 0.0897792130708694,
+					"frames": 153,
+					"reached": true,
+					"target": [
+						475.358978271484,
+						15.6999998092651,
+						-362.029418945312
+					]
+				},
+				{
+					"actual": [
+						474.282684326172,
+						15.6909856796265,
+						-365.975891113281
+					],
+					"contacts": [],
+					"distance": 0.10714191198349,
+					"frames": 43,
+					"reached": true,
+					"target": [
+						474.213256835938,
+						15.6999998092651,
+						-365.894287109375
+					]
+				},
+				{
+					"actual": [
+						475.742279052734,
+						15.6909856796265,
+						-372.318389892578
+					],
+					"contacts": [],
+					"distance": 0.132135733962059,
+					"frames": 72,
+					"reached": true,
+					"target": [
+						475.798522949219,
+						15.6999998092651,
+						-372.198822021484
+					]
+				},
+				{
+					"actual": [
+						463.456939697266,
+						15.6909856796265,
+						-375.019073486328
+					],
+					"contacts": [],
+					"distance": 0.0994631201028824,
+					"frames": 146,
+					"reached": true,
+					"target": [
+						463.533081054688,
+						15.6999998092651,
+						-375.083068847656
+					]
+				},
+				{
+					"actual": [
+						461.429321289062,
+						17.8915119171143,
+						-365.816589355469
+					],
+					"contacts": [],
+					"distance": 0.0733268558979034,
+					"frames": 110,
+					"reached": true,
+					"target": [
+						461.358428955078,
+						17.8999996185303,
+						-365.835327148438
+					]
+				},
+				{
+					"actual": [
+						460.780456542969,
+						17.8908767700195,
+						-363.012054443359
+					],
+					"contacts": [],
+					"distance": 0.116165675222874,
+					"frames": 30,
+					"reached": true,
+					"target": [
+						460.717498779297,
+						17.8999996185303,
+						-363.109680175781
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Tumbalong fountain public edge",
+			"origin": [
+				-802.0,
+				4.5,
+				1874.0
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-802.0,
+						4.49087715148926,
+						1846.88415527344
+					],
+					"contacts": [],
+					"distance": 0.1158447265625,
+					"frames": 314,
+					"reached": true,
+					"target": [
+						-802.0,
+						4.5,
+						1847.0
+					]
+				},
+				{
+					"actual": [
+						-802.0,
+						4.49087715148926,
+						1823.87451171875
+					],
+					"contacts": [],
+					"distance": 0.12548828125,
+					"frames": 262,
+					"reached": true,
+					"target": [
+						-802.0,
+						4.5,
+						1824.0
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Darling Quarter playground west approach",
+			"origin": [
+				-857.299987792969,
+				4.5,
+				1630.0
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-858.763000488281,
+						4.54587697982788,
+						1642.12536621094
+					],
+					"contacts": [],
+					"distance": 0.130708634853363,
+					"frames": 142,
+					"reached": true,
+					"target": [
+						-858.799987792969,
+						4.5,
+						1642.0
+					]
+				},
+				{
+					"actual": [
+						-852.020690917969,
+						4.54587697982788,
+						1648.97509765625
+					],
+					"contacts": [],
+					"distance": 0.0323765464127064,
+					"frames": 109,
+					"reached": true,
+					"target": [
+						-852.0,
+						4.5,
+						1649.0
+					]
+				},
+				{
+					"actual": [
+						-844.213012695312,
+						4.54587697982788,
+						1660.07434082031
+					],
+					"contacts": [],
+					"distance": 0.0754690021276474,
+					"frames": 155,
+					"reached": true,
+					"target": [
+						-844.200012207031,
+						4.5,
+						1660.0
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "Wide slide rear steps and slope",
+			"origin": [
+				-841.165100097656,
+				4.5,
+				1637.73474121094
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-843.377563476562,
+						7.15993547439575,
+						1642.12390136719
+					],
+					"contacts": [],
+					"distance": 0.106748722493649,
+					"frames": 59,
+					"reached": true,
+					"target": [
+						-843.473999023438,
+						7.18000030517578,
+						1642.16967773438
+					]
+				},
+				{
+					"actual": [
+						-846.582580566406,
+						4.54587697982788,
+						1648.31689453125
+					],
+					"contacts": [],
+					"distance": 0.0822479724884033,
+					"frames": 78,
+					"reached": true,
+					"target": [
+						-846.660278320312,
+						4.5,
+						1648.28991699219
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "quay_wharf_2_entry_to_berth",
+			"origin": [
+				139.341934204102,
+				4.5,
+				137.993133544922
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						139.813140869141,
+						4.57087707519531,
+						127.788055419922
+					],
+					"contacts": [],
+					"distance": 0.125365793704987,
+					"frames": 119,
+					"reached": true,
+					"target": [
+						139.829055786133,
+						4.5,
+						127.912406921387
+					]
+				},
+				{
+					"actual": [
+						140.859741210938,
+						4.57087707519531,
+						106.105484008789
+					],
+					"contacts": [],
+					"distance": 0.0963922217488289,
+					"frames": 247,
+					"reached": true,
+					"target": [
+						140.878219604492,
+						4.5,
+						106.200088500977
+					]
+				},
+				{
+					"actual": [
+						141.945083618164,
+						4.57087707519531,
+						83.6439437866211
+					],
+					"contacts": [],
+					"distance": 0.0711726993322372,
+					"frames": 256,
+					"reached": true,
+					"target": [
+						141.96484375,
+						4.5,
+						83.7123184204102
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "quay_wharf_3_entry_to_berth",
+			"origin": [
+				84.7516403198242,
+				4.5,
+				141.936004638672
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						86.232780456543,
+						4.57087707519531,
+						130.336456298828
+					],
+					"contacts": [],
+					"distance": 0.138713836669922,
+					"frames": 136,
+					"reached": true,
+					"target": [
+						86.2702941894531,
+						4.5,
+						130.470001220703
+					]
+				},
+				{
+					"actual": [
+						89.5012054443359,
+						4.57087707519531,
+						105.646087646484
+					],
+					"contacts": [],
+					"distance": 0.134038984775543,
+					"frames": 284,
+					"reached": true,
+					"target": [
+						89.541259765625,
+						4.5,
+						105.774002075195
+					]
+				},
+				{
+					"actual": [
+						92.8850555419922,
+						4.57087707519531,
+						80.0974578857422
+					],
+					"contacts": [],
+					"distance": 0.107911646366119,
+					"frames": 294,
+					"reached": true,
+					"target": [
+						92.9290390014648,
+						4.5,
+						80.1959991455078
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "quay_wharf_5_entry_to_berth",
+			"origin": [
+				-7.82577991485596,
+				4.5,
+				132.210006713867
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-6.33369159698486,
+						4.57087707519531,
+						120.437812805176
+					],
+					"contacts": [],
+					"distance": 0.142045095562935,
+					"frames": 138,
+					"reached": true,
+					"target": [
+						-6.29684972763062,
+						4.5,
+						120.574996948242
+					]
+				},
+				{
+					"actual": [
+						-3.04525470733643,
+						4.57087707519531,
+						95.3998184204102
+					],
+					"contacts": [],
+					"distance": 0.122424043715,
+					"frames": 288,
+					"reached": true,
+					"target": [
+						-3.00376987457275,
+						4.5,
+						95.5149993896484
+					]
+				},
+				{
+					"actual": [
+						0.357659518718719,
+						4.57087707519531,
+						69.5033111572266
+					],
+					"contacts": [],
+					"distance": 0.075099840760231,
+					"frames": 298,
+					"reached": true,
+					"target": [
+						0.406920433044434,
+						4.5,
+						69.5599975585938
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "bank_of_china_sussex_colonnade",
+			"origin": [
+				-625.149780273438,
+				4.53999996185303,
+				1007.85125732422
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-621.876403808594,
+						4.52587795257568,
+						1007.58502197266
+					],
+					"contacts": [],
+					"distance": 0.0918151587247849,
+					"frames": 39,
+					"reached": true,
+					"target": [
+						-621.963439941406,
+						4.53999996185303,
+						1007.55578613281
+					]
+				},
+				{
+					"actual": [
+						-620.517333984375,
+						4.52587795257568,
+						1023.56292724609
+					],
+					"contacts": [],
+					"distance": 0.081665612757206,
+					"frames": 186,
+					"reached": true,
+					"target": [
+						-620.486206054688,
+						4.53999996185303,
+						1023.48742675781
+					]
+				},
+				{
+					"actual": [
+						-618.671447753906,
+						4.52587795257568,
+						1043.51293945312
+					],
+					"contacts": [],
+					"distance": 0.115294359624386,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						-618.639709472656,
+						4.53999996185303,
+						1043.40209960938
+					]
+				},
+				{
+					"actual": [
+						-618.585876464844,
+						4.52587795257568,
+						1044.50048828125
+					],
+					"contacts": [],
+					"distance": 0.109647497534752,
+					"frames": 8,
+					"reached": true,
+					"target": [
+						-618.54736328125,
+						4.53999996185303,
+						1044.39782714844
+					]
+				},
+				{
+					"actual": [
+						-621.607482910156,
+						4.49087715148926,
+						1044.6640625
+					],
+					"contacts": [],
+					"distance": 0.0737238228321075,
+					"frames": 36,
+					"reached": true,
+					"target": [
+						-621.534545898438,
+						4.53999996185303,
+						1044.6748046875
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "w_sydney_public_arrival",
+			"origin": [
+				-769.942993164062,
+				4.53999996185303,
+				1452.21630859375
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-766.128967285156,
+						4.52587699890137,
+						1459.26513671875
+					],
+					"contacts": [],
+					"distance": 0.0827389135956764,
+					"frames": 93,
+					"reached": true,
+					"target": [
+						-766.064514160156,
+						4.53999996185303,
+						1459.21325683594
+					]
+				},
+				{
+					"actual": [
+						-761.958679199219,
+						4.52587699890137,
+						1466.77880859375
+					],
+					"contacts": [],
+					"distance": 0.0771848633885384,
+					"frames": 97,
+					"reached": true,
+					"target": [
+						-761.895141601562,
+						4.53999996185303,
+						1466.73498535156
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "icc_convention",
+			"origin": [
+				-978.174987792969,
+				4.5,
+				1491.89514160156
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-995.916381835938,
+						4.52587699890137,
+						1495.51428222656
+					],
+					"contacts": [],
+					"distance": 0.131008967757225,
+					"frames": 210,
+					"reached": true,
+					"target": [
+						-995.796508789062,
+						4.5,
+						1495.56713867188
+					]
+				},
+				{
+					"actual": [
+						-1030.78576660156,
+						4.52587699890137,
+						1494.68103027344
+					],
+					"contacts": [],
+					"distance": 0.0728179886937141,
+					"frames": 399,
+					"reached": true,
+					"target": [
+						-1030.71362304688,
+						4.5,
+						1494.67114257812
+					]
+				},
+				{
+					"actual": [
+						-1044.50915527344,
+						4.52587699890137,
+						1497.46752929688
+					],
+					"contacts": [],
+					"distance": 0.107798524200916,
+					"frames": 158,
+					"reached": true,
+					"target": [
+						-1044.41931152344,
+						4.5,
+						1497.52709960938
+					]
+				},
+				{
+					"actual": [
+						-1044.98852539062,
+						4.53804540634155,
+						1494.47436523438
+					],
+					"contacts": [],
+					"distance": 0.123357713222504,
+					"frames": 36,
+					"reached": true,
+					"target": [
+						-1045.03125,
+						4.5,
+						1494.59008789062
+					]
+				},
+				{
+					"actual": [
+						-1048.64196777344,
+						10.0409116744995,
+						1476.91320800781
+					],
+					"contacts": [],
+					"distance": 0.0825322642922401,
+					"frames": 204,
+					"reached": true,
+					"target": [
+						-1048.703125,
+						10.0500001907349,
+						1476.96862792969
+					]
+				},
+				{
+					"actual": [
+						-1049.25732421875,
+						10.0409879684448,
+						1473.92272949219
+					],
+					"contacts": [],
+					"distance": 0.123305514454842,
+					"frames": 32,
+					"reached": true,
+					"target": [
+						-1049.31518554688,
+						10.0500001907349,
+						1474.03161621094
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "icc_exhibition",
+			"origin": [
+				-925.10546875,
+				4.5,
+				1635.6123046875
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-934.964111328125,
+						4.52587699890137,
+						1637.59008789062
+					],
+					"contacts": [],
+					"distance": 0.0927847772836685,
+					"frames": 117,
+					"reached": true,
+					"target": [
+						-934.895202636719,
+						4.5,
+						1637.65222167969
+					]
+				},
+				{
+					"actual": [
+						-936.061767578125,
+						4.52587699890137,
+						1631.70739746094
+					],
+					"contacts": [],
+					"distance": 0.0912618488073349,
+					"frames": 70,
+					"reached": true,
+					"target": [
+						-936.119201660156,
+						4.5,
+						1631.7783203125
+					]
+				},
+				{
+					"actual": [
+						-944.005554199219,
+						4.52587699890137,
+						1633.33984375
+					],
+					"contacts": [],
+					"distance": 0.0890977829694748,
+					"frames": 95,
+					"reached": true,
+					"target": [
+						-943.950988769531,
+						4.5,
+						1633.41027832031
+					]
+				},
+				{
+					"actual": [
+						-943.207092285156,
+						4.52587699890137,
+						1637.3818359375
+					],
+					"contacts": [],
+					"distance": 0.0910734757781029,
+					"frames": 49,
+					"reached": true,
+					"target": [
+						-943.135009765625,
+						4.5,
+						1637.326171875
+					]
+				},
+				{
+					"actual": [
+						-937.682678222656,
+						10.9908790588379,
+						1663.85412597656
+					],
+					"contacts": [],
+					"distance": 0.110547050833702,
+					"frames": 309,
+					"reached": true,
+					"target": [
+						-937.627136230469,
+						11.0,
+						1663.75854492188
+					]
+				},
+				{
+					"actual": [
+						-937.083374023438,
+						10.9908790588379,
+						1666.75964355469
+					],
+					"contacts": [],
+					"distance": 0.0936969742178917,
+					"frames": 31,
+					"reached": true,
+					"target": [
+						-937.01513671875,
+						11.0,
+						1666.69543457031
+					]
+				},
+				{
+					"actual": [
+						-946.870544433594,
+						10.9908790588379,
+						1668.67407226562
+					],
+					"contacts": [],
+					"distance": 0.0897785648703575,
+					"frames": 116,
+					"reached": true,
+					"target": [
+						-946.804931640625,
+						11.0,
+						1668.7353515625
+					]
+				},
+				{
+					"actual": [
+						-941.866821289062,
+						10.9908790588379,
+						1692.81591796875
+					],
+					"contacts": [],
+					"distance": 0.11272182315588,
+					"frames": 286,
+					"reached": true,
+					"target": [
+						-941.807067871094,
+						11.0,
+						1692.72033691406
+					]
+				},
+				{
+					"actual": [
+						-971.259582519531,
+						10.9908790588379,
+						1698.7802734375
+					],
+					"contacts": [],
+					"distance": 0.102561309933662,
+					"frames": 347,
+					"reached": true,
+					"target": [
+						-971.17626953125,
+						11.0,
+						1698.84008789062
+					]
+				},
+				{
+					"actual": [
+						-986.892761230469,
+						10.9908790588379,
+						1702.03527832031
+					],
+					"contacts": [],
+					"distance": 0.0867006927728653,
+					"frames": 181,
+					"reached": true,
+					"target": [
+						-986.839904785156,
+						11.0,
+						1702.10400390625
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "icc_theatre",
+			"origin": [
+				-882.357604980469,
+				4.5,
+				1821.99353027344
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-878.54150390625,
+						4.52587699890137,
+						1840.68078613281
+					],
+					"contacts": [],
+					"distance": 0.105306431651115,
+					"frames": 221,
+					"reached": true,
+					"target": [
+						-878.481689453125,
+						4.5,
+						1840.59411621094
+					]
+				},
+				{
+					"actual": [
+						-940.216674804688,
+						4.52587699890137,
+						1853.38037109375
+					],
+					"contacts": [],
+					"distance": 0.0884853973984718,
+					"frames": 728,
+					"reached": true,
+					"target": [
+						-940.157104492188,
+						4.5,
+						1853.44580078125
+					]
+				},
+				{
+					"actual": [
+						-936.138061523438,
+						4.52587699890137,
+						1873.11682128906
+					],
+					"contacts": [],
+					"distance": 0.109931230545044,
+					"frames": 234,
+					"reached": true,
+					"target": [
+						-936.077209472656,
+						4.5,
+						1873.02526855469
+					]
+				},
+				{
+					"actual": [
+						-928.120239257812,
+						4.52587699890137,
+						1871.44775390625
+					],
+					"contacts": [],
+					"distance": 0.136509671807289,
+					"frames": 96,
+					"reached": true,
+					"target": [
+						-928.245422363281,
+						4.5,
+						1871.39331054688
+					]
+				},
+				{
+					"actual": [
+						-925.451538085938,
+						4.52587699890137,
+						1885.16040039062
+					],
+					"contacts": [],
+					"distance": 0.087310679256916,
+					"frames": 162,
+					"reached": true,
+					"target": [
+						-925.389465332031,
+						4.5,
+						1885.09899902344
+					]
+				},
+				{
+					"actual": [
+						-928.602416992188,
+						4.52587699890137,
+						1869.31604003906
+					],
+					"contacts": [],
+					"distance": 0.129695624113083,
+					"frames": 194,
+					"reached": true,
+					"target": [
+						-928.653381347656,
+						4.5,
+						1869.43530273438
+					]
+				},
+				{
+					"actual": [
+						-939.505187988281,
+						4.52587699890137,
+						1871.61572265625
+					],
+					"contacts": [],
+					"distance": 0.104619406163692,
+					"frames": 130,
+					"reached": true,
+					"target": [
+						-939.422119140625,
+						4.5,
+						1871.67932128906
+					]
+				},
+				{
+					"actual": [
+						-938.095397949219,
+						6.01451015472412,
+						1878.42236328125
+					],
+					"contacts": [],
+					"distance": 0.07977444678545,
+					"frames": 82,
+					"reached": true,
+					"target": [
+						-938.024780273438,
+						6.02400016784668,
+						1878.38525390625
+					]
+				},
+				{
+					"actual": [
+						-936.219360351562,
+						6.01487731933594,
+						1887.43237304688
+					],
+					"contacts": [],
+					"distance": 0.108380980789661,
+					"frames": 103,
+					"reached": true,
+					"target": [
+						-936.158203125,
+						6.02400016784668,
+						1887.34289550781
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "icc_theatre_glazed_foyer",
+			"origin": [
+				-835.323791503906,
+				4.5,
+				1866.33142089844
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-853.065185546875,
+						4.52587699890137,
+						1869.95043945312
+					],
+					"contacts": [],
+					"distance": 0.130953133106232,
+					"frames": 210,
+					"reached": true,
+					"target": [
+						-852.945373535156,
+						4.5,
+						1870.00329589844
+					]
+				},
+				{
+					"actual": [
+						-859.207702636719,
+						4.52587699890137,
+						1839.58081054688
+					],
+					"contacts": [],
+					"distance": 0.0964582040905952,
+					"frames": 358,
+					"reached": true,
+					"target": [
+						-859.269165039062,
+						4.5,
+						1839.65515136719
+					]
+				},
+				{
+					"actual": [
+						-874.026062011719,
+						4.52587699890137,
+						1842.64953613281
+					],
+					"contacts": [],
+					"distance": 0.0975671708583832,
+					"frames": 176,
+					"reached": true,
+					"target": [
+						-873.953796386719,
+						4.5,
+						1842.71508789062
+					]
+				},
+				{
+					"actual": [
+						-878.544250488281,
+						4.52587699890137,
+						1840.66345214844
+					],
+					"contacts": [],
+					"distance": 0.0933881998062134,
+					"frames": 54,
+					"reached": true,
+					"target": [
+						-878.481689453125,
+						4.5,
+						1840.59411621094
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "westpac_public_colonnade",
+			"origin": [
+				-637.576904296875,
+				4.5,
+				674.605773925781
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-635.598754882812,
+						4.49087715148926,
+						705.730224609375
+					],
+					"contacts": [],
+					"distance": 0.126354351639748,
+					"frames": 361,
+					"reached": true,
+					"target": [
+						-635.576904296875,
+						4.5,
+						705.605773925781
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "cba_south_park_canopy",
+			"origin": [
+				-724.582214355469,
+				4.5,
+				1745.24475097656
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-723.614440917969,
+						4.49087715148926,
+						1736.56091308594
+					],
+					"contacts": [],
+					"distance": 0.0765982493758202,
+					"frames": 102,
+					"reached": true,
+					"target": [
+						-723.5732421875,
+						4.5,
+						1736.62548828125
+					]
+				},
+				{
+					"actual": [
+						-723.336486816406,
+						4.49087715148926,
+						1729.58996582031
+					],
+					"contacts": [],
+					"distance": 0.064607635140419,
+					"frames": 77,
+					"reached": true,
+					"target": [
+						-723.319213867188,
+						4.5,
+						1729.65222167969
+					]
+				},
+				{
+					"actual": [
+						-723.610290527344,
+						4.49087715148926,
+						1722.70190429688
+					],
+					"contacts": [],
+					"distance": 0.0932375118136406,
+					"frames": 76,
+					"reached": true,
+					"target": [
+						-723.625915527344,
+						4.5,
+						1722.79382324219
+					]
+				},
+				{
+					"actual": [
+						-724.846862792969,
+						4.49087715148926,
+						1715.31909179688
+					],
+					"contacts": [],
+					"distance": 0.0922188684344292,
+					"frames": 83,
+					"reached": true,
+					"target": [
+						-724.903686523438,
+						4.5,
+						1715.39172363281
+					]
+				},
+				{
+					"actual": [
+						-726.473022460938,
+						4.49087715148926,
+						1708.29016113281
+					],
+					"contacts": [],
+					"distance": 0.088854193687439,
+					"frames": 80,
+					"reached": true,
+					"target": [
+						-726.546020507812,
+						4.5,
+						1708.3408203125
+					]
+				},
+				{
+					"actual": [
+						-728.900817871094,
+						4.49087715148926,
+						1701.33337402344
+					],
+					"contacts": [],
+					"distance": 0.0943381637334824,
+					"frames": 82,
+					"reached": true,
+					"target": [
+						-728.984802246094,
+						4.5,
+						1701.37634277344
+					]
+				},
+				{
+					"actual": [
+						-732.076965332031,
+						4.49087715148926,
+						1694.61401367188
+					],
+					"contacts": [],
+					"distance": 0.0866920351982117,
+					"frames": 83,
+					"reached": true,
+					"target": [
+						-732.154663085938,
+						4.5,
+						1694.65246582031
+					]
+				},
+				{
+					"actual": [
+						-736.418884277344,
+						4.49087715148926,
+						1687.5986328125
+					],
+					"contacts": [],
+					"distance": 0.0656571462750435,
+					"frames": 93,
+					"reached": true,
+					"target": [
+						-736.478576660156,
+						4.5,
+						1687.6259765625
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "cba_north_park_canopy",
+			"origin": [
+				-820.030822753906,
+				4.5,
+				1607.87292480469
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-746.930786132812,
+						4.49087715148926,
+						1674.77087402344
+					],
+					"contacts": [],
+					"distance": 0.0166505202651024,
+					"frames": 1144,
+					"reached": true,
+					"target": [
+						-746.933166503906,
+						4.5,
+						1674.78735351562
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "manowar_north_jetty",
+			"origin": [
+				473.920013427734,
+				4.57999992370605,
+				-190.378997802734
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						479.65869140625,
+						4.57087707519531,
+						-195.771957397461
+					],
+					"contacts": [],
+					"distance": 0.020298920571804,
+					"frames": 91,
+					"reached": true,
+					"target": [
+						479.639007568359,
+						4.57999992370605,
+						-195.766998291016
+					]
+				},
+				{
+					"actual": [
+						490.07861328125,
+						4.57087707519531,
+						-216.917434692383
+					],
+					"contacts": [],
+					"distance": 0.0870005339384079,
+					"frames": 271,
+					"reached": true,
+					"target": [
+						490.153991699219,
+						4.57999992370605,
+						-216.873992919922
+					]
+				},
+				{
+					"actual": [
+						489.167999267578,
+						4.57087707519531,
+						-223.057571411133
+					],
+					"contacts": [],
+					"distance": 0.106519185006618,
+					"frames": 69,
+					"reached": true,
+					"target": [
+						489.118988037109,
+						4.57999992370605,
+						-222.962997436523
+					]
+				},
+				{
+					"actual": [
+						490.131011962891,
+						4.57098579406738,
+						-230.130004882812
+					],
+					"contacts": [],
+					"distance": 0.0826183632016182,
+					"frames": 79,
+					"reached": true,
+					"target": [
+						490.182006835938,
+						4.57999992370605,
+						-230.065002441406
+					]
+				},
+				{
+					"actual": [
+						495.754180908203,
+						2.63311147689819,
+						-237.995651245117
+					],
+					"contacts": [],
+					"distance": 0.0484083257615566,
+					"frames": 109,
+					"reached": true,
+					"target": [
+						495.799987792969,
+						2.54999995231628,
+						-237.979995727539
+					]
+				},
+				{
+					"actual": [
+						499.063995361328,
+						2.54087734222412,
+						-242.735870361328
+					],
+					"contacts": [],
+					"distance": 0.0508298650383949,
+					"frames": 65,
+					"reached": true,
+					"target": [
+						499.100006103516,
+						2.54999995231628,
+						-242.699996948242
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "manowar_east_jetty",
+			"origin": [
+				473.920013427734,
+				4.57999992370605,
+				-190.378997802734
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						479.65869140625,
+						4.57087707519531,
+						-195.771957397461
+					],
+					"contacts": [],
+					"distance": 0.020298920571804,
+					"frames": 91,
+					"reached": true,
+					"target": [
+						479.639007568359,
+						4.57999992370605,
+						-195.766998291016
+					]
+				},
+				{
+					"actual": [
+						490.07861328125,
+						4.57087707519531,
+						-216.917434692383
+					],
+					"contacts": [],
+					"distance": 0.0870005339384079,
+					"frames": 271,
+					"reached": true,
+					"target": [
+						490.153991699219,
+						4.57999992370605,
+						-216.873992919922
+					]
+				},
+				{
+					"actual": [
+						493.471160888672,
+						4.57089710235596,
+						-215.991806030273
+					],
+					"contacts": [],
+					"distance": 0.0993048772215843,
+					"frames": 42,
+					"reached": true,
+					"target": [
+						493.407012939453,
+						4.57999992370605,
+						-215.916000366211
+					]
+				},
+				{
+					"actual": [
+						503.453399658203,
+						2.56961607933044,
+						-213.05241394043
+					],
+					"contacts": [],
+					"distance": 0.122151635587215,
+					"frames": 117,
+					"reached": true,
+					"target": [
+						503.348999023438,
+						2.54999995231628,
+						-212.988998413086
+					]
+				},
+				{
+					"actual": [
+						507.620208740234,
+						2.54087734222412,
+						-211.858444213867
+					],
+					"contacts": [],
+					"distance": 0.133661925792694,
+					"frames": 47,
+					"reached": true,
+					"target": [
+						507.5,
+						2.54999995231628,
+						-211.800003051758
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "manly_wharf_hall_to_steyne",
+			"origin": [
+				6819.55126953125,
+				4.53999996185303,
+				-6687.92724609375
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						6819.55126953125,
+						4.53087711334229,
+						-6712.98388671875
+					],
+					"contacts": [],
+					"distance": 0.056640625,
+					"frames": 291,
+					"reached": true,
+					"target": [
+						6819.55126953125,
+						4.53999996185303,
+						-6712.92724609375
+					]
+				},
+				{
+					"actual": [
+						6810.61474609375,
+						4.49087715148926,
+						-6725.9326171875
+					],
+					"contacts": [],
+					"distance": 0.0637033954262733,
+					"frames": 179,
+					"reached": true,
+					"target": [
+						6810.55126953125,
+						4.5,
+						-6725.92724609375
+					]
+				},
+				{
+					"actual": [
+						6806.60400390625,
+						4.49087715148926,
+						-6745.04443359375
+					],
+					"contacts": [],
+					"distance": 0.128506124019623,
+					"frames": 223,
+					"reached": true,
+					"target": [
+						6806.55126953125,
+						4.5,
+						-6744.92724609375
+					]
+				},
+				{
+					"actual": [
+						6840.1728515625,
+						4.49087715148926,
+						-6760.01123046875
+					],
+					"contacts": [],
+					"distance": 0.0947882086038589,
+					"frames": 427,
+					"reached": true,
+					"target": [
+						6840.11328125,
+						4.5,
+						-6760.0849609375
+					]
+				},
+				{
+					"actual": [
+						6847.28466796875,
+						4.49087715148926,
+						-6767.53857421875
+					],
+					"contacts": [],
+					"distance": 0.0391173921525478,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						6847.3203125,
+						4.5,
+						-6767.5546875
+					]
+				},
+				{
+					"actual": [
+						6861.60986328125,
+						4.49087715148926,
+						-6781.34716796875
+					],
+					"contacts": [],
+					"distance": 0.0265519060194492,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						6861.6240234375,
+						4.5,
+						-6781.36962890625
+					]
+				},
+				{
+					"actual": [
+						6897.6240234375,
+						4.49087715148926,
+						-6814.30322265625
+					],
+					"contacts": [],
+					"distance": 0.0295117441564798,
+					"frames": 561,
+					"reached": true,
+					"target": [
+						6897.63232421875,
+						4.5,
+						-6814.33154296875
+					]
+				},
+				{
+					"actual": [
+						6902.5859375,
+						4.49087858200073,
+						-6818.84521484375
+					],
+					"contacts": [],
+					"distance": 0.0293050110340118,
+					"frames": 76,
+					"reached": true,
+					"target": [
+						6902.55712890625,
+						4.5,
+						-6818.83984375
+					]
+				},
+				{
+					"actual": [
+						6924.49365234375,
+						4.49087715148926,
+						-6835.02001953125
+					],
+					"contacts": [],
+					"distance": 0.0467782616615295,
+					"frames": 312,
+					"reached": true,
+					"target": [
+						6924.4560546875,
+						4.5,
+						-6835.0478515625
+					]
+				},
+				{
+					"actual": [
+						6952.20263671875,
+						4.49087715148926,
+						-6854.48095703125
+					],
+					"contacts": [],
+					"distance": 0.0548724718391895,
+					"frames": 389,
+					"reached": true,
+					"target": [
+						6952.17578125,
+						4.5,
+						-6854.52880859375
+					]
+				},
+				{
+					"actual": [
+						6980.01904296875,
+						4.49087715148926,
+						-6862.6591796875
+					],
+					"contacts": [],
+					"distance": 0.100244030356407,
+					"frames": 333,
+					"reached": true,
+					"target": [
+						6979.95166015625,
+						4.59499979019165,
+						-6862.7333984375
+					]
+				},
+				{
+					"actual": [
+						6982.54736328125,
+						4.58142709732056,
+						-6864.5361328125
+					],
+					"contacts": [],
+					"distance": 0.0628897920250893,
+					"frames": 35,
+					"reached": true,
+					"target": [
+						6982.57568359375,
+						4.59499979019165,
+						-6864.59228515625
+					]
+				},
+				{
+					"actual": [
+						7070.4140625,
+						4.58587741851807,
+						-6927.1123046875
+					],
+					"contacts": [],
+					"distance": 0.0520540773868561,
+					"frames": 1239,
+					"reached": true,
+					"target": [
+						7070.38330078125,
+						4.59499979019165,
+						-6927.154296875
+					]
+				},
+				{
+					"actual": [
+						7138.203125,
+						4.58587694168091,
+						-6974.6904296875
+					],
+					"contacts": [],
+					"distance": 0.0547659173607826,
+					"frames": 955,
+					"reached": true,
+					"target": [
+						7138.16796875,
+						4.59499979019165,
+						-6974.732421875
+					]
+				},
+				{
+					"actual": [
+						7165.27587890625,
+						4.58587741851807,
+						-6993.466796875
+					],
+					"contacts": [],
+					"distance": 0.0665801540017128,
+					"frames": 378,
+					"reached": true,
+					"target": [
+						7165.21337890625,
+						4.59499979019165,
+						-6993.48974609375
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "manly_steyne_to_wharf_hall",
+			"origin": [
+				7165.21337890625,
+				4.59499979019165,
+				-6993.48974609375
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						7138.1513671875,
+						4.58587694168091,
+						-6974.78857421875
+					],
+					"contacts": [],
+					"distance": 0.058555081486702,
+					"frames": 380,
+					"reached": true,
+					"target": [
+						7138.16796875,
+						4.59499979019165,
+						-6974.732421875
+					]
+				},
+				{
+					"actual": [
+						7070.35595703125,
+						4.58587694168091,
+						-6927.20068359375
+					],
+					"contacts": [],
+					"distance": 0.0538461543619633,
+					"frames": 955,
+					"reached": true,
+					"target": [
+						7070.38330078125,
+						4.59499979019165,
+						-6927.154296875
+					]
+				},
+				{
+					"actual": [
+						6982.53076171875,
+						4.58559560775757,
+						-6864.6240234375
+					],
+					"contacts": [],
+					"distance": 0.0550026670098305,
+					"frames": 1238,
+					"reached": true,
+					"target": [
+						6982.57568359375,
+						4.59499979019165,
+						-6864.59228515625
+					]
+				},
+				{
+					"actual": [
+						6979.93603515625,
+						4.49087715148926,
+						-6862.7724609375
+					],
+					"contacts": [],
+					"distance": 0.0420715995132923,
+					"frames": 35,
+					"reached": true,
+					"target": [
+						6979.95166015625,
+						4.59499979019165,
+						-6862.7333984375
+					]
+				},
+				{
+					"actual": [
+						6952.0576171875,
+						4.49087715148926,
+						-6854.58837890625
+					],
+					"contacts": [],
+					"distance": 0.132330521941185,
+					"frames": 334,
+					"reached": true,
+					"target": [
+						6952.17578125,
+						4.5,
+						-6854.52880859375
+					]
+				},
+				{
+					"actual": [
+						6924.40283203125,
+						4.49087715148926,
+						-6835.07373046875
+					],
+					"contacts": [],
+					"distance": 0.0591808147728443,
+					"frames": 387,
+					"reached": true,
+					"target": [
+						6924.4560546875,
+						4.5,
+						-6835.0478515625
+					]
+				},
+				{
+					"actual": [
+						6902.490234375,
+						4.49087715148926,
+						-6818.845703125
+					],
+					"contacts": [],
+					"distance": 0.0671506524085999,
+					"frames": 313,
+					"reached": true,
+					"target": [
+						6902.55712890625,
+						4.5,
+						-6818.83984375
+					]
+				},
+				{
+					"actual": [
+						6897.64453125,
+						4.49087715148926,
+						-6814.35205078125
+					],
+					"contacts": [],
+					"distance": 0.0238659176975489,
+					"frames": 75,
+					"reached": true,
+					"target": [
+						6897.63232421875,
+						4.5,
+						-6814.33154296875
+					]
+				},
+				{
+					"actual": [
+						6861.6298828125,
+						4.49087715148926,
+						-6781.39599609375
+					],
+					"contacts": [],
+					"distance": 0.0270103849470615,
+					"frames": 561,
+					"reached": true,
+					"target": [
+						6861.6240234375,
+						4.5,
+						-6781.36962890625
+					]
+				},
+				{
+					"actual": [
+						6847.3359375,
+						4.49087715148926,
+						-6767.5703125
+					],
+					"contacts": [],
+					"distance": 0.0220970865339041,
+					"frames": 228,
+					"reached": true,
+					"target": [
+						6847.3203125,
+						4.5,
+						-6767.5546875
+					]
+				},
+				{
+					"actual": [
+						6840.14013671875,
+						4.49087715148926,
+						-6760.109375
+					],
+					"contacts": [],
+					"distance": 0.0362941138446331,
+					"frames": 118,
+					"reached": true,
+					"target": [
+						6840.11328125,
+						4.5,
+						-6760.0849609375
+					]
+				},
+				{
+					"actual": [
+						6806.4873046875,
+						4.49087715148926,
+						-6744.9990234375
+					],
+					"contacts": [],
+					"distance": 0.0961430594325066,
+					"frames": 427,
+					"reached": true,
+					"target": [
+						6806.55126953125,
+						4.5,
+						-6744.92724609375
+					]
+				},
+				{
+					"actual": [
+						6810.49853515625,
+						4.49087715148926,
+						-6725.80322265625
+					],
+					"contacts": [],
+					"distance": 0.134769156575203,
+					"frames": 227,
+					"reached": true,
+					"target": [
+						6810.55126953125,
+						4.5,
+						-6725.92724609375
+					]
+				},
+				{
+					"actual": [
+						6819.529296875,
+						4.53087711334229,
+						-6712.86865234375
+					],
+					"contacts": [],
+					"distance": 0.0625781491398811,
+					"frames": 179,
+					"reached": true,
+					"target": [
+						6819.55126953125,
+						4.53999996185303,
+						-6712.92724609375
+					]
+				},
+				{
+					"actual": [
+						6819.5498046875,
+						4.53087711334229,
+						-6687.81591796875
+					],
+					"contacts": [],
+					"distance": 0.111337758600712,
+					"frames": 288,
+					"reached": true,
+					"target": [
+						6819.55126953125,
+						4.53999996185303,
+						-6687.92724609375
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "qvb_market_druitt_grand_walk",
+			"origin": [
+				-356.49951171875,
+				4.53999996185303,
+				1211.5390625
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-355.910614013672,
+						4.53087711334229,
+						1225.65307617188
+					],
+					"contacts": [],
+					"distance": 0.127878695726395,
+					"frames": 164,
+					"reached": true,
+					"target": [
+						-355.896301269531,
+						4.53999996185303,
+						1225.52600097656
+					]
+				},
+				{
+					"actual": [
+						-351.867401123047,
+						4.53087711334229,
+						1237.39953613281
+					],
+					"contacts": [],
+					"distance": 0.0936807990074158,
+					"frames": 140,
+					"reached": true,
+					"target": [
+						-351.782592773438,
+						4.53999996185303,
+						1237.35974121094
+					]
+				},
+				{
+					"actual": [
+						-350.205993652344,
+						4.53087711334229,
+						1274.40954589844
+					],
+					"contacts": [],
+					"distance": 0.0859299600124359,
+					"frames": 424,
+					"reached": true,
+					"target": [
+						-350.188385009766,
+						4.53999996185303,
+						1274.32543945312
+					]
+				},
+				{
+					"actual": [
+						-352.252532958984,
+						4.53087711334229,
+						1309.50305175781
+					],
+					"contacts": [],
+					"distance": 0.0602489970624447,
+					"frames": 402,
+					"reached": true,
+					"target": [
+						-352.277008056641,
+						4.53999996185303,
+						1309.44799804688
+					]
+				},
+				{
+					"actual": [
+						-347.215209960938,
+						4.53087711334229,
+						1344.38647460938
+					],
+					"contacts": [],
+					"distance": 0.133189037442207,
+					"frames": 403,
+					"reached": true,
+					"target": [
+						-347.172332763672,
+						4.53999996185303,
+						1344.26037597656
+					]
+				},
+				{
+					"actual": [
+						-345.593841552734,
+						4.53087711334229,
+						1381.34216308594
+					],
+					"contacts": [],
+					"distance": 0.117147922515869,
+					"frames": 423,
+					"reached": true,
+					"target": [
+						-345.578125,
+						4.53999996185303,
+						1381.22607421875
+					]
+				},
+				{
+					"actual": [
+						-348.598968505859,
+						4.53087711334229,
+						1393.48315429688
+					],
+					"contacts": [],
+					"distance": 0.127499535679817,
+					"frames": 141,
+					"reached": true,
+					"target": [
+						-348.65771484375,
+						4.53999996185303,
+						1393.36999511719
+					]
+				},
+				{
+					"actual": [
+						-348.068969726562,
+						4.49087715148926,
+						1407.45715332031
+					],
+					"contacts": [],
+					"distance": 0.101258277893066,
+					"frames": 158,
+					"reached": true,
+					"target": [
+						-348.054504394531,
+						4.53999996185303,
+						1407.35693359375
+					]
+				}
+			]
+		},
+		{
+			"discontinuities": 0,
+			"name": "qvb_george_york_public_crossing",
+			"origin": [
+				-333.294647216797,
+				4.53999996185303,
+				1308.62939453125
+			],
+			"passed": true,
+			"segments": [
+				{
+					"actual": [
+						-342.374542236328,
+						4.53087711334229,
+						1309.00158691406
+					],
+					"contacts": [],
+					"distance": 0.0896080881357193,
+					"frames": 106,
+					"reached": true,
+					"target": [
+						-342.286285400391,
+						4.53999996185303,
+						1309.01708984375
+					]
+				},
+				{
+					"actual": [
+						-352.372985839844,
+						4.53087711334229,
+						1309.43115234375
+					],
+					"contacts": [],
+					"distance": 0.0974449217319489,
+					"frames": 112,
+					"reached": true,
+					"target": [
+						-352.277008056641,
+						4.53999996185303,
+						1309.44799804688
+					]
+				},
+				{
+					"actual": [
+						-362.371215820312,
+						4.53087711334229,
+						1309.86242675781
+					],
+					"contacts": [],
+					"distance": 0.104789033532143,
+					"frames": 112,
+					"reached": true,
+					"target": [
+						-362.267730712891,
+						4.53999996185303,
+						1309.87890625
+					]
+				},
+				{
+					"actual": [
+						-371.33056640625,
+						4.49087715148926,
+						1310.24865722656
+					],
+					"contacts": [],
+					"distance": 0.0734240040183067,
+					"frames": 100,
+					"reached": true,
+					"target": [
+						-371.259368896484,
+						4.53999996185303,
+						1310.2666015625
+					]
+				}
+			]
+		}
+	],
+	"scope": "Exportable production-world validator. Route starts are isolated setup; subsequent walks use production player physics and forward input actions. Native manual frames capture authored buildings in the complete city. This is not an OS hardware-input or real-world survey-accuracy claim.",
+	"screenshots": [
+		{
+			"camera": [
+				-206.0,
+				23.0,
+				1193.0
+			],
+			"file": "pitt_street_mall_paving.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-205.0,
+				4.59999990463257,
+				1110.0
+			]
+		},
+		{
+			"camera": [
+				-605.0,
+				65.0,
+				2720.0
+			],
+			"file": "henry_deane_plaza_paving.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-602.599975585938,
+				4.59999990463257,
+				2673.60009765625
+			]
+		},
+		{
+			"camera": [
+				6835.0,
+				65.0,
+				-6855.0
+			],
+			"file": "manly_forecourt_paving.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				6875.0,
+				4.59999990463257,
+				-6808.0
+			]
+		},
+		{
+			"camera": [
+				310.288940429688,
+				64.5,
+				-501.005615234375
+			],
+			"file": "opera-harbour.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				424.087707519531,
+				32.5,
+				-325.290374755859
+			]
+		},
+		{
+			"camera": [
+				395.478698730469,
+				21.5,
+				-168.680923461914
+			],
+			"file": "opera-monumental-steps.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				424.5478515625,
+				30.5,
+				-309.773040771484
+			]
+		},
+		{
+			"camera": [
+				298.071472167969,
+				214.5,
+				-230.623046875
+			],
+			"file": "opera-roof-plan.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				426.779144287109,
+				26.5,
+				-323.630218505859
+			]
+		},
+		{
+			"camera": [
+				470.563293457031,
+				33.5,
+				-470.507537841797
+			],
+			"file": "opera-north-facade.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				436.335510253906,
+				29.5,
+				-368.637725830078
+			]
+		},
+		{
+			"camera": [
+				386.740478515625,
+				32.5,
+				-428.582153320312
+			],
+			"file": "opera-north-curtain-detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				414.572814941406,
+				28.5,
+				-398.409912109375
+			]
+		},
+		{
+			"camera": [
+				365.447265625,
+				42.5,
+				-372.97998046875
+			],
+			"file": "opera-louvre-detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				400.606994628906,
+				38.5,
+				-356.493865966797
+			]
+		},
+		{
+			"camera": [
+				381.894256591797,
+				11.75,
+				-272.548461914062
+			],
+			"file": "opera-box-office.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				430.851043701172,
+				11.5,
+				-275.41796875
+			]
+		},
+		{
+			"camera": [
+				398.95849609375,
+				11.8999996185303,
+				-266.481170654297
+			],
+			"file": "opera-entry-stairs.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				412.010986328125,
+				17.5,
+				-287.039215087891
+			]
+		},
+		{
+			"camera": [
+				408.623504638672,
+				27.0,
+				-355.636047363281
+			],
+			"file": "opera-concert-hall.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				398.093658447266,
+				23.5,
+				-310.857421875
+			]
+		},
+		{
+			"camera": [
+				397.635864257812,
+				18.5,
+				-308.910552978516
+			],
+			"file": "opera-concert-stage.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				406.563323974609,
+				22.5,
+				-346.875
+			]
+		},
+		{
+			"camera": [
+				392.537353515625,
+				18.5,
+				-326.5458984375
+			],
+			"file": "opera-concert-organ.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				395.804565429688,
+				24.5,
+				-301.122955322266
+			]
+		},
+		{
+			"camera": [
+				457.466979980469,
+				26.5,
+				-349.286712646484
+			],
+			"file": "opera-joan-sutherland.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				446.937164306641,
+				18.5,
+				-304.508117675781
+			]
+		},
+		{
+			"camera": [
+				406.305694580078,
+				19.6499996185303,
+				-389.46484375
+			],
+			"file": "opera-concert-northern-foyer.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				422.818206787109,
+				21.5,
+				-398.525543212891
+			]
+		},
+		{
+			"camera": [
+				419.428009033203,
+				17.3999996185303,
+				-401.582763671875
+			],
+			"file": "opera-concert-curved-stairs.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				416.063049316406,
+				18.8999996185303,
+				-387.273071289062
+			]
+		},
+		{
+			"camera": [
+				451.189025878906,
+				19.6499996185303,
+				-366.274871826172
+			],
+			"file": "opera-jst-northern-foyer.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				466.338958740234,
+				20.5,
+				-373.909637451172
+			]
+		},
+		{
+			"camera": [
+				-799.0,
+				6.80000019073486,
+				1650.0
+			],
+			"file": "darling_waterplay.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-806.0,
+				5.80000019073486,
+				1644.5
+			]
+		},
+		{
+			"camera": [
+				-845.0,
+				24.0,
+				1644.0
+			],
+			"file": "darling_octanet.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-847.0,
+				9.5,
+				1625.0
+			]
+		},
+		{
+			"camera": [
+				-843.0,
+				7.0,
+				1652.0
+			],
+			"file": "darling_wide_slide.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-844.799987792969,
+				6.0,
+				1644.19995117188
+			]
+		},
+		{
+			"camera": [
+				-821.0,
+				20.0,
+				1871.0
+			],
+			"file": "tumbalong_fountains.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-816.5,
+				4.69999980926514,
+				1846.5
+			]
+		},
+		{
+			"camera": [
+				-867.0,
+				75.0,
+				1706.0
+			],
+			"file": "darling_playground_plan.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-842.0,
+				5.0,
+				1651.0
+			]
+		},
+		{
+			"camera": [
+				-850.0,
+				6.59999990463257,
+				2052.0
+			],
+			"file": "darling_steam_mill_new.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-850.0,
+				6.5,
+				2044.0
+			]
+		},
+		{
+			"camera": [
+				-867.0,
+				6.40000009536743,
+				2056.0
+			],
+			"file": "darling_puppuccino_lillianna.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-863.0,
+				6.5,
+				2050.0
+			]
+		},
+		{
+			"camera": [
+				-787.0,
+				7.0,
+				2016.0
+			],
+			"file": "darling_tumbalong_restaurants.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-800.0,
+				6.5,
+				2017.0
+			]
+		},
+		{
+			"camera": [
+				-705.0,
+				7.0,
+				1973.0
+			],
+			"file": "darling_little_pier_shops.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-697.0,
+				6.40000009536743,
+				1988.0
+			]
+		},
+		{
+			"camera": [
+				-656.0,
+				7.0,
+				2041.0
+			],
+			"file": "darling_harbour_street_shops.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-672.0,
+				6.5,
+				2045.0
+			]
+		},
+		{
+			"camera": [
+				-708.0,
+				6.80000019073486,
+				2083.0
+			],
+			"file": "darling_little_hay_shops.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-706.0,
+				6.5,
+				2073.0
+			]
+		},
+		{
+			"camera": [
+				-669.0,
+				6.40000009536743,
+				1999.0
+			],
+			"file": "darling_bendigo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-676.0,
+				6.40000009536743,
+				2000.0
+			]
+		},
+		{
+			"camera": [
+				-697.0,
+				6.69999980926514,
+				2080.0
+			],
+			"file": "darling_tattoo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-696.0,
+				6.59999990463257,
+				2075.0
+			]
+		},
+		{
+			"camera": [
+				-822.0,
+				6.5,
+				2035.0
+			],
+			"file": "darling_bubu_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-820.0,
+				6.5,
+				2041.0
+			]
+		},
+		{
+			"camera": [
+				-658.570617675781,
+				6.59999990463257,
+				2091.48217773438
+			],
+			"file": "darling_business_bengongs_tea_photo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-665.924743652344,
+				6.5,
+				2093.892578125
+			]
+		},
+		{
+			"camera": [
+				-663.728820800781,
+				6.59999990463257,
+				2043.14465332031
+			],
+			"file": "darling_business_haven_specialty_coffee_photo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-671.073913574219,
+				6.5,
+				2045.58227539062
+			]
+		},
+		{
+			"camera": [
+				-779.791564941406,
+				6.59999990463257,
+				2065.59765625
+			],
+			"file": "darling_business_pancakes_on_the_rocks_photo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-786.557861328125,
+				6.5,
+				2069.35400390625
+			]
+		},
+		{
+			"camera": [
+				-706.075439453125,
+				6.59999990463257,
+				2080.91821289062
+			],
+			"file": "darling_business_sushi_sei_photo_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-706.27587890625,
+				6.5,
+				2073.18188476562
+			]
+		},
+		{
+			"camera": [
+				139.5,
+				6.80000019073486,
+				154.5
+			],
+			"file": "quay_gate_2.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				139.266998291016,
+				7.09999990463257,
+				139.544006347656
+			]
+		},
+		{
+			"camera": [
+				85.0,
+				6.80000019073486,
+				132.0
+			],
+			"file": "quay_wharf_3.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				92.0,
+				7.30000019073486,
+				92.0
+			]
+		},
+		{
+			"camera": [
+				-85.0,
+				48.0,
+				-30.0
+			],
+			"file": "quay_wharves.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				58.0,
+				6.0,
+				88.0
+			]
+		},
+		{
+			"camera": [
+				14.0,
+				15.0,
+				42.0
+			],
+			"file": "quay_station.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				14.0,
+				11.0,
+				145.0
+			]
+		},
+		{
+			"camera": [
+				-438.486755371094,
+				171.5,
+				1543.35522460938
+			],
+			"file": "sydney-tower-whole.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-143.486740112305,
+				154.5,
+				1168.35522460938
+			]
+		},
+		{
+			"camera": [
+				-188.486740112305,
+				288.5,
+				1235.35522460938
+			],
+			"file": "sydney-tower-skywalk.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-143.486740112305,
+				274.5,
+				1168.35522460938
+			]
+		},
+		{
+			"camera": [
+				-226.486740112305,
+				18.5,
+				1258.35522460938
+			],
+			"file": "sydney-tower-podium.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-149.486740112305,
+				37.5,
+				1168.35522460938
+			]
+		},
+		{
+			"camera": [
+				-882.706909179688,
+				58.5,
+				1347.79272460938
+			],
+			"file": "w-sydney-harbour.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-811.469360351562,
+				48.5,
+				1507.24865722656
+			]
+		},
+		{
+			"camera": [
+				-729.946411132812,
+				69.5,
+				1371.73474121094
+			],
+			"file": "w-sydney-ribbon-end.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-766.86376953125,
+				62.5,
+				1482.52331542969
+			]
+		},
+		{
+			"camera": [
+				-766.149719238281,
+				7.30000019073486,
+				1446.68359375
+			],
+			"file": "w-sydney-arrival.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-764.917358398438,
+				8.0,
+				1468.2958984375
+			]
+		},
+		{
+			"camera": [
+				-963.420776367188,
+				131.5,
+				635.784790039062
+			],
+			"file": "tower-one-whole.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-773.420776367188,
+				111.5,
+				430.784820556641
+			]
+		},
+		{
+			"camera": [
+				-850.420776367188,
+				89.5,
+				452.784820556641
+			],
+			"file": "tower-one-fins.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-806.420776367188,
+				81.5,
+				429.784820556641
+			]
+		},
+		{
+			"camera": [
+				-679.0,
+				46.0,
+				998.0
+			],
+			"file": "bank-of-china-sussex.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-613.636474609375,
+				31.5,
+				1027.06213378906
+			]
+		},
+		{
+			"camera": [
+				-621.963439941406,
+				6.5,
+				1007.55578613281
+			],
+			"file": "bank-of-china-colonnade.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-619.101318359375,
+				6.94999980926514,
+				1038.42346191406
+			]
+		},
+		{
+			"camera": [
+				-965.6953125,
+				27.5,
+				1434.13464355469
+			],
+			"file": "icc-crystal-facade.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-1005.22027587891,
+				29.5,
+				1469.95080566406
+			]
+		},
+		{
+			"camera": [
+				-884.353515625,
+				19.5,
+				1679.21618652344
+			],
+			"file": "icc-recessed-meeting-pods.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-928.407409667969,
+				24.5,
+				1688.39587402344
+			]
+		},
+		{
+			"camera": [
+				-830.880920410156,
+				22.5,
+				1784.70849609375
+			],
+			"file": "icc-theatre-glazed-mouth.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-875.789794921875,
+				24.5,
+				1833.904296875
+			]
+		},
+		{
+			"camera": [
+				-857.025268554688,
+				6.30000019073486,
+				1850.423828125
+			],
+			"file": "icc-theatre-red-foyer.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-851.394409179688,
+				10.8000001907349,
+				1892.15270996094
+			]
+		},
+		{
+			"camera": [
+				158.871109008789,
+				75.5,
+				251.616729736328
+			],
+			"file": "quay-qqt-rebated-frames.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				102.871109008789,
+				74.5,
+				309.616729736328
+			]
+		},
+		{
+			"camera": [
+				143.871109008789,
+				8.0,
+				248.616729736328
+			],
+			"file": "quay-qqt-stone-podium.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				99.8711090087891,
+				10.5,
+				276.616729736328
+			]
+		},
+		{
+			"camera": [
+				-224.890090942383,
+				66.5,
+				190.077209472656
+			],
+			"file": "quay-salesforce-tree-shades.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-178.890090942383,
+				63.5,
+				251.077209472656
+			]
+		},
+		{
+			"camera": [
+				-210.890090942383,
+				6.5,
+				218.077209472656
+			],
+			"file": "quay-salesforce-glazing.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-183.890090942383,
+				21.5,
+				251.077209472656
+			]
+		},
+		{
+			"camera": [
+				-657.576904296875,
+				7.5,
+				704.605773925781
+			],
+			"file": "westpac_public_colonnade.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-633.576904296875,
+				10.1000003814697,
+				684.605773925781
+			]
+		},
+		{
+			"camera": [
+				-685.576904296875,
+				18.5,
+				708.605773925781
+			],
+			"file": "westpac_podium_glazing.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-620.576904296875,
+				27.5,
+				678.605773925781
+			]
+		},
+		{
+			"camera": [
+				-742.502990722656,
+				6.80000019073486,
+				1735.14453125
+			],
+			"file": "cba_south_canopy.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-724.502990722656,
+				8.89999961853027,
+				1709.14453125
+			]
+		},
+		{
+			"camera": [
+				-762.502990722656,
+				19.5,
+				1713.14453125
+			],
+			"file": "cba_south_timber_facade.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-720.502990722656,
+				21.5,
+				1705.14453125
+			]
+		},
+		{
+			"camera": [
+				-817.717895507812,
+				6.80000019073486,
+				1630.03149414062
+			],
+			"file": "cba_north_canopy.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-789.717895507812,
+				8.89999961853027,
+				1632.03149414062
+			]
+		},
+		{
+			"camera": [
+				-838.717895507812,
+				18.5,
+				1641.03149414062
+			],
+			"file": "cba_north_timber_facade.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-779.717895507812,
+				21.5,
+				1622.03149414062
+			]
+		},
+		{
+			"camera": [
+				530.0,
+				27.0,
+				-187.0
+			],
+			"file": "manowar-overview.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				490.0,
+				3.0,
+				-220.0
+			]
+		},
+		{
+			"camera": [
+				478.0,
+				7.19999980926514,
+				-209.0
+			],
+			"file": "manowar-gangway.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				502.0,
+				3.70000004768372,
+				-215.0
+			]
+		},
+		{
+			"camera": [
+				6848.55126953125,
+				7.5,
+				-6777.92724609375
+			],
+			"file": "manly_wharf_front_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				6813.55126953125,
+				10.5,
+				-6724.92724609375
+			]
+		},
+		{
+			"camera": [
+				6818.55126953125,
+				6.30000019073486,
+				-6712.92724609375
+			],
+			"file": "manly_wharf_public_hall.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				6819.55126953125,
+				7.5,
+				-6686.92724609375
+			]
+		},
+		{
+			"camera": [
+				7009.9609375,
+				6.5,
+				-6888.7802734375
+			],
+			"file": "manly_corso_seating.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				7118.9609375,
+				7.5,
+				-6955.7802734375
+			]
+		},
+		{
+			"camera": [
+				7151.82373046875,
+				7.5,
+				-6969.36962890625
+			],
+			"file": "manly_steyne_corso_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				7130.82373046875,
+				9.5,
+				-6997.36962890625
+			]
+		},
+		{
+			"camera": [
+				7185.82373046875,
+				8.5,
+				-7002.36962890625
+			],
+			"file": "manly_steyne_beach_detail.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				7142.82373046875,
+				9.5,
+				-7020.36962890625
+			]
+		},
+		{
+			"camera": [
+				-266.855072021484,
+				51.5,
+				1363.81799316406
+			],
+			"file": "qvb-george-dome.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-352.277008056641,
+				32.5,
+				1309.44799804688
+			]
+		},
+		{
+			"camera": [
+				-352.563812255859,
+				7.5,
+				1198.35717773438
+			],
+			"file": "qvb-market-entry.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-356.025543212891,
+				10.5,
+				1222.52880859375
+			]
+		},
+		{
+			"camera": [
+				-351.136291503906,
+				6.69999980926514,
+				1252.34582519531
+			],
+			"file": "qvb-grand-walk.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-349.667572021484,
+				15.5,
+				1300.3271484375
+			]
+		},
+		{
+			"camera": [
+				-352.449340820312,
+				6.90000009536743,
+				1305.45166015625
+			],
+			"file": "qvb-central-dome.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"target": [
+				-352.277008056641,
+				33.5,
+				1309.44799804688
+			]
+		}
+	],
+	"user_saves_touched": false
+}

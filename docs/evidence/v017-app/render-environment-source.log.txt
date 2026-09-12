@@ -1,0 +1,34 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+RENDER_ENVIRONMENT PASS CC0 panorama remains the source texture
+RENDER_ENVIRONMENT PASS explicit photograph mapping shader remains intact
+RENDER_ENVIRONMENT PASS ACES keeps exposure fixed across profiles
+RENDER_ENVIRONMENT PASS colour adjustment stays modest
+RENDER_ENVIRONMENT PASS glow only processes HDR highlights
+RENDER_ENVIRONMENT PASS quality0 AO capability gate
+RENDER_ENVIRONMENT PASS quality0 SSR reserved for fine Forward+
+RENDER_ENVIRONMENT PASS quality0 glow and clear-air setting
+RENDER_ENVIRONMENT PASS quality1 AO capability gate
+RENDER_ENVIRONMENT PASS quality1 SSR reserved for fine Forward+
+RENDER_ENVIRONMENT PASS quality1 glow and clear-air setting
+RENDER_ENVIRONMENT PASS quality2 AO capability gate
+RENDER_ENVIRONMENT PASS quality2 SSR reserved for fine Forward+
+RENDER_ENVIRONMENT PASS quality2 glow and clear-air setting
+RENDER_ENVIRONMENT PASS quality switches reuse sky and preserve exposure
+RENDER_ENVIRONMENT PASS mist requires explicit high-quality Forward+ opt-in
+RENDER_ENVIRONMENT PASS lower profile clears expensive effects
+RENDER_ENVIRONMENT PASS numeric diagnostics clamp known safe ranges
+RENDER_ENVIRONMENT PASS runtime snapshot exposes actual toggles
+RENDER_ENVIRONMENT PASS sun still matches unchanged HDR solar core
+RENDER_ENVIRONMENT PASS water stays opaque for depth and SSR
+RENDER_ENVIRONMENT PASS water uses dielectric material
+RENDER_ENVIRONMENT PASS small-wave normal has pixel-footprint filtering
+RENDER_ENVIRONMENT PASS world-space phase preserves neighbouring tile continuity
+RENDER_ENVIRONMENT PASS both real metro dry rectangles remain
+RENDER_ENVIRONMENT PASS original total wave amplitude stays455mm
+RENDER_ENVIRONMENT PASS water exposes numeric diagnostic uniform normal_strength
+RENDER_ENVIRONMENT PASS water exposes numeric diagnostic uniform ripple_strength
+RENDER_ENVIRONMENT PASS water exposes numeric diagnostic uniform base_roughness
+RENDER_ENVIRONMENT PASS water exposes numeric diagnostic uniform specular_strength
+RENDER_ENVIRONMENT PASS water exposes numeric diagnostic uniform time_override
+RENDER_ENVIRONMENT_COMPLETE 31 passed=true

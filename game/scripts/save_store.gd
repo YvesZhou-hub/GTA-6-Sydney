@@ -56,7 +56,7 @@ static func read(id: String, backup: bool = false) -> Dictionary:
 	if not data is Dictionary:
 		last_error = "Invalid save. The previous recovery copy may still be available."
 		return {}
-	for key in ["world", "life", "airport", "settings", "navigation"]:
+	for key in ["world", "life", "airport", "settings", "navigation", "city_clock"]:
 		if data.has(key) and not data[key] is Dictionary:
 			last_error = "Invalid world section: " + key
 			return {}
@@ -76,6 +76,14 @@ static func read(id: String, backup: bool = false) -> Dictionary:
 	for coordinate in data.get("player",[]):
 		if not (coordinate is int or coordinate is float) or not is_finite(float(coordinate)):
 			last_error = "Invalid player coordinate"
+			return {}
+	# Validate before main.load_world resets the active world or selects this slot.
+	# Absent fields remain compatible with main's legacy defaults.
+	for key in ["yaw", "pitch", "elapsed"]:
+		if not data.has(key): continue
+		var value = data[key]
+		if not (value is int or value is float) or not is_finite(float(value)):
+			last_error = "Invalid numeric world field: " + key
 			return {}
 	var version = int(data.get("version",1))
 	if version > VERSION:

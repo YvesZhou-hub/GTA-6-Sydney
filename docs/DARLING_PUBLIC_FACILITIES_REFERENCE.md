@@ -104,3 +104,23 @@ The first exported-App image review found three text/frame overlaps. Pancakes' h
 `photo_capture_views()` supplies four eye-height review frames; `capture_views()` includes them in the parent native review. The focused source fixture additionally checks the four unchanged mapped placements, per-record provenance, finite outward faces, shallow visual bounds and continuous capsule/ground samples across each public frontage. Final visual quality must be judged from the parent's rendered captures; a headless geometry result alone does not establish photo likeness.
 
 The corrected focused headless run passed **130/130** checks (the original 123 plus four measured-bound checks and three label-visibility regressions), with exit 0 and no `ERROR`, `WARNING` or `FAIL` messages. Evidence is in `reports/darling-frontage-sign-fix.log` and `reports/darling-frontage-sign-fix/checks.json`. Each changed label has 891 mesh sightline samples across its full text bounds, viewed frontally and at two horizontal oblique directions. All current samples are clear; replaying the old text layouts against the same geometry detects 135 blocked Bengong samples, 191 Pancakes samples and 198 Sushi samples. This checks the visual frame meshes directly, including details without physics colliders. The component run did not start native rendering; the parent release workflow owns the unchanged four capture views and final visual acceptance.
+
+
+## Indexed/manual mesh append correction
+
+A complete-world index audit found four public-facility components whose material batches mixed indexed cylinders with directly emitted box/beam vertices. The vertices existed in the array and bounding box, but their faces were absent from the index draw list. `Part.append` now uses the shared geometry helper to expand each indexed input into its original triangle order before appending; manual boxes explicitly initialize UV to zero. No geometry coordinates, placement, material choices, component IDs or collision definitions changed.
+
+Actual displayed triangles, including the existing small foundation mesh, were restored as follows:
+
+| Component | Before | After | Restored |
+|---|---:|---:|---:|
+| Water channels | 756 | 948 | 192 |
+| Hand pumps | 972 | 1,008 | 36 |
+| Archimedes screw | 156 | 2,088 | 1,932 |
+| Mapped shelter 1241018457 door detail | 180 | 204 | 24 |
+
+The **2,184 restored triangles** are pre-existing authored geometry, not a new claim of photographic accuracy. The screw's original seven-turn detail and the channels' original banks now actually enter the draw list. All recorded collision shape parameters and transforms for these four components are byte-for-byte equal in the fixture's serialized before/after signatures.
+
+The updated local fixture passes **148/148 headless checks**, exit 0, with no script errors or warnings. Eight targeted assertions fail against the old append code and pass after the correction. They include exact triangle totals, no omitted vertices, box–cylinder–box and cylinder–box–cylinder order controls, and **216 collision-surface samples** with matching visible triangles. The previous physical slide-stair/slope walk, public arrival/path capsule checks and original photo-frontage checks remain enabled. Destruction/repair coverage now also checks all four affected components. Public path sweeps are geometry probes; only the slide route in this fixture uses a continuously moving production Player.
+
+Evidence is retained under `reports/darling-index/`: `before-index/checks.json` and `before-index.log` preserve the failing implementation; `final/checks.json` and `final.log` bind the corrected facility, shared geometry helper and test SHA256; `comparison.json` records visible counts and unchanged collision signatures. The earlier 130-check sign-fix evidence is preserved as `before-index-existing-checks.json`. This repair used no GPU capture; corrected combined-world native visual review remains a separate release step.

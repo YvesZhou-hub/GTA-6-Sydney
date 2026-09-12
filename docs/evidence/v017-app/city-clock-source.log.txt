@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CLOCK PASS default is 12x fixed summer at16 {}
+CLOCK PASS summer horizon spans approximately14 hours {}
+CLOCK PASS sunrise crosses apparent solar horizon {"elevation_deg":-0.832999999999998,"hour":6.03720115813035}
+CLOCK PASS sunrise is in correct southeastern southwestern quarter {}
+CLOCK PASS sunset crosses apparent solar horizon {"elevation_deg":-0.832999999999998,"hour":19.9932813588688}
+CLOCK PASS sunset is in correct southeastern southwestern quarter {}
+CLOCK PASS southern summer noon sun points north {}
+CLOCK PASS real7200 seconds gives exactly one24hour cycle {}
+CLOCK PASS real5 minutes advances game1 hour {}
+CLOCK PASS midnight wraps without negative hours {}
+CLOCK PASS seeking backward wraps to previous evening {}
+CLOCK PASS seeking forward wraps to next day {}
+CLOCK PASS photo freeze stops clock {}
+CLOCK PASS selected speed changes clock rate {}
+CLOCK PASS speed has bounded upper limit {}
+CLOCK PASS freeze uses dedicated switch rather than zero rate {}
+CLOCK PASS invalid numeric inputs do not corrupt the clock {}
+CLOCK PASS game pause stops elapsed time {}
+CLOCK PASS title screen does not consume a saved day {}
+CLOCK PASS active gameplay advances at configured speed {}
+CLOCK PASS paused manual seek immediately updates actual sun and sky {}
+CLOCK PASS night removes below-horizon direct sun {}
+CLOCK PASS JSON save restore retains seek speed freeze and day count {}
+CLOCK PASS HUD clock reflects the saved time {}
+CLOCK PASS legacy saves adopt summer defaults {}
+CLOCK PASS nonfinite save numbers fall back safely {}
+CLOCK PASS malformed optional clock values retain safe legacy defaults {}
+CLOCK PASS sun direction and twilight are continuous over midnight {}
+CLOCK PASS 24hours do not change expensive rendering feature flags {}
+CITY_CLOCK_COMPLETE 29 passed=true

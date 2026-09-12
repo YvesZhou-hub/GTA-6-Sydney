@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS known real tiny footprint is present in current city source {}
+CITY_MAP buildings=4 reserved=0 roads=0
+PASS initial city build stores deferred descriptors without generating near arrays {}
+PASS base facade mesh collision and stable damage IDs already exist {}
+PASS same-material batching retains distinct immutable OSM UV2 IDs and usage {"observed":["3673/0","3674/1"]}
+PASS real production physics hits the base shell before detail streaming {}
+PASS distance tick builds nearby relief using a real worker and combined mesh {"base_collision_resident":true,"builds":1,"cell_size_m":160,"enabled":true,"evictions":0,"last_upload_ms":0.817,"last_worker_ms":0.826,"limit":64,"max_upload_ms":0.817,"pending_worker":0,"resident":1,"resident_cells":[[25,25]],"scope":"near_facade_only","wanted":1}
+PASS distant cells keep detail unloaded {}
+PASS completed uploads release CPU near arrays but retain source descriptors {}
+PASS moving beyond retain radius unloads old relief and loads destination {}
+PASS detail eviction preserves exact base mesh collider resource and structure ID {}
+PASS evicted base shell still supports actual physics queries {}
+PASS returning regenerates the same combined relief geometry {}
+PASS production destruction immediately invalidates resident detail and collision {}
+PASS destroyed component stays absent after unload and reload while intact neighbor remains {"after_vertices":576,"before_vertices":1152}
+PASS destroyed base shell does not reappear in physics {}
+PASS real narrow footprint returns genuinely empty relief arrays {"source_id":"way/556844015"}
+PASS empty worker result completes cleanly without uploading an empty mesh {}
+PASS empty relief is remembered so the same cell is not rebuilt every frame {}
+PASS fast-jump regression starts with a real pending worker {}
+PASS completed old worker cannot commit after a fast camera jump {}
+PASS high altitude evicts all near detail while base shell and IDs remain {}
+PASS close safely joins a pending worker and releases world/output references {}
+CITY_MAP buildings=66 reserved=0 roads=0
+PASS 64-cell retained cache uses real uploaded worker meshes {"maximum":64,"resident":64}
+PASS new commit evicts an unneeded cell before exceeding the hard 64 limit {"evictions":1,"resident":64}
+PASS hard cache limit counts actual live detail meshes as well as dictionary entries {"actual_detail_meshes":64}
+PASS completed job is rejected when every resident slot is still wanted {}
+PASS capacity rejection does not retain uploaded CPU arrays {}
+FACADE_STREAM_COMPLETE checks=27 failures=0

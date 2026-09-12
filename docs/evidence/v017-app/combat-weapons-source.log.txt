@@ -1,0 +1,52 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+COMBAT_WEAPONS PASS preallocated projectile and effects capacities 
+COMBAT_WEAPONS PASS occupied tank fires 
+COMBAT_WEAPONS PASS cooldown prevents immediate repeat 
+COMBAT_WEAPONS PASS swept shell hits 25mm wall beyond excluded player 
+COMBAT_WEAPONS PASS tank hit attributes source and gameplay energy 
+COMBAT_WEAPONS PASS one projectile emits exactly one impact 
+COMBAT_WEAPONS PASS new vehicle has independent cooldown 
+COMBAT_WEAPONS PASS switch back does not reset previous cooldown 
+COMBAT_WEAPONS PASS reject ineligible vehicle occupied 
+COMBAT_WEAPONS PASS reject ineligible vehicle health 
+COMBAT_WEAPONS PASS reject ineligible vehicle kind 
+COMBAT_WEAPONS PASS inactive world cannot fire 
+COMBAT_WEAPONS PASS paused world cannot fire 
+COMBAT_WEAPONS PASS production modal gate prevents firing 
+COMBAT_WEAPONS PASS missing muzzle rejects safely 
+COMBAT_WEAPONS PASS tank turret turns behind without turning chassis 
+COMBAT_WEAPONS PASS barrel maximum elevation is 70 degrees 
+COMBAT_WEAPONS PASS barrel depression limit is minus12 degrees 
+COMBAT_WEAPONS PASS keyboard actions independently raise and traverse 
+COMBAT_WEAPONS PASS fighter launches while camera faces sideways 
+COMBAT_WEAPONS PASS rocket follows muzzle and inherits 2000kmh shooter velocity 
+COMBAT_WEAPONS PASS 2000kmh swept rocket cannot skip 25mm wall 
+COMBAT_WEAPONS PASS fighter damage callback uses independent profile 
+COMBAT_WEAPONS PASS barrel already through wall still fires valid obstruction hit 
+COMBAT_WEAPONS PASS chamber sweep prevents firing from wall far side 
+COMBAT_WEAPONS PASS overlapping muzzle produces immediate single hit 
+COMBAT_WEAPONS PASS pause freezes projectile age and cooldown clock 
+COMBAT_WEAPONS PASS miss expires without phantom damage 
+COMBAT_WEAPONS PASS reticle prediction uses cannon gravity and lifetime 
+COMBAT_WEAPONS PASS Q Z traverse shifts projected reticle with real muzzle 
+COMBAT_WEAPONS PASS switching vehicles retains per-vehicle manual aim offsets 
+COMBAT_WEAPONS PASS restored manual aim remains stable for60 controller frames 
+COMBAT_WEAPONS PASS restored pose marker consumed and offsets retained 
+COMBAT_WEAPONS PASS prediction agrees with forward thin wall collision 
+COMBAT_WEAPONS PASS projectile pool admits32 and rejects33 without overwriting 
+COMBAT_WEAPONS PASS repeated fire never allocates extra scene nodes 
+COMBAT_WEAPONS PASS effect-only API never applies world damage 
+COMBAT_WEAPONS PASS 100 explosions reuse bounded12slot pool 
+COMBAT_WEAPONS PASS smoke persists after short flash and light end 
+COMBAT_WEAPONS PASS visual debris creates no extra rigid bodies 
+COMBAT_WEAPONS PASS all effect slots naturally expire 
+COMBAT_WEAPONS PASS clear removes all active shots and transient references 
+COMBAT_WEAPONS PASS clear resets cooldown and retains reusable capacity 
+COMBAT_WEAPONS PASS production fixture initially has collision 
+COMBAT_WEAPONS PASS real harbor_world blast destroys registered structure 
+COMBAT_WEAPONS PASS destroyed wall no longer collides 
+COMBAT_WEAPONS PASS explicit repair restores visible structure 
+COMBAT_WEAPONS PASS serialized damage restores persistent destruction 
+COMBAT_WEAPONS PASS repeated setup reuses both pools 
+COMBAT_WEAPONS_COMPLETE 49 passed=true

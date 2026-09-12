@@ -5,7 +5,10 @@ config/name="Harbourlife · 悉尼海港"
 run/main_scene="res://bootstrap.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://assets/icon.svg"
-config/version="0.1.6"
+config/version="0.1.7"
+
+[autoload]
+RuntimeDiagnostics="*res://scripts/runtime_diagnostics.gd"
 
 [display]
 window/size/viewport_width=1440
@@ -26,6 +29,7 @@ environment/defaults/default_clear_color=Color(0.49,0.68,0.79,1)
 [physics]
 3d/physics_engine="Jolt Physics"
 jolt_physics_3d/limits/max_bodies=65536
+jolt_physics_3d/limits/max_linear_velocity=650.0
 jolt_physics_3d/simulation/use_enhanced_internal_edge_removal=true
 jolt_physics_3d/queries/use_enhanced_internal_edge_removal=true
 jolt_physics_3d/motion_queries/use_enhanced_internal_edge_removal=true
@@ -39,3 +43,9 @@ gdscript/warnings/treat_warnings_as_errors=false
 [editor]
 movie_writer/mjpeg_quality=0.55
 movie_writer/fps=24
+
+[shader_globals]
+city_night_amount={
+"type": "float",
+"value": 0.0
+}

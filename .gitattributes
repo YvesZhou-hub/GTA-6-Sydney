@@ -2,3 +2,5 @@
 *.png binary
 *.zip binary
 *.mp4 binary
+
+*.hdr binary

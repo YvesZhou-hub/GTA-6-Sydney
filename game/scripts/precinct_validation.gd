@@ -1,7 +1,7 @@
 extends Node
 ## Full production city, native captures and continuous walks using the player controller.
 ## Route origins are test setup; subsequent movement uses input actions, never teleports.
-const MODULE_PATHS := ["res://scripts/opera_landmark.gd", "res://scripts/opera_interiors.gd", "res://scripts/darling_square_detail.gd", "res://scripts/darling_public_facilities.gd", "res://scripts/darling_precinct_businesses.gd", "res://scripts/circular_quay_detail.gd", "res://scripts/sydney_tower_landmark.gd", "res://scripts/city_landmarks.gd", "res://scripts/icc_landmarks.gd", "res://scripts/quay_landmarks.gd", "res://scripts/bank_landmarks.gd", "res://scripts/manowar_detail.gd"]
+const MODULE_PATHS := ["res://scripts/opera_landmark.gd", "res://scripts/opera_interiors.gd", "res://scripts/darling_square_detail.gd", "res://scripts/darling_public_facilities.gd", "res://scripts/darling_precinct_businesses.gd", "res://scripts/circular_quay_detail.gd", "res://scripts/sydney_tower_landmark.gd", "res://scripts/city_landmarks.gd", "res://scripts/icc_landmarks.gd", "res://scripts/quay_landmarks.gd", "res://scripts/bank_landmarks.gd", "res://scripts/manowar_detail.gd", "res://scripts/manly_landmarks.gd", "res://scripts/qvb_public.gd"]
 var game
 var checks:Array=[]
 var screenshots:Array=[]
@@ -33,6 +33,7 @@ func capture(name:String,eye:Vector3,target:Vector3):
 		target=public_space_views[name][1]
 	game.camera.global_position=eye
 	game.camera.look_at(target)
+	check("near facade stream ready for "+name,await game.world.prepare_view(eye))
 	for i in 6:
 		RenderingServer.force_draw(false)
 		await get_tree().process_frame
@@ -118,8 +119,18 @@ func run():
 		if node.has_meta("osm_id") and node.get_meta("osm_id") in authored_shop_ids:duplicate_signs.append(node.get_meta("osm_id"))
 	check("authored shop signs replace generic floating labels",duplicate_signs.is_empty(),{"duplicates":duplicate_signs})
 	var catalog:Array=game.landmark_catalog()
-	var camera_views:Array=[]
-	var walking_routes:Array=[]
+	var camera_views:Array=[
+		["pitt_street_mall_paving",Vector3(-206,23,1193),Vector3(-205,4.6,1110)],
+		["henry_deane_plaza_paving",Vector3(-605,65,2720),Vector3(-602.6,4.6,2673.6)],
+		["manly_forecourt_paving",Vector3(6835,65,-6855),Vector3(6875,4.6,-6808)]
+	]
+	# Midpoints sampled from the mapped mall polygon, not a bounding-box shortcut.
+	var mall_points:Array[Vector3]=[]
+	for point:Array in [[-202.993,1005],[-203.578,1025],[-204.215,1045],[-204.908,1065],[-205.559,1085],[-206.199,1105],[-206.862,1125],[-207.484,1145],[-208.072,1165],[-208.634,1185]]:
+		mall_points.append(Vector3(point[0],4.5,point[1]))
+	var mall_reverse:Array[Vector3]=mall_points.duplicate();mall_reverse.reverse()
+	var walking_routes:Array=[{"name":"pitt_street_mall_north_to_south","points":mall_points},{"name":"pitt_street_mall_south_to_north","points":mall_reverse}]
+	check("mapped pedestrian areas compiled into production paving",int(game.world.get_meta("real_pedestrian_areas",0))==106)
 	for path:String in MODULE_PATHS:
 		if not ResourceLoader.exists(path):
 			check("authored precinct module bundled "+path,false)
@@ -139,7 +150,8 @@ func run():
 			for place:Dictionary in model.metadata():
 				if not place.has("arrival"):continue
 				var id:String=place.id
-				check("authored place has matching map destination "+id,catalog.any(func(item):return item.key==id and item.position.distance_to(place.arrival)<.01))
+				var canonical_id:String=game.world.get_meta("landmark_geography",{}).get(id,{}).get("id",id)
+				check("authored place has matching map destination "+id,catalog.any(func(item):return item.key==canonical_id and item.position.distance_to(place.arrival)<.01))
 	check("new exterior and interior capture views supplied",camera_views.size()>=8)
 	check("Opera, Darling and Quay continuous walking routes supplied",walking_routes.size()>=11)
 	for route:Dictionary in walking_routes:await walk(route)

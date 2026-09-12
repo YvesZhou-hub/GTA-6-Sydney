@@ -40,7 +40,7 @@
       ],
       "arrival_kind": "public street approach outside facade; not a surveyed doorway",
       "arrival_street": "Kent Street",
-      "name": "Westpac Place \u00b7 Westpac Group headquarters",
+      "name": "Westpac Place · Westpac Group headquarters",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.86605579,
@@ -73,7 +73,7 @@
       ],
       "arrival_kind": "public street approach outside facade; not a surveyed doorway",
       "arrival_street": "Harbour Street",
-      "name": "Commonwealth Bank Place South \u00b7 CBA headquarters",
+      "name": "Commonwealth Bank Place South · CBA headquarters",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.875317504,
@@ -140,7 +140,7 @@
       ],
       "arrival_kind": "public street approach outside facade; not a surveyed doorway",
       "arrival_street": "Barangaroo Avenue",
-      "name": "International Tower One \u00b7 HSBC Australia headquarters",
+      "name": "International Tower One · HSBC Australia headquarters",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.863843597,
@@ -206,7 +206,7 @@
       ],
       "arrival_kind": "public street approach outside facade; not a surveyed doorway",
       "arrival_street": "Wheat Road",
-      "name": "W Sydney \u00b7 The Ribbon",
+      "name": "W Sydney · The Ribbon",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.873539783,
@@ -239,7 +239,7 @@
       ],
       "arrival_kind": "public street approach outside facade; not a surveyed doorway",
       "arrival_street": "Little Pier Street",
-      "name": "The Exchange \u00b7 Haidilao Darling Square (Level 5)",
+      "name": "The Exchange · Haidilao Darling Square (Level 5)",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.877907853,
@@ -274,7 +274,7 @@
         1214.0
       ],
       "arrival_kind": "authored publicly accessible street/arcade approach",
-      "name": "CyberCX \u00b7 Sydney office",
+      "name": "CyberCX · Sydney office",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.870600954,
@@ -307,7 +307,7 @@
         924.0
       ],
       "arrival_kind": "authored publicly accessible street/arcade approach",
-      "name": "Cloudflare \u00b7 Sydney office",
+      "name": "Cloudflare · Sydney office",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.868389293,
@@ -317,7 +317,7 @@
     },
     {
       "id": "icc_convention",
-      "address": "14 Darling Drive \u00b7 northern venue",
+      "address": "14 Darling Drive · northern venue",
       "group": "icc_landmarks",
       "osm_ids": [
         "way/488447518",
@@ -340,7 +340,7 @@
         1492.30322
       ],
       "arrival_kind": "public modeled entrance; official public floorplan and collision route verified",
-      "name": "ICC Sydney \u00b7 Convention Centre",
+      "name": "ICC Sydney · Convention Centre",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.873854078,
@@ -350,7 +350,7 @@
     },
     {
       "id": "icc_exhibition",
-      "address": "14 Darling Drive \u00b7 Tumbalong Boulevard",
+      "address": "14 Darling Drive · Tumbalong Boulevard",
       "group": "icc_landmarks",
       "osm_ids": [
         "way/23646745",
@@ -373,7 +373,7 @@
         1636.02026
       ],
       "arrival_kind": "public modeled entrance; official public floorplan and collision route verified",
-      "name": "ICC Sydney \u00b7 Exhibition Centre",
+      "name": "ICC Sydney · Exhibition Centre",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.875488061,
@@ -383,7 +383,7 @@
     },
     {
       "id": "tiktok_entertainment",
-      "address": "14 Darling Drive \u00b7 Moriarty Walk / Tumbalong Boulevard",
+      "address": "14 Darling Drive · Moriarty Walk / Tumbalong Boulevard",
       "group": "icc_landmarks",
       "osm_ids": [
         "way/487371417"
@@ -405,7 +405,7 @@
         1823.95154
       ],
       "arrival_kind": "public modeled entrance; official public floorplan and collision route verified",
-      "name": "TikTok Entertainment Centre \u00b7 theatre",
+      "name": "TikTok Entertainment Centre · theatre",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.876897399,
@@ -437,13 +437,16 @@
         -6753.7844
       ],
       "arrival_kind": "northern public wharf entrance approach",
-      "name": "Manly Wharf",
+      "name": "Manly Wharf · 曼利码头公共大厅",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.800021294,
         151.284386581
       ],
-      "map_to_arrival_m": 78.862
+      "map_to_arrival_m": 78.862,
+      "height_m": 13.2,
+      "height_confidence": "estimated from inspected exterior photograph",
+      "footprint_confidence": "OSM mapped outline"
     },
     {
       "id": "hotel_steyne",
@@ -465,17 +468,21 @@
       "source": "https://hotelsteyne.com.au/",
       "arrival": [
         7157.304,
-        4.5,
+        4.595,
         -6999.8016
       ],
       "arrival_kind": "South Steyne public street approach",
-      "name": "Hotel Steyne",
+      "name": "Hotel Steyne · 斯泰恩酒店外廊",
       "map_position_kind": "mapped outer polygon minus actual courtyard hole; centroid is not a doorway",
       "lat_lon": [
         -33.796968704,
         151.287640326
       ],
-      "map_to_arrival_m": 34.002
+      "map_to_arrival_m": 34.002,
+      "height_m": 11.4,
+      "height_confidence": "estimated two-storey Art Deco exterior with roof parapet",
+      "footprint_confidence": "OSM multipolygon with true courtyard hole",
+      "arrival_height_note": "Foot origin on the authored Corso paving top, 0.095 m above the common game ground datum; horizontal location unchanged."
     },
     {
       "id": "quay_quarter",
@@ -507,7 +514,7 @@
       ],
       "arrival_kind": "public street approach outside facade; not a surveyed doorway",
       "arrival_street": "Bridge Street",
-      "name": "Quay Quarter Tower \u00b7 AMP / Deloitte",
+      "name": "Quay Quarter Tower · AMP / Deloitte",
       "map_position_kind": "union of mapped footprint polygons; centroid is not a surveyed doorway",
       "lat_lon": [
         -33.862815087,
@@ -639,7 +646,7 @@
       ],
       "arrival_kind": "mapped entrance node; arrival 2.81m before escalator approach",
       "source": "https://www.sydneymetro.info/article/first-look-barangaroos-newest-waterfront-precinct",
-      "name": "Barangaroo \u00b7 Hickson Road",
+      "name": "Barangaroo · Hickson Road",
       "map_position_kind": "mapped entrance node",
       "lat_lon": [
         -33.8591539,
@@ -672,7 +679,7 @@
       ],
       "arrival_kind": "northwest mapped entrance; safe Hunter Street approach",
       "source": "https://www.sydneymetro.info/media/document/37151",
-      "name": "Martin Place \u00b7 Hunter Street",
+      "name": "Martin Place · Hunter Street",
       "map_position_kind": "mapped northwest entrance node",
       "lat_lon": [
         -33.8663979,
@@ -700,7 +707,7 @@
       ],
       "arrival": [
         7070.38332,
-        4.5,
+        4.595,
         -6927.15417
       ],
       "arrival_kind": "mapped pedestrian street point; linear precinct has no unique building centre",
@@ -708,13 +715,17 @@
       "aliases": [
         "the_corso"
       ],
-      "name": "The Corso",
+      "name": "The Corso · 曼利步行街",
       "map_position_kind": "mapped pedestrian route point",
       "lat_lon": [
         -33.7977726,
         151.2870193
       ],
-      "map_to_arrival_m": 0.0
+      "map_to_arrival_m": 0.0,
+      "height_m": 0.0,
+      "height_confidence": "game ground datum",
+      "footprint_confidence": "OSM pedestrian polygon and route; tree spacing is a reconstruction",
+      "arrival_height_note": "Foot origin on the authored Corso paving top, 0.095 m above the common game ground datum; horizontal location unchanged."
     },
     {
       "id": "manly_beach",
@@ -738,13 +749,16 @@
       ],
       "arrival_kind": "public beachfront point; not beach polygon centroid",
       "source": "https://www.northernbeaches.nsw.gov.au/things-to-do/recreation-area/manly-beach",
-      "name": "Manly Beach",
+      "name": "Manly Beach · 曼利海滩",
       "map_position_kind": "mapped beachfront public point",
       "lat_lon": [
         -33.7970494,
         151.2883603
       ],
-      "map_to_arrival_m": 0.0
+      "map_to_arrival_m": 0.0,
+      "height_m": 0.0,
+      "height_confidence": "game ground datum",
+      "footprint_confidence": "mapped beachfront public point; not beach polygon centroid"
     }
   ]
 }

@@ -1,0 +1,72 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"hits": 1,
+				"position": "(-0.0, 0.96, -19.13142)"
+			},
+			"name": "tank crushes extremely strong wall through actual swept contact",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"health": 100.0,
+				"position": "(-0.0, 0.96, -19.13142)"
+			},
+			"name": "tank physically traverses wall without losing health",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"height": 0.959999620914459
+			},
+			"name": "tank retains ground contact and collision mask",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "repair restores the destroyed wall collider",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "world save reload restores actual destroyed mesh and collider",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"hits": 2
+			},
+			"name": "2000 km/h sweep destroys thin wall struck by wing outside centre ray",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": "(0.0, 25.0, -64.81483)",
+				"speed_kmh": 2000.00017089844
+			},
+			"name": "same high speed traversal hits subsequent thin wall",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "fighter remains physical and invincible after building traversal",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"count": 0
+			},
+			"name": "temporary exceptions clear after deferred collision removal",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"hits": 1
+			},
+			"name": "initial shape overlap is handled before cast_motion",
+			"passed": true
+		}
+	],
+	"passed": true
+}

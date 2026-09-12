@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS turret/barrel/muzzle are independent nested pivots {}
+PASS yaw and elevation propagate to the actual muzzle transform {"direction":[-0.95105654001236,0.30901700258255,0.0000000415720009527831]}
+PASS 18 running gear pivots carry side and wheel-radius metadata {}
+PASS road wheels and end wheels do not intersect each other {}
+PASS original tank meshes contain no degenerate or reversed faces {"degenerate":0,"mesh_count_before_factory_merge":824,"reversed":0,"triangles":23596}
+PASS tank geometry remains within declared practical spawn envelope {"max":[2.03250002861023,2.97161054611206,3.80500030517578],"min":[-2.03250002861023,-0.965320587158203,-6.40950012207031]}
+PASS material merging preserves every triangle and animated pivot {"draw_meshes":88,"triangles":23596}
+PASS tank settles on actual rigid track contacts {"angular_speed":0.000000770762540014402,"grounded":true,"pitch":0.0,"position":[-0.000000614372027030186,0.959999620914459,-0.000000111758708953857],"roll":0.0,"speed_kmh":0.00000335466868364165,"yaw":0.0}
+PASS forward drive reaches approximately110kmh through forces {"airborne_frames":0,"angular_speed":0.00000000289511326023728,"grounded":true,"max_tilt":0.0,"pitch":0.0,"position":[-0.000000696278050327237,0.959999620914459,-835.592895507812],"roll":0.0,"speed_kmh":107.400881195068,"yaw":0.0}
+PASS brake stops full-speed tank without teleporting {"angular_speed":0.000000558274507511669,"grounded":true,"pitch":0.0,"position":[0.000000629954513442499,0.959999620914459,-851.581176757812],"roll":0.0,"speed_kmh":0.00000358709439751692,"stopping_distance":15.98828125,"yaw":0.0}
+PASS reverse tracks reach controlled reverse speed {"angular_speed":0.00000000215448503482207,"grounded":true,"pitch":0.0,"position":[0.000000654821064927091,0.959999620914459,-720.501525878906],"roll":0.0,"speed_kmh":42.3237133026123,"yaw":0.0}
+PASS differential tracks pivot at rest with little translation {"angular_speed":0.686767339706421,"grounded":true,"pitch":-0.0000000309252712327179,"position":[0.0506760142743587,0.959999620914459,-717.769165039062],"roll":-0.0000000179338517369843,"speed_kmh":0.00990756880491972,"translation":0.20290219783783,"yaw":-2.6636643409729}
+PASS pivot turn sends opposite motion to left/right wheels {}
+PASS tank climbs a25degree physical ramp without being forced level {"angular_speed":0.0000330400725943036,"grounded":true,"height_gain":55.5206084251404,"pitch":0.436333328485489,"position":[-0.000000156179595478534,63.3750877380371,-84.0913848876953],"roll":-0.0000000000738664476807038,"speed_kmh":51.8190319061279,"up_dot_surface":1.0,"yaw":-0.000000000000260011169496074}
+PASS parking brake holds on a25degree incline {"angular_speed":0.0000222577236854704,"drift":0.000000000104662944977463,"grounded":true,"pitch":0.436332225799561,"position":[-0.000000139993176162534,64.8141632080078,-87.1774978637695],"roll":0.000000000362767871298075,"speed_kmh":0.000263197286403738,"yaw":-0.0000000000489348041254889}
+PASS reverse descends the incline with stable ground contact {"angular_speed":0.00000000273113798243685,"grounded":true,"pitch":0.436332225799561,"position":[-0.000000146977839676765,39.7207374572754,-33.3647308349609],"roll":0.000000000362767871298075,"speed_kmh":25.6496601104736,"yaw":-0.0000000000489348041254889}
+PASS tank drives from level ground onto a15degree ramp {"angular_speed":0.0000852502998895943,"grounded":true,"max_roll":0.00129055674187839,"pitch":0.261908203363419,"position":[0.462787926197052,16.3856735229492,-57.2175559997559],"roll":-0.00129055674187839,"speed_kmh":27.0783393859863,"yaw":-0.00851681549102068}
+PASS side-slope driving resists downhill sideways slip {"angular_speed":0.0000000441718235322242,"grounded":true,"lateral_drift":-0.00277987122535706,"pitch":0.0,"position":[0.0287302732467651,12.0366868972778,-35.6795310974121],"roll":0.261799424886703,"speed_kmh":32.4418476104736,"yaw":0.0}
+PASS airborne tank receives no unsupported forward propulsion {"angular_speed":0.0,"grounded":false,"pitch":0.0,"position":[0.0,12.1899385452271,0.0],"roll":0.0,"speed_kmh":26.3418468475342,"yaw":0.0}
+TANK_MOTION_COMPLETE checks=19 failures=0

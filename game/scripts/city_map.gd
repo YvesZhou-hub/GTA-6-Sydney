@@ -4,7 +4,7 @@ extends RefCounted
 const DATA_PATH := "res://assets/city_map.json"
 const FACADE := preload("res://shaders/city_facade.gdshader")
 const DARLING_FACILITY_IDS := ["way/1136058496","way/1241018456","way/1241018457","way/1241018458"]
-const CUSTOM_IDS := ["way/408117953","way/408117952","way/408117951","way/408117950","way/408117949","way/408117948","way/51065527","way/581013659","way/468557019","way/544307818","way/614461305","way/614603737","way/7981564","way/1326239876","way/223786812","way/552008767","relation/7889573","way/120926554","way/335696788","way/544300934","way/544300935","way/544300936","way/544300937","way/544300938","way/183246899","way/183246900","way/312373859","way/387782063","way/1120046335","way/1120046336","way/1120046337","way/1120046338","way/1116329930","way/1521293802","way/335699164","way/335699165","way/1521293801","way/386563854","way/386563852","way/501890909","way/488447518","way/488447519","way/23646745","way/1116329939","way/487371417","way/1098953175","way/197801072","way/197801073","way/197801074","way/273960049","way/270803850","way/354270479","way/354270481","way/354270484","way/354270487","way/1269027215","way/1269027216","way/1269027221","way/1269027222","way/1269027236","way/1269027237","way/1295125146","way/1295125147","way/1295125149","way/1295125150","way/1295125151","way/1295125161","way/1295125162","way/1295125163","way/1295125164","way/1295125165","way/1295125168","way/1295125169","way/1295125170","way/1295125194","way/1295125195","way/1295125196","way/1295125197"]
+const CUSTOM_IDS := ["way/408117953","way/408117952","way/408117951","way/408117950","way/408117949","way/408117948","way/51065527","way/581013659","way/468557019","way/544307818","way/614461305","way/614603737","way/7981564","way/1326239876","way/223786812","way/552008767","relation/7889573","way/120926554","way/335696788","way/544300934","way/544300935","way/544300936","way/544300937","way/544300938","way/183246899","way/183246900","way/312373859","way/387782063","way/1120046335","way/1120046336","way/1120046337","way/1120046338","way/1116329930","way/1521293802","way/335699164","way/335699165","way/1521293801","way/386563854","way/386563852","way/501890909","way/488447518","way/488447519","way/23646745","way/1116329939","way/487371417","way/1098953175","way/197801072","way/197801073","way/197801074","way/273960049","way/270803850","way/354270479","way/354270481","way/354270484","way/354270487","way/1269027215","way/1269027216","way/1269027221","way/1269027222","way/1269027236","way/1269027237","way/1295125146","way/1295125147","way/1295125149","way/1295125150","way/1295125151","way/1295125161","way/1295125162","way/1295125163","way/1295125164","way/1295125165","way/1295125168","way/1295125169","way/1295125170","way/1295125194","way/1295125195","way/1295125196","way/1295125197","way/40717424","way/568422314","way/568422315","way/568422316","way/568422317","way/568422318","way/568422319","way/568422320","way/568422321","way/568422322","way/568422323","way/568422324","way/568422325","way/568422327","way/568422329","way/568422332","way/568422333","way/568422336","way/568422339","way/568422341","way/568422343","way/568422345","way/568422347","way/568422349","way/568422351"]
 const STREET_WIDTH := {"motorway":13.0,"trunk":12.0,"primary":10.5,"secondary":10.0,"tertiary":9.0,"residential":7.0,"unclassified":7.0,"service":4.0,"living_street":5.5,"pedestrian":9.0,"footway":2.0,"path":2.0,"cycleway":2.8,"steps":2.0}
 
 static func data() -> Dictionary:
@@ -63,6 +63,9 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 	var batches := {}
 	var road_masks := {}
 	var paving := []
+	var area_paving := []
+	var area_masks := {}
+	var mapped_areas := 0
 	var nodes := {}
 	var excavations := _road_excavations(snapshot)
 	var rendered := 0
@@ -80,10 +83,21 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 		elif str(tags.get("lanes", "")).is_valid_float() and kind in ["primary", "secondary", "tertiary", "trunk", "motorway"]: width = float(tags.lanes) * 3.15
 		var pedestrian := kind in ["pedestrian", "footway", "path", "steps", "cycleway"]
 		var material := "lightstone" if pedestrian else "road"
+		var mapped_area: bool = road.get("surface_geometry", "") == "area"
 		if road.has("surface_triangles") and road.surface_triangles.is_empty(): continue
 		if road.has("surface_triangles"):
 			for i in range(0, road.surface_triangles.size(), 3):
-				_road_register_surface(batches, polygon(road.surface_triangles.slice(i, i + 3)), material, excavations, world.GROUND + 0.085, road_masks, paving)
+				var face := polygon(road.surface_triangles.slice(i, i + 3))
+				if mapped_area:
+					area_paving.append(face)
+					_road_add_mask(area_masks, face)
+				else:
+					_road_register_surface(batches, face, material, excavations, world.GROUND + 0.085, road_masks, paving)
+		# A mapped plaza boundary is a surface, not a road centreline. Do not
+		# buffer its edges, add turning joints or offer its perimeter for spawning.
+		if mapped_area:
+			mapped_areas += 1
+			continue
 		for i in range(road.points.size() - 1):
 			var a := Vector2(road.points[i][0], road.points[i][1])
 			var b := Vector2(road.points[i + 1][0], road.points[i + 1][1])
@@ -122,9 +136,15 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 	# Road carriageways own their footprint. Coplanar pedestrian ribbons are
 	# geometrically subtracted here, preventing competing white/asphalt pixels
 	# at crossings and beside rounded road edges without raising either surface.
-	for outline in paving:
+	for outline in area_paving:
 		for piece in _road_paving_pieces(outline, road_masks):
 			_road_add_polygon(batches, piece, "lightstone", excavations, world.GROUND + 0.085)
+	# Explicit pedestrian polygons own their footprint. Clip only the portions
+	# of centreline paving inside them, leaving connecting paths in place.
+	for outline in paving:
+		for outside_area in _road_paving_pieces(outline, area_masks):
+			for piece in _road_paving_pieces(outside_area, road_masks):
+				_road_add_polygon(batches, piece, "lightstone", excavations, world.GROUND + 0.085)
 	var draw_groups := 0
 	for material in batches:
 		for cell in batches[material]:
@@ -142,6 +162,7 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 	world.set_meta("real_road_segments", rendered)
 	world.set_meta("real_road_joins", joined)
 	world.set_meta("real_road_draw_groups", draw_groups)
+	world.set_meta("real_pedestrian_areas", mapped_areas)
 
 static func _road_register_surface(batches: Dictionary, outline: PackedVector2Array, material: String, excavations: Array, y: float, masks: Dictionary, paving: Array) -> void:
 	if material == "lightstone":
@@ -152,6 +173,9 @@ static func _road_register_surface(batches: Dictionary, outline: PackedVector2Ar
 	# projected coordinates. The asphalt footprint and all elevations stay put.
 	var expanded := Geometry2D.offset_polygon(outline, 0.002, Geometry2D.JOIN_MITER)
 	if not expanded.is_empty(): outline = expanded[0]
+	_road_add_mask(masks, outline)
+
+static func _road_add_mask(masks: Dictionary, outline: PackedVector2Array) -> void:
 	var bounds := Rect2(outline[0], Vector2.ZERO)
 	for point in outline: bounds = bounds.expand(point)
 	var item := {"polygon": outline, "bounds": bounds, "id": masks.size()}
@@ -306,6 +330,9 @@ static func _triangle(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, 
 static func _extrusion(item: Dictionary, bottom: float, top: float) -> Array:
 	var surface := SurfaceTool.new()
 	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var usage:=str(item.tags.get("building",""))
+	var category:=1.0 if usage in ["apartments","residential","house","hotel","dormitory"] else 2.0 if usage in ["industrial","warehouse"] else 0.0
+	surface.set_uv2(Vector2(float(posmod(str(item.id).hash(),10000))/10000.0,category))
 	var rings: Array = [item.outline]
 	rings.append_array(item.holes)
 	for ring in rings:
@@ -447,9 +474,13 @@ static func build_buildings(world: Node3D, snapshot: Dictionary) -> void:
 			body.set_meta("height_source",item.height_source)
 			body.set_meta("map_building",true)
 			if item.height>9.0 and top-bottom>2.7:
-				var relief:=_facade_relief(item,bottom,top)
-				if relief[Mesh.ARRAY_VERTEX]!=null and not relief[Mesh.ARRAY_VERTEX].is_empty():
-					world.structures[id].surfaces.append({"arrays":relief,"material":world.materials.steel if item.height>35 else world.materials.lightstone,"near":true})
+				var material:Material=world.materials.steel if item.height>35 else world.materials.lightstone
+				if world.get_meta("stream_details",false):
+					world.structures[id].surfaces.append({"deferred_facade":item,"bottom":bottom,"top":top,"material":material,"near":true})
+				else:
+					var relief:=_facade_relief(item,bottom,top)
+					if relief[Mesh.ARRAY_VERTEX]!=null and not relief[Mesh.ARRAY_VERTEX].is_empty():
+						world.structures[id].surfaces.append({"arrays":relief,"material":material,"near":true})
 		if item.has("roof_surface"):
 			var color_name:String=item.tags.get("roof:colour","8b7661" if item.tags.get("roof:material","")=="roof_tiles" else "727a79")
 			var roof_key:="mapped_roof_"+color_name

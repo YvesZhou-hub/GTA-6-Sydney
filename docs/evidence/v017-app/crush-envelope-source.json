@@ -1,0 +1,63 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"cached_visual_front_z": -6.40950012207031,
+				"physical_front_z": -3.79999995231628
+			},
+			"name": "physical hull has no forward barrel collider",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"physical_gap_m": 2.10000004768372,
+				"sweep_motion_m": 0.0625,
+				"unexpected_contacts": []
+			},
+			"name": "turning turret sideways does not crush a wall2m ahead of physical hull",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"contacts": [
+					"actual_front_wall"
+				]
+			},
+			"name": "forward sweep still crushes a wall reached by the actual hull",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"physical_top_y": 3.91999995708466,
+				"slab_bottom_y": 4.55,
+				"unexpected_contacts": []
+			},
+			"name": "antenna visual height does not crush a physically clear overhead slab",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"unexpected_contacts": []
+			},
+			"name": "tank preserves a0.0degree destructible supporting deck",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"unexpected_contacts": []
+			},
+			"name": "tank preserves a25.0degree destructible supporting deck",
+			"passed": true
+		}
+	],
+	"count": 6,
+	"failures": 0,
+	"hashes": {
+		"res://../source/combat_crush_envelope_test.gd": "225ab42bb1f8e8843a5bb55c54c8696b1bc04af0a26e7acd35e6487a68673ea2",
+		"res://scripts/arcade_impact.gd": "f1c61c28825eeff2c853698251c29eef8a9b67dc83b0ff243a3f217e3af54e07",
+		"res://scripts/harbor_vehicle.gd": "d8b6ee5be970747d265bc5319357ff6a4e4aeb987cc5d103ae77edba07129284",
+		"res://scripts/tank_models.gd": "202608e72a1bcf5e9ccbecd0cd6a49702842299bd91dc2840e2b4fb083e43e8d",
+		"res://scripts/vehicle_spawn.gd": "bd791fc60d54f8500dc45296c4c48cac5645be29e6da2dfc6d18df12f68c46d5"
+	},
+	"passed": true
+}

@@ -1,0 +1,44 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS registration preserves authored numeric values and actual resource identity {}
+PASS same resource is registered once despite many users {}
+PASS one role update changes two distinct glass resources in place {}
+PASS role changes preserve colour alpha texture UV specular and shader flags {}
+PASS identical tuning is an idempotent no-op {}
+PASS newly registered existing material inherits active numeric role overrides {}
+PASS metallic and roughness clamp to valid unit range {}
+PASS non-numeric nonfinite forbidden and non-light energy inputs are ignored {}
+PASS booleans and infinity cannot masquerade as numeric material properties {}
+PASS unknown role neither registers nor changes material {}
+PASS conflicting semantic ownership of same resource is rejected {}
+PASS custom shaders and null resources are explicitly unsupported {}
+PASS light feature may initialize once at explicit material creation {}
+PASS light runtime tuning clamps energy and never re-enables feature flags {}
+PASS energy zero does not switch the emission shader feature {}
+PASS registering an existing light without creation flag leaves emission disabled {}
+PASS vertical fins and steel aliases share the metal role {}
+PASS source-reviewed colour exceptions classify by substance {}
+PASS ambiguous or custom shader keys do not silently become glass or metal {}
+PASS dynamic OSM roof colours retain separate roof classification {}
+PASS stats exposes actual role counts and isolated override snapshots {}
+PASS registry weak references do not keep released materials alive {}
+PASS unregister detaches future role updates without cloning or clearing material {}
+PASS world reset clears membership and overrides {}
+PASS snapshot restores each material exact original roughness and metallic {}
+PASS restoring an absent profile removes temporary overrides {}
+PASS snapshot restores prior role profile as well as per-material values {}
+PASS materials registered during preview restore authored baseline and prior profile {}
+PASS unknown wrong-role and foreign-registry snapshots fail without mutation {}
+PASS malformed snapshot rejects atomically without changing values or profile {}
+PASS snapshots do not retain released materials and restore skips them {}
+PASS snapshot from before registry clear is rejected {}
+PASS exact-path facade resources register glass and stone without duplication {}
+PASS shader snapshots distinguish unset defaults and explicit default overrides {}
+PASS glass role edits only mapped facade glass uniforms {}
+PASS stone role changes wall roughness without changing facade glass or adding uniforms {}
+PASS shader restore returns null to defaults and explicit originals exactly {}
+PASS independent stone restore clears only its temporary wall override {}
+PASS facade tuning preserves resource identity shader code and authored colour pattern parameters {}
+PASS water shader remains unregistered despite a glass-like material key {}
+PASS duplicate facade registration remains idempotent for both memberships {}
+MATERIAL_ROLES_COMPLETE checks=41 failures=0

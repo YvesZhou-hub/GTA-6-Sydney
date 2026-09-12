@@ -45,6 +45,7 @@ func run():
 	second.visible=false
 	root.add_child(second)
 	check("minimap and second full map reuse original mesh resources without JSON reload",MAP.source_load_count==1 and mini.geometry_cache().land==map._land_mesh and second._building_mesh==map._building_mesh)
+	check("real pedestrian areas are filled in both map caches",map._pedestrian_area_mesh!=null and map.data_counts.get("pedestrian_areas",0)>100 and mini.geometry_cache().pedestrian_areas==map._pedestrian_area_mesh and second._pedestrian_area_mesh==map._pedestrian_area_mesh)
 	for world_point in [Vector2(-3200,11500),Vector2(7400,-6800),Vector2(-768.5,1993.5)]:
 		check("geographic projection round trip "+str(world_point),map.unproject_point(map.project_flat(world_point)).distance_to(world_point)<0.01)
 	var cursor:=Vector2(270,200)

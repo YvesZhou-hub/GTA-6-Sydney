@@ -1,0 +1,7420 @@
+{
+	"astronomy_inputs": "Actual production city_clock.jump presets and bundled Sydney average-summer baseline; no synthetic solar vectors.",
+	"checks": [
+		{
+			"detail": {},
+			"name": "internal QA guard precedes isolated world setup",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "complete production city and real summer clock ready",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native renderer required for final App visual validation",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "licensed source sky bound panorama",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "licensed source sky bound sunset_panorama",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "licensed source sky bound night_panorama",
+			"passed": true
+		},
+		{
+			"detail": {
+				"facades": {
+					"clock_expected_value": 0.0,
+					"clock_write": {
+						"frame": 1,
+						"hour": 16.0,
+						"name": "city_night_amount",
+						"sequence": 2,
+						"value": 0.0
+					},
+					"global_gpu_readback": false,
+					"night_global_name": "city_night_amount",
+					"registered_facade_materials": 38,
+					"sample": [
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 3.0,
+								"floor_height": null,
+								"glazing": 0.49,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						},
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 3.0,
+								"floor_height": null,
+								"glazing": 0.49,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						},
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 2.3,
+								"floor_height": null,
+								"glazing": 0.86,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						},
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 3.0,
+								"floor_height": null,
+								"glazing": 0.49,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						},
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 3.0,
+								"floor_height": null,
+								"glazing": 0.49,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						},
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 3.0,
+								"floor_height": null,
+								"glazing": 0.49,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						},
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 3.0,
+								"floor_height": null,
+								"glazing": 0.49,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						},
+						{
+							"emission_uses_night_amount": true,
+							"night_uniform_declared": true,
+							"raw_uniform_overrides": {
+								"bay_width": 3.0,
+								"floor_height": null,
+								"glazing": 0.49,
+								"lit_windows": null
+							},
+							"shader": "res://shaders/city_facade.gdshader"
+						}
+					],
+					"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+				},
+				"global_declaration": {
+					"type": "float",
+					"value": 0.0
+				}
+			},
+			"name": "real city facades use clock driven night-window parameter",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected_hour": 6.03720115813035,
+				"expected_value": 0.27964261151465,
+				"gpu_readback": false,
+				"observed_frame": 2,
+				"previous_sequence": 2,
+				"write": {
+					"frame": 2,
+					"hour": 6.03720115813035,
+					"name": "city_night_amount",
+					"sequence": 3,
+					"value": 0.27964261151465
+				}
+			},
+			"name": "clock submits fresh matching night-window parameter for sunrise",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real clock immediately updates sky for sunrise",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "solar light and rendered disc share direction for sunrise",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night blend follows real summer elevation for sunrise",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "apparent summer horizon for sunrise",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production facade stream ready for harbour-sunrise",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native production image harbour-sunrise",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected_hour": 13.0152412584996,
+				"expected_value": 0.0,
+				"gpu_readback": false,
+				"observed_frame": 218,
+				"previous_sequence": 3,
+				"write": {
+					"frame": 218,
+					"hour": 13.0152412584996,
+					"name": "city_night_amount",
+					"sequence": 4,
+					"value": 0.0
+				}
+			},
+			"name": "clock submits fresh matching night-window parameter for noon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real clock immediately updates sky for noon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "solar light and rendered disc share direction for noon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night blend follows real summer elevation for noon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "summer solar noon is high in the north",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production facade stream ready for harbour-noon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native production image harbour-noon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected_hour": 19.4432813588688,
+				"expected_value": 0.0,
+				"gpu_readback": false,
+				"observed_frame": 234,
+				"previous_sequence": 4,
+				"write": {
+					"frame": 234,
+					"hour": 19.4432813588688,
+					"name": "city_night_amount",
+					"sequence": 5,
+					"value": 0.0
+				}
+			},
+			"name": "clock submits fresh matching night-window parameter for golden",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real clock immediately updates sky for golden",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "solar light and rendered disc share direction for golden",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night blend follows real summer elevation for golden",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "golden hour is before actual summer sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production facade stream ready for harbour-golden",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native production image harbour-golden",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected_hour": 19.9932813588688,
+				"expected_value": 0.27964261151465,
+				"gpu_readback": false,
+				"observed_frame": 250,
+				"previous_sequence": 5,
+				"write": {
+					"frame": 250,
+					"hour": 19.9932813588688,
+					"name": "city_night_amount",
+					"sequence": 6,
+					"value": 0.27964261151465
+				}
+			},
+			"name": "clock submits fresh matching night-window parameter for sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real clock immediately updates sky for sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "solar light and rendered disc share direction for sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night blend follows real summer elevation for sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "apparent summer horizon for sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production facade stream ready for harbour-sunset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native production image harbour-sunset",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected_hour": 22.0,
+				"expected_value": 1.0,
+				"gpu_readback": false,
+				"observed_frame": 266,
+				"previous_sequence": 6,
+				"write": {
+					"frame": 266,
+					"hour": 22.0,
+					"name": "city_night_amount",
+					"sequence": 7,
+					"value": 1.0
+				}
+			},
+			"name": "clock submits fresh matching night-window parameter for night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real clock immediately updates sky for night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "solar light and rendered disc share direction for night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night blend follows real summer elevation for night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "night has zero direct sunlight and enabled window blend",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production facade stream ready for harbour-night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native production image harbour-night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production facade stream ready for cbd-george-street-night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native production image cbd-george-street-night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "actual public ICC foyer viewpoint is available",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "public lighting module provides bounded active night lights",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ICC foyer has separate non-emissive tiled finish without geometry change",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production facade stream ready for icc-public-foyer-night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native production image icc-public-foyer-night",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clock remains frozen during camera and streaming waits",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all seven final city images exist",
+			"passed": true
+		}
+	],
+	"count": 51,
+	"native": true,
+	"night_window_validation": "Five fresh CPU submission witnesses recorded by city_clock immediately after RenderingServer.global_shader_parameter_set, matched to actual solar_state, current frame and increasing sequence; registered material declarations/emission connection also checked. Not GPU uniform readback.",
+	"passed": true,
+	"phases": [
+		{
+			"actual_sun_color": [
+				1.0,
+				0.678431391716003,
+				0.419607847929001
+			],
+			"actual_sun_direction": [
+				0.913125991821289,
+				-0.0145380813628435,
+				0.40741828083992
+			],
+			"actual_sun_energy": 0.00000000000000000000000000000035,
+			"clock": {
+				"cycles": 0,
+				"hour": 6.03720115813035,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"cycle_base_values": {
+				"ambient": 0.650335670072637,
+				"exposure": 1.05033567007264,
+				"fog_density": 0.0000230425017193974,
+				"fog_light_energy": 0.765100206327694,
+				"glow_intensity": 0.20838927834544,
+				"ssao_intensity": 0.821700068775898,
+				"sun_energy": 0.00000000000000000000000000000035
+			},
+			"display_time": "06:02",
+			"elevation_deg": -0.832999999999998,
+			"night_factor": 0.27964261151465,
+			"night_window_expected_value": 0.27964261151465,
+			"night_window_write": {
+				"frame": 2,
+				"hour": 6.03720115813035,
+				"name": "city_night_amount",
+				"sequence": 3,
+				"value": 0.27964261151465
+			},
+			"preset": "sunrise",
+			"runtime_parameters": {
+				"adjustment_contrast": 1.02999997138977,
+				"adjustment_saturation": 1.04999995231628,
+				"ambient_light_energy": 0.650335669517517,
+				"fog_density": 0.0000230425011977786,
+				"glow_enabled": true,
+				"glow_hdr_scale": 0.800000011920929,
+				"glow_hdr_threshold": 1.60000002384186,
+				"glow_intensity": 0.208389282226562,
+				"profile": "standard",
+				"renderer": "forward_plus",
+				"ssao_enabled": true,
+				"ssao_intensity": 0.821700096130371,
+				"ssao_power": 1.29999995231628,
+				"ssao_radius": 0.949999988079071,
+				"ssr_depth_tolerance": 0.25,
+				"ssr_enabled": false,
+				"ssr_max_steps": 64,
+				"tonemap_exposure": 1.05033564567566,
+				"volumetric_fog_density": 0.0000999999974737875,
+				"volumetric_fog_enabled": false,
+				"volumetric_fog_length": 128.0
+			},
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"solar_direction": [
+				0.913125991821289,
+				-0.0145380813628435,
+				0.40741828083992
+			],
+			"sunrise_hour": 6.03720115813035,
+			"sunset_hour": 19.9932813588688
+		},
+		{
+			"actual_sun_color": [
+				1.0,
+				0.945098042488098,
+				0.866666674613953
+			],
+			"actual_sun_direction": [
+				0.0,
+				0.967824220657349,
+				-0.251627236604691
+			],
+			"actual_sun_energy": 1.13601076602936,
+			"clock": {
+				"cycles": 0,
+				"hour": 13.0152412584996,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"cycle_base_values": {
+				"ambient": 0.6,
+				"exposure": 1.0,
+				"fog_density": 0.000025,
+				"fog_light_energy": 1.0,
+				"glow_intensity": 0.2,
+				"ssao_intensity": 0.9,
+				"sun_energy": 1.1360107503882
+			},
+			"display_time": "13:00",
+			"elevation_deg": 75.4261761512109,
+			"night_factor": 0.0,
+			"night_window_expected_value": 0.0,
+			"night_window_write": {
+				"frame": 218,
+				"hour": 13.0152412584996,
+				"name": "city_night_amount",
+				"sequence": 4,
+				"value": 0.0
+			},
+			"preset": "noon",
+			"runtime_parameters": {
+				"adjustment_contrast": 1.02999997138977,
+				"adjustment_saturation": 1.04999995231628,
+				"ambient_light_energy": 0.600000023841858,
+				"fog_density": 0.0000249999993684469,
+				"glow_enabled": true,
+				"glow_hdr_scale": 0.800000011920929,
+				"glow_hdr_threshold": 1.60000002384186,
+				"glow_intensity": 0.200000002980232,
+				"profile": "standard",
+				"renderer": "forward_plus",
+				"ssao_enabled": true,
+				"ssao_intensity": 0.899999976158142,
+				"ssao_power": 1.29999995231628,
+				"ssao_radius": 0.949999988079071,
+				"ssr_depth_tolerance": 0.25,
+				"ssr_enabled": false,
+				"ssr_max_steps": 64,
+				"tonemap_exposure": 1.0,
+				"volumetric_fog_density": 0.0000999999974737875,
+				"volumetric_fog_enabled": false,
+				"volumetric_fog_length": 128.0
+			},
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"solar_direction": [
+				0.0,
+				0.967824220657349,
+				-0.251627236604691
+			],
+			"sunrise_hour": 6.03720115813035,
+			"sunset_hour": 19.9932813588688
+		},
+		{
+			"actual_sun_color": [
+				1.0,
+				0.691333711147308,
+				0.441238164901733
+			],
+			"actual_sun_direction": [
+				-0.937978804111481,
+				0.0963252633810043,
+				0.333042502403259
+			],
+			"actual_sun_energy": 0.555188179016113,
+			"clock": {
+				"cycles": 0,
+				"hour": 19.4432813588688,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"cycle_base_values": {
+				"ambient": 0.6,
+				"exposure": 1.0,
+				"fog_density": 0.000025,
+				"fog_light_energy": 1.0,
+				"glow_intensity": 0.2,
+				"ssao_intensity": 0.9,
+				"sun_energy": 0.555188178201526
+			},
+			"display_time": "19:26",
+			"elevation_deg": 5.52760129469724,
+			"night_factor": 0.0,
+			"night_window_expected_value": 0.0,
+			"night_window_write": {
+				"frame": 234,
+				"hour": 19.4432813588688,
+				"name": "city_night_amount",
+				"sequence": 5,
+				"value": 0.0
+			},
+			"preset": "golden",
+			"runtime_parameters": {
+				"adjustment_contrast": 1.02999997138977,
+				"adjustment_saturation": 1.04999995231628,
+				"ambient_light_energy": 0.600000023841858,
+				"fog_density": 0.0000249999993684469,
+				"glow_enabled": true,
+				"glow_hdr_scale": 0.800000011920929,
+				"glow_hdr_threshold": 1.60000002384186,
+				"glow_intensity": 0.200000002980232,
+				"profile": "standard",
+				"renderer": "forward_plus",
+				"ssao_enabled": true,
+				"ssao_intensity": 0.899999976158142,
+				"ssao_power": 1.29999995231628,
+				"ssao_radius": 0.949999988079071,
+				"ssr_depth_tolerance": 0.25,
+				"ssr_enabled": false,
+				"ssr_max_steps": 64,
+				"tonemap_exposure": 1.0,
+				"volumetric_fog_density": 0.0000999999974737875,
+				"volumetric_fog_enabled": false,
+				"volumetric_fog_length": 128.0
+			},
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"solar_direction": [
+				-0.937978804111481,
+				0.0963252633810043,
+				0.333042502403259
+			],
+			"sunrise_hour": 6.03720115813035,
+			"sunset_hour": 19.9932813588688
+		},
+		{
+			"actual_sun_color": [
+				1.0,
+				0.678431391716003,
+				0.419607847929001
+			],
+			"actual_sun_direction": [
+				-0.913125991821289,
+				-0.0145380813628435,
+				0.40741828083992
+			],
+			"actual_sun_energy": 0.00000000000000000000000000000035,
+			"clock": {
+				"cycles": 0,
+				"hour": 19.9932813588688,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"cycle_base_values": {
+				"ambient": 0.650335670072637,
+				"exposure": 1.05033567007264,
+				"fog_density": 0.0000230425017193974,
+				"fog_light_energy": 0.765100206327694,
+				"glow_intensity": 0.20838927834544,
+				"ssao_intensity": 0.821700068775898,
+				"sun_energy": 0.00000000000000000000000000000035
+			},
+			"display_time": "19:59",
+			"elevation_deg": -0.832999999999998,
+			"night_factor": 0.27964261151465,
+			"night_window_expected_value": 0.27964261151465,
+			"night_window_write": {
+				"frame": 250,
+				"hour": 19.9932813588688,
+				"name": "city_night_amount",
+				"sequence": 6,
+				"value": 0.27964261151465
+			},
+			"preset": "sunset",
+			"runtime_parameters": {
+				"adjustment_contrast": 1.02999997138977,
+				"adjustment_saturation": 1.04999995231628,
+				"ambient_light_energy": 0.650335669517517,
+				"fog_density": 0.0000230425011977786,
+				"glow_enabled": true,
+				"glow_hdr_scale": 0.800000011920929,
+				"glow_hdr_threshold": 1.60000002384186,
+				"glow_intensity": 0.208389282226562,
+				"profile": "standard",
+				"renderer": "forward_plus",
+				"ssao_enabled": true,
+				"ssao_intensity": 0.821700096130371,
+				"ssao_power": 1.29999995231628,
+				"ssao_radius": 0.949999988079071,
+				"ssr_depth_tolerance": 0.25,
+				"ssr_enabled": false,
+				"ssr_max_steps": 64,
+				"tonemap_exposure": 1.05033564567566,
+				"volumetric_fog_density": 0.0000999999974737875,
+				"volumetric_fog_enabled": false,
+				"volumetric_fog_length": 128.0
+			},
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"solar_direction": [
+				-0.913125991821289,
+				-0.0145380813628435,
+				0.40741828083992
+			],
+			"sunrise_hour": 6.03720115813035,
+			"sunset_hour": 19.9932813588688
+		},
+		{
+			"actual_sun_color": [
+				1.0,
+				0.678431391716003,
+				0.419607847929001
+			],
+			"actual_sun_direction": [
+				-0.670095324516296,
+				-0.368066161870956,
+				0.644592583179474
+			],
+			"actual_sun_energy": 0.0,
+			"clock": {
+				"cycles": 0,
+				"hour": 22.0,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"cycle_base_values": {
+				"ambient": 0.78,
+				"exposure": 1.18,
+				"fog_density": 0.000018,
+				"fog_light_energy": 0.16,
+				"glow_intensity": 0.23,
+				"ssao_intensity": 0.62,
+				"sun_energy": 0.0
+			},
+			"display_time": "22:00",
+			"elevation_deg": -21.5964019367734,
+			"night_factor": 1.0,
+			"night_window_expected_value": 1.0,
+			"night_window_write": {
+				"frame": 266,
+				"hour": 22.0,
+				"name": "city_night_amount",
+				"sequence": 7,
+				"value": 1.0
+			},
+			"preset": "night",
+			"runtime_parameters": {
+				"adjustment_contrast": 1.02999997138977,
+				"adjustment_saturation": 1.04999995231628,
+				"ambient_light_energy": 0.779999971389771,
+				"fog_density": 0.0000180000006366754,
+				"glow_enabled": true,
+				"glow_hdr_scale": 0.800000011920929,
+				"glow_hdr_threshold": 1.60000002384186,
+				"glow_intensity": 0.230000004172325,
+				"profile": "standard",
+				"renderer": "forward_plus",
+				"ssao_enabled": true,
+				"ssao_intensity": 0.620000004768372,
+				"ssao_power": 1.29999995231628,
+				"ssao_radius": 0.949999988079071,
+				"ssr_depth_tolerance": 0.25,
+				"ssr_enabled": false,
+				"ssr_max_steps": 64,
+				"tonemap_exposure": 1.17999994754791,
+				"volumetric_fog_density": 0.0000999999974737875,
+				"volumetric_fog_enabled": false,
+				"volumetric_fog_length": 128.0
+			},
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"solar_direction": [
+				-0.670095324516296,
+				-0.368066161870956,
+				0.644592583179474
+			],
+			"sunrise_hour": 6.03720115813035,
+			"sunset_hour": 19.9932813588688
+		}
+	],
+	"save_written": false,
+	"scope": "Complete main, real city and public ICC foyer, frozen actors and identical harbour camera. Native fixed-frame visual review, not gameplay FPS, real-time weather, GPU global-uniform readback or measured indoor lighting compliance.",
+	"screenshots": [
+		{
+			"camera": [
+				1000.0,
+				85.0,
+				-720.0
+			],
+			"clock": {
+				"cycles": 0,
+				"hour": 6.03720115813035,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"facade_stream": {
+				"base_collision_resident": true,
+				"builds": 7,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 0,
+				"last_upload_ms": 5.086,
+				"last_worker_ms": 6.371,
+				"limit": 64,
+				"max_upload_ms": 10.427,
+				"pending_worker": 0,
+				"resident": 7,
+				"resident_cells": [
+					[
+						4,
+						-6
+					],
+					[
+						5,
+						-7
+					],
+					[
+						4,
+						-7
+					],
+					[
+						3,
+						-6
+					],
+					[
+						5,
+						-8
+					],
+					[
+						3,
+						-7
+					],
+					[
+						4,
+						-8
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 7
+			},
+			"file": "harbour-sunrise.png",
+			"fov": 64.0,
+			"night_windows": {
+				"clock_expected_value": 0.27964261151465,
+				"clock_write": {
+					"frame": 2,
+					"hour": 6.03720115813035,
+					"name": "city_night_amount",
+					"sequence": 3,
+					"value": 0.27964261151465
+				},
+				"global_gpu_readback": false,
+				"night_global_name": "city_night_amount",
+				"registered_facade_materials": 38,
+				"sample": [
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 2.3,
+							"floor_height": null,
+							"glazing": 0.86,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					}
+				],
+				"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+			},
+			"preset": "sunrise",
+			"public_lighting": {
+				"count": 34,
+				"fixed_positions": true,
+				"lights": [
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-868.487426757812,
+							13.0500001907349,
+							1851.79077148438
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-868.487426757812,
+							4.53499984741211,
+							1851.79077148438
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-865.223510742188,
+							13.0500001907349,
+							1867.45434570312
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-865.223510742188,
+							4.53499984741211,
+							1867.45434570312
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-861.959594726562,
+							13.0500001907349,
+							1883.11804199219
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-861.959594726562,
+							4.53499984741211,
+							1883.11804199219
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-858.695678710938,
+							13.0500001907349,
+							1898.78161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-858.695678710938,
+							4.53499984741211,
+							1898.78161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-862.515686035156,
+							13.0500001907349,
+							1850.54638671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-862.515686035156,
+							4.53499984741211,
+							1850.54638671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-859.251770019531,
+							13.0500001907349,
+							1866.2099609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-859.251770019531,
+							4.53499984741211,
+							1866.2099609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-855.987854003906,
+							13.0500001907349,
+							1881.87365722656
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-855.987854003906,
+							4.53499984741211,
+							1881.87365722656
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-852.723937988281,
+							13.0500001907349,
+							1897.53723144531
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-852.723937988281,
+							4.53499984741211,
+							1897.53723144531
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-856.446044921875,
+							13.0500001907349,
+							1849.28161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-856.446044921875,
+							4.53499984741211,
+							1849.28161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-853.18212890625,
+							13.0500001907349,
+							1864.9453125
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-853.18212890625,
+							4.53499984741211,
+							1864.9453125
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-849.918212890625,
+							13.0500001907349,
+							1880.60888671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-849.918212890625,
+							4.53499984741211,
+							1880.60888671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-846.654296875,
+							13.0500001907349,
+							1896.2724609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-846.654296875,
+							4.53499984741211,
+							1896.2724609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1031.20361328125,
+							9.72999954223633,
+							1482.51538085938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1031.20361328125,
+							4.5,
+							1482.51538085938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1026.30773925781,
+							9.72999954223633,
+							1506.01086425781
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1026.30773925781,
+							4.5,
+							1506.01086425781
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1013.58203125,
+							9.72999954223633,
+							1478.84350585938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1013.58203125,
+							4.5,
+							1478.84350585938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1008.68615722656,
+							9.72999954223633,
+							1502.3388671875
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1008.68615722656,
+							4.5,
+							1502.3388671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-65.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-943.6240234375,
+							15.7799997329712,
+							1649.68591308594
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-943.6240234375,
+							11.0,
+							1649.68591308594
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-20.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-934.444213867188,
+							15.7799997329712,
+							1693.73974609375
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-934.444213867188,
+							11.0,
+							1693.73974609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_25.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-925.264465332031,
+							15.7799997329712,
+							1737.79357910156
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-925.264465332031,
+							11.0,
+							1737.79357910156
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_70.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-916.084716796875,
+							15.7799997329712,
+							1781.84753417969
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-916.084716796875,
+							11.0,
+							1781.84753417969
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_18.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-112.595031738281,
+							61.5,
+							-662.356262207031
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-112.595031738281,
+							54.0,
+							-662.356262207031
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_18.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-70.0707397460938,
+							61.5,
+							-640.308776855469
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-70.0707397460938,
+							54.0,
+							-640.308776855469
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_126.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-62.8845062255859,
+							61.5,
+							-758.235656738281
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-62.8845062255859,
+							54.0,
+							-758.235656738281
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_126.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-20.3602066040039,
+							61.5,
+							-736.188171386719
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-20.3602066040039,
+							54.0,
+							-736.188171386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_234.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							-13.1739768981934,
+							61.5,
+							-854.115112304688
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-13.1739768981934,
+							54.0,
+							-854.115112304688
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_234.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							29.3503227233887,
+							61.5,
+							-832.067626953125
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							29.3503227233887,
+							54.0,
+							-832.067626953125
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_342.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							36.536548614502,
+							61.5,
+							-949.994506835938
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							36.536548614502,
+							54.0,
+							-949.994506835938
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_342.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							79.0608520507812,
+							61.5,
+							-927.947021484375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							79.0608520507812,
+							54.0,
+							-927.947021484375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_450.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							86.2470855712891,
+							61.5,
+							-1045.8740234375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							86.2470855712891,
+							54.0,
+							-1045.8740234375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_450.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							128.771392822266,
+							61.5,
+							-1023.82647705078
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							128.771392822266,
+							54.0,
+							-1023.82647705078
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_-58_-26",
+						"intact": true,
+						"owner": "opera/podium/upper/0/0",
+						"position": [
+							376.786437988281,
+							16.2000007629395,
+							-360.040771484375
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							407.936767578125,
+							43.5,
+							-352.715698242188
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_-58_21",
+						"intact": true,
+						"owner": "opera/podium/upper/0/2",
+						"position": [
+							366.027709960938,
+							16.2000007629395,
+							-314.288757324219
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							397.178039550781,
+							43.5,
+							-306.963653564453
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_58_-23",
+						"intact": true,
+						"owner": "opera/podium/upper/4/0",
+						"position": [
+							489.019653320312,
+							16.2000007629395,
+							-330.566955566406
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							454.948974609375,
+							43.5,
+							-338.578796386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_58_19",
+						"intact": true,
+						"owner": "opera/podium/upper/4/2",
+						"position": [
+							479.405456542969,
+							16.2000007629395,
+							-289.682159423828
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							445.334777832031,
+							43.5,
+							-297.694000244141
+						],
+						"visible": true
+					}
+				],
+				"max_lights": 40,
+				"night_factor": 0.27964261151465,
+				"photometric_survey": false,
+				"runtime_changes": "numeric light_energy only",
+				"total_energy": 52.5740630626678
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "fe9bec74d607fdbc9f2306a1e22896937be860694ddc4b0e7b35b8c56a32b573",
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"target": [
+				180.0,
+				28.0,
+				-530.0
+			]
+		},
+		{
+			"camera": [
+				1000.0,
+				85.0,
+				-720.0
+			],
+			"clock": {
+				"cycles": 0,
+				"hour": 13.0152412584996,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"facade_stream": {
+				"base_collision_resident": true,
+				"builds": 7,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 0,
+				"last_upload_ms": 5.086,
+				"last_worker_ms": 6.371,
+				"limit": 64,
+				"max_upload_ms": 10.427,
+				"pending_worker": 0,
+				"resident": 7,
+				"resident_cells": [
+					[
+						4,
+						-6
+					],
+					[
+						5,
+						-7
+					],
+					[
+						4,
+						-7
+					],
+					[
+						3,
+						-6
+					],
+					[
+						5,
+						-8
+					],
+					[
+						3,
+						-7
+					],
+					[
+						4,
+						-8
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 7
+			},
+			"file": "harbour-noon.png",
+			"fov": 64.0,
+			"night_windows": {
+				"clock_expected_value": 0.0,
+				"clock_write": {
+					"frame": 218,
+					"hour": 13.0152412584996,
+					"name": "city_night_amount",
+					"sequence": 4,
+					"value": 0.0
+				},
+				"global_gpu_readback": false,
+				"night_global_name": "city_night_amount",
+				"registered_facade_materials": 38,
+				"sample": [
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 2.3,
+							"floor_height": null,
+							"glazing": 0.86,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					}
+				],
+				"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+			},
+			"preset": "noon",
+			"public_lighting": {
+				"count": 34,
+				"fixed_positions": true,
+				"lights": [
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-868.487426757812,
+							13.0500001907349,
+							1851.79077148438
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-868.487426757812,
+							4.53499984741211,
+							1851.79077148438
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-865.223510742188,
+							13.0500001907349,
+							1867.45434570312
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-865.223510742188,
+							4.53499984741211,
+							1867.45434570312
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-861.959594726562,
+							13.0500001907349,
+							1883.11804199219
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-861.959594726562,
+							4.53499984741211,
+							1883.11804199219
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-858.695678710938,
+							13.0500001907349,
+							1898.78161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-858.695678710938,
+							4.53499984741211,
+							1898.78161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-862.515686035156,
+							13.0500001907349,
+							1850.54638671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-862.515686035156,
+							4.53499984741211,
+							1850.54638671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-859.251770019531,
+							13.0500001907349,
+							1866.2099609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-859.251770019531,
+							4.53499984741211,
+							1866.2099609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-855.987854003906,
+							13.0500001907349,
+							1881.87365722656
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-855.987854003906,
+							4.53499984741211,
+							1881.87365722656
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-852.723937988281,
+							13.0500001907349,
+							1897.53723144531
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-852.723937988281,
+							4.53499984741211,
+							1897.53723144531
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-856.446044921875,
+							13.0500001907349,
+							1849.28161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-856.446044921875,
+							4.53499984741211,
+							1849.28161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-853.18212890625,
+							13.0500001907349,
+							1864.9453125
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-853.18212890625,
+							4.53499984741211,
+							1864.9453125
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-849.918212890625,
+							13.0500001907349,
+							1880.60888671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-849.918212890625,
+							4.53499984741211,
+							1880.60888671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-846.654296875,
+							13.0500001907349,
+							1896.2724609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-846.654296875,
+							4.53499984741211,
+							1896.2724609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1031.20361328125,
+							9.72999954223633,
+							1482.51538085938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1031.20361328125,
+							4.5,
+							1482.51538085938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1026.30773925781,
+							9.72999954223633,
+							1506.01086425781
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1026.30773925781,
+							4.5,
+							1506.01086425781
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1013.58203125,
+							9.72999954223633,
+							1478.84350585938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1013.58203125,
+							4.5,
+							1478.84350585938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1008.68615722656,
+							9.72999954223633,
+							1502.3388671875
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1008.68615722656,
+							4.5,
+							1502.3388671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-65.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-943.6240234375,
+							15.7799997329712,
+							1649.68591308594
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-943.6240234375,
+							11.0,
+							1649.68591308594
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-20.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-934.444213867188,
+							15.7799997329712,
+							1693.73974609375
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-934.444213867188,
+							11.0,
+							1693.73974609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_25.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-925.264465332031,
+							15.7799997329712,
+							1737.79357910156
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-925.264465332031,
+							11.0,
+							1737.79357910156
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_70.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-916.084716796875,
+							15.7799997329712,
+							1781.84753417969
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-916.084716796875,
+							11.0,
+							1781.84753417969
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_18.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-112.595031738281,
+							61.5,
+							-662.356262207031
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-112.595031738281,
+							54.0,
+							-662.356262207031
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_18.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-70.0707397460938,
+							61.5,
+							-640.308776855469
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-70.0707397460938,
+							54.0,
+							-640.308776855469
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_126.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-62.8845062255859,
+							61.5,
+							-758.235656738281
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-62.8845062255859,
+							54.0,
+							-758.235656738281
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_126.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-20.3602066040039,
+							61.5,
+							-736.188171386719
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-20.3602066040039,
+							54.0,
+							-736.188171386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_234.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							-13.1739768981934,
+							61.5,
+							-854.115112304688
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-13.1739768981934,
+							54.0,
+							-854.115112304688
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_234.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							29.3503227233887,
+							61.5,
+							-832.067626953125
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							29.3503227233887,
+							54.0,
+							-832.067626953125
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_342.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							36.536548614502,
+							61.5,
+							-949.994506835938
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							36.536548614502,
+							54.0,
+							-949.994506835938
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_342.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							79.0608520507812,
+							61.5,
+							-927.947021484375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							79.0608520507812,
+							54.0,
+							-927.947021484375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_450.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							86.2470855712891,
+							61.5,
+							-1045.8740234375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							86.2470855712891,
+							54.0,
+							-1045.8740234375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_450.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							128.771392822266,
+							61.5,
+							-1023.82647705078
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							128.771392822266,
+							54.0,
+							-1023.82647705078
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_-58_-26",
+						"intact": true,
+						"owner": "opera/podium/upper/0/0",
+						"position": [
+							376.786437988281,
+							16.2000007629395,
+							-360.040771484375
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							407.936767578125,
+							43.5,
+							-352.715698242188
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_-58_21",
+						"intact": true,
+						"owner": "opera/podium/upper/0/2",
+						"position": [
+							366.027709960938,
+							16.2000007629395,
+							-314.288757324219
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							397.178039550781,
+							43.5,
+							-306.963653564453
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_58_-23",
+						"intact": true,
+						"owner": "opera/podium/upper/4/0",
+						"position": [
+							489.019653320312,
+							16.2000007629395,
+							-330.566955566406
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							454.948974609375,
+							43.5,
+							-338.578796386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_58_19",
+						"intact": true,
+						"owner": "opera/podium/upper/4/2",
+						"position": [
+							479.405456542969,
+							16.2000007629395,
+							-289.682159423828
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							445.334777832031,
+							43.5,
+							-297.694000244141
+						],
+						"visible": true
+					}
+				],
+				"max_lights": 40,
+				"night_factor": 0.0,
+				"photometric_survey": false,
+				"runtime_changes": "numeric light_energy only",
+				"total_energy": 44.7999987602234
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "43f7c774fe7cd2fb5ea0b0d2e4c0e61670e2fb1ff4e102c7ce8c28159a7686aa",
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"target": [
+				180.0,
+				28.0,
+				-530.0
+			]
+		},
+		{
+			"camera": [
+				1000.0,
+				85.0,
+				-720.0
+			],
+			"clock": {
+				"cycles": 0,
+				"hour": 19.4432813588688,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"facade_stream": {
+				"base_collision_resident": true,
+				"builds": 7,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 0,
+				"last_upload_ms": 5.086,
+				"last_worker_ms": 6.371,
+				"limit": 64,
+				"max_upload_ms": 10.427,
+				"pending_worker": 0,
+				"resident": 7,
+				"resident_cells": [
+					[
+						4,
+						-6
+					],
+					[
+						5,
+						-7
+					],
+					[
+						4,
+						-7
+					],
+					[
+						3,
+						-6
+					],
+					[
+						5,
+						-8
+					],
+					[
+						3,
+						-7
+					],
+					[
+						4,
+						-8
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 7
+			},
+			"file": "harbour-golden.png",
+			"fov": 64.0,
+			"night_windows": {
+				"clock_expected_value": 0.0,
+				"clock_write": {
+					"frame": 234,
+					"hour": 19.4432813588688,
+					"name": "city_night_amount",
+					"sequence": 5,
+					"value": 0.0
+				},
+				"global_gpu_readback": false,
+				"night_global_name": "city_night_amount",
+				"registered_facade_materials": 38,
+				"sample": [
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 2.3,
+							"floor_height": null,
+							"glazing": 0.86,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					}
+				],
+				"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+			},
+			"preset": "golden",
+			"public_lighting": {
+				"count": 34,
+				"fixed_positions": true,
+				"lights": [
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-868.487426757812,
+							13.0500001907349,
+							1851.79077148438
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-868.487426757812,
+							4.53499984741211,
+							1851.79077148438
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-865.223510742188,
+							13.0500001907349,
+							1867.45434570312
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-865.223510742188,
+							4.53499984741211,
+							1867.45434570312
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-861.959594726562,
+							13.0500001907349,
+							1883.11804199219
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-861.959594726562,
+							4.53499984741211,
+							1883.11804199219
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-858.695678710938,
+							13.0500001907349,
+							1898.78161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-858.695678710938,
+							4.53499984741211,
+							1898.78161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-862.515686035156,
+							13.0500001907349,
+							1850.54638671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-862.515686035156,
+							4.53499984741211,
+							1850.54638671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-859.251770019531,
+							13.0500001907349,
+							1866.2099609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-859.251770019531,
+							4.53499984741211,
+							1866.2099609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-855.987854003906,
+							13.0500001907349,
+							1881.87365722656
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-855.987854003906,
+							4.53499984741211,
+							1881.87365722656
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-852.723937988281,
+							13.0500001907349,
+							1897.53723144531
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-852.723937988281,
+							4.53499984741211,
+							1897.53723144531
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-856.446044921875,
+							13.0500001907349,
+							1849.28161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-856.446044921875,
+							4.53499984741211,
+							1849.28161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-853.18212890625,
+							13.0500001907349,
+							1864.9453125
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-853.18212890625,
+							4.53499984741211,
+							1864.9453125
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-849.918212890625,
+							13.0500001907349,
+							1880.60888671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-849.918212890625,
+							4.53499984741211,
+							1880.60888671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-846.654296875,
+							13.0500001907349,
+							1896.2724609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-846.654296875,
+							4.53499984741211,
+							1896.2724609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1031.20361328125,
+							9.72999954223633,
+							1482.51538085938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1031.20361328125,
+							4.5,
+							1482.51538085938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1026.30773925781,
+							9.72999954223633,
+							1506.01086425781
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1026.30773925781,
+							4.5,
+							1506.01086425781
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1013.58203125,
+							9.72999954223633,
+							1478.84350585938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1013.58203125,
+							4.5,
+							1478.84350585938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1008.68615722656,
+							9.72999954223633,
+							1502.3388671875
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1008.68615722656,
+							4.5,
+							1502.3388671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-65.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-943.6240234375,
+							15.7799997329712,
+							1649.68591308594
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-943.6240234375,
+							11.0,
+							1649.68591308594
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-20.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-934.444213867188,
+							15.7799997329712,
+							1693.73974609375
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-934.444213867188,
+							11.0,
+							1693.73974609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_25.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-925.264465332031,
+							15.7799997329712,
+							1737.79357910156
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-925.264465332031,
+							11.0,
+							1737.79357910156
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_70.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-916.084716796875,
+							15.7799997329712,
+							1781.84753417969
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-916.084716796875,
+							11.0,
+							1781.84753417969
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_18.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-112.595031738281,
+							61.5,
+							-662.356262207031
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-112.595031738281,
+							54.0,
+							-662.356262207031
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_18.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-70.0707397460938,
+							61.5,
+							-640.308776855469
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-70.0707397460938,
+							54.0,
+							-640.308776855469
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_126.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-62.8845062255859,
+							61.5,
+							-758.235656738281
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-62.8845062255859,
+							54.0,
+							-758.235656738281
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_126.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-20.3602066040039,
+							61.5,
+							-736.188171386719
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-20.3602066040039,
+							54.0,
+							-736.188171386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_234.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							-13.1739768981934,
+							61.5,
+							-854.115112304688
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-13.1739768981934,
+							54.0,
+							-854.115112304688
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_234.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							29.3503227233887,
+							61.5,
+							-832.067626953125
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							29.3503227233887,
+							54.0,
+							-832.067626953125
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_342.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							36.536548614502,
+							61.5,
+							-949.994506835938
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							36.536548614502,
+							54.0,
+							-949.994506835938
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_342.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							79.0608520507812,
+							61.5,
+							-927.947021484375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							79.0608520507812,
+							54.0,
+							-927.947021484375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_450.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							86.2470855712891,
+							61.5,
+							-1045.8740234375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							86.2470855712891,
+							54.0,
+							-1045.8740234375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.0,
+						"id": "bridge_450.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							128.771392822266,
+							61.5,
+							-1023.82647705078
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							128.771392822266,
+							54.0,
+							-1023.82647705078
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_-58_-26",
+						"intact": true,
+						"owner": "opera/podium/upper/0/0",
+						"position": [
+							376.786437988281,
+							16.2000007629395,
+							-360.040771484375
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							407.936767578125,
+							43.5,
+							-352.715698242188
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_-58_21",
+						"intact": true,
+						"owner": "opera/podium/upper/0/2",
+						"position": [
+							366.027709960938,
+							16.2000007629395,
+							-314.288757324219
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							397.178039550781,
+							43.5,
+							-306.963653564453
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_58_-23",
+						"intact": true,
+						"owner": "opera/podium/upper/4/0",
+						"position": [
+							489.019653320312,
+							16.2000007629395,
+							-330.566955566406
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							454.948974609375,
+							43.5,
+							-338.578796386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.0,
+						"id": "opera_wash_58_19",
+						"intact": true,
+						"owner": "opera/podium/upper/4/2",
+						"position": [
+							479.405456542969,
+							16.2000007629395,
+							-289.682159423828
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							445.334777832031,
+							43.5,
+							-297.694000244141
+						],
+						"visible": true
+					}
+				],
+				"max_lights": 40,
+				"night_factor": 0.0,
+				"photometric_survey": false,
+				"runtime_changes": "numeric light_energy only",
+				"total_energy": 44.7999987602234
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "7337633c9db0afd2ccdae0ffe2f84398a25d1023d9428d5b148de67cabb7e057",
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"target": [
+				180.0,
+				28.0,
+				-530.0
+			]
+		},
+		{
+			"camera": [
+				1000.0,
+				85.0,
+				-720.0
+			],
+			"clock": {
+				"cycles": 0,
+				"hour": 19.9932813588688,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"facade_stream": {
+				"base_collision_resident": true,
+				"builds": 7,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 0,
+				"last_upload_ms": 5.086,
+				"last_worker_ms": 6.371,
+				"limit": 64,
+				"max_upload_ms": 10.427,
+				"pending_worker": 0,
+				"resident": 7,
+				"resident_cells": [
+					[
+						4,
+						-6
+					],
+					[
+						5,
+						-7
+					],
+					[
+						4,
+						-7
+					],
+					[
+						3,
+						-6
+					],
+					[
+						5,
+						-8
+					],
+					[
+						3,
+						-7
+					],
+					[
+						4,
+						-8
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 7
+			},
+			"file": "harbour-sunset.png",
+			"fov": 64.0,
+			"night_windows": {
+				"clock_expected_value": 0.27964261151465,
+				"clock_write": {
+					"frame": 250,
+					"hour": 19.9932813588688,
+					"name": "city_night_amount",
+					"sequence": 6,
+					"value": 0.27964261151465
+				},
+				"global_gpu_readback": false,
+				"night_global_name": "city_night_amount",
+				"registered_facade_materials": 38,
+				"sample": [
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 2.3,
+							"floor_height": null,
+							"glazing": 0.86,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					}
+				],
+				"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+			},
+			"preset": "sunset",
+			"public_lighting": {
+				"count": 34,
+				"fixed_positions": true,
+				"lights": [
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-868.487426757812,
+							13.0500001907349,
+							1851.79077148438
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-868.487426757812,
+							4.53499984741211,
+							1851.79077148438
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-865.223510742188,
+							13.0500001907349,
+							1867.45434570312
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-865.223510742188,
+							4.53499984741211,
+							1867.45434570312
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-861.959594726562,
+							13.0500001907349,
+							1883.11804199219
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-861.959594726562,
+							4.53499984741211,
+							1883.11804199219
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-858.695678710938,
+							13.0500001907349,
+							1898.78161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-858.695678710938,
+							4.53499984741211,
+							1898.78161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-862.515686035156,
+							13.0500001907349,
+							1850.54638671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-862.515686035156,
+							4.53499984741211,
+							1850.54638671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-859.251770019531,
+							13.0500001907349,
+							1866.2099609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-859.251770019531,
+							4.53499984741211,
+							1866.2099609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-855.987854003906,
+							13.0500001907349,
+							1881.87365722656
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-855.987854003906,
+							4.53499984741211,
+							1881.87365722656
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-852.723937988281,
+							13.0500001907349,
+							1897.53723144531
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-852.723937988281,
+							4.53499984741211,
+							1897.53723144531
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-856.446044921875,
+							13.0500001907349,
+							1849.28161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-856.446044921875,
+							4.53499984741211,
+							1849.28161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-853.18212890625,
+							13.0500001907349,
+							1864.9453125
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-853.18212890625,
+							4.53499984741211,
+							1864.9453125
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-849.918212890625,
+							13.0500001907349,
+							1880.60888671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-849.918212890625,
+							4.53499984741211,
+							1880.60888671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-846.654296875,
+							13.0500001907349,
+							1896.2724609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-846.654296875,
+							4.53499984741211,
+							1896.2724609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1031.20361328125,
+							9.72999954223633,
+							1482.51538085938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1031.20361328125,
+							4.5,
+							1482.51538085938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1026.30773925781,
+							9.72999954223633,
+							1506.01086425781
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1026.30773925781,
+							4.5,
+							1506.01086425781
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1013.58203125,
+							9.72999954223633,
+							1478.84350585938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1013.58203125,
+							4.5,
+							1478.84350585938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1008.68615722656,
+							9.72999954223633,
+							1502.3388671875
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1008.68615722656,
+							4.5,
+							1502.3388671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-65.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-943.6240234375,
+							15.7799997329712,
+							1649.68591308594
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-943.6240234375,
+							11.0,
+							1649.68591308594
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-20.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-934.444213867188,
+							15.7799997329712,
+							1693.73974609375
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-934.444213867188,
+							11.0,
+							1693.73974609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_25.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-925.264465332031,
+							15.7799997329712,
+							1737.79357910156
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-925.264465332031,
+							11.0,
+							1737.79357910156
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_70.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-916.084716796875,
+							15.7799997329712,
+							1781.84753417969
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-916.084716796875,
+							11.0,
+							1781.84753417969
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_18.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-112.595031738281,
+							61.5,
+							-662.356262207031
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-112.595031738281,
+							54.0,
+							-662.356262207031
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_18.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-70.0707397460938,
+							61.5,
+							-640.308776855469
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-70.0707397460938,
+							54.0,
+							-640.308776855469
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_126.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-62.8845062255859,
+							61.5,
+							-758.235656738281
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-62.8845062255859,
+							54.0,
+							-758.235656738281
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_126.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-20.3602066040039,
+							61.5,
+							-736.188171386719
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-20.3602066040039,
+							54.0,
+							-736.188171386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_234.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							-13.1739768981934,
+							61.5,
+							-854.115112304688
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-13.1739768981934,
+							54.0,
+							-854.115112304688
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_234.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							29.3503227233887,
+							61.5,
+							-832.067626953125
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							29.3503227233887,
+							54.0,
+							-832.067626953125
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_342.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							36.536548614502,
+							61.5,
+							-949.994506835938
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							36.536548614502,
+							54.0,
+							-949.994506835938
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_342.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							79.0608520507812,
+							61.5,
+							-927.947021484375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							79.0608520507812,
+							54.0,
+							-927.947021484375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_450.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							86.2470855712891,
+							61.5,
+							-1045.8740234375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							86.2470855712891,
+							54.0,
+							-1045.8740234375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 0.587249457836151,
+						"id": "bridge_450.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							128.771392822266,
+							61.5,
+							-1023.82647705078
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							128.771392822266,
+							54.0,
+							-1023.82647705078
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_-58_-26",
+						"intact": true,
+						"owner": "opera/podium/upper/0/0",
+						"position": [
+							376.786437988281,
+							16.2000007629395,
+							-360.040771484375
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							407.936767578125,
+							43.5,
+							-352.715698242188
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_-58_21",
+						"intact": true,
+						"owner": "opera/podium/upper/0/2",
+						"position": [
+							366.027709960938,
+							16.2000007629395,
+							-314.288757324219
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							397.178039550781,
+							43.5,
+							-306.963653564453
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_58_-23",
+						"intact": true,
+						"owner": "opera/podium/upper/4/0",
+						"position": [
+							489.019653320312,
+							16.2000007629395,
+							-330.566955566406
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							454.948974609375,
+							43.5,
+							-338.578796386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 0.475392431020737,
+						"id": "opera_wash_58_19",
+						"intact": true,
+						"owner": "opera/podium/upper/4/2",
+						"position": [
+							479.405456542969,
+							16.2000007629395,
+							-289.682159423828
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							445.334777832031,
+							43.5,
+							-297.694000244141
+						],
+						"visible": true
+					}
+				],
+				"max_lights": 40,
+				"night_factor": 0.27964261151465,
+				"photometric_survey": false,
+				"runtime_changes": "numeric light_energy only",
+				"total_energy": 52.5740630626678
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "ae7bf6a3e4066dfc2400291dbf7f96d8565a1555dbd997160cb8a894f86eba6e",
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"target": [
+				180.0,
+				28.0,
+				-530.0
+			]
+		},
+		{
+			"camera": [
+				1000.0,
+				85.0,
+				-720.0
+			],
+			"clock": {
+				"cycles": 0,
+				"hour": 22.0,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"facade_stream": {
+				"base_collision_resident": true,
+				"builds": 7,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 0,
+				"last_upload_ms": 5.086,
+				"last_worker_ms": 6.371,
+				"limit": 64,
+				"max_upload_ms": 10.427,
+				"pending_worker": 0,
+				"resident": 7,
+				"resident_cells": [
+					[
+						4,
+						-6
+					],
+					[
+						5,
+						-7
+					],
+					[
+						4,
+						-7
+					],
+					[
+						3,
+						-6
+					],
+					[
+						5,
+						-8
+					],
+					[
+						3,
+						-7
+					],
+					[
+						4,
+						-8
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 7
+			},
+			"file": "harbour-night.png",
+			"fov": 64.0,
+			"night_windows": {
+				"clock_expected_value": 1.0,
+				"clock_write": {
+					"frame": 266,
+					"hour": 22.0,
+					"name": "city_night_amount",
+					"sequence": 7,
+					"value": 1.0
+				},
+				"global_gpu_readback": false,
+				"night_global_name": "city_night_amount",
+				"registered_facade_materials": 38,
+				"sample": [
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 2.3,
+							"floor_height": null,
+							"glazing": 0.86,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					}
+				],
+				"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+			},
+			"preset": "night",
+			"public_lighting": {
+				"count": 34,
+				"fixed_positions": true,
+				"lights": [
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-868.487426757812,
+							13.0500001907349,
+							1851.79077148438
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-868.487426757812,
+							4.53499984741211,
+							1851.79077148438
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-865.223510742188,
+							13.0500001907349,
+							1867.45434570312
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-865.223510742188,
+							4.53499984741211,
+							1867.45434570312
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-861.959594726562,
+							13.0500001907349,
+							1883.11804199219
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-861.959594726562,
+							4.53499984741211,
+							1883.11804199219
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-858.695678710938,
+							13.0500001907349,
+							1898.78161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-858.695678710938,
+							4.53499984741211,
+							1898.78161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-862.515686035156,
+							13.0500001907349,
+							1850.54638671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-862.515686035156,
+							4.53499984741211,
+							1850.54638671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-859.251770019531,
+							13.0500001907349,
+							1866.2099609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-859.251770019531,
+							4.53499984741211,
+							1866.2099609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-855.987854003906,
+							13.0500001907349,
+							1881.87365722656
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-855.987854003906,
+							4.53499984741211,
+							1881.87365722656
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-852.723937988281,
+							13.0500001907349,
+							1897.53723144531
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-852.723937988281,
+							4.53499984741211,
+							1897.53723144531
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-856.446044921875,
+							13.0500001907349,
+							1849.28161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-856.446044921875,
+							4.53499984741211,
+							1849.28161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-853.18212890625,
+							13.0500001907349,
+							1864.9453125
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-853.18212890625,
+							4.53499984741211,
+							1864.9453125
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-849.918212890625,
+							13.0500001907349,
+							1880.60888671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-849.918212890625,
+							4.53499984741211,
+							1880.60888671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-846.654296875,
+							13.0500001907349,
+							1896.2724609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-846.654296875,
+							4.53499984741211,
+							1896.2724609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1031.20361328125,
+							9.72999954223633,
+							1482.51538085938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1031.20361328125,
+							4.5,
+							1482.51538085938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1026.30773925781,
+							9.72999954223633,
+							1506.01086425781
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1026.30773925781,
+							4.5,
+							1506.01086425781
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1013.58203125,
+							9.72999954223633,
+							1478.84350585938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1013.58203125,
+							4.5,
+							1478.84350585938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1008.68615722656,
+							9.72999954223633,
+							1502.3388671875
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1008.68615722656,
+							4.5,
+							1502.3388671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-65.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-943.6240234375,
+							15.7799997329712,
+							1649.68591308594
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-943.6240234375,
+							11.0,
+							1649.68591308594
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-20.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-934.444213867188,
+							15.7799997329712,
+							1693.73974609375
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-934.444213867188,
+							11.0,
+							1693.73974609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_25.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-925.264465332031,
+							15.7799997329712,
+							1737.79357910156
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-925.264465332031,
+							11.0,
+							1737.79357910156
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_70.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-916.084716796875,
+							15.7799997329712,
+							1781.84753417969
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-916.084716796875,
+							11.0,
+							1781.84753417969
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_18.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-112.595031738281,
+							61.5,
+							-662.356262207031
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-112.595031738281,
+							54.0,
+							-662.356262207031
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_18.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-70.0707397460938,
+							61.5,
+							-640.308776855469
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-70.0707397460938,
+							54.0,
+							-640.308776855469
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_126.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-62.8845062255859,
+							61.5,
+							-758.235656738281
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-62.8845062255859,
+							54.0,
+							-758.235656738281
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_126.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-20.3602066040039,
+							61.5,
+							-736.188171386719
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-20.3602066040039,
+							54.0,
+							-736.188171386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_234.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							-13.1739768981934,
+							61.5,
+							-854.115112304688
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-13.1739768981934,
+							54.0,
+							-854.115112304688
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_234.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							29.3503227233887,
+							61.5,
+							-832.067626953125
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							29.3503227233887,
+							54.0,
+							-832.067626953125
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_342.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							36.536548614502,
+							61.5,
+							-949.994506835938
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							36.536548614502,
+							54.0,
+							-949.994506835938
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_342.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							79.0608520507812,
+							61.5,
+							-927.947021484375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							79.0608520507812,
+							54.0,
+							-927.947021484375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_450.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							86.2470855712891,
+							61.5,
+							-1045.8740234375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							86.2470855712891,
+							54.0,
+							-1045.8740234375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_450.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							128.771392822266,
+							61.5,
+							-1023.82647705078
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							128.771392822266,
+							54.0,
+							-1023.82647705078
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_-58_-26",
+						"intact": true,
+						"owner": "opera/podium/upper/0/0",
+						"position": [
+							376.786437988281,
+							16.2000007629395,
+							-360.040771484375
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							407.936767578125,
+							43.5,
+							-352.715698242188
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_-58_21",
+						"intact": true,
+						"owner": "opera/podium/upper/0/2",
+						"position": [
+							366.027709960938,
+							16.2000007629395,
+							-314.288757324219
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							397.178039550781,
+							43.5,
+							-306.963653564453
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_58_-23",
+						"intact": true,
+						"owner": "opera/podium/upper/4/0",
+						"position": [
+							489.019653320312,
+							16.2000007629395,
+							-330.566955566406
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							454.948974609375,
+							43.5,
+							-338.578796386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_58_19",
+						"intact": true,
+						"owner": "opera/podium/upper/4/2",
+						"position": [
+							479.405456542969,
+							16.2000007629395,
+							-289.682159423828
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							445.334777832031,
+							43.5,
+							-297.694000244141
+						],
+						"visible": true
+					}
+				],
+				"max_lights": 40,
+				"night_factor": 1.0,
+				"photometric_survey": false,
+				"runtime_changes": "numeric light_energy only",
+				"total_energy": 72.5999979972839
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "7c0e697585a574d2713b3fc4e84eef416bd4006a9369468bdd162f7b91f1fffd",
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"target": [
+				180.0,
+				28.0,
+				-530.0
+			]
+		},
+		{
+			"camera": [
+				-329.079986572266,
+				8.0,
+				1090.0
+			],
+			"clock": {
+				"cycles": 0,
+				"hour": 22.0,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"facade_stream": {
+				"base_collision_resident": true,
+				"builds": 42,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 7,
+				"last_upload_ms": 0.537,
+				"last_worker_ms": 0.663,
+				"limit": 64,
+				"max_upload_ms": 98.307,
+				"pending_worker": 0,
+				"resident": 35,
+				"resident_cells": [
+					[
+						-3,
+						6
+					],
+					[
+						-2,
+						6
+					],
+					[
+						-3,
+						7
+					],
+					[
+						-2,
+						7
+					],
+					[
+						-3,
+						5
+					],
+					[
+						-2,
+						5
+					],
+					[
+						-4,
+						6
+					],
+					[
+						-1,
+						6
+					],
+					[
+						-4,
+						7
+					],
+					[
+						-1,
+						7
+					],
+					[
+						-3,
+						8
+					],
+					[
+						-2,
+						8
+					],
+					[
+						-4,
+						5
+					],
+					[
+						-1,
+						5
+					],
+					[
+						-4,
+						8
+					],
+					[
+						-1,
+						8
+					],
+					[
+						-3,
+						4
+					],
+					[
+						-2,
+						4
+					],
+					[
+						-5,
+						6
+					],
+					[
+						-5,
+						7
+					],
+					[
+						0,
+						6
+					],
+					[
+						-3,
+						9
+					],
+					[
+						-4,
+						4
+					],
+					[
+						-2,
+						9
+					],
+					[
+						-5,
+						5
+					],
+					[
+						-1,
+						4
+					],
+					[
+						0,
+						5
+					],
+					[
+						-5,
+						8
+					],
+					[
+						-4,
+						9
+					],
+					[
+						-1,
+						9
+					],
+					[
+						-3,
+						3
+					],
+					[
+						-2,
+						3
+					],
+					[
+						-5,
+						4
+					],
+					[
+						0,
+						4
+					],
+					[
+						-6,
+						6
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 35
+			},
+			"file": "cbd-george-street-night.png",
+			"fov": 64.0,
+			"night_windows": {
+				"clock_expected_value": 1.0,
+				"clock_write": {
+					"frame": 266,
+					"hour": 22.0,
+					"name": "city_night_amount",
+					"sequence": 7,
+					"value": 1.0
+				},
+				"global_gpu_readback": false,
+				"night_global_name": "city_night_amount",
+				"registered_facade_materials": 38,
+				"sample": [
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 2.3,
+							"floor_height": null,
+							"glazing": 0.86,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					}
+				],
+				"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+			},
+			"preset": "night",
+			"public_lighting": {
+				"count": 34,
+				"fixed_positions": true,
+				"lights": [
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-868.487426757812,
+							13.0500001907349,
+							1851.79077148438
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-868.487426757812,
+							4.53499984741211,
+							1851.79077148438
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-865.223510742188,
+							13.0500001907349,
+							1867.45434570312
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-865.223510742188,
+							4.53499984741211,
+							1867.45434570312
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-861.959594726562,
+							13.0500001907349,
+							1883.11804199219
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-861.959594726562,
+							4.53499984741211,
+							1883.11804199219
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-858.695678710938,
+							13.0500001907349,
+							1898.78161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-858.695678710938,
+							4.53499984741211,
+							1898.78161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-862.515686035156,
+							13.0500001907349,
+							1850.54638671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-862.515686035156,
+							4.53499984741211,
+							1850.54638671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-859.251770019531,
+							13.0500001907349,
+							1866.2099609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-859.251770019531,
+							4.53499984741211,
+							1866.2099609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-855.987854003906,
+							13.0500001907349,
+							1881.87365722656
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-855.987854003906,
+							4.53499984741211,
+							1881.87365722656
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-852.723937988281,
+							13.0500001907349,
+							1897.53723144531
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-852.723937988281,
+							4.53499984741211,
+							1897.53723144531
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-856.446044921875,
+							13.0500001907349,
+							1849.28161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-856.446044921875,
+							4.53499984741211,
+							1849.28161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-853.18212890625,
+							13.0500001907349,
+							1864.9453125
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-853.18212890625,
+							4.53499984741211,
+							1864.9453125
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-849.918212890625,
+							13.0500001907349,
+							1880.60888671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-849.918212890625,
+							4.53499984741211,
+							1880.60888671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-846.654296875,
+							13.0500001907349,
+							1896.2724609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-846.654296875,
+							4.53499984741211,
+							1896.2724609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1031.20361328125,
+							9.72999954223633,
+							1482.51538085938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1031.20361328125,
+							4.5,
+							1482.51538085938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1026.30773925781,
+							9.72999954223633,
+							1506.01086425781
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1026.30773925781,
+							4.5,
+							1506.01086425781
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1013.58203125,
+							9.72999954223633,
+							1478.84350585938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1013.58203125,
+							4.5,
+							1478.84350585938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1008.68615722656,
+							9.72999954223633,
+							1502.3388671875
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1008.68615722656,
+							4.5,
+							1502.3388671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-65.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-943.6240234375,
+							15.7799997329712,
+							1649.68591308594
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-943.6240234375,
+							11.0,
+							1649.68591308594
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-20.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-934.444213867188,
+							15.7799997329712,
+							1693.73974609375
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-934.444213867188,
+							11.0,
+							1693.73974609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_25.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-925.264465332031,
+							15.7799997329712,
+							1737.79357910156
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-925.264465332031,
+							11.0,
+							1737.79357910156
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_70.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-916.084716796875,
+							15.7799997329712,
+							1781.84753417969
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-916.084716796875,
+							11.0,
+							1781.84753417969
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_18.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-112.595031738281,
+							61.5,
+							-662.356262207031
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-112.595031738281,
+							54.0,
+							-662.356262207031
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_18.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-70.0707397460938,
+							61.5,
+							-640.308776855469
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-70.0707397460938,
+							54.0,
+							-640.308776855469
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_126.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-62.8845062255859,
+							61.5,
+							-758.235656738281
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-62.8845062255859,
+							54.0,
+							-758.235656738281
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_126.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-20.3602066040039,
+							61.5,
+							-736.188171386719
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-20.3602066040039,
+							54.0,
+							-736.188171386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_234.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							-13.1739768981934,
+							61.5,
+							-854.115112304688
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-13.1739768981934,
+							54.0,
+							-854.115112304688
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_234.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							29.3503227233887,
+							61.5,
+							-832.067626953125
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							29.3503227233887,
+							54.0,
+							-832.067626953125
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_342.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							36.536548614502,
+							61.5,
+							-949.994506835938
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							36.536548614502,
+							54.0,
+							-949.994506835938
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_342.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							79.0608520507812,
+							61.5,
+							-927.947021484375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							79.0608520507812,
+							54.0,
+							-927.947021484375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_450.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							86.2470855712891,
+							61.5,
+							-1045.8740234375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							86.2470855712891,
+							54.0,
+							-1045.8740234375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_450.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							128.771392822266,
+							61.5,
+							-1023.82647705078
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							128.771392822266,
+							54.0,
+							-1023.82647705078
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_-58_-26",
+						"intact": true,
+						"owner": "opera/podium/upper/0/0",
+						"position": [
+							376.786437988281,
+							16.2000007629395,
+							-360.040771484375
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							407.936767578125,
+							43.5,
+							-352.715698242188
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_-58_21",
+						"intact": true,
+						"owner": "opera/podium/upper/0/2",
+						"position": [
+							366.027709960938,
+							16.2000007629395,
+							-314.288757324219
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							397.178039550781,
+							43.5,
+							-306.963653564453
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_58_-23",
+						"intact": true,
+						"owner": "opera/podium/upper/4/0",
+						"position": [
+							489.019653320312,
+							16.2000007629395,
+							-330.566955566406
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							454.948974609375,
+							43.5,
+							-338.578796386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_58_19",
+						"intact": true,
+						"owner": "opera/podium/upper/4/2",
+						"position": [
+							479.405456542969,
+							16.2000007629395,
+							-289.682159423828
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							445.334777832031,
+							43.5,
+							-297.694000244141
+						],
+						"visible": true
+					}
+				],
+				"max_lights": 40,
+				"night_factor": 1.0,
+				"photometric_survey": false,
+				"runtime_changes": "numeric light_energy only",
+				"total_energy": 72.5999979972839
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "7238ab8b49dccb49e30c58fa569ca433f420b1c09f5331a58857d50cfe2e3b68",
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"target": [
+				-329.079986572266,
+				12.0,
+				980.0
+			]
+		},
+		{
+			"camera": [
+				-857.025268554688,
+				6.30000019073486,
+				1850.423828125
+			],
+			"clock": {
+				"cycles": 0,
+				"hour": 22.0,
+				"running": false,
+				"season": "sydney_average_summer",
+				"speed": 12.0,
+				"version": 1
+			},
+			"facade_stream": {
+				"base_collision_resident": true,
+				"builds": 72,
+				"cell_size_m": 160,
+				"enabled": true,
+				"evictions": 34,
+				"last_upload_ms": 24.148,
+				"last_worker_ms": 26.202,
+				"limit": 64,
+				"max_upload_ms": 123.111,
+				"pending_worker": 0,
+				"resident": 38,
+				"resident_cells": [
+					[
+						-4,
+						7
+					],
+					[
+						-3,
+						8
+					],
+					[
+						-4,
+						8
+					],
+					[
+						-5,
+						7
+					],
+					[
+						-3,
+						9
+					],
+					[
+						-2,
+						9
+					],
+					[
+						-5,
+						8
+					],
+					[
+						-4,
+						9
+					],
+					[
+						-6,
+						12
+					],
+					[
+						-7,
+						11
+					],
+					[
+						-5,
+						12
+					],
+					[
+						-7,
+						12
+					],
+					[
+						-4,
+						11
+					],
+					[
+						-6,
+						13
+					],
+					[
+						-6,
+						9
+					],
+					[
+						-4,
+						12
+					],
+					[
+						-5,
+						13
+					],
+					[
+						-4,
+						10
+					],
+					[
+						-8,
+						11
+					],
+					[
+						-5,
+						9
+					],
+					[
+						-7,
+						13
+					],
+					[
+						-8,
+						12
+					],
+					[
+						-8,
+						10
+					],
+					[
+						-4,
+						13
+					],
+					[
+						-3,
+						11
+					],
+					[
+						-8,
+						13
+					],
+					[
+						-6,
+						14
+					],
+					[
+						-8,
+						9
+					],
+					[
+						-3,
+						12
+					],
+					[
+						-3,
+						10
+					],
+					[
+						-5,
+						14
+					],
+					[
+						-9,
+						11
+					],
+					[
+						-7,
+						14
+					],
+					[
+						-7,
+						8
+					],
+					[
+						-9,
+						12
+					],
+					[
+						-9,
+						10
+					],
+					[
+						-3,
+						13
+					],
+					[
+						-4,
+						14
+					]
+				],
+				"scope": "near_facade_only",
+				"wanted": 32
+			},
+			"file": "icc-public-foyer-night.png",
+			"fov": 64.0,
+			"night_windows": {
+				"clock_expected_value": 1.0,
+				"clock_write": {
+					"frame": 266,
+					"hour": 22.0,
+					"name": "city_night_amount",
+					"sequence": 7,
+					"value": 1.0
+				},
+				"global_gpu_readback": false,
+				"night_global_name": "city_night_amount",
+				"registered_facade_materials": 38,
+				"sample": [
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 2.3,
+							"floor_height": null,
+							"glazing": 0.86,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					},
+					{
+						"emission_uses_night_amount": true,
+						"night_uniform_declared": true,
+						"raw_uniform_overrides": {
+							"bay_width": 3.0,
+							"floor_height": null,
+							"glazing": 0.49,
+							"lit_windows": null
+						},
+						"shader": "res://shaders/city_facade.gdshader"
+					}
+				],
+				"scope": "Actual registered production materials and CPU metadata written immediately after the production RenderingServer submission. This is a submission witness, not GPU global-uniform readback; pixel appearance requires the native CBD image."
+			},
+			"preset": "night",
+			"public_lighting": {
+				"count": 34,
+				"fixed_positions": true,
+				"lights": [
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-868.487426757812,
+							13.0500001907349,
+							1851.79077148438
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-868.487426757812,
+							4.53499984741211,
+							1851.79077148438
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-865.223510742188,
+							13.0500001907349,
+							1867.45434570312
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-865.223510742188,
+							4.53499984741211,
+							1867.45434570312
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-861.959594726562,
+							13.0500001907349,
+							1883.11804199219
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-861.959594726562,
+							4.53499984741211,
+							1883.11804199219
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_42.5_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-858.695678710938,
+							13.0500001907349,
+							1898.78161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-858.695678710938,
+							4.53499984741211,
+							1898.78161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-862.515686035156,
+							13.0500001907349,
+							1850.54638671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-862.515686035156,
+							4.53499984741211,
+							1850.54638671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-859.251770019531,
+							13.0500001907349,
+							1866.2099609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-859.251770019531,
+							4.53499984741211,
+							1866.2099609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-855.987854003906,
+							13.0500001907349,
+							1881.87365722656
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-855.987854003906,
+							4.53499984741211,
+							1881.87365722656
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_48.6_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-852.723937988281,
+							13.0500001907349,
+							1897.53723144531
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-852.723937988281,
+							4.53499984741211,
+							1897.53723144531
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-21.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-856.446044921875,
+							13.0500001907349,
+							1849.28161621094
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-856.446044921875,
+							4.53499984741211,
+							1849.28161621094
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_-5.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-853.18212890625,
+							13.0500001907349,
+							1864.9453125
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-853.18212890625,
+							4.53499984741211,
+							1864.9453125
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_11.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-849.918212890625,
+							13.0500001907349,
+							1880.60888671875
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-849.918212890625,
+							4.53499984741211,
+							1880.60888671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 58.0,
+						"energy": 2.59999990463257,
+						"id": "icc_foyer_54.8_27.0",
+						"intact": true,
+						"owner": "icc/theatre/foyer_west",
+						"position": [
+							-846.654296875,
+							13.0500001907349,
+							1896.2724609375
+						],
+						"range": 15.5,
+						"shadows": false,
+						"source": "existing red-ceiling linear strip",
+						"target": [
+							-846.654296875,
+							4.53499984741211,
+							1896.2724609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1031.20361328125,
+							9.72999954223633,
+							1482.51538085938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1031.20361328125,
+							4.5,
+							1482.51538085938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_24.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1026.30773925781,
+							9.72999954223633,
+							1506.01086425781
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1026.30773925781,
+							4.5,
+							1506.01086425781
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_-10.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1013.58203125,
+							9.72999954223633,
+							1478.84350585938
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1013.58203125,
+							4.5,
+							1478.84350585938
+						],
+						"visible": true
+					},
+					{
+						"angle": 65.0,
+						"energy": 1.39999997615814,
+						"id": "icc_convention_42.0_14.0",
+						"intact": true,
+						"owner": "icc/convention/floor",
+						"position": [
+							-1008.68615722656,
+							9.72999954223633,
+							1502.3388671875
+						],
+						"range": 13.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-1008.68615722656,
+							4.5,
+							1502.3388671875
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-65.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-943.6240234375,
+							15.7799997329712,
+							1649.68591308594
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-943.6240234375,
+							11.0,
+							1649.68591308594
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_-20.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-934.444213867188,
+							15.7799997329712,
+							1693.73974609375
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-934.444213867188,
+							11.0,
+							1693.73974609375
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_25.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-925.264465332031,
+							15.7799997329712,
+							1737.79357910156
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-925.264465332031,
+							11.0,
+							1737.79357910156
+						],
+						"visible": true
+					},
+					{
+						"angle": 67.0,
+						"energy": 2.0,
+						"id": "icc_exhibition_70.0",
+						"intact": true,
+						"owner": "icc/exhibition/event_deck",
+						"position": [
+							-916.084716796875,
+							15.7799997329712,
+							1781.84753417969
+						],
+						"range": 21.0,
+						"shadows": false,
+						"source": "grouped existing recessed ceiling fittings",
+						"target": [
+							-916.084716796875,
+							11.0,
+							1781.84753417969
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_18.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-112.595031738281,
+							61.5,
+							-662.356262207031
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-112.595031738281,
+							54.0,
+							-662.356262207031
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_18.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/01",
+						"position": [
+							-70.0707397460938,
+							61.5,
+							-640.308776855469
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-70.0707397460938,
+							54.0,
+							-640.308776855469
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_126.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-62.8845062255859,
+							61.5,
+							-758.235656738281
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-62.8845062255859,
+							54.0,
+							-758.235656738281
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_126.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/10",
+						"position": [
+							-20.3602066040039,
+							61.5,
+							-736.188171386719
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-20.3602066040039,
+							54.0,
+							-736.188171386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_234.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							-13.1739768981934,
+							61.5,
+							-854.115112304688
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							-13.1739768981934,
+							54.0,
+							-854.115112304688
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_234.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/19",
+						"position": [
+							29.3503227233887,
+							61.5,
+							-832.067626953125
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							29.3503227233887,
+							54.0,
+							-832.067626953125
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_342.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							36.536548614502,
+							61.5,
+							-949.994506835938
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							36.536548614502,
+							54.0,
+							-949.994506835938
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_342.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/28",
+						"position": [
+							79.0608520507812,
+							61.5,
+							-927.947021484375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							79.0608520507812,
+							54.0,
+							-927.947021484375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_450.0_-23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							86.2470855712891,
+							61.5,
+							-1045.8740234375
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							86.2470855712891,
+							54.0,
+							-1045.8740234375
+						],
+						"visible": true
+					},
+					{
+						"angle": 66.0,
+						"energy": 2.09999990463257,
+						"id": "bridge_450.0_23.95",
+						"intact": true,
+						"owner": "bridge/deck/37",
+						"position": [
+							128.771392822266,
+							61.5,
+							-1023.82647705078
+						],
+						"range": 23.0,
+						"shadows": false,
+						"source": "existing bridge lamp head",
+						"target": [
+							128.771392822266,
+							54.0,
+							-1023.82647705078
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_-58_-26",
+						"intact": true,
+						"owner": "opera/podium/upper/0/0",
+						"position": [
+							376.786437988281,
+							16.2000007629395,
+							-360.040771484375
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							407.936767578125,
+							43.5,
+							-352.715698242188
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_-58_21",
+						"intact": true,
+						"owner": "opera/podium/upper/0/2",
+						"position": [
+							366.027709960938,
+							16.2000007629395,
+							-314.288757324219
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							397.178039550781,
+							43.5,
+							-306.963653564453
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_58_-23",
+						"intact": true,
+						"owner": "opera/podium/upper/4/0",
+						"position": [
+							489.019653320312,
+							16.2000007629395,
+							-330.566955566406
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							454.948974609375,
+							43.5,
+							-338.578796386719
+						],
+						"visible": true
+					},
+					{
+						"angle": 40.0,
+						"energy": 1.70000004768372,
+						"id": "opera_wash_58_19",
+						"intact": true,
+						"owner": "opera/podium/upper/4/2",
+						"position": [
+							479.405456542969,
+							16.2000007629395,
+							-289.682159423828
+						],
+						"range": 115.0,
+						"shadows": false,
+						"source": "estimated architectural wash at outer podium",
+						"target": [
+							445.334777832031,
+							43.5,
+							-297.694000244141
+						],
+						"visible": true
+					}
+				],
+				"max_lights": 40,
+				"night_factor": 1.0,
+				"photometric_survey": false,
+				"runtime_changes": "numeric light_energy only",
+				"total_energy": 72.5999979972839
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "0c587774785db6f6a432db4212b06956d65ba5ab740726281bd43d3a0561621e",
+			"sky_material_sha256": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+			"target": [
+				-851.394409179688,
+				10.8000001907349,
+				1892.15270996094
+			]
+		}
+	],
+	"sky_assets": [
+		{
+			"binding": "panorama",
+			"declared_source_sha256": "e70bf97a44982db07fb952b1f74c07e818649c2bbdfeb6ad4f98af7b4431a38f",
+			"height": 1024,
+			"loaded_pixel_format": 16,
+			"loaded_pixels_sha256": "68ef1075b59cd4b1159c97b13389496e3c7aae9add2a8f2cadf85943e113c465",
+			"resource_path": "res://assets/environment/rustig_koppie_puresky_2k.hdr",
+			"source_file_sha256": "",
+			"width": 2048
+		},
+		{
+			"binding": "sunset_panorama",
+			"declared_source_sha256": "d66e08231e9c09ca40c6d035214ae8efb638782745c82addbb2a063fa32cabef",
+			"height": 1024,
+			"loaded_pixel_format": 16,
+			"loaded_pixels_sha256": "9763fbd2d589c1962b1cf0b05d5ef368b1083182b8a30dca056e59a26689325c",
+			"resource_path": "res://assets/environment/qwantani_sunset_puresky_2k.hdr",
+			"source_file_sha256": "",
+			"width": 2048
+		},
+		{
+			"binding": "night_panorama",
+			"declared_source_sha256": "d458fe7f20969d89eedbb7ae12d346abf68c86d844235696e7d70baad3e04cf0",
+			"height": 1024,
+			"loaded_pixel_format": 16,
+			"loaded_pixels_sha256": "c07a609fa8e9b6393a31ea9c402535301a5840f8cf1f1b5781b15cb2f398c9fd",
+			"resource_path": "res://assets/environment/qwantani_night_puresky_2k.hdr",
+			"source_file_sha256": "",
+			"width": 2048
+		}
+	],
+	"source_sha256": {
+		"res://assets/environment/daylight.gdshader": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+		"res://assets/environment/sky_sources.json": "ab2668db48e5548bde1ef8d9e89b2653329900cdb3dc0b27186fe4151269b796",
+		"res://assets/sydney_summer.json": "1f472c3b717e4b56d1c752ae57c40f43228449ffdcb7a6d3fd4fbca14d6a9221",
+		"res://assets/world_facade.gdshader": "75b66a79b242ce047c94e34e03f94820c3cb014488c4a060041ce708785def28",
+		"res://scripts/city_clock.gd": "",
+		"res://scripts/daylight_environment.gd": "",
+		"res://scripts/daylight_validation.gd": "",
+		"res://scripts/icc_landmarks.gd": "",
+		"res://scripts/public_lighting.gd": "",
+		"res://shaders/city_facade.gdshader": "0d5d1e398e83c0097685a893f9b29f3b93df3d46c9b2c97a442da5331c7ccfe9",
+		"res://shaders/water.gdshader": "a19530af5fc9342c2fd028401b9b542117fd7f27972669e993ef13e7cf445604"
+	},
+	"user_saves_touched": false,
+	"world_ready": true
+}

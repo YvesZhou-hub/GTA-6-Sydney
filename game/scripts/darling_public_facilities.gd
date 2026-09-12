@@ -115,7 +115,7 @@ class Part:
 		for v in [Vector3(-1,-1,-1),Vector3(1,-1,-1),Vector3(1,1,-1),Vector3(-1,1,-1),Vector3(-1,-1,1),Vector3(1,-1,1),Vector3(1,1,1),Vector3(-1,1,1)]:vertices.append(p+Vector3.UP*.07+basis*(v*size*.5))
 		for face in [[4,5,6,7],[1,0,3,2],[0,4,7,3],[5,1,2,6],[3,7,6,2],[0,1,5,4]]:
 			var normal:Vector3=(vertices[face[1]]-vertices[face[0]]).cross(vertices[face[2]]-vertices[face[0]]).normalized()
-			for i in [0,2,1,0,3,2]:surfaces[key].set_normal(normal);surfaces[key].add_vertex(vertices[face[i]])
+			for i in [0,2,1,0,3,2]:surfaces[key].set_normal(normal);surfaces[key].set_uv(Vector2.ZERO);surfaces[key].add_vertex(vertices[face[i]])
 		elements+=1
 		if collide:
 			var c:=CollisionShape3D.new();var s:=BoxShape3D.new();s.size=size;c.shape=s;c.transform=Transform3D(basis,p+Vector3.UP*.07);body.add_child(c)
@@ -130,7 +130,7 @@ class Part:
 		box((a+b)*.5,Vector3(d,d,a.distance_to(b)),key,collide,Basis.looking_at(b-a,up))
 	func append(mesh:Mesh,t:Transform3D,key:String):
 		if not surfaces.has(key):var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES);surfaces[key]=st
-		surfaces[key].append_from(mesh,0,t);elements+=1
+		Geo._append_mesh_triangles(surfaces[key],mesh,t);elements+=1
 	func finish():
 		var bounds:=AABB(Vector3(-.15,0,-.15),Vector3(.3,.14,.3))
 		for key in surfaces:

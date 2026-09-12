@@ -1,0 +1,161 @@
+{
+	"checks": [
+		{
+			"evidence": {},
+			"name": "default is 12x fixed summer at16",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "summer horizon spans approximately14 hours",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevation_deg": -0.832999999999998,
+				"hour": 6.03720115813035
+			},
+			"name": "sunrise crosses apparent solar horizon",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "sunrise is in correct southeastern southwestern quarter",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevation_deg": -0.832999999999998,
+				"hour": 19.9932813588688
+			},
+			"name": "sunset crosses apparent solar horizon",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "sunset is in correct southeastern southwestern quarter",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "southern summer noon sun points north",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "real7200 seconds gives exactly one24hour cycle",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "real5 minutes advances game1 hour",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "midnight wraps without negative hours",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "seeking backward wraps to previous evening",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "seeking forward wraps to next day",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "photo freeze stops clock",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "selected speed changes clock rate",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "speed has bounded upper limit",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "freeze uses dedicated switch rather than zero rate",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "invalid numeric inputs do not corrupt the clock",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "game pause stops elapsed time",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "title screen does not consume a saved day",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "active gameplay advances at configured speed",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "paused manual seek immediately updates actual sun and sky",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "night removes below-horizon direct sun",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "JSON save restore retains seek speed freeze and day count",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "HUD clock reflects the saved time",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "legacy saves adopt summer defaults",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "nonfinite save numbers fall back safely",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "malformed optional clock values retain safe legacy defaults",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "sun direction and twilight are continuous over midnight",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "24hours do not change expensive rendering feature flags",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"source_hashes": {
+		"res://../source/city_clock_test.gd": "18e79f26adebf8b65c3adc3d4b75f5a5852b5afb02023627baeee93332cb9d75",
+		"res://assets/sydney_summer.json": "1f472c3b717e4b56d1c752ae57c40f43228449ffdcb7a6d3fd4fbca14d6a9221",
+		"res://scripts/city_clock.gd": "08c1ab941e76cc0db1ddac9f1430da53181860f6be0831f95c512446bafe1468"
+	}
+}

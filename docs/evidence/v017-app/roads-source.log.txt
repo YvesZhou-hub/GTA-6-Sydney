@@ -1,0 +1,28 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS shared OSM node joins separate ways and different widths 0
+PASS dead-end butt cap does not grow into unmapped land 
+PASS centerlines remain identical to the source 
+PASS local road join uses spatial material batches 
+PASS hole fully inside a road junction remains actually open 0.0
+PASS excavation clipping preserves surrounding pavement 
+PASS overlapping pedestrian and asphalt surfaces are geometrically disjoint 
+PASS pedestrian approach survives outside carriageway 
+PASS mapped plaza interior is filled and its boundary is not buffered 
+PASS plaza and crossing footway have no double-painted area 480.0
+PASS plaza does not invent perimeter vehicle spawn segments 
+PASS connecting footway survives outside the mapped area 
+PASS mapped plaza yields to carriageway without coplanar overlap 
+PASS mapped plaza retains a real excavation opening 
+PASS Fairy Bower Road source fixture reproduces old strip gaps 131
+PASS Fairy Bower Road every reproduced gap is paved 0
+PASS Darling pyramidal street source fixture reproduces old strip gaps 185
+PASS Darling pyramidal street every reproduced gap is paved 0
+PASS Darling street native artifact has no coplanar material overlap 0.0
+PASS full city renders every nonempty mapped pedestrian area 106
+PASS all city roads keep the original 4.585m visible surface 0
+PASS all city road triangles face upward without degenerates 0
+PASS both real metro holes contain no road or join triangles 0.0
+PASS all city roads batch below original segment instance count 
+ROAD_JOIN_STATS {"build_ms":2589,"draw_groups":1817,"joins":47508,"segments":64958,"triangles":714573}
+ROAD_JOIN_COMPLETE failures=0

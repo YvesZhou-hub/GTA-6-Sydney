@@ -1,0 +1,29 @@
+test_annotation_is_idempotent_and_only_surface_fields_change (__main__.FidelityTests.test_annotation_is_idempotent_and_only_surface_fields_change) ... ok
+test_area_area_overlap_has_stable_id_ownership (__main__.FidelityTests.test_area_area_overlap_has_stable_id_ownership) ... ok
+test_closed_line_and_roundabout_are_not_inferred_as_areas (__main__.FidelityTests.test_closed_line_and_roundabout_are_not_inferred_as_areas) ... ok
+test_concave_area_does_not_become_convex_hull (__main__.FidelityTests.test_concave_area_does_not_become_convex_hull) ... ok
+test_elevated_or_underground_areas_do_not_get_flattened (__main__.FidelityTests.test_elevated_or_underground_areas_do_not_get_flattened) ... ok
+test_excavation_overlap_with_source_hole_not_double_subtracted (__main__.FidelityTests.test_excavation_overlap_with_source_hole_not_double_subtracted) ... ok
+test_explicit_interior_ring_remains_a_hole (__main__.FidelityTests.test_explicit_interior_ring_remains_a_hole) ... ok
+test_fidelity_audit_does_not_modify_the_snapshot (__main__.FidelityTests.test_fidelity_audit_does_not_modify_the_snapshot) ... ok
+test_full_square_interior_is_filled (__main__.FidelityTests.test_full_square_interior_is_filled) ... ok
+test_fully_excavated_area_stays_marked_empty (__main__.FidelityTests.test_fully_excavated_area_stays_marked_empty) ... ok
+test_input_source_and_excavations_are_immutable_for_single_compile (__main__.FidelityTests.test_input_source_and_excavations_are_immutable_for_single_compile) ... ok
+test_invalid_area_report_does_not_mutate_record (__main__.FidelityTests.test_invalid_area_report_does_not_mutate_record) ... ok
+test_invalid_excavation_fails_instead_of_sealing_real_hole (__main__.FidelityTests.test_invalid_excavation_fails_instead_of_sealing_real_hole) ... ok
+test_nonfinite_and_three_dimensional_source_coordinates_rejected (__main__.FidelityTests.test_nonfinite_and_three_dimensional_source_coordinates_rejected) ... ok
+test_open_and_self_intersecting_areas_rejected_without_repair (__main__.FidelityTests.test_open_and_self_intersecting_areas_rejected_without_repair) ... ok
+test_source_holes_do_not_claim_neighbours_inner_area (__main__.FidelityTests.test_source_holes_do_not_claim_neighbours_inner_area) ... ok
+test_two_excavations_are_actual_removed_geometry (__main__.FidelityTests.test_two_excavations_are_actual_removed_geometry) ... ok
+test_winding_reversal_keeps_same_physical_coverage (__main__.FidelityTests.test_winding_reversal_keeps_same_physical_coverage) ... ok
+test_all_106_ground_pedestrian_areas_compile_without_geometry_rejection (__main__.ProductionSnapshotTests.test_all_106_ground_pedestrian_areas_compile_without_geometry_rejection) ... ok
+test_area_union_is_completely_covered_without_double_area (__main__.ProductionSnapshotTests.test_area_union_is_completely_covered_without_double_area) ... ok
+test_known_excavations_are_still_excluded_from_all_compiled_triangles (__main__.ProductionSnapshotTests.test_known_excavations_are_still_excluded_from_all_compiled_triangles) ... ok
+test_missing_relation_holes_are_explicitly_not_claimed (__main__.ProductionSnapshotTests.test_missing_relation_holes_are_explicitly_not_claimed) ... ok
+test_pitt_street_mall_is_full_surface_inside_original_boundary (__main__.ProductionSnapshotTests.test_pitt_street_mall_is_full_surface_inside_original_boundary) ... ok
+test_source_asset_bytes_and_source_points_remain_unchanged (__main__.ProductionSnapshotTests.test_source_asset_bytes_and_source_points_remain_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 1.887s
+
+OK

@@ -1,10 +1,13 @@
 extends RefCounted
 ## One-time safety migration when loading a world made before real city geometry.
-const REVISION := 6 # Photo-refined buildings, walkable foyers and marine access.
+const REVISION := 7 # QVB public arcade and Manly concourse furnishings.
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
 const City=preload("res://scripts/city_map.gd")
 
 static func _custom_id(id:String) -> bool:
+	# Authored replacements can retain old OSM damage keys. Their actual shells
+	# define occupancy; the retired full-height city extrusion must not seal a hall.
+	if id.begins_with("osm/") and (id.get_slice("/",1)+"/"+id.get_slice("/",2)) in City.CUSTOM_IDS:return true
 	return id.begins_with("city/") or id.begins_with("bank/") or id.begins_with("manly/") or id.begins_with("quay/") or id.begins_with("metro/") or id.begins_with("darling_square/") or id.begins_with("cyber/") or id.begins_with("icc/") or id.begins_with("sydney_tower/") or id.begins_with("circular_quay/") or id.begins_with("darling_detail/") or id.begins_with("opera/")
 
 static func _geometry(world:Node3D) -> Dictionary:
@@ -173,26 +176,42 @@ static func _player_needs_relocation(game:Node3D,at:Vector3) -> bool:
 	# AABB corners below the rounded capsule foot may overlap its support slope.
 	return overlaps_new_building(game.world,AABB(at+Vector3(-.32,.25,-.32),Vector3(.64,1.55,.64)))
 
-static func _player_pose(game: Node3D, near: Vector3) -> Vector3:
+static func _player_ground_allowed(game:Node3D,hit:Dictionary) -> bool:
+	if Spawn._ground_allowed(hit):return true
+	if hit.is_empty() or hit.normal.y<.985 or not hit.collider is StaticBody3D:return false
+	var id:String=str(hit.collider.get_meta("damage_id",""))
+	# These are public walking floors, not new vehicle parking surfaces.
+	return id in ["manly/corso/paving","manly/wharf/platform","city/qvb/public_floor"] and game.world.structures.has(id) and not game.world.destroyed.has(id)
+
+static func _clear_player_pose(game:Node3D,hit:Dictionary) -> Vector3:
+	if not _player_ground_allowed(game,hit):return Vector3.INF
+	var p:Vector3=hit.position+Vector3.UP*.04
 	var capsule:=CapsuleShape3D.new()
 	capsule.radius=0.34
 	capsule.height=1.8
+	var query:=PhysicsShapeQueryParameters3D.new()
+	query.shape=capsule
+	query.transform=Transform3D(Basis.IDENTITY,p+Vector3.UP*.91)
+	query.collision_mask=15
+	query.exclude=[game.player.get_rid()]
+	if not game.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():return Vector3.INF
+	if overlaps_new_building(game.world,AABB(p+Vector3(-.34,0,-.34),Vector3(.68,1.82,.68))):return Vector3.INF
+	return p
+
+static func _player_pose(game: Node3D, near: Vector3) -> Vector3:
+	# A slightly raised public floor can be recovered vertically at the saved
+	# location. The short ray also avoids choosing a roof above an indoor save.
+	var local_ray:=PhysicsRayQueryParameters3D.create(near+Vector3.UP*.35,near-Vector3.UP*.4,15,[game.player.get_rid()])
+	var local_pose:=_clear_player_pose(game,game.get_world_3d().direct_space_state.intersect_ray(local_ray))
+	if local_pose.is_finite():return local_pose
 	for ring in range(0,45):
 		for step in 16:
 			var angle:=step*TAU/16.0
 			var p:=near+Vector3(cos(angle),0,sin(angle))*ring*4.0
 			var ray:=PhysicsRayQueryParameters3D.create(p+Vector3.UP*80,p-Vector3.UP*100,15,[game.player.get_rid()])
 			var hit:Dictionary=game.get_world_3d().direct_space_state.intersect_ray(ray)
-			if not Spawn._ground_allowed(hit): continue
-			p=hit.position+Vector3.UP*0.04
-			var query:=PhysicsShapeQueryParameters3D.new()
-			query.shape=capsule
-			query.transform=Transform3D(Basis.IDENTITY,p+Vector3.UP*0.91)
-			query.collision_mask=15
-			query.exclude=[game.player.get_rid()]
-			if not game.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():continue
-			if overlaps_new_building(game.world,AABB(p+Vector3(-.34,0,-.34),Vector3(.68,1.82,.68))):continue
-			return p
+			var candidate:=_clear_player_pose(game,hit)
+			if candidate.is_finite():return candidate
 	return Vector3.INF
 
 static func apply(game: Node3D) -> int:

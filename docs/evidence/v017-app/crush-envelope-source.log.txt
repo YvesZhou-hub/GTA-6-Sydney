@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS physical hull has no forward barrel collider {"cached_visual_front_z":-6.40950012207031,"physical_front_z":-3.79999995231628}
+PASS turning turret sideways does not crush a wall2m ahead of physical hull {"physical_gap_m":2.10000004768372,"sweep_motion_m":0.0625,"unexpected_contacts":[]}
+PASS forward sweep still crushes a wall reached by the actual hull {"contacts":["actual_front_wall"]}
+PASS antenna visual height does not crush a physically clear overhead slab {"physical_top_y":3.91999995708466,"slab_bottom_y":4.55,"unexpected_contacts":[]}
+PASS tank preserves a0.0degree destructible supporting deck {"unexpected_contacts":[]}
+PASS tank preserves a25.0degree destructible supporting deck {"unexpected_contacts":[]}
+COMBAT_CRUSH_ENVELOPE_COMPLETE checks=6 failures=0
