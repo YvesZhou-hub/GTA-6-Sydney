@@ -1,0 +1,449 @@
+{
+  "archive_sha256": "9269a3f9a39c79b23ef1a2ac349cad535a4d275d37866f3a5c10d236948b33e8",
+  "images_reviewed": 63,
+  "method": "Visual review by four collaborating agents. Changed final PNGs were reopened individually; byte-identical PNGs inherit an earlier direct visual inspection verified by SHA256. All hashes below were checked against the final App captures. Only the 19 representative PNGs listed in screenshots.json are included in the public source package.",
+  "scope": "No newly observed blocking geometry within these views; source references and known approximations remain documented. Not a full city fidelity or unseen interior certification.",
+  "images": [
+    {
+      "file": "westpac_public_colonnade.png",
+      "sha256": "98ef0922ee363364081f4c4fc77b71f3a319e821e2825fa17900f2716f89dde9",
+      "review": "Reopened and inspected the final PNG. The ordinary repeated-window extrusion previously closing the western ground is gone. Blue glazed upper mass remains, with round support columns and a pale panel-jointed soffit visible below. The gap between the outer columns and the setback glazed core is open in the visible portions. Foreground trees still obscure a substantial part of the facade; this view does not establish hidden geometry or complete terrace fidelity. No new visible blocking intersection.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "westpac_podium_glazing.png",
+      "sha256": "53a44cd83441a7e3d465912e618a25ddc30b86d6a270bede3a662566e16e41e6",
+      "review": "Reopened and inspected the final PNG. The retained upper blue-glass western mass now sits above the raised podium; point fittings, supporting round columns and open ground between columns are distinguishable. No remaining ordinary midrise window facade fills the colonnade. Tree crowns partly obscure ground detail; upper glass and horizon facade patterns remain simplified. No new release-blocking visible defect.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "cba_south_canopy.png",
+      "sha256": "ded377bc8e72420d5c604913a46b6325dda2702dfd88ec557534876c2fe324ef",
+      "review": "Swept timber lattice, dark outer edge, warm deep mullions and blinds are clear. Public path appears open; no obvious visible solid intersection.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "cba_south_timber_facade.png",
+      "sha256": "4b5112198a73786afa99b01aeb02c837cc4718d1ab69a7e5cf3dc042af911448",
+      "review": "Curved facade and continuous canopy are legible with warm vertical frames and pale blinds; minor lower-left tree obstruction only.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "cba_north_canopy.png",
+      "sha256": "d8aec635cb0e8f919493f8eeac88a91bb98d87505ba05c263fe64315c3f49175",
+      "review": "Reopened and inspected the changed final PNG. The nearest swept timber ribs, longitudinal battens and warm facade posts are visible along the left; trees hide much of the more distant canopy. Ground path visible between trees is unobstructed. No new visible clipping; hidden canopy portions are not visually verified.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "cba_north_timber_facade.png",
+      "sha256": "9ed895dce7e816e77107a585336a8dcd95b2d9d4d05ce72e8c78b2c67c3c4b38",
+      "review": "Reopened and inspected the changed final PNG. Warm mullions, pale blinds and the curved upper facade remain legible. Tree crowns obscure most lower canopy detail. No new visible geometry fault; this remains a contextual upper-facade view rather than full ground-detail acceptance.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_business_pancakes_on_the_rocks_photo_detail.png",
+      "sha256": "bb09037fb98c7139c407aba03c73a19b6f4a716aa87fcff3662ac4a9e723c2ee",
+      "review": "Entire PANCAKES ON THE ROCKS wording is readable on the red central valance without mullions crossing it. Three red awning bays, hanging lamps and planters remain visible.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_business_bengongs_tea_photo_detail.png",
+      "sha256": "0ff7379d7137b56ddef987c41470d793b59021e1ebe9173df96492291eff43fd",
+      "review": "ORIENTAL / TEACRAFT lies wholly inside the middle pane, without crossing window frames. Bronze glazing and tiered bakery display are visible; blade is edge-on. Overhead slab affects composition but does not bury the frontage. Photo basis remains historical 2019, not a verified current fit-out.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_business_sushi_sei_photo_detail.png",
+      "sha256": "7a8da3fdc6061ff45603cfcf4bbe9b8e7c7775de0d9f0615c817b74ee0ea1278",
+      "review": "SUSHI SEI is clear; by KUON is small but separated from the top frame. Interior-inspired relief, counter, chairs and curtain remain visible. Exterior frame is inferred, not fully photo-verified.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_business_haven_specialty_coffee_photo_detail.png",
+      "sha256": "1d2aa9365181df370e25f33a68fcd923113ff650314a569f92806919956e6ae2",
+      "review": "Brick, vertical Haven lettering, dark louvres, glazing and coffee display are unobstructed. Procedural coffee equipment remains simplified.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_bendigo_detail.png",
+      "sha256": "ec17e1affaa3f3a9db3bb999b24494c84e04fbcdc5ad5ffd4560612188b3a221",
+      "review": "A large foreground trunk hides the central window and a tree crown covers some fascia. Vertical Bendigo sign and right entrance are readable; hidden portion cannot be assessed.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_bubu_detail.png",
+      "sha256": "d73291ed6a60778bff8cea8ce4d7ff76a13a3901d2478fbcbbaeb68a1ea3ed52",
+      "review": "Open canopy, yellow counter, red seating, bottles, framed art and sign are clear. No visible host-building burial.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_tattoo_detail.png",
+      "sha256": "60768df14ff7fd529fc7d7ae6b1747d052f06e92708dc81d0c7ea782d76245a3",
+      "review": "Gold lettering, window graphics, brick, blade and bench are clear; no significant obstruction.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_harbour_street_shops.png",
+      "sha256": "b8e6931235a4651f5078a8849eb58f1ec4c10cfa47bff4d0f20961419aee8c86",
+      "review": "Haven is visible at small scale across the street; generic surrounding facade dominates. No obvious clipping at the shop.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_little_hay_shops.png",
+      "sha256": "86e8e7250fd92dbc89bf6d8ae8c6b7b0727fd85c57329f6ec4b2536ea78996bb",
+      "review": "Sushi center and cropped tattoo frontage at right are visible. The overhead slab occupies the upper view; Sushi sublettering remains separated and small.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_little_pier_shops.png",
+      "sha256": "33c1874010984f56d24742cd4002ef6941185c9b0048f3ed12c2a6a034f776e9",
+      "review": "Meet Fresh is clear foreground right; McDonalds farther left is partially screened by tree canopy. These retain inferred simplified facade scope.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_puppuccino_lillianna.png",
+      "sha256": "dd5a03ef0b37e9c380c9098cb9fe88b3d33b5758026ef35b06851c260b8459bc",
+      "review": "Puppuccino and Lillianna lettering, paired doors and display shelves are clear. Long pedestrian lane is unobstructed in the image. Displays remain stylized and do not establish photo-verified fit-outs.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_steam_mill_new.png",
+      "sha256": "b7fed08ff7cea2fed11186a06a6a77ad7b6480504d54da8433ee7242e1c4f56a",
+      "review": "Dragon Hot Pot front, hanging red details, doors and Matcha-Ya frame are visible. No visible lettering overlap or burial; surrounding facade remains simplified.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "darling_tumbalong_restaurants.png",
+      "sha256": "48a742b2987a2aee5d4d1f392e2392492a5e427eaecc0174a1c4a4e663c072dc",
+      "review": "789 Korean BBQ and Uliveto fronts and doors are clear, with Holy Basil partly at left. No obvious frame-letter clipping; small generic merchant displays remain inferred.",
+      "limitation": "",
+      "group_report": "bank-darling-visual-review.json"
+    },
+    {
+      "file": "icc-crystal-facade.png",
+      "sha256": "e68bd1f2c87641555e35f4b371f12e743d2a35a3ff9a372e795f1ba3f0ddaaaa",
+      "review": "Continuous projecting triangular window relief and pale overhanging crown are clearly visible. Transparent ground foyer is legible; no obvious interpenetration or detached new facade panels.",
+      "limitation": "Regular bay repetition, blue glazing and surrounding plain ground remain stylized; this is not surveyed facade fabrication.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "icc-recessed-meeting-pods.png",
+      "sha256": "a0d0635c6347b86effd43a0ea2fb0bac89b5615fd3045b0eec389c85cd7e6370",
+      "review": "Deep timber cheek/soffit edges, inset rear glazing and low guards read as recessed pods rather than flush dark patches. Lower lobby and fitted bays remain visible.",
+      "limitation": "This camera shows only a subset of the eight pods; their complete geometry and clearances are covered by separate tests, not inferred from this one image.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "icc-theatre-glazed-mouth.png",
+      "sha256": "c725e1eaf22ee9765f8db2f4573933fe45b65a5722a0e2e1217edc0a25e82aa6",
+      "review": "The large angular glazed opening remains clear beneath a continuous folded dark shell. Red interior ceiling edges are visible and the exterior skin does not visually fill the glazed mouth.",
+      "limitation": "Foreground tree canopies obscure much of the ground entrance; this is an upper facade view, not independent entrance-clearance evidence.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "icc-theatre-red-foyer.png",
+      "sha256": "34c38ac4d87a97cf5c537bbd4bd261446e405af2e71a9a174f11140321c38ad8",
+      "review": "Red folded ceiling segments and linear lights, timber side-wall relief and clear glazed-side circulation are visible without apparent geometry crossing the aisle.",
+      "limitation": "Distant Fratelli Fresh, Beer Stadium and Harajuku Gyoza labels visually overlap the end of the foyer. They must not be read as verified theatre-interior tenants; the overlay is distracting.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "quay-qqt-rebated-frames.png",
+      "sha256": "1e789d87f525281124a86220b93882dc878a364a280836ee33b9b705accdb788",
+      "review": "Offset tower volumes, recessed dark window returns, pale projecting frames and planted terrace breaks remain readable against nearby real city blocks. No obvious overlapping tower envelopes are visible.",
+      "limitation": "Uppermost crown is outside this crop; repetitive windows and simplified materials remain an authored approximation.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "quay-qqt-stone-podium.png",
+      "sha256": "6211619d600b6d30784bc9757c114960ceec6194a2f621126179d73b31870150",
+      "review": "Stone-course joints and a dark recessed louvre band are visible on the projecting podium, with its open colonnade retained.",
+      "limitation": "The neighboring foreground block hides the right podium continuation; plaza paving and fitout remain sparse and simplified.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "quay-salesforce-glazing.png",
+      "sha256": "bd4dea0a5a19cbc4fdcd42e165bc6770cda5458c62a070574929012d603929f0",
+      "review": "Lower fine glazing bars and part of the white branching structure can be seen down the lane. No clear collision or mesh penetration can be concluded from the overlap.",
+      "limitation": "A mapped foreground building, tree canopy and right canopy dominate the frame and obscure most intended lobby glazing. Do not use this as the representative new-glazing detail image.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "quay-salesforce-tree-shades.png",
+      "sha256": "ff01a30e65dc2244bb22448a5abe4d5800a20efd1e8fbef4cb968cc97cc26340",
+      "review": "Large white branched exterior members read clearly in front of the dark blue tower; chamfered edges and repeated horizontal shade bands are visible.",
+      "limitation": "The camera crops top and foot of the tower. This proves the depicted facade detail, not whole-building proportion or a publicly accessible office lobby.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-harbour.png",
+      "sha256": "66721d1ef41d3a118be3e8b3b8cad6b9f1000888051681085455a4c03c7341ff",
+      "review": "Unequal longitudinal roof trains, their north glazing and the promenade are readable. No newly exposed interior roof or obvious white-shell penetration appears in this view.",
+      "limitation": "Large unarticulated podium faces and broad dark inter-shell infills remain visible simplifications of the real architecture.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-monumental-steps.png",
+      "sha256": "6bc5051cedb83fcf7ed041ed0907a09b5ba2aa6cd1b2ad87e71fb2999e73c0f9",
+      "review": "The broad stair run meets the upper platform continuously in the visible intact state; both major shell groups and south glass faces are unobstructed. A finished pontoon edge is visible at right.",
+      "limitation": "A static intact screenshot cannot prove damaged-save stair support, collision continuity or traversal; those require the separate Opera access regression.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-roof-plan.png",
+      "sha256": "149be7556d639e49a5ff99356b28f3ee5ffc8830542e95362cbfeecb875b595b",
+      "review": "Two unequal roof trains and their common podium remain legible from above. On the east side, the dogleg stone pier, two distinct pontoons and connecting gangways now replace the previously isolated water-path fragments in the depicted area.",
+      "limitation": "The dock is small in this crop. This confirms its integrated visible form; ramp closure, mouth clearance and saved-position behavior rely on the separate Manowar fixture and production routes.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-north-facade.png",
+      "sha256": "89ba29685e79559667e7fbf260dda7eeab0118dbd9ebd263c62d5019d35ddf62",
+      "review": "Both north foyer glass enclosures reveal the different carpeted public landings behind them; the roofs remain visually outside the enclosed hall volumes.",
+      "limitation": "The blank north podium and large infill faces remain coarse; this is an original procedural landmark, not full measured or photographic reconstruction.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-north-curtain-detail.png",
+      "sha256": "9ba6f2029ff1895a7d16b7e8ddc88a4d79ceddfb5a3bf18f2de04fdaf3778a33",
+      "review": "Deep bronze curtain-wall blades, horizontal divisions, glazing transparency and the purple curved stair/landing inside are plainly visible. No glass wall blocks the visible public foyer.",
+      "limitation": "Shell tile bands and several louvre-to-shell terminations remain stylized; no claim is made for fabricated panel or rib dimensions.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-louvre-detail.png",
+      "sha256": "8fa6123781f1647376180bd8c15867cfdc319084b9f3c515459e65ad69624c19",
+      "review": "Horizontal louvre depth and repeated courses are visible under the white tiled shell edge; no gross floating panel is observed.",
+      "limitation": "Dense horizontal lines produce alias-like banding in this still, and broad flat louvre ends remain a visible simplification. This static image cannot determine temporal shimmer.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-concert-curved-stairs.png",
+      "sha256": "9031293c6e4de01c5e6d81450b8f21ebe58584f6724c6ef6f2d08ec7a4385d9a",
+      "review": "The low landing view clearly shows individual purple risers, curved tread lines and the wood-faced upper landing beneath the glazed enclosure. No obstruction crosses the stair flight.",
+      "limitation": "Actual climbing and saved-pose safety are supported by separate route/migration tests, not by this image alone.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-concert-northern-foyer.png",
+      "sha256": "85676db2ba8dfdf73ff6a4a31b40d377ffbb47b18f7a5943f1836229a7100ae1",
+      "review": "The upper curved purple landing, deep bronze glazing members and clear harbor view are visible; edge guards and the public side route remain legible.",
+      "limitation": "From this elevated direction the risers face away and carpet can look smooth; use the lower curved-stairs image to illustrate the steps.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-jst-northern-foyer.png",
+      "sha256": "ed427a242a887eae34b0c827a9a374503c7d99e1ab23cd2eff9264a71e90bad3",
+      "review": "The smaller red-carpeted curved public landing remains visibly distinct, with open views through the glazing and an unobstructed upper side passage.",
+      "limitation": "Materials and sparse furniture are simplified, and the elevated view does not by itself show every stair riser.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-box-office.png",
+      "sha256": "75eeafa2068ce30bc324b571fb8e7f57217d74c13dc154c0eafe815cad36e41d",
+      "review": "Low concrete-style ceiling ribs, continuous lit bands, the ticket counter and the open stair connection are visible without the former cross-stair decorative obstruction.",
+      "limitation": "The large foreground foyer is sparsely furnished and much less detailed than a fully surveyed real ticket hall.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-entry-stairs.png",
+      "sha256": "6d918042a6c9b9c9face8d20d7776b155cfafbca37fb1c87cc4601de6e83c88d",
+      "review": "Treads, handrails and the upper-floor opening are visible along the rising route; ceiling ribs terminate at the cutout rather than spanning through the flight.",
+      "limitation": "The surrounding under-podium fitout and exterior views through the opening are approximate; visible continuity is not a substitute for walking tests.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-concert-hall.png",
+      "sha256": "d87d707ef6c742b38be71cc7505193e31dc4c135580afed1eb708299046ff18c",
+      "review": "Curved timber enclosure, tiered seating, organ pipes and current-style pink reflectors are clear. White roof shells or exterior louvres do not cut across the visible auditorium.",
+      "limitation": "Seat arrangement, reflector geometry and acoustic timber layout are simplified authored interpretations, not a complete seating/BIM model.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-concert-organ.png",
+      "sha256": "abd90fa59d60612eecdc3f2a9ce9cea8bf18362948f5e4c85ce66b30362b5105",
+      "review": "The suspended pink reflectors, organ-pipe grouping, choir seats and raised stage with side stairs are visible and cleanly separated.",
+      "limitation": "Round reflector shapes and pipe counts are representative; no unseen backstage or exact acoustic specification is established.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-concert-stage.png",
+      "sha256": "74f94f5930f297b9ddf349d646396b110ed103ab0ffb817a30fd7edb7cc055cd",
+      "review": "The stage faces continuous raked seating and wood ceiling surfaces. Public side routes are visible and no exterior wall cuts across the room.",
+      "limitation": "The empty stage and repeat seating are deliberately limited; this does not document live production facilities.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "opera-joan-sutherland.png",
+      "sha256": "d2c9ef970ce15fdd9984644b337bfcf997071af7bbd95a51e93f4b2615a8011c",
+      "review": "The dark enclosed auditorium, two levels of side seating and stage opening are legible. The former exterior glazing/louvre intrusion is absent from the visible stage sightline.",
+      "limitation": "The dark plain ceiling, stage dressing and balcony detail remain simplified and are less visually rich than the actual theatre.",
+      "group_report": "opera-icc-towers-visual-review.json"
+    },
+    {
+      "file": "quay_gate_2.png",
+      "sha256": "f57fcafe8161ec9d13dc08a222a7ef50d86bfc4fb7d60ac098be530d3f2d1c5b",
+      "review": "入口绿色F标记、号码和闸口细节清楚，通路留空。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "quay_wharf_3.png",
+      "sha256": "74e5ce33bc3361d7d0e68c31359f8a52fbdd8593cb7471d2735bd0280eb7d194",
+      "review": "白色柱脚、栏杆和雨棚下通道清楚；旧的外部商户浮字有视觉干扰，顶棚仍简化。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "quay_wharves.png",
+      "sha256": "57458ce7ca3b01aa41ac516243a3db5e28847a4424bdcbef144e0719c3594117",
+      "review": "五条码头与雨棚分组、站房相对关系可见；周边普通楼体仍为简化模型。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "quay_station.png",
+      "sha256": "82de080458383d0f362e786c9abf691d1c2b4c3039a90b1eeced9ad8a437e6e7",
+      "review": "站房正面、双侧雨棚及栏杆可见，没有本次新增断桥。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "darling_waterplay.png",
+      "sha256": "92dc6d9682114aa140a1aea25e12859127184a01db6152acfce70ad7f0b0c5d4",
+      "review": "水轮与水槽、平台格栅可见，树冠/设施材质仍简化。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "darling_octanet.png",
+      "sha256": "5577c5bc1a126f6f7f676d7944fb853f416b279b894440353d9dbc5047d3d8e4",
+      "review": "大型蓝色攀爬网和内部绳索可辨。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "darling_wide_slide.png",
+      "sha256": "0f63fd7bba26ee4320df260dfc018a6d155c74be4af727fb0c34767186cd2c57",
+      "review": "宽滑梯曲面与两侧边界可辨；材质和周围树冠仍简化。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "tumbalong_fountains.png",
+      "sha256": "19e3a730c3c11a34efaf04f42acdd92fd4364954d48d71537f2b71fbb33d5b04",
+      "review": "两处分开的喷泉池与喷柱可见，尚非真实水体模拟。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "darling_playground_plan.png",
+      "sha256": "f47ec4d71f939453ebb0faaca4cd24780af153251e28b77d0e5bd8234e0db8e8",
+      "review": "俯视可辨水道、攀爬网、路径和设施分区，整体仍为程序几何。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "manowar-overview.png",
+      "sha256": "8756e0e31282dafb948de507c0287dd9c75c24405ce9a62096326cfcda8f89c3",
+      "review": "歌剧院东侧完整石码头、两浮台及连接桥取代旧孤立海面条带。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "manowar-gangway.png",
+      "sha256": "00f9003050b39484fbf85fc83c6692809967bdfa883b7e910225438a06ad5a92",
+      "review": "石墙分缝、蓝牌和白桩帽可见；连接桥局部被前景墙遮住，完整关系另由overview画面和连续走桥测试核对。",
+      "limitation": "",
+      "group_report": "root-visual-review.json"
+    },
+    {
+      "file": "w-sydney-harbour.png",
+      "sha256": "24019822e9b1080f187f9a3bb027a4bb86554d80ecf6a4964c72e48da371cb98",
+      "review": "Main curve and fascia are visible; rolled end is foreshortened.",
+      "limitation": "Low: other city buildings frame the outline; no visible penetration.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "w-sydney-ribbon-end.png",
+      "sha256": "e523993fcd2c06bd39c8fe664e2123fc64f3873e34acf46604c7e033ee393ef1",
+      "review": "The intended new geometry is obvious at city scale; no visible separation, clipping or reversed faces.",
+      "limitation": "Moderate left foreground neighbour occupies about one quarter of frame but does not hide the rolled end.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "w-sydney-arrival.png",
+      "sha256": "ba43c759500974d117999fbe40db6d5a4763709bae05ac3b2ea65e7a944eecd8",
+      "review": "Entrance floor and open door bay are visible. The closed blue end is the documented short foyer limit; complete hotel interior is not claimed.",
+      "limitation": "Low: ordinary neighbours stay outside the entrance view. Black transom is a 3.35m-high facade frame, not a route-level physical barrier.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "tower-one-whole.png",
+      "sha256": "c1413d89dfe3dc43c42edc6a16012717c48ff95d1d3ded4f9db100463d72c787",
+      "review": "Cannot assess public entrance from this viewpoint. Visible upper fin field is intact.",
+      "limitation": "High: near towers hide much of the lower and right elevation, including the podium.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "tower-one-fins.png",
+      "sha256": "dc11a77e4b79974ff0eb2e48c037302fb5ac8f29f8617ef42143f5969f3f3c54",
+      "review": "The new fin assembly is distinctly three-dimensional. No obvious float, mesh opening or face inversion is visible.",
+      "limitation": "Low: neighbouring towers appear at frame edges, not across the inspected fins.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "bank-of-china-sussex.png",
+      "sha256": "89f8e5a7ab5cb398aadd406852978d8ce312375e82c5d50f6a74fe6e524f1ebd",
+      "review": "The new west-northwest elevated camera resolves the previous foreground-wall obstruction. No visible penetration, missing facade strip or disconnected detail. BOC upper-facade integration is now visually verified.",
+      "limitation": "Low on the tower elevation. Real street trees hide portions of the ground frontage, with neighbouring buildings confined mainly to the sides and lower foreground.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "bank-of-china-colonnade.png",
+      "sha256": "cd0225028174fa2b756cc6f48427dd9b6b9cc917c469b9de4c76eef2910edd8c",
+      "review": "The revised camera resolves the former central tree obstruction and shows the real open colonnade continuing into depth. Ceiling and glazing remain attached; no new visible obstruction or penetration.",
+      "limitation": "The nearest column fills the right foreground as expected, while real trees stay beyond the column line. No tree trunk hides the inner route.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "sydney-tower-whole.png",
+      "sha256": "30cf7d95265da4aac7daf1dfc26fb2d49ebe43deb1d763459df4e935535747db",
+      "review": "No new visible geometry defect. Fine Skywalk details cannot be judged at this distance.",
+      "limitation": "High lower occlusion from city blocks hides the base. The tower occupies a small part of the frame.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "sydney-tower-skywalk.png",
+      "sha256": "84baa8914ab7f10ad9bece41618b9c099e538ebb79270efc8190c98db01c052e",
+      "review": "Most useful tower image. No obvious crown seam gap or detached platform visible; shaft base lies below the frame.",
+      "limitation": "Low: the crown is unobstructed; nearby buildings remain in the background.",
+      "group_report": "tower-and-city-visual-review.json"
+    },
+    {
+      "file": "sydney-tower-podium.png",
+      "sha256": "d5a93eeac24a362f3a91d90c1108a33acdd6eff227dc31663d60e3b6d08171b1",
+      "review": "The new podium facade reads clearly in the exposed area, but this image cannot certify all street entrances.",
+      "limitation": "High: right foreground building hides a large portion of the lower podium; trees hide part of the street.",
+      "group_report": "tower-and-city-visual-review.json"
+    }
+  ]
+}

@@ -60,7 +60,7 @@ static func build(world: Node3D) -> void:
 	world.set_meta("icc_public_routes",routes())
 
 static func _materials(w: Node3D) -> void:
-	for row: Array in [["stone","c7c7bb"],["floor","b4b4a9"],["wood","b88248"],["wood_light","d1a36c"],["dark","262b30"],["black","111820"],["metal","adb7ba"],["red","bd3f42"],["seat_grey","8e9494"],["seat_dark","555c62"],["cream","d9cfb7"],["white","ebeee5"],["plant","54705a"],["screen","315268"],["stripe","d8be72"],["blue","203c76"],["light","fff0cd"],["carpet","737c7e"]]:
+	for row: Array in [["stone","c7c7bb"],["floor","b4b4a9"],["wood","b88248"],["wood_light","d1a36c"],["dark","262b30"],["black","111820"],["metal","adb7ba"],["red","bd3f42"],["seat_grey","8e9494"],["seat_dark","555c62"],["cream","d9cfb7"],["white","ebeee5"],["plant","54705a"],["screen","315268"],["stripe","d8be72"],["blue","203c76"],["light","fff0cd"],["carpet","737c7e"],["crystal_face","74929f"],["crystal_light","b0bdc6"],["theatre_red","a32136"]]:
 		w._mat("icc_"+row[0],Color(row[1]),0.76 if row[0] not in ["metal","screen"] else 0.38)
 	w._mat("icc_glass",Color(0.34,0.53,0.59,0.30),0.24,0.20)
 	var glass: StandardMaterial3D = w.materials.icc_glass
@@ -79,7 +79,24 @@ void fragment(){
 """
 	var floor_mat:=ShaderMaterial.new();floor_mat.shader=floor_shader;w.materials.icc_floor=floor_mat
 	w.materials.icc_light.emission_enabled=true;w.materials.icc_light.emission=Color("fbe9c7");w.materials.icc_light.emission_energy_multiplier=0.75
-	Geo._glazing(w,"icc_crystal",Color("456f7c"),Color("a6b4b9"),Vector2(2.3,4.3),Vector2(0.075,0.075))
+	var mesh_shader:=Shader.new()
+	mesh_shader.code="""shader_type spatial;
+varying vec3 local_p;
+varying vec3 local_n;
+void vertex(){local_p=VERTEX;local_n=NORMAL;}
+void fragment(){
+ vec2 uv=(abs(local_n.x)>abs(local_n.z)?local_p.zy:local_p.xy)/vec2(0.16,0.085);
+ vec2 diagonal=vec2(uv.x+uv.y,uv.x-uv.y);
+ vec2 d=min(fract(diagonal),1.0-fract(diagonal));
+ vec2 aa=max(fwidth(diagonal),vec2(0.003));
+ float rib=1.0-smoothstep(0.085-aa.x,0.085+aa.x,d.x)*smoothstep(0.085-aa.y,0.085+aa.y,d.y);
+ float fade=1.0-smoothstep(0.35,1.5,max(aa.x,aa.y));
+ ALBEDO=mix(vec3(0.075,0.092,0.107),vec3(0.16,0.18,0.19),mix(0.35,rib,fade));
+ ROUGHNESS=0.62;METALLIC=0.45;
+}
+"""
+	var mesh_mat:=ShaderMaterial.new();mesh_mat.shader=mesh_shader;w.materials.icc_mesh=mesh_mat
+	Geo._glazing(w,"icc_crystal",Color("456f7c"),Color("a6b4b9"),Vector2(2.3,2.15),Vector2(0.075,0.075))
 
 static func _box(w: Node3D, id: String, o: Vector3, p: Vector3, size: Vector3, key: String, basis: Basis=Basis.IDENTITY) -> StaticBody3D:
 	return w._structure_box("icc/"+id,point(o,p),size,"icc_"+key,180000.0,FRAME*basis)
@@ -148,7 +165,7 @@ static func _shell(w: Node3D,id: String,o: Vector3,poly: PackedVector2Array,heig
 			_edge_wall(w,id+"/wall/%d/lintel"%i,o,a.lerp(b,ta),a.lerp(b,tb),4.2,lower,"glass")
 		else:
 			_edge_wall(w,id+"/wall/%d/ground"%i,o,a,b,0,lower,"glass" if (a.x+b.x)*0.5>20 else "dark")
-		_edge_wall(w,id+"/wall/%d/upper"%i,o,a,b,lower,height,"crystal" if style=="crystal" else ("glass" if (a.x+b.x)*0.5>40 else "dark"))
+		_edge_wall(w,id+"/wall/%d/upper"%i,o,a,b,lower,height,"crystal" if style=="crystal" else ("glass" if (a.x+b.x)*0.5>40 or (style=="theatre" and (a.y+b.y)*0.5< -44 and (a.x+b.x)*0.5>20) else "dark"))
 		var d: Vector2=(b-a).normalized();var normal:=Vector2(d.y,-d.x)
 		var basis:=Basis(Vector3(d.x,0,d.y),Vector3.UP,Vector3(-d.y,0,d.x))
 		var count:=maxi(1,ceili(a.distance_to(b)/3.1))
@@ -156,13 +173,9 @@ static func _shell(w: Node3D,id: String,o: Vector3,poly: PackedVector2Array,heig
 			var p:=a.lerp(b,float(j)/count)
 			_detail(batch,"metal",Vector3(p.x,height*0.5,p.y),Vector3(0.10,height,0.16),basis)
 		if style=="crystal":
-			# Alternating diagonal silver fins recreate the photograph's crystalline
-			# light/dark facets without using a closed solid building volume.
-			for y in [9.5,18.1,26.7,35.3]:
-				for j in range(count):
-					var p:=a.lerp(b,(float(j)+0.5)/count)
-					var lean:=Basis(Vector3.RIGHT,deg_to_rad(10 if (i+j)%2==0 else -10))
-					_detail(batch,"metal",Vector3(p.x,y,p.y),Vector3(0.23,7.9,0.65),basis*lean)
+			var facade_batch:=_start()
+			_crystal_cells(facade_batch,a,b,lower+1.0,height-3.0)
+			_flush_attached(w,"icc/"+id+"/wall/%d/upper"%i,o,facade_batch,"CrystalWindowRelief")
 		for y in [lower,height]:
 			_detail(batch,"metal",Vector3((a.x+b.x)*0.5,y,(a.y+b.y)*0.5),Vector3(a.distance_to(b),0.20,0.34),basis)
 
@@ -193,8 +206,8 @@ static func _convention(w: Node3D) -> void:
 	# Faceted roof crown visible in the architects' north-front photographs.
 	for i in poly.size():
 		var a:=poly[i];var b:=poly[(i+1)%poly.size()]
-		var crown_a:=Vector3(a.x*1.002,41.0+2.0*clampf((-a.y+30)/75,0,1),a.y*1.002)
-		var crown_b:=Vector3(b.x*1.002,41.0+2.0*clampf((-b.y+30)/75,0,1),b.y*1.002)
+		var crown_a:=Vector3(a.x*1.07,41.0+2.0*clampf((-a.y+30)/75,0,1),a.y*1.07)
+		var crown_b:=Vector3(b.x*1.07,41.0+2.0*clampf((-b.y+30)/75,0,1),b.y*1.07)
 		_triangle(batch,"cream",Vector3(a.x,37.8,a.y),Vector3(b.x,37.8,b.y),crown_b)
 		_triangle(batch,"cream",Vector3(a.x,37.8,a.y),crown_b,crown_a)
 		_triangle(batch,"cream",crown_a,crown_b,Vector3(-3,44,-8))
@@ -283,18 +296,16 @@ static func _exhibition(w: Node3D) -> void:
 	var upper:=_poly(1116329939,EXHIBITION)
 	_slab(w,"exhibition/upper_halls",EXHIBITION,upper,19,35,"dark")
 	_slab(w,"exhibition/event_deck",EXHIBITION,poly,18.7,19,"stone")
-	# Alternating timber-lined projecting meeting pods, as photographed.
+	# Deep open-front timber-lined window boxes, photographed by the architects.
+	# These upper meeting-room projections remain closed to the playable foyer.
+	var pod_batch:=_start()
 	for row in range(2):
 		for i in range(4):
-			var z: float=-67+i*38+(15 if row==1 else 0)
-			var y: float=13.5+row*12.2
-			# All projections remain on the footprint side of the public boulevard.
-			_detail(batch,"dark",Vector3(58,y,z),Vector3(9,8.5,22))
-			_detail(batch,"wood",Vector3(62.56,y,z),Vector3(0.10,8.2,21.4))
-			_detail(batch,"black",Vector3(62.7,y,z),Vector3(0.14,6.5,17.8))
-			_detail(batch,"wood_light",Vector3(63,y+3.25,z),Vector3(2.0,0.30,19.4))
-			_detail(batch,"wood",Vector3(63,y-3.25,z),Vector3(2.0,0.30,19.4))
-			for dz in [-9.7,9.7]:_detail(batch,"wood",Vector3(63,y,z+dz),Vector3(2.0,6.8,0.26))
+			var z:float=-67+i*38+(15 if row==1 else 0)
+			var y:float=13.5+row*12.2
+			_recessed_pod(pod_batch,Vector3(58,y,z))
+	_flush_attached(w,"icc/exhibition/upper_halls",EXHIBITION,pod_batch,"RecessedTimberPods")
+	w.set_meta("icc_recessed_pods",{"count":8,"recess_depth_m":4.15,"public_access":false})
 	for y in [7.0,19.2,31.2]:
 		_detail(batch,"stone",Vector3(64,y,-8),Vector3(2.5,0.38,171))
 	_text(w,root,"ICC SYDNEY\nEXHIBITION CENTRE",Vector3(68.6,5.3,-74),1.1)
@@ -306,16 +317,12 @@ static func _exhibition(w: Node3D) -> void:
 static func _theatre(w: Node3D) -> void:
 	var root:=_root(w,"TikTokTheatreDetails",THEATRE);var batch:=_start()
 	var poly:=_poly(487371417,THEATRE)
-	_shell(w,"theatre",THEATRE,poly,37.3,[{"edge":16,"t":0.2,"width":10.0},{"edge":12,"t":0.5,"width":9.0}],"dark",batch)
+	_shell(w,"theatre",THEATRE,poly,37.3,[{"edge":16,"t":0.2,"width":10.0},{"edge":12,"t":0.5,"width":9.0}],"theatre",batch)
 	_slab(w,"theatre/floor",THEATRE,poly,-0.215,0.035,"dark")
 	_slab(w,"theatre/roof",THEATRE,poly,37.1,38.0,"dark")
-	# Black faceted zinc envelope: asymmetrical triangular folds and red reveals.
-	for i in range(poly.size()):
-		var a:=poly[i];var b:=poly[(i+1)%poly.size()]
-		var mid:=a.lerp(b,0.47)
-		var apex:=Vector3(mid.x*1.012,22+(i%3)*4,mid.y*1.012)
-		_triangle(batch,"black",Vector3(a.x*1.006,7,a.y*1.006),Vector3(b.x*1.006,7,b.y*1.006),apex)
-		_triangle(batch,"dark",Vector3(a.x*1.006,37.3,a.y*1.006),apex,Vector3(b.x*1.006,37.3,b.y*1.006))
+	# Layered dark facade surrounds the photographed tall northern glass mouth.
+	# Keep the acoustic room opaque inside; the public outer foyer can be seen.
+	_theatre_skin(w,poly)
 	# Keep the east foyer's tall glass window open visually; dark folds surround it.
 	for y in [7.3,18.0,28.0]:
 		_detail(batch,"red",Vector3(59.1,y,-31),Vector3(0.12,0.20,27))
@@ -429,6 +436,120 @@ static func theatre_foyer_route() -> Array[Vector3]:
 	return result
 
 
+static func capture_views() -> Array:
+	return [
+		["icc-crystal-facade",point(CONVENTION,Vector3(98,23,-44)),point(CONVENTION,Vector3(52,25,-17))],
+		["icc-recessed-meeting-pods",point(EXHIBITION,Vector3(105,15,-24)),point(EXHIBITION,Vector3(60,20,-24))],
+		["icc-theatre-glazed-mouth",point(THEATRE,Vector3(93,18,-79)),point(THEATRE,Vector3(39,20,-40))],
+		["icc-theatre-red-foyer",point(THEATRE,Vector3(54,1.8,-20)),point(THEATRE,Vector3(51,6.3,22))]
+	]
+
+static func walk_routes() -> Array:
+	# Main precinct runner appends an Array of named route records. Preserve
+	# the original routes() Dictionary for its existing callers.
+	var result:Array=[]
+	var original:=routes()
+	for key:String in original:
+		result.append({"name":"icc_"+key,"points":original[key].duplicate()})
+	result.append({"name":"icc_theatre_glazed_foyer","points":theatre_foyer_route()})
+	return result
+
+static func _flush_attached(w:Node3D,id:String,o:Vector3,batch:Dictionary,label:String) -> void:
+	var body:Node3D=w.structures[id].node
+	var details:=Node3D.new();details.name=label;body.add_child(details)
+	details.global_transform=Transform3D(FRAME,o)
+	_flush(w,details,batch)
+
+static func _bar_between(batch:Dictionary,key:String,a:Vector3,b:Vector3,width:float,depth:float) -> void:
+	var along:=(b-a).normalized()
+	var ref:=Vector3.UP if absf(along.dot(Vector3.UP))<0.95 else Vector3.RIGHT
+	var right:=ref.cross(along).normalized()
+	_detail(batch,key,(a+b)*0.5,Vector3(width,depth,a.distance_to(b)),Basis(right,along.cross(right),along))
+
+static func _crystal_cells(batch:Dictionary,a:Vector2,b:Vector2,low:float,high:float) -> void:
+	var d:Vector2=(b-a).normalized();var out:=Vector3(d.y,0,-d.x)
+	# Choose outward using the local envelope centre, independent of winding.
+	if out.dot(Vector3((a.x+b.x)*0.5,0,(a.y+b.y)*0.5))<0:out=-out
+	var cols:=maxi(1,ceili(a.distance_to(b)/2.3));var rows:=maxi(1,floori((high-low)/2.15))
+	for j in cols:
+		for r in rows:
+			var p:=a.lerp(b,(j+0.5)/cols)
+			var c:=Vector3(p.x,low+(r+0.5)*(high-low)/rows,p.y)+out*0.23
+			var across:=Vector3(d.x,0,d.y)*(a.distance_to(b)/cols-0.12)*0.5
+			var up:=Vector3.UP*((high-low)/rows-0.12)*0.5
+			var tip:=c+out*0.38+up*0.24
+			var p0:=c-across-up;var p1:=c+across-up;var p2:=c+across+up;var p3:=c-across+up
+			_triangle(batch,"crystal_face",p0,p1,tip)
+			_triangle(batch,"crystal_light",p1,p2,tip)
+			_triangle(batch,"metal",p2,p3,tip)
+			_triangle(batch,"crystal_face",p3,p0,tip)
+			_bar_between(batch,"metal",p0,p1,0.055,0.09)
+
+static func _recessed_pod(batch:Dictionary,c:Vector3) -> void:
+	# Outer metal cheeks have depth. Timber lines the recess; rear glazing is
+	# set 4.15m behind its lip rather than a black rectangle pasted at the front.
+	var front:=64.0;var back:=59.85
+	for side in [-1.0,1.0]:
+		_detail(batch,"dark",Vector3((front+back)*0.5,c.y,c.z+side*10.80),Vector3(front-back,8.5,0.46))
+		_detail(batch,"wood",Vector3((front+back)*0.5,c.y,c.z+side*10.53),Vector3(front-back-0.04,7.70,0.06))
+	for side in [-1.0,1.0]:
+		_detail(batch,"dark",Vector3((front+back)*0.5,c.y+side*4.02,c.z),Vector3(front-back,0.46,21.2))
+		_detail(batch,"wood_light" if side>0 else "wood",Vector3((front+back)*0.5,c.y+side*3.77,c.z),Vector3(front-back-0.06,0.055,21.05))
+	_detail(batch,"crystal_face",Vector3(back,c.y,c.z),Vector3(0.10,7.53,21.05))
+	for z in range(7):
+		_detail(batch,"black",Vector3(back+0.07,c.y,c.z+(z-3)*3.25),Vector3(0.12,7.5,0.065))
+	for z in range(10):
+		_detail(batch,"dark",Vector3(61.9,c.y+3.735,c.z-9.5+z*2.1),Vector3(4.05,0.01,0.017))
+	# A low glazed balustrade and timber cap preserve the depth of the opening.
+	_detail(batch,"glass",Vector3(front-0.14,c.y-3.16,c.z),Vector3(0.035,1.10,21.0))
+	_detail(batch,"wood",Vector3(front-0.13,c.y-2.58,c.z),Vector3(0.10,0.085,21.1))
+	for z in range(8):_detail(batch,"metal",Vector3(front-0.13,c.y-3.17,c.z-10.3+z*2.94),Vector3(0.07,1.18,0.055))
+
+static func _theatre_skin_low(p:Vector2) -> float:
+	# Reconstructed outline of the glazed north/east foyer mouth; elevations
+	# are inferred from N567, not a surveyed facade fabrication drawing.
+	if p.y< -43.5 and p.x>19.0:return 31.2-0.055*(p.x-20.0)
+	if p.x>56.0 and p.y< -4.0:return lerpf(29.1,18.5,clampf((p.y+48.4)/44.4,0,1))
+	return 7.0
+
+static func _theatre_skin(w:Node3D,poly:PackedVector2Array) -> void:
+	var panels:=0
+	for i in poly.size():
+		var a:=poly[i];var b:=poly[(i+1)%poly.size()]
+		var segments:=maxi(1,ceili(a.distance_to(b)/3.0));var skin:=_start()
+		var d:Vector2=(b-a).normalized();var out:=Vector3(d.y,0,-d.x)
+		if out.dot(Vector3((a.x+b.x)*0.5,0,(a.y+b.y)*0.5))<0:out=-out
+		for j in segments:
+			var aa:=a.lerp(b,float(j)/segments);var bb:=a.lerp(b,float(j+1)/segments)
+			var lo0:=_theatre_skin_low(aa);var lo1:=_theatre_skin_low(bb)
+			var p0:=Vector3(aa.x,lo0,aa.y)+out*0.34;var p1:=Vector3(bb.x,lo1,bb.y)+out*0.34
+			var p2:=Vector3(bb.x,37.3,bb.y)+out*(0.70+sin(PI*(j+1)/segments)*0.7);var p3:=Vector3(aa.x,37.3,aa.y)+out*(0.70+sin(PI*j/segments)*0.7)
+			_triangle(skin,"mesh",p0,p1,p2);_triangle(skin,"mesh",p0,p2,p3)
+			_bar_between(skin,"metal",p0,p3,0.018,0.026)
+			if minf(lo0,lo1)>7.1:
+				_bar_between(skin,"theatre_red",p0-out*0.10,p1-out*0.10,0.34,0.48)
+				_bar_between(skin,"black",p0+Vector3.UP*0.22,p1+Vector3.UP*0.22,0.20,0.44)
+			panels+=1
+		_flush_attached(w,"icc/theatre/wall/%d/upper"%i,THEATRE,skin,"FoldedTheatreSkin")
+	w.set_meta("icc_theatre_skin",{"panels":panels,"glazed_mouth":true,"elevations_inferred":true})
+
+static func _theatre_red_ceiling(w:Node3D) -> void:
+	var batch:=_start();var ribs:=0
+	# N13 shows folded red metal ceiling fins with linear lights; adapt this
+	# photographed permanent fitout language to the existing public foyer only.
+	for i in range(96):
+		var z:float=-27.4+i*0.65
+		for k in range(3):
+			var a:=Vector3(42.4+k*6.2,8.22+([0.0,0.48,0.28][k]),z)
+			var b:=Vector3(42.4+(k+1)*6.2,8.22+([0.48,0.28,0.0][k]),z)
+			_bar_between(batch,"theatre_red",a,b,0.14,0.42)
+			ribs+=1
+	for x in [42.5,48.6,54.8,60.9]:
+		_detail(batch,"black",Vector3(x,8.77,3.5),Vector3(0.24,0.16,62.6))
+		_detail(batch,"light",Vector3(x,8.64,3.5),Vector3(0.07,0.055,62.6))
+	_flush_attached(w,"icc/theatre/foyer_west",THEATRE,batch,"RedFoldedCeiling")
+	w.set_meta("icc_theatre_red_ceiling",{"profile_segments":ribs,"lowest_y":8.0,"photo_reference":"Populous N13","estimated_fitout_position":true})
+
 static func _screen_bank(w:Node3D,root:Node3D,batch:Dictionary,origin:Vector3,count:int,yaw:float=0) -> void:
 	var frame:=Basis(Vector3.UP,deg_to_rad(yaw))
 	for i in count:
@@ -530,7 +651,7 @@ static func _exhibition_fitout(w:Node3D,root:Node3D,batch:Dictionary) -> void:
 
 static func _theatre_fitout(w:Node3D,root:Node3D,batch:Dictionary) -> void:
 	_peak_wall(batch,42.24,0.18,8.8,-27.8,35)
-	_ceiling_field(batch,Vector3(52,8.8,3),Vector2(18,60),true)
+	_theatre_red_ceiling(w)
 	_detail(batch,"stone",Vector3(54,0.61,27.13),Vector3(8.2,1.0,0.14))
 	_detail(batch,"stone",Vector3(54,1.15,28),Vector3(8.2,0.12,1.85))
 	_screen_bank(w,root,batch,Vector3(54,3.5,28.8),4,180)

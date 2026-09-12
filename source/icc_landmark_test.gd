@@ -10,8 +10,10 @@ class LocalICC:
 		_build_structure_batches()
 var failures:=0
 var count:=0
+var checks:Array[Dictionary]=[]
 func verify(value: bool,message: String) -> void:
 	count+=1
+	checks.append({"name":message,"passed":value})
 	if value:print("PASS ",message)
 	else:failures+=1;push_error(message)
 func _initialize() -> void:call_deferred("run")
@@ -39,6 +41,7 @@ func run() -> void:
 		for surface in node.mesh.get_surface_count():
 			var arrays: Array=node.mesh.surface_get_arrays(surface)
 			triangles+=(arrays[Mesh.ARRAY_INDEX].size() if arrays[Mesh.ARRAY_INDEX]!=null and not arrays[Mesh.ARRAY_INDEX].is_empty() else arrays[Mesh.ARRAY_VERTEX].size())/3
+	check_refinement(world,world.get_world_3d().direct_space_state)
 	print("ICC FIXTURE METRICS structures=",world.structures.size()," meshes=",mesh_parts," visible_triangles=",triangles," seats=",world.get_meta("icc_modeled_seats"))
 	var space:PhysicsDirectSpaceState3D=world.get_world_3d().direct_space_state
 	for name: String in ICC.routes():
@@ -71,8 +74,70 @@ func run() -> void:
 		if not space.intersect_shape(q).is_empty():blockage+=1
 	verify(blockage==0,"Moriarty Walk stays clear across the venue group")
 	if "--capture" in OS.get_cmdline_user_args():await capture(world)
+	var report:={"passed":failures==0,"check_count":count,"failures":failures,"checks":checks,"execution_flags":OS.get_cmdline_user_args(),"full_world":full_world,"continuous_walks_ran":not "--geometry-only" in OS.get_cmdline_user_args(),"structures":world.structures.size(),"visible_meshes":mesh_parts,"visible_triangles":triangles,"modeled_seats":world.get_meta("icc_modeled_seats"),"model_sha256":FileAccess.get_sha256("res://scripts/icc_landmarks.gd"),"test_sha256":FileAccess.get_sha256("res://../source/icc_landmark_test.gd"),"native_capture_ran":"--capture" in OS.get_cmdline_user_args(),"user_saves_touched":false}
+	var report_path:=ProjectSettings.globalize_path("res://../reports/icc-v016-detail-report.json")
+	var file:=FileAccess.open(report_path,FileAccess.WRITE);file.store_string(JSON.stringify(report,"  "));file.close()
 	print("ICC CHECK COMPLETE checks=",count," failures=",failures)
 	quit(failures)
+func check_refinement(world:Node3D,space:PhysicsDirectSpaceState3D) -> void:
+	# Exercise the exact Array.append_array contract used by precinct_validation.
+	var integrated:Array=[];integrated.append_array(ICC.walk_routes())
+	verify(integrated.size()==4,"precinct can append all four ICC route records as an Array")
+	var schema_ok:=true
+	for row in integrated:
+		if not row is Dictionary or not row.get("name") is String or not row.get("points") is Array:
+			schema_ok=false;continue
+		if row.points.size()<2:schema_ok=false
+		for p in row.points:
+			if not p is Vector3 or not p.is_finite():schema_ok=false
+	verify(schema_ok,"every integrated ICC route has a name and finite Vector3 points")
+	var expected:={}
+	for key:String in ICC.routes():expected["icc_"+key]=ICC.routes()[key]
+	expected["icc_theatre_glazed_foyer"]=ICC.theatre_foyer_route()
+	for name:String in expected:
+		var matches:=integrated.filter(func(row):return row is Dictionary and row.get("name")==name)
+		verify(matches.size()==1 and matches[0].get("points")==expected[name],"precinct route matches the original walked path: "+name)
+	verify(world.get_meta("icc_recessed_pods",{}).get("count",0)==8,"eight meeting pods have recessed timber cheeks, soffits, glazing and low guards")
+	verify(world.get_meta("icc_theatre_red_ceiling",{}).get("profile_segments",0)==288,"theatre public foyer has 288 red folded ceiling segments, not generic silver battens")
+	verify(world.get_meta("icc_theatre_skin",{}).get("glazed_mouth",false),"theatre outer skin preserves the photographed tall glazed mouth")
+	verify(world.find_children("CrystalWindowRelief","Node3D",true,false).size()==ICC._poly(488447518,ICC.CONVENTION).size(),"crystalline window relief is attached separately to every original facade component")
+	var supported_ids:=["icc/convention/wall/17/upper","icc/exhibition/upper_halls","icc/theatre/wall/12/upper","icc/theatre/foyer_west"]
+	var detail_names:=["CrystalWindowRelief","RecessedTimberPods","FoldedTheatreSkin","RedFoldedCeiling"]
+	for i in supported_ids.size():
+		var id:String=supported_ids[i]
+		var body:Node3D=world.structures[id].node
+		var detail:Node3D=body.get_node_or_null(NodePath(detail_names[i]))
+		var live:=detail!=null and detail.is_visible_in_tree()
+		world._destroy_component(id,body.global_position,0,false)
+		verify(live and not detail.is_visible_in_tree(),detail_names[i]+" disappears with its original saved damage ID")
+	world.repair_all()
+	var restored:=true
+	for i in supported_ids.size():restored=restored and world.structures[supported_ids[i]].node.get_node(NodePath(detail_names[i])).is_visible_in_tree()
+	verify(restored,"repair restores all attached facade and ceiling detail groups")
+	var pod_root:Node3D=world.structures["icc/exhibition/upper_halls"].node.get_node("RecessedTimberPods")
+	# Inspect the actual triangles along all eight opening centres: a pasted
+	# black front sheet would intersect these rays before the recessed pane.
+	var clear_recesses:=0
+	for row in range(2):
+		for i in range(4):
+			var y:float=13.5+row*12.2;var z:float=-67+i*38+(15 if row==1 else 0)
+			var blocked:=false
+			for mesh:MeshInstance3D in pod_root.find_children("*","MeshInstance3D",true,false):
+				for surface in mesh.mesh.get_surface_count():
+					var arrays:Array=mesh.mesh.surface_get_arrays(surface)
+					var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX];var idx:PackedInt32Array=arrays[Mesh.ARRAY_INDEX]
+					for k in range(0,idx.size() if not idx.is_empty() else vertices.size(),3):
+						var a:Vector3=vertices[idx[k] if not idx.is_empty() else k]
+						var b:Vector3=vertices[idx[k+1] if not idx.is_empty() else k+1]
+						var c:Vector3=vertices[idx[k+2] if not idx.is_empty() else k+2]
+						if Geometry3D.segment_intersects_triangle(Vector3(64.1,y,z+0.8),Vector3(60.1,y,z+0.8),a,b,c)!=null:blocked=true;break
+			if not blocked:clear_recesses+=1
+	verify(clear_recesses==8,"all eight actual pod meshes have a clear 4m recess in front of the rear glazing")
+	for view:Array in ICC.capture_views():
+		var shape:=SphereShape3D.new();shape.radius=0.18
+		var query:=PhysicsShapeQueryParameters3D.new();query.shape=shape;query.transform.origin=view[1]
+		verify(space.intersect_shape(query).is_empty(),"specialist capture camera clear: "+view[0])
+
 func check_theatre_enclosure(world:Node3D,space:PhysicsDirectSpaceState3D) -> void:
 	var missed:=0;var rays:=0
 	var eye:=ICC.point(ICC.THEATRE,Vector3(-29,4,-17))
@@ -151,6 +216,8 @@ func capture(world:Node3D) -> void:
 		["theatre-auditorium",ICC.point(ICC.THEATRE,Vector3(-29,4.0,-17)),ICC.point(ICC.THEATRE,Vector3(19,13,4))],
 		["theatre-stage",ICC.point(ICC.THEATRE,Vector3(17,18,-3)),ICC.point(ICC.THEATRE,Vector3(-31,3,0))]
 	]
+	views.append_array(ICC.capture_views())
+	if "--detail-capture" in OS.get_cmdline_user_args():views=ICC.capture_views()
 	if "--fitout-capture" in OS.get_cmdline_user_args():views=views.filter(func(view):return view[0] in ["convention-registration","exhibition-foyer"])
 	if "--theatre-capture" in OS.get_cmdline_user_args():views=views.filter(func(view):return view[0] in ["theatre-auditorium","theatre-foyer"])
 	var folder:=ProjectSettings.globalize_path("res://../reports/icc-refinement/"+("full-world" if "--full-world" in OS.get_cmdline_user_args() else "local"));DirAccess.make_dir_recursive_absolute(folder)

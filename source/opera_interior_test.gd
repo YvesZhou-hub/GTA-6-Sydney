@@ -2,6 +2,9 @@ extends SceneTree
 const Exterior=preload("res://scripts/opera_landmark.gd")
 const Interior=preload("res://scripts/opera_interiors.gd")
 var checks:Array=[]
+class MigrationProbe extends Node3D:
+	var world:Node3D
+	var player:CharacterBody3D
 class ProbeWorld extends "res://scripts/harbor_world.gd":
 	func _ready():
 		_make_materials()
@@ -43,6 +46,37 @@ func run():
 	if "--visual-only" in OS.get_cmdline_user_args():
 		await capture(world);quit(0);return
 	var space:=world.get_world_3d().direct_space_state
+	verify("ticket ceiling has folded concrete profiles",world.get_meta("opera_ticket_folded_beams",0)==22)
+	for foyer:String in ["concert_foyer","jst_foyer"]:
+		verify(foyer+" broad flight uses real curved treads",world.structures["opera/interior/"+foyer+"/broad_stairs"].node.get_meta("curved_carpet_treads",0)==14)
+	# The local fixture has no generic city buildings. Feed its actual authored
+	# colliders to the production migration checker, not a synthetic landing box.
+	world.map_snapshot={"buildings":[]}
+	var migration=load("res://scripts/map_migration.gd")
+	var proxy:=MigrationProbe.new();root.add_child(proxy);proxy.world=world
+	proxy.player=load("res://scripts/harbor_player.gd").new();proxy.add_child(proxy.player)
+	for p:Vector3 in [Vector3(-26,13.4,-60.2),Vector3(23,13.4,-48.2)]:
+		var buried:=Interior.point(p-Vector3.UP*.15)
+		var safe:=Interior.point(p+Vector3.UP*.04)
+		verify("new landing buried player is identified "+str(p.x),migration._player_needs_relocation(proxy,buried))
+		verify("new landing safely standing player stays "+str(p.x),not migration._player_needs_relocation(proxy,safe))
+	for spec:Array in [[-26.0,18.0*.775,-77.0,-59.0],[23.0,14.0*.775,-62.0,-47.0]]:
+		for u in [0.0,-.75,.75]:
+			var mid:Vector3=Interior._foyer_stair_p(spec[0],spec[1],spec[2],spec[3],u,.5)
+			proxy.player.global_position=Interior.point(mid+Vector3.UP*.08)
+			proxy.player.velocity=Vector3.ZERO;proxy.player.reset_physics_interpolation();proxy.player.enabled=true
+			for frame in 30:await physics_frame
+			proxy.player.enabled=false
+			var settled:Vector3=proxy.player.global_position
+			var occupied:bool=migration._player_needs_relocation(proxy,settled)
+			verify("foyer actual settled slope player stays cx=%s u=%s"%[spec[0],u],proxy.player.is_on_floor() and not occupied,{"local_position":Interior.basis().inverse()*(settled-Interior.CENTER),"on_floor":proxy.player.is_on_floor(),"needs_relocation":occupied})
+			verify("foyer slope buried 4cm player is identified cx=%s u=%s"%[spec[0],u],migration._player_needs_relocation(proxy,settled-Vector3.UP*.04))
+	proxy.queue_free();await physics_frame
+	if "--migration-only" in OS.get_cmdline_user_args():
+		var path:=ProjectSettings.globalize_path("res://../reports/opera-v016-migration.json")
+		FileAccess.open(path,FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"execution_flags":OS.get_cmdline_user_args(),"continuous_walks_ran":false,"scope":"Local complete Opera geometry; actual settled production capsules and migration decisions only","user_saves_touched":false},"  "))
+		print("OPERA_MIGRATION COMPLETE ",checks.size()," CHECKS / ",checks.filter(func(c):return not c.passed).size()," FAILURES")
+		quit(0 if checks.all(func(c):return c.passed) else 1);return
 	for route:Dictionary in Interior.walk_routes():
 		var filter:String=""
 		for argument:String in OS.get_cmdline_user_args():
@@ -90,7 +124,7 @@ func run():
 		verify("raised playable stage "+str(cx),not hit.is_empty() and absf(hit.position.y-(Interior.CENTER.y+Interior.STAGE))<.03)
 	if "--capture" in OS.get_cmdline_user_args():await capture(world)
 	var folder:=ProjectSettings.globalize_path("res://../reports/opera-interiors");DirAccess.make_dir_recursive_absolute(folder)
-	FileAccess.open(folder+"/report.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"physics_engine":ProjectSettings.get_setting("physics/3d/physics_engine"),"components":component_count,"concert_seats":world.get_meta("opera_concert_seats"),"jst_seats":world.get_meta("opera_jst_seats"),"fixture_mode":"temporary_interior_only" if "--interior-only" in OS.get_cmdline_user_args() else "complete_exterior_and_interiors","user_saves_touched":false},"  "))
+	FileAccess.open(folder+"/report.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"execution_flags":OS.get_cmdline_user_args(),"continuous_walks_ran":not "--geometry-only" in OS.get_cmdline_user_args(),"physics_engine":ProjectSettings.get_setting("physics/3d/physics_engine"),"components":component_count,"concert_seats":world.get_meta("opera_concert_seats"),"jst_seats":world.get_meta("opera_jst_seats"),"fixture_mode":"temporary_interior_only" if "--interior-only" in OS.get_cmdline_user_args() else "complete_exterior_and_interiors","user_saves_touched":false},"  "))
 	print("OPERA_INTERIOR COMPLETE ",checks.size()," CHECKS / ",checks.filter(func(c):return not c.passed).size()," FAILURES")
 	quit(0 if checks.all(func(c):return c.passed) else 1)
 func walk(world:Node3D,route:Dictionary):

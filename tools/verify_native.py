@@ -12,7 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=("experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access"))
     parser.add_argument("--app", type=Path, default=Path("dist/Harbourlife.app"))
-    parser.add_argument("--output", type=Path, default=Path("reports/release-v015-native"))
+    parser.add_argument("--output", type=Path, default=Path("reports/release-v016-native"))
     args = parser.parse_args()
     app = args.app.resolve() / "Contents/MacOS/Harbourlife"
     user_data = Path.home() / "Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港"

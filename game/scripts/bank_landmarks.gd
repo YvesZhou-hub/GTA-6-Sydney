@@ -34,17 +34,17 @@ void fragment(){
 
 static func metadata() -> Array[Dictionary]:
 	return [
-		{"id":"westpac","name":"Westpac Place · Westpac Group headquarters","address":"275 Kent Street, Sydney NSW 2000","center":WESTPAC_PODIUM_CENTER,"lat":-33.8660600591,"lon":151.2039136697,"height_m":166.0,"height_confidence":"CTBUH architectural height including roof beacon; individual OSM part heights inferred from architect photos","osm_ids":[120926554,335696788,544300935,544300936,544300937,544300938],"source":"https://www.westpac.com.au/about-westpac/global-locations/westpac-australia/"},
+		{"id":"westpac","name":"Westpac Place · Westpac Group headquarters","address":"275 Kent Street, Sydney NSW 2000","center":WESTPAC_PODIUM_CENTER,"lat":-33.8660600591,"lon":151.2039136697,"height_m":166.0,"height_confidence":"CTBUH architectural height including roof beacon; individual OSM part heights inferred from architect photos","osm_ids":[120926554,335696788,544300934,544300935,544300936,544300937,544300938],"source":"https://www.westpac.com.au/about-westpac/global-locations/westpac-australia/"},
 		{"id":"cba_south","name":"Commonwealth Bank Place South · CBA headquarters","address":"11 Harbour Street, Sydney NSW 2000","center":CBA_SOUTH_CENTER,"lat":-33.8753175218,"lon":151.2029945561,"height_m":CBA_HEIGHT,"height_confidence":"43.2m estimated from nine mapped levels and photographed vaulted roof; no survey height found","osm_ids":[183246899],"source":"https://www.commbank.com.au/about-us/investors/enquiries.html"},
 		{"id":"cba_north","name":"Commonwealth Bank Place North","address":"Darling Quarter, Harbour Street, Sydney NSW 2000","center":CBA_NORTH_CENTER,"height_m":CBA_HEIGHT,"height_confidence":"43.2m estimated companion campus building; not identified as the South headquarters address","osm_ids":[183246900],"source":"https://fjcstudio.com/projects/darling-quarter/"}
 	]
 
 static func excluded_way_ids() -> Array[int]:
-	return [120926554,335696788,544300935,544300936,544300937,544300938,183246899,183246900]
+	return [120926554,335696788,544300934,544300935,544300936,544300937,544300938,183246899,183246900]
 
 static func footprints() -> Array[PackedVector2Array]:
 	var result: Array[PackedVector2Array] = []
-	for item: Array in [[WESTPAC_PODIUM_POINTS,WESTPAC_PODIUM_CENTER],[WESTPAC_CORE_POINTS,WESTPAC_CORE_CENTER],[WESTPAC_WEST_POINTS,WESTPAC_WEST_CENTER],[WESTPAC_EAST_POINTS,WESTPAC_EAST_CENTER],[WESTPAC_BEACON_POINTS,WESTPAC_BEACON_CENTER],[WESTPAC_PLANT_POINTS,WESTPAC_PLANT_CENTER],[CBA_SOUTH_POINTS,CBA_SOUTH_CENTER],[CBA_NORTH_POINTS,CBA_NORTH_CENTER]]:
+	for item: Array in [[WESTPAC_PODIUM_POINTS,WESTPAC_PODIUM_CENTER],[WESTPAC_CORE_POINTS,WESTPAC_CORE_CENTER],[WESTPAC_SUSSEX_POINTS,WESTPAC_SUSSEX_CENTER],[WESTPAC_WEST_POINTS,WESTPAC_WEST_CENTER],[WESTPAC_EAST_POINTS,WESTPAC_EAST_CENTER],[WESTPAC_BEACON_POINTS,WESTPAC_BEACON_CENTER],[WESTPAC_PLANT_POINTS,WESTPAC_PLANT_CENTER],[CBA_SOUTH_POINTS,CBA_SOUTH_CENTER],[CBA_NORTH_POINTS,CBA_NORTH_CENTER]]:
 		var poly := Geo.polygon(item[0])
 		for i in poly.size(): poly[i]+=Vector2(item[1].x,item[1].z)
 		result.append(poly)
@@ -57,12 +57,55 @@ static func build(world: Node3D) -> void:
 	_cba(world,"cba_north",CBA_NORTH_CENTER,Geo.polygon(CBA_NORTH_POINTS))
 	world.set_meta("bank_landmarks",metadata())
 
+static func capture_views() -> Array:
+	return [
+		["westpac_public_colonnade",WESTPAC_PODIUM_CENTER+Vector3(-49,3.0,30),WESTPAC_PODIUM_CENTER+Vector3(-25,5.6,10)],
+		["westpac_podium_glazing",WESTPAC_PODIUM_CENTER+Vector3(-77,14,34),WESTPAC_PODIUM_CENTER+Vector3(-12,23,4)],
+		["cba_south_canopy",CBA_SOUTH_CENTER+Vector3(-49,2.3,30),CBA_SOUTH_CENTER+Vector3(-31,4.4,4)],
+		["cba_south_timber_facade",CBA_SOUTH_CENTER+Vector3(-69,15,8),CBA_SOUTH_CENTER+Vector3(-27,17,0)],
+		["cba_north_canopy",CBA_NORTH_CENTER+Vector3(-59,2.3,8),CBA_NORTH_CENTER+Vector3(-31,4.4,10)],
+		["cba_north_timber_facade",CBA_NORTH_CENTER+Vector3(-80,14,19),CBA_NORTH_CENTER+Vector3(-21,17,0)]
+	]
+
+static func walk_routes() -> Array[Dictionary]:
+	return [
+		{"name":"westpac_public_colonnade","points":[WESTPAC_PODIUM_CENTER+Vector3(-29,0,0),WESTPAC_PODIUM_CENTER+Vector3(-27,0,31)]},
+		{"name":"cba_south_park_canopy","points":_park_route("cba_south",CBA_SOUTH_CENTER,Geo.polygon(CBA_SOUTH_POINTS))},
+		{"name":"cba_north_park_canopy","points":_park_route("cba_north",CBA_NORTH_CENTER,Geo.polygon(CBA_NORTH_POINTS))}
+	]
+
+static func park_edges(key:String) -> Array[int]:
+	# These are the continuous park-facing elevations in the existing OSM
+	# outlines. The little service/core notches also have westward normals but
+	# do not form the public canopy pictured by the architect.
+	var edges:Array[int]=[]
+	if key=="cba_south":edges.assign([0,1,2,3,4,5,6,7])
+	else:edges.assign([23])
+	return edges
+
+static func _park_route(key:String,center:Vector3,outline:PackedVector2Array) -> Array[Vector3]:
+	var points:Array[Vector3]=[]
+	var edges:Array[int]=park_edges(key)
+	var normals:Array[Vector3]=[]
+	for edge in edges:
+		var a:Vector2=outline[edge];var b:Vector2=outline[(edge+1)%outline.size()]
+		normals.append(Vector3(b.y-a.y,0,a.x-b.x).normalized()*Geo._area_sign(outline))
+	for i in edges.size()+1:
+		var vertex:Vector2=outline[edges[i]] if i<edges.size() else outline[(edges[-1]+1)%outline.size()]
+		var n:Vector3=normals[0] if i==0 else normals[-1] if i==edges.size() else (normals[i-1]+normals[i]).normalized()
+		var shift:float=1.6 if i==0 or i==edges.size() else 1.6/maxf(n.dot(normals[i]),.5)
+		points.append(center+Vector3(vertex.x,0,vertex.y)+n*shift)
+	return points
+
 static func _materials(world: Node3D) -> void:
 	world._mat("bank_metal",Color("909b9e"),0.41,0.63)
 	world._mat("bank_dark",Color("313b43"),0.6,0.43)
 	world._mat("bank_stone",Color("b1ac9a"),0.9)
 	world._mat("bank_wood",Color("927658"),0.79)
 	world._mat("bank_roof",Color("b5bdba"),0.57,0.24)
+	world._mat("bank_soffit",Color("d5d2c5"),0.83)
+	var light:StandardMaterial3D=world._mat("bank_downlight",Color("eee5d2"),0.65)
+	light.emission_enabled=true;light.emission=Color("e7d6b7");light.emission_energy_multiplier=.35
 	var beacon: StandardMaterial3D = world._mat("bank_beacon",Color("d4e1dc"),0.36,0.18)
 	beacon.emission_enabled=true
 	beacon.emission=Color("789b96")
@@ -98,8 +141,14 @@ static func _westpac(world: Node3D) -> void:
 	var column_index := 0
 	for item in Geo._perimeter_samples(outline,10.5):
 		var p: Vector3=item.position
-		world._structure_box("bank/westpac/pier/%02d"%column_index,WESTPAC_PODIUM_CENTER+p+Vector3.UP*3.75,Vector3(0.8,7.5,0.8),"bank_metal",135000.0)
+		# JPW's public-ground photograph shows round metal-clad columns. Keep
+		# their existing positions/IDs and fit inside the former 0.8m square.
+		var circle:=PackedVector2Array()
+		for i in 24:circle.append(Vector2(cos(i*TAU/24),sin(i*TAU/24))*.4)
+		world._structure_mesh("bank/westpac/pier/%02d"%column_index,Geo.prism(circle,0,7.5),WESTPAC_PODIUM_CENTER+p,"bank_metal",135000.0)
 		column_index+=1
+	_westpac_public_details(world,podium,outline)
+	_westpac_sussex(world)
 	var core := Geo.polygon(WESTPAC_CORE_POINTS)
 	for i in range(4):
 		var low := float(i)*15.0
@@ -149,6 +198,18 @@ static func _westpac(world: Node3D) -> void:
 			for z in [-4.45,4.45]: Geo._append_box(lights,Vector3(0,h,z),Vector3(8.3,0.23,0.13),Basis(Vector3.UP,deg_to_rad(5.4)))
 		Geo._commit_detail(world,body,lights,"bank_barometer")
 
+static func _westpac_sussex(world:Node3D) -> void:
+	# Mapped way/544300934 is Westpac's western Sussex mass, sharing the
+	# podium boundary. Preserve its previous 63m estimated upper envelope;
+	# the public ground is already provided by the open podium below 12m.
+	# These 3m damage/facade bands are not a claim about surveyed floor levels.
+	var outline:=Geo.polygon(WESTPAC_SUSSEX_POINTS)
+	for i in 17:
+		var low:float=12.0+i*3.0
+		var body:StaticBody3D=world._structure_mesh("bank/westpac/sussex/%02d"%i,Geo.prism(outline,low,low+3.0),WESTPAC_SUSSEX_CENTER,"bank_westpac_glass",170000.0)
+		Geo._detail(world,body,Geo.prism(outline,low+2.84,low+3.0),"bank_metal")
+		body.set_meta("mapped_source_id","way/544300934")
+
 static func _cba(world: Node3D, key: String, center: Vector3, outline: PackedVector2Array) -> void:
 	for floor_index in range(9):
 		var low := 0.0 if floor_index==0 else 5.4+float(floor_index-1)*3.7
@@ -159,6 +220,7 @@ static func _cba(world: Node3D, key: String, center: Vector3, outline: PackedVec
 		wood.begin(Mesh.PRIMITIVE_TRIANGLES)
 		var frames := SurfaceTool.new()
 		frames.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var gaskets:=SurfaceTool.new();gaskets.begin(Mesh.PRIMITIVE_TRIANGLES)
 		for item in Geo._perimeter_samples(outline,1.8):
 			var p: Vector3=item.position
 			if floor_index==0:
@@ -166,10 +228,17 @@ static func _cba(world: Node3D, key: String, center: Vector3, outline: PackedVec
 			else:
 				# Deep warm mullions and real horizontal blind rhythm distinguish
 				# this campus from the blue glass CBD towers.
-				Geo._append_box(wood,p+Vector3.UP*((low+high)*0.5)+item.outward*0.04,Vector3(0.15,high-low-0.25,0.22),item.basis)
+				Geo._append_box(wood,p+Vector3.UP*((low+high)*0.5)+item.outward*0.04,Vector3(0.15,high-low-0.25,0.36),item.basis)
+				if floor_index==1:Geo._append_box(gaskets,p+Vector3.UP*((low+high)*0.5)+item.outward*.23,Vector3(.046,high-low-.25,.024),item.basis)
+				# Physical tilted slats in the closest office band add near-view
+				# depth; the higher bands retain their batched shading treatment.
+				if floor_index==1 and item.outward.x<-.4:
+					for slat in 18:
+						_append_slat(wood,p+Vector3.UP*(low+.32+slat*.17)+item.basis.x*.65+item.outward*.09,item.basis*Basis(Vector3.RIGHT,deg_to_rad(24)))
 			Geo._append_box(frames,p+Vector3.UP*(high-0.5),Vector3(0.07,0.85,0.11),item.basis)
 		Geo._commit_detail(world,body,wood,"bank_wood")
 		Geo._commit_detail(world,body,frames,"bank_metal")
+		if floor_index==1:Geo._commit_detail(world,body,gaskets,"bank_dark")
 	var roof: StaticBody3D=world._structure_mesh("bank/%s/vaulted_roof"%key,vaulted_roof(outline),center,"bank_atrium_glass",240000.0)
 	var ribs := SurfaceTool.new()
 	ribs.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -188,15 +257,102 @@ static func _cba(world: Node3D, key: String, center: Vector3, outline: PackedVec
 	# Park-facing awning follows the concave frontage, and belongs to the lobby
 	# damage component. No individual shop names or interiors are invented.
 	var lobby: StaticBody3D=world.structures["bank/%s/floor/00"%key].node
-	var canopy := SurfaceTool.new()
-	canopy.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for item in Geo._perimeter_samples(outline,2.0):
-		var p: Vector3=item.position
-		if item.outward.x>-0.4: continue
-		var a := p+Vector3.UP*4.7
-		var b: Vector3=a+item.outward*3.0-Vector3.UP*0.4
-		Geo._append_beam(canopy,a,b,0.20,0.19)
-	Geo._commit_detail(world,lobby,canopy,"bank_wood")
+	_cba_public_canopy(world,lobby,outline,key)
+
+static func _westpac_public_details(world:Node3D,podium:StaticBody3D,outline:PackedVector2Array) -> void:
+	# JPW 004: pale panelled soffit, round columns and small recessed downlights.
+	# All overhead fittings remain above 7.4m; the existing open ground is kept.
+	var first_child:int=podium.get_child_count()
+	Geo._detail(world,podium,Geo.prism(outline,7.45,7.49),"bank_soffit")
+	var joints:=SurfaceTool.new();joints.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var lights:=SurfaceTool.new();lights.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for z in range(-82,53,3):
+		var cuts:Array[float]=[]
+		for i in outline.size():
+			var a:Vector2=outline[i];var b:Vector2=outline[(i+1)%outline.size()]
+			if (a.y<=z and b.y>z) or (b.y<=z and a.y>z):cuts.append(a.x+(b.x-a.x)*(z-a.y)/(b.y-a.y))
+		cuts.sort()
+		for i in range(0,cuts.size()-1,2):
+			Geo._append_box(joints,Vector3((cuts[i]+cuts[i+1])*.5,7.435,z),Vector3(cuts[i+1]-cuts[i],.016,.022),Basis.IDENTITY)
+		if z%6!=0:continue
+		for x in range(-36,31,6):
+			if not Geometry2D.is_point_in_polygon(Vector2(x,z),outline):continue
+			if Geometry2D.is_point_in_polygon(Vector2(x+.15,z+.15),outline) and Geometry2D.is_point_in_polygon(Vector2(x-.15,z-.15),outline):
+				Geo._append_box(joints,Vector3(x,7.418,z),Vector3(.14,.018,.14),Basis.IDENTITY)
+				Geo._append_box(lights,Vector3(x,7.406,z),Vector3(.085,.012,.085),Basis.IDENTITY)
+	Geo._commit_detail(world,podium,joints,"bank_dark")
+	Geo._commit_detail(world,podium,lights,"bank_downlight")
+	# Point-supported glazing and deep edge framing visible in JPW 005.
+	var fittings:=SurfaceTool.new();fittings.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for item in Geo._perimeter_samples(outline,2.8):
+		for h in [8.15,10.65]:
+			var p:Vector3=item.position+Vector3.UP*h+item.outward*.12
+			Geo._append_box(fittings,p,Vector3(.40,.055,.06),item.basis)
+			Geo._append_box(fittings,p,Vector3(.055,.30,.06),item.basis)
+	Geo._commit_detail(world,podium,fittings,"bank_metal")
+	for i in range(first_child,podium.get_child_count()):podium.get_child(i).set_meta("public_detail","westpac_public_details")
+	podium.set_meta("photo_public_details",["panelled_pale_soffit","recessed_downlights","point_supported_glass"])
+
+static func canopy_height(t:float) -> float:
+	# Photographed swept lattice, fitted to the previous 3m projection. The
+	# section is inferred, not a surveyed structural timber bending schedule.
+	return 4.7-.9*sin(PI*t)+.9*t
+
+static func _append_slat(st:SurfaceTool,at:Vector3,basis:Basis) -> void:
+	# The photographed thin timber blades need two visible faces, not twelve
+	# triangles of hidden box edges at every opening.
+	var a:Vector3=at+basis*Vector3(-.56,0,-.06)
+	var b:Vector3=at+basis*Vector3(.56,0,-.06)
+	var c:Vector3=at+basis*Vector3(.56,0,.06)
+	var d:Vector3=at+basis*Vector3(-.56,0,.06)
+	for normal:Vector3 in [basis.y,-basis.y]:
+		Geo._triangle(st,a,b,c,normal,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+		Geo._triangle(st,a,c,d,normal,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+
+static func canopy_sections(outline:PackedVector2Array,key:String) -> Array[Dictionary]:
+	var sections:Array[Dictionary]=[]
+	var sign:float=Geo._area_sign(outline)
+	for i in park_edges(key):
+		var a:Vector2=outline[i];var b:Vector2=outline[(i+1)%outline.size()]
+		var n:Vector3=Vector3(b.y-a.y,0,a.x-b.x).normalized()*sign
+		if n.x>-.4:continue
+		var count:int=maxi(1,ceili(a.distance_to(b)/2.4))
+		for j in count+1:
+			var p:Vector2=a.lerp(b,float(j)/count)
+			sections.append({"position":Vector3(p.x,0,p.y),"outward":n,"edge":i,"first":j==0})
+	return sections
+
+static func _cba_public_canopy(world:Node3D,lobby:StaticBody3D,outline:PackedVector2Array,key:String) -> void:
+	var first_child:int=lobby.get_child_count()
+	var timber:=SurfaceTool.new();timber.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var edge:=SurfaceTool.new();edge.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var panels:=SurfaceTool.new();panels.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var last:Dictionary={}
+	for section in canopy_sections(outline,key):
+		var curve:Array[Vector3]=[]
+		for step in 9:
+			var t:float=step/8.0
+			curve.append(section.position+section.outward*(3.0*t)+Vector3.UP*canopy_height(t))
+		for i in 8:Geo._append_beam(timber,curve[i],curve[i+1],.12,.18)
+		if not section.first:
+			for i in range(1,9):Geo._append_beam(timber,last.curve[i],curve[i],.075,.075)
+			Geo._append_beam(edge,last.curve[8]+Vector3.UP*.12,curve[8]+Vector3.UP*.12,.15,.20)
+			# The photographed timber soffit covers the inner portion; the outer
+			# lattice remains visibly open and all of it clears pedestrian heads.
+			for i in 3:
+				var a:Vector3=last.curve[i];var b:Vector3=curve[i];var c:Vector3=curve[i+1];var d:Vector3=last.curve[i+1]
+				var normal:Vector3=(b-a).cross(c-a).normalized()
+				if normal.y<0:normal=-normal
+				Geo._triangle(panels,a,b,c,normal,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+				Geo._triangle(panels,a,c,d,normal,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+				Geo._triangle(panels,a-Vector3.UP*.025,c-Vector3.UP*.025,b-Vector3.UP*.025,-normal,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+				Geo._triangle(panels,a-Vector3.UP*.025,d-Vector3.UP*.025,c-Vector3.UP*.025,-normal,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+		last={"curve":curve}
+	Geo._commit_detail(world,lobby,timber,"bank_wood")
+	Geo._commit_detail(world,lobby,edge,"bank_dark")
+	Geo._commit_detail(world,lobby,panels,"bank_wood")
+	for i in range(first_child,lobby.get_child_count()):lobby.get_child(i).set_meta("public_detail","cba_canopy")
+	lobby.set_meta("photo_public_details",["swept_timber_canopy","open_lattice_outer_edge","panelled_inner_soffit"])
 
 static func roof_height(p: Vector2) -> float:
 	return 35.2+8.0*pow(clampf(1.0-pow((p.x-1.0)/44.0,2),0,1),0.65)
@@ -263,3 +419,6 @@ const CBA_SOUTH_CENTER := Vector3(-693.50302,4.5,1705.14453)
 const CBA_SOUTH_POINTS := [[-29.49002,40.28627],[-28.47362,31.60331],[-28.2149,24.5011],[-28.52906,17.47681],[-29.8319,9.92931],[-31.50434,2.74917],[-33.99914,-4.37531],[-37.24238,-11.25489],[-41.6129,-18.3571],[-38.1479,-20.5835],[-39.23822,-22.43141],[-21.80234,-34.33152],[-20.73974,-32.69512],[-19.19666,-33.74153],[-20.35166,-35.40019],[-12.31286,-41.11091],[-17.25626,-47.93483],[-7.43414,-55.38213],[-0.38402,-61.10398],[1.3069,-58.95551],[4.53166,-61.38228],[8.72662,-56.06119],[12.3487,-50.17236],[18.00358,-40.10903],[22.52194,-29.8008],[25.9777,-20.56124],[29.08234,-9.71867],[31.42006,0.75654],[33.01858,13.45815],[33.29578,20.68282],[33.37894,30.80181],[32.69518,41.90041],[31.12438,51.75223],[27.33598,50.96186],[27.16042,51.99714],[7.04494,47.92283],[8.04286,42.52381],[-4.34798,40.54231],[-5.3459,45.62963],[-25.98806,41.77796],[-25.88642,40.90967]]
 const CBA_NORTH_CENTER := Vector3(-758.71791,4.5,1622.03146)
 const CBA_NORTH_POINTS := [[12.86511,51.57568],[15.78495,48.29174],[18.06723,49.83909],[49.63107,12.56915],[54.01083,7.40391],[55.23975,5.95675],[22.89051,-23.47626],[2.83971,-43.09085],[1.63851,-44.15952],[0.09543,-42.55651],[-0.98565,-41.17614],[-3.86853,-43.55839],[-26.19237,-35.37637],[-21.99741,-31.84753],[-27.33813,-26.38171],[-31.38525,-30.06641],[-33.35337,-27.48378],[-32.18913,-26.55983],[-33.11313,-25.60247],[-38.80497,-30.64527],[-58.74489,-23.454],[-61.34133,-22.41872],[-57.17409,-18.83422],[-60.23253,-15.33877]]
+
+const WESTPAC_SUSSEX_CENTER := Vector3(-632.624,4.5,691.013)
+const WESTPAC_SUSSEX_POINTS := [[-13.344,-33.29],[6.568,-35.305],[13.248,33.736],[-6.507,35.116],[-10.628,-6.128]]

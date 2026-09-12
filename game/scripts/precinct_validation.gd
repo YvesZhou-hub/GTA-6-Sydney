@@ -1,7 +1,7 @@
 extends Node
 ## Full production city, native captures and continuous walks using the player controller.
 ## Route origins are test setup; subsequent movement uses input actions, never teleports.
-const MODULE_PATHS := ["res://scripts/opera_landmark.gd", "res://scripts/opera_interiors.gd", "res://scripts/darling_square_detail.gd", "res://scripts/darling_public_facilities.gd", "res://scripts/darling_precinct_businesses.gd"]
+const MODULE_PATHS := ["res://scripts/opera_landmark.gd", "res://scripts/opera_interiors.gd", "res://scripts/darling_square_detail.gd", "res://scripts/darling_public_facilities.gd", "res://scripts/darling_precinct_businesses.gd", "res://scripts/circular_quay_detail.gd", "res://scripts/sydney_tower_landmark.gd", "res://scripts/city_landmarks.gd", "res://scripts/icc_landmarks.gd", "res://scripts/quay_landmarks.gd", "res://scripts/bank_landmarks.gd", "res://scripts/manowar_detail.gd"]
 var game
 var checks:Array=[]
 var screenshots:Array=[]
@@ -91,8 +91,7 @@ func walk(route:Dictionary):
 	routes.append({"name":route.name,"passed":okay and discontinuities==0,"origin":vector(points[0]),"segments":records,"discontinuities":discontinuities})
 	check("continuous player walk "+str(route.name),okay and discontinuities==0,{"segments":records.size(),"discontinuities":discontinuities})
 	if okay:
-		var bounds:=AABB(player.global_position+Vector3(-.30,.04,-.30),Vector3(.60,1.7,.60))
-		check("map migration preserves occupied public space "+str(route.name),not preload("res://scripts/map_migration.gd").overlaps_new_building(game.world,bounds))
+		check("map migration preserves actual settled player "+str(route.name),not preload("res://scripts/map_migration.gd")._player_needs_relocation(game,player.global_position))
 	print("PRECINCT_WALK ",JSON.stringify(routes[-1]))
 
 func run():
@@ -142,7 +141,7 @@ func run():
 				var id:String=place.id
 				check("authored place has matching map destination "+id,catalog.any(func(item):return item.key==id and item.position.distance_to(place.arrival)<.01))
 	check("new exterior and interior capture views supplied",camera_views.size()>=8)
-	check("all five Opera and three Darling walking routes supplied",walking_routes.size()>=8)
+	check("Opera, Darling and Quay continuous walking routes supplied",walking_routes.size()>=11)
 	for route:Dictionary in walking_routes:await walk(route)
 	game.player.visible=false
 	game.life.set_process(false)

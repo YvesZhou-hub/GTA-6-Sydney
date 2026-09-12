@@ -1,0 +1,23 @@
+{
+  "mode": "opera-access",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--opera-access-qa"
+  ],
+  "started_utc": "2026-09-12T05:59:51.474826+00:00",
+  "wall_seconds": 65.105,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 29,
+  "passed": true,
+  "screenshots": [
+    "opera-stair-join-legacy-save.png",
+    "opera-stair-join-after-impact.png",
+    "opera-stair-join-intact.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

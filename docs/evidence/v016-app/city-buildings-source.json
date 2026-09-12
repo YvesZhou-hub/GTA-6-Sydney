@@ -1,0 +1,577 @@
+{
+  "checks": [
+    {
+      "name": "four verified named buildings carry addresses and confidence records",
+      "passed": true
+    },
+    {
+      "name": "five exact OSM outlines replace generic footprints including tower podium",
+      "passed": true
+    },
+    {
+      "name": "geographic coordinate conversion remains consistent to centimetres",
+      "passed": true
+    },
+    {
+      "name": "107 meaningful damage components, repeated facade details merged",
+      "passed": true
+    },
+    {
+      "name": "all structural collision faces exactly match rendered solid geometry",
+      "passed": true
+    },
+    {
+      "name": "all facade and structural faces are nondegenerate",
+      "passed": true
+    },
+    {
+      "name": "all explicit triangle winding matches supplied exterior normals",
+      "passed": true
+    },
+    {
+      "name": "bounded four-building triangle budget 324908",
+      "passed": true
+    },
+    {
+      "name": "Tower One retains documented 217m height",
+      "passed": true
+    },
+    {
+      "name": "BOC rooftop envelope retains explicitly estimated 58m height",
+      "passed": true
+    },
+    {
+      "name": "The Ribbon curved apex reaches 90m with thin perimeter trim",
+      "passed": true
+    },
+    {
+      "name": "The Exchange stays within 30m estimated roof envelope",
+      "passed": true
+    },
+    {
+      "name": "The Ribbon has a curved closed elevation, not a rectangular tower",
+      "passed": true
+    },
+    {
+      "name": "long rising Ribbon shoulder is represented geometrically",
+      "passed": true
+    },
+    {
+      "name": "tower_one facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "boc facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "ribbon facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "exchange facade has physical ray support at intended map position",
+      "passed": true
+    },
+    {
+      "name": "W has photo-referenced facade sign, Waratah entrance and relief mullions",
+      "passed": true
+    },
+    {
+      "name": "W northeast entry is a real removed solid volume with a clear 2m-wide approach",
+      "passed": true
+    },
+    {
+      "name": "W copper arrival foyer has physical floor support",
+      "passed": true
+    },
+    {
+      "name": "all 32 legacy W damage IDs retained without adding physical obstructions",
+      "passed": true
+    },
+    {
+      "name": "nine continuous end returns rise and narrow toward the roof without non-finite points",
+      "passed": true
+    },
+    {
+      "name": "hexagonal cladding belongs to its wall and remains correctly positioned after centred-body transforms",
+      "passed": true
+    },
+    {
+      "name": "W entrance preserves the full usable door width across 25 standing capsule samples",
+      "passed": true
+    },
+    {
+      "name": "named W harbour, rolled-end and arrival cameras are usable by the full-city fixture",
+      "passed": true
+    },
+    {
+      "name": "Tower One keeps all 52 components while its shaded floors carry merged framed fins",
+      "passed": true
+    },
+    {
+      "name": "Tower One uses architect-documented 1.5m facade modules and 3m fin centres",
+      "passed": true
+    },
+    {
+      "name": "BOC photo-backed Sussex colonnade has 30 supported standing-capsule samples through its full length",
+      "passed": true
+    },
+    {
+      "name": "all nine colonnade columns are solid parts of the preserved BOC lobby ID",
+      "passed": true
+    },
+    {
+      "name": "BOC keeps its 16 damage IDs and 14 floors of merged street window returns",
+      "passed": true
+    },
+    {
+      "name": "BOC new work stays inside its mapped street edge and leaves the external pavement clear",
+      "passed": true
+    },
+    {
+      "name": "both BOC street entry bays retain 1.2m lateral capsule clearance across their thresholds",
+      "passed": true
+    },
+    {
+      "name": "BOC colonnade has a real overhead slab at the documented model height with ample headroom",
+      "passed": true
+    },
+    {
+      "name": "BOC pavement floor, columns and soffit disappear together under the preserved lobby ID",
+      "passed": true
+    },
+    {
+      "name": "BOC colonnade solid and details restore before production walking",
+      "passed": true
+    },
+    {
+      "name": "W floor rolls and ceiling lights disappear with their own damage components",
+      "passed": true
+    },
+    {
+      "name": "W detail owners restore with their original solid components",
+      "passed": true
+    },
+    {
+      "name": "destroying a floor removes its glazing, timber facade and collision together",
+      "passed": true
+    },
+    {
+      "name": "new-world restore reconstructs the landmark collision",
+      "passed": true
+    },
+    {
+      "name": "bank_of_china_sussex_colonnade outward production HarborPlayer walks continuously without jumping or teleporting",
+      "passed": true
+    },
+    {
+      "name": "bank_of_china_sussex_colonnade return production HarborPlayer walks continuously without jumping or teleporting",
+      "passed": true
+    },
+    {
+      "name": "w_sydney_public_arrival outward production HarborPlayer walks continuously without jumping or teleporting",
+      "passed": true
+    },
+    {
+      "name": "w_sydney_public_arrival return production HarborPlayer walks continuously without jumping or teleporting",
+      "passed": true
+    },
+    {
+      "name": "migration preserves actual settled production player city/boc/lobby at (-621.9634, 4.54, 1007.556)",
+      "passed": true
+    },
+    {
+      "name": "migration relocates production player buried 6cm city/boc/lobby at (-621.9634, 4.54, 1007.556)",
+      "passed": true
+    },
+    {
+      "name": "migration preserves actual settled production player city/boc/lobby at (-620.4862, 4.54, 1023.487)",
+      "passed": true
+    },
+    {
+      "name": "migration relocates production player buried 6cm city/boc/lobby at (-620.4862, 4.54, 1023.487)",
+      "passed": true
+    },
+    {
+      "name": "migration preserves actual settled production player city/boc/lobby at (-618.5474, 4.54, 1044.398)",
+      "passed": true
+    },
+    {
+      "name": "migration relocates production player buried 6cm city/boc/lobby at (-618.5474, 4.54, 1044.398)",
+      "passed": true
+    },
+    {
+      "name": "migration preserves actual settled production player city/ribbon/entry/floor at (-766.5493, 4.54, 1458.339)",
+      "passed": true
+    },
+    {
+      "name": "migration relocates production player buried 6cm city/ribbon/entry/floor at (-766.5493, 4.54, 1458.339)",
+      "passed": true
+    },
+    {
+      "name": "migration preserves actual settled production player city/ribbon/entry/floor at (-763.6404, 4.54, 1463.586)",
+      "passed": true
+    },
+    {
+      "name": "migration relocates production player buried 6cm city/ribbon/entry/floor at (-763.6404, 4.54, 1463.586)",
+      "passed": true
+    },
+    {
+      "name": "migration preserves actual settled production player city/ribbon/entry/floor at (-761.8951, 4.54, 1466.735)",
+      "passed": true
+    },
+    {
+      "name": "migration relocates production player buried 6cm city/ribbon/entry/floor at (-761.8951, 4.54, 1466.735)",
+      "passed": true
+    }
+  ],
+  "components": 107,
+  "continuous_walks_ran": true,
+  "count": 56,
+  "failures": 0,
+  "headless": true,
+  "migration_poses": [
+    {
+      "buried": [
+        -621.963439941406,
+        4.46507740020752,
+        1007.55578613281
+      ],
+      "buried_relocated": true,
+      "id": "city/boc/lobby",
+      "on_floor": true,
+      "preserved": true,
+      "settled": [
+        -621.963439941406,
+        4.52507734298706,
+        1007.55578613281
+      ],
+      "support_id": "city/boc/lobby",
+      "support_y": 4.53500080108643
+    },
+    {
+      "buried": [
+        -620.486206054688,
+        4.46605682373047,
+        1023.48742675781
+      ],
+      "buried_relocated": true,
+      "id": "city/boc/lobby",
+      "on_floor": true,
+      "preserved": true,
+      "settled": [
+        -620.486206054688,
+        4.52605676651001,
+        1023.48742675781
+      ],
+      "support_id": "city/boc/lobby",
+      "support_y": 4.53500080108643
+    },
+    {
+      "buried": [
+        -618.54736328125,
+        4.46605682373047,
+        1044.39782714844
+      ],
+      "buried_relocated": true,
+      "id": "city/boc/lobby",
+      "on_floor": true,
+      "preserved": true,
+      "settled": [
+        -618.54736328125,
+        4.52605676651001,
+        1044.39782714844
+      ],
+      "support_id": "city/boc/lobby",
+      "support_y": 4.53500080108643
+    },
+    {
+      "buried": [
+        -766.54931640625,
+        4.46605682373047,
+        1458.33862304688
+      ],
+      "buried_relocated": true,
+      "id": "city/ribbon/entry/floor",
+      "on_floor": true,
+      "preserved": true,
+      "settled": [
+        -766.54931640625,
+        4.52605676651001,
+        1458.33862304688
+      ],
+      "support_id": "city/ribbon/entry/floor",
+      "support_y": 4.53499984741211
+    },
+    {
+      "buried": [
+        -763.640441894531,
+        4.46605682373047,
+        1463.58630371094
+      ],
+      "buried_relocated": true,
+      "id": "city/ribbon/entry/floor",
+      "on_floor": true,
+      "preserved": true,
+      "settled": [
+        -763.640441894531,
+        4.52605676651001,
+        1463.58630371094
+      ],
+      "support_id": "city/ribbon/entry/floor",
+      "support_y": 4.53499984741211
+    },
+    {
+      "buried": [
+        -761.895141601562,
+        4.46605682373047,
+        1466.73498535156
+      ],
+      "buried_relocated": true,
+      "id": "city/ribbon/entry/floor",
+      "on_floor": true,
+      "preserved": true,
+      "settled": [
+        -761.895141601562,
+        4.52605676651001,
+        1466.73498535156
+      ],
+      "support_id": "city/ribbon/entry/floor",
+      "support_y": 4.53499984741211
+    }
+  ],
+  "migration_sha256": "e84b8eb9a6837d96715f0135e5ca7773bf232628e78208757649831040013fd4",
+  "model_sha256": "a3c94c5d9239ac6b34bd667de5c51f80183133eebc67814656e5dbfc36191e71",
+  "passed": true,
+  "scope": "Four named building meshes with clipped production OSM land at public approaches. Actual HarborPlayer settled migration poses and optional input-driven out-and-back walks; no full-city build or user saves.",
+  "test_sha256": "3b118771530a25d2a65dc8504d9a4cb532b0c370689e1850579b193aa30d13e3",
+  "triangles": 324908,
+  "triangles_measured": true,
+  "user_saves_touched": false,
+  "walks": [
+    {
+      "airborne_frames": 0,
+      "name": "bank_of_china_sussex_colonnade outward",
+      "passed": true,
+      "segments": [
+        {
+          "actual": [
+            -621.78466796875,
+            4.52587795257568,
+            1007.57159423828
+          ],
+          "frames": 41,
+          "reached": true,
+          "target": [
+            -621.963439941406,
+            4.53999996185303,
+            1007.55578613281
+          ]
+        },
+        {
+          "actual": [
+            -620.502746582031,
+            4.52587795257568,
+            1023.64196777344
+          ],
+          "frames": 188,
+          "reached": true,
+          "target": [
+            -620.486206054688,
+            4.53999996185303,
+            1023.48742675781
+          ]
+        },
+        {
+          "actual": [
+            -618.656555175781,
+            4.52598285675049,
+            1043.59057617188
+          ],
+          "frames": 228,
+          "reached": true,
+          "target": [
+            -618.639709472656,
+            4.53999996185303,
+            1043.40209960938
+          ]
+        },
+        {
+          "actual": [
+            -618.568786621094,
+            4.52587795257568,
+            1044.576171875
+          ],
+          "frames": 8,
+          "reached": true,
+          "target": [
+            -618.54736328125,
+            4.53999996185303,
+            1044.39782714844
+          ]
+        },
+        {
+          "actual": [
+            -621.682067871094,
+            4.49087715148926,
+            1044.68127441406
+          ],
+          "frames": 38,
+          "reached": true,
+          "target": [
+            -621.534545898438,
+            4.53999996185303,
+            1044.6748046875
+          ]
+        }
+      ]
+    },
+    {
+      "airborne_frames": 0,
+      "name": "bank_of_china_sussex_colonnade return",
+      "passed": true,
+      "segments": [
+        {
+          "actual": [
+            -618.422607421875,
+            4.52587795257568,
+            1044.41333007812
+          ],
+          "frames": 50,
+          "reached": true,
+          "target": [
+            -618.54736328125,
+            4.53999996185303,
+            1044.39782714844
+          ]
+        },
+        {
+          "actual": [
+            -618.688720703125,
+            4.52587795257568,
+            1043.29089355469
+          ],
+          "frames": 17,
+          "reached": true,
+          "target": [
+            -618.639709472656,
+            4.53999996185303,
+            1043.40209960938
+          ]
+        },
+        {
+          "actual": [
+            -620.463989257812,
+            4.52587795257568,
+            1023.3662109375
+          ],
+          "frames": 229,
+          "reached": true,
+          "target": [
+            -620.486206054688,
+            4.53999996185303,
+            1023.48742675781
+          ]
+        },
+        {
+          "actual": [
+            -621.947082519531,
+            4.52587795257568,
+            1007.36120605469
+          ],
+          "frames": 182,
+          "reached": true,
+          "target": [
+            -621.963439941406,
+            4.53999996185303,
+            1007.55578613281
+          ]
+        },
+        {
+          "actual": [
+            -625.333740234375,
+            4.49087715148926,
+            1007.82781982422
+          ],
+          "frames": 42,
+          "reached": true,
+          "target": [
+            -625.149780273438,
+            4.53999996185303,
+            1007.85125732422
+          ]
+        }
+      ]
+    },
+    {
+      "airborne_frames": 0,
+      "name": "w_sydney_public_arrival outward",
+      "passed": true,
+      "segments": [
+        {
+          "actual": [
+            -766.047241210938,
+            4.52587699890137,
+            1459.35693359375
+          ],
+          "frames": 95,
+          "reached": true,
+          "target": [
+            -766.064514160156,
+            4.53999996185303,
+            1459.21325683594
+          ]
+        },
+        {
+          "actual": [
+            -761.904479980469,
+            4.52587699890137,
+            1466.81616210938
+          ],
+          "frames": 96,
+          "reached": true,
+          "target": [
+            -761.895141601562,
+            4.53999996185303,
+            1466.73498535156
+          ]
+        }
+      ]
+    },
+    {
+      "airborne_frames": 0,
+      "name": "w_sydney_public_arrival return",
+      "passed": true,
+      "segments": [
+        {
+          "actual": [
+            -766.0732421875,
+            4.52587699890137,
+            1459.0654296875
+          ],
+          "frames": 109,
+          "reached": true,
+          "target": [
+            -766.064514160156,
+            4.53999996185303,
+            1459.21325683594
+          ]
+        },
+        {
+          "actual": [
+            -769.975402832031,
+            4.52587699890137,
+            1452.06530761719
+          ],
+          "frames": 90,
+          "reached": true,
+          "target": [
+            -769.942993164062,
+            4.53999996185303,
+            1452.21630859375
+          ]
+        }
+      ]
+    }
+  ]
+}

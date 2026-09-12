@@ -1,0 +1,218 @@
+{
+  "check_count": 50,
+  "checks": [
+    {
+      "name": "three ICC venues built",
+      "passed": true
+    },
+    {
+      "name": "separate Convention / Exhibition / entertainment theatre entries",
+      "passed": true
+    },
+    {
+      "name": "all exact mapped parts replace parent and ordinary envelopes",
+      "passed": true
+    },
+    {
+      "name": "three tiers contain distinct red / grey seat geometry",
+      "passed": true
+    },
+    {
+      "name": "Convention counter has four modeled workstations and digital wayfinding",
+      "passed": true
+    },
+    {
+      "name": "Exhibition foyer has four fitted concession bays and twenty guide screens",
+      "passed": true
+    },
+    {
+      "name": "Theatre ticket foyer has timber relief and a suspended metal ceiling",
+      "passed": true
+    },
+    {
+      "name": "build is idempotent",
+      "passed": true
+    },
+    {
+      "name": "precinct can append all four ICC route records as an Array",
+      "passed": true
+    },
+    {
+      "name": "every integrated ICC route has a name and finite Vector3 points",
+      "passed": true
+    },
+    {
+      "name": "precinct route matches the original walked path: icc_convention",
+      "passed": true
+    },
+    {
+      "name": "precinct route matches the original walked path: icc_exhibition",
+      "passed": true
+    },
+    {
+      "name": "precinct route matches the original walked path: icc_theatre",
+      "passed": true
+    },
+    {
+      "name": "precinct route matches the original walked path: icc_theatre_glazed_foyer",
+      "passed": true
+    },
+    {
+      "name": "eight meeting pods have recessed timber cheeks, soffits, glazing and low guards",
+      "passed": true
+    },
+    {
+      "name": "theatre public foyer has 288 red folded ceiling segments, not generic silver battens",
+      "passed": true
+    },
+    {
+      "name": "theatre outer skin preserves the photographed tall glazed mouth",
+      "passed": true
+    },
+    {
+      "name": "crystalline window relief is attached separately to every original facade component",
+      "passed": true
+    },
+    {
+      "name": "CrystalWindowRelief disappears with its original saved damage ID",
+      "passed": true
+    },
+    {
+      "name": "RecessedTimberPods disappears with its original saved damage ID",
+      "passed": true
+    },
+    {
+      "name": "FoldedTheatreSkin disappears with its original saved damage ID",
+      "passed": true
+    },
+    {
+      "name": "RedFoldedCeiling disappears with its original saved damage ID",
+      "passed": true
+    },
+    {
+      "name": "repair restores all attached facade and ceiling detail groups",
+      "passed": true
+    },
+    {
+      "name": "all eight actual pod meshes have a clear 4m recess in front of the rear glazing",
+      "passed": true
+    },
+    {
+      "name": "specialist capture camera clear: icc-crystal-facade",
+      "passed": true
+    },
+    {
+      "name": "specialist capture camera clear: icc-recessed-meeting-pods",
+      "passed": true
+    },
+    {
+      "name": "specialist capture camera clear: icc-theatre-glazed-mouth",
+      "passed": true
+    },
+    {
+      "name": "specialist capture camera clear: icc-theatre-red-foyer",
+      "passed": true
+    },
+    {
+      "name": "convention public walking route has full capsule clearance: 0",
+      "passed": true
+    },
+    {
+      "name": "convention public walking route has continuous physical floor: 0",
+      "passed": true
+    },
+    {
+      "name": "convention actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "convention actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "convention interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "exhibition public walking route has full capsule clearance: 0",
+      "passed": true
+    },
+    {
+      "name": "exhibition public walking route has continuous physical floor: 0",
+      "passed": true
+    },
+    {
+      "name": "exhibition actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "exhibition actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "exhibition interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "theatre public walking route has full capsule clearance: 0",
+      "passed": true
+    },
+    {
+      "name": "theatre public walking route has continuous physical floor: 0",
+      "passed": true
+    },
+    {
+      "name": "theatre actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "theatre actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "theatre interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "stage-front sightlines hit opaque internal enclosure above/behind seats: 28/28",
+      "passed": true
+    },
+    {
+      "name": "auditorium enclosure uses opaque charcoal material independently of exterior glazing",
+      "passed": true
+    },
+    {
+      "name": "both public acoustic-room doors retain 6m by 3.6m modeled openings and full human clearance",
+      "passed": true
+    },
+    {
+      "name": "theatre glazed foyer actual HarborPlayer enters and reaches interior through normal input",
+      "passed": true
+    },
+    {
+      "name": "theatre glazed foyer actual HarborPlayer walks back out without teleport or jump",
+      "passed": true
+    },
+    {
+      "name": "theatre glazed foyer interior stays above water",
+      "passed": true
+    },
+    {
+      "name": "Moriarty Walk stays clear across the venue group",
+      "passed": true
+    }
+  ],
+  "continuous_walks_ran": true,
+  "execution_flags": [],
+  "failures": 0,
+  "full_world": false,
+  "model_sha256": "047f243ddf4bb5367599e735ba68eb27cff6f84c07e7da3ed3d74efdffa3016d",
+  "modeled_seats": 2400,
+  "native_capture_ran": false,
+  "passed": true,
+  "structures": 279,
+  "test_sha256": "2aa21c617865993bbd2533d55bd55dadbe54213b38316d09626052f4d44a63b1",
+  "user_saves_touched": false,
+  "visible_meshes": 192,
+  "visible_triangles": 235354
+}

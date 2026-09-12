@@ -1,0 +1,65 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS four verified named buildings carry addresses and confidence records
+PASS five exact OSM outlines replace generic footprints including tower podium
+PASS geographic coordinate conversion remains consistent to centimetres
+PASS 107 meaningful damage components, repeated facade details merged
+PASS all structural collision faces exactly match rendered solid geometry
+PASS all facade and structural faces are nondegenerate
+PASS all explicit triangle winding matches supplied exterior normals
+PASS bounded four-building triangle budget 324908
+PASS Tower One retains documented 217m height
+PASS BOC rooftop envelope retains explicitly estimated 58m height
+PASS The Ribbon curved apex reaches 90m with thin perimeter trim
+PASS The Exchange stays within 30m estimated roof envelope
+PASS The Ribbon has a curved closed elevation, not a rectangular tower
+PASS long rising Ribbon shoulder is represented geometrically
+PASS tower_one facade has physical ray support at intended map position
+PASS boc facade has physical ray support at intended map position
+PASS ribbon facade has physical ray support at intended map position
+PASS exchange facade has physical ray support at intended map position
+PASS W has photo-referenced facade sign, Waratah entrance and relief mullions
+PASS W northeast entry is a real removed solid volume with a clear 2m-wide approach
+PASS W copper arrival foyer has physical floor support
+PASS all 32 legacy W damage IDs retained without adding physical obstructions
+PASS nine continuous end returns rise and narrow toward the roof without non-finite points
+PASS hexagonal cladding belongs to its wall and remains correctly positioned after centred-body transforms
+PASS W entrance preserves the full usable door width across 25 standing capsule samples
+PASS named W harbour, rolled-end and arrival cameras are usable by the full-city fixture
+PASS Tower One keeps all 52 components while its shaded floors carry merged framed fins
+PASS Tower One uses architect-documented 1.5m facade modules and 3m fin centres
+PASS BOC photo-backed Sussex colonnade has 30 supported standing-capsule samples through its full length
+PASS all nine colonnade columns are solid parts of the preserved BOC lobby ID
+PASS BOC keeps its 16 damage IDs and 14 floors of merged street window returns
+PASS BOC new work stays inside its mapped street edge and leaves the external pavement clear
+PASS both BOC street entry bays retain 1.2m lateral capsule clearance across their thresholds
+PASS BOC colonnade has a real overhead slab at the documented model height with ample headroom
+PASS BOC pavement floor, columns and soffit disappear together under the preserved lobby ID
+PASS BOC colonnade solid and details restore before production walking
+PASS W floor rolls and ceiling lights disappear with their own damage components
+PASS W detail owners restore with their original solid components
+PASS destroying a floor removes its glazing, timber facade and collision together
+PASS new-world restore reconstructs the landmark collision
+PASS bank_of_china_sussex_colonnade outward production HarborPlayer walks continuously without jumping or teleporting
+PASS bank_of_china_sussex_colonnade return production HarborPlayer walks continuously without jumping or teleporting
+PASS w_sydney_public_arrival outward production HarborPlayer walks continuously without jumping or teleporting
+PASS w_sydney_public_arrival return production HarborPlayer walks continuously without jumping or teleporting
+PASS migration preserves actual settled production player city/boc/lobby at (-621.9634, 4.54, 1007.556)
+PASS migration relocates production player buried 6cm city/boc/lobby at (-621.9634, 4.54, 1007.556)
+CITY_MIGRATION {"buried":[-621.963439941406,4.46507740020752,1007.55578613281],"buried_relocated":true,"id":"city/boc/lobby","on_floor":true,"preserved":true,"settled":[-621.963439941406,4.52507734298706,1007.55578613281],"support_id":"city/boc/lobby","support_y":4.53500080108643}
+PASS migration preserves actual settled production player city/boc/lobby at (-620.4862, 4.54, 1023.487)
+PASS migration relocates production player buried 6cm city/boc/lobby at (-620.4862, 4.54, 1023.487)
+CITY_MIGRATION {"buried":[-620.486206054688,4.46605682373047,1023.48742675781],"buried_relocated":true,"id":"city/boc/lobby","on_floor":true,"preserved":true,"settled":[-620.486206054688,4.52605676651001,1023.48742675781],"support_id":"city/boc/lobby","support_y":4.53500080108643}
+PASS migration preserves actual settled production player city/boc/lobby at (-618.5474, 4.54, 1044.398)
+PASS migration relocates production player buried 6cm city/boc/lobby at (-618.5474, 4.54, 1044.398)
+CITY_MIGRATION {"buried":[-618.54736328125,4.46605682373047,1044.39782714844],"buried_relocated":true,"id":"city/boc/lobby","on_floor":true,"preserved":true,"settled":[-618.54736328125,4.52605676651001,1044.39782714844],"support_id":"city/boc/lobby","support_y":4.53500080108643}
+PASS migration preserves actual settled production player city/ribbon/entry/floor at (-766.5493, 4.54, 1458.339)
+PASS migration relocates production player buried 6cm city/ribbon/entry/floor at (-766.5493, 4.54, 1458.339)
+CITY_MIGRATION {"buried":[-766.54931640625,4.46605682373047,1458.33862304688],"buried_relocated":true,"id":"city/ribbon/entry/floor","on_floor":true,"preserved":true,"settled":[-766.54931640625,4.52605676651001,1458.33862304688],"support_id":"city/ribbon/entry/floor","support_y":4.53499984741211}
+PASS migration preserves actual settled production player city/ribbon/entry/floor at (-763.6404, 4.54, 1463.586)
+PASS migration relocates production player buried 6cm city/ribbon/entry/floor at (-763.6404, 4.54, 1463.586)
+CITY_MIGRATION {"buried":[-763.640441894531,4.46605682373047,1463.58630371094],"buried_relocated":true,"id":"city/ribbon/entry/floor","on_floor":true,"preserved":true,"settled":[-763.640441894531,4.52605676651001,1463.58630371094],"support_id":"city/ribbon/entry/floor","support_y":4.53499984741211}
+PASS migration preserves actual settled production player city/ribbon/entry/floor at (-761.8951, 4.54, 1466.735)
+PASS migration relocates production player buried 6cm city/ribbon/entry/floor at (-761.8951, 4.54, 1466.735)
+CITY_MIGRATION {"buried":[-761.895141601562,4.46605682373047,1466.73498535156],"buried_relocated":true,"id":"city/ribbon/entry/floor","on_floor":true,"preserved":true,"settled":[-761.895141601562,4.52605676651001,1466.73498535156],"support_id":"city/ribbon/entry/floor","support_y":4.53499984741211}
+CITY LANDMARK CHECK COMPLETE checks=56 failures=0 triangles=324908 components=107

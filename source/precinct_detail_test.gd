@@ -88,6 +88,21 @@ func run():
 							if not v[a].is_finite() or (v[b]-v[a]).cross(v[c]-v[a]).dot(n[a])>.0001:winding_bad+=1
 	verify("All authored faces finite with outward winding",winding_bad==0,str(winding_bad))
 	verify("14 individual mapped canopy roofs",roof_count==14,str(roof_count))
+	for d in Quay.WHARVES:
+		var fascia:Node3D=world.structures["circular_quay/wharf/%d/gate_sign"%d[0]].node
+		verify("Wharf %d referenced round marker and divided sign"%d[0],fascia.get_meta("photo_details",[]).size()==3)
+		# Walk directly between the revised ticket-reader bodies at several
+		# offsets, not only along a single zero-width center line.
+		var along:Vector3=(d[2]-d[1]).normalized()
+		var side:=Vector3(-along.z,0,along.x)
+		var clear:=true
+		for x in [-.9,0.0,.9]:
+			for z in [-.7,0.0,.7]:clear=clear and clear_at(d[1]+side*x+along*z)
+		verify("Wharf %d entry remains capsule-clear across 1.8m route"%d[0],clear)
+	var decorated_roofs:=0
+	for id in world.structures:
+		if str(id).begins_with("circular_quay/roof/") and world.structures[id].node.has_meta("soffit_fittings"):decorated_roofs+=1
+	verify("All 14 roof soffits retain their individual mapped owner",decorated_roofs==14)
 	var okay:=true
 	for check in checks:
 		if not check.passed:okay=false
@@ -109,6 +124,7 @@ func capture():
 			var n:=Vector3(item.normal[0],0,item.normal[1]);var c:Vector3=item.center+Vector3.UP*2.4
 			views.append([item.id,c+n*item.width*.9+Vector3.UP*1.0,c])
 	views.append_array([["darling_canopy",Vector3(-770,7.3,2070),Vector3(-777,8.5,2030)],["darling_square",Vector3(-760,22,2057),Vector3(-766,7,2015)],["quay_wharves",Vector3(-85,48,-30),Vector3(58,6,88)],["wharf_3",Vector3(85,6.8,137),Vector3(94,7.4,84)],["quay_station",Vector3(14,15,42),Vector3(14,11,145)]])
+	views.append(Quay.capture_views()[0])
 	var folder:=ProjectSettings.globalize_path("res://../reports/precinct-detail")
 	DirAccess.make_dir_recursive_absolute(folder)
 	for v in views:

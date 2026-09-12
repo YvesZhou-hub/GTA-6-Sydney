@@ -1,6 +1,6 @@
 extends RefCounted
 ## One-time safety migration when loading a world made before real city geometry.
-const REVISION := 5 # Closed Opera stair foundations replace the retired thin strips.
+const REVISION := 6 # Photo-refined buildings, walkable foyers and marine access.
 const Spawn=preload("res://scripts/vehicle_spawn.gd")
 const City=preload("res://scripts/city_map.gd")
 
@@ -147,13 +147,18 @@ static func _player_needs_relocation(game:Node3D,at:Vector3) -> bool:
 	var bounds:=AABB(at+Vector3(-.32,0,-.32),Vector3(.64,1.8,.64))
 	if not overlaps_new_building(game.world,bounds):return false
 	# A standing capsule clears an uphill tread while the corners of its AABB
-	# enter the slope. Exempt only verified support on the new Opera stairs.
+	# enter the slope. Use the actual registered support and production capsule to verify standing.
 	var ray:=PhysicsRayQueryParameters3D.create(at+Vector3.UP*.12,at-Vector3.UP*.25,15,[game.player.get_rid()])
 	var hit:Dictionary=game.get_world_3d().direct_space_state.intersect_ray(ray)
 	if hit.is_empty() or hit.normal.y<.9:return true
 	var id:String=str(hit.collider.get_meta("damage_id",""))
-	if not (id.begins_with("opera/steps/foundation/") or id.begins_with("opera/steps/tread/")):return true
-	if game.world.destroyed.has(id) or at.y<hit.position.y-.002 or at.y-hit.position.y>.10:return true
+	if not _custom_id(id) or not game.world.structures.has(id):return true
+	# The controller capsule begins 10mm above its foot origin. Jolt can settle
+	# that origin up to 10mm below either a flat floor or a sloping support.
+	# A real floor hit alone is insufficient: the capsule and closed torso/head
+	# tests below must both be clear, including complete containment in a mesh.
+	var foot_allowance:=.01
+	if game.world.destroyed.has(id) or at.y<hit.position.y-foot_allowance or at.y-hit.position.y>.10:return true
 	var capsule:CollisionShape3D=null
 	for child in game.player.get_children():
 		if child is CollisionShape3D and child.shape is CapsuleShape3D:

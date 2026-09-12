@@ -1,0 +1,33 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS OSM pier outline retained 354759944 
+PASS structural render/collision agree 354759944 
+PASS OSM pier outline retained 392403849 
+PASS structural render/collision agree 392403849 
+PASS OSM pier outline retained 1218228840 
+PASS structural render/collision agree 1218228840 
+PASS module idempotent 
+PASS all structural faces finite and outward 
+PASS both gangway colliders are closed solids 
+PASS manowar_north_jetty outward 
+PASS manowar_north_jetty return 
+PASS manowar_east_jetty outward 
+PASS manowar_east_jetty return 
+PASS manowar_north arrival is on actual pontoon 
+PASS manowar_east arrival is on actual pontoon 
+PASS safe saved gangway pose north0.25 
+PASS buried gangway pose rejected north0.25 
+PASS safe saved gangway pose north0.5 
+PASS buried gangway pose rejected north0.5 
+PASS safe saved gangway pose north0.75 
+PASS buried gangway pose rejected north0.75 
+PASS safe saved gangway pose east0.25 
+PASS buried gangway pose rejected east0.25 
+PASS safe saved gangway pose east0.5 
+PASS buried gangway pose rejected east0.5 
+PASS safe saved gangway pose east0.75 
+PASS buried gangway pose rejected east0.75 
+PASS pier fittings disappear with their damage owner 
+PASS pier repairs restore fittings 
+PASS pier repairs preserve each fitting material 
+MANOWAR_COMPLETE 30 passed=true

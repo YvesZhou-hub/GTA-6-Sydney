@@ -1,0 +1,22 @@
+{
+  "mode": "experience",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--experience-qa"
+  ],
+  "started_utc": "2026-09-12T06:00:56.658402+00:00",
+  "wall_seconds": 84.76,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 70,
+  "passed": true,
+  "screenshots": [
+    "01-map-pin.png",
+    "04-live-navigation.png",
+    "02-experiences.png",
+    "03-experience-reward.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

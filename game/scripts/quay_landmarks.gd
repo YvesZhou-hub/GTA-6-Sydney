@@ -23,6 +23,7 @@ static func footprints() -> Array[PackedVector2Array]:
 	return result
 
 static func build(world: Node3D) -> void:
+	if world.has_meta("quay_landmarks"):return
 	_materials(world)
 	_quay_quarter(world)
 	_salesforce(world)
@@ -37,6 +38,7 @@ static func _materials(world: Node3D) -> void:
 	world._mat("quay_stone",Color("b4a58b"),0.9)
 	world._mat("quay_dark",Color("29383d"),0.62,0.3)
 	world._mat("quay_green",Color("486348"),0.96)
+	world._mat("quay_joint",Color("665d51"),0.9)
 	Geo._glazing(world,"quay_qqt_glass",Color("526a74"),Color("485154"),Vector2(1.45,194.0/49.0),Vector2(0.035,0.12),12.0)
 	Geo._glazing(world,"quay_sf_glass",Color("284650"),Color("39434a"),Vector2(1.48,235.0/54.0),Vector2(0.025,0.11),14.0)
 	Geo._glazing(world,"quay_lobby",Color("5b7a7f"),Color("637072"),Vector2(2.2,6.0),Vector2(0.045,0.06))
@@ -56,6 +58,7 @@ static func _quay_quarter(world: Node3D) -> void:
 	var podium_poly:=Geo.polygon(QQT_PODIUM_POINTS)
 	var podium: StaticBody3D=world._structure_mesh("quay/qqt/podium",Geo.prism(podium_poly,4.8,8.0),QQT_CENTER,"quay_stone",240000.0)
 	Geo._detail(world,podium,Geo.prism(podium_poly,7.8,8.0),"quay_ivory")
+	_qqt_podium_details(world,podium,podium_poly)
 	var n:=0
 	for sample in Geo._perimeter_samples(podium_poly,10.0):
 		world._structure_box("quay/qqt/podium_column/%02d"%n,QQT_CENTER+sample.position+Vector3.UP*2.4,Vector3(0.6,4.8,0.6),"quay_stone",95000)
@@ -76,6 +79,7 @@ static func _quay_quarter(world: Node3D) -> void:
 			body.set_meta("architectural_block",block_index)
 			var frames:=_surface()
 			var bronze:=_surface()
+			var gaskets:=_surface()
 			for edge_index in poly.size():
 				var a:=poly[edge_index]
 				var b:=poly[(edge_index+1)%poly.size()]
@@ -95,11 +99,21 @@ static func _quay_quarter(world: Node3D) -> void:
 					if t>1.0:continue
 					var p:=a.lerp(b,t)
 					Geo._append_box(frames,Vector3(p.x,(low+high)*0.5,p.y)+outward*0.36,Vector3(0.22,high-low,1.08),Basis.looking_at(-outward,Vector3.UP))
+					# Folded bronze returns and a recessed dark glazing seal turn
+					# the former single rectangular frame into a stepped section.
+					var tangent:=Vector3((b-a).x,0,(b-a).y).normalized()
+					var f0:=Vector3(p.x,low+0.03,p.y)+outward*0.84+tangent*0.115
+					var f1:=Vector3(p.x,high-0.30,p.y)+outward*0.84+tangent*0.115
+					var f2:=f1-outward*0.60+tangent*0.13
+					var f3:=f0-outward*0.60+tangent*0.13
+					_quad(bronze,f0,f1,f2,f3,tangent)
+					Geo._append_box(gaskets,Vector3(p.x,(low+high)*0.5,p.y)+outward*0.10+tangent*0.265,Vector3(0.045,high-low-0.16,0.09),Basis.looking_at(-outward,Vector3.UP))
 					var start:=clampf(t+direction*pitch/length*0.035,0.0,1.0)
 					var finish:=clampf(t+direction*pitch/length*0.48,0.0,1.0)
 					if absf(start-finish)>0.005:_edge_box(frames,a.lerp(b,start),a.lerp(b,finish),high-0.08,0.16,1.20,outward,0.45)
 			Geo._commit_detail(world,body,frames,"quay_ivory")
 			Geo._commit_detail(world,body,bronze,"quay_bronze")
+			Geo._commit_detail(world,body,gaskets,"quay_dark")
 			if floor_index==block.count-1:
 				# Thick folded perimeter reveals each cantilevered volume.
 				var border:=_surface()
@@ -147,6 +161,7 @@ static func _salesforce(world: Node3D) -> void:
 	var poly:=Geo.polygon(SALESFORCE_POINTS)
 	var lobby: StaticBody3D=world._structure_mesh("quay/salesforce/lobby",Geo.prism(poly,0.0,14.0),SALESFORCE_CENTER,"quay_lobby",260000)
 	_salesforce_detail(world,lobby,0.0,14.0,poly)
+	_salesforce_lobby_frames(world,lobby,poly)
 	for i in range(54):
 		var low:=14.0+i*235.0/54.0
 		var high:=low+235.0/54.0
@@ -185,10 +200,14 @@ static func _salesforce_detail(world: Node3D, body: StaticBody3D, low: float, hi
 				var p:=a.lerp(b,clipped[0].x)
 				var q:=a.lerp(b,clipped[1].x)
 				_facade_beam(branches,Vector3(p.x,clipped[0].y,p.y)+outward*0.65,Vector3(q.x,clipped[1].y,q.y)+outward*0.65,outward,0.95,0.5)
-		Geo._append_box(branches,Vector3(a.x,(low+high)*0.5,a.y)+outward*0.46,Vector3(1.1,high-low,0.70),Basis.looking_at(-outward,Vector3.UP))
+		_facade_beam(branches,Vector3(a.x,low,a.y)+outward*0.46,Vector3(a.x,high,a.y)+outward*0.46,outward,1.1,0.70)
 		if low>=14:
-			var fraction:=_shade_cutoff(high)
-			_edge_box(shades,a.lerp(b,fraction),b,high-0.36,0.24,0.9,outward,0.31)
+			# Multiple slender profiled blades per storey, as in the Arup
+			# apex photograph. Clip their inner limit to the existing tree path.
+			for blade in range(3):
+				var y:=lerpf(low,high,(blade+0.58)/3.0)
+				var fraction:=_shade_cutoff(y)
+				_sunshade(shades,a.lerp(b,fraction),b,y,outward)
 			_edge_box(shades,a,b,high-0.36,0.11,0.15,outward,0.06)
 		# Fine structural pins run behind the horizontal sunshade blades.
 		for t in [0.28,0.56,0.98]:
@@ -240,11 +259,75 @@ static func _clip_y(a: Vector2, b: Vector2, low: float, high: float) -> PackedVe
 	return PackedVector2Array([a.lerp(b,clampf((low-a.y)/(b.y-a.y),0.0,1.0)),a.lerp(b,clampf((high-a.y)/(b.y-a.y),0.0,1.0))])
 
 static func _facade_beam(surface: SurfaceTool, a: Vector3, b: Vector3, normal: Vector3, width: float, depth: float) -> void:
-	var delta:=b-a
-	if delta.length()<0.001:return
-	var right:=normal.cross(delta).normalized()
-	var up:=delta.normalized()
-	Geo._append_box(surface,(a+b)*0.5,Vector3(width,delta.length(),depth),Basis(right,up,right.cross(up)))
+	# Chamfered metal-clad tree members, clipped to their original floor IDs.
+	var w:=width*0.5;var d:=depth*0.5;var cut:=minf(w,d)*0.30
+	var profile:=PackedVector2Array([Vector2(-w+cut,-d),Vector2(w-cut,-d),Vector2(w,-d+cut),Vector2(w,d-cut),Vector2(w-cut,d),Vector2(-w+cut,d),Vector2(-w,d-cut),Vector2(-w,-d+cut)])
+	_profile_beam(surface,a,b,normal,profile)
+
+static func _profile_beam(surface:SurfaceTool,a:Vector3,b:Vector3,normal:Vector3,profile:PackedVector2Array) -> void:
+	if a.distance_to(b)<0.001:return
+	var along:=(b-a).normalized();var right:=along.cross(normal).normalized();var outward:=right.cross(along).normalized()
+	var basis:=Basis(right,along,outward)
+	for i in profile.size():
+		var j:=(i+1)%profile.size();var p:=profile[i];var q:=profile[j]
+		var pa:=a+basis*Vector3(p.x,0,p.y);var qa:=a+basis*Vector3(q.x,0,q.y)
+		var pb:=b+basis*Vector3(p.x,0,p.y);var qb:=b+basis*Vector3(q.x,0,q.y)
+		var edge:=q-p;var n:Vector3=(basis*Vector3(edge.y,0,-edge.x)).normalized()
+		_quad(surface,pa,qa,qb,pb,n)
+		Geo._triangle(surface,a,qa,pa,-along,Vector2.ZERO,q,p)
+		Geo._triangle(surface,b,pb,qb,along,Vector2.ZERO,p,q)
+
+static func _quad(surface:SurfaceTool,a:Vector3,b:Vector3,c:Vector3,d:Vector3,normal:Vector3) -> void:
+	Geo._triangle(surface,a,b,c,normal,Vector2(a.x,a.y),Vector2(b.x,b.y),Vector2(c.x,c.y))
+	Geo._triangle(surface,a,c,d,normal,Vector2(a.x,a.y),Vector2(c.x,c.y),Vector2(d.x,d.y))
+
+static func _sunshade(surface:SurfaceTool,a:Vector2,b:Vector2,y:float,outward:Vector3) -> void:
+	# Bevelled leading lip and thinner rear edge; dimensions photo-inferred.
+	var profile:=PackedVector2Array([Vector2(-0.08,-0.43),Vector2(0.05,-0.43),Vector2(0.075,0.31),Vector2(0.025,0.48),Vector2(-0.025,0.48),Vector2(-0.065,0.30)])
+	_profile_beam(surface,Vector3(a.x,y,a.y)+outward*0.31,Vector3(b.x,y,b.y)+outward*0.31,outward,profile)
+
+static func _qqt_podium_details(world:Node3D,body:StaticBody3D,poly:PackedVector2Array) -> void:
+	var joints:=_surface();var grille:=_surface();var dark:=_surface()
+	for i in poly.size():
+		var a:=poly[i];var b:=poly[(i+1)%poly.size()]
+		if a.distance_to(b)<2.0:continue
+		var out:=_outward(poly,a,b)
+		# The BVN street photograph shows pale coursed stone and long dark
+		# ventilation recesses. A shallow front layer preserves the solid core.
+		for y in [4.82,5.31,6.91,7.45]:_edge_box(joints,a,b,y,0.017,0.03,out,0.022)
+		var n:=maxi(1,roundi(a.distance_to(b)/1.5))
+		for j in n:
+			var p:=a.lerp(b,(j+0.5)/n)
+			for y in [5.05,7.18,7.72]:Geo._append_box(joints,Vector3(p.x,y,p.y)+out*0.022,Vector3(0.018,0.42,0.03),Basis.looking_at(-out,Vector3.UP))
+		if a.distance_to(b)<7.0:continue
+		var aa:=a.lerp(b,0.03);var bb:=a.lerp(b,0.97)
+		_edge_box(dark,aa,bb,6.1,1.05,0.035,out,0.035)
+		for y in range(9):_edge_box(grille,aa,bb,5.63+y*0.115,0.035,0.075,out,0.075)
+	Geo._commit_detail(world,body,joints,"quay_joint")
+	Geo._commit_detail(world,body,dark,"quay_dark")
+	Geo._commit_detail(world,body,grille,"quay_bronze")
+	body.set_meta("coursed_stone_and_vents",true)
+
+static func _salesforce_lobby_frames(world:Node3D,body:StaticBody3D,poly:PackedVector2Array) -> void:
+	var frames:=_surface();var transoms:=_surface()
+	for face:Array in [[poly[0],poly[14]],[poly[2],poly[4]]]:
+		var a:Vector2=face[0];var b:Vector2=face[1];var out:=_outward(poly,a,b)
+		var n:=maxi(1,roundi(a.distance_to(b)/1.65))
+		for i in range(n+1):
+			var p:=a.lerp(b,float(i)/n)
+			Geo._append_box(frames,Vector3(p.x,7.0,p.y)+out*0.15,Vector3(0.07,14,0.26),Basis.looking_at(-out,Vector3.UP))
+		for y in [3.8,7.2,10.6]:_edge_box(transoms,a,b,y,0.035,0.11,out,0.18)
+	Geo._commit_detail(world,body,frames,"quay_dark")
+	Geo._commit_detail(world,body,transoms,"quay_steel")
+	body.set_meta("fine_lobby_glazing",true)
+
+static func capture_views() -> Array:
+	return [
+		["quay-qqt-rebated-frames",QQT_CENTER+Vector3(64,71,-78),QQT_CENTER+Vector3(8,70,-20)],
+		["quay-qqt-stone-podium",QQT_CENTER+Vector3(49,3.5,-81),QQT_CENTER+Vector3(5,6,-53)],
+		["quay-salesforce-tree-shades",SALESFORCE_CENTER+Vector3(-53,62,-74),SALESFORCE_CENTER+Vector3(-7,59,-13)],
+		["quay-salesforce-glazing",SALESFORCE_CENTER+Vector3(-39,2,-46),SALESFORCE_CENTER+Vector3(-12,17,-13)]
+	]
 
 static func _edge_box(surface: SurfaceTool, a: Vector2, b: Vector2, y: float, height: float, depth: float, outward: Vector3, offset: float) -> void:
 	if a.distance_to(b)<0.001:return

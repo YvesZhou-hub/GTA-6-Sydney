@@ -1,6 +1,6 @@
 {
-  "checked": "2026-09-11",
-  "scope": "Additional OSM-located, explicitly inferred frontages; original geometry and labels only.",
+  "checked": "2026-09-12",
+  "scope": "Mapped street walls; original geometry with per-record photographic evidence and explicit inference. Reference pixels are not included.",
   "shops": [
     {
       "front": [
@@ -108,9 +108,26 @@
       "style": "bakery",
       "accent": "cream",
       "source": "https://www.darlingsq.com/eat-drink-shop/bengongs-tea/",
-      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
-      "confidence": "Mapped street wall with inferred retail frontage",
-      "address": "91 Harbour Street"
+      "evidence": "Branch-specific reference visually inspected on 12 September 2026. Round black Bengong Black blade, bronze/dark full-height window divisions, paired long pull handles, visible tiered bakery display and Oriental Teacraft lettering. This is the Darling Square Black branch, not Burwood; no outdoor seating added. Original mapped front, normal, width and public arrival retained; facade heights, depth and relative fitting spacing estimated. No complete playable interior.",
+      "confidence": "Mapped position; photograph-informed visible detail; dimensions estimated",
+      "address": "91 Harbour Street",
+      "photo_refinement": 1,
+      "photo_source": "https://juliesdiningclub.blogspot.com/2019/10/bengong-black-sydney.html",
+      "photo_urls": [
+        "https://1.bp.blogspot.com/-Yy0B-uaLRq4/XaahZgyUgoI/AAAAAAADgjk/L8Meh7RKQbY4UJhKtVX46Zepwwrip3cPwCKgBGAsYHg/s1600/IMG_20191016_145640.jpg"
+      ],
+      "photo_scope": "October 2019 Darling Square exterior; historical photograph, present fit-out unchanged status not verified",
+      "photo_notes": "Round black Bengong Black blade, bronze/dark full-height window divisions, paired long pull handles, visible tiered bakery display and Oriental Teacraft lettering. This is the Darling Square Black branch, not Burwood; no outdoor seating added.",
+      "model_status": "mapped_photo_informed_frontage",
+      "photo_checked": "2026-09-12",
+      "estimated_dimensions": "Existing mapped frontage width retained. Nominal backing height 4.400 m; generated visible fittings reach 4.400 m above model ground and extend 1.190 m outward from the backing plane. Backing is offset 0.420 m from the mapped wall. These are rounded model mesh measurements, not a surveyed shop; 1.360 m is only the QA outward-depth allowance.",
+      "identity_source": "https://www.darlingharbour.com/eat-drink/bengong-black",
+      "model_mesh_bounds_m": {
+        "max_outward_from_backing": 1.19,
+        "max_height_above_ground": 4.4,
+        "nominal_backing_height": 4.4,
+        "backing_offset_from_mapped_wall": 0.42
+      }
     },
     {
       "front": [
@@ -160,9 +177,26 @@
       "style": "cafe",
       "accent": "cream",
       "source": "https://www.darlingsq.com/eat-drink-shop/haven-specialty-coffee/",
-      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
-      "confidence": "Mapped street wall with inferred retail frontage",
-      "address": "85 Harbour St"
+      "evidence": "Branch-specific reference visually inspected on 12 September 2026. Black brick base and piers, left glazed door, vertical Haven lettering, upper black louvres, open service window, punched timber backing, glass pastry display and tall cold-drip apparatus. Do not substitute Rosebery or Darling Quarter fit-outs. Original mapped front, normal, width and public arrival retained; facade heights, depth and relative fitting spacing estimated. No complete playable interior.",
+      "confidence": "Mapped position; photograph-informed visible detail; dimensions estimated",
+      "address": "85 Harbour St",
+      "photo_refinement": 1,
+      "photo_source": "https://concreteplayground.com/sydney/cafes/haven-specialty-coffee-darling-square",
+      "photo_urls": [
+        "https://cdn.concreteplayground.com/content/uploads/2020/02/Haven-Specialty-Coffee-Haymarket-supplied2.jpg",
+        "https://cdn.concreteplayground.com/content/uploads/2020/02/Haven-Specialty-Coffee-Haymarket-supplied3.jpg"
+      ],
+      "photo_scope": "Haymarket street frontage and visible counter; supplier-labelled branch photographs",
+      "photo_notes": "Black brick base and piers, left glazed door, vertical Haven lettering, upper black louvres, open service window, punched timber backing, glass pastry display and tall cold-drip apparatus. Do not substitute Rosebery or Darling Quarter fit-outs.",
+      "model_status": "mapped_photo_informed_frontage",
+      "photo_checked": "2026-09-12",
+      "estimated_dimensions": "Existing mapped frontage width retained. Nominal backing height 4.400 m; generated visible fittings reach 4.460 m above model ground and extend 0.880 m outward from the backing plane. Backing is offset 0.420 m from the mapped wall. These are rounded model mesh measurements, not a surveyed shop; 1.360 m is only the QA outward-depth allowance.",
+      "model_mesh_bounds_m": {
+        "max_outward_from_backing": 0.88,
+        "max_height_above_ground": 4.46,
+        "nominal_backing_height": 4.4,
+        "backing_offset_from_mapped_wall": 0.42
+      }
     },
     {
       "front": [
@@ -397,9 +431,25 @@
       "style": "dining",
       "accent": "ochre",
       "source": "https://www.darlingsq.com/eat-drink-shop/pancakes-on-the-rocks/",
-      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
-      "confidence": "Mapped street wall with inferred retail frontage",
-      "address": "55 Tumbalong Boulevard"
+      "evidence": "Branch-specific reference visually inspected on 12 September 2026. Red folding-arm canopy spans, tall dark-framed glazing, cream lettering on projecting double-sided red wood signs, long horizontal-slatted planters and broad foliage. Photo explicitly distinguishes this branch from The Rocks; no Metcalfe Arcade details used. Original mapped front, normal, width and public arrival retained; facade heights, depth and relative fitting spacing estimated. No complete playable interior.",
+      "confidence": "Mapped position; photograph-informed visible detail; dimensions estimated",
+      "address": "55 Tumbalong Boulevard",
+      "photo_refinement": 1,
+      "photo_source": "https://doreenabc0527.pixnet.net/blog/posts/9577962840",
+      "photo_urls": [
+        "https://pimg.1px.tw/doreenabc0527/1752653413-3569393096-g.jpg"
+      ],
+      "photo_scope": "Darling Harbour/Darling Square branch exterior photographed by the visitor; article published July 2025, trip date not independently verified",
+      "photo_notes": "Red folding-arm canopy spans, tall dark-framed glazing, cream lettering on projecting double-sided red wood signs, long horizontal-slatted planters and broad foliage. Photo explicitly distinguishes this branch from The Rocks; no Metcalfe Arcade details used.",
+      "model_status": "mapped_photo_informed_frontage",
+      "photo_checked": "2026-09-12",
+      "estimated_dimensions": "Existing mapped frontage width retained. Nominal backing height 4.400 m; generated visible fittings reach 4.400 m above model ground and extend 1.255 m outward from the backing plane. Backing is offset 0.420 m from the mapped wall. These are rounded model mesh measurements, not a surveyed shop; 1.360 m is only the QA outward-depth allowance.",
+      "model_mesh_bounds_m": {
+        "max_outward_from_backing": 1.255,
+        "max_height_above_ground": 4.4,
+        "nominal_backing_height": 4.4,
+        "backing_offset_from_mapped_wall": 0.42
+      }
     },
     {
       "front": [
@@ -530,9 +580,27 @@
       "style": "dining",
       "accent": "coal",
       "source": "https://www.darlingsq.com/eat-drink-shop/sushi-sei/",
-      "evidence": "Official precinct tenant name and OSM branch point projected to mapped exterior. Frame, display, widths and furnishing are explicitly inferred; not a photo-identical shop survey.",
-      "confidence": "Mapped street wall with inferred retail frontage",
-      "address": "SE04, Little Hay St"
+      "evidence": "Branch-specific reference visually inspected on 12 September 2026. Pale wood counter, dark vertical side screen, pale rear curtain, warm cove illumination and counter seats. Compressed original window relief, not a reconstructed full interior or verified outside door layout. AI-labelled menu illustrations on the operator page were rejected. Original mapped front, normal, width and public arrival retained; facade heights, depth and relative fitting spacing estimated. No complete playable interior.",
+      "confidence": "Mapped position; photograph-informed visible detail; dimensions estimated",
+      "address": "Shop 20/2 Little Hay St",
+      "photo_refinement": 1,
+      "photo_source": "https://sushisei.com.au/",
+      "photo_urls": [
+        "https://cloud.katana.nexigen.digital/katana/svcisREQdWtv6yWPKoO3VcNRi5kIZum3DYraI1BZ.webp",
+        "https://cloud.katana.nexigen.digital/katana/1hWLThKnIDOhwy8dqgzJk4DCeY6kfZo8LUdEnIVS.webp"
+      ],
+      "photo_scope": "Operator-published actual counter/room photograph and chef counter photograph only; exterior frame remains inferred",
+      "photo_notes": "Pale wood counter, dark vertical side screen, pale rear curtain, warm cove illumination and counter seats. Compressed original window relief, not a reconstructed full interior or verified outside door layout. AI-labelled menu illustrations on the operator page were rejected.",
+      "model_status": "mapped_photo_informed_display",
+      "photo_checked": "2026-09-12",
+      "estimated_dimensions": "Existing mapped frontage width retained. Nominal backing height 4.400 m; generated visible fittings reach 4.400 m above model ground and extend 0.840 m outward from the backing plane. Backing is offset 0.420 m from the mapped wall. These are rounded model mesh measurements, not a surveyed shop; 1.360 m is only the QA outward-depth allowance.",
+      "address_note": "Current operator address corrects former SE04 directory field; mapped node and wall projection unchanged.",
+      "model_mesh_bounds_m": {
+        "max_outward_from_backing": 0.84,
+        "max_height_above_ground": 4.4,
+        "nominal_backing_height": 4.4,
+        "backing_offset_from_mapped_wall": 0.42
+      }
     },
     {
       "front": [

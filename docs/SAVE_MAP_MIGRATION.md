@@ -1,6 +1,6 @@
 # Map revision migration
 
-The current v0.1.5 city records `map_revision: 5`. New writes use save format 5 and the reader accepts formats 1–4. Saves older than map revision 5 run the map relocation pass; a current revision save is restored without repeated relocation. Vehicle model revision 3 is recorded independently. Revision 2 below describes the retained bridge compatibility rules.
+The current v0.1.6 city records `map_revision: 6`. New writes use save format 5 and the reader accepts formats 1–4. Saves older than map revision 6 run the map relocation pass; a current revision save is restored without repeated relocation. Vehicle model revision 3 is recorded independently. Revision 2 below describes the retained bridge compatibility rules.
 
 `map_migration.gd` checks the full stored vehicle envelope and the player's capsule-sized bounds against live mapped building solids. Polygon intersection and courtyard subtraction preserve concave outlines and holes. Building-part base heights preserve public ground under elevated structures. Destroyed storey components are excluded. Custom city, bank, Quay, Manly, metro and frontage structures use their real collision shapes; closed trimesh containment catches an object entirely inside a shell. Open meshes are not automatically considered solid interiors.
 
@@ -42,3 +42,13 @@ Map revision 4 includes the revised Opera House `opera/` structures and the expa
 ## v0.1.5 stair support fix
 
 Map revision 5 rechecks old saved poses against the new closed Opera stair foundations. The existing exact collision and closed-mesh containment pass relocates actors embedded in those solids, while safe surface and airborne copies retain their positions. The retired `opera/steps/0..7` damage IDs remain in history and do not delete the new foundations or finish panels. Loading retains fleet identities, health, fuel, ownership and source-save bytes; the next ordinary save records revision 5. Final evidence is linked in [TESTING.md](TESTING.md).
+
+## v0.1.6 foyer refinement
+
+Map revision 6 rechecks existing poses after the Opera north foyers gain photo-informed curved stairs and supported upper landings. The existing collision/closed-solid checks and near-pose recovery handle occupied new solids; save format remains 5. Current-revision reloads skip repeated relocation. The v0.1.5 closed monumental stair foundations and retired damage-ID compatibility are retained. Source fixtures and final exported-App walking checks are listed separately in [TESTING.md](TESTING.md).
+
+The initial Opera-slope regression also exposed the same foot-origin issue on flat BOC/W entrance floors. The final rule verifies a live upward-facing support on a registered authored structure (`_custom_id` and `world.structures`), at most 10mm below or 100mm above the foot origin. It then requires both the exact production capsule with zero extra margin and the closed-solid torso/head checks to be clear. A support ray alone does not qualify: crossing a wall or complete burial in a closed mesh remains rejected. Six settled Opera poses, six settled BOC/W poses, six Man O’War bridge poses and their 40–60mm buried counterexamples are tested separately. The final App also checks the actual settled foot position at every continuous-route destination.
+
+### v0.1.6 Man O’War 连接桥
+
+同一地图修订 6 加入两条真实地图连接桥的实体坡面。码头、平地与门厅共同使用上述实际支撑核对；正常站姿不会因胶囊脚底原点的小偏差而被搬走，真正埋入结构的角色仍由原安全落点流程恢复。独立码头夹具检查六个真实落稳脚位、六个下埋 6 cm 反例及两条连接桥的完整往返。

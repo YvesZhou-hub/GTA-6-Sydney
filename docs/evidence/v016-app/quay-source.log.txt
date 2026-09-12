@@ -1,0 +1,87 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=107 reserved=13 roads=2553
+PASS READY reached with both mapped precincts 
+PASS Original 12 researched Darling frontages retained 
+PASS Three added Darling shops 
+PASS Five numbered piers, heritage station and three Quay restaurants 
+PASS All 28 mapped canopy/kiosk replacements available 
+PASS Both modules idempotent 
+PASS Mapped station has explicit replacement and raised railway floor 
+PASS Station public concourse is open and supported 
+PASS Three Nicolle shopfronts retain real ground-level host podium 
+PASS auvers mapped anchor equals public arrival 
+PASS auvers 1.8m capsule approach clear 
+PASS auvers arrival has real floor support 
+PASS hakatamon mapped anchor equals public arrival 
+PASS hakatamon 1.8m capsule approach clear 
+PASS hakatamon arrival has real floor support 
+PASS chinta_ria mapped anchor equals public arrival 
+PASS chinta_ria 1.8m capsule approach clear 
+PASS chinta_ria arrival has real floor support 
+PASS cq_wharf_2 mapped anchor equals public arrival 
+PASS cq_wharf_2 1.8m capsule approach clear 
+PASS cq_wharf_2 arrival has real floor support 
+PASS cq_wharf_3 mapped anchor equals public arrival 
+PASS cq_wharf_3 1.8m capsule approach clear 
+PASS cq_wharf_3 arrival has real floor support 
+PASS cq_wharf_4 mapped anchor equals public arrival 
+PASS cq_wharf_4 1.8m capsule approach clear 
+PASS cq_wharf_4 arrival has real floor support 
+PASS cq_wharf_5 mapped anchor equals public arrival 
+PASS cq_wharf_5 1.8m capsule approach clear 
+PASS cq_wharf_5 arrival has real floor support 
+PASS cq_wharf_6 mapped anchor equals public arrival 
+PASS cq_wharf_6 1.8m capsule approach clear 
+PASS cq_wharf_6 arrival has real floor support 
+PASS cq_station mapped anchor equals public arrival 
+PASS cq_station 1.8m capsule approach clear 
+PASS cq_station arrival has real floor support 
+PASS cq_eastbank mapped anchor equals public arrival 
+PASS cq_eastbank 1.8m capsule approach clear 
+PASS cq_eastbank arrival has real floor support 
+PASS cq_searock mapped anchor equals public arrival 
+PASS cq_searock 1.8m capsule approach clear 
+PASS cq_searock arrival has real floor support 
+PASS cq_city_extra mapped anchor equals public arrival 
+PASS cq_city_extra 1.8m capsule approach clear 
+PASS cq_city_extra arrival has real floor support 
+PASS No legacy quay/pier/0 
+PASS No legacy quay/pier/1 
+PASS No legacy quay/pier/2 
+PASS No legacy quay/pier/3 
+PASS No legacy quay/pier/4 
+PASS No legacy quay/transit_hall 
+PASS Wharf 2 continuous 41-point walking route 
+PASS Wharf 3 continuous 41-point walking route 
+PASS Wharf 4 continuous 41-point walking route 
+PASS Wharf 5 continuous 41-point walking route 
+PASS Wharf 6 continuous 41-point walking route 
+PASS way/1295125150 retained mapped canopy outline 
+PASS way/1295125151 retained mapped canopy outline 
+PASS way/1295125161 retained mapped canopy outline 
+PASS way/270803850 retained mapped canopy outline 
+PASS way/354270484 retained mapped canopy outline 
+PASS way/354270481 retained mapped canopy outline 
+PASS way/1295125194 retained mapped canopy outline 
+PASS way/1295125195 retained mapped canopy outline 
+PASS way/354270479 retained mapped canopy outline 
+PASS way/1295125196 retained mapped canopy outline 
+PASS way/1295125197 retained mapped canopy outline 
+PASS way/354270487 retained mapped canopy outline 
+PASS way/1269027215 retained mapped canopy outline 
+PASS way/1269027216 retained mapped canopy outline 
+PASS All authored faces finite with outward winding 
+PASS 14 individual mapped canopy roofs 
+PASS Wharf 2 referenced round marker and divided sign 
+PASS Wharf 2 entry remains capsule-clear across 1.8m route 
+PASS Wharf 3 referenced round marker and divided sign 
+PASS Wharf 3 entry remains capsule-clear across 1.8m route 
+PASS Wharf 4 referenced round marker and divided sign 
+PASS Wharf 4 entry remains capsule-clear across 1.8m route 
+PASS Wharf 5 referenced round marker and divided sign 
+PASS Wharf 5 entry remains capsule-clear across 1.8m route 
+PASS Wharf 6 referenced round marker and divided sign 
+PASS Wharf 6 entry remains capsule-clear across 1.8m route 
+PASS All 14 roof soffits retain their individual mapped owner 

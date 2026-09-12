@@ -18,7 +18,7 @@ SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geogr
                 'navigation_map_test.gd', 'vehicle_model_test.gd', 'vehicle_model_migration_test.gd',
                 'boat_model_test.gd', 'interactive_qa.gd', 'hoverboard_test.gd',
                 'air_vehicle_flight_test.gd', 'vehicle_speed_test.gd', 'air_vehicle_model_test.gd',
-                'precinct_detail_test.gd', 'sydney_tower_landmark_test.gd',
+                'precinct_detail_test.gd', 'sydney_tower_landmark_test.gd', 'manowar_detail_test.gd',
                 'city_parent_base_test.gd', 'city_parent_policy_test.py', 'helipad_clearance_test.gd',
                 'fixtures/save_store_v012.gd')
 

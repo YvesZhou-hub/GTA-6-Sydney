@@ -1,0 +1,101 @@
+{
+  "archive_sha256": "9269a3f9a39c79b23ef1a2ac349cad535a4d275d37866f3a5c10d236948b33e8",
+  "source": "Selected unmodified PNGs from the final exported App, native Metal/Forward+. Capture routes are test setup; player walks use production physics.",
+  "screenshots": [
+    {
+      "file": "docs/screenshots/v016/opera-concert-curved-stairs.png",
+      "sha256": "9031293c6e4de01c5e6d81450b8f21ebe58584f6724c6ef6f2d08ec7a4385d9a",
+      "review": "北侧门厅曲梯、木饰面和青铜框架可见；材料与非公开空间仍有简化。"
+    },
+    {
+      "file": "docs/screenshots/v016/opera-north-curtain-detail.png",
+      "sha256": "9ba6f2029ff1895a7d16b7e8ddc88a4d79ceddfb5a3bf18f2de04fdaf3778a33",
+      "review": "深青铜竖框、横框与玻璃连接构造可见，通行区无新增断缝。"
+    },
+    {
+      "file": "docs/screenshots/v016/sydney-tower-skywalk.png",
+      "sha256": "84baa8914ab7f10ad9bece41618b9c099e538ebb79270efc8190c98db01c052e",
+      "review": "双侧外挑平台、塔舱窗框、栏杆与设备层可辨。"
+    },
+    {
+      "file": "docs/screenshots/v016/w-sydney-ribbon-end.png",
+      "sha256": "e523993fcd2c06bd39c8fe664e2123fc64f3873e34acf46604c7e033ee393ef1",
+      "review": "曲面回转边框、端部暗退台和 W 标记可见；周边普通楼体仍简化。"
+    },
+    {
+      "file": "docs/screenshots/v016/tower-one-fins.png",
+      "sha256": "dc11a77e4b79974ff0eb2e48c037302fb5ac8f29f8617ef42143f5969f3f3c54",
+      "review": "遮阳板深框、双色板面和金属连接构造可辨。"
+    },
+    {
+      "file": "docs/screenshots/v016/bank-of-china-sussex.png",
+      "sha256": "89f8e5a7ab5cb398aadd406852978d8ce312375e82c5d50f6a74fe6e524f1ebd",
+      "review": "由街面西北侧的抬高机位查看真实保留的楼体与立面；没有隐藏邻楼。"
+    },
+    {
+      "file": "docs/screenshots/v016/bank-of-china-colonnade.png",
+      "sha256": "cd0225028174fa2b756cc6f48427dd9b6b9cc917c469b9de4c76eef2910edd8c",
+      "review": "开放柱廊、方柱、顶棚与后退玻璃可见，中央步行带连续；此处为公共入口范围。"
+    },
+    {
+      "file": "docs/screenshots/v016/icc-recessed-meeting-pods.png",
+      "sha256": "a0d0635c6347b86effd43a0ea2fb0bac89b5615fd3045b0eec389c85cd7e6370",
+      "review": "会议窗盒的深凹侧壁、木衬和后退玻璃清楚。"
+    },
+    {
+      "file": "docs/screenshots/v016/icc-theatre-red-foyer.png",
+      "sha256": "34c38ac4d87a97cf5c537bbd4bd261446e405af2e71a9a174f11140321c38ad8",
+      "review": "剧场公共门厅的红色折面吊顶可见；远处外部 POI 浮字仍有干扰。"
+    },
+    {
+      "file": "docs/screenshots/v016/quay-qqt-rebated-frames.png",
+      "sha256": "1e789d87f525281124a86220b93882dc878a364a280836ee33b9b705accdb788",
+      "review": "错动楼体的后退窗框与立面分格可辨。"
+    },
+    {
+      "file": "docs/screenshots/v016/quay-salesforce-tree-shades.png",
+      "sha256": "ff01a30e65dc2244bb22448a5abe4d5800a20efd1e8fbef4cb968cc97cc26340",
+      "review": "树形支撑、横向遮阳叶片及窗框可辨。"
+    },
+    {
+      "file": "docs/screenshots/v016/westpac_public_colonnade.png",
+      "sha256": "98ef0922ee363364081f4c4fc77b71f3a319e821e2825fa17900f2716f89dde9",
+      "review": "重复普通楼体已替换，首层柱廊开放；树木保留，部分细节仍受前景遮挡。"
+    },
+    {
+      "file": "docs/screenshots/v016/cba_south_canopy.png",
+      "sha256": "ded377bc8e72420d5c604913a46b6325dda2702dfd88ec557534876c2fe324ef",
+      "review": "南楼沿公园曲线的木格栅雨棚与通路可见。"
+    },
+    {
+      "file": "docs/screenshots/v016/cba_north_canopy.png",
+      "sha256": "d8aec635cb0e8f919493f8eeac88a91bb98d87505ba05c263fe64315c3f49175",
+      "review": "北楼连续公共立面的木格栅雨棚可见。"
+    },
+    {
+      "file": "docs/screenshots/v016/darling_business_haven_specialty_coffee_photo_detail.png",
+      "sha256": "1d2aa9365181df370e25f33a68fcd923113ff650314a569f92806919956e6ae2",
+      "review": "Haven 黑砖服务窗、咖啡设备与糕点展示可见。"
+    },
+    {
+      "file": "docs/screenshots/v016/darling_business_pancakes_on_the_rocks_photo_detail.png",
+      "sha256": "bb09037fb98c7139c407aba03c73a19b6f4a716aa87fcff3662ac4a9e723c2ee",
+      "review": "红色篷架与木招牌可见，店名未再被窗框切字。"
+    },
+    {
+      "file": "docs/screenshots/v016/darling_business_bengongs_tea_photo_detail.png",
+      "sha256": "0ff7379d7137b56ddef987c41470d793b59021e1ebe9173df96492291eff43fd",
+      "review": "圆形吊牌、黑色门面和展示区可见，新增窗中文字完整。"
+    },
+    {
+      "file": "docs/screenshots/v016/quay_gate_2.png",
+      "sha256": "f57fcafe8161ec9d13dc08a222a7ef50d86bfc4fb7d60ac098be530d3f2d1c5b",
+      "review": "绿色渡轮标记、号码、读卡器外壳和中央入口可见。"
+    },
+    {
+      "file": "docs/screenshots/v016/manowar-overview.png",
+      "sha256": "8756e0e31282dafb948de507c0287dd9c75c24405ce9a62096326cfcda8f89c3",
+      "review": "石码头、两浮台、连接桥与歌剧院东侧关系可辨，原海面孤立条带已替换。"
+    }
+  ]
+}

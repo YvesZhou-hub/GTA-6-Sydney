@@ -271,7 +271,7 @@ func run():
 func opera_point(local:Vector3) -> Vector3:return Opera.CENTER+Opera.site_basis()*local
 func opera_stair_revision(game:Node3D):
 	var world:Node3D=game.world
-	check("v015 revision 5 enables a one-time check for revision-4 stair saves",Migration.REVISION==5)
+	check("current revision 6 enables a one-time check for older geometry saves",Migration.REVISION==6)
 	for bay in 8:
 		var body:Node3D=world.structures["opera/steps/foundation/%d"%bay].node
 		var collision:CollisionShape3D=body.get_child(1)
@@ -336,7 +336,7 @@ func opera_stair_revision(game:Node3D):
 			check("v015 actual revision-4 load preserves the settled production-player stair pose",game.player.global_position.is_equal_approx(before))
 	game.current_vehicle=null
 	for body in game.vehicles:body.freeze=true;body.stop_motion_after_relocation()
-	check("v015 explicit save records revision 5 after the one-time safety migration",game.save_world() and Store.read(fixture_id).map_revision==5)
+	check("explicit save records current revision after the one-time safety migration",game.save_world() and Store.read(fixture_id).map_revision==Migration.REVISION)
 	var positions:Dictionary={}
 	for body in game.vehicles:positions[body.vehicle_id]=body.global_transform
 	var saved_player:Vector3=game.player.global_position
@@ -345,3 +345,13 @@ func opera_stair_revision(game:Node3D):
 	for body in game.vehicles:
 		if not body.global_transform.is_equal_approx(positions[body.vehicle_id]):unchanged=false
 	check("v015 current-revision reload performs no second relocation",unchanged and game.vehicles.size()==3)
+	# A v0.1.5 save is the immediately preceding release, so exercise that
+	# actual load gate separately from the retained revision-4 regression.
+	game.player.global_position=trapped_player;game.player.last_safe=trapped_player
+	check("v016 isolated revision-5 fixture saves",game.save_world())
+	var previous_release:Dictionary=Store.read(fixture_id);previous_release.map_revision=5
+	check("v016 previous-release map revision fixture writes",Store.write(fixture_id,previous_release))
+	var previous_bytes:=FileAccess.get_file_as_string(Store.ROOT+fixture_id+".json")
+	game.load_world(fixture_id)
+	check("v016 revision-5 load runs solid-geometry recovery",game.player.global_position.distance_to(trapped_player)>.5 and not Migration._player_needs_relocation(game,game.player.global_position))
+	check("v016 revision-5 load leaves the source save and fleet identities intact",previous_bytes==FileAccess.get_file_as_string(Store.ROOT+fixture_id+".json") and game.vehicles.size()==3 and game.vehicles.all(func(vehicle):return positions.has(vehicle.vehicle_id)))

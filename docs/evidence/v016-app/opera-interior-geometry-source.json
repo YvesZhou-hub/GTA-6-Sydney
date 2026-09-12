@@ -1,0 +1,358 @@
+{
+  "checks": [
+    {
+      "detail": {},
+      "name": "exterior and interior share mapped frame",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "four interior navigation destinations are registered",
+      "passed": true
+    },
+    {
+      "detail": {
+        "components": 178
+      },
+      "name": "independent floors, walls, stages, tiers and stairs have collision",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "ticket ceiling has folded concrete profiles",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "concert_foyer broad flight uses real curved treads",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "jst_foyer broad flight uses real curved treads",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing buried player is identified -26.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing safely standing player stays -26.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing buried player is identified 23.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing safely standing player stays 23.0",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(-26.0, 12.29597, -69.00001)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=-26.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=-26.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(-36.46252, 12.29601, -68.325)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=-26.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=-26.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(-15.5375, 12.29601, -68.32502)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=-26.0 u=0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=-26.0 u=0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(22.99999, 12.30084, -55.50001)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=23.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=23.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(14.86251, 12.30084, -54.825)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=23.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=23.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(31.13751, 12.30084, -54.825)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=23.0 u=0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=23.0 u=0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "blocked": []
+      },
+      "name": "Covered concourse to ticket foyer and upper south foyer capsule route clearance",
+      "passed": true
+    },
+    {
+      "detail": {
+        "missing": []
+      },
+      "name": "Covered concourse to ticket foyer and upper south foyer continuous floor",
+      "passed": true
+    },
+    {
+      "detail": {
+        "blocked": []
+      },
+      "name": "Concert Hall south entrance to front stalls capsule route clearance",
+      "passed": true
+    },
+    {
+      "detail": {
+        "missing": []
+      },
+      "name": "Concert Hall south entrance to front stalls continuous floor",
+      "passed": true
+    },
+    {
+      "detail": {
+        "blocked": []
+      },
+      "name": "Concert Hall harbour promenade through northern foyer capsule route clearance",
+      "passed": true
+    },
+    {
+      "detail": {
+        "missing": []
+      },
+      "name": "Concert Hall harbour promenade through northern foyer continuous floor",
+      "passed": true
+    },
+    {
+      "detail": {
+        "blocked": []
+      },
+      "name": "Joan Sutherland Theatre entrance to front side aisle capsule route clearance",
+      "passed": true
+    },
+    {
+      "detail": {
+        "missing": []
+      },
+      "name": "Joan Sutherland Theatre entrance to front side aisle continuous floor",
+      "passed": true
+    },
+    {
+      "detail": {
+        "blocked": []
+      },
+      "name": "Joan Sutherland Theatre northern harbour foyer capsule route clearance",
+      "passed": true
+    },
+    {
+      "detail": {
+        "missing": []
+      },
+      "name": "Joan Sutherland Theatre northern harbour foyer continuous floor",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-box-office camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-entry-stairs camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-concert-hall camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-concert-stage camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-concert-organ camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-joan-sutherland camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-concert-northern-foyer camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-concert-curved-stairs camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hits": []
+      },
+      "name": "opera-jst-northern-foyer camera lies in clear interior space",
+      "passed": true
+    },
+    {
+      "detail": {
+        "intrusions": [],
+        "samples": 2449318
+      },
+      "name": "Concert external shells and louvres stay outside acoustic room",
+      "passed": true
+    },
+    {
+      "detail": {
+        "intrusions": [],
+        "samples": 2449318
+      },
+      "name": "JST external shells and louvres stay outside acoustic room",
+      "passed": true
+    },
+    {
+      "detail": {
+        "obstruction": "none",
+        "point": "(0.0, 0.0, 0.0)"
+      },
+      "name": "opera-concert-hall clear audience view towards stage",
+      "passed": true
+    },
+    {
+      "detail": {
+        "obstruction": "none",
+        "point": "(0.0, 0.0, 0.0)"
+      },
+      "name": "opera-joan-sutherland clear audience view towards stage",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "all 18 photographed acoustic reflectors are represented",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hit": "opera_interior_concert_north:<StaticBody3D#138965683781>"
+      },
+      "name": "Concert audience sightline meets inner acoustic wall",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hit": "opera_interior_jst_north:<StaticBody3D#157454176676>"
+      },
+      "name": "JST audience sightline meets inner acoustic wall",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hit": "opera_interior_jst_stage_back:<StaticBody3D#157974270402>"
+      },
+      "name": "JST stage rear enclosure -1",
+      "passed": true
+    },
+    {
+      "detail": {
+        "hit": "opera_interior_jst_stage_back:<StaticBody3D#157974270402>"
+      },
+      "name": "JST stage rear enclosure 1",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "raised playable stage -26.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "raised playable stage 23.0",
+      "passed": true
+    }
+  ],
+  "components": 178,
+  "concert_seats": 2488,
+  "continuous_walks_ran": false,
+  "execution_flags": [
+    "--geometry-only"
+  ],
+  "fixture_mode": "complete_exterior_and_interiors",
+  "jst_seats": 1549,
+  "physics_engine": "Jolt Physics",
+  "user_saves_touched": false
+}

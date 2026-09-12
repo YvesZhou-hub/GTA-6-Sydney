@@ -25,6 +25,7 @@ var world:Node3D
 var checks:Array=[]
 var blocked:Array=[]
 var capsule:=CapsuleShape3D.new()
+var output_dir:="res://../reports/darling-v014"
 func _initialize():call_deferred("run")
 func check(name:String,passed:bool,detail=""):
 	checks.append({"name":name,"passed":passed,"detail":detail})
@@ -37,6 +38,8 @@ func clear(p:Vector3)->bool:
 func supported(p:Vector3)->bool:
 	return not world.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(p+Vector3.UP*.35,p-Vector3.UP*.30)).is_empty()
 func run():
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--report-dir="):output_dir=arg.trim_prefix("--report-dir=")
 	capsule.radius=.30;capsule.height=1.8
 	world=LocalWorld.new();root.add_child(world)
 	await physics_frame;await physics_frame
@@ -45,6 +48,7 @@ func run():
 	var counts:Dictionary=Businesses.directory().coverage_counts
 	check("All records classified without claiming 71 exact facades",counts.existing_researched_frontage==15 and counts.mapped_inferred_frontage==23 and counts.exchange_building_directory==14 and counts.directory_only_unresolved==18 and counts.directory_conflict_unresolved==1)
 	check("23 new mapped street facades",Businesses.frontages().size()==23)
+	check_photo_frontages()
 	check("18 mapped playground elements retained",Facilities.data().equipment.size()+Facilities.data().areas.size()==18)
 	check("Square and Quarter geographically distinct",Facilities.point("node/10590136162").distance_to(Vector3(-770,4.5,2020))>350)
 	var before:int=world.structures.size();Facilities.build(world);Businesses.build(world)
@@ -101,10 +105,88 @@ func run():
 		check(id+" repair restores materials and collisions",good)
 	if "--capture" in OS.get_cmdline_user_args():await capture()
 	var passed:bool=checks.all(func(c):return c.passed)
-	DirAccess.make_dir_recursive_absolute("res://../reports/darling-v014")
-	FileAccess.open("res://../reports/darling-v014/checks.json",FileAccess.WRITE).store_string(JSON.stringify({"passed":passed,"checks":checks,"blocked":blocked,"headless":DisplayServer.get_name()=="headless","counts":counts,"scope":"Mapped local city context; capsule sweeps are geometry checks, not a complete production-player walk or surveyed facsimile"},"\t"))
+	DirAccess.make_dir_recursive_absolute(output_dir)
+	FileAccess.open(output_dir+"/checks.json",FileAccess.WRITE).store_string(JSON.stringify({"passed":passed,"checks":checks,"blocked":blocked,"headless":DisplayServer.get_name()=="headless","counts":counts,"scope":"Mapped local city context; capsule sweeps are geometry checks, not a complete production-player walk or surveyed facsimile"},"\t"))
 	print("DARLING_COMPONENT_TEST ",checks.size()," checks; ","PASS" if passed else "FAIL")
 	quit(0 if passed else 1)
+func check_photo_frontages():
+	var records:Array=Businesses.frontages().filter(func(r):return r.has("photo_refinement"))
+	check("Four branch-specific refinements with four review cameras",records.size()==4 and Businesses.photo_capture_views().size()==4)
+	var original:Dictionary={"haven_specialty_coffee":[-671.5217,2045.6267,6.5],"pancakes_on_the_rocks":[-786.9897,2069.4807,8.0],"bengongs_tea":[-666.3727,2093.9352,5.0],"sushi_sei":[-706.1884,2072.7404,5.6]}
+	for item in records:
+		var key:String=item.id.trim_prefix("darling_business_")
+		var body:Node3D=world.structures["darling_square/"+item.id+"/frontage"].node
+		var base:Array=original[key]
+		check(key+" mapped wall and width unchanged",is_equal_approx(item.front[0],base[0]) and is_equal_approx(item.front[1],base[1]) and is_equal_approx(item.width,base[2]))
+		check(key+" inspected image provenance retained",item.photo_urls.size()>0 and item.photo_checked=="2026-09-12" and body.get_meta("photo_features",[]).size()>=4)
+		var faces:=0;var invalid:=0;var max_depth:=0.0;var min_y:=10.0;var max_y:=0.0
+		for child in body.get_children():
+			if not child is MeshInstance3D:continue
+			for surface in child.mesh.get_surface_count():
+				var arr:Array=child.mesh.surface_get_arrays(surface)
+				var verts:PackedVector3Array=arr[Mesh.ARRAY_VERTEX];var normals:PackedVector3Array=arr[Mesh.ARRAY_NORMAL];var ids=arr[Mesh.ARRAY_INDEX]
+				for v in verts:
+					max_depth=maxf(max_depth,v.z);min_y=minf(min_y,v.y+2.2);max_y=maxf(max_y,v.y+2.2)
+				for i in range(0,ids.size() if ids!=null and not ids.is_empty() else verts.size(),3):
+					var a:int=ids[i] if ids!=null and not ids.is_empty() else i;var b:int=ids[i+1] if ids!=null and not ids.is_empty() else i+1;var c:int=ids[i+2] if ids!=null and not ids.is_empty() else i+2
+					faces+=1
+					if not verts[a].is_finite() or (verts[b]-verts[a]).cross(verts[c]-verts[a]).dot(normals[a])>.0001:invalid+=1
+		check(key+" visible surfaces finite and correctly wound",invalid==0 and faces>500,str(faces)+" triangles; "+str(invalid)+" invalid")
+		check(key+" shallow frontage stays within public-side allowance",max_depth<=1.36 and min_y>=-.01 and max_y<=4.5,str([min_y,max_y,max_depth]))
+		var recorded:Dictionary=item.get("model_mesh_bounds_m",{})
+		check(key+" published model bounds match generated mesh",absf(float(recorded.get("max_outward_from_backing",-1))-max_depth)<.0006 and absf(float(recorded.get("max_height_above_ground",-1))-max_y)<.0006,str({"depth":max_depth,"height":max_y}))
+		if key in ["pancakes_on_the_rocks","bengongs_tea","sushi_sei"]:
+			check_frontage_lettering(key,body)
+		var n:=Vector3(item.normal[0],0,item.normal[1]);var p:=Vector3(item.front[0],4.5,item.front[1]);var side:=Vector3.UP.cross(n)
+		var passable:=true
+		for sample in 17:
+			var q:Vector3=p+n*2.15+side*((sample/16.0-.5)*(item.width+.4))
+			if not clear(q) or not supported(q):passable=false
+		check(key+" continuous public path in front stays clear",passable)
+	check("Sushi Sei room photo does not claim a verified exterior",records.filter(func(r):return r.id=="darling_business_sushi_sei")[0].model_status=="mapped_photo_informed_display")
+
+func check_frontage_lettering(key:String,body:Node3D):
+	var text:String={"pancakes_on_the_rocks":"PANCAKES ON THE ROCKS","bengongs_tea":"ORIENTAL\nTEACRAFT","sushi_sei":"by KUON"}[key]
+	var label:Label3D
+	for child in body.get_children():
+		if child is Label3D and child.text==text:label=child;break
+	if label==null:
+		check(key+" lettering clear of actual frame meshes",false,"missing label");return
+	var bounds:AABB=label.get_aabb()
+	var now:Dictionary=lettering_occlusion(body,bounds,label.position)
+	# The same mesh sampler must detect the reviewed defect at its previous
+	# lettering position/size. No collision bodies or production labels are moved.
+	var previous:Dictionary={"pancakes_on_the_rocks":[Vector3(0,3.58-2.2,.33),.19/.17],"bengongs_tea":[Vector3(1.0,2.61-2.2,.32),.17/.125],"sushi_sei":[Vector3(0,3.30-2.2,.35),.075/.065]}
+	var old:Array=previous[key]
+	var before:Dictionary=lettering_occlusion(body,AABB(bounds.position*float(old[1]),bounds.size*float(old[1])),old[0])
+	check(key+" lettering clear of actual frame meshes",now.samples>=800 and now.occluded==0 and before.occluded>0,JSON.stringify({"current":now,"old_layout_control":before}))
+
+func lettering_occlusion(body:Node3D,bounds:AABB,offset:Vector3)->Dictionary:
+	if bounds.size.x<=0 or bounds.size.y<=0:return {"samples":0,"occluded":0,"error":"empty label bounds"}
+	var triangles:PackedVector3Array=[]
+	# Meshes are tested directly because most frame/awning details deliberately
+	# have no physics collider. Cull only triangles outside the sampled volume.
+	for child in body.get_children():
+		if not child is MeshInstance3D:continue
+		var faces:PackedVector3Array=child.mesh.get_faces()
+		for i in range(0,faces.size(),3):
+			var a:Vector3=child.transform*faces[i];var b:Vector3=child.transform*faces[i+1];var c:Vector3=child.transform*faces[i+2]
+			if maxf(a.z,maxf(b.z,c.z))<offset.z+.001:continue
+			if maxf(a.x,maxf(b.x,c.x))<offset.x+bounds.position.x-.26 or minf(a.x,minf(b.x,c.x))>offset.x+bounds.end.x+.26:continue
+			if maxf(a.y,maxf(b.y,c.y))<offset.y+bounds.position.y or minf(a.y,minf(b.y,c.y))>offset.y+bounds.end.y:continue
+			triangles.append_array([a,b,c])
+	var samples:=0;var occluded:=0
+	for side in [-.25,0.0,.25]:
+		for row in 9:
+			for col in 33:
+				var end:Vector3=offset+Vector3(bounds.position.x+bounds.size.x*(.01+.98*col/32.0),bounds.position.y+bounds.size.y*(.01+.98*row/8.0),.001)
+				var start:Vector3=end+Vector3(side,0,1.0)
+				samples+=1
+				for i in range(0,triangles.size(),3):
+					if Geometry3D.segment_intersects_triangle(start,end,triangles[i],triangles[i+1],triangles[i+2])!=null:
+						occluded+=1;break
+	return {"samples":samples,"occluded":occluded,"label_width":bounds.size.x,"label_height":bounds.size.y}
+
 func walk_slide():
 	for action in ["forward","back","left","right","sprint","jump"]:
 		if not InputMap.has_action(action):InputMap.add_action(action)
@@ -136,7 +218,7 @@ func capture():
 	var we:=WorldEnvironment.new();we.environment=env;world.add_child(we)
 	var sun:=DirectionalLight3D.new();sun.rotation_degrees=Vector3(-55,-25,0);sun.light_energy=1.4;sun.shadow_enabled=true;world.add_child(sun)
 	var camera:=Camera3D.new();camera.current=true;camera.far=800;camera.fov=65;world.add_child(camera)
-	DirAccess.make_dir_recursive_absolute("res://../reports/darling-v014")
+	DirAccess.make_dir_recursive_absolute(output_dir)
 	for v in Facilities.capture_views()+Businesses.capture_views():
 		camera.position=v[1];camera.look_at(v[2]);await process_frame;await process_frame;RenderingServer.force_draw(false);await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("res://../reports/darling-v014/"+v[0]+".png")
+		root.get_texture().get_image().save_png(output_dir+"/"+v[0]+".png")

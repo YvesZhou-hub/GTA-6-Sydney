@@ -1,0 +1,498 @@
+{
+  "checks": [
+    {
+      "detail": {},
+      "name": "OSM pier outline retained 354759944",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "structural render/collision agree 354759944",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "OSM pier outline retained 392403849",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "structural render/collision agree 392403849",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "OSM pier outline retained 1218228840",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "structural render/collision agree 1218228840",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "module idempotent",
+      "passed": true
+    },
+    {
+      "detail": {
+        "triangles": 284,
+        "wrong": 0
+      },
+      "name": "all structural faces finite and outward",
+      "passed": true
+    },
+    {
+      "detail": {
+        "unclosed_edges": 0
+      },
+      "name": "both gangway colliders are closed solids",
+      "passed": true
+    },
+    {
+      "detail": {
+        "segments": [
+          {
+            "actual": [
+              479.623962402344,
+              4.57087707519531,
+              -195.745040893555
+            ],
+            "reached": true,
+            "target": [
+              479.639007568359,
+              4.57999992370605,
+              -195.766998291016
+            ]
+          },
+          {
+            "actual": [
+              490.114624023438,
+              4.57087707519531,
+              -216.92594909668
+            ],
+            "reached": true,
+            "target": [
+              490.153991699219,
+              4.57999992370605,
+              -216.873992919922
+            ]
+          },
+          {
+            "actual": [
+              489.168426513672,
+              4.57087707519531,
+              -222.986389160156
+            ],
+            "reached": true,
+            "target": [
+              489.118988037109,
+              4.57999992370605,
+              -222.962997436523
+            ]
+          },
+          {
+            "actual": [
+              490.144317626953,
+              4.57098579406738,
+              -230.143676757812
+            ],
+            "reached": true,
+            "target": [
+              490.182006835938,
+              4.57999992370605,
+              -230.065002441406
+            ]
+          },
+          {
+            "actual": [
+              495.77734375,
+              2.62874293327332,
+              -237.99382019043
+            ],
+            "reached": true,
+            "target": [
+              495.799987792969,
+              2.54999995231628,
+              -237.979995727539
+            ]
+          },
+          {
+            "actual": [
+              499.074676513672,
+              2.54087734222412,
+              -242.716949462891
+            ],
+            "reached": true,
+            "target": [
+              499.100006103516,
+              2.54999995231628,
+              -242.699996948242
+            ]
+          }
+        ]
+      },
+      "name": "manowar_north_jetty outward",
+      "passed": true
+    },
+    {
+      "detail": {
+        "segments": [
+          {
+            "actual": [
+              495.856048583984,
+              2.60938930511475,
+              -238.009170532227
+            ],
+            "reached": true,
+            "target": [
+              495.799987792969,
+              2.54999995231628,
+              -237.979995727539
+            ]
+          },
+          {
+            "actual": [
+              490.215606689453,
+              4.57098579406738,
+              -230.061614990234
+            ],
+            "reached": true,
+            "target": [
+              490.182006835938,
+              4.57999992370605,
+              -230.065002441406
+            ]
+          },
+          {
+            "actual": [
+              489.164459228516,
+              4.57087707519531,
+              -222.929489135742
+            ],
+            "reached": true,
+            "target": [
+              489.118988037109,
+              4.57999992370605,
+              -222.962997436523
+            ]
+          },
+          {
+            "actual": [
+              490.109893798828,
+              4.57087707519531,
+              -216.818664550781
+            ],
+            "reached": true,
+            "target": [
+              490.153991699219,
+              4.57999992370605,
+              -216.873992919922
+            ]
+          },
+          {
+            "actual": [
+              479.702728271484,
+              4.57087707519531,
+              -195.766204833984
+            ],
+            "reached": true,
+            "target": [
+              479.639007568359,
+              4.57999992370605,
+              -195.766998291016
+            ]
+          },
+          {
+            "actual": [
+              473.904388427734,
+              4.57087707519531,
+              -190.379379272461
+            ],
+            "reached": true,
+            "target": [
+              473.920013427734,
+              4.57999992370605,
+              -190.378997802734
+            ]
+          }
+        ]
+      },
+      "name": "manowar_north_jetty return",
+      "passed": true
+    },
+    {
+      "detail": {
+        "segments": [
+          {
+            "actual": [
+              479.623931884766,
+              4.57087707519531,
+              -195.745010375977
+            ],
+            "reached": true,
+            "target": [
+              479.639007568359,
+              4.57999992370605,
+              -195.766998291016
+            ]
+          },
+          {
+            "actual": [
+              490.114593505859,
+              4.57087707519531,
+              -216.925903320312
+            ],
+            "reached": true,
+            "target": [
+              490.153991699219,
+              4.57999992370605,
+              -216.873992919922
+            ]
+          },
+          {
+            "actual": [
+              493.410705566406,
+              4.57098579406738,
+              -215.988388061523
+            ],
+            "reached": true,
+            "target": [
+              493.407012939453,
+              4.57999992370605,
+              -215.916000366211
+            ]
+          },
+          {
+            "actual": [
+              503.391082763672,
+              2.58118176460266,
+              -213.048812866211
+            ],
+            "reached": true,
+            "target": [
+              503.348999023438,
+              2.54999995231628,
+              -212.988998413086
+            ]
+          },
+          {
+            "actual": [
+              507.563049316406,
+              2.54087734222412,
+              -211.853225708008
+            ],
+            "reached": true,
+            "target": [
+              507.5,
+              2.54999995231628,
+              -211.800003051758
+            ]
+          }
+        ]
+      },
+      "name": "manowar_east_jetty outward",
+      "passed": true
+    },
+    {
+      "detail": {
+        "segments": [
+          {
+            "actual": [
+              503.310668945312,
+              2.59044551849365,
+              -212.933380126953
+            ],
+            "reached": true,
+            "target": [
+              503.348999023438,
+              2.54999995231628,
+              -212.988998413086
+            ]
+          },
+          {
+            "actual": [
+              493.327423095703,
+              4.57099580764771,
+              -215.867828369141
+            ],
+            "reached": true,
+            "target": [
+              493.407012939453,
+              4.57999992370605,
+              -215.916000366211
+            ]
+          },
+          {
+            "actual": [
+              490.08056640625,
+              4.57087707519531,
+              -216.824737548828
+            ],
+            "reached": true,
+            "target": [
+              490.153991699219,
+              4.57999992370605,
+              -216.873992919922
+            ]
+          },
+          {
+            "actual": [
+              479.68994140625,
+              4.57087707519531,
+              -195.735763549805
+            ],
+            "reached": true,
+            "target": [
+              479.639007568359,
+              4.57999992370605,
+              -195.766998291016
+            ]
+          },
+          {
+            "actual": [
+              473.885528564453,
+              4.56944751739502,
+              -190.363433837891
+            ],
+            "reached": true,
+            "target": [
+              473.920013427734,
+              4.57999992370605,
+              -190.378997802734
+            ]
+          }
+        ]
+      },
+      "name": "manowar_east_jetty return",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "manowar_north arrival is on actual pontoon",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "manowar_east arrival is on actual pontoon",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": [
+          491.586486816406,
+          4.57086133956909,
+          -232.043746948242
+        ]
+      },
+      "name": "safe saved gangway pose north0.25",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "buried gangway pose rejected north0.25",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": [
+          492.990997314453,
+          4.30912446975708,
+          -234.022491455078
+        ]
+      },
+      "name": "safe saved gangway pose north0.5",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "buried gangway pose rejected north0.5",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": [
+          494.3955078125,
+          3.46875190734863,
+          -236.001251220703
+        ]
+      },
+      "name": "safe saved gangway pose north0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "buried gangway pose rejected north0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": [
+          495.892517089844,
+          4.11252307891846,
+          -215.18424987793
+        ]
+      },
+      "name": "safe saved gangway pose east0.25",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "buried gangway pose rejected east0.25",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": [
+          498.377990722656,
+          3.60352945327759,
+          -214.452499389648
+        ]
+      },
+      "name": "safe saved gangway pose east0.5",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "buried gangway pose rejected east0.5",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": [
+          500.863494873047,
+          3.09452986717224,
+          -213.720748901367
+        ]
+      },
+      "name": "safe saved gangway pose east0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "buried gangway pose rejected east0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "pier fittings disappear with their damage owner",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "pier repairs restore fittings",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "pier repairs preserve each fitting material",
+      "passed": true
+    }
+  ],
+  "continuous_walks_ran": true,
+  "headless": true,
+  "model_sha256": "1c885d9e55fba4d4e6f62cb30e02e1b157978fcd5f596c4b3e37b1ff25be877f",
+  "passed": true,
+  "scope": "Actual production player continuous walks in the mapped coast fixture, closed solids, save poses and damage. Heights and fittings remain estimates."
+}

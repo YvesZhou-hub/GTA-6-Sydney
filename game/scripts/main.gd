@@ -836,7 +836,7 @@ func landmark_catalog() -> Array:
 				break
 	# The model modules publish their actual IDs and names. This also keeps
 	# new bank/Quay/shop destinations in sync with their verified locations.
-	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks","sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses"]:
+	for group in ["bank_landmarks","metro_entrances","quay_landmarks","darling_square_frontages","cyber_landmarks","icc_landmarks","sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses","manowar_detail"]:
 		for record in world.get_meta(group,[]):
 			var key:String=("shop_" if group=="darling_square_frontages" else "")+str(record.get("id",""))
 			if not world.anchors.has(key) or not world.anchors[key] is Vector3: continue

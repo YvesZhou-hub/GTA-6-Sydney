@@ -1,0 +1,97 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS Westpac HQ and both CBA campus buildings have separate identity records
+PASS all nine custom footprint parts have explicit OSM exclusions
+PASS CBA South remains southeast of its paired North building
+PASS documented headquarters coordinates agree with the world projection
+PASS every detailed structural collider uses the identical rendered solid faces
+PASS no zero-area triangles in the bank geometry
+PASS all faces have outward Godot triangle winding
+PASS combined bank geometry stays within 180k public-detail budget triangles=140005
+PASS Westpac's beacon reaches the published 166m architectural height
+PASS both CBA roofs retain explicitly estimated 43.2m curved envelopes
+PASS Westpac massing contains two offset towers with distinct floor counts
+PASS both low-rise campus buildings have curved structural roof meshes
+PASS three headquarters each provide two public exterior review views
+PASS six review camera positions are outside physical bank solids
+PASS Westpac has pictured soffit panels, recessed lights and glazing fittings
+PASS bank/westpac/pier/00 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/01 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/02 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/03 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/04 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/05 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/06 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/07 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/08 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/09 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/10 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/11 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/12 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/13 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/14 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/15 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/16 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/17 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/18 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/19 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/20 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/21 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/22 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/23 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/24 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/25 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/26 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/27 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/28 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/29 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/30 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/31 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/32 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/33 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/34 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/35 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/36 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/37 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/38 rounded support preserves the previous column envelope
+PASS bank/westpac/pier/39 rounded support preserves the previous column envelope
+PASS round colonnade supports retain their original scale and IDs
+PASS cba_south has swept lattice and partial timber soffit
+PASS cba_south actual curved canopy meshes clear pedestrian heads y=[4.13319969177246, 5.79500007629395]
+PASS cba_south continuous 1.8m capsule strip under public canopy remains clear samples=290
+PASS cba_north has swept lattice and partial timber soffit
+PASS cba_north actual curved canopy meshes clear pedestrian heads y=[4.12559986114502, 5.79500007629395]
+PASS cba_north continuous 1.8m capsule strip under public canopy remains clear samples=462
+PASS Westpac open colonnade retains a continuous capsule-clear public route
+PASS CBA central public connector retains a continuous capsule-clear public route
+PASS western Sussex mass comes from the actual mapped way/544300934
+PASS production City._reserved excludes the replaced western mass
+PASS Westpac identity/exclusions/footprints include its western mass
+CITY_MAP buildings=0 reserved=1 roads=0
+PASS production city builder cannot recreate the old ground-sealing extrusion
+PASS production migration shares the exact generic exclusion
+PASS replacement preserves 63m upper mass and raised 12m lower edge in 17 damage bands
+PASS unchanged Westpac public-route standing pose stays valid for migration (-637.5769, 4.5, 674.6058)
+PASS unchanged Westpac public-route standing pose stays valid for migration (-635.5988, 4.490877, 705.7302)
+PASS player fully inside retained upper Sussex solid still requires relocation
+PASS closed upper-storey containment remains effective without shell contact
+PASS destroyed Sussex band removes its collision and occupied interior together
+PASS restoring Sussex band restores its closed-solid occupancy
+PASS westpac has actual collision at its mapped position
+PASS cba_south has actual collision at its mapped position
+PASS cba_north has actual collision at its mapped position
+PASS floor destruction removes glazing, timber trim and collision together
+PASS restoration reinstates matching bank collision
+PASS bank/westpac/podium public details disappear with their damaged parent
+PASS bank/westpac/podium public details restore with their parent
+PASS bank/cba_south/floor/00 public details disappear with their damaged parent
+PASS bank/cba_south/floor/00 public details restore with their parent
+PASS bank/cba_north/floor/00 public details disappear with their damaged parent
+PASS bank/cba_north/floor/00 public details restore with their parent
+PASS three public walk routes have complete point lists before movement starts
+PASS westpac_public_colonnade production Player walks the complete public route with no mid-route teleport
+PASS actual continuous Westpac walk endpoint remains valid for production save migration
+PASS cba_south_park_canopy production Player walks the complete public route with no mid-route teleport
+PASS cba_north_park_canopy production Player walks the complete public route with no mid-route teleport
+PASS all three production-player route records exist and pass
+BANK CHECK COMPLETE failures=0 triangles=140005 components=157

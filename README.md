@@ -1,21 +1,21 @@
 # Harbourlife · 悉尼海港
 
-**v0.1.5-preview.1 · 歌剧院楼梯掉落修复**
+**v0.1.6-preview.1 · 实景细节更新**
 
-[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.5-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
+[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.6-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-本轮修复歌剧院最上段楼梯受撞后整幅断裂、人物掉落的问题：增加可见实体基座，将饰面分成小块，并兼容旧损坏存档。详见 [修复说明](docs/FIXES_0.1.5.md)。此前版本重做歌剧院的外壳与可进入的公共内部，按地图位置补充 Darling Quarter 水上游乐、攀爬设施和 Tumbalong 喷泉，并继续扩展 Darling Square 商户。地图新增明确的鼠标释放、名称搜索和返回游戏操作；小地图改用图像缓存，降低移动时的绘图开销。滑翔机与滑翔伞的出生速度、配平与初始下沉也已统一调整。详见 [更新说明](docs/FIXES_0.1.4.md)。公开下载包面向 **Apple Silicon Mac（M 系列芯片）**；目前验证环境为 Apple M4 / 16 GB / macOS 26.5，没有 Windows、Intel Mac 或浏览器玩家版本。
+本轮按真实照片细化歌剧院幕墙与公共门厅、悉尼塔、W Sydney、ICC/TikTok 场馆、银行与环形码头写字楼及部分达令广场店面；补齐歌剧院东侧 Man O’War 码头和连接桥。保留真实地图位置，并复查新增楼梯、平台和入口的通行。详见 [本轮变化与来源](docs/FIXES_0.1.6.md)。上一版歌剧院大台阶的实体基座、局部饰面和旧损坏存档兼容继续保留。公开下载包面向 **Apple Silicon Mac（M 系列芯片）**；目前验证环境为 Apple M4 / 16 GB / macOS 26.5，没有 Windows、Intel Mac 或浏览器玩家版本。
 
-![歌剧院楼梯修复 · 旧损坏存档恢复后的平台](docs/screenshots/v015/opera-stair-join-legacy-save.png)
+![v0.1.6 W Sydney 曲面回转构造 · 最终导出 App 实际画面](docs/screenshots/v016/w-sydney-ribbon-end.png)
 
 
 ![海港大桥的实际游戏画面](docs/screenshots/v013/bridge.png)
 
-![本版歌剧院外部，最终导出 App 实际画面](docs/screenshots/v014/opera-harbour.png)
+![v0.1.6 歌剧院幕墙细节 · 最终导出 App 实际画面](docs/screenshots/v016/opera-north-curtain-detail.png)
 
-![本版音乐厅，最终导出 App 实际画面](docs/screenshots/v014/opera-concert-hall.png)
+![v0.1.6 悉尼塔 Skywalk · 最终导出 App 实际画面](docs/screenshots/v016/sydney-tower-skywalk.png)
 
 ## 下载后直接试飞
 
@@ -46,17 +46,17 @@
 
 **新增办公楼与 ICC 场馆群：**CyberCX 的 2 Market Street、Cloudflare 的 388 George Street 已单独建模。ICC 的 Convention Centre、Exhibition Centre 与相邻 **TikTok Entertainment Centre** 分为三个独立场馆，可从街面进入已制作的大厅、展厅和观众厅，走上剧场舞台后返回。TikTok 在这里指演出场馆；楼层高差、座位数量及未公开空间仍有简化。[场馆资料与范围](docs/ICC_REFERENCE.md)
 
-![ICC 公共登记大厅的实际游戏画面](docs/screenshots/v013/icc-convention-foyer.png)
+![v0.1.6 ICC 深凹会议窗盒 · 最终导出 App 实际画面](docs/screenshots/v016/icc-recessed-meeting-pods.png)
 
-![W Sydney 曲面外墙与标志，导出 App 实际画面](docs/screenshots/v013/w-sydney.png)
+![v0.1.6 歌剧院北门厅曲梯 · 最终导出 App 实际画面](docs/screenshots/v016/opera-concert-curved-stairs.png)
 
-![Circular Quay 码头和车站，导出 App 实际画面](docs/screenshots/v013/circular-quay.png)
+![v0.1.6 歌剧院东侧 Man O’War 码头 · 最终导出 App 实际画面](docs/screenshots/v016/manowar-overview.png)
 
 ![Darling Quarter 水上游乐区，最终导出 App 实际画面](docs/screenshots/v014/darling_waterplay.png)
 
-![Darling Square 新增店面，最终导出 App 实际画面](docs/screenshots/v014/darling_bubu_detail.png)
+![v0.1.6 Haven Haymarket 店面 · 最终导出 App 实际画面](docs/screenshots/v016/darling_business_haven_specialty_coffee_photo_detail.png)
 
-![本版地图与自由标点，最终导出 App 实际画面](docs/screenshots/v014/01-map-pointer-pin.png)
+![v0.1.4 地图与自由标点，最终导出 App 实际画面](docs/screenshots/v014/01-map-pointer-pin.png)
 
 ## 真实地图与建模精度
 
@@ -122,7 +122,7 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 
 ## 源码与本地构建
 
-[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.5-preview.1` 标签对应的源码。
+[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.6-preview.1` 标签对应的源码。
 
 构建需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
 
@@ -146,4 +146,4 @@ Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据�
 
 Harbourlife is a free, offline, single-player Sydney sandbox for **Apple Silicon Mac**. Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
-**v0.1.5-preview.1 · Opera House stair support hotfix.** The monumental stair now has solid load-bearing foundations and small removable finish panels. Loading legacy stair-damage records no longer removes a full-width walking surface. The map now releases the pointer, supports name search and keeps a selected pin editable; M, Esc or the return button resumes the same player or vehicle. Holding Alt/Option also allows a minimap click. Cached minimap terrain reduces rendering overhead during movement. The Opera House's shells and public interiors are rebuilt from public reference material, while mapped playground equipment, fountains and additional Darling Square frontages expand the precinct. Directory coverage and individually researched geometry are documented separately. All nine vehicle classes remain free and immediately seat the player; unpowered glider launch and trim now use consistent speeds. This is an original, source-backed reconstruction with estimated details, not a complete 1:1 city scan. The app is ad-hoc signed and not notarized. Final build-specific results belong in [TESTING.md](docs/TESTING.md). See [play permission](PLAY_PERMISSION.md) and the separate data/dependency licences.
+**v0.1.6-preview.1 · Photo-informed architectural details.** The Opera House glass frames and public foyers, Sydney Tower, W Sydney, ICC/TikTok venues, bank facades, Quay Quarter and Salesforce towers, ferry-wharf fittings and selected Darling Square shopfronts receive individually referenced geometry. Man O’War now has mapped fixed and floating piers with walkable connecting bridges. Mapped locations, free vehicle copies and the supported monumental Opera stair remain. Save-map revision 6 checks occupied poses against the revised foyer geometry. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon app is ad-hoc signed and not notarized. Final build-specific results belong in [TESTING.md](docs/TESTING.md); exact sources and limitations are in [the update notes](docs/FIXES_0.1.6.md).

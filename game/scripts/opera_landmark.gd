@@ -54,6 +54,7 @@ static func build(world: Node3D) -> void:
 	world._mat("opera_granite", Color("b5a18b"), 0.86)
 	world._mat("opera_edge", Color("d4cbbb"), 0.72)
 	world._mat("opera_bronze", Color("877457"), 0.43, 0.28)
+	world._mat("opera_mullion", Color("875b43"), 0.39, 0.42)
 	var glass: StandardMaterial3D = world._mat("opera_glass", Color(0.33,0.39,0.35,0.27), 0.23, 0.03)
 	glass.metallic_specular = 0.35
 	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -252,9 +253,28 @@ static func _build_foyer(world: Node3D, index: int, spec: Array, origin: Vector3
 			if south_entry and absf(top.x)<6.3:
 				if b.y<3.65:continue
 				if a.y<3.65:a=a.lerp(b,clampf((3.65-a.y)/maxf(b.y-a.y,.001),0.0,1.0))
-			_beam_mesh(frames,a,b,.15)
+			# The built Hall/Arup curtain has deep bronze-clad mullion blades,
+			# not wire-thin square bars (official CMP 4.114 and 2025 foyer photos).
+			# Keep the actual glass/collider and door cutouts unchanged.
+			if index in [0,4] and minf(a.y,b.y)>=3.95:
+				_blade_mesh(frames,a,b,.09,.72)
+				var depth_axis:Vector3=(Vector3.BACK-(b-a).normalized()*Vector3.BACK.dot((b-a).normalized())).normalized()
+				_beam_mesh(frames,a+depth_axis*.73,b+depth_axis*.73,.12)
+			else:_beam_mesh(frames,a,b,.15)
+	# Visible braced transom at the north curtain's change of angle. All new
+	# details are above the public headroom and die with their glazing component.
+	if index in [0,4]:
+		for i in range(1,45,2):
+			var a:=_foyer_point(curves[i],spec,index,.30)
+			var b:=_foyer_point(curves[i+2],spec,index,.30)
+			if minf(a.y,b.y)<3.9:continue
+			var inward:=Vector3(0,.26,.68)
+			_beam_mesh(frames,a+inward,b+inward,.11)
+			_beam_mesh(frames,a,b+inward,.047)
+			_beam_mesh(frames,a+inward,b,.047)
 	var body:Node3D=world._structure_mesh("opera/glass/%s"%index,st.commit(),origin,"opera_glass",105000,basis)
-	var mullions:=MeshInstance3D.new();mullions.mesh=frames.commit();mullions.material_override=world.materials.opera_bronze;body.add_child(mullions)
+	var mullions:=MeshInstance3D.new();mullions.name="BronzeCurtainBlades";mullions.mesh=frames.commit();mullions.material_override=world.materials.opera_mullion;body.add_child(mullions)
+	body.set_meta("curtain_blade_depth",.72 if index in [0,4] else .15)
 
 static func _prepare_fields() -> void:
 	_roof_fields.clear()
@@ -379,7 +399,13 @@ static func _build_interstitial(world:Node3D,index:int,spec:Array,origin:Vector3
 		for y in range(4,ceili(maxf(a.y,b.y)*4.0)):
 			var h:=float(y)*.25
 			if h<maxf(lo_a.y,lo_b.y) or h>minf(a.y,b.y):continue
-			_beam_mesh(blades,Vector3(a.x,h,a.z-.06),Vector3(b.x,h,b.z-.06),.075)
+			# Folded louvre lips have a real angled face and shadowed underside,
+			# replacing the former square rods painted onto a flat infill.
+			var p:=Vector3(a.x,h+.05,a.z-.24);var q:=Vector3(b.x,h+.05,b.z-.24)
+			var r:=Vector3(a.x,h-.06,a.z-.055);var s:=Vector3(b.x,h-.06,b.z-.055)
+			var normal:=Vector3(0,.185,.11).normalized()
+			_triangle(blades,p,q,r,normal);_triangle(blades,r,q,s,normal)
+			_triangle(blades,p,r,q,-normal);_triangle(blades,r,s,q,-normal)
 	var body:Node3D=world._structure_mesh("opera/infill/louvres/"+str(index),panel.commit(),origin,"opera_recess",140000,basis)
 	var mesh:=MeshInstance3D.new();mesh.mesh=blades.commit();mesh.material_override=world.materials.opera_bronze;body.add_child(mesh)
 
@@ -407,6 +433,13 @@ static func _beam_mesh(st: SurfaceTool, a: Vector3, b: Vector3, width: float) ->
 	mesh.size = Vector3(width,width,a.distance_to(b))
 	var facing := Basis.looking_at((b-a).normalized(),Vector3.RIGHT if absf((b-a).normalized().y)>0.97 else Vector3.UP)
 	st.append_from(mesh,0,Transform3D(facing,(a+b)*0.5))
+
+static func _blade_mesh(st:SurfaceTool,a:Vector3,b:Vector3,width:float,depth:float) -> void:
+	var along:=(b-a).normalized()
+	var inward:=(Vector3.BACK-along*Vector3.BACK.dot(along)).normalized()
+	var across:=along.cross(inward).normalized()
+	var mesh:=BoxMesh.new();mesh.size=Vector3(width,a.distance_to(b),depth)
+	st.append_from(mesh,0,Transform3D(Basis(across,along,inward),(a+b)*.5+inward*(depth*.5+.01)))
 
 static func _prism(poly: PackedVector2Array, height: float) -> ArrayMesh:
 	var st := SurfaceTool.new()
@@ -550,7 +583,9 @@ static func capture_views() -> Array:
 		["opera-harbour",Vector3(-155,60,-148),Vector3(-4,28,-3)],
 		["opera-monumental-steps",Vector3(4,17,156),Vector3(0,26,12)],
 		["opera-roof-plan",Vector3(-105,210,118),Vector3(-1,22,-2)],
-		["opera-north-facade",Vector3(8,29,-155),Vector3(-2,25,-48)]
+		["opera-north-facade",Vector3(8,29,-155),Vector3(-2,25,-48)],
+		["opera-north-curtain-detail",Vector3(-64,28,-95),Vector3(-30,24,-72)],
+		["opera-louvre-detail",Vector3(-72,38,-36),Vector3(-34,34,-28)]
 	]
 	var out:Array=[]
 	for v in views:out.append([v[0],CENTER+site_basis()*v[1],CENTER+site_basis()*v[2]])

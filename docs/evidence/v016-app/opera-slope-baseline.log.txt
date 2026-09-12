@@ -1,0 +1,25 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+OPERA_INTERIOR PASS exterior and interior share mapped frame {}
+OPERA_INTERIOR PASS four interior navigation destinations are registered {}
+OPERA_INTERIOR PASS independent floors, walls, stages, tiers and stairs have collision {"components":178}
+OPERA_INTERIOR PASS ticket ceiling has folded concrete profiles {}
+OPERA_INTERIOR PASS concert_foyer broad flight uses real curved treads {}
+OPERA_INTERIOR PASS jst_foyer broad flight uses real curved treads {}
+OPERA_INTERIOR PASS new landing buried player is identified -26.0 {}
+OPERA_INTERIOR PASS new landing safely standing player stays -26.0 {}
+OPERA_INTERIOR PASS new landing buried player is identified 23.0 {}
+OPERA_INTERIOR PASS new landing safely standing player stays 23.0 {}
+OPERA_INTERIOR FAIL foyer actual settled slope player stays cx=-26.0 u=0.0 {"local_position":"(-26.0, 12.29597, -69.00001)","needs_relocation":true,"on_floor":true}
+OPERA_INTERIOR PASS foyer slope buried 4cm player is identified cx=-26.0 u=0.0 {}
+OPERA_INTERIOR FAIL foyer actual settled slope player stays cx=-26.0 u=-0.75 {"local_position":"(-36.46252, 12.29601, -68.325)","needs_relocation":true,"on_floor":true}
+OPERA_INTERIOR PASS foyer slope buried 4cm player is identified cx=-26.0 u=-0.75 {}
+OPERA_INTERIOR FAIL foyer actual settled slope player stays cx=-26.0 u=0.75 {"local_position":"(-15.5375, 12.29601, -68.32502)","needs_relocation":true,"on_floor":true}
+OPERA_INTERIOR PASS foyer slope buried 4cm player is identified cx=-26.0 u=0.75 {}
+OPERA_INTERIOR FAIL foyer actual settled slope player stays cx=23.0 u=0.0 {"local_position":"(22.99999, 12.30084, -55.50001)","needs_relocation":true,"on_floor":true}
+OPERA_INTERIOR PASS foyer slope buried 4cm player is identified cx=23.0 u=0.0 {}
+OPERA_INTERIOR FAIL foyer actual settled slope player stays cx=23.0 u=-0.75 {"local_position":"(14.86251, 12.30084, -54.825)","needs_relocation":true,"on_floor":true}
+OPERA_INTERIOR PASS foyer slope buried 4cm player is identified cx=23.0 u=-0.75 {}
+OPERA_INTERIOR FAIL foyer actual settled slope player stays cx=23.0 u=0.75 {"local_position":"(31.13751, 12.30084, -54.825)","needs_relocation":true,"on_floor":true}
+OPERA_INTERIOR PASS foyer slope buried 4cm player is identified cx=23.0 u=0.75 {}
+OPERA_MIGRATION COMPLETE 22 CHECKS / 6 FAILURES

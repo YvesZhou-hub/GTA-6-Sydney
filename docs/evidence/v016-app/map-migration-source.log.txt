@@ -1,0 +1,91 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=5 reserved=3 roads=0
+PASS tall OSM hollow collision shell detected semantically
+PASS actual courtyard hole remains usable
+PASS courtyard edge crossing masonry is rejected
+PASS concave courtyard must contain entire footprint not just corners
+PASS overhead building part leaves ground open
+PASS custom bank closed trimesh interior detected
+PASS custom metro solid column interior detected
+PASS custom raised architecture does not fill public ground
+PASS v013 actual tower base is a closed solid containing the legacy roof region
+PASS v013 tower interior is detected despite replacing reserved OSM geometry
+PASS reserved original tower OSM pieces are not double-counted as migration solids
+PASS v013 tower Market Street public arrival remains outside closed geometry
+PASS summon rejects a complete hoverboard enclosure in the new tower base
+PASS destroyed tower base floor leaves its actual interior usable
+PASS v013 real mapped Circular Quay kiosk closed interior is rejected
+PASS all five Circular Quay public arrivals remain open below overhead roofs
+PASS v013 Darling public canopy post is an occupied solid
+PASS Darling public canopy centre remains an open walk route
+PASS summon rejects complete enclosure in custom solid shell
+PASS pitched building uses two actual wall groups instead of three total-height groups
+PASS uppermost real wall group remains occupied below eaves
+PASS pitched roof interior is detected independently of wall height
+PASS empty space above low eaves is not filled to ridge bounding height
+PASS roof ridge crossing wide box detected when every box corner is outside
+PASS destroyed upper wall leaves its actual interval empty under intact roof
+PASS lower wall survives independent upper wall destruction
+PASS roof survives independent wall destruction
+PASS destroyed roof leaves pitched interior empty
+PASS roof destruction preserves independently intact upper wall
+PASS repair restores separate wall and pitched roof occupancy
+PASS player relocation exits tall shell rather than returning same floor
+PASS replacement has grounded full-height clearance
+PASS on-foot migration updates safe position without changing view heading
+PASS wide aircraft migration finds nearby flat field with full footprint clearance
+PASS wide aircraft migration preserves ID health fuel and parked state
+PASS relocated loaded car clears queued velocity before same-frame save
+PASS first physics integration cannot restore pre-migration driving momentum
+PASS non-overlapping live flight keeps queued saved velocity during map migration
+PASS unmigrated flight resumes saved motion after normal boarding integration
+PASS destroyed mapped building is not an occupied volume
+PASS QA revision fixture writes
+PASS load preserves all fleet IDs and count
+PASS migration preserves independent health and fuel
+PASS safe and courtyard copies retain exact saved position
+PASS each displaced copy stays near its own saved neighborhood
+PASS original occupied copy restored after relocation
+PASS spawn waypoint remains on its original new-copy ID
+PASS load reports migration to player
+PASS loading does not rewrite source save
+PASS save persists current map revision
+PASS current revision reload does not migrate twice or create copies
+PASS current revision does not rewrite deliberately saved pose
+PASS current revision 6 enables a one-time check for older geometry saves
+PASS v015 actual stair foundation 0 is closed and contains its buried legacy point
+PASS v015 actual stair foundation 1 is closed and contains its buried legacy point
+PASS v015 actual stair foundation 2 is closed and contains its buried legacy point
+PASS v015 actual stair foundation 3 is closed and contains its buried legacy point
+PASS v015 actual stair foundation 4 is closed and contains its buried legacy point
+PASS v015 actual stair foundation 5 is closed and contains its buried legacy point
+PASS v015 actual stair foundation 6 is closed and contains its buried legacy point
+PASS v015 actual stair foundation 7 is closed and contains its buried legacy point
+PASS v015 buried player still requires relocation despite Opera support exception
+PASS v015 buried hoverboard is fully contained by the production stair foundation
+PASS v015 isolated Opera fixture writes without reading user worlds
+PASS v015 revision-4 fixture with retired stair damage is accepted
+PASS v015 actual load migrates a buried player to nearby clear ground
+PASS v015 actual load migrates buried hoverboard outside the filled stair
+PASS v015 migration preserves all hoverboard IDs health fuel and copy count
+PASS v015 valid ground and airborne hoverboards retain exact saved positions
+PASS v015 unrelated airborne hoverboard retains queued saved motion
+PASS v015 loading retains retired damage history and leaves fixture bytes untouched
+PASS v015 safe player pose does not require relocation at (468.9936, 4.54, -219.1939)
+PASS v015 safe player pose is not relocated at (468.9936, 4.54, -219.1939)
+OPERA_MIGRATION_SLOPE_CONTACT position=(428.3354, 13.45423, -247.2458) floor=true velocity=(0.0, 0.0, 0.0)
+PASS v015 safe player pose does not require relocation at (428.3354, 13.45423, -247.2458)
+PASS v015 safe player pose is not relocated at (428.3354, 13.45423, -247.2458)
+PASS v015 stair support exemption does not accept a capsule buried four centimetres into the slope
+PASS v015 standing-stair fixture writes
+PASS v015 standing-stair revision-4 fixture writes
+PASS v015 actual revision-4 load preserves the settled production-player stair pose
+PASS v015 safe player pose does not require relocation at (410.8133, 144.5, -251.3662)
+PASS v015 safe player pose is not relocated at (410.8133, 144.5, -251.3662)
+PASS explicit save records current revision after the one-time safety migration
+PASS v015 current-revision reload performs no second relocation
+PASS v016 isolated revision-5 fixture saves
+PASS v016 previous-release map revision fixture writes
+PASS v016 revision-5 load runs solid-geometry recovery
+PASS v016 revision-5 load leaves the source save and fleet identities intact

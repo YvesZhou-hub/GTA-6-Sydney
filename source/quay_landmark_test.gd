@@ -1,6 +1,7 @@
 extends SceneTree
 const Quay=preload("res://scripts/quay_landmarks.gd")
 var failures:=0
+var check_records:Array[Dictionary]=[]
 
 class ProbeWorld extends "res://scripts/harbor_world.gd":
 	func _ready() -> void:
@@ -13,6 +14,7 @@ class ProbeWorld extends "res://scripts/harbor_world.gd":
 		_ready_complete=true
 
 func verify(value: bool, message: String) -> void:
+	check_records.append({"name":message,"passed":value})
 	if value: print("PASS ",message)
 	else:
 		failures+=1
@@ -89,6 +91,7 @@ func check() -> void:
 	await physics_frame
 	await physics_frame
 	var space:=world.get_world_3d().direct_space_state
+	check_detail_batch(world,space)
 	for item: Array in [["qqt",Quay.QQT_CENTER,Vector3(0,250,0),Vector3(0,0,0)],["salesforce",Quay.SALESFORCE_CENTER,Vector3(0,300,0),Vector3(0,0,0)]]:
 		var hit:=space.intersect_ray(PhysicsRayQueryParameters3D.create(item[1]+item[2],item[1]+item[3]))
 		verify(not hit.is_empty() and str(hit.collider.get_meta("damage_id","")).begins_with("quay/"+item[0]+"/"),item[0]+" has real roof collision at its mapped position")
@@ -101,8 +104,32 @@ func check() -> void:
 	await physics_frame
 	verify(not world.destroyed.has(id) and not body.get_child(1).disabled,"restoration reinstates matching tower collision")
 	if "--visual" in OS.get_cmdline_user_args():await capture(world)
-	print("QUAY CHECK COMPLETE failures=",failures," triangles=",triangles," components=",world.structures.size())
+	var report:={"passed":failures==0,"check_count":check_records.size(),"failures":failures,"checks":check_records,"visible_triangles":triangles,"structures":world.structures.size(),"model_sha256":FileAccess.get_sha256("res://scripts/quay_landmarks.gd"),"test_sha256":FileAccess.get_sha256("res://../source/quay_landmark_test.gd"),"execution_flags":OS.get_cmdline_user_args(),"native_capture_ran":"--visual" in OS.get_cmdline_user_args(),"user_saves_touched":false,"scope":"Isolated two-tower exteriors; structural and camera geometry, no office interiors or complete-city test"}
+	var file:=FileAccess.open(ProjectSettings.globalize_path("res://../reports/quay-v016-detail-report.json"),FileAccess.WRITE);file.store_string(JSON.stringify(report,"  "));file.close()
+	print("QUAY CHECK COMPLETE checks=",check_records.size()," failures=",failures," triangles=",triangles," components=",world.structures.size())
 	quit(failures)
+
+func check_detail_batch(world:Node3D,space:PhysicsDirectSpaceState3D) -> void:
+	verify(world.structures.size()==149,"original 149 structural damage owners retained without added occupied floor volumes")
+	var before:int=world.get_child_count();Quay.build(world)
+	verify(world.get_child_count()==before,"repeated build does not duplicate either tower or its new details")
+	verify(world.structures["quay/qqt/podium"].node.get_meta("coursed_stone_and_vents",false),"QQT original podium owns stone joints and ventilation relief")
+	verify(world.structures["quay/salesforce/lobby"].node.get_meta("fine_lobby_glazing",false),"Salesforce original lobby owns subsidiary physical glazing frames")
+	var st:=Quay._surface();Quay._facade_beam(st,Vector3.ZERO,Vector3(0,4,0),Vector3.FORWARD,1.1,0.7)
+	var mesh:=st.commit();var faces:=mesh.get_faces();var edges:={};var section:={}
+	for i in range(0,faces.size(),3):
+		for j in range(3):
+			var a:Vector3=faces[i+j].snapped(Vector3.ONE*0.0001);var b:Vector3=faces[i+(j+1)%3].snapped(Vector3.ONE*0.0001)
+			var key:=str(a)+"|"+str(b) if str(a)<str(b) else str(b)+"|"+str(a)
+			edges[key]=edges.get(key,0)+1
+			if is_zero_approx(a.y) and a.length_squared()>0.001:section[str(Vector2(a.x,a.z))]=true
+	var closed:=true
+	for n in edges.values():closed=closed and n==2
+	verify(closed and section.size()==8,"real chamfered tree-member mesh has eight profile corners and a closed two-use edge manifold")
+	for view:Array in Quay.capture_views():
+		var shape:=SphereShape3D.new();shape.radius=0.2
+		var query:=PhysicsShapeQueryParameters3D.new();query.shape=shape;query.transform.origin=view[1]
+		verify(space.intersect_shape(query).is_empty(),"specialist tower camera outside solid geometry: "+view[0])
 
 func capture(world: Node3D) -> void:
 	root.size=Vector2i(1440,1000)
@@ -129,6 +156,7 @@ func capture(world: Node3D) -> void:
 		"salesforce_south":[Quay.SALESFORCE_CENTER+Vector3(130,138,320),Quay.SALESFORCE_CENTER+Vector3(0,131,0)],
 		"salesforce_roof":[Quay.SALESFORCE_CENTER+Vector3(-100,320,-150),Quay.SALESFORCE_CENTER+Vector3(0,220,0)]
 	}
+	for view:Array in Quay.capture_views():views[view[0]]=[view[1],view[2]]
 	DirAccess.make_dir_recursive_absolute("/tmp/harbourlife-quay-review")
 	for label: String in views:
 		var center: Vector3=Quay.QQT_CENTER if label.begins_with("qqt") else Quay.SALESFORCE_CENTER

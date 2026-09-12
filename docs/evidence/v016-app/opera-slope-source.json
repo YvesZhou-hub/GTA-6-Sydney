@@ -1,0 +1,146 @@
+{
+  "checks": [
+    {
+      "detail": {},
+      "name": "exterior and interior share mapped frame",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "four interior navigation destinations are registered",
+      "passed": true
+    },
+    {
+      "detail": {
+        "components": 178
+      },
+      "name": "independent floors, walls, stages, tiers and stairs have collision",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "ticket ceiling has folded concrete profiles",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "concert_foyer broad flight uses real curved treads",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "jst_foyer broad flight uses real curved treads",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing buried player is identified -26.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing safely standing player stays -26.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing buried player is identified 23.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "new landing safely standing player stays 23.0",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(-26.0, 12.29597, -69.00001)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=-26.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=-26.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(-36.46252, 12.29601, -68.325)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=-26.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=-26.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(-15.5375, 12.29601, -68.32502)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=-26.0 u=0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=-26.0 u=0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(22.99999, 12.30084, -55.50001)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=23.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=23.0 u=0.0",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(14.86251, 12.30084, -54.825)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=23.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=23.0 u=-0.75",
+      "passed": true
+    },
+    {
+      "detail": {
+        "local_position": "(31.13751, 12.30084, -54.825)",
+        "needs_relocation": false,
+        "on_floor": true
+      },
+      "name": "foyer actual settled slope player stays cx=23.0 u=0.75",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "foyer slope buried 4cm player is identified cx=23.0 u=0.75",
+      "passed": true
+    }
+  ],
+  "continuous_walks_ran": false,
+  "execution_flags": [
+    "--migration-only"
+  ],
+  "scope": "Local complete Opera geometry; actual settled production capsules and migration decisions only",
+  "user_saves_touched": false
+}

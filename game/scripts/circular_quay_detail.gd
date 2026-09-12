@@ -68,6 +68,9 @@ static func build(w:Node3D) -> void:
 	w._mat("cq_sign",Color("268448"),.7)
 	w._mat("cq_tactile",Color("cfb642"),.9)
 	w._mat("cq_granite",Color("c7b9af"),.67,.12)
+	w._mat("cq_soffit",Color("e1dfce"),.82,.06)
+	w._mat("cq_ferry_green",Color("4e994a"),.70,.08)
+	w._mat("cq_fender",Color("303936"),.90,.05)
 	_station(w)
 	var groups:Array=[[],[],[],[],[]]
 	for item in mapped_parts():groups[_wharf_for(Vector2(item.center[0],item.center[1]))].append(item)
@@ -104,6 +107,7 @@ static func _pier(w:Node3D,d:Array,parts:Array):
 			roof.set_meta("source_osm",item.id)
 			roof.set_meta("geometry_scope","Mapped plan outline, estimated roof elevation")
 			_roof_ribs(w,roof,poly,right,along,height+.17)
+			_roof_edges(w,roof,poly,height)
 		else:
 			var shop=w._structure_mesh("circular_quay/kiosk/"+str(item.id),Geo.prism(poly,.08,2.95),at,"ds_stone",90000)
 			shop.set_meta("source_osm",item.id)
@@ -123,7 +127,12 @@ static func _pier(w:Node3D,d:Array,parts:Array):
 		for side in [-1,1]:
 			var c:Vector3=p+right*side*7.0
 			var column_height:=6.18 if d[0]==3 and row>1 else 3.8
-			w._structure_box("circular_quay/wharf/%d/column/%d/%d"%[d[0],row,side],c+Vector3.UP*column_height*.5,Vector3(.16,column_height,.16),"steel",70000)
+			var column=w._structure_box("circular_quay/wharf/%d/column/%d/%d"%[d[0],row,side],c+Vector3.UP*column_height*.5,Vector3(.16,column_height,.16),"steel",70000)
+			# Shallow capital and knee braces are above the passenger envelope.
+			var braces:=SurfaceTool.new();braces.begin(Mesh.PRIMITIVE_TRIANGLES)
+			Geo._append_box(braces,Vector3.UP*(column_height*.5-.08),Vector3(.40,.16,.40),Basis.IDENTITY)
+			Geo._append_beam(braces,Vector3.UP*(column_height*.5-.82),Vector3.UP*(column_height*.5-.13)-right*side*.85,.085,.13)
+			Geo._commit_detail(w,column,braces,"cq_roof_rib")
 			w._batch_cylinder(c+Vector3.DOWN*2.0,.26,5.0,"ds_stone")
 	# Berth edges have rail gaps along the boarding sections, not impassable fences.
 	for side in [-1,1]:
@@ -138,14 +147,24 @@ static func _pier(w:Node3D,d:Array,parts:Array):
 	var facing:Vector3=-along
 	var frame:=Basis(Vector3.UP.cross(facing),Vector3.UP,facing)
 	var fascia=w._structure_box("circular_quay/wharf/%d/gate_sign"%d[0],entry+Vector3.UP*3.05,Vector3(12.5,.62,.12),"cq_sign",85000,frame)
-	_label(fascia,"Wharf %d"%d[0],Vector3(0,0,.08),.35)
+	_entry_details(w,fascia,int(d[0]))
 	# Passenger benches and ticket readers are outside a 2.4m-wide central route.
 	for side in [-1,1]:
 		for t in [.72,.84]:
 			var at:Vector3=d[1].lerp(d[2],t)+right*side*5.5
 			Darling._bench(w,at,2.6,along,"cq_%d_%d_%s"%[d[0],side,str(t)])
-		w._structure_box("circular_quay/wharf/%d/reader/%d"%[d[0],side],entry+right*side*1.75+Vector3.UP*.57,Vector3(.19,1.14,.22),"steel",45000,frame)
-		w._batch_box(entry+right*side*1.75+Vector3.UP*1.17,Vector3(.24,.13,.22),"ds_blue",frame)
+		var reader=w._structure_box("circular_quay/wharf/%d/reader/%d"%[d[0],side],entry+right*side*1.75+Vector3.UP*.57,Vector3(.25,1.14,.50),"steel",45000,frame)
+		w._box(reader,Vector3(0,.46,.265),Vector3(.18,.22,.035),"cq_fender")
+		w._box(reader,Vector3(0,.54,.287),Vector3(.12,.065,.012),"ds_blue")
+		w._box(reader,Vector3(0,.64,.10),Vector3(.26,.10,.28),"cq_ferry_green")
+		_label(reader,"↑",Vector3(0,.32,.286),.11)
+		for t in [.30,.46,.62,.80,.94]:
+			var p:Vector3=d[1].lerp(d[2],t)+right*side*8.35
+			var local:Vector3=p-body.position
+			# Water-facing rubber and pale pile caps, observed in the builder's
+			# completed-work photos. Their exact spacing is a photo estimate.
+			w._box(body,local+Vector3.DOWN*.54,Vector3(.40,1.30,.48),"cq_fender").basis=frame
+			w._box(body,local+Vector3.UP*.20,Vector3(.42,.18,.50),"cq_soffit").basis=frame
 	# Wharf 3's real two-level Manly shed is distinguished by a high clerestory.
 	if d[0]==3:
 		var mid:Vector3=d[1].lerp(d[2],.49)
@@ -174,16 +193,74 @@ static func _roof_ribs(w:Node3D,body:Node3D,poly:PackedVector2Array,right:Vector
 		Geo._append_box(surface,Vector3((a.x+b.x)*.5,y,(a.y+b.y)*.5),Vector3(.035,.035,a.distance_to(b)),Basis.looking_at(Vector3(b.x-a.x,0,b.y-a.y),Vector3.UP))
 	Geo._commit_detail(w,body,surface,"cq_roof_rib")
 
+static func _roof_edges(w:Node3D,body:StaticBody3D,poly:PackedVector2Array,height:float):
+	# The mapped polygon remains the authority for every roof and its underside.
+	# Keep trim attached to that roof's damage owner, never floating after impact.
+	Geo._detail(w,body,Geo.prism(poly,height-.045,height-.015),"cq_soffit")
+	var edge:=SurfaceTool.new();edge.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in poly.size():
+		var a:=Vector3(poly[i].x,height+.055,poly[i].y)
+		var b:=Vector3(poly[(i+1)%poly.size()].x,height+.055,poly[(i+1)%poly.size()].y)
+		Geo._append_beam(edge,a,b,.09,.23)
+	Geo._commit_detail(w,body,edge,"cq_roof_rib")
+	var lamps:=SurfaceTool.new();lamps.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var lamp_count:=0
+	var bounds:=Rect2(poly[0],Vector2.ZERO)
+	for p in poly:bounds=bounds.expand(p)
+	for x in range(ceili(bounds.position.x/4.0),floori(bounds.end.x/4.0)+1):
+		for z in range(ceili(bounds.position.y/7.0),floori(bounds.end.y/7.0)+1):
+			var p:=Vector2(x*4.0,z*7.0)
+			if not Geometry2D.is_point_in_polygon(p,poly):continue
+			Geo._append_box(lamps,Vector3(p.x,height-.066,p.y),Vector3(.30,.035,.62),Basis.IDENTITY)
+			lamp_count+=1
+	if lamp_count>0:Geo._commit_detail(w,body,lamps,"lamp")
+	body.set_meta("soffit_fittings",lamp_count)
+
+static func _entry_details(w:Node3D,body:StaticBody3D,number:int):
+	# 2015 builder close-up: white soffit, twin green number bands and a round
+	# F marker. Do not display invented live departures or operating fare gates.
+	for side in [-1,1]:
+		_label(body,"Wharf %d"%number,Vector3(side*2.30,0,.085),.28)
+		w._box(body,Vector3(side*5.30,0,.02),Vector3(1.86,.59,.10),"cq_fender")
+		_label(body,"Ferry\ntickets",Vector3(side*5.30,0,.085),.14)
+	var disc:=CylinderMesh.new();disc.top_radius=.40;disc.bottom_radius=.40;disc.height=.13;disc.radial_segments=48
+	var rim:=MeshInstance3D.new();rim.mesh=disc;rim.material_override=w.materials.cq_soffit;rim.rotation.x=PI*.5;rim.position=Vector3(0,.35,.09);body.add_child(rim)
+	var inset:=CylinderMesh.new();inset.top_radius=.335;inset.bottom_radius=.335;inset.height=.02;inset.radial_segments=48
+	var face:=MeshInstance3D.new();face.mesh=inset;face.material_override=w.materials.cq_ferry_green;face.rotation.x=PI*.5;face.position=Vector3(0,.35,.17);body.add_child(face)
+	_label(body,"F",Vector3(0,.36,.188),.48)
+	body.set_meta("photo_details",["circular_ferry_marker","split_number_band","ticket_side_panels"])
+
 static func _rail(w:Node3D,a:Vector3,b:Vector3,id:String):
 	var frame:=Basis.looking_at(b-a,Vector3.UP)
 	for y in [.56,1.04]:w._batch_box((a+b)*.5+Vector3.UP*y,Vector3(.045,.045,a.distance_to(b)),"steel",frame)
 	var count:=maxi(2,ceil(a.distance_to(b)/1.8))
 	for j in count+1:
 		var p:Vector3=a.lerp(b,float(j)/count)
-		w._structure_box("circular_quay/rail/"+id+"/"+str(j),p+Vector3.UP*.51,Vector3(.065,1.02,.065),"steel",42000)
+		var post=w._structure_box("circular_quay/rail/"+id+"/"+str(j),p+Vector3.UP*.51,Vector3(.065,1.02,.065),"steel",42000)
+		if j==count:continue
+		var infill:=SurfaceTool.new();infill.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var span:Vector3=(b-a)/count
+		var pickets:=maxi(2,ceili(span.length()/.16))
+		for k in range(1,pickets):Geo._append_box(infill,span*float(k)/pickets+Vector3.UP*.01,Vector3(.022,.90,.022),Basis.IDENTITY)
+		Geo._commit_detail(w,post,infill,"steel")
 
 static func _label(parent:Node3D,value:String,at:Vector3,height:float):
 	var text:=Label3D.new();text.text=value;text.font_size=96;text.pixel_size=height/96.0;text.outline_size=0;text.position=at;text.modulate=Color("f1eee0");text.visibility_range_end=250;parent.add_child(text)
+
+static func capture_views() -> Array:
+	return [
+		["quay_gate_2",Vector3(139.5,6.8,154.5),Vector3(139.267,7.1,139.544)],
+		["quay_wharf_3",Vector3(85.0,6.8,132.0),Vector3(92.0,7.3,92.0)],
+		["quay_wharves",Vector3(-85,48,-30),Vector3(58,6,88)],
+		["quay_station",Vector3(14,15,42),Vector3(14,11,145)]
+	]
+
+static func walk_routes() -> Array:
+	var routes:Array=[]
+	for index in [0,1,3]:
+		var d:Array=WHARVES[index]
+		routes.append({"name":"quay_wharf_%d_entry_to_berth"%d[0],"points":[d[1].lerp(d[2],.02),d[1].lerp(d[2],.15),d[1].lerp(d[2],.43),d[1].lerp(d[2],.72)]})
+	return routes
 
 static func _station(w:Node3D):
 	var source:Dictionary={}

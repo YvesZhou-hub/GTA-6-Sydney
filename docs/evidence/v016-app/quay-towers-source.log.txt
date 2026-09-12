@@ -1,0 +1,31 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS both Circular Quay towers have source confidence records
+PASS all seven mapped parts have explicit footprint exclusions
+PASS QQT stays southeast of Salesforce at the mapped real city locations
+PASS QQT contains five mapped village outlines
+PASS QQT's four village seams change plan and remain vertically continuous
+PASS Salesforce has six increasing-height tree branches per north face
+PASS tree bracing clips at floor ownership boundaries for consistent damage
+PASS documented coordinates agree with the existing metre projection
+PASS all tower structural colliders use the identical rendered mesh faces
+PASS no zero-area triangles in either tower
+PASS tower faces and facade details all use outward Godot winding
+PASS combined detailed geometry remains bounded triangles=138552
+PASS QQT reaches the architect's published 206m total height
+PASS Salesforce's raised crown reaches the developer's 263m total height
+PASS both towers contain the full intended floor structure
+PASS original 149 structural damage owners retained without added occupied floor volumes
+PASS repeated build does not duplicate either tower or its new details
+PASS QQT original podium owns stone joints and ventilation relief
+PASS Salesforce original lobby owns subsidiary physical glazing frames
+PASS real chamfered tree-member mesh has eight profile corners and a closed two-use edge manifold
+PASS specialist tower camera outside solid geometry: quay-qqt-rebated-frames
+PASS specialist tower camera outside solid geometry: quay-qqt-stone-podium
+PASS specialist tower camera outside solid geometry: quay-salesforce-tree-shades
+PASS specialist tower camera outside solid geometry: quay-salesforce-glazing
+PASS qqt has real roof collision at its mapped position
+PASS salesforce has real roof collision at its mapped position
+PASS floor destruction removes glazing, tree braces, lift facade and collision together
+PASS restoration reinstates matching tower collision
+QUAY CHECK COMPLETE checks=28 failures=0 triangles=138552 components=149

@@ -40,6 +40,9 @@ RESOURCES = [
     "res://scripts/darling_square_detail.gd", "res://scripts/map_migration.gd",
     "res://scripts/vehicle_model_migration.gd", "res://assets/city_map.json",
     "res://assets/icc_geometry.json", "res://assets/bridge_north_approach.json",
+    "res://scripts/manowar_detail.gd", "res://assets/manowar_piers.json",
+    "res://scripts/city_landmarks.gd", "res://scripts/icc_landmarks.gd",
+    "res://scripts/bank_landmarks.gd", "res://scripts/quay_landmarks.gd",
 ]
 
 
@@ -155,7 +158,7 @@ def main():
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--archive", type=Path, default=ROOT / "dist/Harbourlife-macOS-arm64.zip")
     parser.add_argument("--source-archive", type=Path)
-    parser.add_argument("--version", default="0.1.5")
+    parser.add_argument("--version", default="0.1.6")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output.resolve() if args.output else ROOT / "reports" / ("archive-audit-preparation.json" if args.prepare_only else "archive-validation.json")

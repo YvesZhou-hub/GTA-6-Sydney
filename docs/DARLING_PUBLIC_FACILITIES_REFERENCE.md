@@ -1,4 +1,4 @@
-# Darling Square, Darling Quarter and Tumbalong Park — 0.1.4
+# Darling Square, Darling Quarter and Tumbalong Park
 
 Checked 11 September 2026. This is a selective, original geometric reconstruction using public references. It is not a survey, a complete replica of every shop, or a representation of every accessible room.
 
@@ -51,7 +51,7 @@ The [official Darling Square directory](https://www.darlingsq.com/eat-drink-shop
 | Puppuccino Pet Spa | [Operator's specifically labelled Darling Square interior](https://puppuccino.com.au/locate-us) | Yellow/white partition, timber base and product shelves. Exterior doorway and sign remain inferred. |
 | Lillianna Gifts & Home | [Official display photograph](https://www.darlingsq.com/eat-drink-shop/lillianna-gifts-and-home/) | Colour-grouped gift boxes, diffuser bottles and shelving. Exterior frame and sign remain inferred. |
 
-The other 18 new fronts have original, explicitly inferred retail fit-outs. The merchant name and geographic relationship are the supported facts; the construction details are not asserted to be measured or photographed. Existing solid OSM host buildings remain, so these shop doors do not falsely lead to remote boxes or invented private interiors.
+The original 18 remaining fronts had inferred retail fit-outs. The 12 September refinement below adds three photo-informed exteriors and one photo-informed counter display; 14 of those fronts still retain fully inferred fit-outs. The merchant name and geographic relationship are the supported facts; the construction details are not asserted to be measured or photographed. Existing solid OSM host buildings remain, so these shop doors do not falsely lead to remote boxes or invented private interiors.
 
 ### Address corrections
 
@@ -68,8 +68,39 @@ The 14 Exchange records are labelled **“Exchange 楼栋入口”** in navigati
 
 The four replaced facility ways must remain excluded from ordinary city extrusion. Geometry is submitted in material batches attached to each destructible structure. Compound equipment records expand their damage/migration bounds to the complete visible geometry; the implementation does **not** add large invisible collision boxes. Attached materials are retained through damage and repair.
 
-[darling_public_facilities_test.gd](../source/darling_public_facilities_test.gd) runs **101 local checks**: directory classification, mapped element counts, all 40 additional public arrivals, continuous 0.30m capsule/ground sweeps of the two perimeter routes, finite outward mesh faces, wide slide bounds, full 11m mast damage bounds, and destruction/repair of compound collisions and materials. It also moves the production `harbor_player.gd` via input actions up the visible steps and down the slide; only the test's starting point is positioned directly.
+[darling_public_facilities_test.gd](../source/darling_public_facilities_test.gd) originally ran **101 local checks** (the 12 September frontage refinement extends this to **123**): directory classification, mapped element counts, all 40 additional public arrivals, continuous 0.30m capsule/ground sweeps of the two perimeter routes, finite outward mesh faces, wide slide bounds, full 11m mast damage bounds, and destruction/repair of compound collisions and materials. It also moves the production `harbor_player.gd` via input actions up the visible steps and down the slide; only the test's starting point is positioned directly.
 
 The local test's scene is a restricted map context, not a final exported-app test. Full-city vegetation, neighbouring landmarks, native game navigation and release packaging require the parent integration run. `reports/darling-v014` contains local QA captures and reports; no final release is implied by those component results.
 
 All textures, labels and geometry are authored in code. Reference photographs and maps were inspected but are not bundled as game textures. OSM-derived coordinates retain the project's ODbL attribution and source records.
+
+
+## Branch-specific shop refinement — 12 September 2026
+
+Four existing mapped shop bays now have separate, original geometric treatments. **Three have exterior-photo evidence; Sushi Sei has room/counter evidence only.** This is not four fully surveyed facades. The 23-record directory classification remains a record of the initial OSM-derived placement, while each frontage now carries its more specific `model_status`, inspected image URLs, date and limitations.
+
+| Shop | Actually viewed photographs | Implemented geometry and limits |
+|---|---|---|
+| Haven Specialty Coffee, 85 Harbour Street | [Branch-specific supplied exterior](https://cdn.concreteplayground.com/content/uploads/2020/02/Haven-Specialty-Coffee-Haymarket-supplied2.jpg), [counter](https://cdn.concreteplayground.com/content/uploads/2020/02/Haven-Specialty-Coffee-Haymarket-supplied3.jpg), identified by [Concrete Playground's Haymarket listing](https://concreteplayground.com/sydney/cafes/haven-specialty-coffee-darling-square) | Black brick base/piers, left glazing, tall vertical lettering, upper louvres and service window; punched wood panel, cold-drip tower, espresso machine and glazed pastry case. The model uses estimated proportions within the retained 6.5m bay. Rosebery and Darling Quarter pictures were rejected as different branches. |
+| Pancakes On The Rocks, 55 Tumbalong Boulevard | [Original visitor photograph](https://pimg.1px.tw/doreenabc0527/1752653413-3569393096-g.jpg), [visit account explicitly distinguishing Darling Harbour from The Rocks](https://doreenabc0527.pixnet.net/blog/posts/9577962840) | Three red folding-arm awning spans, tall divided glass, double-sided red timber-look blade with cream lettering, horizontal slatted planter and broad leaves. Article published July 2025; photograph date was not independently verified. The real frontage is longer than this retained 8m representative bay; canopy depth, plant spacing and entrance offset are estimates, not a measured complete tenancy. |
+| Bengong Black / Bengong's Tea, 91 Harbour Street | [Darling Square exterior dated October 2019](https://1.bp.blogspot.com/-Yy0B-uaLRq4/XaahZgyUgoI/AAAAAAADgjk/L8Meh7RKQbY4UJhKtVX46Zepwwrip3cPwCKgBGAsYHg/s1600/IMG_20191016_145640.jpg), [photographer's branch account](https://juliesdiningclub.blogspot.com/2019/10/bengong-black-sydney.html); [current precinct identity/address](https://www.darlingharbour.com/eat-drink/bengong-black) | Circular black blade, dark bronze-style full-height divisions, paired tall pull handles, low horizontal rails, tiered bakery case and interior lettering. Historical exterior is evidence for these features; the current directory confirms branch identity, not that every fitting remains unchanged. Retained width 5m; no outdoor seating added. |
+| Sushi Sei, Shop 20/2 Little Hay Street | [Operator's actual room photograph](https://cloud.katana.nexigen.digital/katana/svcisREQdWtv6yWPKoO3VcNRi5kIZum3DYraI1BZ.webp), [chef/counter photograph](https://cloud.katana.nexigen.digital/katana/1hWLThKnIDOhwy8dqgzJk4DCeY6kfZo8LUdEnIVS.webp), [current operator website](https://sushisei.com.au/) | Pale wood counter, dark vertical screen, pale hanging rear curtain, warm cove strip and four representative counter seats, compressed into a shallow shop-window relief. **Exterior window/door/sign layout remains inferred**, and the display is not a complete dining room. Current operator address corrects the older SE04 field; mapped wall/node stay unchanged. The website's explicitly AI-labelled menu illustrations were not used. |
+
+The Starbucks and McDonald's precinct banners were actually inspected and show generic drink/food imagery, which does not establish their shopfronts. They therefore remain inferred this round. Other unverified branches were not used as substitutes.
+
+All four keep the existing map front, normal, width, public arrival and backing collision. The nominal backing height is 4.400m, and its plane is offset 0.420m outward from the mapped wall to clear the ordinary building's cornices. Generated mesh bounds, rounded to 1mm, are:
+
+| Frontage | Maximum outward extent from backing | Maximum height above model ground |
+| --- | ---: | ---: |
+| Haven Specialty Coffee | 0.880m | 4.460m |
+| Pancakes On The Rocks | 1.255m | 4.400m |
+| Bengong Black | 1.190m | 4.400m |
+| Sushi Sei | 0.840m | 4.400m |
+
+The 1.360m depth value is the **QA allowance**, not a measured shop dimension or the actual maximum model extent. The Pancakes maximum comes from the projecting sign's outer edge; Haven's upper detail rises above its nominal 4.400m backing. Planters and counter fittings are visual details attached to their frontage's destructible body. Door approaches and the public strip in front remain clear, and there are no new traversable private rooms. Fonts, product shapes and signs are original approximations; reference photographs are not stored in game assets or the source package.
+
+The first exported-App image review found three text/frame overlaps. Pancakes' horizontal identifier is now on the exposed red awning valance, Bengong's two lines fit within one uninterrupted glass pane, and Sushi Sei's secondary line sits within the fascia above the window cove. These changes correct the actual label/structure relationship, retain normal depth testing and leave the capture cameras unchanged. The awning identifier's exact placement and typeface remain approximated; no new claim of surveyed sign positioning is made.
+
+`photo_capture_views()` supplies four eye-height review frames; `capture_views()` includes them in the parent native review. The focused source fixture additionally checks the four unchanged mapped placements, per-record provenance, finite outward faces, shallow visual bounds and continuous capsule/ground samples across each public frontage. Final visual quality must be judged from the parent's rendered captures; a headless geometry result alone does not establish photo likeness.
+
+The corrected focused headless run passed **130/130** checks (the original 123 plus four measured-bound checks and three label-visibility regressions), with exit 0 and no `ERROR`, `WARNING` or `FAIL` messages. Evidence is in `reports/darling-frontage-sign-fix.log` and `reports/darling-frontage-sign-fix/checks.json`. Each changed label has 891 mesh sightline samples across its full text bounds, viewed frontally and at two horizontal oblique directions. All current samples are clear; replaying the old text layouts against the same geometry detects 135 blocked Bengong samples, 191 Pancakes samples and 198 Sushi samples. This checks the visual frame meshes directly, including details without physics colliders. The component run did not start native rendering; the parent release workflow owns the unchanged four capture views and final visual acceptance.

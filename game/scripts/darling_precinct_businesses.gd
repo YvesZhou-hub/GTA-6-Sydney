@@ -1,6 +1,7 @@
 extends RefCounted
 ## Directory completeness is distinct from geometrical completeness.
-## New retail frames are original, inferred geometry on mapped street walls.
+## Mapped shop walls with original geometry; per-record evidence distinguishes
+## photographed facades from inferred frames and photo-informed window displays.
 const Fronts=preload("res://scripts/darling_square_frontages.gd")
 const SOURCE="res://assets/darling_precinct_frontages.json"
 const DIRECTORY="res://assets/darling_precinct_directory.json"
@@ -12,7 +13,7 @@ static func metadata() -> Array[Dictionary]:
 		var p:=Vector3(item.front[0],4.5,item.front[1]);var n:=Vector3(item.normal[0],0,item.normal[1]);var right:=Vector3.UP.cross(n)
 		var door_side:float=1.0 if item.id=="darling_business_bendigo_bank" else -1.0
 		var arrival:Vector3=p+n*1.65+right*(door_side*item.width*.32)
-		out.append({"id":item.id,"name":item.name,"center":p,"map_position":p,"arrival":arrival,"position":arrival,"source":item.source,"precision":item.confidence,"model_status":"mapped_inferred_frontage","osm":item.osm,"building":item.building})
+		out.append({"id":item.id,"name":item.name,"center":p,"map_position":p,"arrival":arrival,"position":arrival,"source":item.source,"precision":item.confidence,"model_status":item.get("model_status","mapped_inferred_frontage"),"osm":item.osm,"building":item.building})
 	for item in directory().tenants:
 		if item.model_status!="exchange_building_directory":continue
 		if item.id=="darling_business_haidilao_hotpot":continue # existing exchange_haidilao destination
@@ -23,7 +24,7 @@ static func metadata() -> Array[Dictionary]:
 		out.append({"id":item.id,"name":item.name+" · Exchange 楼栋入口","center":p,"map_position":p,"arrival":arrival,"position":arrival,"source":item.source,"precision":item.location_precision,"level":item.get("level",""),"model_status":item.model_status,"building":"way/614603737"})
 	return out
 static func capture_views() -> Array:
-	return [["darling_steam_mill_new",Vector3(-850,6.6,2052),Vector3(-850,6.5,2044)],["darling_puppuccino_lillianna",Vector3(-867,6.4,2056),Vector3(-863,6.5,2050)],["darling_tumbalong_restaurants",Vector3(-787,7,2016),Vector3(-800,6.5,2017)],["darling_little_pier_shops",Vector3(-705,7.0,1973),Vector3(-697,6.4,1988)],["darling_harbour_street_shops",Vector3(-656,7,2041),Vector3(-672,6.5,2045)],["darling_little_hay_shops",Vector3(-708,6.8,2083),Vector3(-706,6.5,2073)],["darling_bendigo_detail",Vector3(-669,6.4,1999),Vector3(-676,6.4,2000)],["darling_tattoo_detail",Vector3(-697,6.7,2080),Vector3(-696,6.6,2075)],["darling_bubu_detail",Vector3(-822,6.5,2035),Vector3(-820,6.5,2041)]]
+	return [["darling_steam_mill_new",Vector3(-850,6.6,2052),Vector3(-850,6.5,2044)],["darling_puppuccino_lillianna",Vector3(-867,6.4,2056),Vector3(-863,6.5,2050)],["darling_tumbalong_restaurants",Vector3(-787,7,2016),Vector3(-800,6.5,2017)],["darling_little_pier_shops",Vector3(-705,7.0,1973),Vector3(-697,6.4,1988)],["darling_harbour_street_shops",Vector3(-656,7,2041),Vector3(-672,6.5,2045)],["darling_little_hay_shops",Vector3(-708,6.8,2083),Vector3(-706,6.5,2073)],["darling_bendigo_detail",Vector3(-669,6.4,1999),Vector3(-676,6.4,2000)],["darling_tattoo_detail",Vector3(-697,6.7,2080),Vector3(-696,6.6,2075)],["darling_bubu_detail",Vector3(-822,6.5,2035),Vector3(-820,6.5,2041)]]+photo_capture_views()
 static func walk_routes() -> Array:return []
 static func build(w:Node3D):
 	if w.has_meta("darling_precinct_businesses"):return
@@ -36,13 +37,27 @@ static func build(w:Node3D):
 		f.finish()
 		for child in f.body.get_children():
 			if child is MeshInstance3D:child.set_meta("intact_material",child.material_override)
-		f.body.set_meta("model_status","mapped_inferred_frontage")
+		f.body.set_meta("model_status",item.get("model_status","mapped_inferred_frontage"))
 		f.body.set_meta("source_precision",item.confidence)
 	for item in metadata():w.anchors[item.id]=item.arrival
 	w.set_meta("darling_precinct_businesses",metadata())
 	w.set_meta("darling_precinct_directory",directory())
 
+static func photo_capture_views() -> Array:
+	var result:Array=[]
+	for item in frontages():
+		if not item.has("photo_refinement"):continue
+		var p:=Vector3(item.front[0],4.5,item.front[1])
+		var n:=Vector3(item.normal[0],0,item.normal[1]);var right:=Vector3.UP.cross(n)
+		result.append([item.id+"_photo_detail",p+n*8.0+right*1.7+Vector3.UP*2.1,p+n*.45+Vector3.UP*2.0])
+	return result
+
 static func _fitout(f,item:Dictionary):
+	match str(item.id):
+		"darling_business_haven_specialty_coffee":_haven(f);return
+		"darling_business_pancakes_on_the_rocks":_pancakes(f);return
+		"darling_business_bengongs_tea":_bengong(f);return
+		"darling_business_sushi_sei":_sushi_sei(f);return
 	if item.id=="darling_business_bar_bubu":_bubu(f);return
 	if item.id=="darling_business_bendigo_bank":_bendigo(f);return
 	if item.id=="darling_business_thirteen_feet_tattoo":_tattoo(f);return
@@ -161,6 +176,165 @@ static func _brick_pier(f,x:float,width:float):
 	for row in 40:
 		f.box(Vector3(x,.07+row*.11,.305),Vector3(width,.016,.012),"stone")
 		for col in ceili(width/.32):f.box(Vector3(x-width*.5+.16+(col+(row%2)*.5)*.32,.12+row*.11,.305),Vector3(.012,.10,.012),"stone")
+
+static func _brick_panel(f,x:float,y:float,width:float,height:float):
+	f.box(Vector3(x,y,.25),Vector3(width,height,.12),"coal")
+	for row in ceili(height/.115):
+		var yy:float=y-height*.5+row*.115
+		f.box(Vector3(x,yy,.316),Vector3(width,.012,.012),"stone")
+		for col in ceili(width/.30):
+			var xx:float=x-width*.5+.15+(col+(row%2)*.5)*.30
+			if xx<x+width*.5-.02:f.box(Vector3(xx,yy+.058,.318),Vector3(.011,.103,.012),"stone")
+
+static func _vertical_name(f,value:String,at:Vector3,height:float):
+	var label:=Label3D.new();label.text=value;label.font_size=96;label.pixel_size=height/96.0
+	label.outline_size=0;label.modulate=Color("eee9df");label.position=at+Vector3.DOWN*2.2
+	label.rotation.z=PI*.5;label.visibility_range_end=150;f.body.add_child(label)
+
+static func _haven(f):
+	# Supplied Haymarket photographs show the street service window, black brick,
+	# vertical white lettering, louvres and the distinctive cold-drip apparatus.
+	var width:float=f.width;var dx:float=-width*.32;var cx:float=width*.15;var ww:float=width*.57
+	_brick_pier(f,-width*.48,.28);_brick_pier(f,width*.48,.28)
+	f.door(dx,1.12)
+	f.box(Vector3(dx+.71,2.20,.35),Vector3(.42,4.4,.19),"coal")
+	_vertical_name(f,"Haven",Vector3(dx+.71,2.43,.46),.35)
+	_brick_panel(f,cx,.46,ww,.92)
+	f.box(Vector3(cx,2.15,.09),Vector3(ww,2.48,.07),"warm_glass")
+	# Punched timber back panel is relief behind the shallow counter display.
+	f.box(Vector3(cx,2.0,.14),Vector3(ww-.14,1.40,.04),"wood")
+	for row in 10:
+		for col in 30:f.box(Vector3(cx-ww*.46+col*ww*.032,1.39+row*.13,.168),Vector3(.025,.025,.012),"coal")
+	f.box(Vector3(cx,.99,.47),Vector3(ww+.10,.10,.63),"coal")
+	f.box(Vector3(cx,1.32,.54),Vector3(ww*.60,.55,.27),"glass")
+	for y in [1.06,1.59]:f.box(Vector3(cx,y,.70),Vector3(ww*.62,.035,.04),"frame")
+	for x in [cx-ww*.30,cx+ww*.30]:f.box(Vector3(x,1.33,.70),Vector3(.035,.56,.04),"frame")
+	for i in 5:
+		f.cylinder(Vector3(cx-ww*.22+i*ww*.11,1.13,.60),.09,.11,"ochre")
+		for cut in 3:f.box(Vector3(cx-ww*.22+i*ww*.11+(cut-1)*.04,1.19,.60),Vector3(.012,.01,.12),"cream")
+	f.box(Vector3(cx+.62,1.86,.26),Vector3(.85,.40,.24),"slate")
+	for i in 3:
+		f.cylinder(Vector3(cx+.36+i*.25,2.13,.31),.08,.15,"white")
+		f.beam(Vector3(cx+.36+i*.25,1.87,.38),Vector3(cx+.36+i*.25,1.70,.44),.022,"gold")
+	var tower:float=cx-ww*.36
+	for x in [tower-.17,tower+.17]:f.beam(Vector3(x,1.07,.45),Vector3(x,2.63,.45),.038,"frame")
+	for y in [1.20,1.72,2.25]:f.box(Vector3(tower,y,.45),Vector3(.42,.032,.27),"gold")
+	f.cylinder(Vector3(tower,2.43,.45),.15,.28,"glass",24)
+	f.cylinder(Vector3(tower,1.96,.45),.07,.38,"glass",20)
+	f.cylinder(Vector3(tower,1.46,.45),.10,.25,"glass",20)
+	f.beam(Vector3(tower,2.28,.45),Vector3(tower,2.14,.45),.019,"gold")
+	for row in 7:f.box(Vector3(cx,3.52+row*.105,.32),Vector3(ww,.048,.20),"frame")
+	f.box(Vector3(cx,3.38,.54),Vector3(ww,.06,.68),"coal")
+	f.box(Vector3(cx,3.33,.49),Vector3(ww-.16,.022,.08),"cream")
+	f.text("Haven",Vector3(dx,2.0,.30),.15)
+	f.text("SPECIALTY COFFEE",Vector3(dx,1.82,.30),.06)
+	f.body.set_meta("photo_features",["black_brick_service_window","vertical_haven_lettering","cold_drip_tower","glass_pastry_case","punched_timber_panel"])
+
+static func _planter_leaves(f,x:float,width:float):
+	# Long slatted planter and broad leaves visible in the local Pancakes photo.
+	for row in 5:f.box(Vector3(x,.13+row*.13,.74),Vector3(width,.115,.36),"wood")
+	for plant in 8:
+		var px:float=x-width*.44+plant*width*.125
+		for leaf in 5:
+			var a:float=leaf*TAU/5;var start:=Vector3(px,.70,.74)
+			var tip:=start+Vector3(cos(a)*.22,.22+float(leaf%2)*.10,sin(a)*.15)
+			f.beam(start,tip,.015,"leaf")
+			f.disc(tip,.12,"leaf",Basis(Vector3.RIGHT,-.75)*Basis(Vector3.BACK,a))
+
+static func _pancakes(f):
+	var width:float=f.width;var dx:float=-width*.32
+	f.door(dx,1.18)
+	# Tall segmented glazing and three separate folding awning spans replace
+	# the generic ochre fascia. Dimensions are fitted to the existing mapped bay.
+	for col in 4:
+		var x:float=-width*.12+col*width*.15
+		f.window(x,width*.145,.12,3.72,"glass")
+		f.box(Vector3(x,1.36,.18),Vector3(width*.11,.54,.10),"wood")
+		f.box(Vector3(x,.87,.36),Vector3(width*.11,.075,.40),"wood")
+		f.cylinder(Vector3(x,2.90,.30),.13,.14,"gold")
+		f.beam(Vector3(x,2.98,.30),Vector3(x,3.66,.30),.013,"coal")
+	for part in 3:
+		var x:float=-width/3.0+part*width/3.0;var span:float=width/3.0-.08
+		f.awning(x,span,3.95,1.05,"red")
+		for side in [-1,1]:
+			f.beam(Vector3(x+side*span*.44,3.93,.10),Vector3(x+side*span*.31,3.78,.55),.05,"frame")
+			f.beam(Vector3(x+side*span*.31,3.78,.55),Vector3(x+side*span*.43,3.81,1.03),.05,"frame")
+	_planter_leaves(f,width*.16,width*.59)
+	var sign:=Vector3(width*.38,3.02,.80)
+	f.box(sign,Vector3(.10,.91,.91),"coal")
+	for side in [-1,1]:
+		var basis:=Basis(Vector3.UP,side*PI*.5)
+		f.box(sign+basis*Vector3(0,0,.061),Vector3(.86,.85,.025),"red",basis)
+		for j in 5:f.box(sign+basis*Vector3(-.34+j*.17,0,.077),Vector3(.01,.82,.012),"wood",basis)
+		for e in [-1,1]:
+			f.box(sign+basis*Vector3(e*.395,0,.089),Vector3(.012,.77,.01),"cream",basis)
+			f.box(sign+basis*Vector3(0,e*.385,.089),Vector3(.80,.012,.01),"cream",basis)
+		f.text("PANCAKES\nON·THE·ROCKS",sign+Vector3(side*.098,0,0),.125,Color("f3dc9c"),side*PI*.5)
+	# Put the identifier on the exposed red valance, not behind the glazing
+	# mullions. Typography/position are an approximation within the pictured awning.
+	f.text("PANCAKES ON THE ROCKS",Vector3(0,3.82,1.095),.17,Color("edd79e"))
+	f.body.set_meta("photo_features",["red_folding_awning_bays","double_sided_timber_sign","slatted_planter","full_height_window_divisions"])
+
+static func _bengong(f):
+	var width:float=f.width;var dx:float=-width*.32
+	# Actual Darling Square photograph, not the Burwood branch: slender bronze
+	# glazing, paired pull handles, circular blade and interior bakery display.
+	f.door(dx,1.14)
+	for x in [dx-.30,dx+.30]:f.box(Vector3(x,1.42,.34),Vector3(.026,1.80,.06),"gold")
+	for col in 3:
+		var x:float=-width*.07+col*width*.19
+		f.window(x,width*.18,.08,3.77,"glass")
+		for y in [.66,3.01]:f.box(Vector3(x,y,.26),Vector3(width*.18,.045,.055),"frame")
+	for row in 5:f.box(Vector3(0,3.84+row*.11,.30),Vector3(width,.045,.18),"frame")
+	f.box(Vector3(width*.17,.80,.24),Vector3(width*.51,.45,.22),"coal")
+	for row in 3:
+		var y:float=.74+row*.24
+		f.box(Vector3(width*.17,y,.32),Vector3(width*.51,.027,.25),"gold")
+		for col in 7:f.cylinder(Vector3(-width*.05+col*width*.073,y+.085,.38),.074,.10,"ochre" if col%2 else "cream")
+	f.box(Vector3(width*.17,1.40,.33),Vector3(width*.51,.035,.31),"glass")
+	# Keep the glass lettering wholly inside the middle clear pane. Spanning two
+	# panes placed characters behind the bronze mullion in the previous model.
+	f.text("ORIENTAL\nTEACRAFT",Vector3(width*.12,2.61,.215),.125,Color("d1b94c"))
+	var blade:=Vector3(-width*.13,3.03,.76)
+	f.beam(Vector3(-width*.13,3.68,.14),Vector3(-width*.13,3.68,1.0),.06,"frame")
+	f.beam(Vector3(-width*.13,3.67,.76),Vector3(-width*.13,3.46,.76),.06,"frame")
+	for side in [-1,1]:
+		var basis:=Basis(Vector3.UP,side*PI*.5)
+		f.disc(blade+Vector3(side*.042,0,0),.43,"coal",basis)
+		f.text("BENGONG\nBLACK",blade+Vector3(side*.053,-.05,0),.14,Color("e8e5dc"),side*PI*.5)
+		var pos:=blade+basis*Vector3(0,.24,.057)
+		f.beam(pos+basis*Vector3(-.09,-.01,0),pos+basis*Vector3(0,.09,0),.025,"cream")
+		f.beam(pos+basis*Vector3(0,.09,0),pos+basis*Vector3(.09,-.01,0),.025,"cream")
+	f.body.set_meta("photo_features",["round_bengong_black_blade","bronze_full_height_glazing","twin_tall_pull_handles","tiered_bakery_display"])
+
+static func _sushi_sei(f):
+	var width:float=f.width;var dx:float=-width*.32;var cx:float=width*.15;var ww:float=width*.57
+	# Current operator's counter photo only. Keep the exterior explicitly inferred;
+	# do not copy its AI-labelled food illustrations or invent a playable dining room.
+	f.door(dx,1.10);f.window(cx,ww,.22,3.25,"warm_glass")
+	f.box(Vector3(cx,2.15,.21),Vector3(ww-.12,1.75,.04),"wood")
+	for col in 27:f.box(Vector3(cx-ww*.46+col*ww*.035,2.27,.247),Vector3(.021,1.40,.02),"ochre")
+	f.box(Vector3(cx,1.18,.51),Vector3(ww-.10,.12,.53),"wood")
+	f.box(Vector3(cx,.84,.34),Vector3(ww-.18,.55,.14),"coal")
+	for i in 4:
+		var x:float=cx-ww*.34+i*ww*.226
+		f.box(Vector3(x,.77,.71),Vector3(.40,.075,.26),"wood")
+		f.box(Vector3(x,1.0,.78),Vector3(.40,.34,.07),"wood")
+		for side in [-1,1]:f.beam(Vector3(x+side*.16,.12,.68),Vector3(x+side*.16,.77,.68),.035,"coal")
+		f.box(Vector3(x,1.255,.55),Vector3(.31,.011,.18),"coal")
+		for side in [-1,1]:f.beam(Vector3(x+side*.014,1.275,.55),Vector3(x+side*.014,1.275,.68),.008,"wood")
+	# Draped rear partition, low ceiling cove and dark vertical screen are visible
+	# in the operator's actual room photograph; compressed to a shop-window relief.
+	for col in 13:f.box(Vector3(cx-ww*.47+col*.045,2.05,.29),Vector3(.022,1.95,.06),"coal")
+	for panel in 3:f.box(Vector3(cx+ww*.20+panel*ww*.075,2.65,.30),Vector3(ww*.071,.65,.025),"cream")
+	f.box(Vector3(cx,3.19,.33),Vector3(ww,.16,.22),"wood")
+	f.box(Vector3(cx,3.10,.39),Vector3(ww-.08,.022,.035),"cream")
+	f.box(Vector3(cx+ww*.33,1.55,.29),Vector3(.36,.27,.06),"blue")
+	f.box(Vector3(0,3.54,.25),Vector3(width-.12,.42,.17),"coal")
+	# Both lines belong to the fascia, with the lower line above the cove's top.
+	f.text("SUSHI SEI",Vector3(0,3.60,.35),.23)
+	f.text("by KUON",Vector3(0,3.38,.35),.065)
+	f.body.set_meta("photo_features",["light_wood_counter","dark_vertical_screen","pale_rear_curtain","ceiling_cove","counter_seating_relief"])
 
 static func _bubu(f):
 	# Kera Wong's 2025 official precinct photograph shows an open black

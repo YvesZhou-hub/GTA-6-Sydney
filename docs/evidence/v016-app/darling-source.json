@@ -1,0 +1,665 @@
+{
+	"blocked": [],
+	"checks": [
+		{
+			"detail": "",
+			"name": "Local precinct reaches READY",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "71 official directory records retained",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "All records classified without claiming 71 exact facades",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "23 new mapped street facades",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Four branch-specific refinements with four review cameras",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "bengongs_tea mapped wall and width unchanged",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "bengongs_tea inspected image provenance retained",
+			"passed": true
+		},
+		{
+			"detail": "2020 triangles; 0 invalid",
+			"name": "bengongs_tea visible surfaces finite and correctly wound",
+			"passed": true
+		},
+		{
+			"detail": "[-0.00000004768372, 4.40000004768372, 1.19000005722046]",
+			"name": "bengongs_tea shallow frontage stays within public-side allowance",
+			"passed": true
+		},
+		{
+			"detail": "{ \"depth\": 1.19000005722046, \"height\": 4.40000004768372 }",
+			"name": "bengongs_tea published model bounds match generated mesh",
+			"passed": true
+		},
+		{
+			"detail": "{\"current\":{\"label_height\":0.34375,\"label_width\":0.60546875,\"occluded\":0,\"samples\":891},\"old_layout_control\":{\"label_height\":0.467500001192093,\"label_width\":0.823437511920929,\"occluded\":135,\"samples\":891}}",
+			"name": "bengongs_tea lettering clear of actual frame meshes",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "bengongs_tea continuous public path in front stays clear",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "haven_specialty_coffee mapped wall and width unchanged",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "haven_specialty_coffee inspected image provenance retained",
+			"passed": true
+		},
+		{
+			"detail": "8196 triangles; 0 invalid",
+			"name": "haven_specialty_coffee visible surfaces finite and correctly wound",
+			"passed": true
+		},
+		{
+			"detail": "[-0.00600008964539, 4.45999975204468, 0.87999999523163]",
+			"name": "haven_specialty_coffee shallow frontage stays within public-side allowance",
+			"passed": true
+		},
+		{
+			"detail": "{ \"depth\": 0.87999999523163, \"height\": 4.45999975204468 }",
+			"name": "haven_specialty_coffee published model bounds match generated mesh",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "haven_specialty_coffee continuous public path in front stays clear",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "pancakes_on_the_rocks mapped wall and width unchanged",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "pancakes_on_the_rocks inspected image provenance retained",
+			"passed": true
+		},
+		{
+			"detail": "3156 triangles; 0 invalid",
+			"name": "pancakes_on_the_rocks visible surfaces finite and correctly wound",
+			"passed": true
+		},
+		{
+			"detail": "[-0.00000004768372, 4.40000004768372, 1.25499999523163]",
+			"name": "pancakes_on_the_rocks shallow frontage stays within public-side allowance",
+			"passed": true
+		},
+		{
+			"detail": "{ \"depth\": 1.25499999523163, \"height\": 4.40000004768372 }",
+			"name": "pancakes_on_the_rocks published model bounds match generated mesh",
+			"passed": true
+		},
+		{
+			"detail": "{\"current\":{\"label_height\":0.233750000596046,\"label_width\":2.13916683197021,\"occluded\":0,\"samples\":891},\"old_layout_control\":{\"label_height\":0.261249989271164,\"label_width\":2.39083361625671,\"occluded\":191,\"samples\":891}}",
+			"name": "pancakes_on_the_rocks lettering clear of actual frame meshes",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "pancakes_on_the_rocks continuous public path in front stays clear",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "sushi_sei mapped wall and width unchanged",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "sushi_sei inspected image provenance retained",
+			"passed": true
+		},
+		{
+			"detail": "1116 triangles; 0 invalid",
+			"name": "sushi_sei visible surfaces finite and correctly wound",
+			"passed": true
+		},
+		{
+			"detail": "[-0.00000004768372, 4.40000004768372, 0.83999997377396]",
+			"name": "sushi_sei shallow frontage stays within public-side allowance",
+			"passed": true
+		},
+		{
+			"detail": "{ \"depth\": 0.83999997377396, \"height\": 4.40000004768372 }",
+			"name": "sushi_sei published model bounds match generated mesh",
+			"passed": true
+		},
+		{
+			"detail": "{\"current\":{\"label_height\":0.0893749967217445,\"label_width\":0.283697903156281,\"occluded\":0,\"samples\":891},\"old_layout_control\":{\"label_height\":0.103124998509884,\"label_width\":0.327343732118607,\"occluded\":198,\"samples\":891}}",
+			"name": "sushi_sei lettering clear of actual frame meshes",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "sushi_sei continuous public path in front stays clear",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Sushi Sei room photo does not claim a verified exterior",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "18 mapped playground elements retained",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "Square and Quarter geographically distinct",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "New modules are idempotent",
+			"passed": true
+		},
+		{
+			"detail": "(-801.0, 4.5, 1669.0)",
+			"name": "darling_quarter_waterplay supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_quarter_waterplay anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-857.3, 4.5, 1630.0)",
+			"name": "darling_quarter_octanet supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_quarter_octanet anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-852.0, 4.5, 1649.0)",
+			"name": "darling_quarter_slide supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_quarter_slide anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-802.0, 4.5, 1847.0)",
+			"name": "tumbalong_fountains supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "tumbalong_fountains anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-797.4893, 4.5, 2021.586)",
+			"name": "darling_business_789koreanbbq supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_789koreanbbq anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-819.3001, 4.5, 2038.784)",
+			"name": "darling_business_bar_bubu supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_bar_bubu anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-674.5586, 4.5, 1998.327)",
+			"name": "darling_business_bendigo_bank supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_bendigo_bank anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-664.578, 4.5, 2095.371)",
+			"name": "darling_business_bengongs_tea supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_bengongs_tea anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-851.7708, 4.5, 2046.638)",
+			"name": "darling_business_dragon_hot_pot supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_dragon_hot_pot anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-669.6743, 4.5, 2047.534)",
+			"name": "darling_business_haven_specialty_coffee supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_haven_specialty_coffee anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-857.5756, 4.5, 2048.849)",
+			"name": "darling_business_lermont_laser_clinic supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_lermont_laser_clinic anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-863.4886, 4.5, 2051.1)",
+			"name": "darling_business_lillianna_gifts_and_home supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_lillianna_gifts_and_home anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-751.4046, 4.5, 2071.305)",
+			"name": "darling_business_lilong_by_taste_of_shanghai supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_lilong_by_taste_of_shanghai anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-753.9583, 4.5, 2122.518)",
+			"name": "darling_business_machimachi supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_machimachi anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-688.086, 4.5, 1986.737)",
+			"name": "darling_business_mcdonalds supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_mcdonalds anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-700.5523, 4.5, 1984.727)",
+			"name": "darling_business_meet_fresh supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_meet_fresh anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-858.5917, 4.5, 2089.955)",
+			"name": "darling_business_myhealth supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_myhealth anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-717.7164, 4.5, 2078.594)",
+			"name": "darling_business_my_spec supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_my_spec anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-784.6859, 4.5, 2071.473)",
+			"name": "darling_business_pancakes_on_the_rocks supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_pancakes_on_the_rocks anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-837.3908, 4.5, 2041.163)",
+			"name": "darling_business_planet_pop_world supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_planet_pop_world anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-866.7671, 4.5, 2052.348)",
+			"name": "darling_business_puppuccino_pet_spa supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_puppuccino_pet_spa anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-834.7632, 4.5, 2044.82)",
+			"name": "darling_business_quikstop supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_quikstop anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-746.7653, 4.5, 1984.143)",
+			"name": "darling_business_starbucks_coffee_company supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_starbucks_coffee_company anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-708.2668, 4.5, 2074.011)",
+			"name": "darling_business_sushi_sei supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_sushi_sei anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-695.3549, 4.5, 2083.438)",
+			"name": "darling_business_tea_republic supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_tea_republic anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-697.4899, 4.5, 2076.146)",
+			"name": "darling_business_thirteen_feet_tattoo supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_thirteen_feet_tattoo anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-799.783, 4.5, 2012.924)",
+			"name": "darling_business_uliveto supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_uliveto anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_15_cms supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_15_cms anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_batch_brewing_co supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_batch_brewing_co anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_bubble_nini supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_bubble_nini anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_darling_nest supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_darling_nest anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_darling_square_library supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_darling_square_library anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_fishbowl_the_exchange supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_fishbowl_the_exchange anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_golden_century_bbq supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_golden_century_bbq anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_hulu_hulu supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_hulu_hulu anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_spago supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_spago anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_sushia supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_sushia anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_the_brothers_cafe supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_the_brothers_cafe anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_toastiesmith supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_toastiesmith anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "(-748.0, 4.5, 1998.5)",
+			"name": "darling_business_ume_burger supported clear public arrival",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_business_ume_burger anchor uses arrival, not interior centre",
+			"passed": true
+		},
+		{
+			"detail": "169 samples",
+			"name": "tumbalong_fountain_perimeter continuous capsule and ground sweep",
+			"passed": true
+		},
+		{
+			"detail": "122 samples",
+			"name": "darling_playground_perimeter continuous capsule and ground sweep",
+			"passed": true
+		},
+		{
+			"detail": "[{\"actual\":[-843.440551757812,7.14733600616455,1642.32312011719],\"frames\":61,\"reached\":true,\"target\":[-843.473999023438,7.18000030517578,1642.16967773438]},{\"actual\":[-846.678344726562,4.54587697982788,1648.53234863281],\"frames\":79,\"reached\":true,\"target\":[-846.660278320312,4.5,1648.28991699219]}]",
+			"name": "Production player walks up visible slide steps and down slope",
+			"passed": true
+		},
+		{
+			"detail": "0 bad of 28592",
+			"name": "Original facility meshes finite and outward facing",
+			"passed": true
+		},
+		{
+			"detail": "(5.001019, 1.48521, 5.801114)",
+			"name": "Wide slide has full-width collision and a stair approach",
+			"passed": true
+		},
+		{
+			"detail": "(7.7, 5.535, 7.7)",
+			"name": "Octanet damage bounds cover documented 11m mast",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_detail/playground/octanet damage disables all attached collisions",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_detail/playground/octanet repair restores materials and collisions",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_detail/waterplay/wheel damage disables all attached collisions",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_detail/waterplay/wheel repair restores materials and collisions",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_detail/fountain/730089774 damage disables all attached collisions",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_detail/fountain/730089774 repair restores materials and collisions",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_square/darling_business_bendigo_bank/frontage damage disables all attached collisions",
+			"passed": true
+		},
+		{
+			"detail": "",
+			"name": "darling_square/darling_business_bendigo_bank/frontage repair restores materials and collisions",
+			"passed": true
+		}
+	],
+	"counts": {
+		"directory_conflict_unresolved": 1.0,
+		"directory_only_unresolved": 18.0,
+		"exchange_building_directory": 14.0,
+		"existing_researched_frontage": 15.0,
+		"mapped_inferred_frontage": 23.0
+	},
+	"headless": true,
+	"passed": true,
+	"scope": "Mapped local city context; capsule sweeps are geometry checks, not a complete production-player walk or surveyed facsimile"
+}

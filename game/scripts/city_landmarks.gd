@@ -54,7 +54,7 @@ void fragment(){
 static func metadata() -> Array[Dictionary]:
 	return [
 		{"id":"tower_one","name":"International Tower One · HSBC Australia headquarters","address":"100 Barangaroo Avenue, Barangaroo NSW 2000","lat":-33.8638697883,"lon":151.2021296452,"center":TOWER_CENTER,"height_m":217.0,"height_confidence":"CTBUH and OSM tagged; architectural height","levels":49,"osm_ids":[468557019,581013659],"footprint_confidence":"OSM mapped outline; not cadastral survey","facade_confidence":"reconstruction from real exterior photographs; individual shading fins approximated","source":"https://www.about.hsbc.com.au/"},
-		{"id":"boc","name":"Bank of China Australia headquarters","address":"140 Sussex Street, Sydney NSW 2000","lat":-33.8692262136,"lon":151.2038913802,"center":BOC_CENTER,"height_m":58.0,"height_confidence":"estimated from 15 documented levels; not a measured building height","levels":15,"osm_ids":[544307818],"footprint_confidence":"OSM mapped outline; curved facade bay approximated","facade_confidence":"existing exterior reconstructed from 2016 photo; 2019 rooftop refurbishment referenced, layout approximate","source":"https://www.bankofchina.com/au/en/bocinfo/bi1/201907/t20190710_15913196.html"},
+		{"id":"boc","name":"Bank of China Australia headquarters","address":"140 Sussex Street, Sydney NSW 2000","lat":-33.8692262136,"lon":151.2038913802,"center":BOC_CENTER,"height_m":58.0,"height_confidence":"estimated from 15 documented levels; not a measured building height","levels":15,"osm_ids":[544307818],"footprint_confidence":"OSM mapped outline; curved facade bay approximated","facade_confidence":"2016 exterior and 2018 architect field photos; Sussex colonnade reconstructed; depths and 2019 roof layout approximate","source":"https://www.bankofchina.com/au/en/bocinfo/bi1/201907/t20190710_15913196.html"},
 		{"id":"ribbon","name":"W Sydney · The Ribbon","address":"31 Wheat Road, Sydney NSW 2000","lat":-33.8735397834,"lon":151.2017178641,"center":RIBBON_CENTER,"height_m":90.0,"height_confidence":"CTBUH architectural height","levels":25,"osm_ids":[614461305],"footprint_confidence":"OSM mapped podium outline; curved upper envelope reconstructed","facade_confidence":"photo-based curved elevation and glazing rhythm; no detailed architectural plans","source":"https://www.marriott.com/en-us/hotels/sydwh-w-sydney/overview/"},
 		{"id":"exchange_haidilao","name":"The Exchange · Haidilao Darling Square (Level 5)","address":"1 Little Pier Street, Haymarket NSW 2000","lat":-33.8779078529,"lon":151.2021829537,"center":EXCHANGE_CENTER,"height_m":30.0,"height_confidence":"roof envelope estimate; NSW BCA report records effective occupied height25.55m; OSM15m tag rejected","levels":7,"osm_ids":[614603737],"footprint_confidence":"OSM mapped circular envelope; staggered floor plates reconstructed","facade_confidence":"architect's completed-building photo; irregular timber facade recreated procedurally, floor offsets estimated","source":"https://kkaa.co.jp/en/project/the-exchange/"}
 	]
@@ -91,6 +91,20 @@ static func build(world: Node3D) -> void:
 static func _materials(world: Node3D) -> void:
 	world._mat("city_landmark_metal",Color("b2b8b6"),0.38,0.52)
 	world._mat("city_landmark_red",Color("a54e3d"),0.5,0.32)
+	world._mat("city_tower_one_red",Color("ae2932"),0.38,0.34)
+	world._mat("city_tower_one_frame",Color("29373c"),0.44,0.45)
+	var fin_shader:=Shader.new()
+	fin_shader.code="""shader_type spatial;
+void fragment(){
+ vec2 pitch=vec2(0.037,0.037);
+ vec2 cell=(fract(UV/pitch)-0.5)*pitch;
+ float aa=max(length(fwidth(UV)),0.0008);
+ float hole=1.0-smoothstep(0.008-aa,0.008+aa,length(cell));
+ ALBEDO=mix(vec3(0.59,0.57,0.55),vec3(0.18,0.21,0.22),hole);
+ METALLIC=0.38;ROUGHNESS=0.52;
+}"""
+	var fin_material:=ShaderMaterial.new();fin_material.shader=fin_shader
+	world.materials["city_tower_one_perforated"]=fin_material
 	world._mat("city_landmark_gold",Color("b8a071"),0.38,0.6)
 	world._mat("city_landmark_stone",Color("bcb8ac"),0.83)
 	world._mat("city_landmark_dark",Color("293739"),0.52,0.28)
@@ -101,16 +115,18 @@ static func _materials(world: Node3D) -> void:
 	world._mat("city_w_petal",Color("ed3650"),0.65,0.12)
 	world._mat("city_w_blue",Color("314eb2"),0.34,0.25)
 	world._mat("city_w_roof",Color("283b45"),0.44,0.32)
+	world._mat("city_w_shell",Color("b9b6ac"),0.37,0.58)
+	world._mat("city_w_recess",Color("152831"),0.42,0.28)
 	world._mat("city_w_light",Color("aabfff"),0.30)
 	world.materials.city_w_light.emission_enabled=true
 	world.materials.city_w_light.emission=Color("849dec")
 	world.materials.city_w_light.emission_energy_multiplier=1.2
 	world._mat("city_exchange_wood",Color("c8bd9f"),0.88)
 	world._mat("city_exchange_wood_light",Color("ded3b9"),0.89)
-	_glazing(world,"city_tower_glass",Color("456474"),Color("a1aaa7"),Vector2(1.38,202.0/49.0),Vector2(0.052,0.095),15.0)
-	_glazing(world,"city_boc_glass",Color("526267"),Color("bdb8ac"),Vector2(3.05,3.6),Vector2(0.37,0.56),5.4)
+	_glazing(world,"city_tower_glass",Color("456474"),Color("a1aaa7"),Vector2(1.5,202.0/49.0),Vector2(0.052,0.095),15.0)
+	_glazing(world,"city_boc_glass",Color("526267"),Color("bdb8ac"),Vector2(1.915,3.6),Vector2(0.08,0.56),5.4)
 	_glazing(world,"city_lobby_glass",Color("3a555d"),Color("a6acaa"),Vector2(2.25,5.4),Vector2(0.06,0.13))
-	_glazing(world,"city_ribbon_glass",Color("536f7a"),Color("9bacae"),Vector2(1.9,76.0/25.0),Vector2(0.047,0.078),14.0)
+	_glazing(world,"city_ribbon_glass",Color("536f7a"),Color("9bacae"),Vector2(2.0,76.0/25.0),Vector2(0.047,0.078),14.0)
 	world.materials.city_ribbon_glass.shader.code=GLAZING_SHADER.replace("frame_color.rgb*0.72","glass_color.rgb*0.70")
 	_glazing(world,"city_exchange_glass",Color("526a6a"),Color("aaa9a0"),Vector2(1.8,4.45),Vector2(0.05,0.08))
 
@@ -145,7 +161,10 @@ static func _tower_one(world: Node3D) -> void:
 		fins.begin(Mesh.PRIMITIVE_TRIANGLES)
 		var silver := SurfaceTool.new()
 		silver.begin(Mesh.PRIMITIVE_TRIANGLES)
-		for frame in _perimeter_samples(outline,2.7):
+		var fin_frames:=SurfaceTool.new();fin_frames.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var perforated:=SurfaceTool.new();perforated.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var fin_index:=0
+		for frame in _perimeter_samples(outline,3.0):
 			var p: Vector3 = frame.position
 			var outward: Vector3 = frame.outward
 			# Real tower's warm coloured sunshades run the glazed perimeter.
@@ -154,14 +173,42 @@ static func _tower_one(world: Node3D) -> void:
 			if village:
 				_append_box(silver,Vector3(p.x,low+floor_height*0.5,p.z),Vector3(0.30,floor_height,0.30),frame.basis)
 			elif not core_side:
-				_append_box(fins,Vector3(p.x,low+floor_height*0.5,p.z)+outward*0.29,Vector3(0.12,floor_height-0.3,0.67),frame.basis)
+				_tower_one_fin(fins,perforated,fin_frames,silver,p,outward,frame.basis,low,fin_index)
+				fin_index+=1
 			else:
 				_append_box(silver,Vector3(p.x,low+floor_height*0.5,p.z)+outward*0.12,Vector3(0.38,floor_height-0.2,0.25),frame.basis)
-		_commit_detail(world,body,fins,"city_landmark_red")
+		_commit_detail(world,body,fins,"city_tower_one_red")
+		_commit_detail(world,body,perforated,"city_tower_one_perforated")
+		_commit_detail(world,body,fin_frames,"city_tower_one_frame")
 		_commit_detail(world,body,silver,"city_landmark_metal")
+		body.set_meta("framed_fin_count",fin_index)
 	# The roof plant remains inside the surveyed main footprint and height.
+	world.set_meta("tower_one_refinement",{"fin_spacing_m":3.0,"fin_height_m":3.7,"fin_depth_min_m":0.85,"fin_depth_max_m":1.60,"source":"RSHP Tower 1 fin detail 6120_N13403; construction account"})
 	var roof: StaticBody3D = world.structures["city/tower_one/floor/48"].node
 	_detail(world,roof,prism(_scaled(outline,0.92),TOWER_HEIGHT-0.13,TOWER_HEIGHT),"city_landmark_roof")
+
+static func _tower_one_fin(red:SurfaceTool,perforated:SurfaceTool,frames:SurfaceTool,silver:SurfaceTool,p:Vector3,outward:Vector3,basis:Basis,low:float,index:int) -> void:
+	# RSHP documents 3m centres, panels up to 1.8m deep and 3.7m long.
+	# The Tower 1 close-up shows red upper panels, a pale perforated lower half,
+	# dark rims and metal fixing arms. The azimuth-dependent depths are inferred.
+	var depth:=0.85+0.75*absf(outward.x)
+	var anchor:=Vector3(p.x,low+0.20,p.z)+outward*0.11
+	_append_box(frames,anchor+basis*Vector3(0,1.85,depth*0.5),Vector3(0.06,3.7,depth),basis)
+	for side in [-1.0,1.0]:
+		var normal:=basis*Vector3(side,0,0)
+		for row in 2:
+			var y0:=0.08 if row==0 else 1.83
+			var y1:=1.76 if row==0 else 3.62
+			var a:=anchor+basis*Vector3(side*0.033,y0,0.075)
+			var b:=anchor+basis*Vector3(side*0.033,y0,depth-0.075)
+			var c:=anchor+basis*Vector3(side*0.033,y1,depth-0.075)
+			var d:=anchor+basis*Vector3(side*0.033,y1,0.075)
+			var surface:=perforated if row==0 else red
+			_triangle(surface,a,b,c,normal,Vector2(0,y0),Vector2(depth-0.15,y0),Vector2(depth-0.15,y1))
+			_triangle(surface,a,c,d,normal,Vector2(0,y0),Vector2(depth-0.15,y1),Vector2(0,y1))
+	if index%4==0:
+		for y in [0.10,3.60]:
+			_append_box(silver,anchor+basis*Vector3(0,y,depth*0.25),Vector3(0.18,0.07,depth*0.62),basis)
 
 static func boc_outline() -> PackedVector2Array:
 	var source := polygon(BOC_POINTS)
@@ -180,12 +227,14 @@ static func boc_outline() -> PackedVector2Array:
 
 static func _bank_of_china(world: Node3D) -> void:
 	var outline := boc_outline()
-	var lobby: StaticBody3D = world._structure_mesh("city/boc/lobby",prism(outline,0,5.4),BOC_CENTER,"city_lobby_glass",190000.0)
+	var lobby: StaticBody3D = world._structure_mesh("city/boc/lobby",_boc_lobby_mesh(),BOC_CENTER,"city_lobby_glass",190000.0)
 	var piers := SurfaceTool.new()
 	piers.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for item in _perimeter_samples(polygon(BOC_POINTS),5.4):
+		if item.outward.x < -0.8:continue # Sussex frontage is the real open colonnade below.
 		_append_box(piers,Vector3(item.position.x,2.7,item.position.z),Vector3(0.50,5.4,0.64),item.basis)
 	_commit_detail(world,lobby,piers,"city_landmark_stone")
+	_boc_colonnade_details(world,lobby)
 	for floor_index in range(14):
 		var low := 5.4+float(floor_index)*3.6
 		var body: StaticBody3D = world._structure_mesh("city/boc/floor/%02d"%floor_index,prism(outline,low,low+3.6),BOC_CENTER,"city_boc_glass",155000.0)
@@ -198,6 +247,7 @@ static func _bank_of_china(world: Node3D) -> void:
 			var p := front_a.lerp(front_b,t)
 			_append_box(pilasters,Vector3(p.x-0.14,low+1.8,p.y),Vector3(0.58,3.6,0.52),Basis(Vector3.UP,deg_to_rad(-5.3)))
 		_commit_detail(world,body,pilasters,"city_landmark_stone")
+		_boc_window_returns(world,body,outline,low)
 	var roof: StaticBody3D = world._structure_mesh("city/boc/roof_terrace",prism(outline,55.8,56.1),BOC_CENTER,"city_landmark_stone",130000.0)
 	var details := SurfaceTool.new()
 	details.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -213,6 +263,83 @@ static func _bank_of_china(world: Node3D) -> void:
 	for item in _perimeter_samples(outline,2.6):
 		_append_box(ledges,Vector3(item.position.x,56.62,item.position.z),Vector3(2.65,1.04,0.17),item.basis)
 	_commit_detail(world,roof,ledges,"city_landmark_stone")
+
+# Sussex Street is the west edge (OSM points 0 -> 1); a consistent local
+# frontage frame prevents the new recess from drifting onto the road.
+static func boc_colonnade_point(distance:float,y:float,inward:float) -> Vector3:
+	var a:=Vector3(BOC_POINTS[0][0],0,BOC_POINTS[0][1])
+	var tangent:=(Vector3(BOC_POINTS[1][0],0,BOC_POINTS[1][1])-a).normalized()
+	var outward:=tangent.cross(Vector3.UP)
+	return BOC_CENTER+a+tangent*distance-outward*inward+Vector3.UP*y
+
+static func _boc_frontage_basis() -> Basis:
+	var tangent:=(Vector3(BOC_POINTS[1][0],0,BOC_POINTS[1][1])-Vector3(BOC_POINTS[0][0],0,BOC_POINTS[0][1])).normalized()
+	return Basis(tangent,Vector3.UP,tangent.cross(Vector3.UP))
+
+static func _boc_lobby_mesh() -> ArrayMesh:
+	var outline:=boc_outline()
+	var length:=Vector2(BOC_POINTS[0][0],BOC_POINTS[0][1]).distance_to(Vector2(BOC_POINTS[1][0],BOC_POINTS[1][1]))
+	var cut:=PackedVector2Array()
+	for point:Array in [[-1.0,-1.5],[length+1,-1.5],[length+1,3.15],[-1.0,3.15]]:
+		var p:=boc_colonnade_point(point[0],0,point[1])-BOC_CENTER
+		cut.append(Vector2(p.x,p.z))
+	var pieces:=Geometry2D.clip_polygons(outline,cut)
+	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for poly in pieces:st.append_from(prism(poly,0.035,5.4),0,Transform3D.IDENTITY)
+	# A thin continuous physical floor plus overhead slab leaves the middle
+	# open. Each column is merged into the same old lobby damage component.
+	st.append_from(prism(outline,0,0.035),0,Transform3D.IDENTITY)
+	st.append_from(prism(outline,4.85,5.4),0,Transform3D.IDENTITY)
+	for i in 9:
+		var column_poly:=PackedVector2Array()
+		for offset:Vector2 in [Vector2(-0.275,-0.33),Vector2(0.275,-0.33),Vector2(0.275,0.33),Vector2(-0.275,0.33)]:
+			var p:=boc_colonnade_point(2.0+i*5.2+offset.x,0,0.38+offset.y)-BOC_CENTER
+			column_poly.append(Vector2(p.x,p.z))
+		# Keep all appended solids non-indexed. Mixing BoxMesh's indexed
+		# arrays after non-indexed prisms would silently drop the floor faces.
+		st.append_from(prism(column_poly,0.035,4.845),0,Transform3D.IDENTITY)
+	return st.commit()
+
+static func _boc_colonnade_details(world:Node3D,lobby:StaticBody3D) -> void:
+	var stone:=SurfaceTool.new();stone.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var metal:=SurfaceTool.new();metal.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var frames:=SurfaceTool.new();frames.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var basis:=_boc_frontage_basis()
+	for i in 9:
+		var distance:=2.0+i*5.2
+		_append_box(stone,boc_colonnade_point(distance,2.44,0.38)-BOC_CENTER,Vector3(0.565,4.81,0.675),basis)
+		_append_box(metal,boc_colonnade_point(distance,4.40,1.68)-BOC_CENTER,Vector3(0.22,0.35,2.60),basis)
+	# Slender glass framing belongs to the setback line, never the clear path.
+	for i in 23:
+		_append_box(frames,boc_colonnade_point(0.6+i*2.0,2.44,3.10)-BOC_CENTER,Vector3(0.055,4.78,0.095),basis)
+	var length:=Vector2(BOC_POINTS[0][0],BOC_POINTS[0][1]).distance_to(Vector2(BOC_POINTS[1][0],BOC_POINTS[1][1]))
+	for y in [0.12,3.30,4.72]:_append_box(frames,boc_colonnade_point(length*0.5,y,3.10)-BOC_CENTER,Vector3(length,0.06,0.095),basis)
+	_commit_detail(world,lobby,stone,"city_landmark_stone")
+	_commit_detail(world,lobby,metal,"city_landmark_metal")
+	_commit_detail(world,lobby,frames,"city_landmark_dark")
+	_detail(world,lobby,prism(boc_outline(),0.035,0.04),"city_landmark_stone")
+	_detail(world,lobby,prism(boc_outline(),4.84,4.85),"city_landmark_stone")
+	world.set_meta("boc_colonnade",{"depth_m":3.15,"columns":9,"clear_path_inward_m":1.8,"source":"Nimbus / GroupGSA July2018 field photograph Fig8b and frontage drawings"})
+
+static func _boc_window_returns(world:Node3D,body:StaticBody3D,outline:PackedVector2Array,low:float) -> void:
+	var stone:=SurfaceTool.new();stone.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var seals:=SurfaceTool.new();seals.begin(Mesh.PRIMITIVE_TRIANGLES)
+	# The first 24 segments are the already reconstructed projecting street
+	# bay. Thin returns, sill noses and dark gaskets give it physical depth.
+	for i in 24:
+		var a:=outline[i];var b:=outline[i+1]
+		var tangent:=Vector3(b.x-a.x,0,b.y-a.y).normalized()
+		var normal:=tangent.cross(Vector3.UP)
+		var basis:=Basis(tangent,Vector3.UP,normal)
+		var centre:=Vector3((a.x+b.x)*0.5,0,(a.y+b.y)*0.5)
+		var width:=a.distance_to(b)
+		for yy in [low+0.52,low+3.29]:
+			_append_box(stone,centre+Vector3.UP*yy+normal*0.14,Vector3(width+0.015,0.17,0.28),basis)
+			_append_box(seals,centre+Vector3.UP*(yy+0.12)+normal*0.045,Vector3(width-0.15,0.035,0.06),basis)
+		_append_box(stone,Vector3(a.x,low+1.90,a.y)+normal*0.105,Vector3(0.16,2.61,0.21),basis)
+	_commit_detail(world,body,stone,"city_landmark_stone")
+	_commit_detail(world,body,seals,"city_landmark_dark")
+	body.set_meta("boc_window_returns",24)
 
 static func ribbon_profile() -> PackedVector2Array:
 	var result := PackedVector2Array([Vector2(-57,14)])
@@ -288,14 +415,15 @@ static func _ribbon(world: Node3D) -> void:
 			if segment.size()!=2:continue
 			for z in [-18.4,18.4]:_append_beam(frame,Vector3(segment[0].x,segment[0].y,z),Vector3(segment[1].x,segment[1].y,z),0.25,0.19)
 		_commit_detail(world,body,mullions,"city_landmark_metal")
-		_commit_detail(world,body,frame,"city_landmark_gold")
+		_commit_detail(world,body,frame,"city_w_shell")
 		_commit_detail(world,body,roof_panels,"city_w_roof")
 		if floor_index==22:
 			var sign_mesh:=SurfaceTool.new();sign_mesh.begin(Mesh.PRIMITIVE_TRIANGLES)
 			_w_mark(sign_mesh,Vector3(38,80.5,-20.45),8.0,0.80,0.30)
 			_commit_detail(world,body,sign_mesh,"city_w_white")
+	_ribbon_rolls(world,profile)
 	_ribbon_arrival(world,basis)
-	world.set_meta("ribbon_refinement",{"facade_w":Vector3(38,80.5,-20.45),"arrival_w":Vector3(58.2,1.55,-11.8),"mullion_spacing_m":2.0,"entry_clear_width_m":4.0,"reference":"Marriott exterior / porte cochere; Corlette Waratah sign"})
+	world.set_meta("ribbon_refinement",{"facade_w":Vector3(38,80.5,-20.45),"arrival_w":Vector3(58.2,1.55,-11.8),"mullion_spacing_m":2.0,"entry_clear_width_m":4.0,"rolled_louvres":9,"cladding":"folded hexagonal copper cells","reference":"Multiplex completed exterior; Marriott porte cochere; Corlette Waratah sign"})
 
 static func _w_mark(st:SurfaceTool,origin:Vector3,height:float,width:float,depth:float) -> void:
 	var path: Array[Vector2]=[Vector2(-0.55,0.5),Vector2(-0.27,-0.5),Vector2(0,0.33),Vector2(0.27,-0.5),Vector2(0.55,0.5)]
@@ -317,11 +445,15 @@ static func _ribbon_arrival(world:Node3D,basis:Basis) -> void:
 	var copper:=SurfaceTool.new();copper.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var lights:=SurfaceTool.new();lights.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var dark:=SurfaceTool.new();dark.begin(Mesh.PRIMITIVE_TRIANGLES)
-	# Alternating faceted copper panels on the entrance canyon's left wall.
-	for row in 10:
+	# Corlette's completed entrance photo shows folded hexagonal copper cells,
+	# not rectangular tiles. Recesses and bevels are real mesh relief.
+	var side_cells:=SurfaceTool.new();side_cells.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var side_shadow:=SurfaceTool.new();side_shadow.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for row in 9:
 		for col in 9:
-			var yy:=0.55+row*0.81;var zz:=-18.9+col*0.96
-			_append_box(copper,Vector3(55.10,yy,zz),Vector3(0.18,0.77,0.88),Basis(Vector3.UP,deg_to_rad(15 if (row+col)%2==0 else -15)))
+			_ribbon_hex_cell(side_cells,side_shadow,Vector3(55.04,0.56+row*0.90,-18.9+col*0.91+fmod(row,2)*0.455),Vector3.BACK,Vector3.RIGHT)
+	_ribbon_arrival_detail(world,"side",side_cells,"city_w_copper","CopperHexCells")
+	_ribbon_arrival_detail(world,"side",side_shadow,"city_w_recess","CopperHexRecesses")
 	for y in [3.35,8.4]:_append_box(dark,Vector3(61, y,-19.5),Vector3(12,0.14,0.18),Basis.IDENTITY)
 	for x in [55.25,60.7,66.75]:_append_box(dark,Vector3(x,4.25,-19.5),Vector3(0.17,8.4,0.18),Basis.IDENTITY)
 	# Open automatic door bay at x=62.8; no collision pane across the opening.
@@ -333,17 +465,19 @@ static func _ribbon_arrival(world:Node3D,basis:Basis) -> void:
 	for i in 6:
 		var x:=55.8+i*1.9
 		_append_box(copper,Vector3(x,8.74,-21.5),Vector3(0.16,0.08,0.16),Basis.IDENTITY)
-	# Panels sit in front of the recessed rear closure, so the original podium
-	# surface cannot show through the new copper-lined entrance.
-	for row in 10:
-		for col in 6:
-			_append_box(copper,Vector3(55.45+col*0.92,0.55+row*0.81,-9.90),Vector3(0.87,0.77,0.20),Basis(Vector3.UP,deg_to_rad(14 if (row+col)%2==0 else -14)))
+	var rear_cells:=SurfaceTool.new();rear_cells.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var rear_shadow:=SurfaceTool.new();rear_shadow.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for row in 9:
+		for col in 5:
+			_ribbon_hex_cell(rear_cells,rear_shadow,Vector3(55.48+col*0.91+fmod(row,2)*0.455,0.56+row*0.90,-9.79),Vector3.RIGHT,Vector3.FORWARD)
+	_ribbon_arrival_detail(world,"rear",rear_cells,"city_w_copper","CopperHexCells")
+	_ribbon_arrival_detail(world,"rear",rear_shadow,"city_w_recess","CopperHexRecesses")
 	var blue:=SurfaceTool.new();blue.begin(Mesh.PRIMITIVE_TRIANGLES)
 	_append_box(blue,Vector3(63,4.10,-9.82),Vector3(4.2,7.8,0.045),Basis.IDENTITY)
-	_commit_detail(world,entry,blue,"city_w_blue")
-	_commit_detail(world,entry,copper,"city_w_copper")
+	_ribbon_arrival_detail(world,"rear",blue,"city_w_blue","BluePassageClosure")
+	_ribbon_arrival_detail(world,"ceiling",copper,"city_w_copper","CeilingFixtures")
 	_commit_detail(world,entry,dark,"city_landmark_dark")
-	_commit_detail(world,entry,lights,"city_w_light")
+	_ribbon_arrival_detail(world,"ceiling",lights,"city_w_light","PassageLightFrames")
 	var red:=SurfaceTool.new();red.begin(Mesh.PRIMITIVE_TRIANGLES)
 	_w_mark(red,Vector3(58.2,1.55,-11.8),2.7,0.43,0.40)
 	_commit_detail(world,entry,red,"city_w_red")
@@ -353,8 +487,152 @@ static func _ribbon_arrival(world:Node3D,basis:Basis) -> void:
 		for row in 19:
 			var p:=path[arm].lerp(path[arm+1],(row+0.5)/19.0)*2.7
 			for j in [-1,0,1]:
-				_append_box(petals,Vector3(58.2+p.x+j*0.11,1.55+p.y,-12.07),Vector3(0.075,0.15,0.13),Basis(Vector3.RIGHT,deg_to_rad(28+j*8)))
+				_ribbon_petal(petals,Vector3(58.2+p.x+j*0.11,1.55+p.y,-12.07),0.075,0.15,0.13)
 	_commit_detail(world,entry,petals,"city_w_petal")
+
+# Reusable world-space views for final, populated-city capture fixtures.
+static func capture_views() -> Array:
+	return [
+		["w-sydney-harbour",ribbon_entry_point(Vector3(15,54,-174)),ribbon_entry_point(Vector3(0,44,0))],
+		["w-sydney-ribbon-end",ribbon_entry_point(Vector3(137,65,-79)),ribbon_entry_point(Vector3(51,58,0))],
+		["w-sydney-arrival",ribbon_entry_point(Vector3(69,2.8,-31)),ribbon_entry_point(Vector3(59.6,3.5,-11.5))],
+		["tower-one-whole",TOWER_CENTER+Vector3(-190,127,205),TOWER_CENTER+Vector3(0,107,0)],
+		["tower-one-fins",TOWER_CENTER+Vector3(-77,85,22),TOWER_CENTER+Vector3(-33,77,-1)],
+		["bank-of-china-sussex",Vector3(-679,46,998),BOC_CENTER+Vector3(-3,27,0)],
+		["bank-of-china-colonnade",boc_colonnade_point(4,2.0,1.8),boc_colonnade_point(35,2.45,1.8)]
+	]
+
+static func walk_routes() -> Array:
+	return [
+		{"name":"bank_of_china_sussex_colonnade","points":[boc_colonnade_point(4.0,0.04,-1.4),boc_colonnade_point(4.0,0.04,1.8),boc_colonnade_point(20.0,0.04,1.8),boc_colonnade_point(40.0,0.04,1.8),boc_colonnade_point(41.0,0.04,1.8),boc_colonnade_point(41.0,0.04,-1.2)]},
+		{"name":"w_sydney_public_arrival","points":[ribbon_entry_point(Vector3(63,0.04,-28)),ribbon_entry_point(Vector3(63,0.04,-20)),ribbon_entry_point(Vector3(63,0.04,-11.4))]}
+	]
+
+static func ribbon_louvre_paths() -> Array[PackedVector3Array]:
+	var profile:=ribbon_profile()
+	var paths:Array[PackedVector3Array]=[]
+	for index in 9:
+		var half_width:=17.0-index*1.04
+		var bottom:=30.0+index*4.65
+		var path:=PackedVector3Array()
+		# The two rails wrap continuously from the sloping roof around the high
+		# rounded end. Their lower returns rise and narrow toward the centre.
+		for side in [-1.0,1.0]:
+			var rail:=PackedVector3Array()
+			for i in range(35,profile.size()-1):
+				var a:=profile[i];var b:=profile[i+1]
+				if b.y<a.y and b.y<bottom+2.4:
+					if a.y>=bottom+2.4:
+						var end:=a.lerp(b,(bottom+2.4-a.y)/(b.y-a.y))
+						rail.append(Vector3(end.x+0.20,end.y,side*half_width))
+					break
+				var normal:=Vector2(b.y-a.y,a.x-b.x).normalized()*_area_sign(profile)
+				rail.append(Vector3(a.x+normal.x*0.20,a.y+normal.y*0.20,side*half_width))
+			if side<0:
+				path.append_array(rail)
+				for step in range(1,25):
+					var z:=lerpf(-half_width,half_width,step/24.0)
+					var y:=bottom+2.4*pow(absf(z)/half_width,12)
+					path.append(Vector3(_ribbon_right_x(profile,y)+0.20,y,z))
+			else:
+				rail.reverse();path.append_array(rail)
+		paths.append(path)
+	return paths
+
+static func _ribbon_right_x(profile:PackedVector2Array,y:float) -> float:
+	var result:=-INF
+	for i in profile.size()-1:
+		var a:=profile[i];var b:=profile[i+1]
+		if absf(b.y-a.y)<0.0001 or y<minf(a.y,b.y) or y>maxf(a.y,b.y):continue
+		result=maxf(result,lerpf(a.x,b.x,(y-a.y)/(b.y-a.y)))
+	return result
+
+static func _ribbon_rolls(world:Node3D,profile:PackedVector2Array) -> void:
+	var paths:=ribbon_louvre_paths()
+	for floor_index in 25:
+		var low:=14.0+floor_index*76.0/25.0;var high:=low+76.0/25.0
+		var body:StaticBody3D=world.structures["city/ribbon/floor/%02d"%floor_index].node
+		var shell:=SurfaceTool.new();shell.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var recess:=SurfaceTool.new();recess.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var rolls:=SurfaceTool.new();rolls.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for i in profile.size()-1:
+			var a:=profile[i];var b:=profile[i+1]
+			var segment:=_clip_line_y(a,b,low,high)
+			if segment.size()!=2:continue
+			var normal:=Vector3(b.y-a.y,a.x-b.x,0).normalized()*_area_sign(profile)
+			# Broad metal cheeks along both exposed edges; the central high end
+			# sits behind the rolled louvres with dark recessed glazing.
+			for limits:Array in [[-20.0,-17.4],[17.4,20.0]]:
+				_ribbon_skin_quad(shell,segment,normal,limits[0],limits[1],0.055)
+			if (a.x+b.x)*0.5>43.0:
+				_ribbon_skin_quad(recess if (a.y+b.y)*0.5>28.0 else shell,segment,normal,-17.4,17.4,0.045)
+			# A two-metre face fascia replaces the visually thin outline alone.
+			for z in [-20.16,20.16]:
+				var p:=Vector3(segment[0].x,segment[0].y,z)
+				var q:=Vector3(segment[1].x,segment[1].y,z)
+				var r:=q-normal*1.95;var t:=p-normal*1.95
+				var face_normal:=Vector3.FORWARD if z<0 else Vector3.BACK
+				_triangle(shell,p,q,r,face_normal,Vector2.ZERO,Vector2.ONE,Vector2.ONE)
+				_triangle(shell,p,r,t,face_normal,Vector2.ZERO,Vector2.ONE,Vector2.ZERO)
+		for path in paths:
+			for i in path.size()-1:
+				var a:=path[i];var b:=path[i+1]
+				if maxf(a.y,b.y)<low or minf(a.y,b.y)>=high:continue
+				if absf(b.y-a.y)>0.00001:
+					var t0:=clampf((low-a.y)/(b.y-a.y),0,1);var t1:=clampf((high-a.y)/(b.y-a.y),0,1)
+					var clipped_a:=a.lerp(b,minf(t0,t1));b=a.lerp(b,maxf(t0,t1));a=clipped_a
+				_ribbon_beam(rolls,a,b,0.37,0.48)
+		_commit_detail(world,body,shell,"city_w_shell")
+		_commit_detail(world,body,recess,"city_w_recess")
+		_commit_detail(world,body,rolls,"city_w_shell")
+		body.set_meta("ribbon_rolled_envelope",true)
+
+static func _ribbon_skin_quad(st:SurfaceTool,segment:PackedVector2Array,normal:Vector3,z0:float,z1:float,offset:float) -> void:
+	var p:=Vector3(segment[0].x,segment[0].y,z0)+normal*offset
+	var q:=Vector3(segment[1].x,segment[1].y,z0)+normal*offset
+	var r:=Vector3(segment[1].x,segment[1].y,z1)+normal*offset
+	var s:=Vector3(segment[0].x,segment[0].y,z1)+normal*offset
+	_triangle(st,p,q,r,normal,Vector2.ZERO,Vector2.ONE,Vector2.ONE)
+	_triangle(st,p,r,s,normal,Vector2.ZERO,Vector2.ONE,Vector2.ZERO)
+
+static func _ribbon_beam(st:SurfaceTool,a:Vector3,b:Vector3,width:float,depth:float) -> void:
+	var delta:=b-a
+	if delta.length()<0.001:return
+	var up:=Vector3.RIGHT if absf(delta.normalized().dot(Vector3.UP))>0.98 else Vector3.UP
+	_append_box(st,(a+b)*0.5,Vector3(width,depth,delta.length()+0.008),Basis.looking_at(delta,up))
+
+static func _ribbon_hex_cell(copper:SurfaceTool,dark:SurfaceTool,origin:Vector3,tangent:Vector3,normal:Vector3) -> void:
+	for i in 6:
+		var angle0:=TAU*i/6.0;var angle1:=TAU*(i+1)/6.0
+		var v0:=tangent*cos(angle0)+Vector3.UP*sin(angle0)
+		var v1:=tangent*cos(angle1)+Vector3.UP*sin(angle1)
+		var a:=origin+v0*0.51;var b:=origin+v1*0.51
+		var c:=origin+v1*0.36+normal*0.18;var d:=origin+v0*0.36+normal*0.18
+		var face_normal:=(b-a).cross(d-a).normalized()
+		if face_normal.dot(normal)<0:face_normal=-face_normal
+		_triangle(copper,a,b,c,face_normal,Vector2.ZERO,Vector2.ONE,Vector2.ONE)
+		_triangle(copper,a,c,d,face_normal,Vector2.ZERO,Vector2.ONE,Vector2.ZERO)
+		_triangle(dark,origin+normal*0.015,origin+v0*0.365+normal*0.015,origin+v1*0.365+normal*0.015,normal,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+
+static func _ribbon_arrival_detail(world:Node3D,part:String,st:SurfaceTool,key:String,label:String) -> void:
+	var body:StaticBody3D=world.structures["city/ribbon/entry/"+part].node
+	var mesh:=st.commit()
+	if mesh==null:return
+	var view:=MeshInstance3D.new();view.name=label;view.mesh=mesh;view.material_override=world.materials[key]
+	body.add_child(view)
+	# Geometry is specified in the hotel frame; walls are existing centred boxes.
+	view.transform=body.transform.affine_inverse()*Transform3D(Basis(Vector3.UP,deg_to_rad(RIBBON_ANGLE)),RIBBON_CENTER)
+
+static func _ribbon_petal(st:SurfaceTool,origin:Vector3,width:float,height:float,depth:float) -> void:
+	# A tapered, bent blade captures the actual flexible Waratah petal profile.
+	var points:=[origin+Vector3(-width*0.5,-height*0.5,0),origin+Vector3(width*0.5,-height*0.5,0),origin+Vector3(width*0.36,height*0.20,-depth*0.72),origin+Vector3(0,height*0.55,-depth),origin+Vector3(-width*0.36,height*0.20,-depth*0.72)]
+	var center:=origin+Vector3(0,0,-depth*0.56)
+	for i in 5:
+		var a:Vector3=points[i];var b:Vector3=points[(i+1)%5]
+		var n:Vector3=(b-a).cross(center-a).normalized()
+		if n.z>0:n=-n
+		_triangle(st,a,b,center,n,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
+		_triangle(st,a,center,b,-n,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO)
 
 static func _clip_line_y(a: Vector2, b: Vector2, low: float, high: float) -> PackedVector2Array:
 	if maxf(a.y,b.y)<low or minf(a.y,b.y)>high: return PackedVector2Array()

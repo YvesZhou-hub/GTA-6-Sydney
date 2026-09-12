@@ -1,0 +1,39 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+PASS Sydney Tower model builds with canonical metadata
+PASS Tower build is idempotent
+PASS all 33 pre-existing damage IDs survive the detail revision
+PASS four source OSM pieces are replaced; surrounding mall not suppressed
+PASS Tower centroid projects to mapped OSM turret center
+PASS Market Street arrival lies outside office footprint
+PASS all tower geometry triangles are nondegenerate
+PASS tower winding matches exterior normals
+PASS damage solids and physics geometry match
+PASS modeled navigation beacon tops out at official 309m
+PASS two families contain the documented 56 visible stabilising cables
+PASS turret has 420 distinct modeled window panels
+PASS glass floor geometry forms two discrete rectangular outward platforms
+PASS two stacked galleries include the official 268m visitor level
+PASS platform support geometry connects the turret roof to the deck frames
+PASS roof carries radial ribs, cleaning track and separate parapet geometry
+PASS upper plant enclosure has modeled slots and safety hoops
+PASS retail podium is distinct from the ten office facade bands
+PASS raised Westfield letters follow the drum in physical geometry
+PASS three native capture views include an elevated Skywalk close-up
+PASS tower detail remains within triangle budget: 121772
+PASS tower physical shell exists at height 100.0
+PASS tower physical shell exists at height 220.0
+PASS tower physical shell exists at height 243.0
+PASS tower physical shell exists at height 275.0
+PASS public arrival fits standing pedestrian
+PASS turret damage removes the corresponding solid and attached window detail
+PASS repair restores tower collision
+PASS destroying the existing drum ID removes precisely the platform glass from rendered batches
+PASS drum repair restores collision and all platform glazing in rendered batches
+TOWER FRAME whole
+TOWER FRAME turret
+TOWER FRAME cable_net
+TOWER FRAME street
+TOWER FRAME base_aerial
+SYDNEY TOWER CHECK COMPLETE checks=30 failures=0 triangles=121772 structures=33

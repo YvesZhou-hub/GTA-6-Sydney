@@ -1,0 +1,127 @@
+{
+  "check_count": 28,
+  "checks": [
+    {
+      "name": "both Circular Quay towers have source confidence records",
+      "passed": true
+    },
+    {
+      "name": "all seven mapped parts have explicit footprint exclusions",
+      "passed": true
+    },
+    {
+      "name": "QQT stays southeast of Salesforce at the mapped real city locations",
+      "passed": true
+    },
+    {
+      "name": "QQT contains five mapped village outlines",
+      "passed": true
+    },
+    {
+      "name": "QQT's four village seams change plan and remain vertically continuous",
+      "passed": true
+    },
+    {
+      "name": "Salesforce has six increasing-height tree branches per north face",
+      "passed": true
+    },
+    {
+      "name": "tree bracing clips at floor ownership boundaries for consistent damage",
+      "passed": true
+    },
+    {
+      "name": "documented coordinates agree with the existing metre projection",
+      "passed": true
+    },
+    {
+      "name": "all tower structural colliders use the identical rendered mesh faces",
+      "passed": true
+    },
+    {
+      "name": "no zero-area triangles in either tower",
+      "passed": true
+    },
+    {
+      "name": "tower faces and facade details all use outward Godot winding",
+      "passed": true
+    },
+    {
+      "name": "combined detailed geometry remains bounded triangles=138552",
+      "passed": true
+    },
+    {
+      "name": "QQT reaches the architect's published 206m total height",
+      "passed": true
+    },
+    {
+      "name": "Salesforce's raised crown reaches the developer's 263m total height",
+      "passed": true
+    },
+    {
+      "name": "both towers contain the full intended floor structure",
+      "passed": true
+    },
+    {
+      "name": "original 149 structural damage owners retained without added occupied floor volumes",
+      "passed": true
+    },
+    {
+      "name": "repeated build does not duplicate either tower or its new details",
+      "passed": true
+    },
+    {
+      "name": "QQT original podium owns stone joints and ventilation relief",
+      "passed": true
+    },
+    {
+      "name": "Salesforce original lobby owns subsidiary physical glazing frames",
+      "passed": true
+    },
+    {
+      "name": "real chamfered tree-member mesh has eight profile corners and a closed two-use edge manifold",
+      "passed": true
+    },
+    {
+      "name": "specialist tower camera outside solid geometry: quay-qqt-rebated-frames",
+      "passed": true
+    },
+    {
+      "name": "specialist tower camera outside solid geometry: quay-qqt-stone-podium",
+      "passed": true
+    },
+    {
+      "name": "specialist tower camera outside solid geometry: quay-salesforce-tree-shades",
+      "passed": true
+    },
+    {
+      "name": "specialist tower camera outside solid geometry: quay-salesforce-glazing",
+      "passed": true
+    },
+    {
+      "name": "qqt has real roof collision at its mapped position",
+      "passed": true
+    },
+    {
+      "name": "salesforce has real roof collision at its mapped position",
+      "passed": true
+    },
+    {
+      "name": "floor destruction removes glazing, tree braces, lift facade and collision together",
+      "passed": true
+    },
+    {
+      "name": "restoration reinstates matching tower collision",
+      "passed": true
+    }
+  ],
+  "execution_flags": [],
+  "failures": 0,
+  "model_sha256": "54458a5f9e344d5cf749052d6caeb142740c7d162128e36cca319ebd53f54afc",
+  "native_capture_ran": false,
+  "passed": true,
+  "scope": "Isolated two-tower exteriors; structural and camera geometry, no office interiors or complete-city test",
+  "structures": 149,
+  "test_sha256": "dfd4b518472e1df8017d2090955ea3c42f1f5dc5f34121b3d8410d401cafbd40",
+  "user_saves_touched": false,
+  "visible_triangles": 138552
+}

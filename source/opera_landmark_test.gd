@@ -156,6 +156,17 @@ func check() -> void:
 	verify(holes_clear,"upper stairwell and orchestra pit are absent upper-slab geometry")
 	var glass:StandardMaterial3D=world.materials.opera_glass
 	verify(glass.transparency==BaseMaterial3D.TRANSPARENCY_ALPHA and glass.albedo_color.a<.4,"bronze glass allows harbour visibility instead of an opaque painted facade")
+	var deep_frames:=true
+	for index in [0,4]:
+		var body:Node3D=world.structures["opera/glass/"+str(index)].node
+		var frame:MeshInstance3D=body.get_node("BronzeCurtainBlades")
+		deep_frames=deep_frames and is_equal_approx(body.get_meta("curtain_blade_depth",0.0),.72) and frame.mesh.get_faces().size()>2000
+		# Deep mullions are attached to the same damage component as their glass,
+		# and must not extend beneath the curtain floor. Existing route probes
+		# separately check the public circulation and its unchanged glass collision.
+		for p:Vector3 in frame.mesh.get_faces():
+			if p.y< -0.20:deep_frames=false
+	verify(deep_frames,"both northern curtains have attached deep bronze blades and triangulated transoms")
 	var cover_misses:Array=[]
 	var Interior=load("res://scripts/opera_interiors.gd")
 	for x in [-18.0,-12.0,0.0,12.0,18.0]:
@@ -190,7 +201,7 @@ func check() -> void:
 	verify(not world.destroyed.has(destroyed_id) and not world.structures[destroyed_id].node.get_child(1).disabled,"new world restores damaged roof collider")
 	if "--visual" in OS.get_cmdline_user_args():
 		await capture(world)
-	var report_path:=ProjectSettings.globalize_path("res://../reports/opera-v014-exterior.json")
+	var report_path:=ProjectSettings.globalize_path("res://../reports/opera-v016-exterior.json")
 	FileAccess.open(report_path,FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures,"shell_triangles":triangle_count,"highest_world_y":highest,"native_capture":"--visual" in OS.get_cmdline_user_args(),"includes_interiors":"--with-interiors" in OS.get_cmdline_user_args(),"source_sha256":FileAccess.get_sha256("res://scripts/opera_landmark.gd"),"scope":"Original procedural exterior based on official CMP photos/plans; shell coordinates are inferred, not a surveyed BIM"},"  "))
 	print("OPERA CHECK COMPLETE checks=",checks.size()," failures=",failures," shell_triangles=",triangle_count)
 	quit(failures)
@@ -232,7 +243,7 @@ func capture(world: Node3D) -> void:
 	camera.fov = 50
 	camera.far = 2000
 	var views:=Opera.capture_views()
-	var folder:=ProjectSettings.globalize_path("res://../reports/opera-v014-connected")
+	var folder:=ProjectSettings.globalize_path("res://../reports/opera-v016-connected")
 	DirAccess.make_dir_recursive_absolute(folder)
 	for view in views:
 		camera.position=view[1]

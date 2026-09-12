@@ -1,0 +1,219 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15120 reserved=388 roads=67449
+CITY_BUILD_TIMINGS {"complete_ms":83543,"custom_landmarks_ms":72069,"mapped_city_ms":19371,"terrain_and_harbour_ms":11787}
+HARBOR_WORLD_READY buildings=15122 structure_components=21672
+CITY_STARTUP_MS 84307
+PRECINCT_QA PASS complete production city ready
+PRECINCT_QA PASS both Opera halls are actually built
+PRECINCT_QA PASS authored shop signs replace generic floating labels
+PRECINCT_QA PASS authored precinct module loaded res://scripts/opera_landmark.gd
+PRECINCT_QA PASS Opera exterior has views of distinct sides
+PRECINCT_QA PASS authored precinct module loaded res://scripts/opera_interiors.gd
+PRECINCT_QA PASS both halls and public foyers have interior views
+PRECINCT_QA PASS authored place has matching map destination opera_box_office
+PRECINCT_QA PASS authored place has matching map destination opera_concert_hall
+PRECINCT_QA PASS authored place has matching map destination opera_joan_sutherland
+PRECINCT_QA PASS authored place has matching map destination opera_northern_foyer
+PRECINCT_QA PASS authored precinct module loaded res://scripts/darling_square_detail.gd
+PRECINCT_QA PASS authored place has matching map destination auvers
+PRECINCT_QA PASS authored place has matching map destination hakatamon
+PRECINCT_QA PASS authored place has matching map destination chinta_ria
+PRECINCT_QA PASS authored precinct module loaded res://scripts/darling_public_facilities.gd
+PRECINCT_QA PASS authored place has matching map destination darling_quarter_waterplay
+PRECINCT_QA PASS authored place has matching map destination darling_quarter_octanet
+PRECINCT_QA PASS authored place has matching map destination darling_quarter_slide
+PRECINCT_QA PASS authored place has matching map destination tumbalong_fountains
+PRECINCT_QA PASS authored precinct module loaded res://scripts/darling_precinct_businesses.gd
+PRECINCT_QA PASS authored place has matching map destination darling_business_789koreanbbq
+PRECINCT_QA PASS authored place has matching map destination darling_business_bar_bubu
+PRECINCT_QA PASS authored place has matching map destination darling_business_bendigo_bank
+PRECINCT_QA PASS authored place has matching map destination darling_business_bengongs_tea
+PRECINCT_QA PASS authored place has matching map destination darling_business_dragon_hot_pot
+PRECINCT_QA PASS authored place has matching map destination darling_business_haven_specialty_coffee
+PRECINCT_QA PASS authored place has matching map destination darling_business_lermont_laser_clinic
+PRECINCT_QA PASS authored place has matching map destination darling_business_lillianna_gifts_and_home
+PRECINCT_QA PASS authored place has matching map destination darling_business_lilong_by_taste_of_shanghai
+PRECINCT_QA PASS authored place has matching map destination darling_business_machimachi
+PRECINCT_QA PASS authored place has matching map destination darling_business_mcdonalds
+PRECINCT_QA PASS authored place has matching map destination darling_business_meet_fresh
+PRECINCT_QA PASS authored place has matching map destination darling_business_myhealth
+PRECINCT_QA PASS authored place has matching map destination darling_business_my_spec
+PRECINCT_QA PASS authored place has matching map destination darling_business_pancakes_on_the_rocks
+PRECINCT_QA PASS authored place has matching map destination darling_business_planet_pop_world
+PRECINCT_QA PASS authored place has matching map destination darling_business_puppuccino_pet_spa
+PRECINCT_QA PASS authored place has matching map destination darling_business_quikstop
+PRECINCT_QA PASS authored place has matching map destination darling_business_starbucks_coffee_company
+PRECINCT_QA PASS authored place has matching map destination darling_business_sushi_sei
+PRECINCT_QA PASS authored place has matching map destination darling_business_tea_republic
+PRECINCT_QA PASS authored place has matching map destination darling_business_thirteen_feet_tattoo
+PRECINCT_QA PASS authored place has 2026-09-12 15:59:33.281 Harbourlife[93277:3336572] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+matching map destination darling_business_uliveto
+PRECINCT_QA PASS authored place has matching map destination darling_business_15_cms
+PRECINCT_QA PASS authored place has matching map destination darling_business_batch_brewing_co
+PRECINCT_QA PASS authored place has matching map destination darling_business_bubble_nini
+PRECINCT_QA PASS authored place has matching map destination darling_business_darling_nest
+PRECINCT_QA PASS authored place has matching map destination darling_business_darling_square_library
+PRECINCT_QA PASS authored place has matching map destination darling_business_fishbowl_the_exchange
+PRECINCT_QA PASS authored place has matching map destination darling_business_golden_century_bbq
+PRECINCT_QA PASS authored place has matching map destination darling_business_hulu_hulu
+PRECINCT_QA PASS authored place has matching map destination darling_business_spago
+PRECINCT_QA PASS authored place has matching map destination darling_business_sushia
+PRECINCT_QA PASS authored place has matching map destination darling_business_the_brothers_cafe
+PRECINCT_QA PASS authored place has matching map destination darling_business_toastiesmith
+PRECINCT_QA PASS authored place has matching map destination darling_business_ume_burger
+PRECINCT_QA PASS authored precinct module loaded res://scripts/circular_quay_detail.gd
+PRECINCT_QA PASS authored place has matching map destination cq_wharf_2
+PRECINCT_QA PASS authored place has matching map destination cq_wharf_3
+PRECINCT_QA PASS authored place has matching map destination cq_wharf_4
+PRECINCT_QA PASS authored place has matching map destination cq_wharf_5
+PRECINCT_QA PASS authored place has matching map destination cq_wharf_6
+PRECINCT_QA PASS authored place has matching map destination cq_station
+PRECINCT_QA PASS authored place has matching map destination cq_eastbank
+PRECINCT_QA PASS authored place has matching map destination cq_searock
+PRECINCT_QA PASS authored place has matching map destination cq_city_extra
+PRECINCT_QA PASS authored precinct module loaded res://scripts/sydney_tower_landmark.gd
+PRECINCT_QA PASS authored place has matching map destination sydney_tower
+PRECINCT_QA PASS authored precinct module loaded res://scripts/city_landmarks.gd
+PRECINCT_QA PASS authored precinct module loaded res://scripts/icc_landmarks.gd
+PRECINCT_QA PASS authored place has matching map destination icc_convention
+PRECINCT_QA PASS authored place has matching map destination icc_exhibition
+PRECINCT_QA PASS authored place has matching map destination tiktok_entertainment
+PRECINCT_QA PASS authored precinct module loaded res://scripts/quay_landmarks.gd
+PRECINCT_QA PASS authored precinct module loaded res://scripts/bank_landmarks.gd
+PRECINCT_QA PASS authored precinct module loaded res://scripts/manowar_detail.gd
+PRECINCT_QA PASS authored place has matching map destination manowar_north
+PRECINCT_QA PASS authored place has matching map destination manowar_east
+PRECINCT_QA PASS new exterior and interior capture views supplied
+PRECINCT_QA PASS Opera, Darling and Quay continuous walking routes supplied
+PRECINCT_QA PASS continuous player walk Covered concourse to ticket foyer and upper south foyer
+PRECINCT_QA PASS map migration preserves actual settled player Covered concourse to ticket foyer and upper south foyer
+PRECINCT_WALK {"discontinuities":0,"name":"Covered concourse to ticket foyer and upper south foyer","origin":[354.808807373047,4.5,-284.054046630859],"passed":true,"segments":[{"actual":[356.8369140625,4.52101564407349,-283.650787353516],"contacts":[],"distance":0.0978366360068321,"frames":25,"reached":true,"target":[356.755706787109,4.5,-283.596221923828]},{"actual":[376.321258544922,9.97730159759521,-279.075012207031],"contacts":[],"distance":0.112140841782093,"frames":228,"reached":true,"target":[376.224670410156,9.98640060424805,-279.018035888672]},{"actual":[379.657928466797,9.97727870941162,-271.946655273438],"contacts":[],"distance":0.105281740427017,"frames":91,"reached":true,"target":[379.718444824219,9.98640060424805,-272.032806396484]},{"actual":[407.040557861328,10.0078592300415,-265.686767578125],"contacts":[],"distance":0.0912280902266502,"frames":325,"reached":true,"target":[406.974975585938,9.98640060424805,-265.623352050781]},{"actual":[411.952850341797,15.6908836364746,-287.127258300781],"contacts":[],"distance":0.10550545156002,"frames":255,"reached":true,"target":[412.010986328125,15.6999998092651,-287.039215087891]},{"actual":[412.623565673828,15.6908779144287,-290.013488769531],"contacts":[],"distance":0.0916909202933311,"frames":31,"reached":true,"target":[412.697723388672,15.6999998092651,-289.959564208984]}]}
+PRECINCT_QA PASS continuous player walk Concert Hall south entrance to front stalls
+PRECINCT_QA PASS map migration preserves actual settled player Concert Hall south entrance to front stalls
+PRECINCT_WALK {"discontinuities":0,"name":"Concert Hall south entrance to front stalls","origin":[389.281829833984,15.6999998092651,-264.647583007812],"passed":true,"segments":[{"actual":[393.56787109375,15.6908779144287,-283.229766845703],"contacts":[],"distance":0.107309393584728,"frames":221,"reached":true,"target":[393.631103515625,15.6999998092651,-283.14306640625]},{"actual":[395.970825195312,15.6908779144287,-293.453216552734],"contacts":[],"distance":0.109472043812275,"frames":118,"reached":true,"target":[396.03466796875,15.6999998092651,-293.364288330078]},{"actual":[413.651428222656,15.6908779144287,-289.306610107422],"contacts":[],"distance":0.113588266074657,"frames":211,"reached":true,"target":[413.556701660156,15.6999998092651,-289.243927001953]},{"actual":[418.419219970703,15.6908779144287,-310.276306152344],"contacts":[],"distance":0.118962518870831,"frames":249,"reached":true,"target":[418.478271484375,15.6999998092651,-310.173034667969]},{"actual":[412.556610107422,15.6908779144287,-311.486968994141],"contacts":[],"distance":0.100498840212822,"frames":70,"reached":true,"target":[412.637573242188,15.6999998092651,-311.546508789062]},{"actual":[413.018188476562,15.6908769607544,-313.070281982422],"contacts":[],"distance":0.131351232528687,"frames":23,"reached":true,"target":[413.026733398438,15.6999998092651,-313.201354980469]},{"actual":[399.271911621094,15.6908779144287,-316.351593017578],"contacts":[],"distance":0.137766197323799,"frames":164,"reached":true,"target":[399.3984375,15.6999998092651,-316.406097412109]}]}
+PRECINCT_QA PASS continuous player walk Concert Hall harbour promenade through northern foyer
+PRECINCT_QA PASS map migration preserves actual settled player Concert Hall harbour promenade through northern foyer
+PRECINCT_WALK {"discontinuities":0,"name":"Concert Hall harbour promenade through northern foyer","origin":[389.281829833984,15.6999998092651,-264.647583007812],"passed":true,"segments":[{"actual":[393.56787109375,15.6908779144287,-283.229766845703],"contacts":[],"distance":0.107309393584728,"frames":221,"reached":true,"target":[393.631103515625,15.6999998092651,-283.14306640625]},{"actual":[395.970825195312,15.6908779144287,-293.453216552734],"contacts":[],"distance":0.109472043812275,"frames":118,"reached":true,"target":[396.03466796875,15.6999998092651,-293.364288330078]},{"actual":[413.651428222656,15.6908779144287,-289.306610107422],"contacts":[],"distance":0.113588266074657,"frames":211,"reached":true,"target":[413.556701660156,15.6999998092651,-289.243927001953]},{"actual":[434.232177734375,15.6908779144287,-384.068054199219],"contacts":[],"distance":0.0887464880943298,"frames":1120,"reached":true,"target":[434.300750732422,15.6999998092651,-384.01171875]},{"actual":[433.230926513672,15.6909856796265,-385.855895996094],"contacts":[],"distance":0.062137745320797,"frames":21,"reached":true,"target":[433.183929443359,15.6999998092651,-385.815246582031]},{"actual":[435.756317138672,15.6909856796265,-397.109649658203],"contacts":[],"distance":0.116445198655128,"frames":131,"reached":true,"target":[435.816375732422,15.6999998092651,-397.009887695312]},{"actual":[419.177856445312,15.6909856796265,-400.839630126953],"contacts":[],"distance":0.109086312353611,"frames":197,"reached":true,"target":[419.267791748047,15.6999998092651,-400.9013671875]},{"actual":[416.469879150391,17.8909740447998,-388.665985107422],"contacts":[],"distance":0.0925061479210854,"frames":145,"reached":true,"target":[416.406402587891,17.8999996185303,-388.733276367188]},{"actual":[415.838409423828,17.8908767700195,-385.948120117188],"contacts":[],"distance":0.0941144526004791,"frames":29,"reached":true,"target":[415.765472412109,17.8999996185303,-386.007598876953]}]}
+PRECINCT_QA PASS continuous player walk Joan Sutherland Theatre entrance to front side aisle
+PRECINCT_QA PASS map migration preserves actual settled player Joan Sutherland Theatre entrance to front side aisle
+PRECINCT_WALK {"discontinuities":0,"name":"Joan Sutherland Theatre entrance to front side aisle","origin":[434.060424804688,15.6999998092651,-254.117736816406],"passed":true,"segments":[{"actual":[438.346405029297,15.6908779144287,-272.699737548828],"contacts":[],"distance":0.107172906398773,"frames":221,"reached":true,"target":[438.409698486328,15.6999998092651,-272.613250732422]},{"actual":[440.749389648438,15.6908779144287,-282.923217773438],"contacts":[],"distance":0.10934117436409,"frames":118,"reached":true,"target":[440.813262939453,15.6999998092651,-282.83447265625]},{"actual":[458.126556396484,15.6908779144287,-279.865112304688],"contacts":[],"distance":0.0799437537789345,"frames":205,"reached":true,"target":[458.077484130859,15.6999998092651,-279.802001953125]},{"actual":[464.305450439453,15.6908779144287,-306.641235351562],"contacts":[],"distance":0.0965168029069901,"frames":318,"reached":true,"target":[464.372497558594,15.6999998092651,-306.571807861328]},{"actual":[459.882690429688,15.6908779144287,-307.548767089844],"contacts":[],"distance":0.121514551341534,"frames":53,"reached":true,"target":[459.991973876953,15.6999998092651,-307.601898193359]},{"actual":[460.510803222656,15.7158784866333,-310.195404052734],"contacts":[],"distance":0.0986921936273575,"frames":33,"reached":true,"target":[460.587158203125,15.6999998092651,-310.132873535156]},{"actual":[448.830932617188,15.7158794403076,-312.814849853516],"contacts":[],"distance":0.099059671163559,"frames":139,"reached":true,"target":[448.90576171875,15.6999998092651,-312.879760742188]}]}
+PRECINCT_QA PASS continuous player walk Joan Sutherland Theatre northern harbour foyer
+PRECINCT_QA PASS map migration preserves actual settled player Joan Sutherland Theatre northern harbour foyer
+PRECINCT_WALK {"discontinuities":0,"name":"Joan Sutherland Theatre northern harbour foyer","origin":[434.060424804688,15.6999998092651,-254.117736816406],"passed":true,"segments":[{"actual":[438.346405029297,15.6908779144287,-272.699737548828],"contacts":[],"distance":0.107172906398773,"frames":221,"reached":true,"target":[438.409698486328,15.6999998092651,-272.613250732422]},{"actual":[440.749389648438,15.6908779144287,-282.923217773438],"contacts":[],"distance":0.10934117436409,"frames":118,"reached":true,"target":[440.813262939453,15.6999998092651,-282.83447265625]},{"actual":[458.126556396484,15.6908779144287,-279.865112304688],"contacts":[],"distance":0.0799437537789345,"frames":205,"reached":true,"target":[458.077484130859,15.6999998092651,-279.802001953125]},{"actual":[464.305450439453,15.6908779144287,-306.641235351562],"contacts":[],"distance":0.0965168029069901,"frames":318,"reached":true,"target":[464.372497558594,15.6999998092651,-306.571807861328]},{"actual":[473.175842285156,15.6908779144287,-348.721527099609],"contacts":[],"distance":0.0911675468087196,"frames":493,"reached":true,"target":[473.242156982422,15.6999998092651,-348.658966064453]},{"actual":[475.304565429688,15.690878868103,-362.100830078125],"contacts":[],"distance":0.0897792130708694,"frames":153,"reached":true,"target":[475.358978271484,15.6999998092651,-362.029418945312]},{"actual":[474.282684326172,15.6909856796265,-365.975891113281],"contacts":[],"distance":0.10714191198349,"frames":43,"reached":true,"target":[474.213256835938,15.6999998092651,-365.894287109375]},{"actual":[475.742279052734,15.6909856796265,-372.318389892578],"contacts":[],"distance":0.132135733962059,"frames":72,"reached":true,"target":[475.798522949219,15.6999998092651,-372.198822021484]},{"actual":[463.456939697266,15.6909856796265,-375.019073486328],"contacts":[],"distance":0.0994631201028824,"frames":146,"reached":true,"target":[463.533081054688,15.6999998092651,-375.083068847656]},{"actual":[461.429321289062,17.8915119171143,-365.816589355469],"contacts":[],"distance":0.0733268558979034,"frames":110,"reached":true,"target":[461.358428955078,17.8999996185303,-365.835327148438]},{"actual":[460.780456542969,17.8908767700195,-363.012054443359],"contacts":[],"distance":0.116165675222874,"frames":30,"reached":true,"target":[460.717498779297,17.8999996185303,-363.109680175781]}]}
+PRECINCT_QA PASS continuous player walk Tumbalong fountain public edge
+PRECINCT_QA PASS map migration preserves actual settled player Tumbalong fountain public edge
+PRECINCT_WALK {"discontinuities":0,"name":"Tumbalong fountain public edge","origin":[-802.0,4.5,1874.0],"passed":true,"segments":[{"actual":[-802.0,4.49087715148926,1846.88415527344],"contacts":[],"distance":0.1158447265625,"frames":314,"reached":true,"target":[-802.0,4.5,1847.0]},{"actual":[-802.0,4.49087715148926,1823.87451171875],"contacts":[],"distance":0.12548828125,"frames":262,"reached":true,"target":[-802.0,4.5,1824.0]}]}
+PRECINCT_QA PASS continuous player walk Darling Quarter playground west approach
+PRECINCT_QA PASS map migration preserves actual settled player Darling Quarter playground west approach
+PRECINCT_WALK {"discontinuities":0,"name":"Darling Quarter playground west approach","origin":[-857.299987792969,4.5,1630.0],"passed":true,"segments":[{"actual":[-858.763000488281,4.54587697982788,1642.12536621094],"contacts":[],"distance":0.130708634853363,"frames":142,"reached":true,"target":[-858.799987792969,4.5,1642.0]},{"actual":[-852.020690917969,4.54587697982788,1648.97509765625],"contacts":[],"distance":0.0323765464127064,"frames":109,"reached":true,"target":[-852.0,4.5,1649.0]},{"actual":[-844.213012695312,4.54587697982788,1660.07434082031],"contacts":[],"distance":0.0754690021276474,"frames":155,"reached":true,"target":[-844.200012207031,4.5,1660.0]}]}
+PRECINCT_QA PASS continuous player walk Wide slide rear steps and slope
+PRECINCT_QA PASS map migration preserves actual settled player Wide slide rear steps and slope
+PRECINCT_WALK {"discontinuities":0,"name":"Wide slide rear steps and slope","origin":[-841.165100097656,4.5,1637.73474121094],"passed":true,"segments":[{"actual":[-843.377563476562,7.15993547439575,1642.12390136719],"contacts":[],"distance":0.106748722493649,"frames":59,"reached":true,"target":[-843.473999023438,7.18000030517578,1642.16967773438]},{"actual":[-846.582580566406,4.54587697982788,1648.31689453125],"contacts":[],"distance":0.0822479724884033,"frames":78,"reached":true,"target":[-846.660278320312,4.5,1648.28991699219]}]}
+PRECINCT_QA PASS continuous player walk quay_wharf_2_entry_to_berth
+PRECINCT_QA PASS map migration preserves actual settled player quay_wharf_2_entry_to_berth
+PRECINCT_WALK {"discontinuities":0,"name":"quay_wharf_2_entry_to_berth","origin":[139.341934204102,4.5,137.993133544922],"passed":true,"segments":[{"actual":[139.813140869141,4.57087707519531,127.788055419922],"contacts":[],"distance":0.125365793704987,"frames":119,"reached":true,"target":[139.829055786133,4.5,127.912406921387]},{"actual":[140.859741210938,4.57087707519531,106.105484008789],"contacts":[],"distance":0.0963922217488289,"frames":247,"reached":true,"target":[140.878219604492,4.5,106.200088500977]},{"actual":[141.945083618164,4.57087707519531,83.6439437866211],"contacts":[],"distance":0.0711726993322372,"frames":256,"reached":true,"target":[141.96484375,4.5,83.7123184204102]}]}
+PRECINCT_QA PASS continuous player walk quay_wharf_3_entry_to_berth
+PRECINCT_QA PASS map migration preserves actual settled player quay_wharf_3_entry_to_berth
+PRECINCT_WALK {"discontinuities":0,"name":"quay_wharf_3_entry_to_berth","origin":[84.7516403198242,4.5,141.936004638672],"passed":true,"segments":[{"actual":[86.232780456543,4.57087707519531,130.336456298828],"contacts":[],"distance":0.138713836669922,"frames":136,"reached":true,"target":[86.2702941894531,4.5,130.470001220703]},{"actual":[89.5012054443359,4.57087707519531,105.646087646484],"contacts":[],"distance":0.134038984775543,"frames":284,"reached":true,"target":[89.541259765625,4.5,105.774002075195]},{"actual":[92.8850555419922,4.57087707519531,80.0974578857422],"contacts":[],"distance":0.107911646366119,"frames":294,"reached":true,"target":[92.9290390014648,4.5,80.1959991455078]}]}
+PRECINCT_QA PASS continuous player walk quay_wharf_5_entry_to_berth
+PRECINCT_QA PASS map migration preserves actual settled player quay_wharf_5_entry_to_berth
+PRECINCT_WALK {"discontinuities":0,"name":"quay_wharf_5_entry_to_berth","origin":[-7.82577991485596,4.5,132.210006713867],"passed":true,"segments":[{"actual":[-6.33369159698486,4.57087707519531,120.437812805176],"contacts":[],"distance":0.142045095562935,"frames":138,"reached":true,"target":[-6.29684972763062,4.5,120.574996948242]},{"actual":[-3.04525470733643,4.57087707519531,95.3998184204102],"contacts":[],"distance":0.122424043715,"frames":288,"reached":true,"target":[-3.00376987457275,4.5,95.5149993896484]},{"actual":[0.357659518718719,4.57087707519531,69.5033111572266],"contacts":[],"distance":0.075099840760231,"frames":298,"reached":true,"target":[0.406920433044434,4.5,69.5599975585938]}]}
+PRECINCT_QA PASS continuous player walk bank_of_china_sussex_colonnade
+PRECINCT_QA PASS map migration preserves actual settled player bank_of_china_sussex_colonnade
+PRECINCT_WALK {"discontinuities":0,"name":"bank_of_china_sussex_colonnade","origin":[-625.149780273438,4.53999996185303,1007.85125732422],"passed":true,"segments":[{"actual":[-621.876403808594,4.52587795257568,1007.58502197266],"contacts":[],"distance":0.0918151587247849,"frames":39,"reached":true,"target":[-621.963439941406,4.53999996185303,1007.55578613281]},{"actual":[-620.517333984375,4.52587795257568,1023.56292724609],"contacts":[],"distance":0.081665612757206,"frames":186,"reached":true,"target":[-620.486206054688,4.53999996185303,1023.48742675781]},{"actual":[-618.671447753906,4.52587795257568,1043.51293945312],"contacts":[],"distance":0.115294359624386,"frames":228,"reached":true,"target":[-618.639709472656,4.53999996185303,1043.40209960938]},{"actual":[-618.585876464844,4.52587795257568,1044.50048828125],"contacts":[],"distance":0.109647497534752,"frames":8,"reached":true,"target":[-618.54736328125,4.53999996185303,1044.39782714844]},{"actual":[-621.607482910156,4.49087715148926,1044.6640625],"contacts":[],"distance":0.0737238228321075,"frames":36,"reached":true,"target":[-621.534545898438,4.53999996185303,1044.6748046875]}]}
+PRECINCT_QA PASS continuous player walk w_sydney_public_arrival
+PRECINCT_QA PASS map migration preserves actual settled player w_sydney_public_arrival
+PRECINCT_WALK {"discontinuities":0,"name":"w_sydney_public_arrival","origin":[-769.942993164062,4.53999996185303,1452.21630859375],"passed":true,"segments":[{"actual":[-766.128967285156,4.52587699890137,1459.26513671875],"contacts":[],"distance":0.0827389135956764,"frames":93,"reached":true,"target":[-766.064514160156,4.53999996185303,1459.21325683594]},{"actual":[-761.958679199219,4.52587699890137,1466.77880859375],"contacts":[],"distance":0.0771848633885384,"frames":97,"reached":true,"target":[-761.895141601562,4.53999996185303,1466.73498535156]}]}
+PRECINCT_QA PASS continuous player walk icc_convention
+PRECINCT_QA PASS map migration preserves actual settled player icc_convention
+PRECINCT_WALK {"discontinuities":0,"name":"icc_convention","origin":[-978.174987792969,4.5,1491.89514160156],"passed":true,"segments":[{"actual":[-995.916381835938,4.52587699890137,1495.51428222656],"contacts":[],"distance":0.131008967757225,"frames":210,"reached":true,"target":[-995.796508789062,4.5,1495.56713867188]},{"actual":[-1030.78576660156,4.52587699890137,1494.68103027344],"contacts":[],"distance":0.0728179886937141,"frames":399,"reached":true,"target":[-1030.71362304688,4.5,1494.67114257812]},{"actual":[-1044.50915527344,4.52587699890137,1497.46752929688],"contacts":[],"distance":0.107798524200916,"frames":158,"reached":true,"target":[-1044.41931152344,4.5,1497.52709960938]},{"actual":[-1044.98852539062,4.53804540634155,1494.47436523438],"contacts":[],"distance":0.123357713222504,"frames":36,"reached":true,"target":[-1045.03125,4.5,1494.59008789062]},{"actual":[-1048.64196777344,10.0408964157104,1476.91320800781],"contacts":[],"distance":0.0825322642922401,"frames":204,"reached":true,"target":[-1048.703125,10.0500001907349,1476.96862792969]},{"actual":[-1049.25732421875,10.0409879684448,1473.92272949219],"contacts":[],"distance":0.123305514454842,"frames":32,"reached":true,"target":[-1049.31518554688,10.0500001907349,1474.03161621094]}]}
+PRECINCT_QA PASS continuous player walk icc_exhibition
+PRECINCT_QA PASS map migration preserves actual settled player icc_exhibition
+PRECINCT_WALK {"discontinuities":0,"name":"icc_exhibition","origin":[-925.10546875,4.5,1635.6123046875],"passed":true,"segments":[{"actual":[-934.964111328125,4.52587699890137,1637.59008789062],"contacts":[],"distance":0.0927847772836685,"frames":117,"reached":true,"target":[-934.895202636719,4.5,1637.65222167969]},{"actual":[-936.061767578125,4.52587699890137,1631.70739746094],"contacts":[],"distance":0.0912618488073349,"frames":70,"reached":true,"target":[-936.119201660156,4.5,1631.7783203125]},{"actual":[-944.005554199219,4.52587699890137,1633.33984375],"contacts":[],"distance":0.0890977829694748,"frames":95,"reached":true,"target":[-943.950988769531,4.5,1633.41027832031]},{"actual":[-943.207092285156,4.52587699890137,1637.3818359375],"contacts":[],"distance":0.0910734757781029,"frames":49,"reached":true,"target":[-943.135009765625,4.5,1637.326171875]},{"actual":[-937.682678222656,10.9908790588379,1663.85412597656],"contacts":[],"distance":0.110547050833702,"frames":309,"reached":true,"target":[-937.627136230469,11.0,1663.75854492188]},{"actual":[-937.083374023438,10.9908790588379,1666.75964355469],"contacts":[],"distance":0.0936969742178917,"frames":31,"reached":true,"target":[-937.01513671875,11.0,1666.69543457031]},{"actual":[-946.870544433594,10.9908790588379,1668.67407226562],"contacts":[],"distance":0.0897785648703575,"frames":116,"reached":true,"target":[-946.804931640625,11.0,1668.7353515625]},{"actual":[-941.866821289062,10.9908790588379,1692.81591796875],"contacts":[],"distance":0.11272182315588,"frames":286,"reached":true,"target":[-941.807067871094,11.0,1692.72033691406]},{"actual":[-971.259582519531,10.9908790588379,1698.7802734375],"contacts":[],"distance":0.102561309933662,"frames":347,"reached":true,"target":[-971.17626953125,11.0,1698.84008789062]},{"actual":[-986.892761230469,10.9908790588379,1702.03527832031],"contacts":[],"distance":0.0867006927728653,"frames":181,"reached":true,"target":[-986.839904785156,11.0,1702.10400390625]}]}
+PRECINCT_QA PASS continuous player walk icc_theatre
+PRECINCT_QA PASS map migration preserves actual settled player icc_theatre
+PRECINCT_WALK {"discontinuities":0,"name":"icc_theatre","origin":[-882.357604980469,4.5,1821.99353027344],"passed":true,"segments":[{"actual":[-878.54150390625,4.52587699890137,1840.68078613281],"contacts":[],"distance":0.105306431651115,"frames":221,"reached":true,"target":[-878.481689453125,4.5,1840.59411621094]},{"actual":[-940.216674804688,4.52587699890137,1853.38037109375],"contacts":[],"distance":0.0884853973984718,"frames":728,"reached":true,"target":[-940.157104492188,4.5,1853.44580078125]},{"actual":[-936.138061523438,4.52587699890137,1873.11682128906],"contacts":[],"distance":0.109931230545044,"frames":234,"reached":true,"target":[-936.077209472656,4.5,1873.02526855469]},{"actual":[-928.120239257812,4.52587699890137,1871.44775390625],"contacts":[],"distance":0.136509671807289,"frames":96,"reached":true,"target":[-928.245422363281,4.5,1871.39331054688]},{"actual":[-925.451538085938,4.52587699890137,1885.16040039062],"contacts":[],"distance":0.087310679256916,"frames":162,"reached":true,"target":[-925.389465332031,4.5,1885.09899902344]},{"actual":[-928.602416992188,4.52587699890137,1869.31604003906],"contacts":[],"distance":0.129695624113083,"frames":194,"reached":true,"target":[-928.653381347656,4.5,1869.43530273438]},{"actual":[-939.505187988281,4.52587699890137,1871.61572265625],"contacts":[],"distance":0.104619406163692,"frames":130,"reached":true,"target":[-939.422119140625,4.5,1871.67932128906]},{"actual":[-938.095397949219,6.01451015472412,1878.42236328125],"contacts":[],"distance":0.07977444678545,"frames":82,"reached":true,"target":[-938.024780273438,6.02400016784668,1878.38525390625]},{"actual":[-936.219360351562,6.01487731933594,1887.43237304688],"contacts":[],"distance":0.108380980789661,"frames":103,"reached":true,"target":[-936.158203125,6.02400016784668,1887.34289550781]}]}
+PRECINCT_QA PASS continuous player walk icc_theatre_glazed_foyer
+PRECINCT_QA PASS map migration preserves actual settled player icc_theatre_glazed_foyer
+PRECINCT_WALK {"discontinuities":0,"name":"icc_theatre_glazed_foyer","origin":[-835.323791503906,4.5,1866.33142089844],"passed":true,"segments":[{"actual":[-853.065185546875,4.52587699890137,1869.95043945312],"contacts":[],"distance":0.130953133106232,"frames":210,"reached":true,"target":[-852.945373535156,4.5,1870.00329589844]},{"actual":[-859.207702636719,4.52587699890137,1839.58081054688],"contacts":[],"distance":0.0964582040905952,"frames":358,"reached":true,"target":[-859.269165039062,4.5,1839.65515136719]},{"actual":[-874.026062011719,4.52587699890137,1842.64953613281],"contacts":[],"distance":0.0975671708583832,"frames":176,"reached":true,"target":[-873.953796386719,4.5,1842.71508789062]},{"actual":[-878.544250488281,4.52587699890137,1840.66345214844],"contacts":[],"distance":0.0933881998062134,"frames":54,"reached":true,"target":[-878.481689453125,4.5,1840.59411621094]}]}
+PRECINCT_QA PASS continuous player walk westpac_public_colonnade
+PRECINCT_QA PASS map migration preserves actual settled player westpac_public_colonnade
+PRECINCT_WALK {"discontinuities":0,"name":"westpac_public_colonnade","origin":[-637.576904296875,4.5,674.605773925781],"passed":true,"segments":[{"actual":[-635.598754882812,4.49087715148926,705.730224609375],"contacts":[],"distance":0.126354351639748,"frames":361,"reached":true,"target":[-635.576904296875,4.5,705.605773925781]}]}
+PRECINCT_QA PASS continuous player walk cba_south_park_canopy
+PRECINCT_QA PASS map migration preserves actual settled player cba_south_park_canopy
+PRECINCT_WALK {"discontinuities":0,"name":"cba_south_park_canopy","origin":[-724.582214355469,4.5,1745.24475097656],"passed":true,"segments":[{"actual":[-723.614440917969,4.49087715148926,1736.56091308594],"contacts":[],"distance":0.0765982493758202,"frames":102,"reached":true,"target":[-723.5732421875,4.5,1736.62548828125]},{"actual":[-723.336486816406,4.49087715148926,1729.58996582031],"contacts":[],"distance":0.064607635140419,"frames":77,"reached":true,"target":[-723.319213867188,4.5,1729.65222167969]},{"actual":[-723.610290527344,4.49087715148926,1722.70190429688],"contacts":[],"distance":0.0932375118136406,"frames":76,"reached":true,"target":[-723.625915527344,4.5,1722.79382324219]},{"actual":[-724.846862792969,4.49087715148926,1715.31909179688],"contacts":[],"distance":0.0922188684344292,"frames":83,"reached":true,"target":[-724.903686523438,4.5,1715.39172363281]},{"actual":[-726.473022460938,4.49087715148926,1708.29016113281],"contacts":[],"distance":0.088854193687439,"frames":80,"reached":true,"target":[-726.546020507812,4.5,1708.3408203125]},{"actual":[-728.900817871094,4.49087715148926,1701.33337402344],"contacts":[],"distance":0.0943381637334824,"frames":82,"reached":true,"target":[-728.984802246094,4.5,1701.37634277344]},{"actual":[-732.076965332031,4.49087715148926,1694.61401367188],"contacts":[],"distance":0.0866920351982117,"frames":83,"reached":true,"target":[-732.154663085938,4.5,1694.65246582031]},{"actual":[-736.418884277344,4.49087715148926,1687.5986328125],"contacts":[],"distance":0.0656571462750435,"frames":93,"reached":true,"target":[-736.478576660156,4.5,1687.6259765625]}]}
+PRECINCT_QA PASS continuous player walk cba_north_park_canopy
+PRECINCT_QA PASS map migration preserves actual settled player cba_north_park_canopy
+PRECINCT_WALK {"discontinuities":0,"name":"cba_north_park_canopy","origin":[-820.030822753906,4.5,1607.87292480469],"passed":true,"segments":[{"actual":[-746.930786132812,4.49087715148926,1674.77087402344],"contacts":[],"distance":0.0166505202651024,"frames":1144,"reached":true,"target":[-746.933166503906,4.5,1674.78735351562]}]}
+PRECINCT_QA PASS continuous player walk manowar_north_jetty
+PRECINCT_QA PASS map migration preserves actual settled player manowar_north_jetty
+PRECINCT_WALK {"discontinuities":0,"name":"manowar_north_jetty","origin":[473.920013427734,4.57999992370605,-190.378997802734],"passed":true,"segments":[{"actual":[479.65869140625,4.57087707519531,-195.771957397461],"contacts":[],"distance":0.020298920571804,"frames":91,"reached":true,"target":[479.639007568359,4.57999992370605,-195.766998291016]},{"actual":[490.07861328125,4.57087707519531,-216.917434692383],"contacts":[],"distance":0.0870005339384079,"frames":271,"reached":true,"target":[490.153991699219,4.57999992370605,-216.873992919922]},{"actual":[489.167999267578,4.57087707519531,-223.057571411133],"contacts":[],"distance":0.106519185006618,"frames":69,"reached":true,"target":[489.118988037109,4.57999992370605,-222.962997436523]},{"actual":[490.131011962891,4.57098579406738,-230.130004882812],"contacts":[],"distance":0.0826183632016182,"frames":79,"reached":true,"target":[490.182006835938,4.57999992370605,-230.065002441406]},{"actual":[495.754180908203,2.63311147689819,-237.995651245117],"contacts":[],"distance":0.0484083257615566,"frames":109,"reached":true,"target":[495.799987792969,2.54999995231628,-237.979995727539]},{"actual":[499.063995361328,2.54087734222412,-242.735870361328],"contacts":[],"distance":0.0508298650383949,"frames":65,"reached":true,"target":[499.100006103516,2.54999995231628,-242.699996948242]}]}
+PRECINCT_QA PASS continuous player walk manowar_east_jetty
+PRECINCT_QA PASS map migration preserves actual settled player manowar_east_jetty
+PRECINCT_WALK {"discontinuities":0,"name":"manowar_east_jetty","origin":[473.920013427734,4.57999992370605,-190.378997802734],"passed":true,"segments":[{"actual":[479.65869140625,4.57087707519531,-195.771957397461],"contacts":[],"distance":0.020298920571804,"frames":91,"reached":true,"target":[479.639007568359,4.57999992370605,-195.766998291016]},{"actual":[490.07861328125,4.57087707519531,-216.917434692383],"contacts":[],"distance":0.0870005339384079,"frames":271,"reached":true,"target":[490.153991699219,4.57999992370605,-216.873992919922]},{"actual":[493.471160888672,4.57089710235596,-215.991806030273],"contacts":[],"distance":0.0993048772215843,"frames":42,"reached":true,"target":[493.407012939453,4.57999992370605,-215.916000366211]},{"actual":[503.453399658203,2.56961607933044,-213.05241394043],"contacts":[],"distance":0.122151635587215,"frames":117,"reached":true,"target":[503.348999023438,2.54999995231628,-212.988998413086]},{"actual":[507.620208740234,2.54087734222412,-211.858444213867],"contacts":[],"distance":0.133661925792694,"frames":47,"reached":true,"target":[507.5,2.54999995231628,-211.800003051758]}]}
+PRECINCT_QA PASS native capture opera-harbour
+PRECINCT_QA PASS native capture opera-monumental-steps
+PRECINCT_QA PASS native capture opera-roof-plan
+PRECINCT_QA PASS native capture opera-north-facade
+PRECINCT_QA PASS native capture opera-north-curtain-detail
+PRECINCT_QA PASS native capture opera-louvre-detail
+PRECINCT_QA PASS native capture opera-box-office
+PRECINCT_QA PASS native capture opera-entry-stairs
+PRECINCT_QA PASS native capture opera-concert-hall
+PRECINCT_QA PASS native capture opera-concert-stage
+PRECINCT_QA PASS native capture opera-concert-organ
+PRECINCT_QA PASS native capture opera-joan-sutherland
+PRECINCT_QA PASS native capture opera-concert-northern-foyer
+PRECINCT_QA PASS native capture opera-concert-curved-stairs
+PRECINCT_QA PASS native capture opera-jst-northern-foyer
+PRECINCT_QA PASS native capture darling_waterplay
+PRECINCT_QA PASS native capture darling_octanet
+PRECINCT_QA PASS native capture darling_wide_slide
+PRECINCT_QA PASS native capture tumbalong_fountains
+PRECINCT_QA PASS native capture darling_playground_plan
+PRECINCT_QA PASS native capture darling_steam_mill_new
+PRECINCT_QA PASS native capture darling_puppuccino_lillianna
+PRECINCT_QA PASS native capture darling_tumbalong_restaurants
+PRECINCT_QA PASS native capture darling_little_pier_shops
+PRECINCT_QA PASS native capture darling_harbour_street_shops
+PRECINCT_QA PASS native capture darling_little_hay_shops
+PRECINCT_QA PASS native capture darling_bendigo_detail
+PRECINCT_QA PASS native capture darling_tattoo_detail
+PRECINCT_QA PASS native capture darling_bubu_detail
+PRECINCT_QA PASS native capture darling_business_bengongs_tea_photo_detail
+PRECINCT_QA PASS native capture darling_business_haven_specialty_coffee_photo_detail
+PRECINCT_QA PASS native capture darling_business_pancakes_on_the_rocks_photo_detail
+PRECINCT_QA PASS native capture darling_business_sushi_sei_photo_detail
+PRECINCT_QA PASS native capture quay_gate_2
+PRECINCT_QA PASS native capture quay_wharf_3
+PRECINCT_QA PASS native capture quay_wharves
+PRECINCT_QA PASS native capture quay_station
+PRECINCT_QA PASS native capture sydney-tower-whole
+PRECINCT_QA PASS native capture sydney-tower-skywalk
+PRECINCT_QA PASS native capture sydney-tower-podium
+PRECINCT_QA PASS native capture w-sydney-harbour
+PRECINCT_QA PASS native capture w-sydney-ribbon-end
+PRECINCT_QA PASS native capture w-sydney-arrival
+PRECINCT_QA PASS native capture tower-one-whole
+PRECINCT_QA PASS native capture tower-one-fins
+PRECINCT_QA PASS native capture bank-of-china-sussex
+PRECINCT_QA PASS native capture bank-of-china-colonnade
+PRECINCT_QA PASS native capture icc-crystal-facade
+PRECINCT_QA PASS native capture icc-recessed-meeting-pods
+PRECINCT_QA PASS native capture icc-theatre-glazed-mouth
+PRECINCT_QA PASS native capture icc-theatre-red-foyer
+PRECINCT_QA PASS native capture quay-qqt-rebated-frames
+PRECINCT_QA PASS native capture quay-qqt-stone-podium
+PRECINCT_QA PASS native capture quay-salesforce-tree-shades
+PRECINCT_QA PASS native capture quay-salesforce-glazing
+PRECINCT_QA PASS native capture westpac_public_colonnade
+PRECINCT_QA PASS native capture westpac_podium_glazing
+PRECINCT_QA PASS native capture cba_south_canopy
+PRECINCT_QA PASS native capture cba_south_timber_facade
+PRECINCT_QA PASS native capture cba_north_canopy
+PRECINCT_QA PASS native capture cba_north_timber_facade
+PRECINCT_QA PASS native capture manowar-overview
+PRECINCT_QA PASS native capture manowar-gangway
+PRECINCT_QA_COMPLETE 188 passed=true

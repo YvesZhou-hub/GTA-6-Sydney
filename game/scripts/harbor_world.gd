@@ -100,7 +100,7 @@ func _register_landmark_geography() -> void:
 	# Map icons describe the landmark itself; navigation uses a separately checked
 	# public approach. Never infer an entrance by dropping the player at a centroid.
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/landmark_geography.json"))
-	for group in ["sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses"]:
+	for group in ["sydney_tower_landmark","circular_quay_detail","darling_square_detail","opera_interiors","darling_public_facilities","darling_precinct_businesses","manowar_detail"]:
 		for record:Dictionary in get_meta(group,[]):
 			if not record.has("map_position") or not record.has("arrival"):continue
 			var entry:=record.duplicate(true)
@@ -550,6 +550,7 @@ func _local_beam(parent: Node3D, a: Vector3, b: Vector3, width: float, key: Stri
 
 func _build_quay() -> void:
 	preload("res://scripts/circular_quay_detail.gd").build(self)
+	preload("res://scripts/manowar_detail.gd").build(self)
 	# Open moorings at Walsh Bay, including a garage sized slip and low pontoons.
 	for x in [-660,-605,-545,-485]:
 		_structure_box("marina/pontoon/%s"%x,Vector3(x,2.1,-415),Vector3(7,0.9,114),"wood",600000)

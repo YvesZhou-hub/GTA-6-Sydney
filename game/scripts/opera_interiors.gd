@@ -34,9 +34,9 @@ static func walk_routes() -> Array[Dictionary]:
 	return [
 		_route("Covered concourse to ticket foyer and upper south foyer",[Vector3(-62,0,53),Vector3(-60,0,53),Vector3(-40,BOX_OFFICE,53),Vector3(-35,BOX_OFFICE,59),Vector3(-7,BOX_OFFICE,59),Vector3(-7,UPPER,37),Vector3(-7,UPPER,34)]),
 		_route("Concert Hall south entrance to front stalls",[Vector3(-24,UPPER,64),Vector3(-24,UPPER,45),Vector3(-24,UPPER,34.5),Vector3(-6,UPPER,34.5),Vector3(-6,UPPER,13),Vector3(-12,UPPER,13),Vector3(-12,UPPER,11.3),Vector3(-26,UPPER,11.3)]),
-		_route("Concert Hall harbour promenade through northern foyer",[Vector3(-24,UPPER,64),Vector3(-24,UPPER,45),Vector3(-24,UPPER,34.5),Vector3(-6,UPPER,34.5),Vector3(-7.5,UPPER,-62.5),Vector3(-9,UPPER,-64),Vector3(-9,UPPER,-75.5),Vector3(-26,UPPER,-75.5),Vector3(-26,UPPER+2.2,-63)]),
+		_route("Concert Hall harbour promenade through northern foyer",[Vector3(-24,UPPER,64),Vector3(-24,UPPER,45),Vector3(-24,UPPER,34.5),Vector3(-6,UPPER,34.5),Vector3(-7.5,UPPER,-62.5),Vector3(-9,UPPER,-64),Vector3(-9,UPPER,-75.5),Vector3(-26,UPPER,-75.5),Vector3(-26,UPPER+2.2,-63),Vector3(-26,UPPER+2.2,-60.2)]),
 		_route("Joan Sutherland Theatre entrance to front side aisle",[Vector3(22,UPPER,64),Vector3(22,UPPER,45),Vector3(22,UPPER,34.5),Vector3(39.5,UPPER,33.5),Vector3(39.5,UPPER,6),Vector3(35,UPPER,6),Vector3(35,UPPER,3.4),Vector3(23,UPPER,3.4)]),
-		_route("Joan Sutherland Theatre northern harbour foyer",[Vector3(22,UPPER,64),Vector3(22,UPPER,45),Vector3(22,UPPER,34.5),Vector3(39.5,UPPER,33.5),Vector3(39.5,UPPER,6),Vector3(38.5,UPPER,-37),Vector3(37.5,UPPER,-50.5),Vector3(35.5,UPPER,-54),Vector3(35.6,UPPER,-60.5),Vector3(23,UPPER,-60.5),Vector3(23,UPPER+2.2,-51)])]
+		_route("Joan Sutherland Theatre northern harbour foyer",[Vector3(22,UPPER,64),Vector3(22,UPPER,45),Vector3(22,UPPER,34.5),Vector3(39.5,UPPER,33.5),Vector3(39.5,UPPER,6),Vector3(38.5,UPPER,-37),Vector3(37.5,UPPER,-50.5),Vector3(35.5,UPPER,-54),Vector3(35.6,UPPER,-60.5),Vector3(23,UPPER,-60.5),Vector3(23,UPPER+2.2,-51),Vector3(23,UPPER+2.2,-48.2)])]
 static func capture_views() -> Array:
 	var views:Array=[
 		["opera-box-office",Vector3(-33,7.25,58),Vector3(14,7.0,44)],
@@ -45,8 +45,9 @@ static func capture_views() -> Array:
 		["opera-concert-stage",Vector3(-26,14.0,19),Vector3(-26,18,-20)],
 		["opera-concert-organ",Vector3(-35,14,3),Vector3(-26,20,27)],
 		["opera-joan-sutherland",Vector3(23,22,-34),Vector3(23,14,12)],
-		["opera-concert-northern-foyer",Vector3(-37,13.0,-58),Vector3(-21,14,-74)],
-		["opera-jst-northern-foyer",Vector3(12,13.0,-47),Vector3(29,13.5,-58)]]
+		["opera-concert-northern-foyer",Vector3(-36,15.15,-61.4),Vector3(-22,17,-74)],
+		["opera-concert-curved-stairs",Vector3(-26,12.9,-76.2),Vector3(-26,14.4,-61.5)],
+		["opera-jst-northern-foyer",Vector3(13,15.15,-49.1),Vector3(26,16,-60)]]
 	for view:Array in views:view[1]=point(view[1]);view[2]=point(view[2])
 	return views
 
@@ -156,7 +157,7 @@ static func _box_office(w:Node3D,b:Dictionary) -> void:
 	for x in range(-38,47,4):
 		# Folded ceiling ribs terminate at the actual upper-stair slab opening.
 		var rib_cut:bool=x> -10.81 and x< -3.19
-		_detail(b,"concrete",Vector3(x,10.18,60.75 if rib_cut else 50.0),Vector3(.62,.85,2.5 if rib_cut else 24.0))
+		_folded_foyer_beam(b,float(x),59.5 if rib_cut else 38.0,62.0)
 		var light_cut:bool=x+1.7> -10.64 and x+1.7< -3.36
 		_detail(b,"light",Vector3(x+1.7,10.59,60.25 if light_cut else 50.0),Vector3(.28,.07,1.5 if light_cut else 22.0))
 	for x in [-31,10,33]:_light(w,Vector3(x,8.8,52),20,.9)
@@ -164,6 +165,17 @@ static func _box_office(w:Node3D,b:Dictionary) -> void:
 	_label(w,"CONCERT HALL   /   JOAN SUTHERLAND THEATRE  ↑",Vector3(-7,UPPER+2.5,35.5),.34)
 	for x in [-29,3,40]:
 		_box(w,"boxoffice/bench_%s"%x,Vector3(x,BOX_OFFICE+.4,60.7),Vector3(5,.8,.9),"wooddark")
+	w.set_meta("opera_ticket_folded_beams",22)
+
+static func _folded_foyer_beam(b:Dictionary,x:float,z0:float,z1:float) -> void:
+	# CMP 4.227-4.237: exposed folded concrete, broad sloping cheeks, a narrow
+	# underside and the lighting trough between beams. Cross-section is inferred.
+	var section:=PackedVector2Array([Vector2(-1.18,10.98),Vector2(-1.18,10.71),Vector2(-.28,9.76),Vector2(.28,9.76),Vector2(1.18,10.71),Vector2(1.18,10.98)])
+	var mesh:=Geo.profile_solid(section,(z1-z0)*.5)
+	_st(b,"concrete").append_from(mesh,0,Transform3D(Basis.IDENTITY,Vector3(x,0,(z0+z1)*.5)))
+	# Construction joints and slim service strips sit in the actual recessed soffit.
+	for z in range(ceili(z0/4.0)*4,floori(z1),4):
+		_detail(b,"bronze",Vector3(x,9.756,z),Vector3(.53,.008,.018))
 
 static func _chair(b:Dictionary,p:Vector3,yaw:float,seat:String) -> void:
 	_seat_count+=1
@@ -418,16 +430,80 @@ static func _foyers(w:Node3D,b:Dictionary) -> void:
 		var name:="concert_foyer" if cx<0 else "jst_foyer"
 		# Tiered broad carpet stairs and lower granite landing face the harbour glazing.
 		_box(w,name+"/landing",Vector3(cx,UPPER-.12,(south+north)*.5),Vector3(half*2,.24,south-north),"stone")
-		_stairs(w,b,name+"/broad_stairs",Vector3(cx,UPPER,north+2),Vector3(cx,UPPER+2.2,south-4),half*1.55,carpet)
+		_curved_foyer_stairs(w,cx,north,south,half*.775,name,carpet)
+		# The upper stair landing ends at a folded timber backdrop, leaving both
+		# outer promenade/foyer passages open. No copyrighted mural is substituted.
+		var screen:=_box(w,name+"/upper_screen",Vector3(cx,UPPER+4.2,south-.40),Vector3(half*1.55,4.0,.20),"wooddark")
+		var folds:Dictionary={}
+		for i in 58:
+			var x:float=cx+lerpf(-half*.775,half*.775,(i+.5)/58.0)
+			var angle:float=.38 if i%2==0 else -.38
+			_detail(folds,"brushbox",Vector3(x,UPPER+4.2,south-.63),Vector3(half*1.55/58+.035,4.0,.15),Basis(Vector3.UP,angle))
+		_flush(w,screen,folds)
 		for side in [-1,1]:
 			_box(w,name+"/lounge_%s"%side,Vector3(cx+side*(half-1.3),UPPER+.35,south-2),Vector3(2.2,.7,2.0),carpet)
 		for x in [-half*.7,half*.7]:
 			_box(w,name+"/bar_%s"%x,Vector3(cx+x,UPPER+.50,north+.5),Vector3(3,1,.75),"wooddark")
 			_detail(b,"birch",Vector3(cx+x,UPPER+1.04,north+.5),Vector3(3.2,.12,.90))
 		for z in [south-1,north+1]:_light(w,Vector3(cx,UPPER+5,z),19,.85)
-		_label(w,"HARBOUR FOYER",Vector3(cx,UPPER+3,south-.3),.36,PI)
 	# Wayfinding and furnishings in the two southern main foyers.
 	for cx in [-24.0,22.0]:
 		for side in [-1,1]:
 			_box(w,"south_foyer/seat_%s_%s"%[cx,side],Vector3(cx+side*8,UPPER+.38,53),Vector3(4,.76,1),"wooddark")
 		_light(w,Vector3(cx,UPPER+4.5,48),20,1.0)
+	w.set_meta("opera_northern_foyer_detail",{"curved_stairs":2,"upper_landing_y":UPPER+2.2,"mullion_reference":"SOH Weddings Event Kit December 2025, printed pages 9-12","dimensions":"photo-inferred; public two-level route, not every real foyer level"})
+
+static func _foyer_stair_p(cx:float,half:float,north:float,south:float,u:float,t:float) -> Vector3:
+	return Vector3(cx+half*u,UPPER+2.2*t,lerpf(north+2,south-4,t)+1.2*u*u)
+
+static func _quad(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3,d:Vector3,n:Vector3) -> void:
+	_tri(st,a,b,c,n);_tri(st,a,c,d,n)
+
+static func _curved_foyer_stairs(w:Node3D,cx:float,north:float,south:float,half:float,name:String,carpet:String) -> void:
+	# Photos show sweeping carpet nosings, not straight rectangular flights.
+	# Keep the centre-line endpoints of the verified circulation route unchanged.
+	var ramp:=SurfaceTool.new();ramp.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var visible:=SurfaceTool.new();visible.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var treads:=14;var slices:=24;var low:=UPPER-.12
+	var landing:=PackedVector2Array()
+	for slice in slices:
+		var u0:=float(slice)/slices*2-1;var u1:=float(slice+1)/slices*2-1
+		var a:=_foyer_stair_p(cx,half,north,south,u0,0);var b:=_foyer_stair_p(cx,half,north,south,u1,0)
+		var c:=_foyer_stair_p(cx,half,north,south,u1,1);var d:=_foyer_stair_p(cx,half,north,south,u0,1)
+		var la:=Vector3(a.x,low,a.z);var lb:=Vector3(b.x,low,b.z);var lc:=Vector3(c.x,low,c.z);var ld:=Vector3(d.x,low,d.z)
+		_quad(ramp,a,b,c,d,Vector3.UP)
+		_quad(ramp,la,ld,lc,lb,Vector3.DOWN)
+		_quad(ramp,la,lb,b,a,Vector3.FORWARD)
+		_quad(ramp,ld,d,c,lc,Vector3.BACK)
+		if slice==0:_quad(ramp,la,a,d,ld,Vector3.LEFT)
+		if slice==slices-1:_quad(ramp,lb,lc,c,b,Vector3.RIGHT)
+		landing.append(Vector2(d.x,d.z))
+		if slice==slices-1:landing.append(Vector2(c.x,c.z))
+		for step in treads:
+			var t0:=float(step)/treads;var t1:=float(step+1)/treads
+			var p:=_foyer_stair_p(cx,half,north,south,u0,t0);var q:=_foyer_stair_p(cx,half,north,south,u1,t0)
+			var r:=_foyer_stair_p(cx,half,north,south,u1,t1);var s:=_foyer_stair_p(cx,half,north,south,u0,t1)
+			var vp:=Vector3(p.x,s.y,p.z);var vq:=Vector3(q.x,r.y,q.z)
+			_quad(visible,vp,vq,r,s,Vector3.UP)
+			_quad(visible,p,q,vq,vp,Vector3.FORWARD)
+			if slice==0:_quad(visible,Vector3(p.x,low,p.z),vp,s,Vector3(s.x,low,s.z),Vector3.LEFT)
+			if slice==slices-1:_quad(visible,Vector3(q.x,low,q.z),Vector3(r.x,low,r.z),r,vq,Vector3.RIGHT)
+		_quad(visible,la,ld,lc,lb,Vector3.DOWN)
+		_quad(visible,la,lb,b,a,Vector3.FORWARD)
+		_quad(visible,ld,d,c,lc,Vector3.BACK)
+	var body:Node3D=w._structure_mesh("opera/interior/"+name+"/broad_stairs",ramp.commit(),CENTER,"opi_"+carpet,180000,basis())
+	body.get_child(0).mesh=visible.commit()
+	body.set_meta("curved_carpet_treads",treads)
+	landing.append(Vector2(cx+half,south-.65));landing.append(Vector2(cx-half,south-.65))
+	_slab(w,name+"/upper_landing",landing,UPPER+1.94,UPPER+2.2,"stone")
+	var fittings:Dictionary={}
+	for side in [-1,1]:
+		var u:=float(side)*.97
+		for i in 12:
+			var a:=_foyer_stair_p(cx,half,north,south,u,float(i)/12)+Vector3.UP*.92
+			var b:=_foyer_stair_p(cx,half,north,south,u,float(i+1)/12)+Vector3.UP*.92
+			_beam(fittings,"bronze",a,b,.055)
+		for i in 7:
+			var p:=_foyer_stair_p(cx,half,north,south,u,float(i)/6)
+			_beam(fittings,"bronze",p,p+Vector3.UP*.92,.035)
+	_flush(w,body,fittings)

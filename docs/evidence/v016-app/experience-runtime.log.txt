@@ -1,0 +1,78 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15120 reserved=388 roads=67449
+CITY_BUILD_TIMINGS {"complete_ms":54759,"custom_landmarks_ms":46513,"mapped_city_ms":16532,"terrain_and_harbour_ms":9177}
+HARBOR_WORLD_READY buildings=15122 structure_components=21672
+CITY_STARTUP_MS 55474
+EXPERIENCE PASS complete world before any delivery checks
+EXPERIENCE PASS new life starts with generous funds and all classes
+EXPERIENCE PASS free garage action exists car
+EXPERIENCE PASS garage immediately seats fresh car
+EXPERIENCE PASS zero-balance creation preserves fleet car
+EXPERIENCE PASS free garage action exists motorcycle
+EXPERIENCE PASS garage immediately seats fresh motorcycle
+EXPERIENCE PASS zero-balance creation preserves fleet motorcycle
+EXPERIENCE PASS previous occupied instance remains motorcycle
+EXPERIENCE PASS free garage action exists hoverboard
+EXPERIENCE PASS garage immediately seats fresh hoverboard
+EXPERIENCE PASS zero-balance creation preserves fleet hoverboard
+EXPERIENCE PASS previous occupied instance remains hoverboard
+EXPERIENCE PASS free garage action exists speedboat
+EXPERIENCE PASS garage immediately seats fresh speedboat
+EXPERIENCE PASS zero-balance creation preserves fleet speedboat
+EXPERIENCE PASS previous occupied instance remains speedboat
+EXPERIENCE PASS free garage action exists yacht
+EXPERIENCE PASS garage immediately seats fresh yacht
+EXPERIENCE PASS zero-balance creation preserves fleet yacht
+EXPERIENCE PASS previous occupied instance remains yacht
+EXPERIENCE PASS free garage action exists paraglider
+EXPERIENCE PASS garage immediately seats fresh paraglider
+EXPERIENCE PASS zero-balance creation preserves fleet paraglider
+EXPERIENCE PASS previous occupied instance remains paraglider
+EXPERIENCE PASS free garage action exists glider
+EXPERIENCE PASS garage immediately seats fresh glider
+EXPERIENCE PASS zero-balance creation preserves fleet glider
+EXPERIENCE PASS previous occupied instance remains glider
+EXPERIENCE PASS free garage action exists helicopter
+EXPERIENCE PASS garage immediately seats fresh helicopter
+EXPERIENCE PASS zero-balance creation preserves fleet helicopter
+EXPERIENCE PASS previous occupied instance remains helicopter
+EXPERIENCE PASS free garage action exists airliner
+EXPERIENCE PASS garage immediately seats fresh airliner
+EXPERIENCE PASS zero-balance creation preserves fleet airliner
+EXPERIENCE PASS previous occupied instance remains airliner
+EXPERIENCE PASS invalid selection leaves current driver untouched
+EXPERIENCE PASS all initial instance transforms preserved
+EXPERIENCE PASS other vehicle collision does not count as player incident
+EXPERIENCE PASS occupied vehicle collision counts one player incident
+EXPERIENCE PASS arbitrary pin sets destination without moving driver
+EXPERIENCE PASS minimap and world marker share destination
+EXPERIENCE PASS pin survives reopening big map
+EXPERIENCE PASS new fleet navigation save succeeds
+EXPERIENCE PASS exact occupied fresh instance restored
+EXPERIENCE PASS arbitrary destination restored without reselecting
+EXPERIENCE PASS larger legacy boats retain identity damage and fuel
+EXPERIENCE PASS overlapping old berths safely separate new hulls
+EXPERIENCE PASS legacy load keeps original save bytes
+EXPERIENCE PASS legacy parking adjustment preserves occupied aircraft
+EXPERIENCE PASS clear removes all destination indicators
+EXPERIENCE PASS actual mapped city experiences available
+EXPERIENCE PASS new shop service and map share checked entrance auvers
+EXPERIENCE PASS new shop service and map share checked entrance hakatamon
+EXPERIENCE PASS new shop service and map share checked entrance chinta_ria
+EXPERIENCE PASS new shop service and map share checked entrance cq_eastbank
+EXPERIENCE PASS new shop service and map share checked entrance cq_searock
+EXPERIENCE PASS new shop service and map share checked entrance cq_city_extra
+EXPERIENCE PASS nearby service button is present
+EXPERIENCE PASS single UI purchase charges once and returns to play
+EXPERIENCE PASS one service signal restores stamina once
+EXPERIENCE PASS out-of-range elevated service guides rather than claiming reachable
+EXPERIENCE PASS compass cardinal 0.0
+EXPERIENCE PASS compass cardinal 90.0
+EXPERIENCE PASS compass cardinal 180.0
+EXPERIENCE PASS compass cardinal 270.0
+EXPERIENCE PASS flying over target is not an arrival
+EXPERIENCE PASS nearby ground destination can arrive
+EXPERIENCE PASS aft yacht platform permits immediate E reboarding
+EXPERIENCE_REPORT {"checks":[{"detail":{},"name":"complete world before any delivery checks","passed":true},{"detail":{},"name":"new life starts with generous funds and all classes","passed":true},{"detail":{},"name":"free garage action exists car","passed":true},{"detail":{},"name":"garage immediately seats fresh car","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet car","passed":true},{"detail":{},"name":"free garage action exists motorcycle","passed":true},{"detail":{},"name":"garage immediately seats fresh motorcycle","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet motorcycle","passed":true},{"detail":{},"name":"previous occupied instance remains motorcycle","passed":true},{"detail":{},"name":"free garage action exists hoverboard","passed":true},{"detail":{},"name":"garage immediately seats fresh hoverboard","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet hoverboard","passed":true},{"detail":{},"name":"previous occupied instance remains hoverboard","passed":true},{"detail":{},"name":"free garage action exists speedboat","passed":true},{"detail":{},"name":"garage immediately seats fresh speedboat","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet speedboat","passed":true},{"detail":{},"name":"previous occupied instance remains speedboat","passed":true},{"detail":{},"name":"free garage action exists yacht","passed":true},{"detail":{},"name":"garage immediately seats fresh yacht","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet yacht","passed":true},{"detail":{},"name":"previous occupied instance remains yacht","passed":true},{"detail":{},"name":"free garage action exists paraglider","passed":true},{"detail":{},"name":"garage immediately seats fresh paraglider","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet paraglider","passed":true},{"detail":{},"name":"previous occupied instance remains paraglider","passed":true},{"detail":{},"name":"free garage action exists glider","passed":true},{"detail":{},"name":"garage immediately seats fresh glider","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet glider","passed":true},{"detail":{},"name":"previous occupied instance remains glider","passed":true},{"detail":{},"name":"free garage action exists helicopter","passed":true},{"detail":{},"name":"garage immediately seats fresh helicopter","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet helicopter","passed":true},{"detail":{},"name":"previous occupied instance remains helicopter","passed":true},{"detail":{},"name":"free garage action exists airliner","passed":true},{"detail":{},"name":"garage immediately seats fresh airliner","passed":true},{"detail":{},"name":"zero-balance creation preserves fleet airliner","passed":true},{"detail":{},"name":"previous occupied instance remains airliner","passed":true},{"detail":{},"name":"invalid selection leaves current driver untouched","passed":true},{"detail":{},"name":"all initial instance transforms preserved","passed":true},{"detail":{},"name":"other vehicle collision does not count as player incident","passed":true},{"detail":{},"name":"occupied vehicle collision counts one player incident","passed":true},{"detail":{},"name":"arbitrary pin sets destination without moving driver","passed":true},{"detail":{},"name":"minimap and world marker share destination","passed":true},{"detail":{},"name":"pin survives reopening big map","passed":true},{"detail":{},"name":"new fleet navigation save succeeds","passed":true},{"detail":{},"name":"exact occupied fresh instance restored","passed":true},{"detail":{},"name":"arbitrary destination restored without reselecting","passed":true},{"detail":{},"name":"larger legacy boats retain identity damage and fuel","passed":true},{"detail":{},"name":"overlapping old berths safely separate new hulls","passed":true},{"detail":{},"name":"legacy load keeps original save bytes","passed":true},{"detail":{},"name":"legacy parking adjustment preserves occupied aircraft","passed":true},{"detail":{},"name":"clear removes all destination indicators","passed":true},{"detail":{},"name":"actual mapped city experiences available","passed":true},{"detail":{},"name":"new shop service and map share checked entrance auvers","passed":true},{"detail":{},"name":"new shop service and map share checked entrance hakatamon","passed":true},{"detail":{},"name":"new shop service and map share checked entrance chinta_ria","passed":true},{"detail":{},"name":"new shop service and map share checked entrance cq_eastbank","passed":true},{"detail":{},"name":"new shop service and map share checked entrance cq_searock","passed":true},{"detail":{},"name":"new shop service and map share checked entrance cq_city_extra","passed":true},{"detail":{},"name":"nearby service button is present","passed":true},{"detail":{},"name":"single UI purchase charges once and returns to play","passed":true},{"detail":{},"name":"one service signal restores stamina once","passed":true},{"detail":{},"name":"out-of-range elevated service guides rather than claiming reachable","passed":true},{"detail":{},"name":"compass cardinal 0.0","passed":true},{"detail":{},"name":"compass cardinal 90.0","passed":true},{"detail":{},"name":"compass cardinal 180.0","passed":true},{"detail":{},"name":"compass cardinal 270.0","passed":true},{"detail":{},"name":"flying over target is not an arrival","passed":true},{"detail":{},"name":"nearby ground destination can arrive","passed":true},{"detail":{},"name":"aft yacht platform permits immediate E reboarding","passed":true}],"failures":0,"player_saves_touched":false,"save_fixture_retained":true,"screenshots":[{"name":"01-map-pin.png","resolution":[1440,900],"saved":true},{"name":"02-experiences.png","resolution":[1440,900],"saved":true},{"name":"03-experience-reward.png","resolution":[1440,900],"saved":true},{"name":"04-live-navigation.png","resolution":[1440,900],"saved":true}],"test_world":"qa_experience_56115636","world_components":21672,"world_ready":true}

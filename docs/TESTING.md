@@ -1,36 +1,40 @@
-# v0.1.5-preview.1 验证记录
+# v0.1.6-preview.1 验证记录
 
-本轮针对歌剧院大台阶被撞毁后产生长槽的问题。环境为 Apple M4 / 16 GB、macOS 26.5、Godot 4.7.2、Metal / Forward+、Jolt。此前版本的完整记录保留在 [v0.1.4](TESTING_0.1.4.md)，没有将旧包的 258 项验证算成本次结果。
+这轮覆盖歌剧院、悉尼塔、码头与连接桥、W Sydney、ICC 场馆、银行与写字楼、部分达令广场店面。环境：Apple M4 / 16 GB、macOS 26.5、Godot 4.7.2、Metal / Forward+、Jolt。旧版记录保留在 [v0.1.5](TESTING_0.1.5.md)，未混入本次计数。
 
 ## 最终下载包
 
-`Harbourlife-macOS-arm64.zip`：32,880,630 字节，SHA-256：
+Apple Silicon 原生离线应用，ad-hoc 签名，未公证。ZIP 大小 32,940,060 字节，SHA-256：
 
 ```text
-5837b657e7a7775f62f3f944f9fe0bd7092046343e9e789a021212832a1b9fc7
+9269a3f9a39c79b23ef1a2ac349cad535a4d275d37866f3a5c10d236948b33e8
 ```
 
-[构建清单](evidence/v015-app/build.json)核对 121 个游戏文件，在导出前、启动和打包后检查源码一致。玩家包为 Apple Silicon Mac 原生离线应用，ad-hoc 签名，未公证。最终独立 ZIP 与源码审计见发布资产 [release-validation.json](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.5-preview.1/release-validation.json)，包括全新解压启动、版本、权限、签名、PCK 资源与源码逐文件一致性。
+[构建清单](evidence/v016-app/build.json)核对 124 个游戏文件，导出前冻结，启动与打包后再次比对。最终全新解压、签名、版本、PCK 资源和源码 ZIP 对应检查在发布资产 [release-validation.json](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.6-preview.1/release-validation.json)。
 
-## 导出 App 实测
+## 最终 App 实测
 
 | 流程 | 通过检查 | 证据 |
 |---|---:|---|
-| 楼梯完整状态、旧损坏状态重载、局部撞击，人物与平衡车跨接口、原生截图 | 29 | [启动](evidence/v015-app/opera-access-launch.json) · [结果](evidence/v015-app/opera-access-report.json) |
-| 完整城市地标模块、八条公共路线、导航目的地和原生场景截图 | 101 | [启动](evidence/v015-app/precinct-launch.json) · [结果](evidence/v015-app/precinct-report.json) |
+| 完整城市、公共路线、地图目的地与新增模型原生画面 | 188 | [启动](evidence/v016-app/precinct-launch.json) · [结果](evidence/v016-app/precinct-report.json) |
+| 歌剧院大台阶完整、旧损坏重载与撞击后人物/平衡车通行 | 29 | [启动](evidence/v016-app/opera-access-launch.json) · [结果](evidence/v016-app/opera-access-report.json) |
+| 免费新增载具、即时乘坐、地图/体验与存档回归 | 70 | [启动](evidence/v016-app/experience-launch.json) · [结果](evidence/v016-app/experience-report.json) |
 
-合计 130 项自动检查，包含截图保存与重复覆盖。两次均直接启动最终 App，报告和日志为本次新生成，正常退出、无 ERROR / WARNING。这不是 OS 硬件鼠标人工走查，也不是所有载具或长途航线重测。
+合计 287 项自动检查，均正常退出，无运行时 ERROR / WARNING；计数包括截图保存和重复覆盖。街区专项包含 22 条实际控制器连续行走路线、63 张原生截图。只在路线起点设置人物位置，随后使用生产输入与物理移动。这不是 OS 硬件输入人工验收，也不代表所有载具的每条长途航线均重测。
 
-楼梯专项每种状态检查 672 个位置，三种状态共 2,016 个采样；射线核对台阶或主平台的结构归属和预期坡面高度，不能用上层餐厅地板掩盖缺阶。人物与平衡车使用实际生产控制器连续移动，只在每条路线起点设置位置。局部 450 kJ 撞击实际移除了中央两块饰面，承重基座保持，人物和平衡车都从受损位置双向通过，没有跌破支撑面；平衡车健康保持 100。不同高度、任意速度和持续极端破坏不属于本次保证。
+## 源码夹具与视觉核对
 
-## 问题复现与旧存档
+- 地图修订 6：87 项通过，包含上一版 revision 5 的实际加载、固体占用恢复、正常位置与源存档字节保留。[结果](evidence/v016-app/map-migration-source.json)
+- 码头及沿街局部场景：83 项通过，含五个入口多偏移胶囊通行、每个码头 41 点连续支撑、14 个原地图雨棚与网格朝向。[结果](evidence/v016-app/quay-source.json)
+- 歌剧院局部：外部 24 项、内部完整往返路线 49 项；另跑新增相机与几何 52 项、坡中迁移 22 项，修复前六个安全站位误判、修复后全部通过。这几次是不同范围的独立跑次。[全路线](evidence/v016-app/opera-interior-full-source.json) · [坡中存档](evidence/v016-app/opera-slope-source.json)
+- 达令广场与公共设施局部：130 项通过，包含四家本分店照片细化、已定位入口和损坏归属。[结果](evidence/v016-app/darling-source.json)
+- Man O’War 码头：30 项通过，包含两座浮码头、两条连接桥的完整往返和坡中存档正反例。[结果](evidence/v016-app/manowar-source.json)
+- ICC 三馆：50 项通过，保留公共路线与结构损坏关系。[结果](evidence/v016-app/icc-source.json)
+- W Sydney、HSBC Tower One、中国银行及保留的 Exchange：56 项通过，包含中国银行柱廊与 W 入口的生产控制器双向行走。[结果](evidence/v016-app/city-buildings-source.json)
+- Westpac / CBA 三栋：93 项通过，三条生产角色连续公共路径、雨棚净空及损坏归属。[结果](evidence/v016-app/bank-source.json)
+- Quay Quarter / Salesforce 两塔：28 项通过，149 个结构、138,552 个三角形；贴附细节随原结构损坏和修复。[结果](evidence/v016-app/quay-towers-source.json)
+- 悉尼塔：30 项通过，33 个结构 ID、121,772 个三角形，检查平台几何、窗格、损坏/恢复、行人落点；另有局部原生五视图。[日志](evidence/v016-app/tower-source.log.txt)
 
-[旧版基线](evidence/v015-app/stair-baseline.json)使用隔离场景复现：移除 `opera/steps/7` 后，局部 x=0、z=67.5 的支撑从世界高度约 15.14 米降到 4.5 米。新版采用实体基座与独立饰面，旧八个损坏 ID 保留历史，但不会删除新基座。
+[63 张画面的视觉核对](evidence/v016-app/visual-review.json)记录最终图片哈希与观察；其中 [19 张代表画面](evidence/v016-app/screenshots.json)原样收入公开源码。历史图片保留原版本标识。可见几何已对照真实参考照片，但没有用自动检查证明现实中的厘米级准确性；场景范围与估算尺寸见 [更新说明](FIXES_0.1.6.md)。
 
-[地图迁移夹具](evidence/v015-app/map-migration-source.json)共 83 项通过，使用实际保存/加载代码与真实楼梯网格验证旧 revision 4 的被困人物和悬浮车迁出，安全副本及状态保留。地图修订升级到 5，存档格式仍为 5；测试使用独立 QA 世界，不覆盖或删除玩家存档。[外壳组件](evidence/v015-app/opera-exterior-source.json)23 项通过，原有室内入口与开口继续保留。这两组属于源码夹具，未计入上面的导出 App 检查。
-
-## 画面与范围
-
-[三张最终包截图](evidence/v015-app/screenshots.json)分别对应完整楼梯、加载旧损坏记录、再次撞击后的同一位置。它们是原生画面，没有修图。README 中 `v014` 与 `v013` 图片是历史版本，本次只新增 `v015` 楼梯图片。歌剧院屋壳和室内布局不属于这次重新建模的范围。
-
-复现：运行 `python3 tools/verify_native.py opera-access --app <Harbourlife.app路径>` 或将 mode 改为 `precinct`。源码迁移夹具运行 `tools/runtime/godot --headless --path game --script ../source/map_migration_test.gd`。完整验证范围和本地路径处理见 [证据来源](evidence/v015-app/provenance.md)。
+复现：`python3 tools/verify_native.py precinct --app <Harbourlife.app路径>`；另可选 `opera-access` 或 `experience`。证据路径处理见 [来源说明](evidence/v016-app/provenance.md)。

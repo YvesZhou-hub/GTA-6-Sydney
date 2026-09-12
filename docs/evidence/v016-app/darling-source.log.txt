@@ -1,0 +1,134 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CITY_MAP buildings=66 reserved=14 roads=1640
+PASS Local precinct reaches READY 
+PASS 71 official directory records retained 
+PASS All records classified without claiming 71 exact facades 
+PASS 23 new mapped street facades 
+PASS Four branch-specific refinements with four review cameras 
+PASS bengongs_tea mapped wall and width unchanged 
+PASS bengongs_tea inspected image provenance retained 
+PASS bengongs_tea visible surfaces finite and correctly wound 
+PASS bengongs_tea shallow frontage stays within public-side allowance 
+PASS bengongs_tea published model bounds match generated mesh 
+PASS bengongs_tea lettering clear of actual frame meshes 
+PASS bengongs_tea continuous public path in front stays clear 
+PASS haven_specialty_coffee mapped wall and width unchanged 
+PASS haven_specialty_coffee inspected image provenance retained 
+PASS haven_specialty_coffee visible surfaces finite and correctly wound 
+PASS haven_specialty_coffee shallow frontage stays within public-side allowance 
+PASS haven_specialty_coffee published model bounds match generated mesh 
+PASS haven_specialty_coffee continuous public path in front stays clear 
+PASS pancakes_on_the_rocks mapped wall and width unchanged 
+PASS pancakes_on_the_rocks inspected image provenance retained 
+PASS pancakes_on_the_rocks visible surfaces finite and correctly wound 
+PASS pancakes_on_the_rocks shallow frontage stays within public-side allowance 
+PASS pancakes_on_the_rocks published model bounds match generated mesh 
+PASS pancakes_on_the_rocks lettering clear of actual frame meshes 
+PASS pancakes_on_the_rocks continuous public path in front stays clear 
+PASS sushi_sei mapped wall and width unchanged 
+PASS sushi_sei inspected image provenance retained 
+PASS sushi_sei visible surfaces finite and correctly wound 
+PASS sushi_sei shallow frontage stays within public-side allowance 
+PASS sushi_sei published model bounds match generated mesh 
+PASS sushi_sei lettering clear of actual frame meshes 
+PASS sushi_sei continuous public path in front stays clear 
+PASS Sushi Sei room photo does not claim a verified exterior 
+PASS 18 mapped playground elements retained 
+PASS Square and Quarter geographically distinct 
+PASS New modules are idempotent 
+PASS darling_quarter_waterplay supported clear public arrival 
+PASS darling_quarter_waterplay anchor uses arrival, not interior centre 
+PASS darling_quarter_octanet supported clear public arrival 
+PASS darling_quarter_octanet anchor uses arrival, not interior centre 
+PASS darling_quarter_slide supported clear public arrival 
+PASS darling_quarter_slide anchor uses arrival, not interior centre 
+PASS tumbalong_fountains supported clear public arrival 
+PASS tumbalong_fountains anchor uses arrival, not interior centre 
+PASS darling_business_789koreanbbq supported clear public arrival 
+PASS darling_business_789koreanbbq anchor uses arrival, not interior centre 
+PASS darling_business_bar_bubu supported clear public arrival 
+PASS darling_business_bar_bubu anchor uses arrival, not interior centre 
+PASS darling_business_bendigo_bank supported clear public arrival 
+PASS darling_business_bendigo_bank anchor uses arrival, not interior centre 
+PASS darling_business_bengongs_tea supported clear public arrival 
+PASS darling_business_bengongs_tea anchor uses arrival, not interior centre 
+PASS darling_business_dragon_hot_pot supported clear public arrival 
+PASS darling_business_dragon_hot_pot anchor uses arrival, not interior centre 
+PASS darling_business_haven_specialty_coffee supported clear public arrival 
+PASS darling_business_haven_specialty_coffee anchor uses arrival, not interior centre 
+PASS darling_business_lermont_laser_clinic supported clear public arrival 
+PASS darling_business_lermont_laser_clinic anchor uses arrival, not interior centre 
+PASS darling_business_lillianna_gifts_and_home supported clear public arrival 
+PASS darling_business_lillianna_gifts_and_home anchor uses arrival, not interior centre 
+PASS darling_business_lilong_by_taste_of_shanghai supported clear public arrival 
+PASS darling_business_lilong_by_taste_of_shanghai anchor uses arrival, not interior centre 
+PASS darling_business_machimachi supported clear public arrival 
+PASS darling_business_machimachi anchor uses arrival, not interior centre 
+PASS darling_business_mcdonalds supported clear public arrival 
+PASS darling_business_mcdonalds anchor uses arrival, not interior centre 
+PASS darling_business_meet_fresh supported clear public arrival 
+PASS darling_business_meet_fresh anchor uses arrival, not interior centre 
+PASS darling_business_myhealth supported clear public arrival 
+PASS darling_business_myhealth anchor uses arrival, not interior centre 
+PASS darling_business_my_spec supported clear public arrival 
+PASS darling_business_my_spec anchor uses arrival, not interior centre 
+PASS darling_business_pancakes_on_the_rocks supported clear public arrival 
+PASS darling_business_pancakes_on_the_rocks anchor uses arrival, not interior centre 
+PASS darling_business_planet_pop_world supported clear public arrival 
+PASS darling_business_planet_pop_world anchor uses arrival, not interior centre 
+PASS darling_business_puppuccino_pet_spa supported clear public arrival 
+PASS darling_business_puppuccino_pet_spa anchor uses arrival, not interior centre 
+PASS darling_business_quikstop supported clear public arrival 
+PASS darling_business_quikstop anchor uses arrival, not interior centre 
+PASS darling_business_starbucks_coffee_company supported clear public arrival 
+PASS darling_business_starbucks_coffee_company anchor uses arrival, not interior centre 
+PASS darling_business_sushi_sei supported clear public arrival 
+PASS darling_business_sushi_sei anchor uses arrival, not interior centre 
+PASS darling_business_tea_republic supported clear public arrival 
+PASS darling_business_tea_republic anchor uses arrival, not interior centre 
+PASS darling_business_thirteen_feet_tattoo supported clear public arrival 
+PASS darling_business_thirteen_feet_tattoo anchor uses arrival, not interior centre 
+PASS darling_business_uliveto supported clear public arrival 
+PASS darling_business_uliveto anchor uses arrival, not interior centre 
+PASS darling_business_15_cms supported clear public arrival 
+PASS darling_business_15_cms anchor uses arrival, not interior centre 
+PASS darling_business_batch_brewing_co supported clear public arrival 
+PASS darling_business_batch_brewing_co anchor uses arrival, not interior centre 
+PASS darling_business_bubble_nini supported clear public arrival 
+PASS darling_business_bubble_nini anchor uses arrival, not interior centre 
+PASS darling_business_darling_nest supported clear public arrival 
+PASS darling_business_darling_nest anchor uses arrival, not interior centre 
+PASS darling_business_darling_square_library supported clear public arrival 
+PASS darling_business_darling_square_library anchor uses arrival, not interior centre 
+PASS darling_business_fishbowl_the_exchange supported clear public arrival 
+PASS darling_business_fishbowl_the_exchange anchor uses arrival, not interior centre 
+PASS darling_business_golden_century_bbq supported clear public arrival 
+PASS darling_business_golden_century_bbq anchor uses arrival, not interior centre 
+PASS darling_business_hulu_hulu supported clear public arrival 
+PASS darling_business_hulu_hulu anchor uses arrival, not interior centre 
+PASS darling_business_spago supported clear public arrival 
+PASS darling_business_spago anchor uses arrival, not interior centre 
+PASS darling_business_sushia supported clear public arrival 
+PASS darling_business_sushia anchor uses arrival, not interior centre 
+PASS darling_business_the_brothers_cafe supported clear public arrival 
+PASS darling_business_the_brothers_cafe anchor uses arrival, not interior centre 
+PASS darling_business_toastiesmith supported clear public arrival 
+PASS darling_business_toastiesmith anchor uses arrival, not interior centre 
+PASS darling_business_ume_burger supported clear public arrival 
+PASS darling_business_ume_burger anchor uses arrival, not interior centre 
+PASS tumbalong_fountain_perimeter continuous capsule and ground sweep 
+PASS darling_playground_perimeter continuous capsule and ground sweep 
+PASS Production player walks up visible slide steps and down slope 
+PASS Original facility meshes finite and outward facing 
+PASS Wide slide has full-width collision and a stair approach 
+PASS Octanet damage bounds cover documented 11m mast 
+PASS darling_detail/playground/octanet damage disables all attached collisions 
+PASS darling_detail/playground/octanet repair restores materials and collisions 
+PASS darling_detail/waterplay/wheel damage disables all attached collisions 
+PASS darling_detail/waterplay/wheel repair restores materials and collisions 
+PASS darling_detail/fountain/730089774 damage disables all attached collisions 
+PASS darling_detail/fountain/730089774 repair restores materials and collisions 
+PASS darling_square/darling_business_bendigo_bank/frontage damage disables all attached collisions 
+PASS darling_square/darling_business_bendigo_bank/frontage repair restores materials and collisions 
+DARLING_COMPONENT_TEST 130 checks; PASS
