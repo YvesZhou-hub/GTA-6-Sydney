@@ -1,4 +1,13 @@
-# v0.2.1 持续遭遇验证：源码已测，最终包待验
+# v0.2.1 持续遭遇验证
+
+最终导出的 Mac App 已通过 **136/136 项原生检查，生成 11 张新截图**。两次运行均使用默认音频驱动、Metal 画面与同一 EXE/PCK，正常退出，日志零错误/警告。截图 SHA-256 已逐张核对；歌剧院同平台攻击、B 火控菜单，以及坦克底部两行按键和炮管角度均做了图像检查。
+
+| 最终 Mac 原生回归 | 通过数 | 截图 | 范围 |
+| --- | ---: | ---: | --- |
+| [自然遭遇](evidence/v021-app/encounter/report.json) | 96/96 | 7 | 默认家门口、歌剧院上平台、机场、CBD 自动刷新追击，90 米换区旧怪仍存活时增援，V/B/H 输入、火控升级与持续战斗 |
+| [受控生存](evidence/v021-app/survival/report.json) | 40/40 | 4 | 五类敌人、人物扣血与治疗、真实坦克炮弹击败奖励、战斗中补给与安全完整维修 |
+
+[产物与截图哈希索引](evidence/v021-app/native-index.json) · [自然遭遇外部门禁](evidence/v021-app/encounter/app-binding.json) · [生存外部门禁](evidence/v021-app/survival/app-binding.json) · [构建清单](evidence/v021-app/build.json)。实际退出清理分别跟踪 13/14 个音频播放对象，44/37 毫秒后全部释放。默认音频路径已执行，**声音未人工实听**；这些自动输入、固定场景检查也不代表长期玩家试玩或全地图性能。Windows 验收另列，不借用 Mac 通过数。
 
 本轮十一份局部生产脚本报告合计 **515/515 项通过**，包括管理器满容量时的换区增援边界和歌剧院上平台近身攻击站位。这些检查使用实际敌人、载具、武器和物理脚本，但多数场景是受控夹具，不能替代完整城市或下载包的验收。
 
@@ -30,11 +39,11 @@
 
 早期完整城市对比中，旧管理器在家门口约 **26.02 秒**出现第一只、**39.07 秒**第一次受伤；新管理器约 **1.02 秒**出现、**13.37 秒**受伤。机场的 90 米换区观察中，保留 3 只旧怪，约 1.28 秒出现新怪，击败数、清理数和金币没有变化。这些是对应场景的观察值，不保证全城任意位置都能使用同一时间。
 
-首次导出的 v0.2.1 Mac App 自然遭遇为 **95/96**，受控生存为 **40/40**；两次正常完成、包体哈希未变且日志无错误/警告。自然遭遇唯一失败是歌剧院上平台：怪物实际接近并开始前摇，但 30 秒观察内没有产生真实伤害。该结果保留为缺陷证据，不能算全通过。自动副炮配合真实 H 快修的连续战斗已通过，实际三次各花 1125 金币、各恢复 25 点耐久，并验证重复按 H 不重复收费。
+先前首次导出的 v0.2.1 Mac App 自然遭遇为 **95/96**，受控生存为 **40/40**；两次均产生新鲜报告，包体哈希未变且日志无错误/警告。自然遭遇唯一失败是歌剧院上平台：怪物实际接近并开始前摇，但 30 秒观察内没有产生真实伤害。该结果保留为缺陷证据，不能算全通过。该次自动副炮配合真实 H 快修的连续战斗已通过，实际三次各花 1125 金币、各恢复 25 点耐久，并验证重复按 H 不重复收费。
 
-[首次自然遭遇报告](evidence/v021-app/initial-app/encounter/encounter-report.json) · [首次 App 身份绑定](evidence/v021-app/initial-app/encounter/encounter-launch.json) · [同包生存报告](evidence/v021-app/initial-app/survival/survival-report.json) · [首次构建清单](evidence/v021-app/initial-app/build.json)。**修复后的 Mac App 及 v0.2.1 Windows EXE 仍待各自完整验收。** Windows 不使用 Mac 截图或通过数代替实测。
+[首次自然遭遇报告](evidence/v021-app/initial-app/encounter/encounter-report.json) · [首次 App 身份绑定](evidence/v021-app/initial-app/encounter/encounter-launch.json) · [同包生存报告](evidence/v021-app/initial-app/survival/survival-report.json) · [首次构建清单](evidence/v021-app/initial-app/build.json)。这些先前包体的证据与页首最终通过的包体分别绑定，未被覆盖。
 
-修复歌剧院站位与底部按键提示后，第二次验证的游戏断言分别为 **96/96、40/40**；歌剧院约 11.95 秒实际扣血，底部两行提示均在画面内。但两次退出分别出现 48/44 个 ObjectDB 对象泄漏警告，外部原生门禁因此仍为失败，尚未放行。[自然遭遇退出门禁](evidence/v021-app/initial-exit-warning/encounter/encounter-launch.json)与[生存退出门禁](evidence/v021-app/initial-exit-warning/survival/survival-launch.json)保留原始失败状态；不能只引用游戏内部通过数。
+修复歌剧院站位与底部按键提示后的第二次验证，游戏断言分别为 **96/96、40/40**；歌剧院约 11.95 秒实际扣血，底部两行提示均在画面内。但当时两次退出分别出现 48/44 个 ObjectDB 对象泄漏警告，外部原生门禁因此判为失败，没有放行。[自然遭遇退出门禁](evidence/v021-app/initial-exit-warning/encounter/encounter-launch.json)与[生存退出门禁](evidence/v021-app/initial-exit-warning/survival/survival-launch.json)保留原始失败状态；不能只引用游戏内部通过数。
 
 同包 `--verbose --survival-qa` 将 44 个泄漏对象定位为 22 个 `AudioStreamWAV` 和 22 个 `AudioStreamPlaybackWAV`。[音频退出诊断及五组日志](evidence/v021-app/audio-diagnostic/diagnostic.json)进一步记录：宿主 CoreAudio 在 22 辆真实车的 1 秒观察中没有混音周期，最小单音频播放器的 3 秒观察也未混音。Dummy 仅等待原来的五帧同样泄漏；等待实际三个混音周期、约 205 毫秒后才零泄漏。因此只换驱动或用渲染帧数代替音频清理都不充分，宿主 CoreAudio 未混音的原因尚未确认。
 
@@ -42,7 +51,7 @@
 
 该退出契约的原生小场景分别通过 [Dummy 11/11](evidence/v021-app/audio-diagnostic/shutdown-dummy.json) 和[恢复混音后的 CoreAudio 11/11](evidence/v021-app/audio-diagnostic/shutdown-coreaudio-restored.json)。22 辆真实车的播放对象分别在约 44/6 毫秒释放，另测普通/2D 音频节点、重复退出和已到期限时如实返回未完成；两组均零泄漏警告。它们是同一套专项在两个驱动下的结果，单列而不加入上方 515 项；设备后来恢复混音的原因未确认，声音仍未人工实听。
 
-最终 App 会先采用默认 CoreAudio 路径进行原生验收；若宿主再次停止混音，将保留该次失败，再另行显式使用 `--audio-driver Dummy` 验证 Metal 画面与完整物理。Dummy 不输出可听声音，只作用于该 QA 进程，不改游戏包、系统设备或默认音效，也不证明 CoreAudio 设备问题已修复。运行记录包含是否覆盖驱动和 `audio_listening_verified: false`，任何驱动下的错误或警告仍会令外部门禁失败。
+最终 App 的两组验收已采用默认 CoreAudio 路径通过，没有使用 Dummy 替代。工具仍保留显式 `--audio-driver Dummy` 供单独的图形/物理诊断使用；它不输出可听声音，只作用于该 QA 进程，不改游戏包、系统设备或默认音效，也不证明 CoreAudio 设备问题已修复。运行记录包含是否覆盖驱动和 `audio_listening_verified: false`，任何驱动下的错误或警告仍会令外部门禁失败。
 
 现有 [`--survival-qa`](../game/scripts/survival_validation.gd) 继续检查五型模型、实际炮弹、治疗和付费维修；为了验证主炮的单次击败奖励，该受控回归会关闭自动副武器，结束时恢复。当前规则允许战斗中补充医疗包，完整维修仍受安全停车和脱战条件限制。
 
@@ -60,7 +69,13 @@ python3 tools/verify_native.py survival --app /path/to/Harbourlife.app --output 
 
 新增自然遭遇阶段后，Windows 工作流包含 **37 项聚合门禁**，其中核对 12 个驾驶、16 个受控生存及 42 个自然遭遇的必需检查名称。每阶段从同一最终 ZIP 解出的 EXE 运行，独立临时用户目录、300 秒时限，并要求报告新鲜、全部检查通过且名称唯一、计数与完成标记一致、完整世界就绪、存档隔离，以及无运行错误或警告。
 
-[`windows_package_gate_test.py`](../source/windows_package_gate_test.py) 已通过 **34/34 项本地门禁检查**，YAML 与全部 7 段嵌入 Python 均可解析/编译。测试把合成证据交给工作流真实聚合代码，确认缺报告、缺必需项、失败项、重复名称、伪造计数、超时、旧报告、关闭自动刷新、访问存档及日志告警会被拒绝。另外以完全拦截 GitHub 命令的方式执行真实资产上传步骤，验证完整提交/标签绑定、草稿、注解标签、同名文件 SHA-256，以及拒绝浮动分支和不同版本覆盖。该结果不表示 Windows 游戏已经执行或已上传，也不与游戏源码检查数相加。
+[`windows_package_gate_test.py`](../source/windows_package_gate_test.py) 已通过 **34/34 项本地门禁检查**，YAML 与全部 7 段嵌入 Python 均可解析/编译。测试把合成证据交给工作流真实聚合代码，确认缺报告、缺必需项、失败项、重复名称、伪造计数、超时、旧报告、关闭自动刷新、访问存档及日志告警会被拒绝。另外以完全拦截 GitHub 命令的方式执行真实资产上传步骤，验证完整提交/标签绑定、草稿、注解标签、同名文件 SHA-256，以及拒绝浮动分支和不同版本覆盖。该模拟结果本身不能代替实际 Windows 执行证据，后者在下方单列；这些数字也不与游戏源码检查数相加。
+
+## Windows 最终 EXE 的独立验证
+
+[云端运行 34769213189](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34769213189) 已实际完成导出 ZIP 解压后的 Windows EXE 启动、驾驶、生存及自然遭遇四阶段：**23/23 包检查、37/37 聚合门禁，以及 32/32 驾驶、30/30 生存、82/82 自然遭遇断言全部通过**。223 个游戏文件与 Mac 构建清单及提交 `44cdc69987fa3f9f946afb9d875e3ed34d1b499e` 的 Git 文件逐一一致；EXE/PCK 运行前后身份未变，12 份日志无错误或警告，测试未读写玩家存档。
+
+[原始报告](evidence/v021-windows/windows-validation.json)和[原始校验和](evidence/v021-windows/Windows-SHA256SUMS.txt)按发布资产的原始字节保存；[交叉核验记录](evidence/v021-windows/verification.json)再确认实际运行提交、全部必需项、唯一名称、计数/完成标记、源清单，以及 GitHub 服务器 ZIP 摘要。Windows 使用 headless Jolt 60 Hz，无原生截图、GPU、人工操作或声音实听结论。32 + 30 + 82 是 144 项游戏断言，包检查/聚合门禁不另算作玩法断言，Mac 136 项也不并入 Windows。详细哈希与范围见 [Windows 说明](WINDOWS.md)。
 
 以下保留各版本的原始验证记录，不将旧包通过数计入 v0.2.1。
 

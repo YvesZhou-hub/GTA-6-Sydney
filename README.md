@@ -8,7 +8,7 @@
 
 **奶龙危机**现在跟随玩家所在街区持续增援：没清完旧区域也会在新区域遇敌，清理奖金不再暂停刷新。11 类载具配有免费自动追踪副武器（V 开关），坦克和战斗机保留手动主炮；H 可急救或战地快修，金币用于补给与升级火控。保留无敌人的自由观光模式，以及漂移、急刹和 Shift 三倍加速。[生存规则](docs/SURVIVAL_DESIGN.md) · [驾驶操作](docs/DRIVING.md) · [本版改动](docs/FIXES_0.2.1.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 与 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动说明](docs/WINDOWS.md)
 
-![v0.2.0 奶龙危机 · 最终 Mac App 实际场景](docs/evidence/v020-app/survival/five-nailong-city-hud.png)
+![v0.2.1 持续增援与坦克自动反击 · 最终 Mac App 实际场景](docs/evidence/v021-app/encounter/screenshots/automatic%20tank%20support%20with%20player%20H%20field%20repairs.png)
 
 以下宣传素材录制于 v0.1.8：
 

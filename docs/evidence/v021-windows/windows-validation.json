@@ -1,0 +1,2914 @@
+{
+  "passed": true,
+  "checks": {
+    "package_checks_passed": true,
+    "process_exit_zero": true,
+    "fresh_engine_log_has_output": true,
+    "no_runtime_errors_or_warnings": true,
+    "real_world_populated": true,
+    "isolated_gameplay_ready": true,
+    "driving_process_exit_zero": true,
+    "fresh_driving_report_and_log": true,
+    "driving_report_passed": true,
+    "every_driving_check_passed": true,
+    "driving_check_count_complete": true,
+    "requested_driving_behaviors_exercised": true,
+    "driving_completion_marker_matches_report": true,
+    "driving_physics_backend": true,
+    "driving_save_guard_confirmed": true,
+    "survival_process_exit_zero": true,
+    "fresh_survival_report_and_log": true,
+    "survival_report_passed": true,
+    "every_survival_check_passed": true,
+    "survival_check_count_complete": true,
+    "requested_survival_behaviors_exercised": true,
+    "survival_completion_marker_matches_report": true,
+    "survival_full_city_ready": true,
+    "survival_headless_scope_confirmed": true,
+    "survival_save_guard_confirmed": true,
+    "encounter_process_exit_zero": true,
+    "fresh_encounter_report_and_log": true,
+    "encounter_report_passed": true,
+    "every_encounter_check_passed": true,
+    "encounter_check_count_complete": true,
+    "requested_natural_encounters_exercised": true,
+    "encounter_completion_marker_matches_report": true,
+    "encounter_full_city_ready": true,
+    "encounter_headless_scope_confirmed": true,
+    "encounter_save_guard_confirmed": true,
+    "encounter_uses_production_automatic_loop": true,
+    "exe_pck_unchanged_after_run": true
+  },
+  "check_count": 37,
+  "package": {
+    "passed": true,
+    "checks": {
+      "valid_tag": true,
+      "release_tag_matches_game": true,
+      "build_source_commit": true,
+      "dispatched_commit_matches": true,
+      "game_sources_match_build": true,
+      "numeric_game_version": true,
+      "source_reference_matches_game_version": true,
+      "source_reference_hash_matches_build": true,
+      "all_game_files_match_macos_build": true,
+      "same_engine_as_macos_build": true,
+      "zip_matches_build_hash": true,
+      "unique_zip_paths": true,
+      "bounded_uncompressed_size": true,
+      "safe_zip_paths": true,
+      "zip_crc": true,
+      "expected_exe_and_external_pck": true,
+      "single_external_pck": true,
+      "dos_header": true,
+      "pe_header_bounds": true,
+      "pe_signature": true,
+      "pe_amd64_pe32plus": true,
+      "extracted_exe_and_pck_match_build": true,
+      "godot_pck_header": true
+    },
+    "release_tag": "v0.2.1-preview.1",
+    "asset_name": "Harbourlife-Windows-x86_64.zip",
+    "repository": "YvesZhou-hub/GTA-6-Sydney",
+    "workflow_sha": "44cdc69987fa3f9f946afb9d875e3ed34d1b499e",
+    "run_id": "34769213189",
+    "run_attempt": "1",
+    "build_manifest_sha256": "8b236afb209e7450dde81b4ce4749c19804de56ff3c289147a634b529f059b9e",
+    "build": {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "architecture": "x86_64",
+      "source_commit": "44cdc69987fa3f9f946afb9d875e3ed34d1b499e",
+      "game_version": "0.2.1",
+      "game_release": "v0.2.1-preview.1",
+      "source_sha256": {
+        "game/assets/bridge_north_approach.json": "7cdb28256e7969d64dfb5fcf472936a8344c3c0913d3ee3323a38e2f25a05b4d",
+        "game/assets/city_map.json": "c4708c54e233efce7a1a0c5fd37bab5d60c2420af521c726c3e59a384f50d632",
+        "game/assets/darling_precinct_directory.json": "6fa193c4e9c1f94470bff31d9e765e120b545dadaf32a9e5eef246fda2933617",
+        "game/assets/darling_precinct_frontages.json": "afd48f1d609b0f8385559685d1fe8df689533be54930c12d8ef46a2cca6b6c06",
+        "game/assets/darling_public_facilities.json": "12d9fe244a2c57ce2fd7de42dd510d8a8043ac0f6dc3df5250dadde7920454f9",
+        "game/assets/darling_square_frontages.json": "397ef5f10f0569fe9ec44191499da015169fae5d1e4486603272cf84d4d9f45f",
+        "game/assets/environment/daylight.gdshader": "e224c928026d91f9abfd8d017777bd822bc12d2c9bc20dad81623206bab34f36",
+        "game/assets/environment/daylight.gdshader.uid": "6677df324395689dbec5f6e4cb71bc24b287ac3c7e22312b0f0de11eb058508d",
+        "game/assets/environment/qwantani_night_puresky_2k.hdr": "d458fe7f20969d89eedbb7ae12d346abf68c86d844235696e7d70baad3e04cf0",
+        "game/assets/environment/qwantani_night_puresky_2k.hdr.import": "3f213246839ff7d7f12ab4d0ba29aead2c7afcd05ff2adc008f8f7b9f93f84b1",
+        "game/assets/environment/qwantani_sunset_puresky_2k.hdr": "d66e08231e9c09ca40c6d035214ae8efb638782745c82addbb2a063fa32cabef",
+        "game/assets/environment/qwantani_sunset_puresky_2k.hdr.import": "fc860f200c2e4621156c27f4a44cae50194e05c373f264f5ac0d23d599745cab",
+        "game/assets/environment/rustig_koppie_puresky_2k.hdr": "e70bf97a44982db07fb952b1f74c07e818649c2bbdfeb6ad4f98af7b4431a38f",
+        "game/assets/environment/rustig_koppie_puresky_2k.hdr.import": "43c6fac666e31bf11a28d71eedd3090918e63cb0d85c709f13e58b757128db89",
+        "game/assets/environment/sky_sources.json": "ab2668db48e5548bde1ef8d9e89b2653329900cdb3dc0b27186fe4151269b796",
+        "game/assets/fonts/font_sources.json": "515e9899f59e96c3df9d9667aa24f8e29d4c3e6eae348cdd3d0ca99b1beb6e2c",
+        "game/assets/fonts/harbour_ui_font.tres": "3d7922f372f47a2e79fb6986bb0b9742f6bb2a03926f1d467dadcc02aaba9b9f",
+        "game/assets/fonts/NotoSans[wdth,wght].ttf": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+        "game/assets/fonts/NotoSans[wdth,wght].ttf.import": "3d7d21ff45fc83b5b6436dd542e011f2fc4810d2180cadd25a009a1425e5a033",
+        "game/assets/fonts/NotoSansArabic[wdth,wght].ttf": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+        "game/assets/fonts/NotoSansArabic[wdth,wght].ttf.import": "14f8f5f97b90f0c8becdf6e2f1db9cb92d7da56e4287a824be214aee46e635c9",
+        "game/assets/fonts/NotoSansCJKsc-Bold.otf": "b5f0d1a190a7f9b43c310a8850630af12553df32c4c050543f9059732d9b4c0a",
+        "game/assets/fonts/NotoSansCJKsc-Bold.otf.import": "ad41f9970aea274249e4cd51b30c418df0fd1407ca48e5e5169ea7a2eaf0ce66",
+        "game/assets/fonts/NotoSansCJKsc-Regular.otf": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+        "game/assets/fonts/NotoSansCJKsc-Regular.otf.import": "f24b7bb3f2ce94de4197ae70eb6550b13f7ffe0235d4fa2fe2e36a8d9040963d",
+        "game/assets/fonts/NotoSansMath-Regular.ttf": "3f495fe933c06786e4d5f6d86b8ee70b6753a68ee3b9d87528726de0f6e2c47d",
+        "game/assets/fonts/NotoSansMath-Regular.ttf.import": "f48335acfa3052223f0ee05c62795a306c02531d380826baecc056dc6125facd",
+        "game/assets/fx/artillery_smoke.png": "35980e299a6702614b47b45ddf7fb1472de919f427847b95d8aac81982d5fe5c",
+        "game/assets/fx/artillery_smoke.png.import": "4c50bf63b61c3a2e88ebe94ac3c94a81d2939e2e5bf1b600aa5d524a4651b06f",
+        "game/assets/fx/sources.json": "b1395c366d3c4825e5b8bf452a8f60d915305b341acf46e6bc61f11c0bf8ade5",
+        "game/assets/icc_geometry.json": "3b1e36dbb2bddd8ee063c4bc1917f9983d1f8391686e18be61146556af0b6b7d",
+        "game/assets/icon.svg": "da0c5aa28e24b84c5d3fb90c37b1b9fdc58f061a2752906cc1d5716f5d55786e",
+        "game/assets/icon.svg.import": "a0c634437ad8658a84e8e1afe79c1d0ca69f9ab8ccfe85d7bb80d673c798c4a0",
+        "game/assets/landmark_geography.json": "b15740fe9f33e40aa123343d25a75b22a54898e6627c969b9691487a7d575348",
+        "game/assets/manowar_piers.json": "37d6327046b9f7e8539dd7c5e911eea70a262c63ccdf11cf308034bac7054679",
+        "game/assets/sydney_summer.json": "1f472c3b717e4b56d1c752ae57c40f43228449ffdcb7a6d3fd4fbca14d6a9221",
+        "game/assets/world_facade.gdshader": "75b66a79b242ce047c94e34e03f94820c3cb014488c4a060041ce708785def28",
+        "game/assets/world_facade.gdshader.uid": "bc6f87ce6cb2bb18d15817c9f950a0a32328a25cb6a0bdc2d85ba84d328eed11",
+        "game/assets/world_geography.json": "d462461e2bf4df9a81e8d2f2b1a29220abe79f98153de6c9747126af2104cbf8",
+        "game/bootstrap.tscn": "784237bb2c30013203ed2ff1e5b592fb1a36bdd60075683b0c3489a2f4c0ff79",
+        "game/export_presets.cfg": "725d52aea794b5e9959c1faa47f603e428764c694fee206f12dc8bf884715e26",
+        "game/main.tscn": "5f77997d53d0a8bebf3427e51afb4bf44b069e9cc5996baf306c2f007c26e187",
+        "game/project.godot": "ed706aa2f298f227ad33f63630ebea349ad7d38ebf639f524d6bc6ca0f242a18",
+        "game/scripts/air_vehicle_models.gd": "2b157b45352ddd53915c66c33696fdc1f0d2af7366800e43f18e90071650f5a9",
+        "game/scripts/air_vehicle_models.gd.uid": "2f8e2a20c3674fce6c6c09b705618d6382dd5a3899ef97729edbc675e341c1b6",
+        "game/scripts/air_vehicle_validation.gd": "eed28b684108da54e3bca8fe3689d97e21036fdc678b460b5c5899923fe1a170",
+        "game/scripts/air_vehicle_validation.gd.uid": "273487b72e8545b210874c35b802dc05895ac643d15795b8f2f9940b8d625291",
+        "game/scripts/airport_world.gd": "22b0bd39eaff832a4295f91e64cae869ead8ee6270fe09410ec99987ae7c6bd6",
+        "game/scripts/airport_world.gd.uid": "83326459339ac975a53f6eac25b5990ce778e0f0abadb57487268d902e9699a6",
+        "game/scripts/arcade_impact.gd": "f1c61c28825eeff2c853698251c29eef8a9b67dc83b0ff243a3f217e3af54e07",
+        "game/scripts/arcade_impact.gd.uid": "bb79847c3d779914a15ac411b180653ea437fe7282146216fd5c4f85d1f952f2",
+        "game/scripts/audio_shutdown.gd": "e9e460452c66b141563263a1a1fef450f68629315415153b76ee950a765d5de7",
+        "game/scripts/audio_shutdown.gd.uid": "ce1441a59d0509a21249eb92f280a980d84e3f76a3c062a34d749206cc215cb9",
+        "game/scripts/bank_landmarks.gd": "366dd2fabd8402bb88400a660f1c6daa308a6b1c880b7113c5c354a1c4009b6b",
+        "game/scripts/bank_landmarks.gd.uid": "dd9a0055ce8cdc2006003a399bec1e7e9b94b587c22132d06e93b8818bc74f07",
+        "game/scripts/boat_models.gd": "e0e50c9cd13494abd694a894db9a2da1a78d3bcf840e0366cfbe0c08da4a4b6c",
+        "game/scripts/boat_models.gd.uid": "e408a83e5b10dbfacc617e09c6b87a57d121e08650b098c5cd00ff0ac9313f16",
+        "game/scripts/bootstrap.gd": "69d8a5f36604f9f72a3d9286bf0a7e7104a8766c67534448fd2ebf6bdc35bef4",
+        "game/scripts/bootstrap.gd.uid": "417bc426b77bbc063f5f1cfee86a64437caa6c7eaedb2d91e820419e5c29cda8",
+        "game/scripts/bridge_landmark.gd": "a6f86451dfcfc253d16d263fd29f021f4c84385bc36f7bf906193cf7adc2e080",
+        "game/scripts/bridge_landmark.gd.uid": "3afceda17e28b239ec5ec99df42a68e8c57370933e80c4841b716dd11808941c",
+        "game/scripts/circular_quay_detail.gd": "9ee1e84b1d1acbc2838d19c0171856033580b82fdedfe2264b173bc7202142c8",
+        "game/scripts/circular_quay_detail.gd.uid": "0f498fccd2c479765cc3c91a6ca469099863d12bb5e74051c25b488f29f52eb8",
+        "game/scripts/city_clock.gd": "08c1ab941e76cc0db1ddac9f1430da53181860f6be0831f95c512446bafe1468",
+        "game/scripts/city_clock.gd.uid": "60d81f4169434314ab6f7d29b40ca32031b520f449e3a72aac43d671fb5ec0bf",
+        "game/scripts/city_landmarks.gd": "9da41df654d1b9ba948ecb60e1e5949ed7a392a7a7ccaacd60670493b4cc1e40",
+        "game/scripts/city_landmarks.gd.uid": "3986d97ecd898540be1031b7f793fa7595d2f2275527dc23061680a7c79ac48d",
+        "game/scripts/city_map.gd": "f5bf1c4f69635fcc9da4d97ee991fd4b668226e0cc49c988d8d9a3caa5d5e6e5",
+        "game/scripts/city_map.gd.uid": "a84059dac2d0e1cf748bdd7f99f35c4bd8b78b9cfe99768e61612f13d0c967b6",
+        "game/scripts/combat_effects.gd": "e096bda1ee734d796bc1782aa5b331f8d25fbc2caef2569aa79a7f0b81265d7e",
+        "game/scripts/combat_effects.gd.uid": "fd94bdd3c9945ab3f9bae94f8628337cc316e49d1d57a5d9339743753b770945",
+        "game/scripts/combat_validation.gd": "2709c84994eb1ede3ce9e8eb2810bccc03fc3915cd18ca0c667ce437903d3d29",
+        "game/scripts/combat_validation.gd.uid": "bd156a2a81456c99ce008e12c916b7c32f2389f481f59c56ae784d85cf502a0e",
+        "game/scripts/cyber_landmarks.gd": "1768883c70f97b6ae82386f9890d2fd988a7b9bdba91037a9f80adec8f583c19",
+        "game/scripts/cyber_landmarks.gd.uid": "de829c736b1b74e8d29215dc091bc96b902ddec6a1d417cb36c887e22d9b4faa",
+        "game/scripts/darling_precinct_businesses.gd": "c2e95ea40c6f259a22d45157cc283b45b5caf85facb5b7d32cabd06a0ba9120a",
+        "game/scripts/darling_precinct_businesses.gd.uid": "c1d8bdef54df84193d122d71e2dc108467d4e239e2a94dcf8b02bf2e3295c5e9",
+        "game/scripts/darling_public_facilities.gd": "1d43f541fabc64d369bd4b1a1458b522a622ecc0bc0cc6ce9803899d8d4a1bcb",
+        "game/scripts/darling_public_facilities.gd.uid": "41219f2a112f6056e0d8a5ef569da308a1461feb130e29642f8dc818af7209a3",
+        "game/scripts/darling_square_detail.gd": "29882f5e126d6a0758ecb814074a544162aa82a2a7eccbb8286f087f15fb2c52",
+        "game/scripts/darling_square_detail.gd.uid": "84a4880598b187a6e362ec1593f050c1d47571f53875478d66ca16197ba91376",
+        "game/scripts/darling_square_frontages.gd": "68e315d5bcdc595422c3a638d103c99aab268d2b650f7ed85ad10e79db0e6ed9",
+        "game/scripts/darling_square_frontages.gd.uid": "3d13aa76a777a620ec830edda250682f7b7eb44663343b25a5ca36c9bb912e9c",
+        "game/scripts/daylight_environment.gd": "1ec40c20defdf7c76e61cf38049f4c26e98c8550dfd7bb11439fe018a0b68a77",
+        "game/scripts/daylight_environment.gd.uid": "979cd69a3715b51280e2419b2b35f6c060156c6457639685d56a1d174f384860",
+        "game/scripts/daylight_validation.gd": "97bf15ffda40377179903544dd85011bad34a4b91f38a1b1d823bcb77a8e1ea0",
+        "game/scripts/daylight_validation.gd.uid": "411d696893079009bb3c459c678608ecd809fbeca30795b26b36f68a38f9fa94",
+        "game/scripts/diagnostics_panel.gd": "6fa6246bf2ab37be41fbcf282c7b1c918ed0ceaeb6e5ec34c0385c8d91ad452c",
+        "game/scripts/diagnostics_panel.gd.uid": "c91d3a0759d6ff95936b7a34f8bd9704845cbcccef82693c9805b8c7f454463a",
+        "game/scripts/diagnostics_validation.gd": "8f319525507621aee8567feffd93fc4fc7e2b32312fc58594f74661175e54f8e",
+        "game/scripts/diagnostics_validation.gd.uid": "4442bd7fea49da6db49151c12549641acd2ca105ebfd3b116714ac78fdbeb6ca",
+        "game/scripts/driving_validation.gd": "d2036276aba83b03db55a05402321004244ae308883159138d88f03df3f5c639",
+        "game/scripts/driving_validation.gd.uid": "4f100aab7aecec8e137a2db7015e3ad107ab9f0781ac78d26fb3b779bb6e9715",
+        "game/scripts/encounter_spawn.gd": "a0face4d99e315fe27bd19163b91f851e8c4457b63cc46a370fb5a4431346aa6",
+        "game/scripts/encounter_spawn.gd.uid": "86b5593fb3cf70992f7de81f70a95e5dc907dd429ab8b2bad0339b5193adfff5",
+        "game/scripts/encounter_validation.gd": "e42cf3c9ec06a00df2f289d91aafb16c40ee6e6edad9fc62f3bae6c121555a88",
+        "game/scripts/encounter_validation.gd.uid": "2e7f776a989b2b2549a7d4fafaee544efe45eba1fa72896570c1eac96ae6f2af",
+        "game/scripts/experience_validation.gd": "fe0e340bc3ecaae96035feb6c28ee773d759b65cd45aad666075748e727b0005",
+        "game/scripts/experience_validation.gd.uid": "41add3c372d5dd2bb157353ef80a0a25867dd5156f282bc42ae48776ce50da20",
+        "game/scripts/facade_stream.gd": "a0bc53fcbb344253beb340ac6e13fed8e763e8adb76cd42fd989a576e7e9c0c8",
+        "game/scripts/facade_stream.gd.uid": "a1496b3b2fc4458856a64ebdc60046fba91412eecba2d741f392412ba5e8d5c4",
+        "game/scripts/fighter_models.gd": "73fde383872f939241343fef977ccbae2a3638a609a42f444286143e7ca06304",
+        "game/scripts/fighter_models.gd.uid": "c54d95203a5be2e246654bacf41e20d5f9e0540c7b8bc73e7d64dde8274c482d",
+        "game/scripts/fighter_motion.gd": "565ce2f66ad755f60f7b8004390255d11cf4bffd1b22fc9efa1912d28cf2498a",
+        "game/scripts/fighter_motion.gd.uid": "e193122fab222c3f6de7663184c74cc2241167770afc1170b3c2a4494fc3ff9c",
+        "game/scripts/flight_validation.gd": "7102f264228bd42cdc162c1f7dc5f76685cdeef076390fb8f675a2c4a5273615",
+        "game/scripts/flight_validation.gd.uid": "e103395f87b7493b1bf59c83c4ac0e89416512674c48c790c93f4f616bc90b9e",
+        "game/scripts/harbor_audio.gd": "05c1aacb80428c34aaf364d6a348245b4b14e0432d4cf6a8b6f2c8ae3341cab3",
+        "game/scripts/harbor_audio.gd.uid": "cb1767906c399e94fb82a68bd83053c2803749cfd3f063e43d8d60ba68341d13",
+        "game/scripts/harbor_cargo.gd": "092f7383b21afb478c30b54786a396065d311a695b62a05fd6d4e034817bfda7",
+        "game/scripts/harbor_cargo.gd.uid": "41511074f22e44ddb79302845f051a0f50f0a68817cc7b3e3d17028022639b3c",
+        "game/scripts/harbor_life.gd": "4d6bf2087e950575481d5303dfde1692a2ec4d697f9e07e1f9f2cc9b81c1bdc3",
+        "game/scripts/harbor_life.gd.uid": "d340de5682f407ba34c271c5051991d6faf96fa8040d8898e38b92b887e46076",
+        "game/scripts/harbor_map.gd": "81e7802565fb6591413b85669913f943eee0d808e369c3da17ddd7ef33346f9f",
+        "game/scripts/harbor_map.gd.uid": "94984b13ec7e63c7acf5878018ed30fdf084ac8b088f81bb99c4575b39c6152d",
+        "game/scripts/harbor_minimap.gd": "ab33922531289f123daf4d588a4f2a7e7b6e37f2bc85471c0aa4da39c917f818",
+        "game/scripts/harbor_minimap.gd.uid": "9ad40868f6fbdef40152929a3bb06cffc898147f67083262f6a38d5d8121555d",
+        "game/scripts/harbor_npc.gd": "d9595fa3e3073c1754e9dd3e478819dad2b59d7687438bd533951d080d0d7cd4",
+        "game/scripts/harbor_npc.gd.uid": "b7b8af6b5db48b719deac6143e4cd5dfaa673459c7e80126e487d4dca2d771fe",
+        "game/scripts/harbor_player.gd": "9cae57c1fd6320d8bf686be5955f43c0403592a763f1c9f6c38994fc9de3383e",
+        "game/scripts/harbor_player.gd.uid": "0278ea79b7c1df89c0e6d089279967bb2eef7daae0a31d7e0e681473a5669b36",
+        "game/scripts/harbor_survival.gd": "373da83404dc727f03fd3f0e51a10f0fdb6509f0f6234c66aedca9277aec1f03",
+        "game/scripts/harbor_survival.gd.uid": "4a26586f55ae44870ef92646d2dbe1ce365178879709d58d35703fe7f4d8b2c4",
+        "game/scripts/harbor_vehicle.gd": "4129be7d033cb026746b9625adb5178eb41a044ebd27769b9712a13b036ec21a",
+        "game/scripts/harbor_vehicle.gd.uid": "d14a95fe793940f90da177c62545ffd7c8ead1faf90209c51ef79450c3a41cb3",
+        "game/scripts/harbor_world.gd": "0279630cf2bd03a0142dbf7209fa9598909b8b09a0045460b2b1417e80a7fc88",
+        "game/scripts/harbor_world.gd.uid": "a45d00ee51197eb376dbc1511d7da086ac52c7021b1c54030c6ebbe28e33e2e9",
+        "game/scripts/hoverboard_models.gd": "0c9cbf344943b10159840603ffa4b26437e1f65e47e47959f2c02f86517a2f25",
+        "game/scripts/hoverboard_models.gd.uid": "3f7de50eafba0349e6a48ec691a9d9361e0e96c65c2ad1b4b89a3bc9fa95eb11",
+        "game/scripts/hoverboard_motion.gd": "5a434d68a9b44838893cc8e4909a86c32078fbaf16cd1ee93d27e876e793c09a",
+        "game/scripts/hoverboard_motion.gd.uid": "bc046b28d957159ea15f6f6b7641e7885d60065fa9797fa0f8b2cb0a9869fb95",
+        "game/scripts/icc_landmarks.gd": "46749a061df2ec71094144811532f4e5c755b4a37278c11cac5de513d89740bb",
+        "game/scripts/icc_landmarks.gd.uid": "6f91e32156fcd4aa0e88a316b56a5264944c7604ece7875ba638202e33a1e301",
+        "game/scripts/landmark_validation.gd": "cf9c949a2d316a502aa55587488b1c94e5bc529a2021604b958600f9d22cf35a",
+        "game/scripts/landmark_validation.gd.uid": "3c3081c1751115b4fb4de3ead90bb92ed717537955056c91f8f2917cb959bdbd",
+        "game/scripts/main.gd": "fdb7e9bcb231e580d49cf4683eaf5c3d6ca0a282155ed5f6533e3f629c984f7f",
+        "game/scripts/main.gd.uid": "5d7c1c07952d77960d71f9e22db5649a935b74086cdabc38a60728492483679d",
+        "game/scripts/manly_landmarks.gd": "7f33bab15a73704a0f263d8dab08d7752fe053368a83cd25377d646843326ab6",
+        "game/scripts/manly_landmarks.gd.uid": "d0343ed09d20e2b87c22aa4f2d2cc9017b3f5a720653625ea365bc5023136f4b",
+        "game/scripts/manowar_detail.gd": "1c885d9e55fba4d4e6f62cb30e02e1b157978fcd5f596c4b3e37b1ff25be877f",
+        "game/scripts/manowar_detail.gd.uid": "de95889b67abcab5994482bb61d29731f67665afd591662b3ab9fb270863f752",
+        "game/scripts/map_migration.gd": "4e03f33a0b352acb0d7326191d5a6b316a25c86903d1b784083b029dc901163b",
+        "game/scripts/map_migration.gd.uid": "32f18ac9620fb18de5b26f5fddb03e1a251f2150ca4ceb49619dda97a8f543e9",
+        "game/scripts/material_roles.gd": "153792865871ca8b7a6d1f83c77cef0e8b90068eee5155ce9458d5b62743b6f7",
+        "game/scripts/material_roles.gd.uid": "e05241fe34a7b686a3e510c68e1f0052b16aa6fdf5bbcade091b130beccfba97",
+        "game/scripts/metro_entrances.gd": "9199b44374c0546be6c4606a88efc99675e3c3e17e7a378c444f5bcc206b05ba",
+        "game/scripts/metro_entrances.gd.uid": "58f3fa98148f19b97fba2d73b1114ea99d6d26c1b71dc0efd9ccdbc7f016e9ef",
+        "game/scripts/mobility_validation.gd": "7bad13ac6d3236312b18434ab07b0dc1fe1a8f8675250e490b0c710034fd31ce",
+        "game/scripts/mobility_validation.gd.uid": "fa869cfc593359762e30bc31b222f1b480454165674ba463e4ef44f76451567d",
+        "game/scripts/nailong_enemy.gd": "31366dbada69ad15ad89fb08737b06e137738fa3cc883ed6b19bc44be7f3932c",
+        "game/scripts/nailong_enemy.gd.uid": "b6e9908fb04ce55d0fa6cc65edb213b60f209017f2af93669d895125cce1c5f8",
+        "game/scripts/nailong_model.gd": "8ef15eb72eb999b37cb14f51772e6c027781d9fb8127a44d7b858518fce0368b",
+        "game/scripts/nailong_model.gd.uid": "c05f240d91cf5a727a497db66aa82bda65efbfc3d349be379c69b38bddc256f1",
+        "game/scripts/navigation_guidance.gd": "a2151f03b38feeab22819690c2bdabbd9fedc897247b10db6694b9a3e754de50",
+        "game/scripts/navigation_guidance.gd.uid": "d5a0c3981aa0595521d663ce05248654b5f95c86d139d797e09e10fafda5f064",
+        "game/scripts/navigation_input_validation.gd": "02973fc043ccdc13f3dae712377d71559fa0c9536990073564c1ad45a8751078",
+        "game/scripts/navigation_input_validation.gd.uid": "52dfb21b0ebe677f488f880ed04f6e8e2400dff3f5ddfc8129972b372bdc4ff3",
+        "game/scripts/opera_access_validation.gd": "e2d4d36ddca07ad4f35a154fbca23394ad4bf0cb51df19abc8101189ce8e950d",
+        "game/scripts/opera_access_validation.gd.uid": "170c2e9fe6fabd4a17698af5ae2dd5029f86db6bb14028184934ba1638509ed3",
+        "game/scripts/opera_interiors.gd": "b592c078a8d2ddaeb11ea8dc9d0862c14660694ff562a64d0c3ced85466cbfd4",
+        "game/scripts/opera_interiors.gd.uid": "975939769fbe865f1cb086f9923b997b870d572eb342c82e7bab08b17d72a2d0",
+        "game/scripts/opera_landmark.gd": "7c4a84cda6227d17fee2801e018d176d8cd507315a697a02a44656e46b4b3be1",
+        "game/scripts/opera_landmark.gd.uid": "a2726dfa4d7885c8c8db7fe5a89b93efa1ef3be94ae1350f5188321713072808",
+        "game/scripts/precinct_validation.gd": "fb19159cb2e062d248d5a1bd7151c4efbe1e73d63b7e3e2c5c7193ff55dc1c62",
+        "game/scripts/precinct_validation.gd.uid": "6d5fe96f402251ee9d29e61816b0e53cd67c90f9ba54ee4d934314dfa2a4b1ef",
+        "game/scripts/public_lighting.gd": "1fbb249c351f8973878b1732f5a4e3f6a269cb1703a073d97645d0fddfda24ac",
+        "game/scripts/public_lighting.gd.uid": "30c2e09f4676b6b8d8ad594b1d34469371ed329f0b3dec22aee2fd7ba80bab86",
+        "game/scripts/quay_landmarks.gd": "54458a5f9e344d5cf749052d6caeb142740c7d162128e36cca319ebd53f54afc",
+        "game/scripts/quay_landmarks.gd.uid": "e3be1eadcacde6d1099a41ff5d29e7975c1e89ce0152c3eb173812bc6ed5feb2",
+        "game/scripts/qvb_public.gd": "fc55d0f93a4c513a13be456c1b47b6e3089ffc61af5c6f999302a6372edf978d",
+        "game/scripts/qvb_public.gd.uid": "01415cc9fe1fda0c91d30bd75e03cbec906b57562919be0ddc0d6cd0ac3d4e5e",
+        "game/scripts/road_motion.gd": "88202124c4a7467f0b3a4a24f3ee5e87d9fce0183dd24560c6fc8e48aaf2fec3",
+        "game/scripts/road_motion.gd.uid": "5f737d8aefb9954d88c00161723c7d6c5bae61bd199f89135f05a0b21cafc820",
+        "game/scripts/runtime_diagnostics.gd": "f80a58c042cbd66f3da8899ecdcc9a62142e77f5914936cefc875d25b48bffc3",
+        "game/scripts/runtime_diagnostics.gd.uid": "fc8cc710413161f09d048dca750430834cecda814a45aaefa3097d3a90a5fb89",
+        "game/scripts/save_store.gd": "3e213c96e6581500a679da7f169a33c3d3a1f85ae03792fd12f3874c8c4cfece",
+        "game/scripts/save_store.gd.uid": "4d3cec42a5c283e7530be8a7e7a193f5d9703aff6b7878d0dc72fcaace6a5261",
+        "game/scripts/survival_hud.gd": "cb856d2c2af322398b44e08b4eb3933a22058dd54a4cced6d8c97c52ad6a2e36",
+        "game/scripts/survival_hud.gd.uid": "36ccf663dcc793d64c79d41d8f6f3a651d037cb05d081b3514e00e48373e15d5",
+        "game/scripts/survival_validation.gd": "3d719ad0a0a3ddf669813ca0d08ef30cb245fcb0add2ab37a5d4462a97a1d78e",
+        "game/scripts/survival_validation.gd.uid": "cdb8eaefa47c34785a9e546192d483a55b9cab764c2ec3335b934dc92210214f",
+        "game/scripts/sydney_tower_landmark.gd": "922b205c05447f8db0dad8bd7490401c4fcd2a9bde8deab654ed5d6585c2349f",
+        "game/scripts/sydney_tower_landmark.gd.uid": "0996fe094ea4018fa8df892ef88d2d91d7225d51e3adfa70d80a63c0327ade16",
+        "game/scripts/tank_models.gd": "202608e72a1bcf5e9ccbecd0cd6a49702842299bd91dc2840e2b4fb083e43e8d",
+        "game/scripts/tank_models.gd.uid": "0d5927b9ec35ac27a250e2f26d78d82bb86048b5b4f53a65bff85d021b9c7a75",
+        "game/scripts/tank_motion.gd": "90b79b070578b063648fdf72a9edb930bdae255f3a5bfcf7ae7a05f4806fc8bb",
+        "game/scripts/tank_motion.gd.uid": "3f3f5a0b4650a04e15dacfc5d9163b578c21e3f7b9430b904b38d1f978949f8c",
+        "game/scripts/time_panel.gd": "31ec68e7b06d6ab6acd435e057e77c4b508391eff2d1c3670ad1a5c248a21cfa",
+        "game/scripts/time_panel.gd.uid": "3bf93f08f803a5131012ab5a916f58d2cb8ee66d0271d712963b8f133b2f51ef",
+        "game/scripts/trailer_capture.gd": "89ab7ef866cc1050b97e344dc5c453089e1d2c5a25ebf48cee3bb9a962fef3cd",
+        "game/scripts/trailer_capture.gd.uid": "90b61b202b53fcc10b7370fbf514ae4f4265726657ddafe8112c0518babfcb12",
+        "game/scripts/ui_font_validation.gd": "278be81e7a4831b3f4829d009a26c8ea6a0bdb229000b801317096c97846b065",
+        "game/scripts/ui_font_validation.gd.uid": "8ee6d67361d5e39cb7135a03744c0042f870d67fedd5bbe32c8f4278a8637420",
+        "game/scripts/ui_fonts.gd": "879559e1039eae6a91dfd163994bdba1ccdb68be87d347e1566987887dc53bb8",
+        "game/scripts/ui_fonts.gd.uid": "38fe7c67eb045c57f8b5e4ae13e6d29f02178ced80b94f1a94f224d7c5824453",
+        "game/scripts/vehicle_durability.gd": "52f93f763e75e232d6b3983b9d8b904c6c7357823ab75b7cf795a06d4f86c9cc",
+        "game/scripts/vehicle_durability.gd.uid": "e22a04b1ae9b3a3d1af4dd423a54dfdb4425e9b760e48f819b9a65afb92ac72e",
+        "game/scripts/vehicle_factory.gd": "d65f3ee8d9a55f86c40cfacd6e4ed2dff738560723c5665bce1d50a206a736f2",
+        "game/scripts/vehicle_factory.gd.uid": "44774982334a67cb401b8f50570c976e33ddec86d1133c052801e3026df241ba",
+        "game/scripts/vehicle_model_migration.gd": "0a6879c05c190331d092612f8e21508286b9d308cf9f5eddd03b1b9e88cdb7b3",
+        "game/scripts/vehicle_model_migration.gd.uid": "37f567dbb82908c6b8c3eff9ced5c20344f61ca0b80018b885bd8e368d0c3c39",
+        "game/scripts/vehicle_refinement.gd": "6d393f3bdd3fc50951d4ceedcd1a903ae7b4961a03f478f16fd475633ad8ab50",
+        "game/scripts/vehicle_refinement.gd.uid": "106d87d17540078ef77501b6ccbc3210a19690b77d02937b385365e40730d979",
+        "game/scripts/vehicle_spawn.gd": "bd791fc60d54f8500dc45296c4c48cac5645be29e6da2dfc6d18df12f68c46d5",
+        "game/scripts/vehicle_spawn.gd.uid": "1ad1de956835132c64301547810a0eba74a6b6a192dfca32cd1eb706710dfe7a",
+        "game/scripts/vehicle_support_weapons.gd": "2373d2f9897811d4497dc2f0098c7c5e97fb4e6fa1b756579ac7e936e6d0e21a",
+        "game/scripts/vehicle_support_weapons.gd.uid": "07e00326b45a006d3590951e07e0b819251eff5746d806cfbff2a93d3d874baf",
+        "game/scripts/vehicle_weapons.gd": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98",
+        "game/scripts/vehicle_weapons.gd.uid": "b63b378c421e1bfead5fcdc974b5155f8966b7d74a2a9c79d85dae189615b455",
+        "game/scripts/weapon_audio.gd": "44614e08ecba3d11fe5cba4eadfec9f47a9402326d1b44ecc081419e4f8ff752",
+        "game/scripts/weapon_audio.gd.uid": "743c84eea1e9d6120e19112ff2b48799a1b3e2fd73a7d37d2345cb1d0846ebe9",
+        "game/shaders/city_facade.gdshader": "0d5d1e398e83c0097685a893f9b29f3b93df3d46c9b2c97a442da5331c7ccfe9",
+        "game/shaders/city_facade.gdshader.uid": "896dab6adf880fc76165a85c5147180740117699a24809b7df76280c063a294b",
+        "game/shaders/combat_cloud.gdshader": "25751a0faf6850db6d685e2dc9961271b43edabd3ac36106992f60a862aaf782",
+        "game/shaders/combat_cloud.gdshader.uid": "678481097e0e348b730616c86a327752dd70ace890bc0376d9b6473e2b4b7a58",
+        "game/shaders/combat_pressure.gdshader": "c29d92e22adb813722650df523fbbd66843a3186585869d5d8feeaf53423d513",
+        "game/shaders/combat_pressure.gdshader.uid": "6504ef73e5fd7470015c37f217f21fa094cb0378d17290c6466a1eacc6261d56",
+        "game/shaders/opera_tiles.gdshader": "9f0654b0710637e54d35b7ab50784e3d10cb47c237a3edd17c7244d75448cfed",
+        "game/shaders/opera_tiles.gdshader.uid": "c297e7739f049896b6fcc82fbcc50d032a29604f0bcf91b265661f5e5e6372d5",
+        "game/shaders/water.gdshader": "a19530af5fc9342c2fd028401b9b542117fd7f27972669e993ef13e7cf445604",
+        "game/shaders/water.gdshader.uid": "490eeadd96ded5f8c7704593da61f88d4d34863cc08d9b7be32810e1e2e0121e",
+        "game/shaders/world_landcover.gdshader": "11025556e8c14fae9f8a793a3c3dc1372362028000fd11793c8a0f5c6437a234",
+        "game/shaders/world_landcover.gdshader.uid": "6af3282f73b1d919e374d96190b38b2060198670fa52f692adbf6d773f4475de"
+      },
+      "source_reference": "docs/evidence/v021-app/build.json",
+      "source_reference_sha256": "67f0220dc93a4596abee4fd221822fbbb9ff8125de5145505ee9702d2dcd6037",
+      "source_file_count": 223,
+      "source_frozen_from": "Matches docs/evidence/v021-app/build.json before staging; checked after export and ZIP packaging",
+      "windows_preset": "[preset.0]\nname=\"Windows Desktop\"\nplatform=\"Windows Desktop\"\nrunnable=true\nexport_filter=\"all_resources\"\ninclude_filter=\"assets/*.json\"\nexclude_filter=\"*.md,*.log,export_presets.cfg\"\nexport_path=\"\"\nscript_export_mode=2\n\n[preset.0.options]\ncustom_template/debug=\"C:/Users/runneradmin/AppData/Roaming/Godot/export_templates/4.7.2.stable/windows_debug_x86_64.exe\"\ncustom_template/release=\"C:/Users/runneradmin/AppData/Roaming/Godot/export_templates/4.7.2.stable/windows_release_x86_64.exe\"\nbinary_format/architecture=\"x86_64\"\nbinary_format/embed_pck=false\ndebug/export_console_wrapper=0\ntexture_format/s3tc_bptc=true\ntexture_format/etc2_astc=false\nshader_baker/enabled=false\ncodesign/enable=false\napplication/modify_resources=true\napplication/icon=\"res://assets/icon.svg\"\napplication/file_version=\"0.2.1.0\"\napplication/product_version=\"0.2.1.0\"\napplication/product_name=\"Harbourlife\"\napplication/file_description=\"Harbourlife Sydney\"\napplication/copyright=\"Harbourlife contributors, 2026\"\napplication/export_d3d12=2\napplication/export_angle=0\n",
+      "archive_sha256": "6904b9ea38dfc5e960801ce2345a55021401b9070032dd1c2d2d327b09ab1758",
+      "archive_bytes": 85420521,
+      "uncompressed_bytes": 189108125,
+      "app_identity": {
+        "executable_sha256": "7df86170fbe59a3df98b40ea8d29e3e66c2cb361b8f556f35d02612beb913175",
+        "pck_sha256": "5954969963fe34ac102699a9174be578f596be553ec6bfc1613ab72a6b971d42"
+      },
+      "package_files": {
+        "Harbourlife/Harbourlife.exe": {
+          "sha256": "7df86170fbe59a3df98b40ea8d29e3e66c2cb361b8f556f35d02612beb913175",
+          "bytes": 109165568
+        },
+        "Harbourlife/Harbourlife.pck": {
+          "sha256": "5954969963fe34ac102699a9174be578f596be553ec6bfc1613ab72a6b971d42",
+          "bytes": 79786376
+        },
+        "Harbourlife/LICENSE": {
+          "sha256": "7fe8af5832345b783f9489f155b20766604f6ba499ad797293b752cb84fda62c",
+          "bytes": 8000
+        },
+        "Harbourlife/licenses/ASSET_REGISTER.md": {
+          "sha256": "6c58efe795476341374669465e29d1039b135f1579418fc459a405b732b62841",
+          "bytes": 11794
+        },
+        "Harbourlife/licenses/DAYLIGHT_CYCLE.md": {
+          "sha256": "fdc5b1f6d0be7dbec29fa019f8f0427bb9c113f186f1b800c81150dc907f7eb2",
+          "bytes": 2513
+        },
+        "Harbourlife/licenses/DAYLIGHT_ENVIRONMENT.md": {
+          "sha256": "a9107f698578eab64d84892212761311f032c8773ccfa2047361200679af1fd3",
+          "bytes": 1767
+        },
+        "Harbourlife/licenses/FONTS.md": {
+          "sha256": "e6f68dad86a699af500fbdd882c9529178aa20261e167ad5c6e14b860afa8ed1",
+          "bytes": 3081
+        },
+        "Harbourlife/licenses/GENERATED_EFFECTS.md": {
+          "sha256": "4528ebf6e2357374f12f03035f4be27d8245a1c93b16665352f02de218d15a95",
+          "bytes": 1536
+        },
+        "Harbourlife/licenses/GEOGRAPHY.md": {
+          "sha256": "029a0476cf4b14a3d0ae7cafeea1e521ade5d2d3181c797a384f6ffc0e697ab4",
+          "bytes": 5789
+        },
+        "Harbourlife/licenses/GODOT_COPYRIGHT.txt": {
+          "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d",
+          "bytes": 100108
+        },
+        "Harbourlife/licenses/GODOT_LICENSE.txt": {
+          "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+          "bytes": 1149
+        },
+        "Harbourlife/licenses/notosans-OFL.txt": {
+          "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+          "bytes": 4396
+        },
+        "Harbourlife/licenses/notosansarabic-OFL.txt": {
+          "sha256": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96",
+          "bytes": 4382
+        },
+        "Harbourlife/licenses/NotoSansCJK-OFL.txt": {
+          "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+          "bytes": 4301
+        },
+        "Harbourlife/licenses/notosansmath-OFL.txt": {
+          "sha256": "403a95275b469061b7d4371c328e0ada3bc7d63328abe2e88aad5cd243b2fe21",
+          "bytes": 4380
+        },
+        "Harbourlife/PLAY_PERMISSION.md": {
+          "sha256": "5b56e89855625d1481d59a7553efa41e5de61bca52232f876e56b4770cf4037e",
+          "bytes": 1963
+        },
+        "Harbourlife/START-HERE.txt": {
+          "sha256": "294b129e80094b2e09d8407e5cba3955bf1315518369006547b947a0c226b3e4",
+          "bytes": 1022
+        }
+      },
+      "signature": "Unsigned preview; no signing certificate configured",
+      "rendering": {
+        "default": "Vulkan Forward+",
+        "gpu_tested_by_build": false
+      },
+      "runtime_tested_by_build": false
+    },
+    "source_baseline_sha256": "67f0220dc93a4596abee4fd221822fbbb9ff8125de5145505ee9702d2dcd6037",
+    "source_file_count": 223,
+    "archive_sha256": "6904b9ea38dfc5e960801ce2345a55021401b9070032dd1c2d2d327b09ab1758",
+    "pe_machine": "0x8664",
+    "app_identity": {
+      "executable_sha256": "7df86170fbe59a3df98b40ea8d29e3e66c2cb361b8f556f35d02612beb913175",
+      "pck_sha256": "5954969963fe34ac102699a9174be578f596be553ec6bfc1613ab72a6b971d42"
+    },
+    "pck_header": {
+      "format": 4,
+      "engine_major": 4,
+      "engine_minor": 7,
+      "engine_patch": 2
+    }
+  },
+  "process": {
+    "finished_utc": "2026-09-13T16:41:28.2775626Z",
+    "iterations": 15,
+    "passed": true,
+    "scope": "Headless CPU/runtime boot of the release EXE; no GPU, audio listening or manual input test.",
+    "started_utc": "2026-09-13T16:40:49.8953334Z",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "driving_process": {
+    "passed": true,
+    "timed_out": false,
+    "exit_code": 0,
+    "fixed_physics_hz": 60,
+    "wall_timeout_seconds": 300,
+    "started_utc": "2026-09-13T16:41:28.425354+00:00",
+    "scope": "Production exported Windows vehicle physics with bound input actions; headless, no GPU or manual-driving claim.",
+    "report_original_path": "${QA_TEMP}\\driving-user\\roaming\\Godot\\app_userdata\\Harbourlife \u00b7 \u6089\u5c3c\u6d77\u6e2f\\driving-qa\\report.json",
+    "observed_user_data_directory": "${QA_TEMP}\\driving-user\\roaming\\Godot\\app_userdata\\Harbourlife \u00b7 \u6089\u5c3c\u6d77\u6e2f",
+    "report_fresh": true,
+    "finished_utc": "2026-09-13T16:42:18.531825+00:00"
+  },
+  "driving": {
+    "backend": "Jolt Physics",
+    "checks": [
+      {
+        "metrics": {
+          "speed_kmh": 100.177933502197
+        },
+        "name": "car accelerates from rest to 100 km/h",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "engine_cut": true,
+          "remaining_kmh": 5.73261837999439e-09,
+          "stop_distance_m": 20.9251327514648,
+          "stop_seconds": 1.55
+        },
+        "name": "car emergency brake beats held throttle",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "up_dot": 1.0
+        },
+        "name": "car braking keeps chassis stable",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "end_kmh": 88.0389678955078,
+          "max_roll": 3.32587184459499e-08,
+          "max_slip_degrees": 27.8106640705003
+        },
+        "name": "car Ctrl turn creates controlled lateral drift",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "max_frame_acceleration_mps2": 15.8220630884171
+        },
+        "name": "car drift changes velocity through continuous forces",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "slip_degrees": 0.00924731215979001,
+          "up_dot": 1.0,
+          "yaw_mps": -0.000135145426611416
+        },
+        "name": "car release restores grip and straight tracking",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "slip_degrees": 7.58738604596881,
+          "up_dot": 1.0,
+          "yaw_mps": 0.28507137298584
+        },
+        "name": "car countersteer remains responsive",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "boost": false,
+          "brake": true,
+          "braking_accel": 17.0,
+          "drift_active": false,
+          "drift_blend": 0.926666666666667,
+          "drift_requested": true,
+          "drifting": true,
+          "drive_accel": 0.0,
+          "grounded": true,
+          "slip_angle_degrees": 7.97721202517028,
+          "steering": -0.799955005876925,
+          "target_slip_degrees": 19.3604666398207,
+          "yaw_rate": 0.177208058946402
+        },
+        "name": "car emergency braking overrides active drift",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "speed_kmh": 100.117515563965
+        },
+        "name": "motorcycle accelerates from rest to 100 km/h",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "engine_cut": true,
+          "remaining_kmh": 0.000370938138803467,
+          "stop_distance_m": 22.1095294952393,
+          "stop_seconds": 1.63333333333333
+        },
+        "name": "motorcycle emergency brake beats held throttle",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "up_dot": 0.999999940395355
+        },
+        "name": "motorcycle braking keeps chassis stable",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "end_kmh": 87.1602401733398,
+          "max_roll": 0.384418159723282,
+          "max_slip_degrees": 19.8876488331294
+        },
+        "name": "motorcycle Ctrl turn creates controlled lateral drift",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "max_frame_acceleration_mps2": 17.8149461746216
+        },
+        "name": "motorcycle drift changes velocity through continuous forces",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "slip_degrees": 0.0234903255066553,
+          "up_dot": 0.999958872795105,
+          "yaw_mps": -0.000494291249196976
+        },
+        "name": "motorcycle release restores grip and straight tracking",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "slip_degrees": 7.95925306786796,
+          "up_dot": 0.912577152252197,
+          "yaw_mps": 0.252519905567169
+        },
+        "name": "motorcycle countersteer remains responsive",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "boost": false,
+          "brake": true,
+          "braking_accel": 16.0,
+          "drift_active": false,
+          "drift_blend": 0.926666666666667,
+          "drift_requested": true,
+          "drifting": true,
+          "drive_accel": 0.0,
+          "grounded": true,
+          "slip_angle_degrees": 8.27984274118323,
+          "steering": -0.799992592130206,
+          "target_slip_degrees": 15.1121642714094,
+          "yaw_rate": 0.158996032619223
+        },
+        "name": "motorcycle emergency braking overrides active drift",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "heading_change_degrees": 57.3926172239346,
+          "health": 100.0,
+          "roll": 0.397798091173172,
+          "speed_kmh": 38.9675411224365
+        },
+        "name": "motorcycle city turn left responds within 1.25 seconds",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "heading_change_degrees": -57.3895587215867,
+          "health": 100.0,
+          "roll": -0.398882061243057,
+          "speed_kmh": 38.9674072265625
+        },
+        "name": "motorcycle city turn right responds within 1.25 seconds",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "left_radians": 1.00169013689447,
+          "right_radians": 1.00163675595832
+        },
+        "name": "motorcycle left and right have comparable authority",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "achieved_kmh": 1259.99549560547,
+          "base_kmh": 420.0,
+          "health": 100.0,
+          "peak_kmh": 1259.99560546875
+        },
+        "name": "car Shift reaches triple speed through acceleration",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "turn_radians": -0.0770603567361832,
+          "up_dot": 1.0
+        },
+        "name": "car boost steering stays stable",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "limit_kmh": 1260.0,
+          "slip_degrees": -21.6654716874449,
+          "total_peak_kmh": 1259.96407470703,
+          "up_dot": 1.0
+        },
+        "name": "car combined Ctrl and Shift respects total speed ceiling",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "base_kmh": 420.0,
+          "first_frame_speed_drop_kmh": 2.56201171875,
+          "remaining_kmh": 420.080410766602
+        },
+        "name": "car release boost smoothly restores normal maximum",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "drive_accel": 0.0,
+          "health": 100.0,
+          "remaining_kmh": 2.35653057067964e-09
+        },
+        "name": "car Space stops despite held Shift and W",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "achieved_kmh": 959.995568847656,
+          "base_kmh": 320.0,
+          "health": 100.0,
+          "peak_kmh": 959.996118164063
+        },
+        "name": "motorcycle Shift reaches triple speed through acceleration",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "turn_radians": -0.0725577045377577,
+          "up_dot": 0.942636787891388
+        },
+        "name": "motorcycle boost steering stays stable",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "health": 100.0,
+          "limit_kmh": 960.0,
+          "slip_degrees": -22.1621936845634,
+          "total_peak_kmh": 959.987658691406,
+          "up_dot": 0.907287836074829
+        },
+        "name": "motorcycle combined Ctrl and Shift respects total speed ceiling",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "base_kmh": 320.0,
+          "first_frame_speed_drop_kmh": 2.09674072265625,
+          "remaining_kmh": 320.006469726563
+        },
+        "name": "motorcycle release boost smoothly restores normal maximum",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "drive_accel": 0.0,
+          "health": 100.0,
+          "remaining_kmh": 0.000737576046958566
+        },
+        "name": "motorcycle Space stops despite held Shift and W",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "heading": 0.0,
+          "speed_mps": 7.97238497440844e-10
+        },
+        "name": "stationary drift input does not spin or launch a car",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "driving": {
+            "boost": false,
+            "brake": false,
+            "braking_accel": 0.0,
+            "drift_active": true,
+            "drift_blend": 1.0,
+            "drift_requested": true,
+            "drifting": true,
+            "drive_accel": 14.0,
+            "grounded": true,
+            "slip_angle_degrees": -33.1478780603505,
+            "steering": 0.999999960052118,
+            "target_slip_degrees": -28.6475423658236,
+            "yaw_rate": -0.23648522560011
+          },
+          "parked": {
+            "boost": false,
+            "brake": true,
+            "braking_accel": 1.28673551813563e-08,
+            "drift_active": false,
+            "drift_blend": 0.0,
+            "drift_requested": false,
+            "drifting": false,
+            "drive_accel": 0.0,
+            "grounded": true,
+            "slip_angle_degrees": 0.0,
+            "steering": 0.0,
+            "target_slip_degrees": 0.0,
+            "yaw_rate": 0.0
+          },
+          "parked_speed": 1.6002663638659e-09
+        },
+        "name": "separate vehicles do not share steering or drift state",
+        "pass": true,
+        "passed": true
+      },
+      {
+        "metrics": {
+          "grounded": false,
+          "velocity": [
+            0.0,
+            -7.19399785995483,
+            0.0
+          ],
+          "yaw_mps": 0.0
+        },
+        "name": "airborne road controls create no artificial thrust or yaw",
+        "pass": true,
+        "passed": true
+      }
+    ],
+    "count": 32,
+    "engine": "4.7.2-stable (official)",
+    "failures": 0,
+    "native": false,
+    "passed": true,
+    "physics_hz": 60,
+    "save_written": false,
+    "scope": "Actual production HarborVehicle and input actions on an isolated flat road. No velocity or transform writes after initial placement. This validates arcade controls, not real-world handling or display rendering.",
+    "screenshots": [],
+    "source_sha256": {
+      "res://scripts/driving_validation.gd": "",
+      "res://scripts/harbor_vehicle.gd": "",
+      "res://scripts/main.gd": "",
+      "res://scripts/road_motion.gd": ""
+    },
+    "user_saves_touched": false
+  },
+  "survival_process": {
+    "passed": true,
+    "timed_out": false,
+    "exit_code": 0,
+    "fixed_physics_hz": 60,
+    "wall_timeout_seconds": 300,
+    "started_utc": "2026-09-13T16:42:18.608214+00:00",
+    "scope": "Production exported Windows survival integration in the full city, including physical H/B input, enemy damage, tank projectile rewards and paid repair; headless, no native rendering claim.",
+    "report_original_path": "${QA_TEMP}\\survival-user\\roaming\\Godot\\app_userdata\\Harbourlife \u00b7 \u6089\u5c3c\u6d77\u6e2f\\survival-qa\\report.json",
+    "observed_user_data_directory": "${QA_TEMP}\\survival-user\\roaming\\Godot\\app_userdata\\Harbourlife \u00b7 \u6089\u5c3c\u6d77\u6e2f",
+    "report_fresh": true,
+    "finished_utc": "2026-09-13T16:42:55.706428+00:00"
+  },
+  "survival": {
+    "checks": [
+      {
+        "detail": {
+          "structure_components": 21697
+        },
+        "name": "full existing Sydney city and airport ready",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "unsaved survival starts with 120 health, 3 medkits and $50000",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "Bennelong forecourt has existing walkable city collision",
+        "passed": true
+      },
+      {
+        "detail": {
+          "point": [
+            400.0,
+            4.57999992370605,
+            -117.0
+          ]
+        },
+        "name": "production spawn finds safe real-city floor: roamer",
+        "passed": true
+      },
+      {
+        "detail": {
+          "point": [
+            389.0,
+            4.57999992370605,
+            -114.052558898926
+          ]
+        },
+        "name": "production spawn finds safe real-city floor: runner",
+        "passed": true
+      },
+      {
+        "detail": {
+          "point": [
+            380.947448730469,
+            4.57999992370605,
+            -106.0
+          ]
+        },
+        "name": "production spawn finds safe real-city floor: brute",
+        "passed": true
+      },
+      {
+        "detail": {
+          "point": [
+            378.0,
+            4.57999992370605,
+            -95.0
+          ]
+        },
+        "name": "production spawn finds safe real-city floor: spitter",
+        "passed": true
+      },
+      {
+        "detail": {
+          "point": [
+            378.000152587891,
+            4.57999992370605,
+            -94.9208297729492
+          ]
+        },
+        "name": "production spawn finds safe real-city floor: alpha",
+        "passed": true
+      },
+      {
+        "detail": {
+          "clear_capsule": true,
+          "on_floor": true,
+          "point": [
+            400.0,
+            4.50039863586426,
+            -117.0
+          ]
+        },
+        "name": "spawn settles on floor without wall overlap: roamer",
+        "passed": true
+      },
+      {
+        "detail": {
+          "clear_capsule": true,
+          "on_floor": true,
+          "point": [
+            389.0,
+            4.50039863586426,
+            -114.052558898926
+          ]
+        },
+        "name": "spawn settles on floor without wall overlap: runner",
+        "passed": true
+      },
+      {
+        "detail": {
+          "clear_capsule": true,
+          "on_floor": true,
+          "point": [
+            380.947448730469,
+            4.50039863586426,
+            -106.0
+          ]
+        },
+        "name": "spawn settles on floor without wall overlap: brute",
+        "passed": true
+      },
+      {
+        "detail": {
+          "clear_capsule": true,
+          "on_floor": true,
+          "point": [
+            378.0,
+            4.50039863586426,
+            -95.0
+          ]
+        },
+        "name": "spawn settles on floor without wall overlap: spitter",
+        "passed": true
+      },
+      {
+        "detail": {
+          "clear_capsule": true,
+          "on_floor": true,
+          "point": [
+            378.000152587891,
+            4.50039863586426,
+            -94.9208297729492
+          ]
+        },
+        "name": "spawn settles on floor without wall overlap: alpha",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "all five production enemy identities spawned",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "all five photo positions have clear city-floor capsules and sightlines",
+        "passed": true
+      },
+      {
+        "detail": {
+          "after": 112.0,
+          "before": 120.0,
+          "physics_frames": 40,
+          "saw_windup": true
+        },
+        "name": "real nearby enemy winds up then hurts player without instant kill",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "physical H routes through main input to heal and consume one kit",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "repeat H cannot spend another kit during cooldown",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "physical B opens paused service menu with free pointer",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "nearby combat allows medical supplies while full repair stays blocked",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "production free tank spawn immediately seats player",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "tank target uses open line of sight over existing city floor",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "production fire button launches occupied tank projectile",
+        "passed": true
+      },
+      {
+        "detail": {
+          "kills_after": 1,
+          "kills_before": 0,
+          "money_after": 50120,
+          "money_before": 50000,
+          "weapon_stats": {
+            "active_projectiles": 0,
+            "active_recoils": 1,
+            "effects": {
+              "active": 1,
+              "active_muzzles": 1,
+              "allocated": 12,
+              "audio_players": 20,
+              "capacity": 12,
+              "discharges": 1,
+              "emitted": 1,
+              "muzzle_allocated": 8,
+              "muzzle_capacity": 8,
+              "particle_instances_per_blast": 108,
+              "physical_debris_bodies": 0,
+              "stage_seconds": {
+                "dust": 2.15,
+                "flash": 0.38,
+                "pressure": 0.55,
+                "smoke": 3.4
+              }
+            },
+            "expired": 0,
+            "fired": 1,
+            "hits": 1,
+            "pool_rejections": 0,
+            "projectile_capacity": 32,
+            "projectiles_allocated": 32,
+            "recoil_capacity": 16
+          }
+        },
+        "name": "actual tank blast kills real enemy and credits reward once",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "eight-second combat timeout clears while exploration runs",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_after_armor": 25.0,
+          "health": 75.0
+        },
+        "name": "survival tank armor permits damage and records shared durability",
+        "passed": true
+      },
+      {
+        "detail": {
+          "cost": 750,
+          "reason": ""
+        },
+        "name": "safe B menu offers enabled paid repair",
+        "passed": true
+      },
+      {
+        "detail": {
+          "after": 49370,
+          "before": 50120,
+          "cost": 750,
+          "tank_health": 100.0
+        },
+        "name": "real repair menu callback deducts price and restores shared fleet",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "leaving services resumes gameplay",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "compiled script resources resolve; external App/PCK hashes must bind this run",
+        "passed": true
+      }
+    ],
+    "count": 30,
+    "display_driver": "headless",
+    "native": false,
+    "passed": true,
+    "performance_sample": {},
+    "save_written": false,
+    "scope": "Full main, existing Sydney city and airport. Production spawn queries, real enemy physics/windup/damage, actual H/B input, tank projectile collision/reward and paid repair UI callback. Initial actor/camera poses frozen for reproducible native captures; fixed projectile step. Separate native 90-frame sample with active enemy AI; not a player-drive or sustained balance test.",
+    "screenshots": [],
+    "source_evidence": {
+      "res://scripts/audio_shutdown.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_player.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_survival.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_vehicle.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/main.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_enemy.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_model.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/survival_hud.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/survival_validation.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_support_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      }
+    },
+    "source_evidence_start": {
+      "res://scripts/audio_shutdown.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_player.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_survival.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_vehicle.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/main.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_enemy.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_model.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/survival_hud.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/survival_validation.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_support_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      }
+    },
+    "source_sha256": {},
+    "source_verification": "Compiled resources resolve only; use external final App executable/PCK SHA256 evidence to identify this tested build",
+    "spawns": [
+      {
+        "initial": [
+          400.0,
+          4.57999992370605,
+          -117.0
+        ],
+        "kind": "roamer",
+        "settled": [
+          400.0,
+          4.50039863586426,
+          -117.0
+        ]
+      },
+      {
+        "initial": [
+          389.0,
+          4.57999992370605,
+          -114.052558898926
+        ],
+        "kind": "runner",
+        "settled": [
+          389.0,
+          4.50039863586426,
+          -114.052558898926
+        ]
+      },
+      {
+        "initial": [
+          380.947448730469,
+          4.57999992370605,
+          -106.0
+        ],
+        "kind": "brute",
+        "settled": [
+          380.947448730469,
+          4.50039863586426,
+          -106.0
+        ]
+      },
+      {
+        "initial": [
+          378.0,
+          4.57999992370605,
+          -95.0
+        ],
+        "kind": "spitter",
+        "settled": [
+          378.0,
+          4.50039863586426,
+          -95.0
+        ]
+      },
+      {
+        "initial": [
+          378.000152587891,
+          4.57999992370605,
+          -94.9208297729492
+        ],
+        "kind": "alpha",
+        "settled": [
+          378.000152587891,
+          4.50039863586426,
+          -94.9208297729492
+        ]
+      }
+    ],
+    "user_saves_touched": false,
+    "world_ready": true
+  },
+  "encounter_process": {
+    "passed": true,
+    "timed_out": false,
+    "exit_code": 0,
+    "fixed_physics_hz": 60,
+    "wall_timeout_seconds": 300,
+    "started_utc": "2026-09-13T16:42:55.781387+00:00",
+    "scope": "Production exported Windows encounter integration in the full city, automatic spawning and pursuit at home, Opera, airport and CBD, 90-metre replacement with old threats retained, V/B controls and automatic tank support with actual H field repairs; headless, no native rendering claim.",
+    "report_original_path": "${QA_TEMP}\\encounter-user\\roaming\\Godot\\app_userdata\\Harbourlife \u00b7 \u6089\u5c3c\u6d77\u6e2f\\encounter-qa\\report.json",
+    "observed_user_data_directory": "${QA_TEMP}\\encounter-user\\roaming\\Godot\\app_userdata\\Harbourlife \u00b7 \u6089\u5c3c\u6d77\u6e2f",
+    "report_fresh": true,
+    "finished_utc": "2026-09-13T16:43:41.321659+00:00"
+  },
+  "encounter": {
+    "auto_spawn_enabled": true,
+    "checks": [
+      {
+        "detail": {
+          "structures": 21697
+        },
+        "name": "complete production Sydney city and airport loaded",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "default new game actually enables automatic encounters",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 1.01666666666667
+        },
+        "name": "default home: automatic first enemy within 6 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "alive_count": 4,
+          "total_created": 4
+        },
+        "name": "default home: at least 3 naturally spawned threats by 10 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 2.53333333333333
+        },
+        "name": "default home: natural pursuit closes at least 4 metres",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 5.88333333333333
+        },
+        "name": "default home: threat reaches 8 metres",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "default home: every initial capsule clear of city and vehicles",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "default home: enemies remain assigned to current player or vehicle",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 12.2833333333333,
+          "windup_s": 5.31666666666667
+        },
+        "name": "default home: natural windup culminates in real damage",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 12.2833333333333,
+          "grace_s": 12.0
+        },
+        "name": "default home: preparation protects player until grace ends",
+        "passed": true
+      },
+      {
+        "detail": {
+          "after": 104.0,
+          "before": 120.0
+        },
+        "name": "default home: first contact is survivable without forced healing",
+        "passed": true
+      },
+      {
+        "detail": {
+          "position": [
+            -335.0,
+            4.49064970016479,
+            -13.0
+          ]
+        },
+        "name": "default home falls onto real ground",
+        "passed": true
+      },
+      {
+        "detail": {
+          "requested": [
+            412.644561767578,
+            15.6999998092651,
+            -259.153747558594
+          ],
+          "support_id": "opera/podium/upper/2/4"
+        },
+        "name": "Opera public upper podium: existing production walking surface",
+        "passed": true
+      },
+      {
+        "detail": {
+          "position": [
+            412.644561767578,
+            15.6902751922607,
+            -259.153747558594
+          ]
+        },
+        "name": "Opera public upper podium: player naturally grounded",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 0.483333333333333
+        },
+        "name": "Opera public upper podium: automatic first enemy within 6 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "alive_count": 4,
+          "total_created": 4
+        },
+        "name": "Opera public upper podium: at least 3 naturally spawned threats by 10 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 3.7
+        },
+        "name": "Opera public upper podium: natural pursuit closes at least 4 metres",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 5.93333333333333
+        },
+        "name": "Opera public upper podium: threat reaches 8 metres",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "Opera public upper podium: every initial capsule clear of city and vehicles",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "Opera public upper podium: enemies remain assigned to current player or vehicle",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 11.4833333333333,
+          "windup_s": 6.93333333333333
+        },
+        "name": "Opera public upper podium: natural windup culminates in real damage",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 11.4833333333333,
+          "grace_s": 11.4833333333333
+        },
+        "name": "Opera public upper podium: preparation protects player until grace ends",
+        "passed": true
+      },
+      {
+        "detail": {
+          "after": 97.0,
+          "before": 120.0
+        },
+        "name": "Opera public upper podium: first contact is survivable without forced healing",
+        "passed": true
+      },
+      {
+        "detail": {
+          "requested": [
+            -3076.22802734375,
+            6.40000009536743,
+            9585.876953125
+          ],
+          "support_id": "Airport_North_Land"
+        },
+        "name": "airport apron: existing production walking surface",
+        "passed": true
+      },
+      {
+        "detail": {
+          "position": [
+            -3076.22802734375,
+            6.24027585983276,
+            9585.876953125
+          ]
+        },
+        "name": "airport apron: player naturally grounded",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 0.483333333333333
+        },
+        "name": "airport apron: automatic first enemy within 6 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "alive_count": 4,
+          "total_created": 4
+        },
+        "name": "airport apron: at least 3 naturally spawned threats by 10 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 2.0
+        },
+        "name": "airport apron: natural pursuit closes at least 4 metres",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 5.3
+        },
+        "name": "airport apron: threat reaches 8 metres",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "airport apron: every initial capsule clear of city and vehicles",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "airport apron: enemies remain assigned to current player or vehicle",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 11.6666666666667,
+          "windup_s": 4.78333333333333
+        },
+        "name": "airport apron: natural windup culminates in real damage",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 11.6666666666667,
+          "grace_s": 11.4833333333333
+        },
+        "name": "airport apron: preparation protects player until grace ends",
+        "passed": true
+      },
+      {
+        "detail": {
+          "after": 94.0,
+          "before": 120.0
+        },
+        "name": "airport apron: first contact is survivable without forced healing",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "90 metre neighbouring airport surface exists",
+        "passed": true
+      },
+      {
+        "detail": {
+          "kills": 0,
+          "old_count": 4
+        },
+        "name": "neighbouring encounter begins with zero kills and existing threats",
+        "passed": true
+      },
+      {
+        "detail": {
+          "first_reinforcement_s": 1.3,
+          "metres": 90.0,
+          "new_nearby": 1,
+          "old_retained": 3
+        },
+        "name": "90 metre move gets a new threat while old enemies are still alive",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "new nearby encounters require no kills and award no skipped clearance",
+        "passed": true
+      },
+      {
+        "detail": {
+          "requested": [
+            -206.199996948242,
+            4.59999990463257,
+            1105.0
+          ],
+          "support_id": "OSM_Land_6"
+        },
+        "name": "CBD Pitt Street Mall: existing production walking surface",
+        "passed": true
+      },
+      {
+        "detail": {
+          "position": [
+            -206.199996948242,
+            4.49027585983276,
+            1105.0
+          ]
+        },
+        "name": "CBD Pitt Street Mall: player naturally grounded",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 0.483333333333333
+        },
+        "name": "CBD Pitt Street Mall: automatic first enemy within 6 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "alive_count": 4,
+          "total_created": 4
+        },
+        "name": "CBD Pitt Street Mall: at least 3 naturally spawned threats by 10 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 2.0
+        },
+        "name": "CBD Pitt Street Mall: natural pursuit closes at least 4 metres",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 5.3
+        },
+        "name": "CBD Pitt Street Mall: threat reaches 8 metres",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "CBD Pitt Street Mall: every initial capsule clear of city and vehicles",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "CBD Pitt Street Mall: enemies remain assigned to current player or vehicle",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 11.7333333333333,
+          "windup_s": 4.78333333333333
+        },
+        "name": "CBD Pitt Street Mall: natural windup culminates in real damage",
+        "passed": true
+      },
+      {
+        "detail": {
+          "damage_s": 11.7333333333333,
+          "grace_s": 11.4833333333333
+        },
+        "name": "CBD Pitt Street Mall: preparation protects player until grace ends",
+        "passed": true
+      },
+      {
+        "detail": {
+          "after": 94.2666666666667,
+          "before": 120.0
+        },
+        "name": "CBD Pitt Street Mall: first contact is survivable without forced healing",
+        "passed": true
+      },
+      {
+        "detail": {
+          "direction": [
+            0.0,
+            0.0,
+            18.0
+          ],
+          "end": [
+            -206.199996948242,
+            4.49087715148926,
+            1118.00012207031
+          ],
+          "metres": 13.0001220703125,
+          "start": [
+            -206.199996948242,
+            4.49027585983276,
+            1105.0
+          ]
+        },
+        "name": "real player input travels along Pitt Street Mall",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "abandonment starts with naturally populated encounter",
+        "passed": true
+      },
+      {
+        "detail": {
+          "old_count": 4,
+          "quota": 8,
+          "remaining_old_enemy": false,
+          "replacement_s": 1.36666666666667,
+          "wave_spawned": 1
+        },
+        "name": "leaving a district retires distant enemies and naturally replaces them",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "abandonment never pays kill or wave rewards",
+        "passed": true
+      },
+      {
+        "detail": {
+          "wave_kills": 2,
+          "wave_spawned": 2
+        },
+        "name": "synthetic stale full-wave save retains kills but frees absent enemy slots",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "legacy wave respite is removed on state recovery",
+        "passed": true
+      },
+      {
+        "detail": {
+          "enemies": 1,
+          "first_spawn_s": 0.6
+        },
+        "name": "stale wave recovery resumes actual automatic spawning",
+        "passed": true
+      },
+      {
+        "detail": {
+          "requested": [
+            -2752.23828125,
+            6.46000003814697,
+            11492.724609375
+          ],
+          "support_id": "Asphalt"
+        },
+        "name": "tank runway setup: existing production walking surface",
+        "passed": true
+      },
+      {
+        "detail": {
+          "position": [
+            -2752.23828125,
+            6.45027589797974,
+            11492.724609375
+          ]
+        },
+        "name": "tank runway setup: player naturally grounded",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "normal free tank request succeeds and enters vehicle",
+        "passed": true
+      },
+      {
+        "detail": {
+          "metres": 44.5060348510742
+        },
+        "name": "production tank input moves the current target",
+        "passed": true
+      },
+      {
+        "detail": {
+          "seconds": 0.0166666666666667
+        },
+        "name": "tank airport pursuit: automatic first enemy within 6 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "alive_count": 7,
+          "total_created": 7
+        },
+        "name": "tank airport pursuit: at least 3 naturally spawned threats by 10 seconds",
+        "passed": true
+      },
+      {
+        "detail": {
+          "approach_s": 1.45,
+          "natural_kills": 0
+        },
+        "name": "tank airport pursuit: threats approach vehicle or are defeated by its automatic defence",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "tank airport pursuit: every initial capsule clear of city and vehicles",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "tank airport pursuit: enemies remain assigned to current player or vehicle",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "automatic defence starts enabled in a real occupied tank",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "physical V disables automatic support without leaving vehicle",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "physical V restores automatic support and runtime status",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "physical B opens paused field services with a usable pointer",
+        "passed": true
+      },
+      {
+        "detail": {
+          "current": "\u4f24\u5bb3 90 \u00b7 \u534a\u5f84 16.0 m \u00b7 \u88c5\u586b 1.15 s",
+          "next": "\u4e0b\u4e00\u7ea7\uff1a\u4f24\u5bb3 113 \u00b7 \u534a\u5f84 19.2 m \u00b7 \u88c5\u586b 1.03 s",
+          "stats": {
+            "ammo_cost": 0,
+            "at_max": false,
+            "base": {
+              "ammo_cost": 0,
+              "cooldown": 1.15,
+              "damage": 90.0,
+              "effect": 1.0,
+              "energy": 1000000000.0,
+              "gravity": 9.8,
+              "level": 0,
+              "life": 10.0,
+              "radius": 16.0,
+              "speed": 440.0
+            },
+            "current": {
+              "ammo_cost": 0,
+              "cooldown": 1.15,
+              "damage": 90.0,
+              "effect": 1.0,
+              "energy": 1000000000.0,
+              "gravity": 9.8,
+              "level": 0,
+              "life": 10.0,
+              "radius": 16.0,
+              "speed": 440.0
+            },
+            "level": 0,
+            "max_level": 3,
+            "next": {
+              "ammo_cost": 0,
+              "cooldown": 1.035,
+              "damage": 112.5,
+              "effect": 1.2,
+              "energy": 1000000000.0,
+              "gravity": 9.8,
+              "level": 1,
+              "life": 10.0,
+              "radius": 19.2,
+              "speed": 440.0
+            }
+          }
+        },
+        "name": "B menu shows actual current and next damage radius reload plus V state",
+        "passed": true
+      },
+      {
+        "detail": {
+          "failures": []
+        },
+        "name": "service controls have no overlap or horizontal text clipping",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "nearby enemies do not block paid weapon upgrades",
+        "passed": true
+      },
+      {
+        "detail": {
+          "cost": 8000,
+          "improved": {
+            "ammo_cost": 0,
+            "cooldown": 1.035,
+            "damage": 112.5,
+            "effect": 1.2,
+            "energy": 1000000000.0,
+            "gravity": 9.8,
+            "level": 1,
+            "life": 10.0,
+            "radius": 19.2,
+            "speed": 440.0
+          },
+          "level": 1
+        },
+        "name": "actual B upgrade callback spends coins and improves area damage and reload",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "closing B resumes the same occupied tank and continuous encounters",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "production tank automatic defence is enabled by default",
+        "passed": true
+      },
+      {
+        "detail": {
+          "repairs": [
+            {
+              "balance_after": 41675,
+              "balance_before": 42800,
+              "coins_paid": 1125,
+              "concurrent_kill_rewards": 0,
+              "cooldown_after_s": 11.9833333333333,
+              "elapsed_s": 24.8,
+              "expected_cost": 1125,
+              "health_after": 74.0,
+              "health_before": 49.0,
+              "net_durability_gain": 25.0,
+              "repeat_H_charged": false
+            },
+            {
+              "balance_after": 40550,
+              "balance_before": 41675,
+              "coins_paid": 1125,
+              "concurrent_kill_rewards": 0,
+              "cooldown_after_s": 11.9833333333333,
+              "elapsed_s": 36.7666666666667,
+              "expected_cost": 1125,
+              "health_after": 55.0,
+              "health_before": 30.0,
+              "net_durability_gain": 25.0,
+              "repeat_H_charged": false
+            }
+          ]
+        },
+        "name": "continuous defence uses real paid H repairs with health recovery",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "repeat H is blocked by its production repair cooldown",
+        "passed": true
+      },
+      {
+        "detail": {
+          "cleared": 1,
+          "elapsed_s": 48.0,
+          "final_spawn_sequence": 19,
+          "first_clear_s": 42.0,
+          "natural_kills": 9,
+          "net_money_change": 220,
+          "player_actions": "Automatic support remains enabled; real H events buy repairs below 50% health and test cooldown. No main-cannon fire or direct health writes.",
+          "region": "automatic tank support with player H field repairs",
+          "remaining_enemies": 10,
+          "repairs": [
+            {
+              "balance_after": 41675,
+              "balance_before": 42800,
+              "coins_paid": 1125,
+              "concurrent_kill_rewards": 0,
+              "cooldown_after_s": 11.9833333333333,
+              "elapsed_s": 24.8,
+              "expected_cost": 1125,
+              "health_after": 74.0,
+              "health_before": 49.0,
+              "net_durability_gain": 25.0,
+              "repeat_H_charged": false
+            },
+            {
+              "balance_after": 40550,
+              "balance_before": 41675,
+              "coins_paid": 1125,
+              "concurrent_kill_rewards": 0,
+              "cooldown_after_s": 11.9833333333333,
+              "elapsed_s": 36.7666666666667,
+              "expected_cost": 1125,
+              "health_after": 55.0,
+              "health_before": 30.0,
+              "net_durability_gain": 25.0,
+              "repeat_H_charged": false
+            }
+          ],
+          "rest_stayed_zero": true,
+          "spawn_sequence_at_clear": 17,
+          "vehicle_health": 25.6666666666667,
+          "weapons": {
+            "active_projectiles": 0,
+            "ammo_cost": 0,
+            "available": true,
+            "blocked": 0,
+            "enabled": true,
+            "expired": 0,
+            "fired": 99,
+            "hits": 99,
+            "locked": true,
+            "mount_count": 1,
+            "profile": {
+              "ammo_cost": 0,
+              "cooldown": 0.6175,
+              "damage": 13.2,
+              "level": 1,
+              "life": 3.0,
+              "range": 75.0,
+              "speed": 110.0
+            },
+            "projectile_capacity": 8,
+            "projectiles_allocated": 8,
+            "reload_remaining": 0.2675,
+            "simulation_seconds": 66.6333333333308,
+            "state": "\u9501\u5b9a",
+            "target_distance": 19.2001953125,
+            "target_id": 7202945503191
+          }
+        },
+        "name": "real automatic tank defence reaches a rewarded kill milestone",
+        "passed": true
+      },
+      {
+        "detail": {
+          "clear_s": 42.0,
+          "spawns_after_clear": 2
+        },
+        "name": "kill milestone continues reinforcement without scheduled respite",
+        "passed": true
+      },
+      {
+        "detail": {
+          "health": 25.6666666666667
+        },
+        "name": "tank survives the first continuous natural defence milestone",
+        "passed": true
+      },
+      {
+        "detail": {
+          "cap": 24,
+          "peak": 11
+        },
+        "name": "encounter cap respected throughout production simulation",
+        "passed": true
+      },
+      {
+        "detail": {},
+        "name": "production source identity stable during validation",
+        "passed": true
+      }
+    ],
+    "count": 82,
+    "direct_enemy_spawn_calls": 0,
+    "display_driver": "headless",
+    "forced_damage_calls": 0,
+    "native": false,
+    "observed_physics_seconds": 131.08333333333,
+    "passed": true,
+    "physics_hz": 60,
+    "qa_running": true,
+    "save_written": false,
+    "scenarios": [
+      {
+        "count_at_10s": 4,
+        "count_at_5s": 4,
+        "elapsed_s": 14.0,
+        "enemies": [
+          {
+            "approach_s": 2.53333333333333,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0034446716309,
+            "minimum_distance_m": 1.74587607383728,
+            "near_s": 6.11666666666667,
+            "spawn": [
+              -335.0,
+              4.88000011444092,
+              -35.0
+            ],
+            "spawn_s": 1.01666666666667,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 8.26666666666667
+          },
+          {
+            "approach_s": 3.73333333333333,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0034427642822,
+            "minimum_distance_m": 1.74584496021271,
+            "near_s": 7.31666666666667,
+            "spawn": [
+              -335.079162597656,
+              4.88000011444092,
+              -34.9998550415039
+            ],
+            "spawn_s": 2.21666666666667,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 9.46666666666667
+          },
+          {
+            "approach_s": 4.26666666666667,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.000171661377,
+            "minimum_distance_m": 0.920386552810669,
+            "near_s": 5.88333333333333,
+            "spawn": [
+              -356.999847412109,
+              4.58000040054321,
+              -13.0791730880737
+            ],
+            "spawn_s": 3.41666666666667,
+            "target_correct": true,
+            "type": "runner",
+            "windup_s": 6.86666666666667
+          },
+          {
+            "approach_s": -1.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001811981201,
+            "minimum_distance_m": 21.8958148956299,
+            "near_s": -1.0,
+            "spawn": [
+              -357.0,
+              4.58000040054321,
+              -12.9999990463257
+            ],
+            "spawn_s": 4.61666666666667,
+            "target_correct": true,
+            "type": "spitter",
+            "windup_s": 5.31666666666667
+          }
+        ],
+        "final_position": [
+          -335.0,
+          4.49064970016479,
+          -13.0
+        ],
+        "first_approach_4m_s": 2.53333333333333,
+        "first_damage_s": 12.2833333333333,
+        "first_spawn_s": 1.01666666666667,
+        "first_windup_s": 5.31666666666667,
+        "first_within_8m_s": 5.88333333333333,
+        "grace_at_start_s": 12.0,
+        "last_spawn_diagnostics": {
+          "candidates": 1,
+          "elapsed_ms": 0.153,
+          "position": "(-357.0, 4.58, -13.0)",
+          "reason": "\u5976\u9f99\u6b63\u5728\u63a5\u8fd1"
+        },
+        "natural_kills": 0,
+        "origin": [
+          -335.0,
+          6.0,
+          -13.0
+        ],
+        "player_health": 104.0,
+        "region": "default home",
+        "total_spawned_at_10s": 4,
+        "vehicle_health": -1.0
+      },
+      {
+        "count_at_10s": 4,
+        "count_at_5s": 4,
+        "elapsed_s": 14.0,
+        "enemies": [
+          {
+            "approach_s": 4.31666666666667,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001850128174,
+            "minimum_distance_m": 1.80113077163696,
+            "near_s": 7.88333333333333,
+            "spawn": [
+              393.561248779297,
+              15.7799997329712,
+              -270.100311279297
+            ],
+            "spawn_s": 0.483333333333333,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 10.05
+          },
+          {
+            "approach_s": 3.7,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001754760742,
+            "minimum_distance_m": 1.78627371788025,
+            "near_s": 7.26666666666667,
+            "spawn": [
+              393.631713867188,
+              15.7799997329712,
+              -270.222229003906
+            ],
+            "spawn_s": 1.68333333333333,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 9.43333333333333
+          },
+          {
+            "approach_s": 4.33333333333333,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001754760742,
+            "minimum_distance_m": 1.18755912780762,
+            "near_s": 5.93333333333333,
+            "spawn": [
+              393.592010498047,
+              15.7799997329712,
+              -270.153747558594
+            ],
+            "spawn_s": 2.88333333333333,
+            "target_correct": true,
+            "type": "runner",
+            "windup_s": 6.93333333333333
+          },
+          {
+            "approach_s": -1.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0251789093018,
+            "minimum_distance_m": 22.0251789093018,
+            "near_s": -1.0,
+            "spawn": [
+              390.644561767578,
+              14.6374158859253,
+              -259.153747558594
+            ],
+            "spawn_s": 4.08333333333333,
+            "target_correct": true,
+            "type": "spitter",
+            "windup_s": -1.0
+          }
+        ],
+        "final_position": [
+          412.644561767578,
+          15.6902751922607,
+          -259.153747558594
+        ],
+        "first_approach_4m_s": 3.7,
+        "first_damage_s": 11.4833333333333,
+        "first_spawn_s": 0.483333333333333,
+        "first_windup_s": 6.93333333333333,
+        "first_within_8m_s": 5.93333333333333,
+        "grace_at_start_s": 11.4833333333333,
+        "last_spawn_diagnostics": {
+          "candidates": 1,
+          "elapsed_ms": 0.205,
+          "position": "(390.6446, 14.63742, -259.1537)",
+          "reason": "\u5976\u9f99\u6b63\u5728\u63a5\u8fd1"
+        },
+        "natural_kills": 0,
+        "origin": [
+          412.644561767578,
+          15.6902751922607,
+          -259.153747558594
+        ],
+        "player_health": 97.0,
+        "region": "Opera public upper podium",
+        "total_spawned_at_10s": 4,
+        "vehicle_health": -1.0
+      },
+      {
+        "count_at_10s": 4,
+        "count_at_5s": 4,
+        "elapsed_s": 14.0,
+        "enemies": [
+          {
+            "approach_s": 2.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001831054688,
+            "minimum_distance_m": 1.74710321426392,
+            "near_s": 5.55,
+            "spawn": [
+              -3076.22802734375,
+              6.32999992370605,
+              9563.876953125
+            ],
+            "spawn_s": 0.483333333333333,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 7.7
+          },
+          {
+            "approach_s": 3.16666666666667,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0003356933594,
+            "minimum_distance_m": 1.80387222766876,
+            "near_s": 6.7,
+            "spawn": [
+              -3087.22802734375,
+              6.32999992370605,
+              9566.82421875
+            ],
+            "spawn_s": 1.68333333333333,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 8.85
+          },
+          {
+            "approach_s": 3.68333333333333,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001239776611,
+            "minimum_distance_m": 1.55826878547668,
+            "near_s": 5.3,
+            "spawn": [
+              -3095.28051757813,
+              6.32999992370605,
+              9574.876953125
+            ],
+            "spawn_s": 2.88333333333333,
+            "target_correct": true,
+            "type": "runner",
+            "windup_s": 8.65
+          },
+          {
+            "approach_s": -1.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001831054688,
+            "minimum_distance_m": 21.8959980010986,
+            "near_s": -1.0,
+            "spawn": [
+              -3098.22802734375,
+              6.32999992370605,
+              9585.876953125
+            ],
+            "spawn_s": 4.08333333333333,
+            "target_correct": true,
+            "type": "spitter",
+            "windup_s": 4.78333333333333
+          }
+        ],
+        "final_position": [
+          -3076.22802734375,
+          6.24027585983276,
+          9585.876953125
+        ],
+        "first_approach_4m_s": 2.0,
+        "first_damage_s": 11.6666666666667,
+        "first_spawn_s": 0.483333333333333,
+        "first_windup_s": 4.78333333333333,
+        "first_within_8m_s": 5.3,
+        "grace_at_start_s": 11.4833333333333,
+        "last_spawn_diagnostics": {
+          "candidates": 1,
+          "elapsed_ms": 0.16,
+          "position": "(-3098.228, 6.33, 9585.877)",
+          "reason": "\u5976\u9f99\u6b63\u5728\u63a5\u8fd1"
+        },
+        "natural_kills": 0,
+        "origin": [
+          -3076.22802734375,
+          6.24027585983276,
+          9585.876953125
+        ],
+        "player_health": 94.0,
+        "region": "airport apron",
+        "total_spawned_at_10s": 4,
+        "vehicle_health": -1.0
+      },
+      {
+        "count_at_10s": 4,
+        "count_at_5s": 4,
+        "elapsed_s": 14.0,
+        "enemies": [
+          {
+            "approach_s": 2.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001831054688,
+            "minimum_distance_m": 1.71597540378571,
+            "near_s": 5.58333333333333,
+            "spawn": [
+              -206.199996948242,
+              4.57999992370605,
+              1083.0
+            ],
+            "spawn_s": 0.483333333333333,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 7.75
+          },
+          {
+            "approach_s": 3.18333333333333,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0002288818359,
+            "minimum_distance_m": 1.81793010234833,
+            "near_s": 6.76666666666667,
+            "spawn": [
+              -217.199996948242,
+              4.57999992370605,
+              1085.94738769531
+            ],
+            "spawn_s": 1.68333333333333,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": 8.91666666666667
+          },
+          {
+            "approach_s": 3.68333333333333,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001907348633,
+            "minimum_distance_m": 1.57686471939087,
+            "near_s": 5.3,
+            "spawn": [
+              -225.252563476563,
+              4.57999992370605,
+              1094.0
+            ],
+            "spawn_s": 2.88333333333333,
+            "target_correct": true,
+            "type": "runner",
+            "windup_s": 8.66666666666667
+          },
+          {
+            "approach_s": -1.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 22.0001831054688,
+            "minimum_distance_m": 21.895845413208,
+            "near_s": -1.0,
+            "spawn": [
+              -228.199996948242,
+              4.57999992370605,
+              1105.0
+            ],
+            "spawn_s": 4.08333333333333,
+            "target_correct": true,
+            "type": "spitter",
+            "windup_s": 4.78333333333333
+          }
+        ],
+        "final_position": [
+          -206.199996948242,
+          4.49027585983276,
+          1105.0
+        ],
+        "first_approach_4m_s": 2.0,
+        "first_damage_s": 11.7333333333333,
+        "first_spawn_s": 0.483333333333333,
+        "first_windup_s": 4.78333333333333,
+        "first_within_8m_s": 5.3,
+        "grace_at_start_s": 11.4833333333333,
+        "last_spawn_diagnostics": {
+          "candidates": 1,
+          "elapsed_ms": 0.146,
+          "position": "(-228.2, 4.58, 1105.0)",
+          "reason": "\u5976\u9f99\u6b63\u5728\u63a5\u8fd1"
+        },
+        "natural_kills": 0,
+        "origin": [
+          -206.199996948242,
+          4.49027585983276,
+          1105.0
+        ],
+        "player_health": 94.2666666666667,
+        "region": "CBD Pitt Street Mall",
+        "total_spawned_at_10s": 4,
+        "vehicle_health": -1.0
+      },
+      {
+        "count_at_10s": 7,
+        "count_at_5s": 6,
+        "elapsed_s": 14.0,
+        "enemies": [
+          {
+            "approach_s": 1.45,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 55.865234375,
+            "minimum_distance_m": 16.537109375,
+            "near_s": -1.0,
+            "spawn": [
+              -2752.23828125,
+              6.46087694168091,
+              11489.6953125
+            ],
+            "spawn_s": 0.0166666666666667,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": -1.0
+          },
+          {
+            "approach_s": 1.45,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 46.8746871948242,
+            "minimum_distance_m": 7.42428779602051,
+            "near_s": 13.8,
+            "spawn": [
+              -2763.43310546875,
+              6.46087694168091,
+              11499.697265625
+            ],
+            "spawn_s": 0.0166666666666667,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": -1.0
+          },
+          {
+            "approach_s": -1.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 21.9923267364502,
+            "minimum_distance_m": 18.8666286468506,
+            "near_s": -1.0,
+            "spawn": [
+              -2769.32373046875,
+              6.42087745666504,
+              11530.0341796875
+            ],
+            "spawn_s": 0.0166666666666667,
+            "target_correct": true,
+            "type": "runner",
+            "windup_s": -1.0
+          },
+          {
+            "approach_s": -1.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 24.2388496398926,
+            "minimum_distance_m": 21.7743740081787,
+            "near_s": -1.0,
+            "spawn": [
+              -2778.39770507813,
+              6.25087738037109,
+              11549.359375
+            ],
+            "spawn_s": 0.0166666666666667,
+            "target_correct": true,
+            "type": "spitter",
+            "windup_s": 0.866666666666667
+          },
+          {
+            "approach_s": 2.66666666666667,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 23.9431095123291,
+            "minimum_distance_m": 16.133113861084,
+            "near_s": -1.0,
+            "spawn": [
+              -2775.7138671875,
+              6.32999992370605,
+              11562.9130859375
+            ],
+            "spawn_s": 0.783333333333333,
+            "target_correct": true,
+            "type": "brute",
+            "windup_s": -1.0
+          },
+          {
+            "approach_s": 3.23333333333333,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 23.0691795349121,
+            "minimum_distance_m": 15.8526754379272,
+            "near_s": -1.0,
+            "spawn": [
+              -2765.7919921875,
+              6.32999992370605,
+              11572.8349609375
+            ],
+            "spawn_s": 1.98333333333333,
+            "target_correct": true,
+            "type": "runner",
+            "windup_s": -1.0
+          },
+          {
+            "approach_s": 8.3,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 23.3076171875,
+            "minimum_distance_m": 3.248046875,
+            "near_s": 12.3166666666667,
+            "spawn": [
+              -2752.23828125,
+              6.53999996185303,
+              11576.466796875
+            ],
+            "spawn_s": 6.78333333333333,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": -1.0
+          },
+          {
+            "approach_s": -1.0,
+            "clear_initial_capsule": true,
+            "grounded_seen": true,
+            "initial_distance_m": 23.0691795349121,
+            "minimum_distance_m": 22.1689281463623,
+            "near_s": -1.0,
+            "spawn": [
+              -2738.6845703125,
+              6.53999996185303,
+              11572.8349609375
+            ],
+            "spawn_s": 13.6166666666667,
+            "target_correct": true,
+            "type": "roamer",
+            "windup_s": -1.0
+          }
+        ],
+        "final_position": [
+          -2752.23828125,
+          7.42000007629395,
+          11549.359375
+        ],
+        "first_approach_4m_s": 1.45,
+        "first_damage_s": 9.75,
+        "first_spawn_s": 0.0166666666666667,
+        "first_windup_s": 0.866666666666667,
+        "first_within_8m_s": 12.3166666666667,
+        "grace_at_start_s": 6.98333333333314,
+        "last_spawn_diagnostics": {
+          "candidates": 1,
+          "elapsed_ms": 0.143,
+          "position": "(-2738.685, 6.54, 11572.83)",
+          "reason": "\u5976\u9f99\u6b63\u5728\u63a5\u8fd1"
+        },
+        "natural_kills": 0,
+        "origin": [
+          -2752.23828125,
+          7.42000007629395,
+          11549.359375
+        ],
+        "player_health": 120.0,
+        "region": "tank airport pursuit",
+        "total_spawned_at_10s": 7,
+        "vehicle_health": 96.0
+      },
+      {
+        "cleared": 1,
+        "elapsed_s": 48.0,
+        "final_spawn_sequence": 19,
+        "first_clear_s": 42.0,
+        "natural_kills": 9,
+        "net_money_change": 220,
+        "player_actions": "Automatic support remains enabled; real H events buy repairs below 50% health and test cooldown. No main-cannon fire or direct health writes.",
+        "region": "automatic tank support with player H field repairs",
+        "remaining_enemies": 10,
+        "repairs": [
+          {
+            "balance_after": 41675,
+            "balance_before": 42800,
+            "coins_paid": 1125,
+            "concurrent_kill_rewards": 0,
+            "cooldown_after_s": 11.9833333333333,
+            "elapsed_s": 24.8,
+            "expected_cost": 1125,
+            "health_after": 74.0,
+            "health_before": 49.0,
+            "net_durability_gain": 25.0,
+            "repeat_H_charged": false
+          },
+          {
+            "balance_after": 40550,
+            "balance_before": 41675,
+            "coins_paid": 1125,
+            "concurrent_kill_rewards": 0,
+            "cooldown_after_s": 11.9833333333333,
+            "elapsed_s": 36.7666666666667,
+            "expected_cost": 1125,
+            "health_after": 55.0,
+            "health_before": 30.0,
+            "net_durability_gain": 25.0,
+            "repeat_H_charged": false
+          }
+        ],
+        "rest_stayed_zero": true,
+        "spawn_sequence_at_clear": 17,
+        "vehicle_health": 25.6666666666667,
+        "weapons": {
+          "active_projectiles": 0,
+          "ammo_cost": 0,
+          "available": true,
+          "blocked": 0,
+          "enabled": true,
+          "expired": 0,
+          "fired": 99,
+          "hits": 99,
+          "locked": true,
+          "mount_count": 1,
+          "profile": {
+            "ammo_cost": 0,
+            "cooldown": 0.6175,
+            "damage": 13.2,
+            "level": 1,
+            "life": 3.0,
+            "range": 75.0,
+            "speed": 110.0
+          },
+          "projectile_capacity": 8,
+          "projectiles_allocated": 8,
+          "reload_remaining": 0.2675,
+          "simulation_seconds": 66.6333333333308,
+          "state": "\u9501\u5b9a",
+          "target_distance": 19.2001953125,
+          "target_id": 7202945503191
+        }
+      }
+    ],
+    "scope": "Complete production city/airport and real automatic encounters. Region origins, a 90-metre neighbouring relocation and a distant district relocation are fixture setup; walking/driving use production input. Actual V/B events and paid upgrade callbacks. Enemy creation/pursuit remains automatic; no forced damage, altered grace or enemy poses. Parked unused vehicles are frozen. Fixed-step correctness and natural encounter screenshots, not sustained FPS or broad play-balance research.",
+    "screenshots": [],
+    "simulation_seconds": 131.3,
+    "source_end": {
+      "res://scripts/audio_shutdown.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/encounter_spawn.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/encounter_validation.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_player.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_survival.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_vehicle.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/main.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_enemy.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_model.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/survival_hud.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_support_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      }
+    },
+    "source_start": {
+      "res://scripts/audio_shutdown.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/encounter_spawn.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/encounter_validation.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_player.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_survival.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/harbor_vehicle.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/main.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_enemy.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/nailong_model.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/survival_hud.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_support_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      },
+      "res://scripts/vehicle_weapons.gd": {
+        "loadable": true,
+        "representation": "compiled_resource"
+      }
+    },
+    "user_saves_touched": false,
+    "world_ready": true
+  },
+  "app_identity_after": {
+    "executable_sha256": "7df86170fbe59a3df98b40ea8d29e3e66c2cb361b8f556f35d02612beb913175",
+    "pck_sha256": "5954969963fe34ac102699a9174be578f596be553ec6bfc1613ab72a6b971d42"
+  },
+  "runtime_errors": [],
+  "world_ready_counts": [
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ]
+  ],
+  "interactive_ready_components": [
+    "21697",
+    "21697"
+  ],
+  "driving_complete_counts": [
+    "32",
+    "32"
+  ],
+  "survival_complete_counts": [
+    "30",
+    "30"
+  ],
+  "encounter_complete_counts": [
+    "82",
+    "82"
+  ],
+  "encounter_world_ready_counts": [
+    [
+      "15097",
+      "21697"
+    ],
+    [
+      "15097",
+      "21697"
+    ]
+  ],
+  "log_sha256": {
+    "stdout.log": "ad8cfe68be0f0b33312db93a3c2ca9937984aeb940289d24c74776b8f2d7f814",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "engine.log": "211fc6d92b1114d38d0604fc87b0aa4189d7ee2dac961e558f66a0220dc13d25",
+    "driving-stdout.log": "52ada6f54cdc732fbf77e750de94e572ef3320892563a639991774ed4c7c6053",
+    "driving-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "driving-engine.log": "cd6c857e84f4d1e06bb9216811cce3591d266698f5f1723642d1e9f4f71dd861",
+    "survival-stdout.log": "db5a45d2294e7b1867f5a06cd3b59ccc5f368bcb2a5bdafd904e51585ba70759",
+    "survival-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "survival-engine.log": "4ef01b8ece0cf6d1ef330c1a8398d41921648355d790179ac5c62aeb821e189d",
+    "encounter-stdout.log": "226e218cf0c819ca7c9c54903b94e2aa4343726df9c8bdad75abb216fdfdc10d",
+    "encounter-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encounter-engine.log": "2af02f9871cb514c69a91f64a75c6ce71c5f6cc732efe75e1a59a58ee09752cd"
+  },
+  "driving_report_sha256": "aee1740ca4e4b8722745f7bedb8c6acd8cc3bbde421616a7fdf529623b490bd0",
+  "survival_report_sha256": "e36afb9799406ffb7471d83c9bc0bc4b7e2405bb6f00194b0eb3d71c52389c0b",
+  "encounter_report_sha256": "b602b63ceee9d53c90740cd42a52149e51b1cba51d1fb4dc68a7f8ccfac983c4",
+  "scope": "Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state; full-city survival enemy spawning, damage, H/B input, tank projectile rewards and paid fleet repair; natural home/Opera/airport/CBD encounters, pursuit and neighbouring reinforcement while old enemies remain, stale-wave recovery, V/B controls and paid fire-control upgrades, automatic tank support with actual H field repairs. Exported scripts may be compiled resources; external executable/PCK hashes identify the tested build. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.",
+  "save_isolation": "Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving, survival and encounter report locations are observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa, --driving-qa, --survival-qa and --encounter-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving, survival or encounter evidence causes failure."
+}

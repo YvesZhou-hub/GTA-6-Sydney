@@ -1,0 +1,31 @@
+{
+  "app_identity": {
+    "executable_sha256": "4d0373fc42156d5ca41d904d71d7b18bc5eea0256895d50a0c11b70ae137d5ff",
+    "pck_sha256": "10e5b71f5de2c3b8bc5fcc1e6dbbe4e65123873033683d1f69a4079db347b1f1"
+  },
+  "app_identity_unchanged": true,
+  "mode": "survival",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--survival-qa"
+  ],
+  "audio_driver": null,
+  "audio_driver_scope": "Engine default; no driver override requested",
+  "audio_listening_verified": false,
+  "audio_validation_scope": "Unattended automated QA; audible sound was not manually verified",
+  "started_utc": "2026-09-13T15:59:00.608690+00:00",
+  "wall_seconds": 96.091,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 40,
+  "passed": true,
+  "screenshots": [
+    "services-paid-repair.png",
+    "five-nailong-city-hud.png",
+    "services-during-combat-blocked.png",
+    "tank-survival-impact-hud.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

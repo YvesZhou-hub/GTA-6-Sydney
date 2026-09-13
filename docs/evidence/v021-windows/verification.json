@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "checked_utc": "2026-09-13T17:59:52.724448+00:00",
+  "checks": {
+    "successful_run_on_exact_candidate": true,
+    "report_bound_to_run_and_candidate": true,
+    "release_target_remains_exact_candidate": true,
+    "all_37_aggregate_gates_true": true,
+    "all_23_package_checks_true": true,
+    "driving_all_checks_count_and_unique": true,
+    "driving_required_behaviors": true,
+    "driving_completed_fresh_no_timeout": true,
+    "driving_completion_marker_matches": true,
+    "driving_headless_and_save_isolated": true,
+    "survival_all_checks_count_and_unique": true,
+    "survival_required_behaviors": true,
+    "survival_completed_fresh_no_timeout": true,
+    "survival_completion_marker_matches": true,
+    "survival_headless_and_save_isolated": true,
+    "encounter_all_checks_count_and_unique": true,
+    "encounter_required_behaviors": true,
+    "encounter_completed_fresh_no_timeout": true,
+    "encounter_completion_marker_matches": true,
+    "encounter_headless_and_save_isolated": true,
+    "jolt_60_hz": true,
+    "full_production_world_loaded": true,
+    "natural_autospawn_not_synthetic": true,
+    "all_logs_without_errors_or_warnings": true,
+    "all_223_game_sources_match_mac_build": true,
+    "mac_source_reference_digest_exact": true,
+    "same_official_engine_as_mac": true,
+    "all_223_game_sources_match_committed_git_blobs": true,
+    "executable_and_pck_unchanged_after_all_stages": true,
+    "package_file_hashes_match_tested_identity": true,
+    "raw_validation_asset_hash_matches_sums_and_github": true,
+    "raw_sums_asset_hash_matches_github": true,
+    "server_zip_hash_matches_cloud_execution_and_sums": true,
+    "server_zip_size_matches_build": true
+  },
+  "check_count": 34,
+  "run": {
+    "conclusion": "success",
+    "databaseId": 34769213189,
+    "event": "workflow_dispatch",
+    "headSha": "44cdc69987fa3f9f946afb9d875e3ed34d1b499e",
+    "status": "completed",
+    "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34769213189"
+  },
+  "release_at_verification": {
+    "tagName": "v0.2.1-preview.1",
+    "isDraft": true,
+    "targetCommitish": "44cdc69987fa3f9f946afb9d875e3ed34d1b499e"
+  },
+  "asset_metadata": {
+    "Harbourlife-Windows-x86_64.zip": {
+      "apiUrl": "https://api.github.com/repos/YvesZhou-hub/GTA-6-Sydney/releases/assets/561560893",
+      "contentType": "application/zip",
+      "createdAt": "2026-09-13T16:43:51Z",
+      "digest": "sha256:6904b9ea38dfc5e960801ce2345a55021401b9070032dd1c2d2d327b09ab1758",
+      "downloadCount": 0,
+      "id": "RA_kwDOUUpM-s4heL09",
+      "label": "",
+      "name": "Harbourlife-Windows-x86_64.zip",
+      "size": 85420521,
+      "state": "uploaded",
+      "updatedAt": "2026-09-13T16:43:55Z",
+      "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/untagged-2c8430d6397d4f1753f5/Harbourlife-Windows-x86_64.zip"
+    },
+    "Windows-SHA256SUMS.txt": {
+      "apiUrl": "https://api.github.com/repos/YvesZhou-hub/GTA-6-Sydney/releases/assets/561560896",
+      "contentType": "text/plain; charset=utf-8",
+      "createdAt": "2026-09-13T16:43:51Z",
+      "digest": "sha256:749c48514b2d73a3d08665c8e4318d9a5592e36c206d311e7a9c8b784feec719",
+      "downloadCount": 1,
+      "id": "RA_kwDOUUpM-s4heL1A",
+      "label": "",
+      "name": "Windows-SHA256SUMS.txt",
+      "size": 189,
+      "state": "uploaded",
+      "updatedAt": "2026-09-13T16:43:51Z",
+      "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/untagged-2c8430d6397d4f1753f5/Windows-SHA256SUMS.txt"
+    },
+    "windows-validation.json": {
+      "apiUrl": "https://api.github.com/repos/YvesZhou-hub/GTA-6-Sydney/releases/assets/561560894",
+      "contentType": "application/json",
+      "createdAt": "2026-09-13T16:43:51Z",
+      "digest": "sha256:9b9576cd5a37dc87777ee3136734483e1369a4eb344905a3633a4e5d6d5f4e7c",
+      "downloadCount": 1,
+      "id": "RA_kwDOUUpM-s4heL0-",
+      "label": "",
+      "name": "windows-validation.json",
+      "size": 112500,
+      "state": "uploaded",
+      "updatedAt": "2026-09-13T16:43:51Z",
+      "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/untagged-2c8430d6397d4f1753f5/windows-validation.json"
+    }
+  },
+  "app_identity": {
+    "executable_sha256": "7df86170fbe59a3df98b40ea8d29e3e66c2cb361b8f556f35d02612beb913175",
+    "pck_sha256": "5954969963fe34ac102699a9174be578f596be553ec6bfc1613ab72a6b971d42"
+  },
+  "archive_sha256": "6904b9ea38dfc5e960801ce2345a55021401b9070032dd1c2d2d327b09ab1758",
+  "raw_asset_sha256": {
+    "windows-validation.json": "9b9576cd5a37dc87777ee3136734483e1369a4eb344905a3633a4e5d6d5f4e7c",
+    "Windows-SHA256SUMS.txt": "749c48514b2d73a3d08665c8e4318d9a5592e36c206d311e7a9c8b784feec719"
+  },
+  "cloud_package_checks": 23,
+  "cloud_aggregate_gates": 37,
+  "cloud_gameplay_counts": {
+    "driving": 32,
+    "survival": 30,
+    "encounter": 82
+  },
+  "source_files_matched": 223,
+  "large_zip_downloaded_locally": false,
+  "scope": "Read original small release assets, GitHub server asset SHA-256, successful exact-commit run, all cloud checks and required names, source Git blobs, and cloud pre/post-execution EXE/PCK identities. The actual Windows ZIP was exported, extracted and run by CI; it was not redownloaded or executed on this Mac. No GPU, human input or audio-listening claim; this verification does not publish the draft release."
+}

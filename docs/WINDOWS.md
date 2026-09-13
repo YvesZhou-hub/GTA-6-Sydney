@@ -1,6 +1,6 @@
 # Windows x86_64 试玩说明
 
-本页操作说明对应 Harbourlife v0.2.1，游戏为离线单人试玩。**v0.2.1 Windows 下载包尚待云端构建与最终 EXE 验收**；当前源码通过不代表 Windows 包已通过。已完成的 v0.2.0 Windows 记录保留在下方，其附件在 [v0.2.0-preview.1 发布页](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/tag/v0.2.0-preview.1)。Windows GPU 画面与人工操作尚未实测。
+本页操作说明对应 Harbourlife v0.2.1，游戏为离线单人试玩。**v0.2.1 Windows 包已通过云端最终 EXE 验收**：37 项运行门禁、32 项驾驶、30 项生存和 82 项自然遭遇检查全部通过。附件发布状态见 [v0.2.1-preview.1 发布页](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/tag/v0.2.1-preview.1)。Windows GPU 画面、声音实听与人工操作尚未实测；历史版本记录保留在下方。
 
 ## 下载与启动
 
@@ -83,15 +83,33 @@
 
 ## Windows 验证记录
 
-### v0.2.1：源码与门禁已验，Windows 最终 EXE 待验
+### v0.2.1：Windows 最终 EXE 与自然遭遇验收通过
 
-开发源码已有逐模块的局部检查报告；自然遭遇源码回归已在真实家门口、歌剧院平台、机场和 CBD 观察到自行生成、追近及攻击。详细范围、当前通过数与中间原生运行的未解决验证事项见 [测试说明](TESTING.md)。这些结果不计为 Windows 的通过记录。
+2026-09-14（悉尼时间），[Windows 云端运行 34769213189](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34769213189)完成。运行、工作流与构建提交均为 `44cdc69987fa3f9f946afb9d875e3ed34d1b499e`，引擎为 Godot `4.7.2.stable.official.ed1daf0bf`。再次下载并逐项核对了发布资产中的原始报告和校验和，不只依据 Actions 的绿色状态。
 
-[Windows 工作流](../.github/workflows/windows-package-check.yml) 默认版本已设为 `v0.2.1-preview.1`。最终运行将比对同版 `docs/evidence/v021-app/build.json` 的游戏源清单和 SHA-256，再从下载 ZIP 解压出的实际 EXE 执行启动、驾驶、受控生存及新增 `--encounter-qa` 四个阶段。每个测试进程使用新临时目录、300 秒时限；自然遭遇阶段包括 90 米换区且旧怪仍在、V/B 操作、付费火控升级，以及自动辅助武器配合实际 H 快修的持续战斗。
+| 项目 | 实际结果 |
+| --- | --- |
+| 下载包 | `Harbourlife-Windows-x86_64.zip`，85,420,521 字节，17 个随包文件 |
+| 包与源码 | 23/23 包检查通过；223 个游戏文件与同版 Mac 构建及该提交的 Git 文件逐一匹配；AMD64 PE32+、外部 Godot PCK 与 ZIP CRC 检查通过 |
+| 运行门禁 | 37/37；实际从最终 ZIP 解压出的 EXE 完成启动、驾驶、生存、自然遭遇四阶段；全部进程退出码 0，12 份日志无错误或警告 |
+| 世界 | 15,097 栋建筑、21,697 个结构组件，城市和机场初始化完成 |
+| 驾驶 | 32/32；Jolt 60 Hz，急刹、漂移、摩托转向、三倍加速、松键恢复与独立车辆状态 |
+| 受控生存 | 30/30；五类敌人、真实攻击扣血、H 治疗、B 补给与安全完整维修、坦克炮弹击败奖励 |
+| 自然遭遇 | 82/82；家门口、歌剧院平台、机场和 CBD 自动生成追击，移动 90 米后旧怪仍在也能增援，V/B 输入、火控升级，以及自动辅助武器配合实际 H 快修持续战斗 |
+| 隔离与身份 | 各阶段新临时用户目录，报告新鲜，未读写玩家存档；EXE/PCK 在云端导出、ZIP 解压和全部运行结束后的 SHA-256 一致 |
+| 边界 | Windows `--headless`，报告明确 `native=false`，没有 Windows 截图；未测 Windows GPU、声音实听、实体鼠标键盘、长期游玩或 FPS |
 
-37 项聚合门禁要求进程正常结束、日志无错误或警告、世界就绪、无玩家存档访问、新鲜报告的计数与完成标记一致，所有检查通过且名称唯一，必需的驾驶/生存/自然遭遇名称齐全。门禁自身及资产上传步骤的 34 项本地合成/模拟验收已通过，7 段嵌入 Python 与 YAML 编译/解析已通过；**目前尚无 v0.2.1 Windows 云端运行编号、下载包哈希或通过报告**。完成后应以该次发布的 `windows-validation.json` 和 `Windows-SHA256SUMS.txt` 为准。
+32 + 30 + 82 共 144 项游戏断言；包检查和聚合门禁用于核验这些下级报告，不叠加成独立玩法测试总数。各专项的计数、名称唯一性、必需行为、完成标记及 300 秒进程时限均再次核对。三个专项分别约 50.11、37.10、45.54 秒完成，仅为该云端机器的测试耗时。
 
-验证通过后，上传步骤可向已存在的草稿或公开发布添加资产，必须使用本次构建的完整 40 位提交 SHA 作为 `targetCommitish`，并匹配指定标签；现存 Git 标签也必须解引用到同一提交。草稿尚未生成 Git 标签时允许暂存资产，工作流不会改变草稿/公开状态。所有同名资产先核对 SHA-256，字节不同即拒绝整个上传，不使用覆盖参数。
+| 文件 | SHA-256 |
+| --- | --- |
+| Windows ZIP | `6904b9ea38dfc5e960801ce2345a55021401b9070032dd1c2d2d327b09ab1758` |
+| EXE | `7df86170fbe59a3df98b40ea8d29e3e66c2cb361b8f556f35d02612beb913175` |
+| PCK | `5954969963fe34ac102699a9174be578f596be553ec6bfc1613ab72a6b971d42` |
+
+[原始 Windows 报告](evidence/v021-windows/windows-validation.json) · [原始校验和](evidence/v021-windows/Windows-SHA256SUMS.txt) · [发布资产与提交交叉核验](evidence/v021-windows/verification.json)。本机只下载上述小型证据；ZIP 的 GitHub 服务端 SHA-256 与报告、校验和一致，实际大包的解压和执行发生在 Windows CI。核验时资产仍位于绑定该完整提交的草稿，上传步骤没有发布或覆盖资产；正式发布由维护者单独完成。
+
+同版 [Mac 验收](evidence/v021-app/native-index.json)另外通过 136/136 项原生检查、11 张截图；不计入本节 Windows 结果。[工作流门禁的本地模拟验收](TESTING.md#windows-ci-门禁的本地验证)和历史失败记录与最终平台证据分别保存。
 
 ### v0.2.0：Windows 构建、驾驶与奶龙生存无窗口验证通过
 

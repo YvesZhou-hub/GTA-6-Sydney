@@ -1,0 +1,1797 @@
+{
+	"auto_spawn_enabled": true,
+	"checks": [
+		{
+			"detail": {
+				"structures": 21697
+			},
+			"name": "complete production Sydney city and airport loaded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "default new game actually enables automatic encounters",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 1.01666666666667
+			},
+			"name": "default home: automatic first enemy within 6 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"alive_count": 4,
+				"total_created": 4
+			},
+			"name": "default home: at least 3 naturally spawned threats by 10 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 2.53333333333333
+			},
+			"name": "default home: natural pursuit closes at least 4 metres",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 5.88333333333333
+			},
+			"name": "default home: threat reaches 8 metres",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "default home: every initial capsule clear of city and vehicles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "default home: enemies remain assigned to current player or vehicle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 12.2833333333333,
+				"windup_s": 5.31666666666667
+			},
+			"name": "default home: natural windup culminates in real damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 12.2833333333333,
+				"grace_s": 12.0
+			},
+			"name": "default home: preparation protects player until grace ends",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 104.0,
+				"before": 120.0
+			},
+			"name": "default home: first contact is survivable without forced healing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "default home: facade stream ready for native capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "default home: native natural encounter image",
+			"passed": true
+		},
+		{
+			"detail": {
+				"position": [
+					-335.0,
+					4.49064970016479,
+					-13.0
+				]
+			},
+			"name": "default home falls onto real ground",
+			"passed": true
+		},
+		{
+			"detail": {
+				"requested": [
+					412.644561767578,
+					15.6999998092651,
+					-259.153747558594
+				],
+				"support_id": "opera/podium/upper/2/4"
+			},
+			"name": "Opera public upper podium: existing production walking surface",
+			"passed": true
+		},
+		{
+			"detail": {
+				"position": [
+					412.644561767578,
+					15.6902751922607,
+					-259.153747558594
+				]
+			},
+			"name": "Opera public upper podium: player naturally grounded",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 0.5
+			},
+			"name": "Opera public upper podium: automatic first enemy within 6 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"alive_count": 4,
+				"total_created": 4
+			},
+			"name": "Opera public upper podium: at least 3 naturally spawned threats by 10 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 2.36666666666667
+			},
+			"name": "Opera public upper podium: natural pursuit closes at least 4 metres",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 5.93333333333333
+			},
+			"name": "Opera public upper podium: threat reaches 8 metres",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Opera public upper podium: every initial capsule clear of city and vehicles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Opera public upper podium: enemies remain assigned to current player or vehicle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 11.5,
+				"windup_s": 4.8
+			},
+			"name": "Opera public upper podium: natural windup culminates in real damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 11.5,
+				"grace_s": 11.5
+			},
+			"name": "Opera public upper podium: preparation protects player until grace ends",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 93.2666666666667,
+				"before": 120.0
+			},
+			"name": "Opera public upper podium: first contact is survivable without forced healing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Opera public upper podium: facade stream ready for native capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Opera public upper podium: native natural encounter image",
+			"passed": true
+		},
+		{
+			"detail": {
+				"requested": [
+					-3076.22802734375,
+					6.40000009536743,
+					9585.876953125
+				],
+				"support_id": "Airport_North_Land"
+			},
+			"name": "airport apron: existing production walking surface",
+			"passed": true
+		},
+		{
+			"detail": {
+				"position": [
+					-3076.22802734375,
+					6.24027585983276,
+					9585.876953125
+				]
+			},
+			"name": "airport apron: player naturally grounded",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 0.5
+			},
+			"name": "airport apron: automatic first enemy within 6 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"alive_count": 4,
+				"total_created": 4
+			},
+			"name": "airport apron: at least 3 naturally spawned threats by 10 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 2.01666666666667
+			},
+			"name": "airport apron: natural pursuit closes at least 4 metres",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 5.31666666666667
+			},
+			"name": "airport apron: threat reaches 8 metres",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airport apron: every initial capsule clear of city and vehicles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airport apron: enemies remain assigned to current player or vehicle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 11.6833333333333,
+				"windup_s": 4.8
+			},
+			"name": "airport apron: natural windup culminates in real damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 11.6833333333333,
+				"grace_s": 11.5
+			},
+			"name": "airport apron: preparation protects player until grace ends",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 94.0,
+				"before": 120.0
+			},
+			"name": "airport apron: first contact is survivable without forced healing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airport apron: facade stream ready for native capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airport apron: native natural encounter image",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "90 metre neighbouring airport surface exists",
+			"passed": true
+		},
+		{
+			"detail": {
+				"kills": 0,
+				"old_count": 4
+			},
+			"name": "neighbouring encounter begins with zero kills and existing threats",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_reinforcement_s": 1.28333333333333,
+				"metres": 90.0,
+				"new_nearby": 1,
+				"old_retained": 3
+			},
+			"name": "90 metre move gets a new threat while old enemies are still alive",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new nearby encounters require no kills and award no skipped clearance",
+			"passed": true
+		},
+		{
+			"detail": {
+				"requested": [
+					-206.199996948242,
+					4.59999990463257,
+					1105.0
+				],
+				"support_id": "OSM_Land_6"
+			},
+			"name": "CBD Pitt Street Mall: existing production walking surface",
+			"passed": true
+		},
+		{
+			"detail": {
+				"position": [
+					-206.199996948242,
+					4.49027585983276,
+					1105.0
+				]
+			},
+			"name": "CBD Pitt Street Mall: player naturally grounded",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 0.483333333333333
+			},
+			"name": "CBD Pitt Street Mall: automatic first enemy within 6 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"alive_count": 4,
+				"total_created": 4
+			},
+			"name": "CBD Pitt Street Mall: at least 3 naturally spawned threats by 10 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 2.0
+			},
+			"name": "CBD Pitt Street Mall: natural pursuit closes at least 4 metres",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 5.3
+			},
+			"name": "CBD Pitt Street Mall: threat reaches 8 metres",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "CBD Pitt Street Mall: every initial capsule clear of city and vehicles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "CBD Pitt Street Mall: enemies remain assigned to current player or vehicle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 11.7333333333333,
+				"windup_s": 4.78333333333333
+			},
+			"name": "CBD Pitt Street Mall: natural windup culminates in real damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_s": 11.7333333333333,
+				"grace_s": 11.4833333333333
+			},
+			"name": "CBD Pitt Street Mall: preparation protects player until grace ends",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 94.2666666666667,
+				"before": 120.0
+			},
+			"name": "CBD Pitt Street Mall: first contact is survivable without forced healing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "CBD Pitt Street Mall: facade stream ready for native capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "CBD Pitt Street Mall: native natural encounter image",
+			"passed": true
+		},
+		{
+			"detail": {
+				"direction": [
+					0.0,
+					0.0,
+					18.0
+				],
+				"end": [
+					-206.199996948242,
+					4.49087715148926,
+					1117.91345214844
+				],
+				"metres": 12.9134521484375,
+				"start": [
+					-206.199996948242,
+					4.49027585983276,
+					1105.0
+				]
+			},
+			"name": "real player input travels along Pitt Street Mall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "abandonment starts with naturally populated encounter",
+			"passed": true
+		},
+		{
+			"detail": {
+				"old_count": 4,
+				"quota": 8,
+				"remaining_old_enemy": false,
+				"replacement_s": 1.91666666666667,
+				"wave_spawned": 1
+			},
+			"name": "leaving a district retires distant enemies and naturally replaces them",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "abandonment never pays kill or wave rewards",
+			"passed": true
+		},
+		{
+			"detail": {
+				"wave_kills": 2,
+				"wave_spawned": 2
+			},
+			"name": "synthetic stale full-wave save retains kills but frees absent enemy slots",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "legacy wave respite is removed on state recovery",
+			"passed": true
+		},
+		{
+			"detail": {
+				"enemies": 1,
+				"first_spawn_s": 0.6
+			},
+			"name": "stale wave recovery resumes actual automatic spawning",
+			"passed": true
+		},
+		{
+			"detail": {
+				"requested": [
+					-2752.23828125,
+					6.46000003814697,
+					11492.724609375
+				],
+				"support_id": "Asphalt"
+			},
+			"name": "tank runway setup: existing production walking surface",
+			"passed": true
+		},
+		{
+			"detail": {
+				"position": [
+					-2752.23828125,
+					6.45027589797974,
+					11492.724609375
+				]
+			},
+			"name": "tank runway setup: player naturally grounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "normal free tank request succeeds and enters vehicle",
+			"passed": true
+		},
+		{
+			"detail": {
+				"metres": 44.5060348510742
+			},
+			"name": "production tank input moves the current target",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 0.0166666666666667
+			},
+			"name": "tank airport pursuit: automatic first enemy within 6 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"alive_count": 7,
+				"total_created": 8
+			},
+			"name": "tank airport pursuit: at least 3 naturally spawned threats by 10 seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"approach_s": 0.7,
+				"natural_kills": 2
+			},
+			"name": "tank airport pursuit: threats approach vehicle or are defeated by its automatic defence",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank airport pursuit: every initial capsule clear of city and vehicles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank airport pursuit: enemies remain assigned to current player or vehicle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank airport pursuit: facade stream ready for native capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank airport pursuit: native natural encounter image",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "automatic defence starts enabled in a real occupied tank",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "physical V disables automatic support without leaving vehicle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "physical V restores automatic support and runtime status",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "physical B opens paused field services with a usable pointer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"current": "伤害 90 · 半径 16.0 m · 装填 1.15 s",
+				"next": "下一级：伤害 112 · 半径 19.2 m · 装填 1.03 s",
+				"stats": {
+					"ammo_cost": 0,
+					"at_max": false,
+					"base": {
+						"ammo_cost": 0,
+						"cooldown": 1.15,
+						"damage": 90.0,
+						"effect": 1.0,
+						"energy": 1000000000.0,
+						"gravity": 9.8,
+						"level": 0,
+						"life": 10.0,
+						"radius": 16.0,
+						"speed": 440.0
+					},
+					"current": {
+						"ammo_cost": 0,
+						"cooldown": 1.15,
+						"damage": 90.0,
+						"effect": 1.0,
+						"energy": 1000000000.0,
+						"gravity": 9.8,
+						"level": 0,
+						"life": 10.0,
+						"radius": 16.0,
+						"speed": 440.0
+					},
+					"level": 0,
+					"max_level": 3,
+					"next": {
+						"ammo_cost": 0,
+						"cooldown": 1.035,
+						"damage": 112.5,
+						"effect": 1.2,
+						"energy": 1000000000.0,
+						"gravity": 9.8,
+						"level": 1,
+						"life": 10.0,
+						"radius": 19.2,
+						"speed": 440.0
+					}
+				}
+			},
+			"name": "B menu shows actual current and next damage radius reload plus V state",
+			"passed": true
+		},
+		{
+			"detail": {
+				"failures": []
+			},
+			"name": "service controls have no overlap or horizontal text clipping",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nearby enemies do not block paid weapon upgrades",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank fire control B menu: facade stream ready for native capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank fire control B menu: native natural encounter image",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cost": 8000,
+				"improved": {
+					"ammo_cost": 0,
+					"cooldown": 1.035,
+					"damage": 112.5,
+					"effect": 1.2,
+					"energy": 1000000000.0,
+					"gravity": 9.8,
+					"level": 1,
+					"life": 10.0,
+					"radius": 19.2,
+					"speed": 440.0
+				},
+				"level": 1
+			},
+			"name": "actual B upgrade callback spends coins and improves area damage and reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "closing B resumes the same occupied tank and continuous encounters",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production tank automatic defence is enabled by default",
+			"passed": true
+		},
+		{
+			"detail": {
+				"repairs": [
+					{
+						"balance_after": 41835,
+						"balance_before": 42960,
+						"coins_paid": 1125,
+						"concurrent_kill_rewards": 0,
+						"cooldown_after_s": 11.9833333333333,
+						"elapsed_s": 23.7833333333333,
+						"expected_cost": 1125,
+						"health_after": 74.5000000000001,
+						"health_before": 49.5000000000001,
+						"net_durability_gain": 25.0,
+						"repeat_H_charged": false
+					},
+					{
+						"balance_after": 40710,
+						"balance_before": 41835,
+						"coins_paid": 1125,
+						"concurrent_kill_rewards": 0,
+						"cooldown_after_s": 11.9833333333333,
+						"elapsed_s": 35.75,
+						"expected_cost": 1125,
+						"health_after": 59.1666666666667,
+						"health_before": 34.1666666666667,
+						"net_durability_gain": 25.0,
+						"repeat_H_charged": false
+					}
+				]
+			},
+			"name": "continuous defence uses real paid H repairs with health recovery",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeat H is blocked by its production repair cooldown",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cleared": 1,
+				"elapsed_s": 42.9333333333333,
+				"final_spawn_sequence": 18,
+				"first_clear_s": 36.9333333333333,
+				"natural_kills": 7,
+				"net_money_change": -20,
+				"player_actions": "Automatic support remains enabled; real H events buy repairs below 50% health and test cooldown. No main-cannon fire or direct health writes.",
+				"region": "automatic tank support with player H field repairs",
+				"remaining_enemies": 8,
+				"repairs": [
+					{
+						"balance_after": 41835,
+						"balance_before": 42960,
+						"coins_paid": 1125,
+						"concurrent_kill_rewards": 0,
+						"cooldown_after_s": 11.9833333333333,
+						"elapsed_s": 23.7833333333333,
+						"expected_cost": 1125,
+						"health_after": 74.5000000000001,
+						"health_before": 49.5000000000001,
+						"net_durability_gain": 25.0,
+						"repeat_H_charged": false
+					},
+					{
+						"balance_after": 40710,
+						"balance_before": 41835,
+						"coins_paid": 1125,
+						"concurrent_kill_rewards": 0,
+						"cooldown_after_s": 11.9833333333333,
+						"elapsed_s": 35.75,
+						"expected_cost": 1125,
+						"health_after": 59.1666666666667,
+						"health_before": 34.1666666666667,
+						"net_durability_gain": 25.0,
+						"repeat_H_charged": false
+					}
+				],
+				"rest_stayed_zero": true,
+				"spawn_sequence_at_clear": 16,
+				"vehicle_health": 35.5,
+				"weapons": {
+					"active_projectiles": 0,
+					"ammo_cost": 0,
+					"available": true,
+					"blocked": 0,
+					"enabled": true,
+					"expired": 0,
+					"fired": 92,
+					"hits": 91,
+					"locked": true,
+					"mount_count": 1,
+					"profile": {
+						"ammo_cost": 0,
+						"cooldown": 0.6175,
+						"damage": 13.2,
+						"level": 1,
+						"life": 3.0,
+						"range": 75.0,
+						"speed": 110.0
+					},
+					"projectile_capacity": 8,
+					"projectiles_allocated": 8,
+					"reload_remaining": 0.2675,
+					"simulation_seconds": 61.5999999999978,
+					"state": "锁定",
+					"target_distance": 5.77312183380127,
+					"target_id": 7408969714985
+				}
+			},
+			"name": "real automatic tank defence reaches a rewarded kill milestone",
+			"passed": true
+		},
+		{
+			"detail": {
+				"clear_s": 36.9333333333333,
+				"spawns_after_clear": 2
+			},
+			"name": "kill milestone continues reinforcement without scheduled respite",
+			"passed": true
+		},
+		{
+			"detail": {
+				"health": 35.5
+			},
+			"name": "tank survives the first continuous natural defence milestone",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "automatic tank support with player H field repairs: facade stream ready for native capture",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "automatic tank support with player H field repairs: native natural encounter image",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cap": 24,
+				"peak": 9
+			},
+			"name": "encounter cap respected throughout production simulation",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production source identity stable during validation",
+			"passed": true
+		}
+	],
+	"count": 96,
+	"direct_enemy_spawn_calls": 0,
+	"display_driver": "macOS",
+	"forced_damage_calls": 0,
+	"native": true,
+	"observed_physics_seconds": 126.549999999994,
+	"passed": true,
+	"physics_hz": 60,
+	"qa_running": true,
+	"save_written": false,
+	"scenarios": [
+		{
+			"count_at_10s": 4,
+			"count_at_5s": 4,
+			"elapsed_s": 14.0,
+			"enemies": [
+				{
+					"approach_s": 2.53333333333333,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0034446716309,
+					"minimum_distance_m": 1.74587607383728,
+					"near_s": 6.11666666666667,
+					"spawn": [
+						-335.0,
+						4.88000011444092,
+						-35.0
+					],
+					"spawn_s": 1.01666666666667,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 8.26666666666667
+				},
+				{
+					"approach_s": 3.73333333333333,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0034427642822,
+					"minimum_distance_m": 1.74584496021271,
+					"near_s": 7.31666666666667,
+					"spawn": [
+						-335.079162597656,
+						4.88000011444092,
+						-34.9998550415039
+					],
+					"spawn_s": 2.21666666666667,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 9.46666666666667
+				},
+				{
+					"approach_s": 4.26666666666667,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.000171661377,
+					"minimum_distance_m": 0.920164406299591,
+					"near_s": 5.88333333333333,
+					"spawn": [
+						-356.999847412109,
+						4.58000040054321,
+						-13.0791730880737
+					],
+					"spawn_s": 3.41666666666667,
+					"target_correct": true,
+					"type": "runner",
+					"windup_s": 6.86666666666667
+				},
+				{
+					"approach_s": -1.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001811981201,
+					"minimum_distance_m": 21.8958148956299,
+					"near_s": -1.0,
+					"spawn": [
+						-357.0,
+						4.58000040054321,
+						-12.9999990463257
+					],
+					"spawn_s": 4.61666666666667,
+					"target_correct": true,
+					"type": "spitter",
+					"windup_s": 5.31666666666667
+				}
+			],
+			"final_position": [
+				-335.0,
+				4.49064970016479,
+				-13.0
+			],
+			"first_approach_4m_s": 2.53333333333333,
+			"first_damage_s": 12.2833333333333,
+			"first_spawn_s": 1.01666666666667,
+			"first_windup_s": 5.31666666666667,
+			"first_within_8m_s": 5.88333333333333,
+			"grace_at_start_s": 12.0,
+			"last_spawn_diagnostics": {
+				"candidates": 1,
+				"elapsed_ms": 0.103,
+				"position": "(-357.0, 4.58, -13.0)",
+				"reason": "奶龙正在接近"
+			},
+			"natural_kills": 0,
+			"origin": [
+				-335.0,
+				6.0,
+				-13.0
+			],
+			"player_health": 104.0,
+			"region": "default home",
+			"total_spawned_at_10s": 4,
+			"vehicle_health": -1.0
+		},
+		{
+			"count_at_10s": 4,
+			"count_at_5s": 4,
+			"elapsed_s": 14.0,
+			"enemies": [
+				{
+					"approach_s": 2.36666666666667,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001850128174,
+					"minimum_distance_m": 1.77359235286713,
+					"near_s": 5.93333333333333,
+					"spawn": [
+						393.561248779297,
+						15.7799997329712,
+						-270.100311279297
+					],
+					"spawn_s": 0.5,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 8.1
+				},
+				{
+					"approach_s": 5.58333333333333,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001754760742,
+					"minimum_distance_m": 1.81405889987946,
+					"near_s": 9.15,
+					"spawn": [
+						393.631713867188,
+						15.7799997329712,
+						-270.222229003906
+					],
+					"spawn_s": 1.7,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 11.3
+				},
+				{
+					"approach_s": 4.35,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001754760742,
+					"minimum_distance_m": 1.18755912780762,
+					"near_s": 5.95,
+					"spawn": [
+						393.592010498047,
+						15.7799997329712,
+						-270.153747558594
+					],
+					"spawn_s": 2.9,
+					"target_correct": true,
+					"type": "runner",
+					"windup_s": 6.95
+				},
+				{
+					"approach_s": -1.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0251789093018,
+					"minimum_distance_m": 21.9580516815186,
+					"near_s": -1.0,
+					"spawn": [
+						390.644561767578,
+						14.6374158859253,
+						-259.153747558594
+					],
+					"spawn_s": 4.1,
+					"target_correct": true,
+					"type": "spitter",
+					"windup_s": 4.8
+				}
+			],
+			"final_position": [
+				412.644561767578,
+				15.6902751922607,
+				-259.153747558594
+			],
+			"first_approach_4m_s": 2.36666666666667,
+			"first_damage_s": 11.5,
+			"first_spawn_s": 0.5,
+			"first_windup_s": 4.8,
+			"first_within_8m_s": 5.93333333333333,
+			"grace_at_start_s": 11.5,
+			"last_spawn_diagnostics": {
+				"candidates": 1,
+				"elapsed_ms": 0.173,
+				"position": "(390.6446, 14.63742, -259.1537)",
+				"reason": "奶龙正在接近"
+			},
+			"natural_kills": 0,
+			"origin": [
+				412.644561767578,
+				15.6902751922607,
+				-259.153747558594
+			],
+			"player_health": 93.2666666666667,
+			"region": "Opera public upper podium",
+			"total_spawned_at_10s": 4,
+			"vehicle_health": -1.0
+		},
+		{
+			"count_at_10s": 4,
+			"count_at_5s": 4,
+			"elapsed_s": 14.0,
+			"enemies": [
+				{
+					"approach_s": 2.01666666666667,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001831054688,
+					"minimum_distance_m": 1.74710321426392,
+					"near_s": 5.56666666666667,
+					"spawn": [
+						-3076.22802734375,
+						6.32999992370605,
+						9563.876953125
+					],
+					"spawn_s": 0.5,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 7.71666666666667
+				},
+				{
+					"approach_s": 3.18333333333333,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0003356933594,
+					"minimum_distance_m": 1.80387222766876,
+					"near_s": 6.71666666666667,
+					"spawn": [
+						-3087.22802734375,
+						6.32999992370605,
+						9566.82421875
+					],
+					"spawn_s": 1.7,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 8.86666666666667
+				},
+				{
+					"approach_s": 3.7,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001239776611,
+					"minimum_distance_m": 1.77836012840271,
+					"near_s": 5.31666666666667,
+					"spawn": [
+						-3095.28051757812,
+						6.32999992370605,
+						9574.876953125
+					],
+					"spawn_s": 2.9,
+					"target_correct": true,
+					"type": "runner",
+					"windup_s": 6.33333333333333
+				},
+				{
+					"approach_s": -1.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001831054688,
+					"minimum_distance_m": 21.8959980010986,
+					"near_s": -1.0,
+					"spawn": [
+						-3098.22802734375,
+						6.32999992370605,
+						9585.876953125
+					],
+					"spawn_s": 4.1,
+					"target_correct": true,
+					"type": "spitter",
+					"windup_s": 4.8
+				}
+			],
+			"final_position": [
+				-3076.22802734375,
+				6.24027585983276,
+				9585.876953125
+			],
+			"first_approach_4m_s": 2.01666666666667,
+			"first_damage_s": 11.6833333333333,
+			"first_spawn_s": 0.5,
+			"first_windup_s": 4.8,
+			"first_within_8m_s": 5.31666666666667,
+			"grace_at_start_s": 11.5,
+			"last_spawn_diagnostics": {
+				"candidates": 1,
+				"elapsed_ms": 0.102,
+				"position": "(-3098.228, 6.33, 9585.877)",
+				"reason": "奶龙正在接近"
+			},
+			"natural_kills": 0,
+			"origin": [
+				-3076.22802734375,
+				6.24027585983276,
+				9585.876953125
+			],
+			"player_health": 94.0,
+			"region": "airport apron",
+			"total_spawned_at_10s": 4,
+			"vehicle_health": -1.0
+		},
+		{
+			"count_at_10s": 4,
+			"count_at_5s": 4,
+			"elapsed_s": 14.0,
+			"enemies": [
+				{
+					"approach_s": 2.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001831054688,
+					"minimum_distance_m": 1.71597540378571,
+					"near_s": 5.58333333333333,
+					"spawn": [
+						-206.199996948242,
+						4.57999992370605,
+						1083.0
+					],
+					"spawn_s": 0.483333333333333,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 7.75
+				},
+				{
+					"approach_s": 3.18333333333333,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0002288818359,
+					"minimum_distance_m": 1.81793010234833,
+					"near_s": 6.76666666666667,
+					"spawn": [
+						-217.199996948242,
+						4.57999992370605,
+						1085.94738769531
+					],
+					"spawn_s": 1.68333333333333,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 8.91666666666667
+				},
+				{
+					"approach_s": 3.68333333333333,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001907348633,
+					"minimum_distance_m": 1.77796387672424,
+					"near_s": 5.3,
+					"spawn": [
+						-225.252563476562,
+						4.57999992370605,
+						1094.0
+					],
+					"spawn_s": 2.88333333333333,
+					"target_correct": true,
+					"type": "runner",
+					"windup_s": 6.31666666666667
+				},
+				{
+					"approach_s": -1.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 22.0001831054688,
+					"minimum_distance_m": 21.895845413208,
+					"near_s": -1.0,
+					"spawn": [
+						-228.199996948242,
+						4.57999992370605,
+						1105.0
+					],
+					"spawn_s": 4.08333333333333,
+					"target_correct": true,
+					"type": "spitter",
+					"windup_s": 4.78333333333333
+				}
+			],
+			"final_position": [
+				-206.199996948242,
+				4.49027585983276,
+				1105.0
+			],
+			"first_approach_4m_s": 2.0,
+			"first_damage_s": 11.7333333333333,
+			"first_spawn_s": 0.483333333333333,
+			"first_windup_s": 4.78333333333333,
+			"first_within_8m_s": 5.3,
+			"grace_at_start_s": 11.4833333333333,
+			"last_spawn_diagnostics": {
+				"candidates": 1,
+				"elapsed_ms": 0.086,
+				"position": "(-228.2, 4.58, 1105.0)",
+				"reason": "奶龙正在接近"
+			},
+			"natural_kills": 0,
+			"origin": [
+				-206.199996948242,
+				4.49027585983276,
+				1105.0
+			],
+			"player_health": 94.2666666666667,
+			"region": "CBD Pitt Street Mall",
+			"total_spawned_at_10s": 4,
+			"vehicle_health": -1.0
+		},
+		{
+			"count_at_10s": 7,
+			"count_at_5s": 5,
+			"elapsed_s": 14.0,
+			"enemies": [
+				{
+					"approach_s": 1.45,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 55.865234375,
+					"minimum_distance_m": 16.537109375,
+					"near_s": -1.0,
+					"spawn": [
+						-2752.23828125,
+						6.46087694168091,
+						11489.6953125
+					],
+					"spawn_s": 0.0166666666666667,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": -1.0
+				},
+				{
+					"approach_s": 1.45,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 46.8746871948242,
+					"minimum_distance_m": 7.42428779602051,
+					"near_s": 13.8,
+					"spawn": [
+						-2763.43310546875,
+						6.46087694168091,
+						11499.697265625
+					],
+					"spawn_s": 0.0166666666666667,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": -1.0
+				},
+				{
+					"approach_s": 0.7,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 21.9923267364502,
+					"minimum_distance_m": 8.74250316619873,
+					"near_s": -1.0,
+					"spawn": [
+						-2769.32373046875,
+						6.42087745666504,
+						11530.0341796875
+					],
+					"spawn_s": 0.0166666666666667,
+					"target_correct": true,
+					"type": "runner",
+					"windup_s": -1.0
+				},
+				{
+					"approach_s": -1.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 24.2388496398926,
+					"minimum_distance_m": 21.7743740081787,
+					"near_s": -1.0,
+					"spawn": [
+						-2778.39770507812,
+						6.25087738037109,
+						11549.359375
+					],
+					"spawn_s": 0.0166666666666667,
+					"target_correct": true,
+					"type": "spitter",
+					"windup_s": 0.866666666666667
+				},
+				{
+					"approach_s": 2.66666666666667,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 23.9431095123291,
+					"minimum_distance_m": 16.133113861084,
+					"near_s": -1.0,
+					"spawn": [
+						-2775.7138671875,
+						6.32999992370605,
+						11562.9130859375
+					],
+					"spawn_s": 0.783333333333333,
+					"target_correct": true,
+					"type": "brute",
+					"windup_s": -1.0
+				},
+				{
+					"approach_s": -1.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 23.0691795349121,
+					"minimum_distance_m": 23.0691795349121,
+					"near_s": -1.0,
+					"spawn": [
+						-2765.7919921875,
+						6.32999992370605,
+						11572.8349609375
+					],
+					"spawn_s": 1.98333333333333,
+					"target_correct": true,
+					"type": "runner",
+					"windup_s": -1.0
+				},
+				{
+					"approach_s": 7.1,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 23.3076171875,
+					"minimum_distance_m": 1.7421875,
+					"near_s": 11.1166666666667,
+					"spawn": [
+						-2752.23828125,
+						6.53999996185303,
+						11576.466796875
+					],
+					"spawn_s": 5.58333333333333,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": 13.2666666666667
+				},
+				{
+					"approach_s": 9.46666666666667,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 23.0691795349121,
+					"minimum_distance_m": 6.35786581039429,
+					"near_s": 13.4166666666667,
+					"spawn": [
+						-2738.6845703125,
+						6.53999996185303,
+						11572.8349609375
+					],
+					"spawn_s": 7.98333333333333,
+					"target_correct": true,
+					"type": "roamer",
+					"windup_s": -1.0
+				},
+				{
+					"approach_s": -1.0,
+					"clear_initial_capsule": true,
+					"grounded_seen": true,
+					"initial_distance_m": 23.8976898193359,
+					"minimum_distance_m": 22.4822578430176,
+					"near_s": -1.0,
+					"spawn": [
+						-2728.7626953125,
+						6.53999996185303,
+						11562.9130859375
+					],
+					"spawn_s": 13.6166666666667,
+					"target_correct": true,
+					"type": "runner",
+					"windup_s": -1.0
+				}
+			],
+			"final_position": [
+				-2752.23828125,
+				7.42000007629395,
+				11549.359375
+			],
+			"first_approach_4m_s": 0.7,
+			"first_damage_s": 9.75,
+			"first_spawn_s": 0.0166666666666667,
+			"first_windup_s": 0.866666666666667,
+			"first_within_8m_s": 11.1166666666667,
+			"grace_at_start_s": 6.98333333333314,
+			"last_spawn_diagnostics": {
+				"candidates": 1,
+				"elapsed_ms": 0.066,
+				"position": "(-2728.763, 6.54, 11562.91)",
+				"reason": "奶龙正在接近"
+			},
+			"natural_kills": 2,
+			"origin": [
+				-2752.23828125,
+				7.42000007629395,
+				11549.359375
+			],
+			"player_health": 120.0,
+			"region": "tank airport pursuit",
+			"total_spawned_at_10s": 8,
+			"vehicle_health": 96.0
+		},
+		{
+			"cleared": 1,
+			"elapsed_s": 42.9333333333333,
+			"final_spawn_sequence": 18,
+			"first_clear_s": 36.9333333333333,
+			"natural_kills": 7,
+			"net_money_change": -20,
+			"player_actions": "Automatic support remains enabled; real H events buy repairs below 50% health and test cooldown. No main-cannon fire or direct health writes.",
+			"region": "automatic tank support with player H field repairs",
+			"remaining_enemies": 8,
+			"repairs": [
+				{
+					"balance_after": 41835,
+					"balance_before": 42960,
+					"coins_paid": 1125,
+					"concurrent_kill_rewards": 0,
+					"cooldown_after_s": 11.9833333333333,
+					"elapsed_s": 23.7833333333333,
+					"expected_cost": 1125,
+					"health_after": 74.5000000000001,
+					"health_before": 49.5000000000001,
+					"net_durability_gain": 25.0,
+					"repeat_H_charged": false
+				},
+				{
+					"balance_after": 40710,
+					"balance_before": 41835,
+					"coins_paid": 1125,
+					"concurrent_kill_rewards": 0,
+					"cooldown_after_s": 11.9833333333333,
+					"elapsed_s": 35.75,
+					"expected_cost": 1125,
+					"health_after": 59.1666666666667,
+					"health_before": 34.1666666666667,
+					"net_durability_gain": 25.0,
+					"repeat_H_charged": false
+				}
+			],
+			"rest_stayed_zero": true,
+			"spawn_sequence_at_clear": 16,
+			"vehicle_health": 35.5,
+			"weapons": {
+				"active_projectiles": 0,
+				"ammo_cost": 0,
+				"available": true,
+				"blocked": 0,
+				"enabled": true,
+				"expired": 0,
+				"fired": 92,
+				"hits": 91,
+				"locked": true,
+				"mount_count": 1,
+				"profile": {
+					"ammo_cost": 0,
+					"cooldown": 0.6175,
+					"damage": 13.2,
+					"level": 1,
+					"life": 3.0,
+					"range": 75.0,
+					"speed": 110.0
+				},
+				"projectile_capacity": 8,
+				"projectiles_allocated": 8,
+				"reload_remaining": 0.2675,
+				"simulation_seconds": 61.5999999999978,
+				"state": "锁定",
+				"target_distance": 5.77312183380127,
+				"target_id": 7408969714985
+			}
+		}
+	],
+	"scope": "Complete production city/airport and real automatic encounters. Region origins, a 90-metre neighbouring relocation and a distant district relocation are fixture setup; walking/driving use production input. Actual V/B events and paid upgrade callbacks. Enemy creation/pursuit remains automatic; no forced damage, altered grace or enemy poses. Parked unused vehicles are frozen. Fixed-step correctness and natural encounter screenshots, not sustained FPS or broad play-balance research.",
+	"screenshots": [
+		{
+			"camera": [
+				-335.0,
+				8.4249267578125,
+				-6.10090637207031
+			],
+			"enemy_before_capture": [
+				-335.0,
+				4.50092744827271,
+				-14.7458457946777
+			],
+			"enemy_survived_capture": true,
+			"file": "default home.png",
+			"natural_enemy_pose": true,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "3ee729d4264973c3355e4c7a0195468ee40845ff75cb7e71cbf648fbe7bfdbe9",
+			"subject": [
+				-335.0,
+				4.49064970016479,
+				-13.0
+			]
+		},
+		{
+			"camera": [
+				418.689270019531,
+				19.6245517730713,
+				-255.828262329102
+			],
+			"enemy_before_capture": [
+				411.090637207031,
+				15.7009286880493,
+				-260.008636474609
+			],
+			"enemy_survived_capture": true,
+			"file": "Opera public upper podium.png",
+			"natural_enemy_pose": true,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "0e501d193085773e799241b6745668195c886dc00acd1d512cb0406e4c00cf07",
+			"subject": [
+				412.644561767578,
+				15.6902751922607,
+				-259.153747558594
+			]
+		},
+		{
+			"camera": [
+				-3076.22802734375,
+				10.1745529174805,
+				9592.7763671875
+			],
+			"enemy_before_capture": [
+				-3076.22802734375,
+				6.2509913444519,
+				9584.1298828125
+			],
+			"enemy_survived_capture": true,
+			"file": "airport apron.png",
+			"natural_enemy_pose": true,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "1818475c3f771a1aca00537afc615bfa3a56afd9fee6a16114bdd6d6c4a93318",
+			"subject": [
+				-3076.22802734375,
+				6.24027585983276,
+				9585.876953125
+			]
+		},
+		{
+			"camera": [
+				-206.199996948242,
+				8.42455291748047,
+				1111.89904785156
+			],
+			"enemy_before_capture": [
+				-206.199996948242,
+				4.50092697143555,
+				1103.28405761719
+			],
+			"enemy_survived_capture": true,
+			"file": "CBD Pitt Street Mall.png",
+			"natural_enemy_pose": true,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "0ab41320eba401ed594f6d2c2f996580a077adfd3f3e37d3777146a8657a0c9b",
+			"subject": [
+				-206.199996948242,
+				4.49027585983276,
+				1105.0
+			]
+		},
+		{
+			"camera": [
+				-2752.23828125,
+				12.8885526657104,
+				11563.1572265625
+			],
+			"enemy_before_capture": [
+				-2752.23828125,
+				6.46087741851807,
+				11529.0234375
+			],
+			"enemy_survived_capture": true,
+			"file": "tank airport pursuit.png",
+			"natural_enemy_pose": true,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "a8a8e445324da473c8b062f8fcc57e6acdfd8435379511aab729acc521f11ba3",
+			"subject": [
+				-2752.23828125,
+				7.42000007629395,
+				11549.359375
+			]
+		},
+		{
+			"camera": [
+				-2752.23828125,
+				12.8885526657104,
+				11563.1572265625
+			],
+			"enemy_before_capture": [
+				-2752.23828125,
+				6.46087694168091,
+				11529.3515625
+			],
+			"enemy_survived_capture": true,
+			"file": "tank fire control B menu.png",
+			"natural_enemy_pose": true,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "b726feddc02781db598a9594fc4e29f8f58919e22870d768a77a603618ec1b67",
+			"subject": [
+				-2752.23828125,
+				7.42000007629395,
+				11549.359375
+			]
+		},
+		{
+			"camera": [
+				-2738.44018554688,
+				12.8885526657104,
+				11549.359375
+			],
+			"enemy_before_capture": [
+				-2775.93090820312,
+				6.25092697143555,
+				11549.359375
+			],
+			"enemy_survived_capture": true,
+			"file": "automatic tank support with player H field repairs.png",
+			"natural_enemy_pose": true,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "f6512018748a26cb1c585323b0e5bafb9e6057ff870bf7ca7e570d38c3ef7730",
+			"subject": [
+				-2752.23828125,
+				7.42000007629395,
+				11549.359375
+			]
+		}
+	],
+	"simulation_seconds": 135.2,
+	"source_end": {
+		"res://scripts/audio_shutdown.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/encounter_spawn.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/encounter_validation.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_player.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_survival.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_vehicle.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/main.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_enemy.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_model.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/survival_hud.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_support_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		}
+	},
+	"source_start": {
+		"res://scripts/audio_shutdown.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/encounter_spawn.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/encounter_validation.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_player.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_survival.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_vehicle.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/main.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_enemy.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_model.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/survival_hud.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_support_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		}
+	},
+	"user_saves_touched": false,
+	"world_ready": true
+}

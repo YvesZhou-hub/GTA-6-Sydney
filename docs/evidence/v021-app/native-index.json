@@ -1,0 +1,78 @@
+{
+  "scope": "Final exported macOS Metal app, default audio driver with no override; automated input/physics and screenshots. Audible sound not manually verified. Historical failed packages remain separate.",
+  "app_identity": {
+    "executable_sha256": "4d0373fc42156d5ca41d904d71d7b18bc5eea0256895d50a0c11b70ae137d5ff",
+    "pck_sha256": "10e5b71f5de2c3b8bc5fcc1e6dbbe4e65123873033683d1f69a4079db347b1f1"
+  },
+  "archive_sha256": "35fbcaccb977a72e27cdce21fdb356c4b5cd917db9576a01a127aa29a3d62726",
+  "audio_driver_override": null,
+  "audio_listening_verified": false,
+  "modes": {
+    "encounter": {
+      "checks": 96,
+      "screenshots": 7,
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 44,
+        "remaining": 0,
+        "tracked": 13
+      },
+      "wall_seconds": 164.275,
+      "report": "report.json",
+      "report_sha256": "4fc45e97c37140e857991d3fb4291ce9cc592de5ccb17f3a8b07138d7168cae2",
+      "app_binding": "app-binding.json",
+      "app_binding_sha256": "f877857536587201b7b7115a1f4459aff40b0c4e63f6f463054f46f4306bb0b5",
+      "console": "console.txt",
+      "console_sha256": "85aeae51e13c87629611378af99bd6bc3bf4e47215311a1a957813d9443227c1",
+      "original_console_sha256": "85aeae51e13c87629611378af99bd6bc3bf4e47215311a1a957813d9443227c1",
+      "image_sha256": {
+        "default home.png": "3ee729d4264973c3355e4c7a0195468ee40845ff75cb7e71cbf648fbe7bfdbe9",
+        "Opera public upper podium.png": "0e501d193085773e799241b6745668195c886dc00acd1d512cb0406e4c00cf07",
+        "airport apron.png": "1818475c3f771a1aca00537afc615bfa3a56afd9fee6a16114bdd6d6c4a93318",
+        "CBD Pitt Street Mall.png": "0ab41320eba401ed594f6d2c2f996580a077adfd3f3e37d3777146a8657a0c9b",
+        "tank airport pursuit.png": "a8a8e445324da473c8b062f8fcc57e6acdfd8435379511aab729acc521f11ba3",
+        "tank fire control B menu.png": "b726feddc02781db598a9594fc4e29f8f58919e22870d768a77a603618ec1b67",
+        "automatic tank support with player H field repairs.png": "f6512018748a26cb1c585323b0e5bafb9e6057ff870bf7ca7e570d38c3ef7730"
+      }
+    },
+    "survival": {
+      "checks": 40,
+      "screenshots": 4,
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 37,
+        "remaining": 0,
+        "tracked": 14
+      },
+      "wall_seconds": 96.091,
+      "report": "report.json",
+      "report_sha256": "e483426f2cf07a767cecb8c95ca6261d90541cfdbbd112cccdef8bba7db1785a",
+      "app_binding": "app-binding.json",
+      "app_binding_sha256": "84abc79815b7b6c0df316ac34e1779dbf40c8d19265afbcb3f7ee8b68bd497a6",
+      "console": "console.txt",
+      "console_sha256": "a83340a309ccddc84ba2c687384dde5cea170f8ae32ce6b5bcf0b5cb8c2bf3e9",
+      "original_console_sha256": "40e6788443088a2fed0336f207d645cc589bac70575be78764127d772a598a01",
+      "image_sha256": {
+        "five-nailong-city-hud.png": "b05e0885db182e86f71924ac0463463ab9f2ed1959439ef62cb15b4c33b20ee3",
+        "services-during-combat-blocked.png": "2652cb38306c7e1a977751a0a90316b68e6299b4c85a1941fc3f2e5ad954fc48",
+        "tank-survival-impact-hud.png": "f64cbafe1340f55e4c629f082730ddb7fa9b773fbf000688b3b4bac0f24b2ca2",
+        "services-paid-repair.png": "f9e1a16dd4fc1714790e74c5494ca7ca6ea28f58457e7394779308b1a6e4efee"
+      }
+    }
+  },
+  "total_checks": 136,
+  "total_screenshots": 11,
+  "source_commit_with_matching_game_files": "44cdc69987fa3f9f946afb9d875e3ed34d1b499e",
+  "source_file_count": 223,
+  "visual_review": {
+    "images_inspected": 11,
+    "focus": [
+      "real enemy contact on the Opera upper podium",
+      "B menu current/next fire-control statistics and controls",
+      "both vehicle footer lines within viewport",
+      "barrel angle above footer",
+      "five enemy model variants and natural home/CBD/airport pursuit"
+    ],
+    "scope": "Selected static screenshots were inspected; nearby 3D enemy labels can overlap. This is not a claim of every frame, all camera angles or audible sound being reviewed."
+  }
+}
