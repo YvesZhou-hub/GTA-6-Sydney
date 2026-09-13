@@ -54,6 +54,8 @@ python3 tools/verify_native.py driving --app /path/to/Harbourlife.app
 
 ## 平台与内容边界
 
-本页不包含 **v0.1.9 Windows** 的通过记录，不能把 Mac 结果移作 Windows 验收；Windows 导出、启动和显卡显示应分别核验。历史 [v0.1.8 验证](TESTING_0.1.8.md)及宣传片保留各自版本身份。
+**v0.1.9 Windows** 另经 [云端运行 34734507798](https://github.com/YvesZhou-hub/harbourlife/actions/runs/34734507798)验收：最终 ZIP 的 23 项包检查、16 项运行门禁，以及门禁内核验的 32 项驾驶物理断言全部通过。205 个游戏源文件与 Mac 构建逐项一致；实际从 ZIP 解压的 EXE 完成生产世界初始化与驾驶测试，日志没有错误或警告。[Windows 报告](evidence/v019-windows/windows-validation.json)与 [SHA-256](evidence/v019-windows/Windows-SHA256SUMS.txt)来自发布资产，保留原始字节。Windows 使用 headless Jolt 60 Hz，未实测 GPU 画面、实体鼠标键盘或音效，不把 Mac 的截图或检查数计入 Windows。
+
+历史 [v0.1.8 验证](TESTING_0.1.8.md)及宣传片保留各自版本身份。
 
 本轮未新增城市建筑或一比一还原证明，也不是驾考模拟认证。改动与玩家操作见 [FIXES_0.1.9](FIXES_0.1.9.md)和 [DRIVING](DRIVING.md)。

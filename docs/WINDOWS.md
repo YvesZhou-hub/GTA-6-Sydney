@@ -1,6 +1,6 @@
 # Windows x86_64 试玩说明
 
-本页面向即将发布的 Harbourlife v0.1.9 Windows x86_64 下载包，操作说明对应 v0.1.9。游戏为离线单人试玩，不需要账号、源码或 Godot 编辑器。**v0.1.9 的 Windows 云端构建与验证仍待完成**；下载资产和实际验证状态以[正式发布页面](https://github.com/YvesZhou-hub/harbourlife/releases)及本页末尾记录为准。下方另保留 v0.1.8 的历史验证记录。
+本页面向 Harbourlife v0.1.9 Windows x86_64 下载包，操作说明对应 v0.1.9。游戏为离线单人试玩，不需要账号、源码或 Godot 编辑器。**v0.1.9 已通过 Windows 云端构建、无窗口启动和驾驶物理验证**；下载资产见 [v0.1.9-preview.1 发布页](https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.1.9-preview.1)，具体范围见本页末尾记录。下方另保留 v0.1.8 的历史验证记录。
 
 ## 下载与启动
 
@@ -76,9 +76,31 @@
 
 ## Windows 验证记录
 
-### v0.1.9：待 Windows CI 完成
+### v0.1.9：Windows 构建与物理验证通过
 
-v0.1.9 的 Windows 下载包构建、完整解压校验、导出 EXE 启动及对应运行报告仍待完成。发布后须依据该版本的 `windows-validation.json` 和校验和填写结果。当前没有 v0.1.9 Windows GPU 画面或人工驾驶测试结论。
+2026-09-13，[Windows 云端构建与验收运行](https://github.com/YvesZhou-hub/harbourlife/actions/runs/34734507798)通过。构建提交为 `abff72723a7a7fe0718a6284029f19c3d5d0e64e`，引擎为 Godot `4.7.2.stable.official.ed1daf0bf`。205 个游戏源文件与同版 Mac 构建证据逐一匹配。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 下载包 | `Harbourlife-Windows-x86_64.zip`，85,299,027 字节（约 85 MB） |
+| 解压布局 | `Harbourlife/Harbourlife.exe`、`Harbourlife.pck`、`START-HERE.txt`、`LICENSE`、`PLAY_PERMISSION.md` 和 `licenses/`；共 17 个文件，188,983,965 字节（约 189 MB） |
+| 包与源身份 | 23/23 项包检查通过：版本与源身份、ZIP CRC 和路径、AMD64 PE32+、外部 PCK 及哈希 |
+| 运行验收 | 16/16 项汇总门槛通过；从最终 ZIP 解压后启动 EXE，并运行驾驶专项；两个进程退出码均为 0，日志无错误或警告 |
+| 世界初始化 | `HARBOR_WORLD_READY buildings=15097 structure_components=21697`；隔离试玩世界达到 READY |
+| 驾驶专项 | 导出 EXE 中的 Jolt 60 Hz 物理检查 32/32 通过，覆盖跑车与摩托车急刹、漂移、回正、反打、三倍极速及松开恢复，以及静止、腾空和独立载具状态 |
+| 存档隔离 | 全新 Windows 云端环境，启动与驾驶检查均跳过玩家存档读取，未创建存档、未接触既有玩家存档；运行后 EXE / PCK 哈希不变 |
+| 未验证范围 | Windows GPU 画面、中文视觉效果、音效听感、人工鼠标/驾驶/炮击、FPS 和完整游玩及存档重开未实测；Mac 验证不计入 Windows |
+| 签名 | 未配置数字签名证书 |
+
+上述 16 项运行门槛包含对包检查和 32 项驾驶子报告的核验，三个数字按层级记录，不相加作为独立测试总数。启动使用 `--headless --quit-after 15 -- --interactive-qa`，其中 15 指引擎迭代次数；驾驶专项另外运行生产载具与实际输入动作。
+
+ZIP SHA-256：
+
+```text
+38b0bdac943e1b1f6c62d9c451c9780a603382f0c72771127b1150118665abdd
+```
+
+[v0.1.9 完整 Windows 验证报告](evidence/v019-windows/windows-validation.json)包含逐文件身份、运行记录和驾驶专项结果；[v0.1.9 校验和](evidence/v019-windows/Windows-SHA256SUMS.txt)记录下载包与报告哈希。
 
 ### v0.1.8：历史基线
 
