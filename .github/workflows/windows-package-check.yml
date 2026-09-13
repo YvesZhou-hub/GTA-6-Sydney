@@ -83,7 +83,7 @@ jobs:
                       records[name]['uncompressed_bytes'] = sum(e.file_size for e in archive.infolist())
                       print('OFFICIAL_WINDOWS_TEMPLATE_ENTRIES', json.dumps(relevant))
                       # Install the complete official templates tree exactly once, including
-                      # auxiliary DLL subdirectories needed by the D3D12 fallback export.
+                      # any auxiliary files present in the verified official distribution.
                       for entry in archive.infolist():
                           parts = PurePosixPath(entry.filename).parts
                           if not parts or parts[0] != 'templates' or '..' in parts or '\\' in entry.filename:

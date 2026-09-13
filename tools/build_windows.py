@@ -60,7 +60,7 @@ application/product_version="0.1.8.0"
 application/product_name="Harbourlife"
 application/file_description="Harbourlife Sydney"
 application/copyright="Harbourlife contributors, 2026"
-application/export_d3d12=1
+application/export_d3d12=2
 application/export_angle=0
 '''
 
@@ -132,23 +132,18 @@ def main():
         with pck.open('rb') as stream:
             if stream.read(4) != b'GDPC':
                 raise RuntimeError('Missing or invalid external Godot PCK')
-        # D3D12 is an optional Windows fallback; its official DLLs must accompany it.
-        if not list(package.rglob('D3D12Core.dll')):
-            raise RuntimeError('D3D12 fallback requested but D3D12Core.dll was not exported')
         shutil.copytree(ROOT / 'licenses', package / 'licenses')
         for name in ('LICENSE', 'PLAY_PERMISSION.md'):
             shutil.copy2(ROOT / name, package / name)
-        (package / 'Start-D3D12.cmd').write_bytes(
-            b'@echo off\r\ncd /d "%~dp0"\r\nstart "Harbourlife" "Harbourlife.exe" --rendering-driver d3d12\r\n')
         (package / 'START-HERE.txt').write_text(
             'HARBOURLIFE / 悉尼海港 — Windows x86_64 0.1.8\n\n'
             '请先全部解压，再运行 Harbourlife.exe。无需安装 Godot。\n'
-            '保留旁边的 PCK、DLL、D3D12 子目录和 licenses；移动时移动整个文件夹。\n'
-            '默认使用 Vulkan。如显卡驱动不支持，可尝试 Start-D3D12.cmd。\n'
+            '保留旁边的 PCK 和 licenses；移动时移动整个文件夹。\n'
+            '使用 Vulkan 渲染，需要支持 Vulkan 的显卡与驱动。\n'
             'WASD 移动，鼠标观察，Tab 免费新增载具并立即驾驶，M 地图，Esc 菜单。\n'
             'T 调整日夜，F3 诊断，F5 保存；坦克/战斗机用 X 或左键开火。\n\n'
             'Unzip everything, then run Harbourlife.exe. Keep all accompanying files.\n'
-            'Optional Direct3D 12 launcher: Start-D3D12.cmd.\n'
+            'Uses Vulkan rendering. A Vulkan-capable GPU and driver are required.\n'
             'This preview is unsigned. Verification scope and download checksums:\n'
             'https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.1.8-preview.1\n'
             'Windows instructions: https://github.com/YvesZhou-hub/harbourlife/blob/main/docs/WINDOWS.md\n',
@@ -178,7 +173,7 @@ def main():
             'uncompressed_bytes': sum(entry['bytes'] for entry in manifest.values()),
             'app_identity': {'executable_sha256': digest(exe), 'pck_sha256': digest(pck)},
             'package_files': manifest, 'signature': 'Unsigned preview; no signing certificate configured',
-            'rendering': {'default': 'Vulkan Forward+', 'optional_launcher': 'Direct3D 12 Forward+',
+            'rendering': {'default': 'Vulkan Forward+',
                           'gpu_tested_by_build': False},
             'runtime_tested_by_build': False,
         }
