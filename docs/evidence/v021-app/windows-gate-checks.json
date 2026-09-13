@@ -1,0 +1,394 @@
+{
+  "passed": true,
+  "count": 34,
+  "checks": [
+    {
+      "name": "YAML parses and every embedded Python step compiles",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "manual release defaults to v0.2.1-preview.1",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter EXE runner has isolated user directories, fresh evidence and 300-second timeout",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "gate requires driving, survival and natural encounter behaviors",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "complete synthetic evidence is accepted",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "exit_code": 0,
+        "failed_gates": [],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing encounter report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_report_passed",
+          "every_encounter_check_passed",
+          "encounter_check_count_complete",
+          "requested_natural_encounters_exercised",
+          "encounter_completion_marker_matches_report",
+          "encounter_full_city_ready",
+          "encounter_headless_scope_confirmed",
+          "encounter_save_guard_confirmed",
+          "encounter_uses_production_automatic_loop"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "failed encounter report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_report_passed"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing required encounter behavior is rejected even with a consistent count",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "requested_natural_encounters_exercised"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "failed individual encounter check is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "every_encounter_check_passed",
+          "encounter_check_count_complete",
+          "requested_natural_encounters_exercised"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "duplicate passing encounter check names are rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_check_count_complete"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "incorrect encounter check count is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_check_count_complete",
+          "encounter_completion_marker_matches_report"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "native report cannot impersonate Windows headless evidence",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_headless_scope_confirmed"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing production world readiness is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_full_city_ready"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "disabled save guard is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_save_guard_confirmed"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "player-save access is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_save_guard_confirmed"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "disabled production autospawn is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_uses_production_automatic_loop"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "manually spawned enemy evidence is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_uses_production_automatic_loop"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "stale encounter report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "fresh_encounter_report_and_log"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "timed-out encounter process is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_process_exit_zero"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing encounter completion marker is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_completion_marker_matches_report"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "runtime warning from encounter phase is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "no_runtime_errors_or_warnings"
+        ],
+        "gate_count": 37,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "exact-commit draft accepts verified assets before its Git tag exists",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "matching existing lightweight tag accepts verified assets",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "annotated tag is resolved to the validated commit",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "exact-commit published release accepts verified assets without status mutation",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "floating release target main is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Release must use the specified tag and full source commit, not a floating branch"
+      }
+    },
+    {
+      "name": "wrong full release target commit is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Release must use the specified tag and full source commit, not a floating branch"
+      }
+    },
+    {
+      "name": "wrong release tag is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Release must use the specified tag and full source commit, not a floating branch"
+      }
+    },
+    {
+      "name": "package source commit mismatch is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Validated package must match the requested tag, repository and exact dispatched commit"
+      }
+    },
+    {
+      "name": "package repository mismatch is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Validated package must match the requested tag, repository and exact dispatched commit"
+      }
+    },
+    {
+      "name": "existing tag on another commit is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Existing Git tag does not resolve to the validated source commit"
+      }
+    },
+    {
+      "name": "published release without an exact Git tag is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Published release must have exactly one matching Git tag"
+      }
+    },
+    {
+      "name": "identical existing assets are retained without upload or clobber",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "different same-name asset rejects the whole upload during preflight",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Existing release asset differs; refusing replacement: windows-validation.json"
+      }
+    }
+  ],
+  "embedded_python_steps_compiled": 7,
+  "required_name_counts": {
+    "required_driving_checks": 12,
+    "required_survival_checks": 16,
+    "required_encounter_checks": 42
+  },
+  "workflow_sha256": "c8355412c11b1423eb6fe0903f1a0664e9ada2ffbd98a128024bffcb3b3dcc47",
+  "scope": "Local YAML/Python compilation, adversarial synthetic inputs to the real aggregate Windows CI gate, and mocked exact-commit release upload/preflight. No Windows EXE execution, build, actual GitHub operation or user save access."
+}

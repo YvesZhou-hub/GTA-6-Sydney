@@ -157,7 +157,7 @@ def main():
             'WASD 移动，鼠标观察，Tab 免费新增载具并立即驾驶，M 地图，Esc 菜单。\n'
             '跑车/摩托车用 Ctrl + A/D 漂移，Space 急刹，Shift 三倍增压。\n'
             'T 调整日夜，F3 诊断，F5 保存；步行/坦克/战斗机用 X 或左键开火。\n'
-            '奶龙危机：H 医疗包，B 维修/补给/升级，击败高等级奶龙获得更多金币。\n\n'
+            '奶龙持续刷新；V 自动追踪武器，H 急救/战地快修，B 补给/火控升级，弹药免费。\n\n'
             'Unzip everything, then run Harbourlife.exe. Keep all accompanying files.\n'
             'Uses Vulkan rendering. A Vulkan-capable GPU and driver are required.\n'
             'This preview is unsigned. Verification scope and download checksums:\n'

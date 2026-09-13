@@ -120,6 +120,32 @@ func run() -> void:
 	hud.update_state(state)
 	check("UI clamps invalid display values", hud._state.vehicle_health == 0 and hud._state.enemy_count == 0 and hud._state.medkits == 0)
 	check("new run clears previous attack pulses", hud._damage_time == 0 and hud._low_entry_time == 0)
+	state.vehicle_active = true
+	state.vehicle_health = 40.0
+	state.field_repair_cost = 1125
+	state.field_repair_cooldown = 0.0
+	state.money = 5000
+	hud.update_state(state)
+	check("full-health driver can click contextual vehicle repair", not hud._heal_button.disabled and "快修" in hud._heal_button.text and "1125" in hud._heal_button.text)
+	hud._request_heal()
+	check("repair button emits contextual recovery once", healing == 2)
+	state.field_repair_cooldown = 8.5
+	hud.update_state(state)
+	hud._request_heal()
+	check("repair cooldown disables the same button and shows time", hud._heal_button.disabled and "9" in hud._heal_button.text and healing == 2)
+	state.field_repair_cooldown = 0.0
+	state.money = 100
+	hud.update_state(state)
+	check("unaffordable field repair cannot be submitted", hud._heal_button.disabled)
+	state.money = 5000
+	state.field_repair_cost = 0
+	hud.update_state(state)
+	check("undamaged vehicle cannot spend money through HUD", hud._heal_button.disabled)
+	state.vehicle_active = false
+	state.medkits = 3
+	state.player_health = 60
+	hud.update_state(state)
+	check("leaving vehicle restores medical kit action", not hud._heal_button.disabled and "治疗" in hud._heal_button.text and "3" in hud._heal_button.text)
 	if "--visual" in OS.get_cmdline_user_args():
 		root.title = "Harbourlife Survival HUD Verification"
 		root.content_scale_size = Vector2i.ZERO

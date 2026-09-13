@@ -1,0 +1,29 @@
+{
+  "app_identity": {
+    "executable_sha256": "70eb0d8e8b25ef4ea657fa1a9d93e5e24f44dc3465432300524eb859079e305d",
+    "pck_sha256": "a8f6cb2b7dc5ee704b0b7410c1fe9f85e202bebbf88b7f7de3393a77b3449502"
+  },
+  "app_identity_unchanged": true,
+  "mode": "survival",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--survival-qa"
+  ],
+  "started_utc": "2026-09-13T15:16:34.256102+00:00",
+  "wall_seconds": 92.551,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 40,
+  "passed": false,
+  "screenshots": [
+    "services-paid-repair.png",
+    "five-nailong-city-hud.png",
+    "services-during-combat-blocked.png",
+    "tank-survival-impact-hud.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": [
+    "SURVIVAL_QA PASS production free tank spawn immediately seats pWARNING: 44 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+  ]
+}

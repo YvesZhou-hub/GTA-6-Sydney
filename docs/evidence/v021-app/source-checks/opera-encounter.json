@@ -1,0 +1,1473 @@
+{
+  "checks": [
+    {
+      "detail": {},
+      "name": "fixture uses production podium stairs, player collision and Jolt",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "actual player capsule triggers forward obstruction probe side=-1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "first_damage_seconds": 12.1833333333333,
+        "health_after_30_seconds": 48.0
+      },
+      "name": "entry grace protects health but expiry leads to natural damage side=-1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "furthest_after_contact": 1.82315218448639,
+        "lowest_after_contact": 15.700927734375,
+        "position": "(410.8603, 15.70093, -259.5283)"
+      },
+      "name": "cooldown holds legal melee station above Opera stairs side=-1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "health": 48.0,
+        "post_grace_attacks": 9
+      },
+      "name": "repeated attacks retain full telegraph and cooldown side=-1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "after_three_seconds": 5.96544885635376,
+        "initial": 14.1616468429565
+      },
+      "name": "moving target releases cooldown station and resumes pursuit side=-1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "actual player capsule triggers forward obstruction probe side=-1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "first_damage_seconds": 12.15,
+        "health_after_30_seconds": 48.0
+      },
+      "name": "entry grace protects health but expiry leads to natural damage side=-1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "furthest_after_contact": 1.81605875492096,
+        "lowest_after_contact": 15.700927734375,
+        "position": "(411.0787, 15.70093, -260.0737)"
+      },
+      "name": "cooldown holds legal melee station above Opera stairs side=-1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "health": 48.0,
+        "post_grace_attacks": 9
+      },
+      "name": "repeated attacks retain full telegraph and cooldown side=-1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "after_three_seconds": 5.37560892105103,
+        "initial": 13.5742521286011
+      },
+      "name": "moving target releases cooldown station and resumes pursuit side=-1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "actual player capsule triggers forward obstruction probe side=1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "first_damage_seconds": 12.1833333333333,
+        "health_after_30_seconds": 48.0
+      },
+      "name": "entry grace protects health but expiry leads to natural damage side=1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "furthest_after_contact": 1.77790653705597,
+        "lowest_after_contact": 15.700927734375,
+        "position": "(410.9244, 15.70093, -259.6033)"
+      },
+      "name": "cooldown holds legal melee station above Opera stairs side=1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "health": 48.0,
+        "post_grace_attacks": 9
+      },
+      "name": "repeated attacks retain full telegraph and cooldown side=1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {
+        "after_three_seconds": 5.87346887588501,
+        "initial": 14.0688276290894
+      },
+      "name": "moving target releases cooldown station and resumes pursuit side=1.0 close=true",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "actual player capsule triggers forward obstruction probe side=1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "first_damage_seconds": 12.15,
+        "health_after_30_seconds": 48.0
+      },
+      "name": "entry grace protects health but expiry leads to natural damage side=1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "furthest_after_contact": 1.81605875492096,
+        "lowest_after_contact": 15.700927734375,
+        "position": "(411.0787, 15.70093, -260.0737)"
+      },
+      "name": "cooldown holds legal melee station above Opera stairs side=1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "health": 48.0,
+        "post_grace_attacks": 9
+      },
+      "name": "repeated attacks retain full telegraph and cooldown side=1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {
+        "after_three_seconds": 5.37560892105103,
+        "initial": 13.5742521286011
+      },
+      "name": "moving target releases cooldown station and resumes pursuit side=1.0 close=false",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "wall cancellation begins from a natural close-range windup",
+      "passed": true
+    },
+    {
+      "detail": {
+        "health_after": 120.0,
+        "health_before": 120.0,
+        "state": "chase"
+      },
+      "name": "new wall cancels windup damage without freezing pursuit",
+      "passed": true
+    }
+  ],
+  "count": 23,
+  "passed": true,
+  "physics": "Jolt Physics",
+  "source_sha256": "31366dbada69ad15ad89fb08737b06e137738fa3cc883ed6b19bc44be7f3932c",
+  "traces": [
+    {
+      "attacks": [
+        {
+          "distance": 1.82315218448639,
+          "grace": 10.6333333333333,
+          "health": 120.0,
+          "time": 1.35
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 8.46666666666649,
+          "health": 120.0,
+          "time": 3.51666666666667
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 6.29999999999981,
+          "health": 120.0,
+          "time": 5.68333333333333
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 4.13333333333315,
+          "health": 120.0,
+          "time": 7.85
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 1.96666666666649,
+          "health": 120.0,
+          "time": 10.0166666666667
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 112.0,
+          "time": 12.1833333333333
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 104.0,
+          "time": 14.35
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 96.0,
+          "time": 16.5166666666667
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 88.0,
+          "time": 18.6833333333333
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 80.0,
+          "time": 20.85
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 72.0,
+          "time": 23.0166666666667
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 64.0,
+          "time": 25.1833333333333
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 56.0,
+          "time": 27.35
+        },
+        {
+          "distance": 1.82315218448639,
+          "grace": 0.0,
+          "health": 48.0,
+          "time": 29.5166666666667
+        }
+      ],
+      "close": true,
+      "samples": [
+        {
+          "cooldown": 0.683333333333333,
+          "distance": 1.80316746234894,
+          "health": 120.0,
+          "position": "(410.8882, 15.71389, -259.5616)",
+          "seconds": 0.0166666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 1.01666666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.833333333333335,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 2.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 3.01666666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 1.0,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 4.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.00000000000000032612801348364,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 5.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.16666666666667,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 6.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.166666666666667,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 7.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.33333333333333,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 8.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.333333333333334,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 9.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.5,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 10.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.5,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 11.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 120.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 12.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.666666666666667,
+          "distance": 1.82315218448639,
+          "health": 112.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 13.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 112.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 14.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.833333333333335,
+          "distance": 1.82315218448639,
+          "health": 104.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 15.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 104.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 16.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 1.0,
+          "distance": 1.82315218448639,
+          "health": 96.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 17.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.00000000000000032612801348364,
+          "distance": 1.82315218448639,
+          "health": 96.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 18.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.16666666666667,
+          "distance": 1.82315218448639,
+          "health": 88.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 19.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.166666666666667,
+          "distance": 1.82315218448639,
+          "health": 88.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 20.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.33333333333333,
+          "distance": 1.82315218448639,
+          "health": 80.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 21.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.333333333333334,
+          "distance": 1.82315218448639,
+          "health": 80.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 22.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.5,
+          "distance": 1.82315218448639,
+          "health": 72.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 23.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.5,
+          "distance": 1.82315218448639,
+          "health": 72.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 24.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 72.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 25.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.666666666666667,
+          "distance": 1.82315218448639,
+          "health": 64.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 26.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 64.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 27.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.833333333333335,
+          "distance": 1.82315218448639,
+          "health": 56.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 28.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.82315218448639,
+          "health": 56.0,
+          "position": "(410.8603, 15.70093, -259.5283)",
+          "seconds": 29.0166666666667,
+          "state": "windup"
+        }
+      ],
+      "side": -1.0
+    },
+    {
+      "attacks": [
+        {
+          "distance": 1.81605875492096,
+          "grace": 4.14999999999982,
+          "health": 120.0,
+          "time": 7.81666666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 1.98333333333316,
+          "health": 120.0,
+          "time": 9.98333333333333
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 112.0,
+          "time": 12.15
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 104.0,
+          "time": 14.3166666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 96.0,
+          "time": 16.4833333333333
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 88.0,
+          "time": 18.65
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 80.0,
+          "time": 20.8166666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 72.0,
+          "time": 22.9833333333333
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 64.0,
+          "time": 25.15
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 56.0,
+          "time": 27.3166666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 48.0,
+          "time": 29.4833333333333
+        }
+      ],
+      "close": false,
+      "samples": [
+        {
+          "cooldown": 0.683333333333333,
+          "distance": 21.8347663879395,
+          "health": 120.0,
+          "position": "(393.5798, 15.77389, -269.7974)",
+          "seconds": 0.0166666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 19.1744575500488,
+          "health": 120.0,
+          "position": "(395.8847, 15.70088, -268.4686)",
+          "seconds": 1.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 16.3738651275635,
+          "health": 120.0,
+          "position": "(398.3327, 15.70089, -267.1083)",
+          "seconds": 2.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 13.5731754302979,
+          "health": 120.0,
+          "position": "(400.7808, 15.70088, -265.7479)",
+          "seconds": 3.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 10.7724704742432,
+          "health": 120.0,
+          "position": "(403.2289, 15.70088, -264.3875)",
+          "seconds": 4.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 7.97172355651855,
+          "health": 120.0,
+          "position": "(405.677, 15.70088, -263.027)",
+          "seconds": 5.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 5.17101860046387,
+          "health": 120.0,
+          "position": "(408.1251, 15.70088, -261.6665)",
+          "seconds": 6.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 2.37035250663757,
+          "health": 120.0,
+          "position": "(410.5732, 15.70088, -260.3061)",
+          "seconds": 7.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.3,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 8.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.3,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 9.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.46666666666667,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 10.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.466666666666667,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 11.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 12.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.633333333333334,
+          "distance": 1.81605875492096,
+          "health": 112.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 13.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 112.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 14.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.800000000000001,
+          "distance": 1.81605875492096,
+          "health": 104.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 15.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 104.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 16.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.966666666666668,
+          "distance": 1.81605875492096,
+          "health": 96.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 17.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 96.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 18.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 1.13333333333333,
+          "distance": 1.81605875492096,
+          "health": 88.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 19.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.133333333333334,
+          "distance": 1.81605875492096,
+          "health": 88.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 20.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.3,
+          "distance": 1.81605875492096,
+          "health": 80.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 21.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.3,
+          "distance": 1.81605875492096,
+          "health": 80.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 22.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.46666666666667,
+          "distance": 1.81605875492096,
+          "health": 72.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 23.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.466666666666667,
+          "distance": 1.81605875492096,
+          "health": 72.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 24.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 72.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 25.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.633333333333334,
+          "distance": 1.81605875492096,
+          "health": 64.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 26.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 64.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 27.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.800000000000001,
+          "distance": 1.81605875492096,
+          "health": 56.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 28.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 56.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 29.0166666666667,
+          "state": "windup"
+        }
+      ],
+      "side": -1.0
+    },
+    {
+      "attacks": [
+        {
+          "distance": 1.77790653705597,
+          "grace": 10.6166666666666,
+          "health": 120.0,
+          "time": 1.35
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 8.44999999999982,
+          "health": 120.0,
+          "time": 3.51666666666667
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 6.28333333333314,
+          "health": 120.0,
+          "time": 5.68333333333333
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 4.11666666666648,
+          "health": 120.0,
+          "time": 7.85
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 1.94999999999982,
+          "health": 120.0,
+          "time": 10.0166666666667
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 112.0,
+          "time": 12.1833333333333
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 104.0,
+          "time": 14.35
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 96.0,
+          "time": 16.5166666666667
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 88.0,
+          "time": 18.6833333333333
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 80.0,
+          "time": 20.85
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 72.0,
+          "time": 23.0166666666667
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 64.0,
+          "time": 25.1833333333333
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 56.0,
+          "time": 27.35
+        },
+        {
+          "distance": 1.77790653705597,
+          "grace": 0.0,
+          "health": 48.0,
+          "time": 29.5166666666667
+        }
+      ],
+      "close": true,
+      "samples": [
+        {
+          "cooldown": 0.683333333333333,
+          "distance": 1.79694211483002,
+          "health": 120.0,
+          "position": "(410.8965, 15.71389, -259.57)",
+          "seconds": 0.0166666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 1.01666666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.833333333333335,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 2.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 3.01666666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 1.0,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 4.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.00000000000000032612801348364,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 5.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.16666666666667,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 6.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.166666666666667,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 7.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.33333333333333,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 8.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.333333333333334,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 9.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.5,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 10.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.5,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 11.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 120.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 12.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.666666666666667,
+          "distance": 1.77790653705597,
+          "health": 112.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 13.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 112.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 14.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.833333333333335,
+          "distance": 1.77790653705597,
+          "health": 104.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 15.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 104.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 16.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 1.0,
+          "distance": 1.77790653705597,
+          "health": 96.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 17.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.00000000000000032612801348364,
+          "distance": 1.77790653705597,
+          "health": 96.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 18.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.16666666666667,
+          "distance": 1.77790653705597,
+          "health": 88.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 19.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.166666666666667,
+          "distance": 1.77790653705597,
+          "health": 88.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 20.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.33333333333333,
+          "distance": 1.77790653705597,
+          "health": 80.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 21.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.333333333333334,
+          "distance": 1.77790653705597,
+          "health": 80.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 22.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.5,
+          "distance": 1.77790653705597,
+          "health": 72.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 23.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.5,
+          "distance": 1.77790653705597,
+          "health": 72.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 24.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 72.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 25.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.666666666666667,
+          "distance": 1.77790653705597,
+          "health": 64.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 26.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 64.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 27.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.833333333333335,
+          "distance": 1.77790653705597,
+          "health": 56.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 28.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.77790653705597,
+          "health": 56.0,
+          "position": "(410.9244, 15.70093, -259.6033)",
+          "seconds": 29.0166666666667,
+          "state": "windup"
+        }
+      ],
+      "side": 1.0
+    },
+    {
+      "attacks": [
+        {
+          "distance": 1.81605875492096,
+          "grace": 4.14999999999982,
+          "health": 120.0,
+          "time": 7.81666666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 1.98333333333316,
+          "health": 120.0,
+          "time": 9.98333333333333
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 112.0,
+          "time": 12.15
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 104.0,
+          "time": 14.3166666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 96.0,
+          "time": 16.4833333333333
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 88.0,
+          "time": 18.65
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 80.0,
+          "time": 20.8166666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 72.0,
+          "time": 22.9833333333333
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 64.0,
+          "time": 25.15
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 56.0,
+          "time": 27.3166666666667
+        },
+        {
+          "distance": 1.81605875492096,
+          "grace": 0.0,
+          "health": 48.0,
+          "time": 29.4833333333333
+        }
+      ],
+      "close": false,
+      "samples": [
+        {
+          "cooldown": 0.683333333333333,
+          "distance": 21.8347663879395,
+          "health": 120.0,
+          "position": "(393.5798, 15.77389, -269.7974)",
+          "seconds": 0.0166666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 19.1744575500488,
+          "health": 120.0,
+          "position": "(395.8847, 15.70088, -268.4686)",
+          "seconds": 1.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 16.3738651275635,
+          "health": 120.0,
+          "position": "(398.3327, 15.70089, -267.1083)",
+          "seconds": 2.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 13.5731754302979,
+          "health": 120.0,
+          "position": "(400.7808, 15.70088, -265.7479)",
+          "seconds": 3.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 10.7724704742432,
+          "health": 120.0,
+          "position": "(403.2289, 15.70088, -264.3875)",
+          "seconds": 4.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 7.97172355651855,
+          "health": 120.0,
+          "position": "(405.677, 15.70088, -263.027)",
+          "seconds": 5.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 5.17101860046387,
+          "health": 120.0,
+          "position": "(408.1251, 15.70088, -261.6665)",
+          "seconds": 6.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 2.37035250663757,
+          "health": 120.0,
+          "position": "(410.5732, 15.70088, -260.3061)",
+          "seconds": 7.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.3,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 8.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.3,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 9.01666666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.46666666666667,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 10.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.466666666666667,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 11.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 120.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 12.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.633333333333334,
+          "distance": 1.81605875492096,
+          "health": 112.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 13.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 112.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 14.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.800000000000001,
+          "distance": 1.81605875492096,
+          "health": 104.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 15.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 104.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 16.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.966666666666668,
+          "distance": 1.81605875492096,
+          "health": 96.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 17.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 96.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 18.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 1.13333333333333,
+          "distance": 1.81605875492096,
+          "health": 88.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 19.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.133333333333334,
+          "distance": 1.81605875492096,
+          "health": 88.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 20.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.3,
+          "distance": 1.81605875492096,
+          "health": 80.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 21.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.3,
+          "distance": 1.81605875492096,
+          "health": 80.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 22.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 1.46666666666667,
+          "distance": 1.81605875492096,
+          "health": 72.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 23.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.466666666666667,
+          "distance": 1.81605875492096,
+          "health": 72.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 24.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 72.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 25.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.633333333333334,
+          "distance": 1.81605875492096,
+          "health": 64.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 26.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 64.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 27.0166666666667,
+          "state": "windup"
+        },
+        {
+          "cooldown": 0.800000000000001,
+          "distance": 1.81605875492096,
+          "health": 56.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 28.0166666666667,
+          "state": "chase"
+        },
+        {
+          "cooldown": 0.0,
+          "distance": 1.81605875492096,
+          "health": 56.0,
+          "position": "(411.0787, 15.70093, -260.0737)",
+          "seconds": 29.0166666666667,
+          "state": "windup"
+        }
+      ],
+      "side": 1.0
+    }
+  ]
+}

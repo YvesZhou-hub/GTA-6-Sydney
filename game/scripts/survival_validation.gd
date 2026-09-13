@@ -8,7 +8,7 @@ var native := false
 var source_start: Dictionary = {}
 var spawn_records: Array[Dictionary] = []
 var performance_sample: Dictionary = {}
-const SOURCES := ["main", "harbor_survival", "nailong_enemy", "nailong_model", "survival_hud", "harbor_vehicle", "harbor_player", "vehicle_weapons", "survival_validation"]
+const SOURCES := ["main", "audio_shutdown", "harbor_survival", "nailong_enemy", "nailong_model", "survival_hud", "harbor_vehicle", "harbor_player", "vehicle_weapons", "vehicle_support_weapons", "survival_validation"]
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -174,6 +174,9 @@ func run():
 	game.set_process(false)
 	game.player.enabled = false
 	game.weapons.set_physics_process(false)
+	# This validator isolates the aimed main shell and exact reward accounting.
+	# Natural automatic support is covered separately by --encounter-qa.
+	game.weapons.set_auto_enabled(false)
 	game.survival.auto_spawn = false
 	game.survival.set_physics_process(false)
 	game.survival.grace = 0.0
@@ -251,8 +254,8 @@ func run():
 	await key_press(KEY_B)
 	check("physical B opens paused service menu with free pointer", game.active_panel == "survival" and game.paused and get_tree().paused and game.modal.visible and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
 	var medicine := find_button("补充医疗包")
-	check("nearby combat blocks purchase and hides combat HUD", is_instance_valid(medicine) and medicine.disabled and not game.hud.visible and not game.survival.service_block_reason().is_empty())
-	await capture("services-during-combat-blocked", stage.eye, stage.target, {"physical_B": true, "blocked_near_enemy": true})
+	check("nearby combat allows medical supplies while full repair stays blocked", is_instance_valid(medicine) and not medicine.disabled and not game.hud.visible and not game.survival.service_block_reason().is_empty())
+	await capture("services-during-combat-blocked", stage.eye, stage.target, {"physical_B": true, "full_repair_blocked_near_enemy": true, "medical_supplies_available": true})
 	game.close_panel()
 	game.survival.clear_enemies()
 	for frame in 2: await get_tree().physics_frame
@@ -324,6 +327,7 @@ func run():
 	await finish()
 
 func finish():
+	game.weapons.set_auto_enabled(true)
 	var source_end := sources()
 	var raw: Dictionary = raw_hashes(source_end)
 	var readable: bool = raw.size() == SOURCES.size()

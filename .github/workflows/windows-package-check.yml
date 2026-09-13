@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: Existing release to receive the verified Windows assets
+        description: Existing draft or published release pinned to this exact source commit
         required: true
-        default: v0.2.0-preview.1
+        default: v0.2.1-preview.1
         type: string
       publish:
         description: Upload only after validation; never replace a different existing asset
@@ -373,7 +373,69 @@ jobs:
           if not result['passed']:
               sys.exit(result.get('error', 'Survival QA failed'))
 
-      - name: Require world readiness, driving and survival checks, and clean fresh logs
+      - name: Run natural encounter QA from the exact extracted release EXE
+        shell: python
+        run: |
+          import datetime, json, os, shutil, subprocess, sys, time
+          from pathlib import Path
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          package = base / 'package/Harbourlife'
+          child_env = dict(os.environ)
+          child_env['APPDATA'] = str(base / 'encounter-user/roaming')
+          child_env['LOCALAPPDATA'] = str(base / 'encounter-user/local')
+          for key in ('APPDATA', 'LOCALAPPDATA'):
+              Path(child_env[key]).mkdir(parents=True, exist_ok=False)
+          # Observe the actual known-folder location as well as the requested
+          # process-local redirect, matching the driving report isolation guard.
+          user_roots = {Path(os.environ['APPDATA']) / 'Godot/app_userdata',
+                        Path(child_env['APPDATA']) / 'Godot/app_userdata'}
+          def encounter_reports():
+              return sorted({p.resolve() for folder in user_roots
+                             for p in folder.glob('*/encounter-qa/report.json') if p.is_file()})
+          result = {'passed': False, 'timed_out': False, 'exit_code': None,
+                    'fixed_physics_hz': 60, 'wall_timeout_seconds': 300,
+                    'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    'scope': 'Production exported Windows encounter integration in the full city, automatic spawning and pursuit at home, Opera, airport and CBD, 90-metre replacement with old threats retained, V/B controls and automatic tank support with actual H field repairs; headless, no native rendering claim.'}
+          started_ns = time.time_ns()
+          try:
+              if encounter_reports():
+                  raise RuntimeError('A encounter report already exists before this run; refusing stale evidence.')
+              log_names = ('encounter-engine.log', 'encounter-stdout.log', 'encounter-stderr.log')
+              if any((evidence / name).exists() for name in (*log_names, 'encounter-report.json')):
+                  raise RuntimeError('Encounter logs and collected report must be fresh for this run.')
+              with (evidence / 'encounter-stdout.log').open('wb') as stdout, (evidence / 'encounter-stderr.log').open('wb') as stderr:
+                  completed = subprocess.run(
+                      [str(package / 'Harbourlife.exe'), '--headless', '--fixed-fps', '60',
+                       '--log-file', str(evidence / 'encounter-engine.log'), '--', '--encounter-qa'],
+                      cwd=package, env=child_env, stdout=stdout, stderr=stderr,
+                      timeout=300, check=False)
+              result['exit_code'] = completed.returncode
+              if completed.returncode != 0:
+                  raise RuntimeError('Encounter QA EXE did not exit zero.')
+              reports = encounter_reports()
+              if len(reports) != 1:
+                  raise RuntimeError(f'Expected one fresh encounter report in observed Windows user directories; found {len(reports)}.')
+              original = reports[0]
+              result['report_original_path'] = str(original)
+              result['observed_user_data_directory'] = str(original.parent.parent)
+              result['report_fresh'] = original.stat().st_mtime_ns >= started_ns - 1_000_000_000
+              if not result['report_fresh']:
+                  raise RuntimeError('Encounter report timestamp predates this process.')
+              shutil.copy2(original, evidence / 'encounter-report.json')
+              result['passed'] = True
+          except subprocess.TimeoutExpired:
+              result['timed_out'] = True
+              result['error'] = 'Encounter QA exceeded 300 seconds; subprocess terminated and waited.'
+          except Exception as exc:
+              result['error'] = f'{type(exc).__name__}: {exc}'
+          finally:
+              result['finished_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+              (evidence / 'encounter-process.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+          if not result['passed']:
+              sys.exit(result.get('error', 'Encounter QA failed'))
+
+      - name: Require world readiness, driving, survival and natural encounters with clean logs
         if: ${{ always() }}
         shell: python
         run: |
@@ -392,10 +454,12 @@ jobs:
           package, process = read_json('package.json'), read_json('process.json')
           driving_process, driving = read_json('driving-process.json'), read_json('driving-report.json')
           survival_process, survival = read_json('survival-process.json'), read_json('survival-report.json')
+          encounter_process, encounter = read_json('encounter-process.json'), read_json('encounter-report.json')
           logs = {name: (evidence / name).read_text(encoding='utf-8-sig', errors='replace')
                   if (evidence / name).is_file() else '' for name in
                   ('stdout.log', 'stderr.log', 'engine.log', 'driving-stdout.log', 'driving-stderr.log', 'driving-engine.log',
-                   'survival-stdout.log', 'survival-stderr.log', 'survival-engine.log')}
+                   'survival-stdout.log', 'survival-stderr.log', 'survival-engine.log',
+                   'encounter-stdout.log', 'encounter-stderr.log', 'encounter-engine.log')}
           combined = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs.values()))
           runtime_errors = [line for line in combined.splitlines() if re.search(r'(?:SCRIPT ERROR|SHADER ERROR|FATAL ERROR|ERROR|WARNING):', line)]
           world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', combined, re.M)
@@ -404,6 +468,11 @@ jobs:
           survival_logs = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs[name] for name in
               ('survival-stdout.log', 'survival-stderr.log', 'survival-engine.log')))
           survival_markers = re.findall(r'^SURVIVAL_QA_COMPLETE (\d+) passed=true report=.+\s*$', survival_logs, re.M)
+          encounter_logs = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs[name] for name in
+              ('encounter-stdout.log', 'encounter-stderr.log', 'encounter-engine.log')))
+          encounter_markers = re.findall(r'^ENCOUNTER_QA_COMPLETE checks=(\d+) passed=true\s*$', encounter_logs, re.M)
+          encounter_world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', encounter_logs, re.M)
+          encounter_checks = encounter.get('checks', [])
           driving_checks = driving.get('checks', [])
           survival_checks = survival.get('checks', [])
           required_driving_checks = {
@@ -426,7 +495,7 @@ jobs:
               'physical H routes through main input to heal and consume one kit',
               'repeat H cannot spend another kit during cooldown',
               'physical B opens paused service menu with free pointer',
-              'nearby combat blocks purchase and hides combat HUD',
+              'nearby combat allows medical supplies while full repair stays blocked',
               'production free tank spawn immediately seats player',
               'production fire button launches occupied tank projectile',
               'actual tank blast kills real enemy and credits reward once',
@@ -440,6 +509,54 @@ jobs:
               isinstance(item, dict) and item.get('passed') is True and isinstance(item.get('name'), str)
               for item in survival_checks)
           survival_names = [item['name'] for item in survival_checks] if valid_survival_checks else []
+          required_encounter_checks = {
+              'complete production Sydney city and airport loaded',
+              'default new game actually enables automatic encounters',
+              'default home: automatic first enemy within 6 seconds',
+              'default home: at least 3 naturally spawned threats by 10 seconds',
+              'default home: natural pursuit closes at least 4 metres',
+              'default home: natural windup culminates in real damage',
+              'default home: preparation protects player until grace ends',
+              'Opera public upper podium: existing production walking surface',
+              'Opera public upper podium: automatic first enemy within 6 seconds',
+              'Opera public upper podium: natural windup culminates in real damage',
+              'Opera public upper podium: every initial capsule clear of city and vehicles',
+              'airport apron: automatic first enemy within 6 seconds',
+              'airport apron: natural windup culminates in real damage',
+              'CBD Pitt Street Mall: automatic first enemy within 6 seconds',
+              'CBD Pitt Street Mall: natural windup culminates in real damage',
+              'neighbouring encounter begins with zero kills and existing threats',
+              '90 metre move gets a new threat while old enemies are still alive',
+              'new nearby encounters require no kills and award no skipped clearance',
+              'real player input travels along Pitt Street Mall',
+              'leaving a district retires distant enemies and naturally replaces them',
+              'abandonment never pays kill or wave rewards',
+              'synthetic stale full-wave save retains kills but frees absent enemy slots',
+              'legacy wave respite is removed on state recovery',
+              'stale wave recovery resumes actual automatic spawning',
+              'normal free tank request succeeds and enters vehicle',
+              'production tank input moves the current target',
+              'tank airport pursuit: threats approach vehicle or are defeated by its automatic defence',
+              'physical V disables automatic support without leaving vehicle',
+              'physical V restores automatic support and runtime status',
+              'physical B opens paused field services with a usable pointer',
+              'B menu shows actual current and next damage radius reload plus V state',
+              'service controls have no overlap or horizontal text clipping',
+              'nearby enemies do not block paid weapon upgrades',
+              'actual B upgrade callback spends coins and improves area damage and reload',
+              'closing B resumes the same occupied tank and continuous encounters',
+              'continuous defence uses real paid H repairs with health recovery',
+              'repeat H is blocked by its production repair cooldown',
+              'real automatic tank defence reaches a rewarded kill milestone',
+              'kill milestone continues reinforcement without scheduled respite',
+              'tank survives the first continuous natural defence milestone',
+              'encounter cap respected throughout production simulation',
+              'production source identity stable during validation',
+          }
+          valid_encounter_checks = isinstance(encounter_checks, list) and bool(encounter_checks) and all(
+              isinstance(item, dict) and item.get('passed') is True and isinstance(item.get('name'), str)
+              for item in encounter_checks)
+          encounter_names = [item['name'] for item in encounter_checks] if valid_encounter_checks else []
           checks = {
               'package_checks_passed': package.get('passed') is True,
               'process_exit_zero': process.get('passed') is True and process.get('exit_code') == 0 and not process.get('timed_out', True),
@@ -472,6 +589,25 @@ jobs:
               'survival_full_city_ready': survival.get('world_ready') is True,
               'survival_headless_scope_confirmed': survival.get('native') is False and survival.get('display_driver') == 'headless',
               'survival_save_guard_confirmed': survival.get('user_saves_touched') is False and survival.get('save_written') is False,
+              'encounter_process_exit_zero': encounter_process.get('passed') is True and encounter_process.get('exit_code') == 0
+                  and not encounter_process.get('timed_out', True),
+              'fresh_encounter_report_and_log': encounter_process.get('report_fresh') is True and bool(logs['encounter-engine.log'].strip()),
+              'encounter_report_passed': encounter.get('passed') is True,
+              'every_encounter_check_passed': valid_encounter_checks,
+              'encounter_check_count_complete': encounter.get('count') == len(encounter_names) > 0
+                  and len(encounter_names) == len(set(encounter_names)),
+              'requested_natural_encounters_exercised': required_encounter_checks.issubset(encounter_names),
+              'encounter_completion_marker_matches_report': bool(encounter_markers)
+                  and all(int(count) == encounter.get('count') for count in encounter_markers),
+              'encounter_full_city_ready': encounter.get('world_ready') is True and bool(encounter_world)
+                  and all(int(buildings) > 10000 and int(components) > 10000 for buildings, components in encounter_world),
+              'encounter_headless_scope_confirmed': encounter.get('native') is False
+                  and encounter.get('display_driver') == 'headless' and encounter.get('physics_hz') == 60,
+              'encounter_save_guard_confirmed': encounter.get('qa_running') is True
+                  and encounter.get('user_saves_touched') is False and encounter.get('save_written') is False,
+              'encounter_uses_production_automatic_loop': encounter.get('direct_enemy_spawn_calls') == 0
+                  and encounter.get('forced_damage_calls') == 0 and encounter.get('auto_spawn_enabled') is True,
+
           }
           current = {}
           for field, name in (('executable_sha256', 'Harbourlife.exe'), ('pck_sha256', 'Harbourlife.pck')):
@@ -481,16 +617,19 @@ jobs:
           checks['exe_pck_unchanged_after_run'] = bool(current) and current == package.get('app_identity')
           report = {'passed': all(checks.values()), 'checks': checks, 'check_count': len(checks),
                     'package': package, 'process': process, 'driving_process': driving_process,
-                    'driving': driving, 'survival_process': survival_process, 'survival': survival, 'app_identity_after': current,
+                    'driving': driving, 'survival_process': survival_process, 'survival': survival,
+                    'encounter_process': encounter_process, 'encounter': encounter, 'app_identity_after': current,
                     'runtime_errors': runtime_errors, 'world_ready_counts': world,
                     'interactive_ready_components': interactive,
                     'driving_complete_counts': driving_markers,
                     'survival_complete_counts': survival_markers,
+                    'encounter_complete_counts': encounter_markers, 'encounter_world_ready_counts': encounter_world,
                     'log_sha256': {name: digest(evidence / name) for name in logs if (evidence / name).is_file()},
                     'driving_report_sha256': digest(evidence / 'driving-report.json') if (evidence / 'driving-report.json').is_file() else None,
                     'survival_report_sha256': digest(evidence / 'survival-report.json') if (evidence / 'survival-report.json').is_file() else None,
-                    'scope': 'Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state; full-city survival enemy spawning, damage, H/B input, tank projectile rewards and paid fleet repair. Exported scripts may be compiled resources; external executable/PCK hashes identify the tested build. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
-                    'save_isolation': 'Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving and survival report locations are observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa, --driving-qa and --survival-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving or survival evidence causes failure.'}
+                    'encounter_report_sha256': digest(evidence / 'encounter-report.json') if (evidence / 'encounter-report.json').is_file() else None,
+                    'scope': 'Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state; full-city survival enemy spawning, damage, H/B input, tank projectile rewards and paid fleet repair; natural home/Opera/airport/CBD encounters, pursuit and neighbouring reinforcement while old enemies remain, stale-wave recovery, V/B controls and paid fire-control upgrades, automatic tank support with actual H field repairs. Exported scripts may be compiled resources; external executable/PCK hashes identify the tested build. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
+                    'save_isolation': 'Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving, survival and encounter report locations are observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa, --driving-qa, --survival-qa and --encounter-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving, survival or encounter evidence causes failure.'}
           (evidence / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8') as summary:
               summary.write('## Windows package headless check\n\n')
@@ -498,6 +637,7 @@ jobs:
               summary.write('ZIP SHA256: `' + package.get('archive_sha256', 'unavailable') + '`\n\n')
               summary.write('Production driving checks: ' + str(len(driving_names)) + '; report passed: ' + str(driving.get('passed', False)) + '.\n\n')
               summary.write('Production survival checks: ' + str(len(survival_names)) + '; report passed: ' + str(survival.get('passed', False)) + '.\n\n')
+              summary.write('Production natural encounter checks: ' + str(len(encounter_names)) + '; report passed: ' + str(encounter.get('passed', False)) + '.\n\n')
               summary.write(report['scope'] + '\n')
           print('WINDOWS_PACKAGE_CHECK', json.dumps({'passed': report['passed'], 'checks': checks}))
           if not report['passed']:
@@ -516,7 +656,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Publish only verified files to the existing release
+      - name: Upload only verified files to the exact-commit release without publishing it
         if: ${{ success() && inputs.publish }}
         shell: python
         env:
@@ -556,10 +696,30 @@ jobs:
           sums.write_text(''.join(digest(p) + '  ' + p.name + '\n' for p in (archive, validation)), encoding='utf-8')
           files = [archive, validation, sums]
           tag, repo = os.environ['RELEASE_TAG'], os.environ['GITHUB_REPOSITORY']
+          commit = package.get('build', {}).get('source_commit', '')
+          if (not re.fullmatch(r'[0-9a-f]{40}', commit) or commit != os.environ['GITHUB_SHA']
+                  or package.get('release_tag') != tag or package.get('repository') != repo):
+              raise RuntimeError('Validated package must match the requested tag, repository and exact dispatched commit')
           release = json.loads(subprocess.check_output(['gh', 'release', 'view', tag, '--repo', repo,
-                                                      '--json', 'tagName,isDraft,assets'], text=True))
-          if release['tagName'] != tag or release['isDraft']:
-              raise RuntimeError('Target must be the specified existing published release')
+                                                      '--json', 'tagName,isDraft,targetCommitish,assets'], text=True))
+          if (release['tagName'] != tag or release.get('targetCommitish') != commit
+                  or not isinstance(release.get('isDraft'), bool)):
+              raise RuntimeError('Release must use the specified tag and full source commit, not a floating branch')
+          # A draft may not create its Git tag until publication. Existing tags must
+          # still resolve to this commit, including annotated tags; never retarget one.
+          refs = json.loads(subprocess.check_output(['gh', 'api', f'repos/{repo}/git/matching-refs/tags/{tag}'], text=True))
+          refs = [ref for ref in refs if ref.get('ref') == 'refs/tags/' + tag]
+          if len(refs) > 1 or (not refs and not release['isDraft']):
+              raise RuntimeError('Published release must have exactly one matching Git tag')
+          if refs:
+              obj = refs[0]['object']
+              for _ in range(8):
+                  if obj.get('type') != 'tag':
+                      break
+                  obj = json.loads(subprocess.check_output(
+                      ['gh', 'api', f'repos/{repo}/git/tags/{obj["sha"]}'], text=True))['object']
+              if obj.get('type') != 'commit' or obj.get('sha') != commit:
+                  raise RuntimeError('Existing Git tag does not resolve to the validated source commit')
           existing = {asset['name'] for asset in release['assets']}
           missing = []
           # Preflight every same-name asset before uploading anything. Never use --clobber.
@@ -574,4 +734,4 @@ jobs:
                       raise RuntimeError('Existing release asset differs; refusing replacement: ' + path.name)
           if missing:
               subprocess.run(['gh', 'release', 'upload', tag, '--repo', repo, *map(str, missing)], check=True)
-          print('WINDOWS_RELEASE_ASSETS_VERIFIED', tag, ', '.join(p.name for p in files))
+          print('WINDOWS_RELEASE_ASSETS_VERIFIED', tag, commit, 'draft=' + str(release['isDraft']), ', '.join(p.name for p in files))

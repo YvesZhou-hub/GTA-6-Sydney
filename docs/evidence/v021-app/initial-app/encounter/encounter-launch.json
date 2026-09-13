@@ -1,0 +1,32 @@
+{
+  "app_identity": {
+    "executable_sha256": "b2caae3b519870c1a2335076e363bf9a23dfdaf32fdda5f372adc312c2a98c43",
+    "pck_sha256": "e424531ed8a11be892f564a1a9e3b4fc70b33ad08dcde2a90eebd6b117577881"
+  },
+  "app_identity_unchanged": true,
+  "mode": "encounter",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--encounter-qa"
+  ],
+  "started_utc": "2026-09-13T14:19:21.734986+00:00",
+  "wall_seconds": 242.1,
+  "exit_code": 1,
+  "report_fresh": true,
+  "checks": 96,
+  "passed": false,
+  "screenshots": [
+    "tank airport pursuit.png",
+    "CBD Pitt Street Mall.png",
+    "automatic tank support with player H field repairs.png",
+    "tank fire control B menu.png",
+    "Opera public upper podium.png",
+    "airport apron.png",
+    "default home.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

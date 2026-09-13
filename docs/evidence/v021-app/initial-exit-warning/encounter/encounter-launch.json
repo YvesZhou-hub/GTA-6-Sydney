@@ -1,0 +1,34 @@
+{
+  "app_identity": {
+    "executable_sha256": "70eb0d8e8b25ef4ea657fa1a9d93e5e24f44dc3465432300524eb859079e305d",
+    "pck_sha256": "a8f6cb2b7dc5ee704b0b7410c1fe9f85e202bebbf88b7f7de3393a77b3449502"
+  },
+  "app_identity_unchanged": true,
+  "mode": "encounter",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--encounter-qa"
+  ],
+  "started_utc": "2026-09-13T14:53:04.709018+00:00",
+  "wall_seconds": 1087.354,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 96,
+  "passed": false,
+  "screenshots": [
+    "tank airport pursuit.png",
+    "CBD Pitt Street Mall.png",
+    "automatic tank support with player H field repairs.png",
+    "tank fire control B menu.png",
+    "Opera public upper podium.png",
+    "airport apron.png",
+    "default home.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": [
+    "ENCOUNTER_QA PASS real automatic tank defence reaches a rewarded kill milestone {\"cleared\":1,\"elapsed_s\":42.9833333333333,\"final_spawn_sequence\":18,\"first_clear_s\":36.9833333333333,\"natural_kills\":7,\"net_money_change\":-20,\"player_actions\":\"Automatic support remains enabled; real H events buy repairs below 50% health and test cooldown. No main-cannon fire or direct health writes.\",\"region\":\"automatic tank support with player H field repairs\",\"remaining_enemies\":9,\"repairs\":[{\"balance_after\":41835,\"balance_before\":42960,\"coins_paid\":1125,\"concurrent_kill_rewards\":0,\"cooldown_after_s\":11.9833333333333,\"elapsed_s\":25.6333333333333,\"expected_cost\":1125,\"health_after\":72.8333333333334,\"health_before\":47.8333333333334,\"net_durability_gain\":25.0,\"repeat_H_charged\":false},{\"balance_after\":42140,\"balance_before\":43265,\"coins_paid\":1125,\"concurrent_kill_rewards\":0,\"cooldown_after_s\":11.9833333333333,\"elapsed_s\":37.6,\"expected_cost\":1125,\"health_after\":55.5,\"health_before\":30.5,\"net_durability_gain\":25.0,\"repeat_H_charged\":false}],\"rest_stayed_zero\":true,\"spawn_sequence_at_clear\":16,\"vehicle_health\":40.8333333333334,\"weapons\":{\"active_projectiles\":0,\"ammo_cost\":0,\"available\":true,\"blocked\":0,\"enabled\":true,\"expired\":0,\"fired\":92,\"hits\":91,\"locked\":true,\"mount_count\":1,\"profile\":{\"ammo_cost\":0,\"cooldWARNING: 48 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+  ]
+}

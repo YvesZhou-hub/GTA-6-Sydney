@@ -1,3 +1,71 @@
+# v0.2.1 持续遭遇验证：源码已测，最终包待验
+
+本轮十一份局部生产脚本报告合计 **515/515 项通过**，包括管理器满容量时的换区增援边界和歌剧院上平台近身攻击站位。这些检查使用实际敌人、载具、武器和物理脚本，但多数场景是受控夹具，不能替代完整城市或下载包的验收。
+
+| 局部源码验证 | 通过数 |
+| --- | ---: |
+| [连续增援、压力控制与旧波次恢复](evidence/v021-app/source-checks/encounter-director.json) | 37/37 |
+| [追踪、绕障与攻击视线](evidence/v021-app/source-checks/enemy-pursuit.json) | 15/15 |
+| [歌剧院真实台阶上的接近、冷却站位与扣血](evidence/v021-app/source-checks/opera-encounter.json) | 23/23 |
+| [战地快修、原子计费与冷却](evidence/v021-app/source-checks/field-service.json) | 35/35 |
+| [五类敌人、等级与奖励](evidence/v021-app/source-checks/nailong-enemies.json) | 52/52 |
+| [战斗、经济、共享车队与恢复](evidence/v021-app/source-checks/survival-loop.json) | 60/60 |
+| [载具耐久、损毁与武器状态](evidence/v021-app/source-checks/survival-vehicle.json) | 113/113 |
+| [11 类载具的自动追踪辅助武器](evidence/v021-app/source-checks/vehicle-support.json) | 47/47 |
+| [主炮范围、伤害与装填升级](evidence/v021-app/source-checks/weapon-upgrade.json) | 47/47 |
+| [生命、载具快修与辅助武器 HUD](evidence/v021-app/source-checks/survival-hud.json) | 37/37 |
+| [实际炮弹、碰撞与爆炸判伤](evidence/v021-app/source-checks/combat-weapons.json) | 49/49 |
+
+上述计数逐份核对本地报告的检查列表，不累计本页后面的历史版本结果。报告证明其记录的源码运行；只有最终导出文件的外部 EXE/PCK 哈希与构建清单可以确认发行包身份。
+
+管理器容量夹具另外把 24 个旧敌人放在 80–89 米外，观察到约 0.6 秒出现新敌人，6 秒时本地 4 只、全局仍为 24 只；同时检查不删除可见/近身敌人、只回收必需的远处名额、不发击败奖励。这是受控容量边界，区别于下面的自然完整城市遭遇。
+
+歌剧院专项使用生产平台/楼梯、玩家胶囊和敌人脚本，交叉检查两种避障方向及近处/22 米起点。修复后四组怪物都留在约 15.7 米高的平台上，保护时间后约 12.15–12.20 秒发生真实扣血，避免冷却中把玩家当成障碍而绕下楼梯。该专项不替代最终 App 的自然刷新回归。
+
+## 新增完整城市自然遭遇回归
+
+[`--encounter-qa`](../game/scripts/encounter_validation.gd) 从默认家门口开始，让人物实际落地并等待**生产管理器自行生成和追击**；另外检查歌剧院公开上平台、悉尼机场地面和 Pitt Street Mall。它不会调用手动造怪、直接伤害或跳过保护时间来制造成功。
+
+检查包括首次生成、开始追近和第一次真实攻击的时间；实际行走与坦克驾驶；移动 90 米后，旧怪仍存活、未清完甚至零击败时，新位置仍能增援；跨区离开的名额回收；合成陈旧波次记录恢复；实际 V/B 输入、菜单当前/下一级火控数值与付费升级。连续战斗段采用**自动副炮 + 玩家 H 付费快修**，验证达到清理奖励后仍继续补怪；报告记录实际金币、耐久增量和冷却，不能理解为纯挂机自动清场。地区起点与两段换区位置是测试设置，未模拟一路从市区开到机场；未使用的停放载具被冻结。
+
+早期完整城市对比中，旧管理器在家门口约 **26.02 秒**出现第一只、**39.07 秒**第一次受伤；新管理器约 **1.02 秒**出现、**13.37 秒**受伤。机场的 90 米换区观察中，保留 3 只旧怪，约 1.28 秒出现新怪，击败数、清理数和金币没有变化。这些是对应场景的观察值，不保证全城任意位置都能使用同一时间。
+
+首次导出的 v0.2.1 Mac App 自然遭遇为 **95/96**，受控生存为 **40/40**；两次正常完成、包体哈希未变且日志无错误/警告。自然遭遇唯一失败是歌剧院上平台：怪物实际接近并开始前摇，但 30 秒观察内没有产生真实伤害。该结果保留为缺陷证据，不能算全通过。自动副炮配合真实 H 快修的连续战斗已通过，实际三次各花 1125 金币、各恢复 25 点耐久，并验证重复按 H 不重复收费。
+
+[首次自然遭遇报告](evidence/v021-app/initial-app/encounter/encounter-report.json) · [首次 App 身份绑定](evidence/v021-app/initial-app/encounter/encounter-launch.json) · [同包生存报告](evidence/v021-app/initial-app/survival/survival-report.json) · [首次构建清单](evidence/v021-app/initial-app/build.json)。**修复后的 Mac App 及 v0.2.1 Windows EXE 仍待各自完整验收。** Windows 不使用 Mac 截图或通过数代替实测。
+
+修复歌剧院站位与底部按键提示后，第二次验证的游戏断言分别为 **96/96、40/40**；歌剧院约 11.95 秒实际扣血，底部两行提示均在画面内。但两次退出分别出现 48/44 个 ObjectDB 对象泄漏警告，外部原生门禁因此仍为失败，尚未放行。[自然遭遇退出门禁](evidence/v021-app/initial-exit-warning/encounter/encounter-launch.json)与[生存退出门禁](evidence/v021-app/initial-exit-warning/survival/survival-launch.json)保留原始失败状态；不能只引用游戏内部通过数。
+
+同包 `--verbose --survival-qa` 将 44 个泄漏对象定位为 22 个 `AudioStreamWAV` 和 22 个 `AudioStreamPlaybackWAV`。[音频退出诊断及五组日志](evidence/v021-app/audio-diagnostic/diagnostic.json)进一步记录：宿主 CoreAudio 在 22 辆真实车的 1 秒观察中没有混音周期，最小单音频播放器的 3 秒观察也未混音。Dummy 仅等待原来的五帧同样泄漏；等待实际三个混音周期、约 205 毫秒后才零泄漏。因此只换驱动或用渲染帧数代替音频清理都不充分，宿主 CoreAudio 未混音的原因尚未确认。
+
+新的 [`audio_shutdown.gd`](../game/scripts/audio_shutdown.gd) 在停止声音前仅保留播放对象的弱引用，停止并清空音频流后，等待这些对象实际释放；实际墙钟 1 秒只是防止异常设备阻止退出的上限，不是固定等待时长。它解决正常混音状态下过早退出的竞争问题，未修改音频设备或默认驱动。上面的未混音观察属于早前的宿主状态，不能据此断言 CoreAudio 始终失效。
+
+该退出契约的原生小场景分别通过 [Dummy 11/11](evidence/v021-app/audio-diagnostic/shutdown-dummy.json) 和[恢复混音后的 CoreAudio 11/11](evidence/v021-app/audio-diagnostic/shutdown-coreaudio-restored.json)。22 辆真实车的播放对象分别在约 44/6 毫秒释放，另测普通/2D 音频节点、重复退出和已到期限时如实返回未完成；两组均零泄漏警告。它们是同一套专项在两个驱动下的结果，单列而不加入上方 515 项；设备后来恢复混音的原因未确认，声音仍未人工实听。
+
+最终 App 会先采用默认 CoreAudio 路径进行原生验收；若宿主再次停止混音，将保留该次失败，再另行显式使用 `--audio-driver Dummy` 验证 Metal 画面与完整物理。Dummy 不输出可听声音，只作用于该 QA 进程，不改游戏包、系统设备或默认音效，也不证明 CoreAudio 设备问题已修复。运行记录包含是否覆盖驱动和 `audio_listening_verified: false`，任何驱动下的错误或警告仍会令外部门禁失败。
+
+现有 [`--survival-qa`](../game/scripts/survival_validation.gd) 继续检查五型模型、实际炮弹、治疗和付费维修；为了验证主炮的单次击败奖励，该受控回归会关闭自动副武器，结束时恢复。当前规则允许战斗中补充医疗包，完整维修仍受安全停车和脱战条件限制。
+
+复现命令，在仓库根目录运行：
+
+```sh
+tools/runtime/godot --headless --path game --fixed-fps 60 --script ../source/encounter_test.gd -- --encounter-qa
+python3 tools/verify_native.py encounter --app /path/to/Harbourlife.app --output reports/v021-final-app/encounter
+python3 tools/verify_native.py survival --app /path/to/Harbourlife.app --output reports/v021-final-app/survival
+```
+
+原生运行器绑定运行前后的 App/PCK SHA-256，并收集新鲜报告、截图和日志。省略 `--audio-driver` 则使用引擎默认音频驱动，仍不代表人工实听。自然回归使用固定物理步长，不能当作 FPS 或长期难度平衡测试。所有游戏 QA 跳过真实设置、槽位及玩家存档的读取，不保存测试世界。
+
+## Windows CI 门禁的本地验证
+
+新增自然遭遇阶段后，Windows 工作流包含 **37 项聚合门禁**，其中核对 12 个驾驶、16 个受控生存及 42 个自然遭遇的必需检查名称。每阶段从同一最终 ZIP 解出的 EXE 运行，独立临时用户目录、300 秒时限，并要求报告新鲜、全部检查通过且名称唯一、计数与完成标记一致、完整世界就绪、存档隔离，以及无运行错误或警告。
+
+[`windows_package_gate_test.py`](../source/windows_package_gate_test.py) 已通过 **34/34 项本地门禁检查**，YAML 与全部 7 段嵌入 Python 均可解析/编译。测试把合成证据交给工作流真实聚合代码，确认缺报告、缺必需项、失败项、重复名称、伪造计数、超时、旧报告、关闭自动刷新、访问存档及日志告警会被拒绝。另外以完全拦截 GitHub 命令的方式执行真实资产上传步骤，验证完整提交/标签绑定、草稿、注解标签、同名文件 SHA-256，以及拒绝浮动分支和不同版本覆盖。该结果不表示 Windows 游戏已经执行或已上传，也不与游戏源码检查数相加。
+
+以下保留各版本的原始验证记录，不将旧包通过数计入 v0.2.1。
+
+---
+
 # v0.2.0 奶龙危机验证
 
 最终导出的 Apple Silicon Mac App 已通过 **40/40 原生完整城市检查**，退出码为 0，并人工检查四张截图。验证包括五型奶龙真实落地、攻击前摇和人物扣血、H 治疗与冷却、坦克弹丸击杀并增加金币、B 暂停/鼠标释放，以及付费维修和装甲减伤。

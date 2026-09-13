@@ -1,0 +1,264 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "preallocated projectile and effects capacities",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "occupied tank fires",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "cooldown prevents immediate repeat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "swept shell hits 25mm wall beyond excluded player",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank hit attributes source and gameplay energy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "one projectile emits exactly one impact",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new vehicle has independent cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "switch back does not reset previous cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "reject ineligible vehicle occupied",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "reject ineligible vehicle health",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "reject ineligible vehicle kind",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "inactive world cannot fire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paused world cannot fire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production modal gate prevents firing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "missing muzzle rejects safely",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank turret turns behind without turning chassis",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "barrel maximum elevation is 70 degrees",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "barrel depression limit is minus12 degrees",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "keyboard actions independently raise and traverse",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter launches while camera faces sideways",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rocket follows muzzle and inherits 2000kmh shooter velocity",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "2000kmh swept rocket cannot skip 25mm wall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter damage callback uses independent profile",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "barrel already through wall still fires valid obstruction hit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "chamber sweep prevents firing from wall far side",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "overlapping muzzle produces immediate single hit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "pause freezes projectile age and cooldown clock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "miss expires without phantom damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "reticle prediction uses cannon gravity and lifetime",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Q Z traverse shifts projected reticle with real muzzle",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "switching vehicles retains per-vehicle manual aim offsets",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "restored manual aim remains stable for60 controller frames",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "restored pose marker consumed and offsets retained",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "prediction agrees with forward thin wall collision",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "projectile pool admits32 and rejects33 without overwriting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeated fire never allocates extra scene nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "effect-only API never applies world damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "100 explosions reuse bounded12slot pool",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "smoke persists after short flash and light end",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "visual debris creates no extra rigid bodies",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all effect slots naturally expire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clear removes all active shots and transient references",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clear resets cooldown and retains reusable capacity",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production fixture initially has collision",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real harbor_world blast destroys registered structure",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "destroyed wall no longer collides",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "explicit repair restores visible structure",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "serialized damage restores persistent destruction",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeated setup reuses both pools",
+			"passed": true
+		}
+	],
+	"count": 49,
+	"engine": "4.7.2-stable (official)",
+	"headless": true,
+	"passed": true,
+	"scope": "Small real Jolt space plus production harbor_world damage/save-state component fixture. No main UI, native visuals, full city or user save accessed.",
+	"source_sha256": {
+		"res://../source/combat_weapons_test.gd": "d854f9ca5cf809352373620df4f3e383d683e220a9c55653d55a3d360d8a39bd",
+		"res://assets/fx/artillery_smoke.png": "35980e299a6702614b47b45ddf7fb1472de919f427847b95d8aac81982d5fe5c",
+		"res://scripts/combat_effects.gd": "e096bda1ee734d796bc1782aa5b331f8d25fbc2caef2569aa79a7f0b81265d7e",
+		"res://scripts/vehicle_weapons.gd": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98",
+		"res://scripts/weapon_audio.gd": "44614e08ecba3d11fe5cba4eadfec9f47a9402326d1b44ecc081419e4f8ff752",
+		"res://shaders/combat_cloud.gdshader": "25751a0faf6850db6d685e2dc9961271b43edabd3ac36106992f60a862aaf782",
+		"res://shaders/combat_pressure.gdshader": "c29d92e22adb813722650df523fbbd66843a3186585869d5d8feeaf53423d513"
+	},
+	"user_saves_touched": false
+}

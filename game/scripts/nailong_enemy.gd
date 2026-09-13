@@ -41,6 +41,10 @@ var _body_scale := 1.0
 var _shape_target_id: int = 0
 var _target_shapes: Array[CollisionShape3D] = []
 var _shape_bounds: Dictionary = {}
+var _detour_direction := Vector3.ZERO
+var _stuck_seconds := 0.0
+var _blocked_seconds := 0.0
+var _pursuit_seconds := 0.0
 
 func configure(type: String, level: int = 1) -> void:
 	# A configured enemy has one identity and one health/reward lifecycle.
@@ -110,14 +114,21 @@ func _ready() -> void:
 	_sensing_left = float(get_instance_id()%13)*.015
 
 func set_target(value: Node3D) -> void:
+	if target==value: return
 	target = value
 	_shape_target_id = 0
 	_target_shapes.clear()
 	_sensing_left = 0.0
 	_line_clear = false
-	if not is_instance_valid(target):
-		_windup_left = 0.0
-		state = "idle"
+	# Entering another vehicle must not inherit a strike aimed at the old target.
+	_windup_left = 0.0
+	_warning.visible = false
+	_steering = Vector3.ZERO
+	_detour_direction = Vector3.ZERO
+	_stuck_seconds = 0.0
+	_blocked_seconds = 0.0
+	_pursuit_seconds = 0.0
+	state = "idle"
 
 func take_damage(amount: float, hit_position: Vector3 = Vector3.ZERO) -> float:
 	if dead or not is_finite(amount) or amount<=0.0: return 0.0
@@ -205,16 +216,38 @@ func has_line_of_sight(value: Node3D = null) -> bool:
 func _choose_direction(wanted: Vector3) -> Vector3:
 	if wanted.length_squared()<.01: return Vector3.ZERO
 	var look_ahead := maxf(1.1,float(spec.speed)*.38)
-	if not test_move(global_transform,wanted*look_ahead): return wanted
+	var collision := KinematicCollision3D.new()
+	# Keep walking around a wall until a useful stretch toward the target is clear.
+	# Re-scoring only against target bearing made wide facades cause oscillation.
+	var direct_probe := maxf(4.5,look_ahead) if _detour_direction.length_squared()>.01 else look_ahead
+	var obstructed := test_move(global_transform,wanted*direct_probe,collision)
+	if not obstructed and _has_walkable_floor(wanted,look_ahead):
+		_detour_direction = Vector3.ZERO
+		return wanted
+	if _detour_direction.length_squared()<.01:
+		var normal := collision.get_normal() if obstructed else -wanted
+		normal.y = 0.0
+		_detour_direction = normal.normalized().cross(Vector3.UP)*_avoid_side
+		if _detour_direction.length_squared()<.01: _detour_direction = wanted.rotated(Vector3.UP,PI*.5*_avoid_side)
 	var result := Vector3.ZERO
 	var best := -10.0
-	for angle in [.65,1.15,1.57,2.1,2.7]:
-		for side in [_avoid_side,-_avoid_side]:
-			var candidate := wanted.rotated(Vector3.UP,angle*side)
-			if test_move(global_transform,candidate*look_ahead): continue
-			var score := candidate.dot(wanted)+(.12 if side==_avoid_side else 0.0)
-			if score>best: best=score; result=candidate
+	for angle in [0.0,.45,-.45,.85,-.85,1.3,-1.3,1.8,-1.8,2.5,-2.5,PI]:
+		var candidate := _detour_direction.rotated(Vector3.UP,angle)
+		if test_move(global_transform,candidate*look_ahead): continue
+		if not _has_walkable_floor(candidate,look_ahead): continue
+		var score := candidate.dot(_detour_direction)*2.0+candidate.dot(wanted)*.35
+		if score>best: best=score; result=candidate
+	if result.length_squared()>.01: _detour_direction=result
 	return result
+
+func _has_walkable_floor(direction: Vector3, look_ahead: float) -> bool:
+	# A local probe keeps ground enemies on quays and roofs instead of walking
+	# into water while chasing. Movement and stair clearance still use the body.
+	if not is_on_floor(): return true
+	var point := global_position+direction*maxf(.8,look_ahead)
+	var query := PhysicsRayQueryParameters3D.create(point+Vector3.UP*.55,point-Vector3.UP*1.0,1,[get_rid()])
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	return not hit.is_empty() and hit.normal.y>=cos(floor_max_angle)
 
 func _attack_allowed(distance: float) -> bool:
 	return distance<=float(spec.range) and _line_clear and is_on_floor()
@@ -235,6 +268,7 @@ func _physics_process(delta: float) -> void:
 	var flat := Vector3(offset.x,0,offset.z)
 	var wanted := flat.normalized() if flat.length_squared()>.01 else Vector3.ZERO
 	if has_target and distance<260.0:
+		_pursuit_seconds += delta
 		if _sensing_left<=0.0:
 			_sensing_left = .19
 			_line_clear = has_line_of_sight()
@@ -259,12 +293,18 @@ func _physics_process(delta: float) -> void:
 		state = "idle"
 		_steering = Vector3.ZERO
 		_windup_left = 0.0
+		_detour_direction = Vector3.ZERO
+		_pursuit_seconds = 0.0
+	_blocked_seconds = _blocked_seconds+delta if has_target and state=="chase" and not _line_clear else 0.0
 	var movement := _steering if state=="chase" else Vector3.ZERO
 	if enemy_type=="spitter" and _line_clear and distance<16.0: movement=Vector3.ZERO
-	if distance<float(spec.range)*.84 and _line_clear: movement=Vector3.ZERO
+	# Once a strike is possible, keep that position through its cooldown. The
+	# target's own collider can otherwise create a detour that walks past it.
+	if _attack_allowed(distance): movement=Vector3.ZERO
 	velocity.x = move_toward(velocity.x,movement.x*float(spec.speed),delta*15)
 	velocity.z = move_toward(velocity.z,movement.z*float(spec.speed),delta*15)
 	velocity.y = -.5 if is_on_floor() else maxf(-45.0,velocity.y-22.0*delta)
+	var before_move := global_position
 	move_and_slide()
 	# A tiny stair is climbed only after physical clearance and floor probes succeed.
 	if state=="chase" and is_on_floor() and get_slide_collision_count()>0 and movement.length_squared()>.01:
@@ -276,6 +316,12 @@ func _physics_process(delta: float) -> void:
 			if test_move(landing,Vector3.DOWN*.36):
 				global_position.y += .30
 				reset_physics_interpolation()
+	var displacement := Vector2(global_position.x-before_move.x,global_position.z-before_move.z).length()
+	var should_advance := state=="chase" and (not _line_clear or distance>float(spec.range))
+	if should_advance and displacement<float(spec.speed)*delta*.12:
+		_stuck_seconds += delta
+	else:
+		_stuck_seconds = maxf(0.0,_stuck_seconds-delta*2.0)
 	var planar := Vector2(velocity.x,velocity.z).length()
 	_stride += delta*planar*4.0
 	var windup := 1.0-_windup_left/float(spec.windup) if _windup_left>0 else 0.0
@@ -295,5 +341,8 @@ func _physics_process(delta: float) -> void:
 	if camera!=null:
 		_bar.rotation.y = atan2(camera.global_position.x-global_position.x,camera.global_position.z-global_position.z)
 
+func pursuit_status() -> Dictionary:
+	return {"stuck_seconds":_stuck_seconds,"blocked_seconds":_blocked_seconds,"pursuit_seconds":_pursuit_seconds,"detouring":_detour_direction.length_squared()>.01}
+
 func snapshot() -> Dictionary:
-	return {"type":enemy_type,"level":level,"label":str(spec.get("label","游荡奶龙")),"health":health,"max_health":max_health,"damage":float(spec.get("damage",8.0)),"speed":float(spec.get("speed",2.8)),"dead":dead,"state":state,"attack_range":float(spec.get("range",2.0)),"reward":int(spec.get("reward",120)),"position":[global_position.x,global_position.y,global_position.z],"windup_remaining":_windup_left,"cooldown_remaining":_cooldown,"line_of_sight":_line_clear}
+	return {"type":enemy_type,"level":level,"label":str(spec.get("label","游荡奶龙")),"health":health,"max_health":max_health,"damage":float(spec.get("damage",8.0)),"speed":float(spec.get("speed",2.8)),"dead":dead,"state":state,"attack_range":float(spec.get("range",2.0)),"reward":int(spec.get("reward",120)),"position":[global_position.x,global_position.y,global_position.z],"windup_remaining":_windup_left,"cooldown_remaining":_cooldown,"line_of_sight":_line_clear,"stuck_seconds":_stuck_seconds,"blocked_seconds":_blocked_seconds,"pursuit_seconds":_pursuit_seconds,"detouring":_detour_direction.length_squared()>.01}

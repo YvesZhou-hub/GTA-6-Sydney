@@ -7,7 +7,7 @@ TOOL_FILES = ('build.py', 'build_windows.py', 'build.sh', 'package_source.py', '
               'test_save.gd', 'test_integration.gd', 'test_vehicles.gd', 'import_city.py', 'city_roofs.py', 'city_fidelity.py', 'import_elevation.py', 'calibrate_summer.py', 'verify_native.py', 'verify_archive.py')
 SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geography.json',
                 'airport-runways.json', 'airport_test.gd', 'airport_connector_test.gd', 'world_physics_probe.gd',
-                'world_damage_probe.gd', 'world_road_probe.gd', 'world_winding_check.gd',
+                'world_damage_probe.gd', 'world_road_probe.gd', 'world_winding_check.gd', 'opera_encounter_test.gd', 'audio_shutdown_test.gd',
                 'camera_motion_test.gd', 'bridge_drive_test.gd', 'bridge_landmark_test.gd',
                 'opera_landmark_test.gd', 'opera_interior_test.gd', 'vehicle_spawn_test.gd', 'vehicle_contact_test.gd',
                 'landmark_visual_check.gd', 'city_landmark_test.gd', 'bank_landmark_test.gd',
@@ -24,7 +24,7 @@ SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geogr
                 'tank_motion_test.gd', 'fighter_flight_test.gd', 'combat_vehicle_state_test.gd',
                 'combat_crush_test.gd', 'combat_crush_envelope_test.gd', 'combat_weapons_test.gd', 'combat_effects_test.gd', 'combat_spawn_test.gd',
                 'runtime_diagnostics_test.gd', 'material_roles_test.gd', 'facade_night_test.gd', 'facade_stream_test.gd',
-                'render_environment_test.gd', 'daylight_cycle_test.gd', 'city_clock_test.gd', 'vehicle_factory_cache_test.gd', 'public_lighting_test.gd', 'ui_font_test.gd', 'nailong_enemy_test.gd', 'survival_vehicle_test.gd', 'survival_driving_test.gd', 'survival_boost_test.gd', 'survival_hud_test.gd', 'survival_loop_test.gd', 'fixtures/save_store_v012.gd')
+                'render_environment_test.gd', 'daylight_cycle_test.gd', 'city_clock_test.gd', 'vehicle_factory_cache_test.gd', 'public_lighting_test.gd', 'ui_font_test.gd', 'nailong_enemy_test.gd', 'survival_vehicle_test.gd', 'survival_driving_test.gd', 'survival_boost_test.gd', 'survival_hud_test.gd', 'survival_loop_test.gd', 'enemy_pursuit_test.gd', 'encounter_director_test.gd', 'encounter_test.gd', 'encounter_baseline.gd', 'weapon_upgrade_test.gd', 'vehicle_support_test.gd', 'field_service_test.gd', 'windows_package_gate_test.py', 'fixtures/save_store_v012.gd')
 
 def public_files(root: Path):
     files = [root / name for name in ROOT_FILES]

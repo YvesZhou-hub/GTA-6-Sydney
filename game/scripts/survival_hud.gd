@@ -145,6 +145,9 @@ func update_state(data: Dictionary) -> void:
 	_state["medkits"] = maxi(0, int(_number(data.get("medkits", 0))))
 	_state["heal_cooldown"] = maxf(0, _number(data.get("heal_cooldown", 0)))
 	_state["threat"] = clampf(_number(data.get("threat", 0)), 0, 1)
+	_state["field_repair_cost"] = maxi(0, int(_number(data.get("field_repair_cost", 0))))
+	_state["field_repair_cooldown"] = maxf(0, _number(data.get("field_repair_cooldown", 0)))
+	_state["money"] = maxi(0, int(_number(data.get("money", 0))))
 	_refresh_buttons()
 	_sync_visibility()
 	queue_redraw()
@@ -162,6 +165,8 @@ func _blocked() -> bool:
 
 
 func _can_heal() -> bool:
+	if bool(_state.get("vehicle_active", false)):
+		return float(_state.get("field_repair_cooldown", 0)) <= 0 and int(_state.get("field_repair_cost", 0)) > 0 and int(_state.get("money", 0)) >= int(_state.get("field_repair_cost", 0))
 	return int(_state.get("medkits", 0)) > 0 and float(_state.get("heal_cooldown", 0)) <= 0 and float(_state.get("player_health", 120)) > 0 and float(_state.get("player_health", 120)) < float(_state.get("max_health", 120))
 
 
@@ -169,6 +174,11 @@ func _refresh_buttons() -> void:
 	if not _built: return
 	var cooldown: float = float(_state.get("heal_cooldown", 0))
 	_heal_button.text = "H  治疗 %.1f s" % cooldown if cooldown > 0 else "H  治疗 ×%d" % int(_state.get("medkits", 0))
+	if bool(_state.get("vehicle_active", false)):
+		var repair_cooldown: float = float(_state.get("field_repair_cooldown", 0))
+		_heal_button.text = "H 快修 %.0f s" % ceil(repair_cooldown) if repair_cooldown > 0 else "H 快修 $%d" % int(_state.get("field_repair_cost", 0))
+		_heal_button.tooltip_text = "战斗中补充最多25%载具耐久；每点45金币，12秒冷却"
+	else: _heal_button.tooltip_text = "医疗包恢复60生命，12秒冷却"
 	_heal_button.disabled = not _can_heal()
 	_service_button.disabled = false
 
@@ -240,20 +250,21 @@ func _draw() -> void:
 	var phase: String = str(_state.get("phase", "巡游"))
 	draw_style_box(_pill, Rect2(_card_rect.position + Vector2(171, 13), Vector2(113, 24)))
 	_text(Vector2(180, 30), phase, 12, AMBER if threat >= 0.5 else MUTED, 94)
-	var threat_text := "夜间威胁增强" if "夜" in phase else ("周边威胁较高 · 保持距离" if threat >= 0.5 else "保持移动，清理附近奶龙")
+	var threat_text := str(_state.get("encounter_hint", "保持移动，清理附近奶龙"))
 	_text(Vector2(16, 52), threat_text, 12, AMBER if threat >= 0.5 else MUTED)
 	_text(Vector2(16, 78), "生命危急" if low else "生命", 14, DANGER if low else INK, 120)
 	_text(Vector2(187, 78), "%d / %d" % [int(_state.player_health), int(_state.max_health)], 16, DANGER if low else INK, 97)
 	_bar(Vector2(16, 89), 268, 10, _health_visual, DANGER if low else MINT)
 	var vehicle_name: String = str(_state.get("vehicle_name", ""))
 	if not vehicle_name.is_empty():
-		_text(Vector2(16, 123), vehicle_name, 13, MUTED, 185)
+		_text(Vector2(16, 117), vehicle_name, 12, MUTED, 185)
+		_text(Vector2(16, 146), str(_state.get("support_label", "V 自动武器 · 免费弹药")), 11, MINT)
 		_text(Vector2(210, 123), "%d%%" % int(_state.vehicle_health), 14, INK, 74)
 		_bar(Vector2(16, 133), 268, 5, float(_state.vehicle_health) / 100.0, Color("80bed1"))
 	else:
 		_text(Vector2(16, 123), "步行中 · Tab 新增载具", 13, MUTED)
 		_bar(Vector2(16, 133), 268, 5, 0, MUTED)
-	draw_line(_card_rect.position + Vector2(16, 150), _card_rect.position + Vector2(284, 150), Color("2b4649"), 1)
+	draw_line(_card_rect.position + Vector2(16, 155), _card_rect.position + Vector2(284, 155), Color("2b4649"), 1)
 	_text(Vector2(16, 177), "%d" % int(_state.enemy_count), 23, INK, 65)
 	_text(Vector2(68, 176), "附近奶龙", 12, MUTED, 91)
 	_text(Vector2(184, 176), "已清理 %d" % int(_state.kills), 13, MINT, 100)

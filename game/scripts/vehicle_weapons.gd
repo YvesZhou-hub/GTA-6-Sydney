@@ -2,7 +2,9 @@ extends Node3D
 ## Fictional sandbox fire control. Swept physics rays, not camera-only hitscan.
 signal blast_hit(point: Vector3, radius: float, damage: float, owner: RigidBody3D)
 const Effects = preload("res://scripts/combat_effects.gd")
+const Support = preload("res://scripts/vehicle_support_weapons.gd")
 const PROJECTILE_CAPACITY := 32
+const MAX_UPGRADE := 3
 const PROFILES := {
 	"tank":{"speed":440.0, "gravity":9.8, "energy":1.0e9, "damage":90.0, "radius":16.0, "cooldown":1.15, "life":10.0, "effect":1.0},
 	"fighter":{"speed":1350.0, "gravity":0.0, "energy":1.2e9, "damage":70.0, "radius":22.0, "cooldown":0.35, "life":7.0, "effect":1.35}
@@ -13,6 +15,7 @@ const RECOIL_CAPACITY := 16
 const RECOIL_DURATION := 0.46
 var game: Node
 var effects: Node3D
+var support: Node3D
 var _game_properties: Dictionary = {}
 var _projectiles: Array[Dictionary] = []
 var _cooldowns: Dictionary = {}
@@ -32,6 +35,9 @@ func setup(owner_game: Node) -> void:
 	game = owner_game
 	_game_properties.clear()
 	for info: Dictionary in game.get_property_list(): _game_properties[str(info.name)] = true
+	if not is_instance_valid(support):
+		support = Support.new(); support.name = "VehicleSupportWeapons"; add_child(support)
+	support.setup(game)
 	_muzzle_overlap.radius = 0.12
 	if not is_instance_valid(effects):
 		effects = Effects.new()
@@ -125,16 +131,35 @@ func _initial_obstruction(vehicle: RigidBody3D, marker: Node3D, exclude: Array[R
 		if not get_world_3d().direct_space_state.intersect_shape(overlap, 1).is_empty(): obstruction = {"position":marker.global_position}
 	return obstruction
 
+static func profile_for(kind: String, level: int = 0) -> Dictionary:
+	if not PROFILES.has(kind): return {}
+	var upgrade := clampi(level, 0, MAX_UPGRADE)
+	var profile: Dictionary = PROFILES[kind].duplicate()
+	profile.level = upgrade
+	profile.ammo_cost = 0
+	profile.damage *= 1.0 + upgrade * .25
+	profile.radius *= 1.0 + upgrade * .20
+	profile.cooldown *= 1.0 - upgrade * .10
+	# Radius affects real blast damage and world destruction. Presentation uses
+	# the same multiplier while retaining the existing fixed particle pools.
+	profile.effect *= 1.0 + upgrade * .20
+	return profile
+
+static func upgrade_stats(kind: String, level: int = 0) -> Dictionary:
+	if not PROFILES.has(kind): return {}
+	var upgrade := clampi(level, 0, MAX_UPGRADE)
+	return {"level":upgrade, "max_level":MAX_UPGRADE, "ammo_cost":0,
+		"at_max":upgrade == MAX_UPGRADE, "base":profile_for(kind),
+		"current":profile_for(kind, upgrade),
+		"next":profile_for(kind, upgrade + 1) if upgrade < MAX_UPGRADE else {}}
+
 func weapon_profile(vehicle: RigidBody3D) -> Dictionary:
-	if not is_instance_valid(vehicle) or not PROFILES.has(str(vehicle.get("kind"))): return {}
-	var profile: Dictionary = PROFILES[str(vehicle.get("kind"))].duplicate()
+	if not is_instance_valid(vehicle): return {}
 	var saved_upgrade: Variant = vehicle.get("weapon_upgrade")
 	var upgrade := 0
 	if (saved_upgrade is int or saved_upgrade is float) and is_finite(float(saved_upgrade)):
-		upgrade = int(clampf(float(saved_upgrade),0.0,3.0))
-	profile.damage *= 1.0 + upgrade * .25
-	profile.cooldown *= 1.0 - upgrade * .10
-	return profile
+		upgrade = int(clampf(float(saved_upgrade),0.0,float(MAX_UPGRADE)))
+	return profile_for(str(vehicle.get("kind")), upgrade)
 
 func aim_point() -> Vector3:
 	# A bounded prediction of this muzzle's trajectory, independent of the
@@ -218,6 +243,8 @@ func fire_current() -> bool:
 	slot.active = true
 	slot.position = from
 	slot.velocity = direction * float(profile.speed) + vehicle.linear_velocity
+	# Snapshot at launch: upgrades purchased in flight affect the next shell,
+	# never enlarge an already airborne shell or shorten its active reload.
 	slot.profile = profile
 	slot.life = float(profile.life)
 	slot.source = weakref(vehicle)
@@ -289,6 +316,7 @@ func _tick_recoil(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not _simulation_running(): return
+	if is_instance_valid(support): support.tick(delta)
 	_clock += delta
 	update_aim(delta)
 	_tick_recoil(delta)
@@ -317,6 +345,7 @@ func _physics_process(delta: float) -> void:
 		if _cooldowns[id].source.get_ref() == null: _cooldowns.erase(id)
 
 func clear() -> void:
+	if is_instance_valid(support): support.clear()
 	for record: Dictionary in _recoils: _restore_recoil(record)
 	_recoils.clear()
 	for slot: Dictionary in _projectiles:
@@ -331,6 +360,15 @@ func clear() -> void:
 	_pitch_offset = 0.0
 	if is_instance_valid(effects): effects.clear()
 
+func set_auto_enabled(value: bool) -> void:
+	if is_instance_valid(support): support.set_enabled(value)
+
+func auto_enabled() -> bool:
+	return bool(support.enabled) if is_instance_valid(support) else true
+
+func auto_status() -> Dictionary:
+	return support.status() if is_instance_valid(support) else {"enabled":true, "available":false, "locked":false, "state":"待命", "ammo_cost":0}
+
 func aim_status() -> Dictionary:
 	var vehicle := _vehicle()
 	if not is_instance_valid(vehicle) or not PROFILES.has(str(vehicle.get("kind"))): return {}
@@ -339,8 +377,11 @@ func aim_status() -> Dictionary:
 	var moving := _moving(vehicle)
 	var barrel: Node3D = moving.get("barrel")
 	var turret: Node3D = moving.get("turret")
+	var profile := weapon_profile(vehicle)
 	return {"kind":str(vehicle.get("kind")), "ready":_eligible(vehicle) and remaining <= 0,
 		"cooldown_remaining":remaining,
+		"weapon_level":int(profile.level), "blast_radius":float(profile.radius),
+		"damage":float(profile.damage), "reload_seconds":float(profile.cooldown), "ammo_cost":0,
 		"yaw_deg":rad_to_deg(turret.rotation.y) if is_instance_valid(turret) else 0.0,
 		"elevation_deg":rad_to_deg(barrel.rotation.x) if is_instance_valid(barrel) else 0.0}
 

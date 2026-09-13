@@ -1,0 +1,203 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "field service fixture uses actual damage armor and fleet propagation",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "moving combat full repair remains blocked on a damaged tank",
+			"passed": true
+		},
+		{
+			"detail": {
+				"message": "战地快修 · 同款耐久 +25%，12 秒冷却 · $1125",
+				"ok": true
+			},
+			"name": "moving surrounded tank can buy exactly25HP for1125 coins",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "field repair restores durability without free energy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "successful field repair starts a twelve second shared cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeated field repair cannot drain money or bypass cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "H shortcut shares the same paid repair cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "switching vehicle kind cannot bypass the global field cooldown",
+			"passed": true
+		},
+		{
+			"detail": {
+				"remaining": 0.149999999999825
+			},
+			"name": "physical clock keeps field repair blocked just before twelve seconds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "physical clock unlocks paid field repair after twelve seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"message": "战地快修 · 同款耐久 +10%，12 秒冷却 · $450",
+				"ok": true
+			},
+			"name": "partial field repair charges only missing ten HP",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "full durability preserves money and cooldown",
+			"passed": true
+		},
+		{
+			"detail": {
+				"message": "战地快修 · 同款耐久 +0%，12 秒冷却 · $12",
+				"ok": true
+			},
+			"name": "fractional missing durability rounds its actual price up once",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "insufficient funds preserve fleet money cooldown and medical kits",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "exact repair funds succeed without a negative wallet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "field repair cooldown is serialized with fleet durability",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "save reload retains repair cooldown and prevents instant repeat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid field cooldown clamps safely -5.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid field cooldown clamps safely inf",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid field cooldown clamps safely nan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid field cooldown clamps safely 999.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "occupied submerged tank rejects field repair without charge",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "occupied submerged tank also rejects refuel",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "portable medkit is purchasable during moving recent combat",
+			"passed": true
+		},
+		{
+			"detail": {
+				"message": "火控 1 级 · 爆炸半径 19.2 m · 装填 1.03 s · 弹药免费 · $8000",
+				"ok": true
+			},
+			"name": "tank fire control can upgrade during moving recent combat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "moving combat refuel charges only energy without repair",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "on foot H consumes one medkit and heals without charging coins",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "inside vehicle H repairs vehicle and leaves player health and medkits unchanged",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paused game cannot trigger a paid keyboard recovery",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unboarded field repair cannot charge the player",
+			"passed": true
+		},
+		{
+			"detail": {
+				"quoted": 1125
+			},
+			"name": "repair quote sees fresh shared damage without mutating durability",
+			"passed": true
+		},
+		{
+			"detail": {
+				"other_health": 65.0,
+				"paid": 1125,
+				"tank_health": 65.0
+			},
+			"name": "field transaction includes newer same-type damage before pricing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "field repair recovers paid durability and removes submerged abandoned twin",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "recovered underwater wreck cannot redamage a fresh shared fleet copy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown service leaves wallet and resources unchanged",
+			"passed": true
+		}
+	],
+	"count": 35,
+	"passed": true,
+	"physics": "Jolt Physics",
+	"user_saves_touched": false
+}

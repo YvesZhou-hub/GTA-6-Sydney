@@ -3,6 +3,7 @@ extends Node3D
 const Store = preload("res://scripts/save_store.gd")
 const Player = preload("res://scripts/harbor_player.gd")
 const Sound = preload("res://scripts/harbor_audio.gd")
+const AudioShutdown = preload("res://scripts/audio_shutdown.gd")
 const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
 const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 重装坦克","fighter":"Aster F-27 · 战斗机"}
 var survival: Node3D
@@ -98,7 +99,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -155,7 +156,7 @@ func _ready():
 	hud.add_child(survival_hud)
 	survival_hud.setup(self)
 	survival_hud.service_requested.connect(survival_menu)
-	survival_hud.heal_requested.connect(func(): notify(survival.heal_player()))
+	survival_hud.heal_requested.connect(func(): notify(survival.quick_recovery()))
 	if not qa_running: load_settings()
 	else: apply_settings()
 	city_clock=load("res://scripts/city_clock.gd").new()
@@ -194,6 +195,8 @@ func _ready():
 		add_child(load("res://scripts/driving_validation.gd").new())
 	elif "--survival-qa" in arguments:
 		add_child(load("res://scripts/survival_validation.gd").new())
+	elif "--encounter-qa" in arguments:
+		add_child(load("res://scripts/encounter_validation.gd").new())
 	elif "--visual-qa" in arguments:
 		add_child(load("res://scripts/landmark_validation.gd").new())
 	elif "--interactive-qa" in arguments:
@@ -235,10 +238,10 @@ func start_interactive_qa():
 	print("INTERACTIVE_QA_READY world=",world_id," components=",world.structures.size())
 
 func setup_input():
-	for action in {"heal":KEY_H,"survival_services":KEY_B}:
+	for action in {"heal":KEY_H,"survival_services":KEY_B,"auto_support":KEY_V}:
 		if not InputMap.has_action(action): InputMap.add_action(action)
 		var event=InputEventKey.new()
-		event.physical_keycode={"heal":KEY_H,"survival_services":KEY_B}[action]
+		event.physical_keycode={"heal":KEY_H,"survival_services":KEY_B,"auto_support":KEY_V}[action]
 		if not InputMap.action_has_event(action,event): InputMap.action_add_event(action,event)
 	var bindings={"forward":[KEY_W,KEY_UP],"back":[KEY_S,KEY_DOWN],"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"rise":[KEY_R],"fall":[KEY_F],"brake":[KEY_SPACE],"jump":[KEY_SPACE],"sprint":[KEY_SHIFT],"boost":[KEY_SHIFT],"drift":[KEY_CTRL],"interact":[KEY_E],"vehicles":[KEY_TAB],"jobs":[KEY_J],"map":[KEY_M],"experiences":[KEY_K],"carry":[KEY_G],"photo":[KEY_P],"save":[KEY_F5],"recover":[KEY_HOME],"fire":[KEY_X],"combat_yaw_left":[KEY_Q],"combat_yaw_right":[KEY_Z],"combat_raise":[KEY_R],"combat_lower":[KEY_F]}
 	for action in bindings:
@@ -316,12 +319,13 @@ func setup_ui():
 	hud.add_child(activity_label)
 	speed_label=label("",25)
 	speed_label.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	speed_label.position=Vector2(-350,-225)
+	speed_label.position=Vector2(-350,-295)
 	speed_label.size=Vector2(320,140)
 	speed_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	hud.add_child(speed_label)
 	var bottom=PanelContainer.new()
 	bottom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	bottom.grow_vertical=Control.GROW_DIRECTION_BEGIN
 	bottom.offset_left=28
 	bottom.offset_right=-28
 	bottom.offset_top=-76
@@ -467,13 +471,18 @@ func main_menu():
 	modal_content.add_child(name_edit)
 	button("奶龙危机 · 开始生存  →",func(): new_world("life",name_edit.text))
 	button("自由观光 · 无敌人  →",func(): new_world("sandbox",name_edit.text))
-	if is_instance_valid(airport): button("从悉尼机场起飞  ↗",airport_start)
-	modal_content.add_child(label("开局 $50,000 · 免费载具 · 五类奶龙\n左键反击 · H 治疗 · B 维修升级 · M 地图\n生存有受伤与救援，观光可安静探索悉尼。",15,Color("b7c4bc")))
+	if is_instance_valid(airport): button("机场出发 · 奶龙危机  ↗",airport_start)
+	modal_content.add_child(label("奶龙跟随所在街区持续增援 · 免费弹药、免费载具\nV 自动锁定 · H 急救 / 快修 · B 战地升级 · M 地图\n清理奖金自动到账，不必清完上一批也会遇到新敌人。",15,Color("b7c4bc")))
 	var worlds=[] if qa_running else Store.slots()
 	if not worlds.is_empty():
 		modal_content.add_child(label("继续你的世界",21))
 		for entry in worlds.slice(0,4):
-			button(str(entry.name)+"  ·  "+("沙盒" if entry.mode=="sandbox" else "生活"),func(): load_world(entry.id))
+			if entry.mode=="sandbox":
+				button(str(entry.name)+" · 继续并开启奶龙危机",func():
+					load_world(entry.id)
+					if active and world_id==entry.id: enable_encounters())
+				button("继续原有观光 · 无敌人 · "+str(entry.name),func(): load_world(entry.id))
+			else: button(str(entry.name)+" · 继续奶龙危机",func(): load_world(entry.id))
 	button("存档与恢复",worlds_menu)
 	button("操作与设置",settings_menu)
 	button("制作与资料来源",credits_menu)
@@ -526,7 +535,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	landmark_target_key=""
 	landmark_target_name=""
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
-	if survival.enabled: life.status_text="清理奶龙赚金币 · 等级越高，奖励越多\nH 治疗 · B 安全整备 · J 可接取城市工作"
+	if survival.enabled: life.status_text="奶龙持续增援 · 击败赚金币 · 无需清完上一批\nH 急救 / 快修 · B 战地升级 · V 自动武器"
 	reset_fleet()
 	player.global_position=world.anchors.get("home",Vector3(-140,6,150))+Vector3(0,1,15)
 	player.last_safe=player.global_position
@@ -545,8 +554,22 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	yaw=0
 	pitch=-0.17
 	autosave=0
-	notify("$50,000 已到账 · 25 秒整备\n左键脉冲枪 / Tab 载具 · H 治疗 · B 维修升级" if survival.enabled else "自由观光 · Tab 载具 · M 标点探索 · K 城市体验")
+	notify("$50,000 已到账 · 12 秒保护，奶龙正在接近\n左键反击 / Tab 武装载具 · H 急救 / 快修 · B 升级" if survival.enabled else "自由观光 · 奶龙刷新关闭 · B 可原地开启奶龙危机")
 	if save_now: save_world()
+
+func enable_encounters():
+	if not active or survival.enabled: return
+	mode="life"
+	life.sandbox=false
+	# Preserve the current world, purse, fleet, health and acquired upgrades.
+	survival.enabled=true
+	survival.auto_spawn=true
+	survival.grace=12.0
+	survival._spawn_clock=0.6
+	survival.rest=0.0
+	life.status_text="奶龙跟随街区持续增援 · 击败赚金币\nH 急救 / 快修 · B 升级 · V 自动武器"
+	close_panel()
+	notify("奶龙危机已开启 · 保留当前财富、载具与位置\n12 秒保护，奶龙正在接近 · Tab 新增武装载具")
 
 func reset_fleet(with_defaults: bool = true):
 	if is_instance_valid(weapons): weapons.clear()
@@ -597,6 +620,9 @@ func on_impact(point:Vector3,energy:float,source:RigidBody3D=null):
 
 func can_fire_weapon() -> bool:
 	return active and not paused and not modal.visible and not map_panel.visible and is_instance_valid(current_vehicle) and current_vehicle.occupied and current_vehicle.health>0 and current_vehicle.kind in ["tank","fighter"]
+
+func can_auto_fire_weapon() -> bool:
+	return active and not paused and not modal.visible and not map_panel.visible and is_instance_valid(survival) and survival.enabled and is_instance_valid(current_vehicle) and current_vehicle.occupied and current_vehicle.health>0
 
 func apply_combat_blast(point:Vector3,energy:float,radius:float,source:RigidBody3D) -> void:
 	world.damage_at(point,energy,radius)
@@ -729,6 +755,8 @@ func pause_menu():
 	active_panel="pause"
 	clear_panel("海港会等你。",world_name+"  /  "+("自由沙盒" if mode=="sandbox" else "生活模式"))
 	button("继续游玩",close_panel)
+	if not survival.enabled: button("开启奶龙危机 · 保留当前世界与财富",enable_encounters)
+	button("战地补给与武器升级  ·  B",survival_menu)
 	button("保存世界",func():
 		if save_world(): notify("世界已保存"))
 	button("工作与活动",jobs_menu)
@@ -812,26 +840,42 @@ func survival_menu():
 	if not active or not is_instance_valid(survival): return
 	survival.sync_fleet()
 	active_panel="survival"
-	clear_panel("整备，再出发。","金币 $%d · 同款载具共享耐久和升级\n停稳、远离奶龙 20 米并脱战 8 秒后，可远程整备车队。"%life.money)
+	clear_panel("战地整备。","金币 $%d · 弹药免费 · 同款载具共享耐久和升级\n补给、升级与快修可在战斗中使用；打开面板暂停战斗。"%life.money)
+	if not survival.enabled:
+		modal_content.add_child(label("当前为自由观光：奶龙刷新已关闭。",18,Color("f3cb80")))
+		button("开启奶龙危机 · 保留财富与当前位置",enable_encounters)
 	var blocked:String=survival.service_block_reason()
 	if not blocked.is_empty():
 		var reason=label(blocked,17,Color("f3cb80"))
+		reason.text="完整维修需安全停车；战斗中可用 H 快修。"
 		reason.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 		modal_content.add_child(reason)
 	modal_content.add_child(label("生命 %d / 120 · 医疗包 %d / 5"%[player.health,survival.medkits],19))
 	var medicine=button("补充医疗包  ·  $300  ·  H 恢复 60 生命",func(): _survival_transaction("medkit"))
-	medicine.disabled=not blocked.is_empty() or survival.medkits>=5 or life.money<300
+	medicine.disabled=survival.medkits>=5 or life.money<300
+	if is_instance_valid(current_vehicle):
+		var field_cost:int=survival.field_repair_cost()
+		var field_reason:String=survival.service_block_reason("field_repair")
+		var quick=button("H 快修最多 +25%% 耐久 · $%d · 12 秒冷却"%field_cost,func(): _survival_transaction("field_repair"))
+		quick.disabled=not survival.enabled or field_cost<=0 or life.money<field_cost or not field_reason.is_empty()
+		if not field_reason.is_empty(): modal_content.add_child(label(field_reason,15,Color("f3cb80")))
+		var auto=weapons.auto_status()
+		button("V 自动辅助武器 · "+("已开启" if auto.enabled else "已关闭")+" · 免费追踪弹",func():
+			weapons.set_auto_enabled(not weapons.auto_enabled())
+			survival_menu())
 	if is_instance_valid(current_vehicle) and current_vehicle.fuel < 100.0:
 		var energy_cost:int=ceili((100.0-current_vehicle.fuel)*3.0)
 		var energy=button("当前载具补满能源 · %d%% → 100%% · $%d"%[current_vehicle.fuel,energy_cost],func(): _survival_transaction("refuel"))
-		energy.disabled=not blocked.is_empty() or life.money<energy_cost
+		energy.disabled=not survival.service_block_reason("refuel").is_empty() or life.money<energy_cost
 	if is_instance_valid(current_vehicle) and current_vehicle.kind in ["tank","fighter"]:
 		var level:int=current_vehicle.weapon_upgrade
-		modal_content.add_child(label("当前火控 %s · 伤害 +%d%%"%[["基础","I","II","III"][level],level*25],19,Color("96ddc7")))
+		var stats:Dictionary=weapons.upgrade_stats(current_vehicle.kind,level)
+		modal_content.add_child(label("火控 %s · 伤害 %.0f · 半径 %.1f m · 装填 %.2f s"%[["基础","I","II","III"][level],stats.current.damage,stats.current.radius,stats.current.cooldown],17,Color("96ddc7")))
 		if level<3:
 			var cost:int=survival.UPGRADE_COSTS[level]
-			var upgrade=button("升级火控  ·  $%d  ·  增加伤害、缩短装填"%cost,func(): _survival_transaction("upgrade"))
-			upgrade.disabled=not blocked.is_empty() or life.money<cost
+			modal_content.add_child(label("下一级：伤害 %.0f · 半径 %.1f m · 装填 %.2f s"%[stats.next.damage,stats.next.radius,stats.next.cooldown],16))
+			var upgrade=button("升级火控到 %s 级  ·  $%d"%[["I","II","III"][level],cost],func(): _survival_transaction("upgrade"))
+			upgrade.disabled=life.money<cost
 		else: modal_content.add_child(label("已达到最高火控等级",16))
 	else: modal_content.add_child(label("进入坦克或战斗机，即可升级火控。",16,Color("a9c0bc")))
 	modal_content.add_child(label("车队维修",22))
@@ -1304,9 +1348,15 @@ func _input(event):
 		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event):
+	if quitting: return
 	if not active or paused: return
 	if event.is_action_pressed("heal"):
-		notify(survival.heal_player())
+		notify(survival.quick_recovery())
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("auto_support"):
+		weapons.set_auto_enabled(not weapons.auto_enabled())
+		notify("自动辅助武器 · "+("开启，自动锁定附近奶龙" if weapons.auto_enabled() else "关闭")+" · V 切换")
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed("survival_services"):
@@ -1487,7 +1537,7 @@ func update_hud():
 			info.text="航向 %03d° · 海港 %.1f km" %[fposmod(rad_to_deg(atan2(forward.x,-forward.z)),360),current_vehicle.global_position.distance_to(world.anchors.opera)/1000]
 		if current_vehicle.is_boosting():
 			speed_label.text+="\n3倍加速中 · 上限 %d km/h"%current_vehicle.effective_top_speed_kmh()
-		context_hint.text=vehicle_help(current_vehicle.kind)+" · Shift 3倍加速   E 离开   Tab 新增   M 地图   T 时间"
+		context_hint.text=vehicle_help(current_vehicle.kind)+" · Shift 3倍加速   E 离开   Tab 新增   M 地图"+("\nV 自动武器   H 战地快修   B 补给 / 升级 · 弹药免费" if survival.enabled else "   T 时间")
 	else:
 		speed_label.text="游泳" if player.swimming else ""
 		var near=nearest_vehicle()
@@ -1514,16 +1564,11 @@ func quit_game():
 func finish_quit(exit_code=0):
 	if quitting: return
 	quitting=true
-	# Release looping WAV playback before engine teardown, including paused exits.
+	active=false
+	# Stop new gameplay audio and drain mixer-owned playback before teardown.
 	get_tree().paused=false
-	var pending: Array[Node]=[self]
-	while not pending.is_empty():
-		var node=pending.pop_back()
-		if node is AudioStreamPlayer or node is AudioStreamPlayer2D or node is AudioStreamPlayer3D:
-			node.stop()
-			node.stream=null
-		for child in node.get_children(): pending.append(child)
-	for i in 5: await get_tree().process_frame
+	var audio_cleanup: Dictionary = await AudioShutdown.stop_and_drain(self)
+	print("AUDIO_SHUTDOWN ",JSON.stringify(audio_cleanup))
 	get_tree().quit(exit_code)
 
 func run_qa():
@@ -1653,7 +1698,7 @@ func airport_start():
 	if not is_instance_valid(airport):
 		notify("机场正在构建",false)
 		return
-	if not active: new_world("sandbox","悉尼机场试飞")
+	if not active: new_world("life","悉尼机场奶龙危机")
 	survival.sync_fleet()
 	if float(survival.fleet_health.get("airliner",100.0)) <= 0.0:
 		notify("客机已损毁 · B 远程维修后再从机场出发",false)

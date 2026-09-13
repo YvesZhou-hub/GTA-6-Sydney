@@ -1,0 +1,124 @@
+{
+  "audio_output_device": "Default",
+  "checks": [
+    {
+      "detail": {},
+      "name": "probe requires native audio players instead of headless early return",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "all 22 production vehicle engine players actually own playback",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "drain tracks every active production engine using weak references",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "engine and collision audio streams are stopped and detached",
+      "passed": true
+    },
+    {
+      "detail": {
+        "complete": true,
+        "elapsed_ms": 6,
+        "remaining": 0,
+        "tracked": 22
+      },
+      "name": "returned remaining count agrees with independent playback weak references",
+      "passed": true
+    },
+    {
+      "detail": {
+        "drain": {
+          "complete": true,
+          "elapsed_ms": 6,
+          "remaining": 0,
+          "tracked": 22
+        },
+        "mix_boundaries": 1
+      },
+      "name": "native mixer releases all 22 playback references before exit",
+      "passed": true
+    },
+    {
+      "detail": {
+        "complete": true,
+        "elapsed_ms": 0,
+        "remaining": 0,
+        "tracked": 0
+      },
+      "name": "repeated shutdown with no active playback returns immediately",
+      "passed": true
+    },
+    {
+      "detail": {
+        "complete": true,
+        "elapsed_ms": 10,
+        "remaining": 0,
+        "tracked": 2
+      },
+      "name": "plain and 2D players are included and detached",
+      "passed": true
+    },
+    {
+      "detail": {
+        "complete": true,
+        "elapsed_ms": 10,
+        "remaining": 0,
+        "tracked": 2
+      },
+      "name": "all player classes report the actual completion or timeout",
+      "passed": true
+    },
+    {
+      "detail": {
+        "complete": false,
+        "elapsed_ms": 0,
+        "remaining": 1,
+        "tracked": 1
+      },
+      "name": "expired real-time deadline returns incomplete without waiting",
+      "passed": true
+    },
+    {
+      "detail": {
+        "elapsed_ms": 11,
+        "remaining": 0
+      },
+      "name": "deadline result did not retain a hidden strong playback reference",
+      "passed": true
+    }
+  ],
+  "count": 11,
+  "expect_inactive_mixer_timeout": false,
+  "expired_deadline": {
+    "complete": false,
+    "elapsed_ms": 0,
+    "remaining": 1,
+    "tracked": 1
+  },
+  "listening_verified": false,
+  "mix_boundaries_during_vehicle_drain": 1,
+  "native": true,
+  "other_player_drain": {
+    "complete": true,
+    "elapsed_ms": 10,
+    "remaining": 0,
+    "tracked": 2
+  },
+  "passed": true,
+  "physics_hz": 60,
+  "production_driver_changed": false,
+  "scope": "22 actual production vehicle engines plus plain/2D audio players; physical driver chosen only by invocation. Fast process frames, real wall-clock deadline and independently watched playback references. Does not verify audible output or repair an inactive host driver.",
+  "shutdown_source_sha256": "e9e460452c66b141563263a1a1fef450f68629315415153b76ee950a765d5de7",
+  "vehicle_drain": {
+    "complete": true,
+    "elapsed_ms": 6,
+    "remaining": 0,
+    "tracked": 22
+  }
+}

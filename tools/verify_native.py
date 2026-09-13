@@ -18,15 +18,18 @@ def digest(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("survival", "driving", "experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access", "combat", "diagnostics", "daylight", "ui-font"))
+    parser.add_argument("mode", choices=("encounter", "survival", "driving", "experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access", "combat", "diagnostics", "daylight", "ui-font"))
     parser.add_argument("--app", type=Path, default=Path("dist/Harbourlife.app"))
     parser.add_argument("--output", type=Path, default=Path("reports/release-v018-native"))
+    parser.add_argument("--audio-driver", default=None,
+                        help="Optional driver for this QA process only (for example Dummy); never changes the game or system audio configuration")
     args = parser.parse_args()
     app = args.app.resolve() / "Contents/MacOS/Harbourlife"
     pck = args.app.resolve() / "Contents/Resources/Harbourlife.pck"
     identity = {"executable_sha256": digest(app), "pck_sha256": digest(pck)}
     user_data = Path.home() / "Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港"
     cases = {
+        "encounter": (["--encounter-qa"], "encounter-qa/report.json", "encounter-qa"),
         "survival": (["--survival-qa"], "survival-qa/report.json", "survival-qa"),
         "driving": (["--driving-qa"], "driving-qa/report.json", "driving-qa"),
         "ui-font": (["--ui-font-qa"], "ui-font-qa/report.json", "ui-font-qa"),
@@ -48,10 +51,12 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     log = out / (args.mode + "-runtime.log")
     console_path = out / (args.mode + "-console.log")
-    command = [str(app), "--disable-vsync", "--log-file", str(log)]
-    if args.mode in ("driving", "flight", "mobility", "air-vehicle", "precinct", "opera-access", "combat"):
-        command += ["--fixed-fps", "60"]
-    command += ["--"] + flags
+    launch_flags = ["--disable-vsync"]
+    if args.mode in ("encounter", "driving", "flight", "mobility", "air-vehicle", "precinct", "opera-access", "combat"):
+        launch_flags += ["--fixed-fps", "60"]
+    if args.audio_driver is not None:
+        launch_flags += ["--audio-driver", args.audio_driver]
+    command = [str(app), "--log-file", str(log)] + launch_flags + ["--"] + flags
     started = time.time()
     print("START", args.mode, flush=True)
     with console_path.open("w") as console:
@@ -61,7 +66,11 @@ def main():
         "app_identity": identity,
         "app_identity_unchanged": identity == {"executable_sha256": digest(app), "pck_sha256": digest(pck)},
         "mode": args.mode,
-        "launch_flags": ["--disable-vsync"] + (["--fixed-fps", "60"] if "--fixed-fps" in command else []) + ["--"] + flags,
+        "launch_flags": launch_flags + ["--"] + flags,
+        "audio_driver": args.audio_driver,
+        "audio_driver_scope": "Explicit override for this QA process only" if args.audio_driver is not None else "Engine default; no driver override requested",
+        "audio_listening_verified": False,
+        "audio_validation_scope": "Dummy mixer only; no audible output or hardware sound validation" if args.audio_driver == "Dummy" else "Unattended automated QA; audible sound was not manually verified",
         "started_utc": datetime.datetime.fromtimestamp(started, datetime.timezone.utc).isoformat(),
         "wall_seconds": round(time.time() - started, 3),
         "exit_code": result.returncode,

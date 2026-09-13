@@ -1,0 +1,318 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "fixture runs actual Jolt and production scripts",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "director creates real enemy with layer16 and lifecycle signals",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "kill reward and lifetime earnings are credited exactly once",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "dead enemy leaves the scene without a second reward",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "higher level kill pays increased gold exactly once",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clearance0 selects encounter level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clearance1 selects encounter level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clearance2 selects encounter level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clearance4 selects encounter level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clearance18 selects encounter level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clearance100 selects encounter level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "automatic street spawn uses actual encounter level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "pause holds medical combat and firing clocks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "held menu click cannot become a gameplay shot",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "release then new press restores blaster fire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "full health preserves medkit and cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "medical action heals60 spends one kit and starts12s cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "medical repeat cannot bypass cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "medical cooldown blocks until full12 seconds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "partial heal clamps to120 and consumes only one kit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "defeated player cannot waste a medical kit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "empty medical inventory cannot heal",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "medical supply purchase charges300 once",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "insufficient funds preserve money and inventory",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "same type copies share worst fleet durability",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new free copy cannot erase existing fleet damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repair chargesmissing HP times30 and repairs all same type",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "undamaged fleet cannot be charged for repair",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "upgrade1 charges configured amount and propagates",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "upgrade2 charges configured amount and propagates",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "upgrade3 charges configured amount and propagates",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "levelIII cap prevents extra upgrade payment",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "future copy inherits bought fire control level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nonweapon craft cannot buy tank upgrades",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "healthy empty vehicle can refuel for300 coins",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "full energy rejects refuel without charging",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "insufficient refuel funds preserve money energy and health",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "refuel only restores current energy without healing or filling others",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "enemy inside20m permits portable medical supply",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "enemy inside20m still blocks damaged fleet full repair",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "enemy outside20m permits paid damaged fleet full repair",
+			"passed": true
+		},
+		{
+			"detail": {
+				"center_distance": 34.0267906188965,
+				"surface_distance": 2.60000038146973
+			},
+			"name": "enemy at large aircraft nose blocks full repair despite distant center",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "director routes damage into real player and startscombat gate",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "recent damage does not block a purchased medical response",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "recent damage still blocks damaged full repair for8 seconds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "7.9 seconds is not enough for full repair after combat",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "8 second repair gate expires through production clock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "moving vehicle permits portable supply purchases",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "moving damaged vehicle still blocks full repair",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "remote destroyed aircraft repair is payable without boarding",
+			"passed": true
+		},
+		{
+			"detail": {
+				"fleet_health": 100.0,
+				"new_fighter_health": 100.0
+			},
+			"name": "repaired submerged wreck cannot damage newly summoned same type",
+			"passed": true
+		},
+		{
+			"detail": {
+				"health": 112.0,
+				"state": "chase"
+			},
+			"name": "real enemy windup signal damages player through director",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "survival schema records player fleet resources enemy level and combat timer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "JSON roundtrip restores actual player inventory fleet and enemy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "save and reload cannot erase combat full repair cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "v6 repeated section restoration cannot mint money or full health",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "legacy save without survival section keeps damaged physical fleet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "loading another world does not retain previous fleet dictionaries",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid numeric schema stays finite and within gameplay bounds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "restored enemies respect count and per-type HP caps",
+			"passed": true
+		}
+	],
+	"count": 60,
+	"engine": "4.7.2-stable (official)",
+	"passed": true,
+	"scope": "Real survival director, player, vehicle, enemy, weapon and economy scripts in an isolated Jolt world; only the city/UI host is a fixture. No user saves or complete city launched.",
+	"user_saves_touched": false
+}

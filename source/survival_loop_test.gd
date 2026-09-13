@@ -176,10 +176,13 @@ func run() -> void:
 	var nearby=director.spawn_enemy("roamer",game.player.position+Vector3(19,0,0)); nearby.set_physics_process(false)
 	director.medkits=0; fee_before=game.life.money
 	purchase=director.transact("medkit")
-	check("enemy inside20m blocks supply transactions",not purchase.ok and game.life.money==fee_before and director.medkits==0)
+	check("enemy inside20m permits portable medical supply",purchase.ok and game.life.money==fee_before-300 and director.medkits==1)
+	first.take_combat_damage(60.0); director.sync_fleet(); fee_before=game.life.money
+	purchase=director.transact("repair","tank")
+	check("enemy inside20m still blocks damaged fleet full repair",not purchase.ok and game.life.money==fee_before and first.health==90.0)
 	nearby.position=game.player.position+Vector3(20.1,0,0)
-	purchase=director.transact("medkit")
-	check("enemy outside20m permits safe purchase",purchase.ok and game.life.money==fee_before-300 and director.medkits==1)
+	purchase=director.transact("repair","tank")
+	check("enemy outside20m permits paid damaged fleet full repair",purchase.ok and game.life.money==fee_before-300 and first.health==100.0)
 	await clear_enemies()
 	var large:=vehicle("airliner"); game.current_vehicle=large
 	var nose_enemy=director.spawn_enemy("roamer",large.position+Vector3(0,-1.35,-50)); nose_enemy.set_physics_process(false)
@@ -189,21 +192,27 @@ func run() -> void:
 		if nose_enemy.distance_to_target_surface(large)<3.0:
 			outside_center=true
 			break
-	fee_before=game.life.money; purchase=director.transact("medkit")
-	check("enemy at large aircraft nose blocks services despite distant center",outside_center and not purchase.ok and game.life.money==fee_before,{"surface_distance":nose_enemy.distance_to_target_surface(large),"center_distance":nose_enemy.position.distance_to(large.position)})
+	large.take_combat_damage(30.0); director.sync_fleet()
+	fee_before=game.life.money; purchase=director.transact("repair")
+	check("enemy at large aircraft nose blocks full repair despite distant center",outside_center and not purchase.ok and game.life.money==fee_before and large.health==90.0,{"surface_distance":nose_enemy.distance_to_target_surface(large),"center_distance":nose_enemy.position.distance_to(large.position)})
 	game.current_vehicle=null; await clear_enemies()
 	director.grace=0.0; game.player.reset_health()
 	var hit: float=director._hurt_target(8.0,game.player.position+Vector3.FORWARD*3)
 	check("director routes damage into real player and startscombat gate",hit==8.0 and game.player.health==112.0 and director._hurt_clock==8.0)
 	fee_before=game.life.money; purchase=director.transact("medkit")
-	check("damage blocks transactions for8 seconds",not purchase.ok and game.life.money==fee_before)
-	director._physics_process(7.9); purchase=director.transact("medkit")
-	check("7.9 seconds is not enough to exit combat",not purchase.ok and game.life.money==fee_before)
-	director._physics_process(.11); purchase=director.transact("medkit")
-	check("8 second gate expires through production clock",purchase.ok and game.life.money==fee_before-300)
+	check("recent damage does not block a purchased medical response",purchase.ok and game.life.money==fee_before-300 and director._hurt_clock==8.0)
+	fee_before=game.life.money; purchase=director.transact("repair","airliner")
+	check("recent damage still blocks damaged full repair for8 seconds",not purchase.ok and game.life.money==fee_before and large.health==90.0)
+	director._physics_process(7.9); purchase=director.transact("repair","airliner")
+	check("7.9 seconds is not enough for full repair after combat",not purchase.ok and game.life.money==fee_before and large.health==90.0)
+	director._physics_process(.11); purchase=director.transact("repair","airliner")
+	check("8 second repair gate expires through production clock",purchase.ok and game.life.money==fee_before-300 and large.health==100.0)
 	game.current_vehicle=board; board.linear_velocity=Vector3(2,0,0); fee_before=game.life.money
 	purchase=director.transact("medkit")
-	check("moving vehicle blocks service purchases",not purchase.ok and game.life.money==fee_before)
+	check("moving vehicle permits portable supply purchases",purchase.ok and game.life.money==fee_before-300)
+	board.take_combat_damage(10.0); director.sync_fleet(); fee_before=game.life.money
+	purchase=director.transact("repair")
+	check("moving damaged vehicle still blocks full repair",not purchase.ok and game.life.money==fee_before and board.health<100.0)
 	board.linear_velocity=Vector3.ZERO; game.current_vehicle=null
 	# Remote repair is needed after a destroyed aircraft has fallen beyond reach.
 	var remote:=vehicle("fighter"); remote.position=Vector3(900,-12,0); remote.freeze=false; remote.take_combat_damage(10000.0); director.sync_fleet()
@@ -231,8 +240,8 @@ func run() -> void:
 	director.reset_mode(true)
 	director.apply_state(saved)
 	check("JSON roundtrip restores actual player inventory fleet and enemy",game.player.health==85.0 and director.medkits==4 and director.heal_cooldown==6.5 and director.kills==7 and director.cleared==1 and director.wave_kills==2 and summoned.health==80.0 and summoned.weapon_upgrade==3 and director.enemies.size()==1 and is_equal_approx(director.enemies[0].health,569.2) and director.enemies[0].level==5 and director.enemies[0].spec.reward==1248)
-	fee_before=game.life.money; purchase=director.transact("medkit")
-	check("save and reload cannot erase combat service cooldown",director._hurt_clock==4.2 and not purchase.ok and game.life.money==fee_before)
+	fee_before=game.life.money; purchase=director.transact("repair","tank")
+	check("save and reload cannot erase combat full repair cooldown",director._hurt_clock==4.2 and not purchase.ok and game.life.money==fee_before and summoned.health==80.0)
 	game.life.money=8765; game.life.lifetime_earnings=4321
 	var packed_save: Dictionary=JSON.parse_string(JSON.stringify({"version":preload("res://scripts/save_store.gd").VERSION,"life":game.life.get_state(),"survival":director.get_state()}))
 	for repeat_index in 3:
@@ -249,7 +258,7 @@ func run() -> void:
 	director.apply_state({"health":50.0,"fleet_health":{"car":30.0},"fleet_upgrades":{"car":0},"enemies":[]})
 	check("loading another world does not retain previous fleet dictionaries",director.fleet_health.size()==1 and director.fleet_health.car==30.0 and director.fleet_upgrades.size()==1 and not director.fleet_health.has("tank"))
 	director.apply_state({"health":NAN,"medkits":999,"heal_cooldown":-5,"kills":-10,"cleared":INF,"wave_kills":999,"wave_spawned":-3,"grace":-50,"rest":500,"fleet_health":{"car":-50,"tank":NAN,"invalid":42},"fleet_upgrades":{"tank":99,"fighter":-5,"invalid":2},"enemies":"invalid"})
-	check("invalid numeric schema stays finite and within gameplay bounds",game.player.health==120.0 and director.medkits==5 and director.heal_cooldown==0.0 and director.kills==0 and director.cleared==0 and director.wave_kills==5 and director.wave_spawned>=director.wave_kills and director.grace>=5.0 and director.rest==30.0 and director.fleet_health.car==0.0 and director.fleet_health.tank==100.0 and director.fleet_upgrades.tank==3 and director.fleet_upgrades.fighter==0 and not director.fleet_health.has("invalid") and director.enemies.is_empty())
+	check("invalid numeric schema stays finite and within gameplay bounds",game.player.health==120.0 and director.medkits==5 and director.heal_cooldown==0.0 and director.kills==0 and director.cleared==0 and director.wave_kills==7 and director.wave_spawned==director.wave_kills and director.grace>=5.0 and director.rest==0.0 and director.fleet_health.car==0.0 and director.fleet_health.tank==100.0 and director.fleet_upgrades.tank==3 and director.fleet_upgrades.fighter==0 and not director.fleet_health.has("invalid") and director.enemies.is_empty())
 	director.reset_mode(true)
 	var bounded: Array=[]
 	for index in 30: bounded.append({"type":"roamer","health":99999,"position":[100+index,4.7,100]})

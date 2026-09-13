@@ -1,0 +1,591 @@
+{
+	"checks": [
+		{
+			"detail": {
+				"attack_range": 2.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.7,
+				"damage": 8.0,
+				"dead": false,
+				"detouring": false,
+				"health": 80.0,
+				"label": "游荡奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 80.0,
+				"position": [
+					0.0,
+					6.0,
+					80.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 120,
+				"speed": 2.8,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "roamer",
+				"windup_remaining": 0.0
+			},
+			"name": "roamer config health and collision contract",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 2.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.7,
+				"damage": 7.0,
+				"dead": false,
+				"detouring": false,
+				"health": 60.0,
+				"label": "疾跑奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 60.0,
+				"position": [
+					9.0,
+					6.0,
+					80.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 160,
+				"speed": 6.2,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "runner",
+				"windup_remaining": 0.0
+			},
+			"name": "runner config health and collision contract",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 3.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.7,
+				"damage": 22.0,
+				"dead": false,
+				"detouring": false,
+				"health": 360.0,
+				"label": "重装奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 360.0,
+				"position": [
+					18.0,
+					6.0,
+					80.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 480,
+				"speed": 2.2,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "brute",
+				"windup_remaining": 0.0
+			},
+			"name": "brute config health and collision contract",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 22.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.7,
+				"damage": 12.0,
+				"dead": false,
+				"detouring": false,
+				"health": 110.0,
+				"label": "喷吐奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 110.0,
+				"position": [
+					27.0,
+					6.0,
+					80.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 240,
+				"speed": 2.7,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "spitter",
+				"windup_remaining": 0.0
+			},
+			"name": "spitter config health and collision contract",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 4.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.7,
+				"damage": 28.0,
+				"dead": false,
+				"detouring": false,
+				"health": 700.0,
+				"label": "首领奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 700.0,
+				"position": [
+					36.0,
+					6.0,
+					80.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 1200,
+				"speed": 3.5,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "alpha",
+				"windup_remaining": 0.0
+			},
+			"name": "alpha config health and collision contract",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all five archetypes land on physical ground",
+			"passed": true
+		},
+		{
+			"detail": {
+				"materials": 9,
+				"shared": true,
+				"types": [
+					"roamer",
+					"runner",
+					"brute",
+					"spitter",
+					"alpha"
+				]
+			},
+			"name": "five silhouettes reuse shared mesh and material cache",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "instances share geometry without sharing mutable health",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown type falls back to roamer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"position": "(0.0, 0.000877, -6.761678)"
+			},
+			"name": "grounded chase advances toward target",
+			"passed": true
+		},
+		{
+			"detail": {
+				"roamer_distance": 6.76167821884155,
+				"runner_distance": 14.2700109481812
+			},
+			"name": "runner is physically faster than roamer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 2.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 8.0,
+				"dead": false,
+				"detouring": false,
+				"health": 80.0,
+				"label": "游荡奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 80.0,
+				"position": [
+					-40.0,
+					0.0,
+					0.0
+				],
+				"pursuit_seconds": 0.416666666666667,
+				"reward": 120,
+				"speed": 2.8,
+				"state": "windup",
+				"stuck_seconds": 0.0,
+				"type": "roamer",
+				"windup_remaining": 0.25
+			},
+			"name": "attack has visible windup before any damage request",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attacks": 1
+			},
+			"name": "completed windup requests one configured attack",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attacks": 1
+			},
+			"name": "cooldown prevents per-frame attacks",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attacks": 1
+			},
+			"name": "moving target outside range cancels pending hit",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 22.0,
+				"blocked_seconds": 3.99999999999999,
+				"cooldown_remaining": 0.0,
+				"damage": 12.0,
+				"dead": false,
+				"detouring": true,
+				"health": 110.0,
+				"label": "喷吐奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 110.0,
+				"position": [
+					67.3397674560547,
+					0.000877506739925593,
+					-3.24000120162964
+				],
+				"pursuit_seconds": 3.99999999999999,
+				"reward": 240,
+				"speed": 2.7,
+				"state": "chase",
+				"stuck_seconds": 0.0,
+				"type": "spitter",
+				"windup_remaining": 0.0
+			},
+			"name": "solid wall blocks line of sight and ranged damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"z": -3.24000120162964
+			},
+			"name": "enemy never moves through blocking wall",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 22.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 1.05000000000001,
+				"damage": 12.0,
+				"dead": false,
+				"detouring": false,
+				"health": 110.0,
+				"label": "喷吐奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 110.0,
+				"position": [
+					68.1006851196289,
+					0.000927312532439828,
+					-3.24000120162964
+				],
+				"pursuit_seconds": 6.66666666666665,
+				"reward": 240,
+				"speed": 2.7,
+				"state": "chase",
+				"stuck_seconds": 0.0,
+				"type": "spitter",
+				"windup_remaining": 0.0
+			},
+			"name": "removing obstruction restores ranged attack",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ranged windup starts before obstruction",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 22.0,
+				"blocked_seconds": 0.883333333333334,
+				"cooldown_remaining": 1.61666666666667,
+				"damage": 12.0,
+				"dead": false,
+				"detouring": false,
+				"health": 110.0,
+				"label": "喷吐奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 110.0,
+				"position": [
+					-90.0,
+					0.000877417856827378,
+					-2.16416668891907
+				],
+				"pursuit_seconds": 2.58333333333333,
+				"reward": 240,
+				"speed": 2.7,
+				"state": "chase",
+				"stuck_seconds": 0.0,
+				"type": "spitter",
+				"windup_remaining": 0.0
+			},
+			"name": "new wall cancels attack at release time",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "damage returns actual amount without accepting invalid input",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "health belongs to each enemy instance",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "lethal damage is clamped to remaining health",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "death emits reward exactly once even with reentrant damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "death hides attack warning health and name immediately",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "dead enemy expires and never attacks",
+			"passed": true
+		},
+		{
+			"detail": {
+				"position": "(169.3507, 0.000927, -10.32859)"
+			},
+			"name": "local obstacle steering passes finite wall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "freed target returns to grounded idle safely",
+			"passed": true
+		},
+		{
+			"detail": {
+				"surface_distance": 4.0
+			},
+			"name": "large vehicle range uses nearest collision surface",
+			"passed": true
+		},
+		{
+			"detail": {
+				"surface_distance": 10.0
+			},
+			"name": "nearest hull distance respects vehicle rotation",
+			"passed": true
+		},
+		{
+			"detail": {
+				"center_distance": 11.8209543228149,
+				"hits": 2,
+				"surface_distance": 1.75998210906982
+			},
+			"name": "large hull receives real melee after surface approach",
+			"passed": true
+		},
+		{
+			"detail": {
+				"z": 11.7599821090698
+			},
+			"name": "enemy attacks hull without entering vehicle collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_damage": 12.32,
+				"max_health": 209.6,
+				"max_reward": 552
+			},
+			"name": "roamer level 1 to 10 health damage and reward strictly increase",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "roamer speed remains unchanged across levels",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_damage": 10.78,
+				"max_health": 157.2,
+				"max_reward": 736
+			},
+			"name": "runner level 1 to 10 health damage and reward strictly increase",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "runner speed remains unchanged across levels",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_damage": 33.88,
+				"max_health": 943.2,
+				"max_reward": 2208
+			},
+			"name": "brute level 1 to 10 health damage and reward strictly increase",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "brute speed remains unchanged across levels",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_damage": 18.48,
+				"max_health": 288.2,
+				"max_reward": 1104
+			},
+			"name": "spitter level 1 to 10 health damage and reward strictly increase",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "spitter speed remains unchanged across levels",
+			"passed": true
+		},
+		{
+			"detail": {
+				"max_damage": 43.12,
+				"max_health": 1834.0,
+				"max_reward": 5520
+			},
+			"name": "alpha level 1 to 10 health damage and reward strictly increase",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "alpha speed remains unchanged across levels",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "missing level remains backward compatible at level one",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid levels clamp to one and ten",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 2.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.7,
+				"damage": 12.32,
+				"dead": false,
+				"detouring": false,
+				"health": 209.6,
+				"label": "游荡奶龙",
+				"level": 10,
+				"line_of_sight": false,
+				"max_health": 209.6,
+				"position": [
+					330.0,
+					0.0,
+					0.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 552,
+				"speed": 2.8,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "roamer",
+				"windup_remaining": 0.0
+			},
+			"name": "level ten scaled stats use requested formulas",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "overhead label includes level type and integer coins",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "snapshot survives JSON with explicit level and reward",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "snapshot level recreates matching rank and stats",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "record without level recreates level one",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ranked death awards scaled coins once with reentrant damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 4.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 31.36,
+				"dead": false,
+				"detouring": false,
+				"health": 952.0,
+				"label": "首领奶龙",
+				"level": 3,
+				"line_of_sight": true,
+				"max_health": 952.0,
+				"position": [
+					380.0,
+					0.000935588730499148,
+					-0.00416666688397527
+				],
+				"pursuit_seconds": 1.66666666666667,
+				"reward": 2160,
+				"speed": 3.5,
+				"state": "windup",
+				"stuck_seconds": 0.0,
+				"type": "alpha",
+				"windup_remaining": 0.533333333333334
+			},
+			"name": "boss heavy windup raises both arms with red full range warning",
+			"passed": true
+		},
+		{
+			"detail": {
+				"hits": [
+					31.36
+				]
+			},
+			"name": "boss attack signal carries level scaled damage",
+			"passed": true
+		}
+	],
+	"count": 52,
+	"passed": true,
+	"physics": "Jolt Physics",
+	"physics_hz": 60
+}

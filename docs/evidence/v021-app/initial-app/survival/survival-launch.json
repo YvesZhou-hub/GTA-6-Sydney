@@ -1,0 +1,27 @@
+{
+  "app_identity": {
+    "executable_sha256": "b2caae3b519870c1a2335076e363bf9a23dfdaf32fdda5f372adc312c2a98c43",
+    "pck_sha256": "e424531ed8a11be892f564a1a9e3b4fc70b33ad08dcde2a90eebd6b117577881"
+  },
+  "app_identity_unchanged": true,
+  "mode": "survival",
+  "launch_flags": [
+    "--disable-vsync",
+    "--",
+    "--survival-qa"
+  ],
+  "started_utc": "2026-09-13T14:26:36.475784+00:00",
+  "wall_seconds": 102.593,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 40,
+  "passed": true,
+  "screenshots": [
+    "services-paid-repair.png",
+    "five-nailong-city-hud.png",
+    "services-during-combat-blocked.png",
+    "tank-survival-impact-hud.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

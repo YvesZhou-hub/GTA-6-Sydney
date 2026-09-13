@@ -1,0 +1,134 @@
+{
+  "captured_utc": "2026-09-13T15:39:17.423562+00:00",
+  "engine": "Godot 4.7.2 stable",
+  "purpose": "Separate native gameplay correctness from inactive host CoreAudio mixing and audio playback teardown.",
+  "system_audio_settings_modified": false,
+  "listening_verified": false,
+  "rendering": "Native macOS Metal / Forward+ window for all attached probes; not headless.",
+  "observations": [
+    "22 real production vehicle engines with default CoreAudio and normal rendering produced no observed mix boundaries during a 1000 ms bounded observation; all 22 AudioStreamPlaybackWAV and associated 22 AudioStreamWAV objects remained referenced at exit.",
+    "The corresponding 22-vehicle Dummy-driver probe observed three mix boundaries in 205 ms after stop and stream clearing; exit reported no leaked objects. Dummy produces no audible output.",
+    "A minimal SceneTree loading no game scripts, creating one AudioStreamPlayer and one synthetic WAV, observed zero CoreAudio mix boundaries during 3000 ms and two leaked objects at exit.",
+    "The unchanged final release App reproduced 44 WAV/playback leaks while passing all 40 survival gameplay checks.",
+    "Restoring normal rendering, explicitly drawing frames, removing fixed FPS, and selecting the existing default speaker within the test process did not restore host CoreAudio mixing. No operating-system output preference was changed.",
+    "Dummy with only the original five process frames after stop also leaked 44 WAV/playback objects: 0.627 ms elapsed, less than the reported 40 ms until its next mix. The zero-leak Dummy case explicitly observed three mix boundaries after stopping, so selecting Dummy alone is insufficient.",
+    "Headless vehicle fixtures are not an audio teardown comparison: production harbor_vehicle._setup_audio() returns immediately for a headless DisplayServer and creates no engine playback."
+  ],
+  "limits": [
+    "These measurements do not identify why CoreAudio failed to mix on this host.",
+    "No engine or production audio fix is claimed; normal release audio defaults remain unchanged.",
+    "No human listening verification was performed. A Dummy-driver native validation cannot verify audible CoreAudio output.",
+    "The two 22-vehicle log commands differ in audio driver and an extra pre-stop manual draw in the CoreAudio case; both enabled normal rendering and measured mix boundaries after stopping playback.",
+    "Absolute local user/project/temp paths in logs are replaced with named placeholders; warning and leak lines are retained."
+  ],
+  "samples": [
+    {
+      "name": "coreaudio-22-vehicles",
+      "command": "godot --verbose --path <project>/game --disable-vsync --fixed-fps 60 --resolution 640x360 --script <diagnostic>/harbour-audio-exit-probe.gd -- --render --draw --mix-wait",
+      "source_log_modified_utc": "2026-09-13T15:31:00.555380+00:00",
+      "log": "coreaudio-22-vehicles.txt",
+      "vehicle_count": 22,
+      "leaked_instances": {
+        "AudioStreamPlaybackWAV": 22,
+        "AudioStreamWAV": 22
+      },
+      "leaked_count": 44,
+      "measurement_lines": [
+        "AUDIO_START time_since_last_mix=0.728903 time_to_next_mix=-0.728903",
+        "MIX_DRAIN observed_cycles=0 elapsed_ms=1000",
+        "AUDIO_END time_since_last_mix=1.732493 time_to_next_mix=-1.732493"
+      ]
+    },
+    {
+      "name": "dummy-22-vehicles",
+      "command": "godot --verbose --path <project>/game --audio-driver Dummy --disable-vsync --fixed-fps 60 --resolution 640x360 --script <diagnostic>/harbour-audio-exit-probe.gd -- --render --mix-wait",
+      "source_log_modified_utc": "2026-09-13T15:32:07.354821+00:00",
+      "log": "dummy-22-vehicles.txt",
+      "vehicle_count": 22,
+      "leaked_instances": {},
+      "leaked_count": 0,
+      "measurement_lines": [
+        "AUDIO_DRIVER devices=[\"Default\"] current=Default",
+        "AUDIO_START time_since_last_mix=0.091762 time_to_next_mix=0.0011178185941",
+        "MIX_DRAIN observed_cycles=3 elapsed_ms=205",
+        "AUDIO_END time_since_last_mix=0.005229 time_to_next_mix=0.0876508185941"
+      ]
+    },
+    {
+      "name": "coreaudio-minimal-player",
+      "command": "godot --verbose --path <project>/game --resolution 640x360 --script <diagnostic>/harbour-coreaudio-minimal.gd",
+      "source_log_modified_utc": "2026-09-13T15:34:51.485982+00:00",
+      "log": "coreaudio-minimal-player.txt",
+      "vehicle_count": 1,
+      "leaked_instances": {
+        "AudioStreamWAV": 1,
+        "AudioStreamPlaybackWAV": 1
+      },
+      "leaked_count": 2,
+      "measurement_lines": [
+        "DRIVER devices=[\"Default\", \"MacBook Pro Speakers (71)\"] current=Default",
+        "MIX cycles=0 elapsed_ms=3000 since=3.45608 next=-3.45608"
+      ]
+    },
+    {
+      "name": "release-app-survival-verbose",
+      "command": "<release-app>/Contents/MacOS/Harbourlife --verbose --disable-vsync --fixed-fps 60 --resolution 1440x900 -- --survival-qa",
+      "source_log_modified_utc": "2026-09-13T15:27:59.187869+00:00",
+      "log": "release-app-survival-verbose.txt",
+      "vehicle_count": null,
+      "leaked_instances": {
+        "AudioStreamPlaybackWAV": 22,
+        "AudioStreamWAV": 22
+      },
+      "leaked_count": 44,
+      "measurement_lines": [],
+      "gameplay_checks": {
+        "passed": 40,
+        "total": 40
+      }
+    },
+    {
+      "name": "dummy-22-vehicles-five-frames",
+      "command": "godot --verbose --path <project>/game --audio-driver Dummy --disable-vsync --fixed-fps 60 --resolution 640x360 --script <diagnostic>/harbour-audio-exit-probe.gd",
+      "source_log_modified_utc": "2026-09-13T15:36:58.096934+00:00",
+      "log": "dummy-22-vehicles-five-frames.txt",
+      "vehicle_count": 22,
+      "leaked_instances": {
+        "AudioStreamPlaybackWAV": 22,
+        "AudioStreamWAV": 22
+      },
+      "leaked_count": 44,
+      "measurement_lines": [
+        "AUDIO_DRIVER devices=[\"Default\"] current=Default",
+        "AUDIO_START time_since_last_mix=0.052248 time_to_next_mix=0.0406318185941",
+        "AUDIO_END time_since_last_mix=0.052875 time_to_next_mix=0.0400048185941"
+      ]
+    }
+  ],
+  "engine_source_review": {
+    "version": "4.7.2-stable",
+    "reviewer": "parallel source audit",
+    "audio_server_source": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/servers/audio/audio_server.cpp",
+    "coreaudio_source": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/drivers/coreaudio/audio_driver_coreaudio.mm",
+    "confirmed_chain": [
+      "stop_playback_stream (1196-1225) marks regular playback FADE_OUT_TO_DELETION.",
+      "_mix_step (489-493) invokes deletion registration. _delete_stream_playback_list_node (673-680) registers a main-thread destructor that releases stream_playback.",
+      "update (1505) and cleanup (1511) process already registered deletions; they cannot replace an absent mixer step.",
+      "CoreAudio.start (246-254) calls AudioOutputUnitStart and reports an error on failure; these logs contain no such failure message. The cause of absent callbacks remains unverified.",
+      "No script API for flush, force_mix or restart is exposed."
+    ]
+  },
+  "follow_up_utc": "2026-09-13T15:50:05.893024+00:00",
+  "shutdown_contract_follow_up": {
+    "production_change": "Shutdown now stops and clears each audio stream, watches only weak playback references and waits until all are released or a real wall-clock 1000 ms deadline expires. No audio driver changes or warning filters.",
+    "host_state_changed": "CoreAudio later resumed mixing without changing operating-system settings. The earlier zero-mix results remain historical observations, not a claim about current device state.",
+    "dummy_regression_report": "shutdown-dummy.json",
+    "coreaudio_restored_regression_report": "shutdown-coreaudio-restored.json",
+    "checks_per_report": 11,
+    "results": "Both drivers completed the native 22-vehicle and plain/2D playback regression with zero leaked objects. Expired-deadline handling is independently exercised without disabling mixing or keeping a strong playback reference.",
+    "listening_verified": false,
+    "inactive_coreaudio_timeout_not_reproduced_after_change": "An explicit --expect-timeout invocation instead observed actual mix and completed playback release in 10 ms. This environmental precondition was no longer present; no inactive-device recovery is claimed."
+  },
+  "production_code_modified_for_initial_diagnostic": false,
+  "publication_note": "Sanitized log bytes retained; .log suffix renamed .txt for the public source allowlist."
+}

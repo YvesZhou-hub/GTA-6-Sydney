@@ -1,0 +1,288 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "encounter fixture uses production scripts and Jolt",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "director exposes adaptive concurrent encounter budget",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_spawn_seconds": 1.0,
+				"grace_remaining": 11.0,
+				"initial_grace": 12.0
+			},
+			"name": "automatic first encounter arrives while entry damage grace is active",
+			"passed": true
+		},
+		{
+			"detail": {
+				"distance": 22.0001125335693
+			},
+			"name": "first automatic enemy has a real nearby supported position",
+			"passed": true
+		},
+		{
+			"detail": {
+				"current_distance": 13.8392963409424,
+				"initial_distance": 22.0001125335693
+			},
+			"name": "automatically spawned enemy actively approaches the player",
+			"passed": true
+		},
+		{
+			"detail": {
+				"enemies": 3,
+				"grace": 7.9999999999998,
+				"health": 120.0
+			},
+			"name": "entry grace allows encounters without draining player health",
+			"passed": true
+		},
+		{
+			"detail": {
+				"new_local": 2,
+				"old_count": 4,
+				"reward_progress": 7,
+				"reward_quota": 8,
+				"surviving_old": 4,
+				"total": 6
+			},
+			"name": "moving to another street spawns new threats before clearing old enemies",
+			"passed": true
+		},
+		{
+			"detail": {
+				"reward_quota": 8,
+				"spawned_counter": 13
+			},
+			"name": "reward milestone cannot lock a partially uncleared map region",
+			"passed": true
+		},
+		{
+			"detail": {
+				"healthy": 4,
+				"low_health": 2
+			},
+			"name": "low health reduces incoming pressure while keeping encounters",
+			"passed": true
+		},
+		{
+			"detail": {
+				"foot": 4,
+				"vehicle": 6
+			},
+			"name": "vehicle combat receives more concurrent targets than early walking",
+			"passed": true
+		},
+		{
+			"detail": {
+				"foot": 9,
+				"vehicle": 11
+			},
+			"name": "progression budgets stay bounded below global enemy limit",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual": 6,
+				"budget": 6,
+				"grace": 1.99999999999982
+			},
+			"name": "vehicle encounter autonomously fills its bounded target budget",
+			"passed": true
+		},
+		{
+			"detail": {
+				"enemies": 6
+			},
+			"name": "vehicle spawn group stays outside the actual hull",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attempts": 20,
+				"successes": 20
+			},
+			"name": "open ground produces reliable bounded placement across search bearings",
+			"passed": true
+		},
+		{
+			"detail": {
+				"floor_top": 4.5,
+				"point": "(19.05256, 4.58, 11.0)"
+			},
+			"name": "thin walkable podium is usable despite destructible metadata",
+			"passed": true
+		},
+		{
+			"detail": {
+				"point": "(inf, inf, inf)"
+			},
+			"name": "building roof is rejected even within vertical spawn window",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sea level and submerged placement never creates a ground enemy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "high airborne player does not summon unsupported enemies",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "enclosed player has no disconnected exterior spawn",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "stale full quota reconciles against zero live enemies",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "departed enemies release encounter capacity without a kill",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "recycled enemy cannot deliver a delayed duplicate reward",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "queued deletion also frees quota without awarding coins",
+			"passed": true
+		},
+		{
+			"detail": {
+				"status": {
+					"blocked_seconds": 16.0000000000004,
+					"detouring": true,
+					"pursuit_seconds": 16.0000000000004,
+					"stuck_seconds": 16.0000000000004
+				}
+			},
+			"name": "physically trapped offscreen pursuer is safely recycled",
+			"passed": true
+		},
+		{
+			"detail": {
+				"nearby": 4,
+				"replacement_seconds": 0.6,
+				"total": 24
+			},
+			"name": "full resident population outside district leaves room for prompt nearby reinforcement",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "capacity recovery retains old pursuers without overcap or false rewards",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "capacity recovery preserves visible distant and hidden nearby pursuers",
+			"passed": true
+		},
+		{
+			"detail": {
+				"desired": 4,
+				"local": 1,
+				"resident": 21
+			},
+			"name": "capacity recovery releases exactly the missing local slots",
+			"passed": true
+		},
+		{
+			"detail": {
+				"closest_removed": 89.202018737793,
+				"farthest_retained": 89.0505447387695
+			},
+			"name": "capacity recovery selects farthest eligible hidden actors first",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "available resident slots prevent unnecessary capacity recycling",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "full visible resident population is never removed for spawn pressure",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "wave completion grants progress without a forced rest",
+			"passed": true
+		},
+		{
+			"detail": {
+				"replenishment_seconds": 0.6
+			},
+			"name": "next wave replenishes promptly without an eighteen or thirty second gap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"grace": 5.0,
+				"rest": 0.0,
+				"spawned": 0
+			},
+			"name": "legacy rest and vanished saved enemies cannot stall loaded play",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_events": 26,
+				"defeated": true,
+				"duration_seconds": 38.25,
+				"first_damage_seconds": 12.2333333333333,
+				"survival_after_first_damage_seconds": 26.0
+			},
+			"name": "automatic first minute creates actual damage pressure",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_events": 26,
+				"defeated": true,
+				"duration_seconds": 38.25,
+				"first_damage_seconds": 12.2333333333333,
+				"survival_after_first_damage_seconds": 26.0
+			},
+			"name": "initial damage grace expires before enemies can hurt player",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_events": 26,
+				"defeated": true,
+				"duration_seconds": 38.25,
+				"first_damage_seconds": 12.2333333333333,
+				"survival_after_first_damage_seconds": 26.0
+			},
+			"name": "first contact leaves at least twenty two seconds of passive reaction time",
+			"passed": true
+		}
+	],
+	"count": 37,
+	"passed": true,
+	"passive_encounter": {
+		"damage_events": 26,
+		"defeated": true,
+		"duration_seconds": 38.25,
+		"first_damage_seconds": 12.2333333333333,
+		"survival_after_first_damage_seconds": 26.0
+	},
+	"physics": "Jolt Physics",
+	"physics_hz": 60
+}

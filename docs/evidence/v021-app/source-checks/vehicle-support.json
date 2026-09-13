@@ -1,0 +1,299 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "actual Jolt backend",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter has free finite-speed bounded support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown craft cannot silently receive a weapon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "automatic support defaults on with a short mounting delay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nearest visible forward enemy is locked automatically",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "bolt has finite flight time instead of instant hitscan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "one physics step advances pulse by its configured speed",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "automatic pulse damages actual enemy while player keeps driving",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "support firing never spends coins or launches a heavy main shell",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "pause freezes support clocks and prevents more fire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "V off cancels lock and airborne support bolts",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production modal gate blocks automatic support",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sightseeing mode never auto-attacks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "destroyed current vehicle cannot lock or fire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unoccupied vehicle cannot attack by itself",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "thin wall blocks acquisition and shots",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "target becomes available when obstruction is removed",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "wall introduced during flight intercepts swept bolt before damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"health": 344.0,
+				"initial_direction": "(0.0, 0.011148, -0.999938)",
+				"movement": 3.75000166893005
+			},
+			"name": "finite-speed homing follows a moving enemy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "changing vehicle removes old bolts and retargets from new mount",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "boat automatically fights using same single mount",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "freed target safely cancels bolts and lock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production enemy dies once and delivers one normal coin reward",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "dead enemy cannot retain a lock or receive duplicate rewards",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "car physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "motorcycle physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "hoverboard physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "speedboat physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "yacht physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "helicopter physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "glider physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "paraglider physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 16.0,
+				"expected": 16.0,
+				"manual_main_shells": 0
+			},
+			"name": "airliner physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 15.6,
+				"expected": 15.6,
+				"manual_main_shells": 0
+			},
+			"name": "tank physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 15.6,
+				"expected": 15.6,
+				"manual_main_shells": 0
+			},
+			"name": "fighter physically fires its free auxiliary weapon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "forty vehicle switches never duplicate mount or projectile nodes",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeated setup preserves support pool allocation",
+			"passed": true
+		}
+	],
+	"count": 47,
+	"engine": "4.7.2-stable (official)",
+	"headless": true,
+	"passed": true,
+	"scope": "Production vehicle support controller and actual Nailong damage/reward lifecycle in isolated Jolt space. No city, user saves or native visuals.",
+	"source_sha256": {
+		"res://../source/vehicle_support_test.gd": "ebd57ab58601dbaa76445a19de8129935f5811b0b9d8a1b5cf2b35cbd12b4824",
+		"res://scripts/nailong_enemy.gd": "31366dbada69ad15ad89fb08737b06e137738fa3cc883ed6b19bc44be7f3932c",
+		"res://scripts/vehicle_support_weapons.gd": "2373d2f9897811d4497dc2f0098c7c5e97fb4e6fa1b756579ac7e936e6d0e21a",
+		"res://scripts/vehicle_weapons.gd": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98"
+	},
+	"user_saves_touched": false
+}
