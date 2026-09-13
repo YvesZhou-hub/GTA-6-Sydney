@@ -27,14 +27,16 @@ jobs:
     permissions:
       contents: write
     env:
-      QA_ROOT: ${{ runner.temp }}/harbourlife-windows-${{ github.run_id }}-${{ github.run_attempt }}
       RELEASE_TAG: ${{ inputs.release_tag }}
       WORKFLOW_SHA: ${{ github.workflow_sha }}
       PYTHONUTF8: '1'
     steps:
       - name: Preserve committed LF bytes on the disposable runner
         shell: pwsh
-        run: git config --global core.autocrlf false
+        run: |
+          git config --global core.autocrlf false
+          $qa = Join-Path $env:RUNNER_TEMP "harbourlife-windows-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          "QA_ROOT=$qa" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Checkout the dispatched commit without persisted credentials
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
