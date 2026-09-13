@@ -2,11 +2,11 @@
 
 **v0.1.8-preview.1 · 中文字体修复、炮击反馈与横屏宣传片**
 
-[下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
+[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-本轮修复“无敌坦克”“无敌战斗机”的中文缺字，随包提供完整许可的 Noto 字体；强化炮口喷焰、后坐、命中尘浪、碎片、烟尘与空间音效。横屏宣传片展示真实玩法和海港探索，具体见 [本轮说明](docs/FIXES_0.1.8.md) 与 [宣传片制作](docs/PROMO.md)。公开试玩包面向 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费；没有 Windows、Intel Mac 或浏览器玩家版本。
+本轮修复“无敌坦克”“无敌战斗机”的中文缺字，随包提供完整许可的 Noto 字体；强化炮口喷焰、后坐、命中尘浪、碎片、烟尘与空间音效。横屏宣传片展示真实玩法和海港探索，具体见 [本轮说明](docs/FIXES_0.1.8.md) 与 [宣传片制作](docs/PROMO.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 和 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动与操作说明](docs/WINDOWS.md)
 
 [观看 38 秒横屏宣传片](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Sydney-Trailer-1080p.mp4) · [16.5 秒短版](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Sydney-Teaser-1080p.mp4) · [下载宣传素材包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Promo-Kit.zip)
 
@@ -21,14 +21,14 @@
 
 ## 下载后直接试飞
 
-1. 从发布页面下载 `Harbourlife-macOS-arm64.zip`，解压得到 `Harbourlife.app`，双击打开。游玩不需要源码或 Godot 编辑器。
+1. 从发布页面选择自己的平台：**Windows** 下载 `Harbourlife-Windows-x86_64.zip`，选择“全部解压缩”，进入 `Harbourlife` 文件夹运行 `Harbourlife.exe`，保留旁边的 PCK 和其他随包文件；**Mac** 下载 `Harbourlife-macOS-arm64.zip`，解压后双击 `Harbourlife.app`。游玩不需要源码或 Godot 编辑器。
 2. 标题页选择 **“从悉尼机场起飞”**，建立独立沙盒世界，从 **34L 跑道**进入客机。
 3. 按住 **W** 加推力，约 **250 km/h** 时按 **R** 抬头；离地后松开，按需用 **R / F** 调整俯仰。
 4. **A / D** 转弯，朝北偏东飞向海港；**M** 打开地图选择歌剧院或大桥，跟随距离和方向指引。**S** 减推力，落地后用空格制动。
 
 这是辅助飞行游戏模型：客机需要前进速度，会失速，不能悬停。不要将游戏地图或操纵当作现实导航与驾驶依据。
 
-发布包采用本地 ad-hoc 签名，未取得 Apple Developer ID 签名或公证。首次打开若被 macOS 阻止，请确认来自本仓库发布页面，再按 [Apple 官方说明](https://support.apple.com/en-au/102445)，在“系统设置 → 隐私与安全”中针对该应用选择“仍要打开”。GitHub 的 **Code → Download ZIP** 下载的是源码，不能直接当应用打开。
+Mac 发布包采用本地 ad-hoc 签名，未取得 Apple Developer ID 签名或公证。首次打开若被 macOS 阻止，请确认来自本仓库发布页面，再按 [Apple 官方说明](https://support.apple.com/en-au/102445)，在“系统设置 → 隐私与安全”中针对该应用选择“仍要打开”。Windows 文件与系统要求见 [Windows 说明](docs/WINDOWS.md)。GitHub 的 **Code → Download ZIP** 下载的是源码，不能直接当应用打开。
 
 ![悉尼机场跑道上的新版客机，导出 App 实际画面](docs/screenshots/v013/flight-01_runway_parked.png)
 
@@ -121,21 +121,21 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 
 ## 存档与旧世界
 
-存档位于本机 `~/Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港/worlds/`。每个世界使用独立 JSON，保留前一次成功保存的 `.bak`；约每 60 秒自动保存，F5 手动保存，正常退出也会保存。截图存于同级 `photos/`，没有云存档。
+Mac 存档位于 `~/Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港/worlds/`；Windows 存档位于 `%APPDATA%\Godot\app_userdata\Harbourlife · 悉尼海港\worlds\`。每个世界使用独立 JSON，保留前一次成功保存的 `.bak`；约每 60 秒自动保存，F5 手动保存，正常退出也会保存。截图存于同级 `photos` 文件夹，没有云存档。
 
 本版写入存档格式 5，仍可读取旧格式 1 / 2 / 3 / 4，保存独立载具、导航目标和城市体验。较大的新船艇会检查旧泊位净空，必要时调整静止旧副本；原有 ID、油量和损伤保留，空中姿态与安全桥下停车不会被搬到另一层道路。旧世界首次进入本次地图时，会检查人物和已有载具是否被新建筑包住，只调整发生冲突的副本，保留 ID、油量、损伤与占用关系；之后正常保存记录地图版本。详见 [旧地图存档迁移](docs/SAVE_MAP_MIGRATION.md)。格式 5 存档须继续使用本版或兼容的新版应用；v0.1.2 会拒绝读取，防止旧版忽略滑板等新内容后覆盖保存。仅载入旧存档不会重写原文件；首次成功保存时升级格式并保留之前的恢复副本。
 
 ## 验证与已知限制
 
-最终发布构建、原生应用内自动验证、镜头跟随、静态渲染采样和试飞结果，以 [本轮验证记录](docs/TESTING.md) 对应的构建和证据为准。初版试飞视频及旧性能数据不作为这次城市扩展的通过证明。具体通过数量、启动方式和试飞范围列在验证记录中。
+本轮 **189 项原生检查**对应 Apple Silicon Mac 发布构建，具体范围与截图见 [本轮验证记录](docs/TESTING.md)。Windows 云端 headless 检查与 GPU 画面、人工输入验证分开记录，实际结果见 [Windows 验证范围](docs/WINDOWS.md#windows-验证记录)。初版试飞视频及旧性能数据不作为这次城市扩展的通过证明。
 
-仅上述 Mac 配置有实测记录，其他设备表现未知。还没有多小时稳定性或完整硬件矩阵验证，不能保证所有场景稳定 60 FPS。游戏、美术、声音和生活内容仍是开发预览；商业推广所需的第三方地标形象等权利也尚未全部解决。
+还没有多小时稳定性或完整硬件矩阵验证，不能保证所有场景稳定 60 FPS。游戏、美术、声音和生活内容仍是开发预览；商业推广所需的第三方地标形象等权利也尚未全部解决。
 
 ## 源码与本地构建
 
-[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；本轮使用 `v0.1.8-preview.1` 标签对应的源码。
+[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；游戏内容使用 `v0.1.8-preview.1` 标签对应的源码。Windows 构建工具随后补充到 `main`；Windows 验证报告记录其确切提交，原 Mac 与源码下载档案保持不变。
 
-构建需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
+**Mac 构建：**需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
 
 ```sh
 chmod +x tools/runtime/godot
@@ -143,7 +143,17 @@ codesign --force --sign - tools/runtime/godot
 ./tools/build.sh
 ```
 
-脚本使用本机暂存目录构建、ad-hoc 签名和启动检查，输出 `dist/Harbourlife-macOS-arm64.zip`。`dist/Harbourlife.app` 是本地生成应用的链接，分享请用 ZIP。地图的离线重建步骤见 [CITY_DATA.md](docs/CITY_DATA.md)，验证命令见 [TESTING.md](docs/TESTING.md)。
+脚本使用本机暂存目录构建、ad-hoc 签名和启动检查，输出 `dist/Harbourlife-macOS-arm64.zip`。`dist/Harbourlife.app` 是本地生成应用的链接，分享请用 ZIP。
+
+**Windows 构建：**安装 Python 3.11 或以上版本、同版本 Godot 4.7.2-stable Windows 编辑器和完整官方导出模板。在仓库根目录运行以下 PowerShell 命令，将 `--engine` 替换为自己的编辑器路径；模板目录须保留官方文件布局：
+
+```powershell
+python tools/build_windows.py --engine "C:\Tools\Godot\Godot_v4.7.2-stable_win64.exe" --templates "$env:APPDATA\Godot\export_templates\4.7.2.stable"
+```
+
+输出为 `dist/windows/Harbourlife-Windows-x86_64.zip`，构建报告为 `reports/windows-build.json`。脚本在临时副本中导出，并检查游戏源码与已发布 v0.1.8 的哈希一致；输出目录须为空。使用 Vulkan Forward+，需要支持 Vulkan 的显卡与驱动。[Windows CI 工作流](.github/workflows/windows-package-check.yml)负责构建、解压实际 ZIP，并运行导出的 EXE 做云端 headless 检查。
+
+地图的离线重建步骤见 [CITY_DATA.md](docs/CITY_DATA.md)，Mac 验证命令见 [TESTING.md](docs/TESTING.md)。
 
 ## 许可与来源
 
@@ -155,6 +165,6 @@ Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据�
 
 ## English
 
-Harbourlife is a free, offline, single-player Sydney sandbox for **Apple Silicon Mac**. Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
+Harbourlife is a free, offline, single-player Sydney sandbox for **Windows x86_64 and Apple Silicon Mac**. On Windows, extract the complete ZIP and run `Harbourlife.exe` with all accompanying files in place; see the [Windows guide](docs/WINDOWS.md). Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
-**v0.1.8-preview.1 · Readable Chinese UI and stronger artillery feedback.** The game bundles licensed Noto fonts to fix missing Chinese glyphs, adds pooled muzzle/recoil/impact effects and procedural spatial weapon audio, and ships a landscape project trailer recorded from this exact App. Existing public spaces, free vehicles, navigation and Sydney's summer day/night cycle remain available. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Final build-specific results are in [TESTING.md](docs/TESTING.md); capture, editing and factual scope are in [PROMO.md](docs/PROMO.md).
+**v0.1.8-preview.1 · Readable Chinese UI and stronger artillery feedback.** The game bundles licensed Noto fonts to fix missing Chinese glyphs, adds pooled muzzle/recoil/impact effects and procedural spatial weapon audio, and ships a landscape project trailer recorded from the Apple Silicon App. Existing public spaces, free vehicles, navigation and Sydney's summer day/night cycle remain available. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Its 189 native checks are recorded in [TESTING.md](docs/TESTING.md); Windows validation is recorded separately in [WINDOWS.md](docs/WINDOWS.md). Capture, editing and factual scope are in [PROMO.md](docs/PROMO.md).

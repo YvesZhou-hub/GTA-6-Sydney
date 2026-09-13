@@ -4,12 +4,12 @@
 
 ## 下载与启动
 
-1. 在发布页面的 **Assets** 中选择 Windows x86_64 试玩 ZIP。GitHub 的 **Code → Download ZIP** 和 `Source code` 是源码，不是可直接运行的游戏。
+1. 在发布页面的 **Assets** 中选择 `Harbourlife-Windows-x86_64.zip`。GitHub 的 **Code → Download ZIP** 和 `Source code` 是源码，不是可直接运行的游戏。
 2. 在资源管理器中对 ZIP 选择 **“全部解压缩”**，解压到一个独立文件夹。
-3. 打开解压后的文件夹，运行其中的 **`Harbourlife.exe`**。保留它旁边的 **`Harbourlife.pck`**、随包 DLL 和 `licenses` 目录；移动游戏时移动整个文件夹。
+3. 打开解压后的文件夹，运行其中的 **`Harbourlife.exe`**。保留它旁边的 **`Harbourlife.pck`**和 `licenses` 目录；移动游戏时移动整个文件夹。
 4. 等待加载完成，再从标题页选择 **“开始生活”**、**“自由沙盒”** 或 **“从悉尼机场起飞”**。加载时间取决于设备；本页没有给出 Windows 启动耗时保证。
 
-`Harbourlife.pck` 是游戏资源包，不能单独打开或与其他版本的 EXE 混用。Godot 的 Windows 导出采用可执行文件配合 PCK，发布时也可以选择嵌入 PCK；本项目采用的实际文件布局在最终打包记录中核对。[Godot 官方 Windows 导出说明](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_windows.html)
+`Harbourlife.pck` 是游戏资源包，不能单独打开或与其他版本的 EXE 混用。Godot 的 Windows 导出采用可执行文件配合 PCK，发布时也可以选择嵌入 PCK；本项目采用外部 PCK，必须与 EXE 一起分发。[Godot 官方 Windows 导出说明](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_windows.html)
 
 若 Windows 显示未知发布者或安全提示，先核对下载来源和该版本提供的 SHA-256。数字签名和安全软件提示是独立事项；导出成功不代表文件已签名，也不保证不会出现提示。本页不要求关闭系统防护。
 
@@ -17,7 +17,7 @@
 
 这个包用于 **64 位 Windows 的 Intel / AMD x86_64 处理器**。它不是 Windows ARM 原生包，也不是 32 位 Windows 包。
 
-截至 2026-09-13，Godot stable 官方文档给出的简单原生项目基线包括 **Windows 10、支持 SSE4.2 的 x86_64 CPU**。本项目使用 **Forward+** 渲染；官方列出的相应图形 API 基线是完整 Vulkan 1.0 支持，或 Windows 下 Direct3D 12 的 feature level 12_0。实际使用哪种驱动，以本包最终启动日志为准。[Godot 官方系统要求：导出项目](https://docs.godotengine.org/en/stable/about/system_requirements.html#exported-godot-project)
+截至 2026-09-13，Godot stable 官方文档给出的简单原生项目基线包括 **Windows 10、支持 SSE4.2 的 x86_64 CPU**。本项目使用 **Forward+** 渲染；官方列出的相应图形 API 基线是完整 Vulkan 1.0 支持；本包采用 Vulkan，不提供额外的 Direct3D 12 启动入口。[Godot 官方系统要求：导出项目](https://docs.godotengine.org/en/stable/about/system_requirements.html#exported-godot-project)
 
 上述是引擎运行简单项目的基线，**不是 Harbourlife 已测得的最低配置**。城市规模、分辨率和可用内存都会影响实际表现；尚未通过硬件测试确定本游戏的最低 RAM、显存或推荐显卡，不把引擎示例中的内存与磁盘数字当作本游戏保证。下载和解压所需空间应以该版本 ZIP 及解压后大小为准。
 
@@ -61,26 +61,33 @@
 %APPDATA%\Godot\app_userdata\Harbourlife · 悉尼海港\
 ```
 
-这是 Godot 默认 Windows `user://` 规则与本项目名称组合出的路径；最终 Windows 运行记录还需核实其实际展开位置。[Godot 官方用户数据路径说明](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html#accessing-persistent-user-data-user)
+这是 Godot 默认 Windows `user://` 规则与本项目名称组合出的路径；云端验证使用隔离的临时用户目录，未读取真实玩家存档。[Godot 官方用户数据路径说明](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html#accessing-persistent-user-data-user)
 
 其中 `worlds` 保存世界 JSON 和前次成功保存的 `.bak`，`photos` 保存 P 键截图，`settings.json` 保存设置。正常游玩约每 60 秒自动保存，也可按 F5 手动保存；没有云同步。更新前退出旧版，保留这份用户数据，不要把自己的存档覆盖到下载包中。
 
-如果无法启动或遇到显示问题，请记录 Windows 版本、CPU、显卡和驱动版本、错误原文、下载包名称及 SHA-256。游戏能打开时可补充 F3 诊断信息和截图。缺少 PCK / DLL 时先核对是否完整解压；不要从不明网站单独下载同名 DLL。
+若异常中断后某个世界从列表消失，请先退出游戏并备份整个 `worlds` 文件夹。当前恢复菜单依赖主 `.json`：若主文件缺失但对应 `.json.bak` 仍存在，可复制该备份，将复制件改成原 `.json` 文件名再启动；保留原 `.bak`。这是源码审查发现的恢复入口限制，本次补包没有改动存档逻辑。
+
+如果无法启动或遇到显示问题，请记录 Windows 版本、CPU、显卡和驱动版本、错误原文、下载包名称及 SHA-256。游戏能打开时可补充 F3 诊断信息和截图。缺少 PCK 时先核对是否完整解压。
 
 ## Windows 验证记录
 
-**待最终导出与验证负责人补齐。** 当前本页只核对源码键位、默认路径规则及官方引擎要求，尚未提供 Windows 实机通过结论。已有 [v0.1.8 macOS 验证](TESTING_0.1.8.md)不作为 Windows 通过证据。
+2026-09-13，[Windows 云端构建与验收运行](https://github.com/YvesZhou-hub/harbourlife/actions/runs/34727607243)通过并上传到现有 [v0.1.8-preview.1 发布页](https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.1.8-preview.1)。构建提交为 `57d153c20bc163b63cf41e206a979380bc6975ae`，引擎为 Godot `4.7.2.stable.official.ed1daf0bf`。199 个游戏源文件与原 v0.1.8 发布证据逐一匹配，Windows 构建在临时副本中导入。
 
-| 项目 | 待填写的实际结果 |
+| 项目 | 实际结果 |
 | --- | --- |
-| Windows ZIP、EXE / PCK 文件名与 SHA-256 | 待最终产物 |
-| 完整随包文件列表、解压后大小 | 待核对实际 ZIP |
-| 数字签名状态 | 待核对产物 |
-| Windows 版本、CPU、GPU、驱动、渲染后端 | 待运行记录 |
-| 从解压包启动与进入完整世界 | 待验证 |
-| 中文字体、鼠标捕获、地图与菜单输入 | 待验证 |
-| 载具生成、驾驶、瞄准与炮击 | 待验证 |
-| 专用测试存档的保存、重开和恢复 | 待验证 |
-| 启动日志、截图及失败记录 | 待证据链接 |
+| 下载包 | `Harbourlife-Windows-x86_64.zip`，85,277,110 字节（约 85 MB） |
+| 解压布局 | `Harbourlife/Harbourlife.exe`、`Harbourlife.pck`、`START-HERE.txt`、`LICENSE`、`PLAY_PERMISSION.md` 和 `licenses/`；共 17 个文件，188,961,043 字节（约 189 MB） |
+| 包与源身份 | 19 项包检查通过：ZIP CRC、路径、AMD64 PE32+、外部 PCK 及哈希、原始游戏源文件；完整逐文件清单见报告 |
+| 实际 Windows 启动 | 从最终 ZIP 解压后运行 EXE；7 项运行检查通过，退出码 0，日志无错误/警告 |
+| 世界初始化 | `HARBOR_WORLD_READY buildings=15097 structure_components=21697`；隔离的试玩世界也达到 READY |
+| 测试方式 | GitHub Windows Server 2025（10.0.26100）全新 VM；`--headless --quit-after 15 -- --interactive-qa`，15 指引擎迭代次数 |
+| 图形与操作范围 | 无窗口 CPU/资源加载验证；Windows GPU 画面、中文视觉效果、音效听感、人工鼠标/驾驶/炮击以及保存重开未实测。Mac 的 189 项验证不计入 Windows |
+| 签名 | 本次构建未配置数字签名证书 |
 
-导出、文件检查、兼容层运行和真实 Windows 运行应分别标明。未经实测不声称运行流畅、无安全提示、所有显卡兼容或稳定 60 FPS。
+ZIP SHA-256：
+
+```text
+e693672c39dc3fdbde40622875dcc5680c78c36eb246cd54efa30dba81f8a052
+```
+
+[完整 Windows 验证报告](evidence/v018-windows/windows-validation.json)包含 EXE / PCK 哈希、全部随包文件清单、运行状态和日志哈希；[校验和](evidence/v018-windows/Windows-SHA256SUMS.txt)与发布页附件一致。原 Mac 包、源码下载档案、视频及其校验文件保持原样。原发布标签保留游戏源代码；Windows 构建工具及本文随后补充到仓库 `main`。
