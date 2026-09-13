@@ -1,0 +1,366 @@
+name: Build and check Windows release
+
+# Manual Windows CPU/runtime validation. No GPU or human-input claim.
+# https://docs.github.com/en/actions/reference/runners/github-hosted-runners
+# https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release to receive the verified Windows assets
+        required: true
+        default: v0.1.8-preview.1
+        type: string
+      publish:
+        description: Upload only after validation; never replace a different existing asset
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  build-check-windows:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    env:
+      QA_ROOT: ${{ runner.temp }}/harbourlife-windows-${{ github.run_id }}-${{ github.run_attempt }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      WORKFLOW_SHA: ${{ github.workflow_sha }}
+      PYTHONUTF8: '1'
+    steps:
+      - name: Preserve committed LF bytes on the disposable runner
+        shell: pwsh
+        run: git config --global core.autocrlf false
+
+      - name: Checkout the dispatched commit without persisted credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Download and verify official Godot 4.7.2 tools
+        shell: python
+        run: |
+          import hashlib, json, os, shutil, urllib.request, zipfile
+          from pathlib import Path, PurePosixPath
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          evidence.mkdir(parents=True, exist_ok=False)
+          tools = base / 'tools'
+          tools.mkdir()
+          installed = Path(os.environ['APPDATA']) / 'Godot/export_templates/4.7.2.stable'
+          installed.mkdir(parents=True, exist_ok=True)
+          sources = {
+              'Godot_v4.7.2-stable_win64.exe.zip': '731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953',
+              'Godot_v4.7.2-stable_export_templates.tpz': 'f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011',
+          }
+          records = {}
+          for name, expected in sources.items():
+              url = 'https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/' + name
+              target = tools / name
+              request = urllib.request.Request(url, headers={'User-Agent': 'Harbourlife-Windows-CI'})
+              with urllib.request.urlopen(request, timeout=180) as response, target.open('wb') as output:
+                  shutil.copyfileobj(response, output)
+              with target.open('rb') as stream:
+                  actual = hashlib.file_digest(stream, 'sha256').hexdigest()
+              records[name] = {'url': url, 'sha256': actual, 'expected_sha256': expected, 'bytes': target.stat().st_size}
+              (evidence / 'official-tools.json').write_text(json.dumps(records, indent=2) + '\n', encoding='utf-8')
+              if actual != expected:
+                  raise RuntimeError('Official download SHA256 mismatch: ' + name)
+              with zipfile.ZipFile(target) as archive:
+                  if archive.testzip() is not None:
+                      raise RuntimeError('Official archive CRC mismatch: ' + name)
+                  if name.endswith('.tpz'):
+                      relevant = [n for n in archive.namelist()
+                                  if 'windows' in n.lower() or 'd3d12' in n.lower() or n.lower().endswith('.dll')]
+                      records[name]['windows_and_auxiliary_entries'] = relevant
+                      records[name]['uncompressed_bytes'] = sum(e.file_size for e in archive.infolist())
+                      print('OFFICIAL_WINDOWS_TEMPLATE_ENTRIES', json.dumps(relevant))
+                      # Install the complete official templates tree exactly once, including
+                      # auxiliary DLL subdirectories needed by the D3D12 fallback export.
+                      for entry in archive.infolist():
+                          parts = PurePosixPath(entry.filename).parts
+                          if not parts or parts[0] != 'templates' or '..' in parts or '\\' in entry.filename:
+                              raise RuntimeError('Unexpected official template member: ' + entry.filename)
+                          destination = installed.joinpath(*parts[1:])
+                          if entry.is_dir():
+                              destination.mkdir(parents=True, exist_ok=True)
+                          else:
+                              destination.parent.mkdir(parents=True, exist_ok=True)
+                              with archive.open(entry) as src, destination.open('wb') as dst:
+                                  shutil.copyfileobj(src, dst)
+                  else:
+                      for member in archive.namelist():
+                          if PurePosixPath(member).name != member or not member.lower().endswith('.exe'):
+                              raise RuntimeError('Unexpected official editor member: ' + member)
+                          archive.extract(member, tools)
+              (evidence / 'official-tools.json').write_text(json.dumps(records, indent=2) + '\n', encoding='utf-8')
+              target.unlink()  # Only our verified temporary download; avoid duplicate multi-GB storage.
+          if (installed / 'version.txt').read_text().strip() != '4.7.2.stable':
+              raise RuntimeError('Wrong installed export template version')
+          with Path(os.environ['GITHUB_ENV']).open('a', encoding='utf-8') as env:
+              env.write('GODOT_ENGINE=' + str(tools / 'Godot_v4.7.2-stable_win64_console.exe') + '\n')
+              env.write('GODOT_TEMPLATES=' + str(installed) + '\n')
+
+      - name: Build the unchanged game sources for Windows
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $log = Join-Path $env:QA_ROOT 'evidence/build.log'
+          python tools/build_windows.py --engine "$env:GODOT_ENGINE" --templates "$env:GODOT_TEMPLATES" `
+            --output dist/windows --report reports/windows-build.json 2>&1 | Tee-Object -FilePath $log
+          if ($LASTEXITCODE -ne 0) { throw 'Windows export failed.' }
+
+      - name: Verify build identity and extract the exact ZIP for execution
+        shell: python
+        run: |
+          import hashlib, json, os, re, stat, struct, subprocess, sys, zipfile
+          from pathlib import Path, PurePosixPath
+          root = Path.cwd()
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          def digest(path):
+              with path.open('rb') as stream:
+                  return hashlib.file_digest(stream, 'sha256').hexdigest()
+          report = {'passed': False, 'checks': {}, 'release_tag': os.environ['RELEASE_TAG'],
+                    'asset_name': 'Harbourlife-Windows-x86_64.zip', 'repository': os.environ['GITHUB_REPOSITORY'],
+                    'workflow_sha': os.environ['WORKFLOW_SHA'], 'run_id': os.environ['GITHUB_RUN_ID'],
+                    'run_attempt': os.environ['GITHUB_RUN_ATTEMPT']}
+          def check(name, condition):
+              report['checks'][name] = bool(condition)
+              if not condition:
+                  raise RuntimeError(name)
+          try:
+              check('valid_tag', bool(re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?', report['release_tag'])))
+              manifest_path = root / 'reports/windows-build.json'
+              manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+              check('release_tag_matches_game', manifest['game_release'] == report['release_tag'])
+              report['build_manifest_sha256'] = digest(manifest_path)
+              report['build'] = manifest
+              commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+              check('build_source_commit', manifest['source_commit'] == commit)
+              check('dispatched_commit_matches', commit == os.environ['GITHUB_SHA'])
+              current_sources = {str(p.relative_to(root)).replace('\\', '/'): digest(p) for p in sorted((root / 'game').rglob('*'))
+                                 if p.is_file() and '.godot' not in p.parts}
+              check('game_sources_match_build', current_sources == manifest['source_sha256'])
+              baseline_path = root / 'docs/evidence/v018-app/build.json'
+              baseline = json.loads(baseline_path.read_text(encoding='utf-8'))
+              report['v018_source_baseline_sha256'] = digest(baseline_path)
+              check('all_199_game_files_match_published_v018', len(current_sources) == 199
+                    and current_sources == baseline['source_sha256'])
+              archive = root / 'dist/windows' / report['asset_name']
+              report['archive_sha256'] = digest(archive)
+              check('zip_matches_build_hash', report['archive_sha256'] == manifest['archive_sha256'])
+              extracted = base / 'package'
+              extracted.mkdir()
+              with zipfile.ZipFile(archive) as package:
+                  entries = package.infolist()
+                  names = [entry.filename for entry in entries]
+                  check('unique_zip_paths', len(names) == len(set(n.casefold() for n in names)))
+                  check('bounded_uncompressed_size', sum(e.file_size for e in entries) < 2 * 1024**3)
+                  for entry in entries:
+                      path = PurePosixPath(entry.filename)
+                      check('safe_zip_paths', not path.is_absolute() and '\\' not in entry.filename
+                            and bool(path.parts) and path.parts[0] == 'Harbourlife'
+                            and all(part not in ('..', '.') and ':' not in part and not part.endswith((' ', '.')) for part in path.parts)
+                            and not stat.S_ISLNK(entry.external_attr >> 16))
+                  check('zip_crc', package.testzip() is None)
+                  package.extractall(extracted)
+              exe = extracted / 'Harbourlife/Harbourlife.exe'
+              pck = extracted / 'Harbourlife/Harbourlife.pck'
+              check('expected_exe_and_external_pck', exe.is_file() and pck.is_file())
+              check('single_external_pck', list(extracted.rglob('*.pck')) == [pck])
+              data = exe.read_bytes()
+              check('dos_header', len(data) >= 64 and data[:2] == b'MZ')
+              offset = struct.unpack_from('<I', data, 0x3c)[0]
+              check('pe_header_bounds', offset + 26 <= len(data))
+              check('pe_signature', data[offset:offset + 4] == b'PE\0\0')
+              machine = struct.unpack_from('<H', data, offset + 4)[0]
+              magic = struct.unpack_from('<H', data, offset + 24)[0]
+              check('pe_amd64_pe32plus', machine == 0x8664 and magic == 0x20b)
+              report['pe_machine'] = hex(machine)
+              report['app_identity'] = {'executable_sha256': digest(exe), 'pck_sha256': digest(pck)}
+              check('extracted_exe_and_pck_match_build', report['app_identity'] == manifest['app_identity'])
+              with pck.open('rb') as stream:
+                  header = stream.read(20)
+              check('godot_pck_header', len(header) == 20 and header[:4] == b'GDPC')
+              report['pck_header'] = dict(zip(('format', 'engine_major', 'engine_minor', 'engine_patch'), struct.unpack('<4I', header[4:])))
+              report['passed'] = True
+          except Exception as exc:
+              report['error'] = f'{type(exc).__name__}: {exc}'
+          finally:
+              (evidence / 'package.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+          if not report['passed']:
+              sys.exit(report.get('error', 'Package validation failed'))
+
+      - name: Run the actual exported EXE and wait for termination
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $evidence = Join-Path $env:QA_ROOT 'evidence'
+          $package = Join-Path $env:QA_ROOT 'package/Harbourlife'
+          $exe = Join-Path $package 'Harbourlife.exe'
+          $runtime = Join-Path $evidence 'engine.log'
+          $stdout = Join-Path $evidence 'stdout.log'
+          $stderr = Join-Path $evidence 'stderr.log'
+          # These process-local directories are fresh runner scratch, never user data.
+          $env:APPDATA = Join-Path $env:QA_ROOT 'isolated-user/roaming'
+          $env:LOCALAPPDATA = Join-Path $env:QA_ROOT 'isolated-user/local'
+          New-Item -ItemType Directory -Force $env:APPDATA, $env:LOCALAPPDATA | Out-Null
+          $result = @{ passed = $false; timed_out = $false; exit_code = $null; iterations = 15;
+            scope = 'Headless CPU/runtime boot of the release EXE; no GPU, audio listening or manual input test.';
+            started_utc = [DateTime]::UtcNow.ToString('o') }
+          try {
+            if (Test-Path $runtime) { throw 'Engine log must not exist before this run.' }
+            # Start-Process joins ArgumentList; explicitly quote the possibly spaced log path.
+            $arguments = @('--headless', '--quit-after', '15', '--log-file', ('"' + $runtime + '"'), '--', '--interactive-qa')
+            $process = Start-Process -FilePath $exe -ArgumentList $arguments -WorkingDirectory $package -PassThru `
+              -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+            if (-not $process.WaitForExit(300000)) {
+              $result.timed_out = $true
+              Stop-Process -Id $process.Id -Force
+              $process.WaitForExit()
+              throw 'Exported EXE exceeded the 300-second wall-clock limit.'
+            }
+            # Wait again to ensure redirected output handles have fully drained.
+            $process.WaitForExit()
+            $result.exit_code = $process.ExitCode
+            $result.passed = ($process.ExitCode -eq 0)
+          } catch {
+            $result.error = $_.Exception.Message
+          } finally {
+            $result.finished_utc = [DateTime]::UtcNow.ToString('o')
+            $result | ConvertTo-Json -Depth 5 | Set-Content -Encoding utf8 (Join-Path $evidence 'process.json')
+          }
+          if (-not $result.passed) { throw 'Exported EXE did not exit successfully; see process.json.' }
+
+      - name: Require complete world readiness and clean fresh logs
+        if: ${{ always() }}
+        shell: python
+        run: |
+          import hashlib, json, os, re, sys
+          from pathlib import Path
+
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          evidence.mkdir(parents=True, exist_ok=True)
+          def read_json(name):
+              path = evidence / name
+              return json.loads(path.read_text(encoding='utf-8-sig')) if path.is_file() else {}
+          def digest(path):
+              with path.open('rb') as stream:
+                  return hashlib.file_digest(stream, 'sha256').hexdigest()
+          package, process = read_json('package.json'), read_json('process.json')
+          logs = {name: (evidence / name).read_text(encoding='utf-8-sig', errors='replace')
+                  if (evidence / name).is_file() else '' for name in ('stdout.log', 'stderr.log', 'engine.log')}
+          combined = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs.values()))
+          runtime_errors = [line for line in combined.splitlines() if re.search(r'(?:SCRIPT ERROR|SHADER ERROR|FATAL ERROR|ERROR|WARNING):', line)]
+          world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', combined, re.M)
+          interactive = re.findall(r'^INTERACTIVE_QA_READY world=qa_interactive_\d+ components=(\d+)\s*$', combined, re.M)
+          checks = {
+              'package_checks_passed': package.get('passed') is True,
+              'process_exit_zero': process.get('passed') is True and process.get('exit_code') == 0 and not process.get('timed_out', True),
+              'fresh_engine_log_has_output': bool(logs['engine.log'].strip()),
+              'no_runtime_errors_or_warnings': not runtime_errors,
+              'real_world_populated': bool(world) and all(int(a) > 0 and int(b) > 0 for a, b in world),
+              'isolated_gameplay_ready': bool(interactive) and all(int(count) > 0 for count in interactive),
+          }
+          current = {}
+          for field, name in (('executable_sha256', 'Harbourlife.exe'), ('pck_sha256', 'Harbourlife.pck')):
+              path = base / 'package/Harbourlife' / name
+              if path.is_file():
+                  current[field] = digest(path)
+          checks['exe_pck_unchanged_after_run'] = bool(current) and current == package.get('app_identity')
+          report = {'passed': all(checks.values()), 'checks': checks, 'check_count': len(checks),
+                    'package': package, 'process': process, 'app_identity_after': current,
+                    'runtime_errors': runtime_errors, 'world_ready_counts': world,
+                    'interactive_ready_components': interactive,
+                    'log_sha256': {name: digest(evidence / name) for name in logs if (evidence / name).is_file()},
+                    'scope': 'Windows x86_64 release ZIP integrity, PE architecture, exact external PCK hash/header and real production-world headless initialization. PCK resources exercised by startup only; not an exhaustive resource enumeration. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
+                    'save_isolation': 'Fresh GitHub-hosted VM; process-local APPDATA/LOCALAPPDATA under runner scratch; built-in --interactive-qa skips slot/settings reads and creates an unsaved in-memory world. No existing saves copied, opened or deleted.'}
+          (evidence / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+          with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8') as summary:
+              summary.write('## Windows package headless check\n\n')
+              summary.write(('PASS' if report['passed'] else 'FAIL') + ': ' + str(sum(checks.values())) + '/' + str(len(checks)) + ' runtime gates.\n\n')
+              summary.write('ZIP SHA256: `' + package.get('archive_sha256', 'unavailable') + '`\n\n')
+              summary.write(report['scope'] + '\n')
+          print('WINDOWS_PACKAGE_CHECK', json.dumps({'passed': report['passed'], 'checks': checks}))
+          if not report['passed']:
+              sys.exit(1)
+
+      - name: Keep the package and verification evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: windows-package-check-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ env.QA_ROOT }}/evidence/
+            dist/windows/Harbourlife-Windows-x86_64.zip
+            reports/windows-build.json
+            reports/windows-export-logs/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish only verified files to the existing release
+        if: ${{ success() && inputs.publish }}
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          import hashlib, json, os, re, subprocess, tempfile
+          from pathlib import Path
+          root = Path.cwd()
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          report_path = evidence / 'report.json'
+          report = json.loads(report_path.read_text(encoding='utf-8'))
+          if not report['passed']:
+              raise RuntimeError('Refusing to publish a failed Windows check')
+          package = report['package']
+          def digest(path):
+              with path.open('rb') as stream:
+                  return hashlib.file_digest(stream, 'sha256').hexdigest()
+          output = root / 'dist/windows'
+          archive = output / 'Harbourlife-Windows-x86_64.zip'
+          if digest(archive) != package['archive_sha256']:
+              raise RuntimeError('ZIP changed after runtime validation')
+          # Publish a report with portable paths; keep original runner logs in the Actions artifact.
+          def portable(value):
+              if isinstance(value, str):
+                  for old, replacement in ((str(base), '${QA_TEMP}'), (str(root), '${PROJECT}')):
+                      value = value.replace(old, replacement).replace(old.replace('\\', '/'), replacement)
+                  return value
+              if isinstance(value, dict):
+                  return {portable(k): portable(v) for k, v in value.items()}
+              if isinstance(value, list):
+                  return [portable(v) for v in value]
+              return value
+          validation = output / 'windows-validation.json'
+          validation.write_text(json.dumps(portable(report), indent=2) + '\n', encoding='utf-8')
+          sums = output / 'Windows-SHA256SUMS.txt'
+          sums.write_text(''.join(digest(p) + '  ' + p.name + '\n' for p in (archive, validation)), encoding='utf-8')
+          files = [archive, validation, sums]
+          tag, repo = os.environ['RELEASE_TAG'], os.environ['GITHUB_REPOSITORY']
+          release = json.loads(subprocess.check_output(['gh', 'release', 'view', tag, '--repo', repo,
+                                                      '--json', 'tagName,isDraft,assets'], text=True))
+          if release['tagName'] != tag or release['isDraft']:
+              raise RuntimeError('Target must be the specified existing published release')
+          existing = {asset['name'] for asset in release['assets']}
+          missing = []
+          # Preflight every same-name asset before uploading anything. Never use --clobber.
+          for path in files:
+              if path.name not in existing:
+                  missing.append(path)
+                  continue
+              with tempfile.TemporaryDirectory(prefix='existing-release-', dir=base) as tmp:
+                  subprocess.run(['gh', 'release', 'download', tag, '--repo', repo, '--pattern', path.name,
+                                  '--dir', tmp], check=True)
+                  if digest(Path(tmp) / path.name) != digest(path):
+                      raise RuntimeError('Existing release asset differs; refusing replacement: ' + path.name)
+          if missing:
+              subprocess.run(['gh', 'release', 'upload', tag, '--repo', repo, *map(str, missing)], check=True)
+          print('WINDOWS_RELEASE_ASSETS_VERIFIED', tag, ', '.join(p.name for p in files))

@@ -2,7 +2,7 @@
 from pathlib import Path
 
 ROOT_FILES = ('.gitignore', '.gitattributes', 'README.md', 'LICENSE', 'PLAY_PERMISSION.md', '启动 Harbourlife.command')
-TOOL_FILES = ('build.py', 'build.sh', 'package_source.py', 'release_files.py', 'encode_video.py',
+TOOL_FILES = ('build.py', 'build_windows.py', 'build.sh', 'package_source.py', 'release_files.py', 'encode_video.py',
               'capture_trailer.py', 'edit_promo.py', 'promo_score.py', 'promo_audio_export.gd',
               'test_save.gd', 'test_integration.gd', 'test_vehicles.gd', 'import_city.py', 'city_roofs.py', 'city_fidelity.py', 'import_elevation.py', 'calibrate_summer.py', 'verify_native.py', 'verify_archive.py')
 SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geography.json',
@@ -28,6 +28,7 @@ SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geogr
 
 def public_files(root: Path):
     files = [root / name for name in ROOT_FILES]
+    files += [root / '.github/workflows/windows-package-check.yml']
     files += [root / 'tools' / name for name in TOOL_FILES]
     files += [root / 'source' / name for name in SOURCE_FILES]
     files += [p for p in (root/'source/map-data').glob('*.json') if p.is_file() and not p.is_symlink()]
