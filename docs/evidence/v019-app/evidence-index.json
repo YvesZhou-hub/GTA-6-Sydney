@@ -1,0 +1,229 @@
+{
+  "release": "v0.1.9-preview.1",
+  "app_identity": {
+    "executable_sha256": "3d05c1b919acd41b8a937dd2b7395838be6b9c0762d8af7a997e426b59ae9086",
+    "pck_sha256": "53844990698de431b561b098b6c0c68e2316c4b5160e3225f63564553a74e3b7"
+  },
+  "archive_sha256": "5256d85d716f22fa8812d0c66ac1e342255e7097e305052677ea46f67feae638",
+  "native_modes": {
+    "driving": {
+      "passed": true,
+      "passed_checks": 39,
+      "checks": 39,
+      "report": "docs/evidence/v019-app/driving-report.json",
+      "launch": "docs/evidence/v019-app/driving-launch.json",
+      "screenshots": [
+        "docs/screenshots/v019/car-emergency-stop.png",
+        "docs/screenshots/v019/motorcycle-controlled-drift.png",
+        "docs/screenshots/v019/car-controlled-drift.png",
+        "docs/screenshots/v019/motorcycle-triple-speed.png",
+        "docs/screenshots/v019/car-triple-speed.png",
+        "docs/screenshots/v019/motorcycle-emergency-stop.png"
+      ]
+    },
+    "experience": {
+      "passed": true,
+      "passed_checks": 82,
+      "checks": 82,
+      "report": "docs/evidence/v019-app/experience-report.json",
+      "launch": "docs/evidence/v019-app/experience-launch.json",
+      "screenshots": [
+        "docs/screenshots/v019/experience-01-map-pin.png",
+        "docs/screenshots/v019/experience-04-live-navigation.png",
+        "docs/screenshots/v019/experience-02-experiences.png",
+        "docs/screenshots/v019/experience-03-experience-reward.png"
+      ]
+    },
+    "navigation-input": {
+      "passed": true,
+      "passed_checks": 35,
+      "checks": 35,
+      "report": "docs/evidence/v019-app/navigation-input-report.json",
+      "launch": "docs/evidence/v019-app/navigation-input-launch.json",
+      "screenshots": [
+        "docs/screenshots/v019/navigation-input-01-map-pointer-pin.png",
+        "docs/screenshots/v019/navigation-input-03-map-search-manly.png",
+        "docs/screenshots/v019/navigation-input-02-map-top-close.png"
+      ]
+    }
+  },
+  "native_check_count": 156,
+  "native_passed_count": 156,
+  "native_screenshot_count": 13,
+  "source_modes": {
+    "vehicle-durability": {
+      "passed": true,
+      "passed_checks": 83,
+      "checks": 83,
+      "report": "docs/evidence/v019-app/vehicle-durability.json",
+      "scope": "Deterministic arcade durability and contact episode policy; native physical contact test is separate"
+    },
+    "hoverboard-immunity": {
+      "passed": true,
+      "passed_checks": 9,
+      "checks": 9,
+      "report": "docs/evidence/v019-app/hoverboard-immunity.json",
+      "scope": "Local hoverboard state and immunity regression"
+    },
+    "vehicle-contact": {
+      "passed": true,
+      "passed_checks": 5,
+      "checks": 5,
+      "report": "docs/evidence/v019-app/vehicle-contact.json",
+      "scope": "Native production vehicle contacts on controlled physical surfaces; no user saves"
+    },
+    "vehicle-physics": {
+      "passed": true,
+      "passed_checks": 23,
+      "checks": 23,
+      "report": "docs/evidence/v019-app/vehicle-physics.json",
+      "scope": "Production vehicle physics on deterministic test surfaces; not a city visual or airport geography test"
+    },
+    "vehicle-boost": {
+      "passed": true,
+      "passed_checks": 100,
+      "checks": 100,
+      "report": "docs/evidence/v019-app/vehicle-boost.json",
+      "scope": "Production HarborVehicle and Jolt on controlled open-road, water and airborne fixtures. Initial transform and base cruise velocity establish each fixture; phases use real Input actions and native forces only. Not native GPU or public-road gameplay verification."
+    },
+    "specialty-boost": {
+      "passed": true,
+      "passed_checks": 13,
+      "checks": 13,
+      "report": "docs/evidence/v019-app/specialty-boost.json",
+      "scope": "Isolated production RigidBody3D and Input actions; no velocity or transform writes after each fixture starts. GPU appearance and whole-city integration are separate."
+    }
+  },
+  "source_check_count": 233,
+  "source_counts_separate_from_native": true,
+  "retained_initial_navigation_run": {
+    "checks": 35,
+    "passed_checks": 33,
+    "passed": false,
+    "same_app_identity": true,
+    "report": "docs/evidence/v019-app/navigation-initial-report.json",
+    "launch": "docs/evidence/v019-app/navigation-initial-launch.json",
+    "failed_checks": [
+      "new world captures pointer for camera",
+      "normal gameplay mouse still turns camera"
+    ],
+    "interpretation": "Two startup pointer checks failed; unchanged build reran 35/35. Focus sensitivity is suspected, not established by the reports because actual window focus was not recorded."
+  },
+  "windows_v019_result_included": false,
+  "files": {
+    "docs/evidence/v019-app/build.json": {
+      "sha256": "1e70e30b01d813541127503e5ce81d89b1c527d791554aa39fd7897de466c8cd",
+      "bytes": 23261
+    },
+    "docs/evidence/v019-app/driving-launch.json": {
+      "sha256": "15880c7824b335790b2c246be2975d3f96034632cf2b1859b46a8e1bfc0d8256",
+      "bytes": 799
+    },
+    "docs/evidence/v019-app/driving-report.json": {
+      "sha256": "1f4a7515136ed4ddbe27cf85088fb4ad44b7db7e8b13416ab935db51e1ffb4cd",
+      "bytes": 13206
+    },
+    "docs/evidence/v019-app/experience-launch.json": {
+      "sha256": "e6f6effff29cd60ee3afa28c2825431a96e46a48bba4d48c4a60a50cd81be344",
+      "bytes": 685
+    },
+    "docs/evidence/v019-app/experience-report.json": {
+      "sha256": "66ff68d2426f218dc2ea67de769d74d08e6254cc45316450797492f508596754",
+      "bytes": 10083
+    },
+    "docs/evidence/v019-app/hoverboard-immunity.json": {
+      "sha256": "0b1b4d3da24ff61b434eea3a780cc025d332579ce20da3bd7985e9dab6518581",
+      "bytes": 2230
+    },
+    "docs/evidence/v019-app/navigation-initial-launch.json": {
+      "sha256": "5bf6854bcd42c009906a460c4654734053bbfeeae38c99d7f8fcacf78a853d47",
+      "bytes": 676
+    },
+    "docs/evidence/v019-app/navigation-initial-report.json": {
+      "sha256": "c8da563fec61edecd1e69d376703e0da93f60f19fd24807dcedc78e9f9696f98",
+      "bytes": 4487
+    },
+    "docs/evidence/v019-app/navigation-input-launch.json": {
+      "sha256": "177b36250e8be65ea655c5fac0a27d64936dab63bdcc74d54ae7a77e3f5e3b06",
+      "bytes": 674
+    },
+    "docs/evidence/v019-app/navigation-input-report.json": {
+      "sha256": "b62e516c67f1025fc71a542110852eac177344719582dababbab564a16978761",
+      "bytes": 4484
+    },
+    "docs/evidence/v019-app/specialty-boost.json": {
+      "sha256": "ab825bc5f187570c308ef768b00a9e8b9a0cf204662764f8255e0fdaa75220d6",
+      "bytes": 4033
+    },
+    "docs/evidence/v019-app/vehicle-boost.json": {
+      "sha256": "6cc6e2ed7441ae9ff9d93c04fa75c632b3b67f2f1a96aa5abd09e37d94aa8dd1",
+      "bytes": 48756
+    },
+    "docs/evidence/v019-app/vehicle-contact.json": {
+      "sha256": "daf8850af49b2b3a3bf169dcd5da3b08191babfee6141f9791688c075a28a7f7",
+      "bytes": 4158
+    },
+    "docs/evidence/v019-app/vehicle-durability.json": {
+      "sha256": "60610e49acc3d6c7f56185c5e7a359fa1df9afaa1b85bcdb9448d290478d6a38",
+      "bytes": 10170
+    },
+    "docs/evidence/v019-app/vehicle-physics.json": {
+      "sha256": "8b83cbecf49a5e014b0a0608593e8d7fb0e7fcb3ea478dda07b60fce033acd83",
+      "bytes": 11948
+    },
+    "docs/screenshots/v019/car-controlled-drift.png": {
+      "sha256": "2fc2da1f1b9da66a36d723f119496ba8195bc57713d253c5fa06f2630c004575",
+      "bytes": 246094
+    },
+    "docs/screenshots/v019/car-emergency-stop.png": {
+      "sha256": "acb3fc32a5e9d6c0eb8fc99590bb3927c844943c4f2d1da566de323268959195",
+      "bytes": 225117
+    },
+    "docs/screenshots/v019/car-triple-speed.png": {
+      "sha256": "47f27e078049437a83ad6fb8fd5ac626c9989d5780294f6055c61aacfd80eb75",
+      "bytes": 218258
+    },
+    "docs/screenshots/v019/experience-01-map-pin.png": {
+      "sha256": "d0144b6954e4d5ca7b7b9a1c258d881c814e74a13b05834a8b07099d0c5700e5",
+      "bytes": 409864
+    },
+    "docs/screenshots/v019/experience-02-experiences.png": {
+      "sha256": "f833033f8ba4eb2d71984ea6f5bde5e98f3ab013d3b623b5da18135251fed916",
+      "bytes": 479346
+    },
+    "docs/screenshots/v019/experience-03-experience-reward.png": {
+      "sha256": "8d519b880919c4bbaa4ddc50a46b8136ac85b68afffc3b1caeca56d55841bc9a",
+      "bytes": 642928
+    },
+    "docs/screenshots/v019/experience-04-live-navigation.png": {
+      "sha256": "d66292a19466ab6ba16662e4869c4ab520d0359b3416ae7edb3e275ca9ba2240",
+      "bytes": 529617
+    },
+    "docs/screenshots/v019/motorcycle-controlled-drift.png": {
+      "sha256": "1add9a9235bb2bd6e6431d36d2e7217c8053053d4711f038cb0a77b5527bdfa5",
+      "bytes": 266375
+    },
+    "docs/screenshots/v019/motorcycle-emergency-stop.png": {
+      "sha256": "86e148fe94067fff78f4266937ee3834ccb34864efc0f47027a6cb3e96437c30",
+      "bytes": 205824
+    },
+    "docs/screenshots/v019/motorcycle-triple-speed.png": {
+      "sha256": "bbd926d4b2d4395b0c864b7004c2be2a369511bc31cf48224394e5572c6b320b",
+      "bytes": 200946
+    },
+    "docs/screenshots/v019/navigation-input-01-map-pointer-pin.png": {
+      "sha256": "793ed8fc325c17a448ccd5a7f528a5756a29d5d38160cfdf918bcfada6e3db63",
+      "bytes": 374356
+    },
+    "docs/screenshots/v019/navigation-input-02-map-top-close.png": {
+      "sha256": "3f81a38e9600351d54b7f8b44cf0f75f565367576d8a19bb7cdddbfe55dc9ce7",
+      "bytes": 204854
+    },
+    "docs/screenshots/v019/navigation-input-03-map-search-manly.png": {
+      "sha256": "f1dd03cf765e6273a2c775f3628dc82e27ddf5625d9209b4503d9b48b8ad20fe",
+      "bytes": 508985
+    }
+  },
+  "path_base": "repository root",
+  "scope": "Three final exported macOS Apple Silicon App suites. Source fixtures are counted separately. Screenshots copied byte-for-byte. Launch records bind actual executable and PCK; empty per-script hashes in the exported driving report are not source-identity evidence."
+}

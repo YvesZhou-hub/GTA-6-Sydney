@@ -1,0 +1,139 @@
+{
+  "checks": [
+    {
+      "metrics": {
+        "height": 4000.9599609375,
+        "kmh": 321.72799987793,
+        "target": 330.0
+      },
+      "name": "tank reaches boosted target",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "heading_change": 0.145062312483788,
+        "height": 4000.9599609375,
+        "kmh": 321.611022949219,
+        "up_dot": 1.0
+      },
+      "name": "tank retains controlled boosted steering",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after_five_seconds": 29.8912601470947,
+        "after_one_tick": 88.7679290771484,
+        "before_mps": 89.3363952636719
+      },
+      "name": "tank releases boost without velocity snap",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "boost": false,
+        "kmh": 2.68408751225024e-08
+      },
+      "name": "tank brake overrides held boost",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "height": 4000.99975585938,
+        "kmh": 599.999468994141,
+        "target": 600.0
+      },
+      "name": "hoverboard reaches boosted target",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "heading_change": 0.209019810472152,
+        "height": 4000.99975585938,
+        "kmh": 599.578747558594,
+        "up_dot": 0.998433768749237
+      },
+      "name": "hoverboard retains controlled boosted steering",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after_five_seconds": 66.2975616455078,
+        "after_one_tick": 166.216384887695,
+        "before_mps": 166.549652099609
+      },
+      "name": "hoverboard releases boost without velocity snap",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "boost": false,
+        "kmh": 0.000748776050750166
+      },
+      "name": "hoverboard brake overrides held boost",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "height": 5000.0,
+        "kmh": 5999.994140625,
+        "target": 6000.0
+      },
+      "name": "fighter reaches boosted target",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "heading_change": 0.14351099729538,
+        "height": 5223.12841796875,
+        "kmh": 5991.11015625,
+        "up_dot": 0.960354089736938
+      },
+      "name": "fighter retains controlled boosted steering",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "after_five_seconds": 903.964782714844,
+        "after_one_tick": 1661.55603027344,
+        "before_mps": 1664.197265625
+      },
+      "name": "fighter releases boost without velocity snap",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "boost": false,
+        "kmh": 252.000357055664
+      },
+      "name": "fighter brake overrides held boost",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "entry_kmh": 599.999468994141,
+        "health": 100.0,
+        "kmh": 0.000748776050750166,
+        "minimum_distance_from_wall_center": 4.67342606541251,
+        "predicted_stop_distance": 183.3930305576,
+        "travel": 203.719604492188
+      },
+      "name": "boosted hoverboard stops before tall wall",
+      "passed": true
+    }
+  ],
+  "count": 13,
+  "engine": "4.7.2-stable (official)",
+  "failures": 0,
+  "hashes": {
+    "res://../source/specialty_boost_test.gd": "15940cbc3388076d49c577acc819652bf53d211a05f2e191fc804c328bf47ee0",
+    "res://project.godot": "40478b7f862d826f416f8389c5139dc42c586d83fc6518b71d902b5bbba3b567",
+    "res://scripts/fighter_motion.gd": "565ce2f66ad755f60f7b8004390255d11cf4bffd1b22fc9efa1912d28cf2498a",
+    "res://scripts/harbor_vehicle.gd": "04a348e74675be8835dd83d97dc24cde99ecd977bca54c2b0f14784dbbeb5bd5",
+    "res://scripts/hoverboard_motion.gd": "5a434d68a9b44838893cc8e4909a86c32078fbaf16cd1ee93d27e876e793c09a",
+    "res://scripts/tank_motion.gd": "90b79b070578b063648fdf72a9edb930bdae255f3a5bfcf7ae7a05f4806fc8bb"
+  },
+  "native": false,
+  "passed": true,
+  "physics_hz": 60,
+  "scope": "Isolated production RigidBody3D and Input actions; no velocity or transform writes after each fixture starts. GPU appearance and whole-city integration are separate."
+}

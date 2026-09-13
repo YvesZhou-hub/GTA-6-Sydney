@@ -18,7 +18,7 @@ SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geogr
                 'experience_flow_test.gd', 'landmark_alignment_test.gd', 'life_experience_test.gd',
                 'navigation_map_test.gd', 'vehicle_model_test.gd', 'vehicle_model_migration_test.gd',
                 'boat_model_test.gd', 'interactive_qa.gd', 'hoverboard_test.gd',
-                'air_vehicle_flight_test.gd', 'vehicle_speed_test.gd', 'air_vehicle_model_test.gd',
+                'air_vehicle_flight_test.gd', 'vehicle_speed_test.gd', 'road_handling_test.gd', 'vehicle_durability_test.gd', 'hoverboard_immunity_test.gd', 'vehicle_boost_test.gd', 'specialty_boost_test.gd', 'air_vehicle_model_test.gd',
                 'precinct_detail_test.gd', 'sydney_tower_landmark_test.gd', 'manowar_detail_test.gd',
                 'city_parent_base_test.gd', 'city_parent_policy_test.py', 'helipad_clearance_test.gd',
                 'tank_motion_test.gd', 'fighter_flight_test.gd', 'combat_vehicle_state_test.gd',

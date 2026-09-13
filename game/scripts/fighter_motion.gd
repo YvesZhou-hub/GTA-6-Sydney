@@ -15,31 +15,37 @@ static func setup(body: RigidBody3D) -> void:
 	body.physics_material_override.friction = 0.025
 	body.physics_material_override.bounce = 0.0
 	body.throttle = LAUNCH_SPEED / TOP_SPEED
-	body.controls_hint = "W/S throttle • A/D turn • R/F pitch • Space airbrake • 2000 km/h"
+	body.controls_hint = "W/S throttle • A/D turn • R/F pitch • Space airbrake • Shift 3x boost • 2000 / 6000 km/h"
 
 static func tick(body: RigidBody3D, delta: float, f: Vector3, r: Vector3, u: Vector3, power: float, steer: float, pitch: float, brake: bool) -> void:
 	if not body.occupied: return
 	body.stalled = false
 	body.throttle = clampf(body.throttle+power*delta*0.22,0.0,1.0)
-	var target_speed: float = clampf(body.throttle*TOP_SPEED,MINIMUM_FLIGHT_SPEED,TOP_SPEED)
+	var multiplier: float = 1.0 if brake else body.speed_multiplier()
+	var top_speed: float = TOP_SPEED*multiplier
+	var target_speed: float = clampf(body.throttle*top_speed,MINIMUM_FLIGHT_SPEED,top_speed)
 	if brake: target_speed = MINIMUM_FLIGHT_SPEED
 	var desired: Vector3 = f*target_speed
 	var difference: Vector3 = desired-body.linear_velocity
 	# A force-based velocity servo gives this fictional aircraft forgiving lift
 	# and coordinated turns. No transform/velocity writes or collision bypass.
 	var longitudinal: float = difference.dot(f)
-	var acceleration: Vector3 = f*clampf(longitudinal*2.2,-150.0,65.0)
+	var acceleration: Vector3 = f*clampf(longitudinal*2.2,-150.0,65.0*multiplier)
 	acceleration += (difference-f*longitudinal).limit_length(90.0)*2.6
 	acceleration += Vector3.UP*float(ProjectSettings.get_setting("physics/3d/default_gravity",9.8))
 	body.apply_central_force(acceleration*body.mass)
 	var speed_ratio: float = clampf(body.linear_velocity.length()/TOP_SPEED,0.0,1.0)
+	# Limit angular rates by actual speed, including the coast-down after Shift
+	# is released, so the lateral force servo can still follow the chosen heading.
+	var control_scale: float = maxf(1.0,body.linear_velocity.length()/TOP_SPEED)
 	var desired_pitch: float = pitch*deg_to_rad(58.0)
 	var actual_pitch: float = asin(clampf(f.y,-1.0,1.0))
-	var pitch_rate: float = clampf((desired_pitch-actual_pitch)*1.8,-0.72,0.72)
-	var yaw_rate: float = -steer*lerpf(0.65,0.23,speed_ratio)
+	var pitch_limit: float = 0.72/pow(control_scale,1.6)
+	var pitch_rate: float = clampf((desired_pitch-actual_pitch)*1.8/control_scale,-pitch_limit,pitch_limit)
+	var yaw_rate: float = -steer*lerpf(0.65,0.23,speed_ratio)/control_scale
 	var horizon_right: Vector3 = f.cross(Vector3.UP).normalized()
 	if horizon_right.length_squared()<.1: horizon_right=r
-	var desired_up: Vector3 = (Vector3.UP+horizon_right*steer*0.60).normalized()
+	var desired_up: Vector3 = (Vector3.UP+horizon_right*steer*0.60/control_scale).normalized()
 	var roll_error: float = u.cross(desired_up).dot(f)
 	# Yaw is about world-up; pitch is about the horizontal right axis. Using
 	# body-right here would couple a banked yaw command into an unwanted dive.

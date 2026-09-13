@@ -96,7 +96,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -180,6 +180,8 @@ func _ready():
 		add_child(load("res://scripts/experience_validation.gd").new())
 	elif "--air-vehicle-qa" in arguments:
 		add_child(load("res://scripts/air_vehicle_validation.gd").new())
+	elif "--driving-qa" in arguments:
+		add_child(load("res://scripts/driving_validation.gd").new())
 	elif "--visual-qa" in arguments:
 		add_child(load("res://scripts/landmark_validation.gd").new())
 	elif "--interactive-qa" in arguments:
@@ -221,7 +223,7 @@ func start_interactive_qa():
 	print("INTERACTIVE_QA_READY world=",world_id," components=",world.structures.size())
 
 func setup_input():
-	var bindings={"forward":[KEY_W,KEY_UP],"back":[KEY_S,KEY_DOWN],"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"rise":[KEY_R],"fall":[KEY_F],"brake":[KEY_SPACE],"jump":[KEY_SPACE],"sprint":[KEY_SHIFT],"interact":[KEY_E],"vehicles":[KEY_TAB],"jobs":[KEY_J],"map":[KEY_M],"experiences":[KEY_K],"carry":[KEY_G],"photo":[KEY_P],"save":[KEY_F5],"recover":[KEY_HOME],"fire":[KEY_X],"combat_yaw_left":[KEY_Q],"combat_yaw_right":[KEY_Z],"combat_raise":[KEY_R],"combat_lower":[KEY_F]}
+	var bindings={"forward":[KEY_W,KEY_UP],"back":[KEY_S,KEY_DOWN],"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"rise":[KEY_R],"fall":[KEY_F],"brake":[KEY_SPACE],"jump":[KEY_SPACE],"sprint":[KEY_SHIFT],"boost":[KEY_SHIFT],"drift":[KEY_CTRL],"interact":[KEY_E],"vehicles":[KEY_TAB],"jobs":[KEY_J],"map":[KEY_M],"experiences":[KEY_K],"carry":[KEY_G],"photo":[KEY_P],"save":[KEY_F5],"recover":[KEY_HOME],"fire":[KEY_X],"combat_yaw_left":[KEY_Q],"combat_yaw_right":[KEY_Z],"combat_raise":[KEY_R],"combat_lower":[KEY_F]}
 	for action in bindings:
 		if not InputMap.has_action(action): InputMap.add_action(action)
 		for key in bindings[action]:
@@ -310,6 +312,8 @@ func setup_ui():
 	hud.add_child(bottom)
 	context_hint=label("",16)
 	context_hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	context_hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	context_hint.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	bottom.add_child(context_hint)
 	toast_label=label("",21,Color("f5e4b6"))
 	toast_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
@@ -1382,11 +1386,18 @@ func update_hud():
 	activity_label.text=life.status_text
 	if is_instance_valid(current_vehicle):
 		speed_label.text="%d km/h  ·  %d m\n%s  %d%%" %[current_vehicle.linear_velocity.length()*3.6,current_vehicle.global_position.y,VEHICLE_NAMES[current_vehicle.kind].split(" · ")[0],current_vehicle.health]
+		if current_vehicle.kind=="hoverboard":
+			speed_label.text="%d km/h  ·  %d m\nAether X1\n耐久 100%% · 无损" %[current_vehicle.linear_velocity.length()*3.6,current_vehicle.global_position.y]
+		elif current_vehicle.kind in ["car","motorcycle"]:
+			var handling:Dictionary=current_vehicle.get_meta("road_handling",{})
+			if handling.get("drifting",false): speed_label.text+="\n漂移中"
 		if current_vehicle.kind=="airliner":
 			speed_label.text+="\n推力 %d%% %s" %[current_vehicle.throttle*100,"失速 · 放低机头" if current_vehicle.stalled else ""]
 			var forward=-current_vehicle.global_basis.z
 			info.text="航向 %03d° · 海港 %.1f km" %[fposmod(rad_to_deg(atan2(forward.x,-forward.z)),360),current_vehicle.global_position.distance_to(world.anchors.opera)/1000]
-		context_hint.text=vehicle_help(current_vehicle.kind)+"   E 离开   Tab 新增   M 地图   T 时间"
+		if current_vehicle.is_boosting():
+			speed_label.text+="\n3倍加速中 · 上限 %d km/h"%current_vehicle.effective_top_speed_kmh()
+		context_hint.text=vehicle_help(current_vehicle.kind)+" · Shift 3倍加速   E 离开   Tab 新增   M 地图   T 时间"
 	else:
 		speed_label.text="游泳" if player.swimming else ""
 		var near=nearest_vehicle()
@@ -1575,8 +1586,8 @@ func vehicle_help(kind:String) -> String:
 	match kind:
 		"tank": return "W/S 履带 · A/D 转向 · 鼠标瞄准 · Q/Z 旋塔 · R/F 俯仰 · X/左键 发射 · 无敌"
 		"fighter": return "W/S 推力 · A/D 转弯 · R/F 俯仰 · X/左键 发射 · 2000 km/h · 无敌"
-		"car": return "W/S 加速倒车   A/D 转向   空格 制动 · 极速 420 km/h"
-		"motorcycle": return "W/S 加速倒车   A/D 转向   空格 制动 · 极速 320 km/h"
+		"car": return "W/S 加速倒车 · A/D 转向 · 空格 急刹 · Ctrl + A/D 漂移 · 常速 420 km/h"
+		"motorcycle": return "W/S 加速倒车 · A/D 转向 · 空格 急刹 · Ctrl + A/D 漂移 · 常速 320 km/h"
 		"yacht","speedboat": return "W/S 双机推力   A/D 船舵   空格 反向推力"
 		"hoverboard": return "W/S 加速 / 后退 · 200 km/h   A/D 转向   R/F 升降   空格 急停 · 自动越阶 / 掠水"
 		"helicopter": return "W/S 俯仰   A/D 偏航   R/F 升降 · 极速 350 km/h"

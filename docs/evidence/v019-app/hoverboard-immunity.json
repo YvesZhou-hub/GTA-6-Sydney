@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "detail": {},
+      "name": "damaged legacy hoverboard restores health and discards damage before first tick",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "legacy identity position fuel and lift survive immunity migration",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "hoverboard immunity does not grant combat crushing",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contact": {
+          "angular_velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "closing_mps": 50.0,
+          "collider": "/root/@Node3D@2/wall",
+          "contact_count": 4,
+          "energy_j": 193750.0,
+          "health": 100.0,
+          "impulse_mps": 26.3201707409274,
+          "impulse_normal_mps": 26.2881111391129,
+          "linear_velocity": [
+            0.0,
+            0.0,
+            -50.0
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "normal_closing": 50.0,
+          "point": [
+            0.545000016689301,
+            0.823282957077026,
+            -3.5
+          ],
+          "previous_velocity": [
+            0.0,
+            0.0,
+            -50.0
+          ],
+          "relative_velocity": [
+            0.0,
+            0.0,
+            -50.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "impacts": 1
+      },
+      "name": "real wall impact retains physical contact and event",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "real collision leaves hoverboard intact and smoke-free",
+      "passed": true
+    },
+    {
+      "detail": {
+        "height": 0.997934579849243
+      },
+      "name": "submerged hoverboard does not lose health",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "save and reload persist undamaged board",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "ordinary vehicles still preserve saved damage",
+      "passed": true
+    },
+    {
+      "detail": {},
+      "name": "repair clears normal damage smoke and darkened paint",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

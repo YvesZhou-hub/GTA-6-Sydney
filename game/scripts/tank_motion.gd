@@ -17,7 +17,7 @@ static func setup(v:RigidBody3D) -> void:
 	v.physics_material_override.friction=.08
 	v.physics_material_override.bounce=0.0
 	v.continuous_cd=true
-	v.controls_hint="W/S tracks • A/D differential turn • Space brake • 110 km/h"
+	v.controls_hint="W/S tracks • A/D differential turn • Space brake • Shift 3x boost • 110 / 330 km/h"
 	v.set_meta("tank_track_left_speed",0.0);v.set_meta("tank_track_right_speed",0.0)
 
 static func _ground(v:RigidBody3D) -> Dictionary:
@@ -45,20 +45,24 @@ static func tick(v:RigidBody3D,delta:float,f:Vector3,r:Vector3,u:Vector3,power:f
 		var relative:Vector3=v.linear_velocity-support.velocity
 		speed=relative.dot(along)
 		var stop:bool=brake or not active
+		var multiplier:float=1.0 if stop else v.speed_multiplier()
+		var control_scale:float=maxf(1.0,absf(speed)/TOP_SPEED)
 		v.physics_material_override.friction=.88 if stop else .08
-		var target:float=v.throttle*(TOP_SPEED if v.throttle>=0.0 else REVERSE_SPEED)
+		var target:float=v.throttle*(TOP_SPEED*multiplier if v.throttle>=0.0 else REVERSE_SPEED)
 		var climbing:float=-Vector3.DOWN.dot(along)*9.8
 		var resistance:float=speed*.03
 		# Feed-forward belongs to requested drive, not tiny contact jitter at rest.
 		var rolling:float=signf(target)*.9 if absf(target)>.05 else 0.0
-		var traction:float=clampf((target-speed)*1.7+climbing+rolling,-10.0,9.0)
-		if stop:traction=clampf(-speed*5.0+climbing,-18.0,18.0)
+		var traction:float=clampf((target-speed)*1.7+climbing+rolling,-10.0*maxf(multiplier,control_scale),9.0*multiplier)
+		if stop:traction=clampf(-speed*5.0+climbing,-18.0*control_scale,18.0*control_scale)
 		v.apply_central_force(along*v.mass*(traction-resistance))
 		var downhill:float=Vector3.DOWN.dot(across)*9.8
 		v.apply_central_force(-across*v.mass*clampf(relative.dot(across)*7.0+downhill,-14.0,14.0))
 		# Ground-normal stabilization resists roll without teleporting or fixing
 		# the body upright in world space. Inclines remain actual physical slopes.
-		yaw_rate=-steer*lerpf(.76,.23,clampf(absf(speed)/TOP_SPEED,0.0,1.0)) if active and not brake else 0.0
+		# Keep lateral acceleration near its normal-speed range at boosted speed;
+		# actual-speed scaling also covers the gradual return to the base limit.
+		yaw_rate=-steer*lerpf(.76,.23,clampf(absf(speed)/TOP_SPEED,0.0,1.0))/control_scale if active and not brake else 0.0
 		var yaw:float=v.angular_velocity.dot(n)
 		var tilt_velocity:Vector3=v.angular_velocity-n*yaw
 		v._torque_accel(u.cross(n)*26.0-tilt_velocity*8.5+n*(yaw_rate-yaw)*7.0)

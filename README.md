@@ -1,12 +1,14 @@
 # Harbourlife · 悉尼海港
 
-**v0.1.8-preview.1 · 中文字体修复、炮击反馈与横屏宣传片**
+**v0.1.9-preview.1 · 漂移、急刹、三倍加速与平衡车无损**
 
-[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
+[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.9-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.9-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-本轮修复“无敌坦克”“无敌战斗机”的中文缺字，随包提供完整许可的 Noto 字体；强化炮口喷焰、后坐、命中尘浪、碎片、烟尘与空间音效。横屏宣传片展示真实玩法和海港探索，具体见 [本轮说明](docs/FIXES_0.1.8.md) 与 [宣传片制作](docs/PROMO.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 和 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动与操作说明](docs/WINDOWS.md)
+本轮新增 **Ctrl + A/D 漂移、空格急刹、Shift 三倍加速**，改善摩托车转向，提高车辆耐撞程度；磁悬浮平衡车不会损坏，旧存档中的破损也会恢复。详见 [更新说明](docs/FIXES_0.1.9.md) 和 [驾驶操作](docs/DRIVING.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 与 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动说明](docs/WINDOWS.md)
+
+以下宣传素材录制于 v0.1.8：
 
 [观看 38 秒横屏宣传片](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Sydney-Trailer-1080p.mp4) · [16.5 秒短版](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Sydney-Teaser-1080p.mp4) · [下载宣传素材包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.8-preview.1/Harbourlife-Promo-Kit.zip)
 
@@ -81,15 +83,17 @@ Mac 发布包采用本地 ad-hoc 签名，未取得 Apple Developer ID 签名或
 
 **Aether X1 反重力平衡车**是原创科幻载具：W/S 加速或后退，A/D 转向，空格急停；R/F 提升或降低悬浮高度，松开后保持。它自动越过台阶并掠水行驶，不消耗燃料；遇到无法越过的实体墙会辅助制动。
 
-| 载具 | 本版游戏极速 |
-| --- | ---: |
-| 超跑 | 420 km/h |
-| 摩托车 | 320 km/h |
-| 反重力平衡车 | 200 km/h |
-| 客机 | 800 km/h |
-| 直升机 | 350 km/h |
+| 载具 | 常规速度上限 | Shift 加速上限 |
+| --- | ---: | ---: |
+| 超跑 | 420 km/h | 1260 km/h |
+| 摩托车 | 320 km/h | 960 km/h |
+| 反重力平衡车 | 200 km/h | 600 km/h |
+| 客机 | 800 km/h | 2400 km/h |
+| 直升机 | 350 km/h | 1050 km/h |
+| 战斗机 | 2000 km/h | 6000 km/h |
+| 坦克 | 110 km/h | 330 km/h |
 
-上述速度为游戏调校。滑翔机和滑翔伞没有发动机，创建后以安全高度与滑翔初速进入，松开操纵仍会缓慢下降；A/D 转向、R/F 调整俯仰、空格减速。
+上述速度为游戏调校。按住 Shift 逐渐加速，松开后平顺回落。滑翔机和滑翔伞通常无动力，创建后以安全高度与滑翔初速进入，松开操纵仍会缓慢下降；A/D 转向、R/F 调整俯仰、空格减速，Shift 提供游戏辅助推力。船艇和滑翔类的加速基准见 [驾驶说明](docs/DRIVING.md)。
 
 两种模式都从 **$50,000** 开始。旧世界首次更新时仅补足不足部分，花掉后不会反复补款。摄影、回收、巡检、飞行观察和竞速均可重复，基础报酬 $1,500–3,000。**K** 打开城市体验：Darling Square 与环形码头已制作店面的美食、ICC 场馆纪念体验和 Manly 野餐共 22 项，每次 $12–120，恢复耐力并保存旅行印章。这些是游戏消费反馈；目前没有实际电影播放、完整演出或全部商铺室内。[资金与体验说明](docs/PLAY_EXPERIENCE.md)
 
@@ -101,7 +105,8 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 | --- | --- |
 | 行走、油门与转向 | WASD / 方向键 |
 | 观察 | 鼠标 |
-| 奔跑 | Shift |
+| 步行奔跑；载具三倍加速 | 按住 Shift |
+| 跑车 / 摩托车漂移 | Ctrl + A / D |
 | 跳跃、载具制动 / 减速板 | 空格 |
 | 交互、进入 / 离开载具 | E |
 | 飞行俯仰、直升机 / 平衡车升降 | R / F |
@@ -127,13 +132,13 @@ Mac 存档位于 `~/Library/Application Support/Godot/app_userdata/Harbourlife �
 
 ## 验证与已知限制
 
-本轮 **189 项原生检查**对应 Apple Silicon Mac 发布构建，具体范围与截图见 [本轮验证记录](docs/TESTING.md)。Windows 云端 headless 检查与 GPU 画面、人工输入验证分开记录，实际结果见 [Windows 验证范围](docs/WINDOWS.md#windows-验证记录)。初版试飞视频及旧性能数据不作为这次城市扩展的通过证明。
+本轮驾驶与存档整合检查对应最终 Apple Silicon Mac 发布构建，具体范围与截图见 [本轮验证记录](docs/TESTING.md)。Windows 云端 headless 检查与 GPU 画面、人工输入验证分开记录，实际结果见 [Windows 验证范围](docs/WINDOWS.md#windows-验证记录)。初版试飞视频及旧性能数据不作为这次城市扩展的通过证明。
 
 还没有多小时稳定性或完整硬件矩阵验证，不能保证所有场景稳定 60 FPS。游戏、美术、声音和生活内容仍是开发预览；商业推广所需的第三方地标形象等权利也尚未全部解决。
 
 ## 源码与本地构建
 
-[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；游戏内容使用 `v0.1.8-preview.1` 标签对应的源码。Windows 构建工具随后补充到 `main`；Windows 验证报告记录其确切提交，原 Mac 与源码下载档案保持不变。
+[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；游戏内容使用 `v0.1.9-preview.1` 标签对应的源码；Windows 验证报告记录确切构建提交与游戏文件哈希。
 
 **Mac 构建：**需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
 
@@ -151,7 +156,7 @@ codesign --force --sign - tools/runtime/godot
 python tools/build_windows.py --engine "C:\Tools\Godot\Godot_v4.7.2-stable_win64.exe" --templates "$env:APPDATA\Godot\export_templates\4.7.2.stable"
 ```
 
-输出为 `dist/windows/Harbourlife-Windows-x86_64.zip`，构建报告为 `reports/windows-build.json`。脚本在临时副本中导出，并检查游戏源码与已发布 v0.1.8 的哈希一致；输出目录须为空。使用 Vulkan Forward+，需要支持 Vulkan 的显卡与驱动。[Windows CI 工作流](.github/workflows/windows-package-check.yml)负责构建、解压实际 ZIP，并运行导出的 EXE 做云端 headless 检查。
+输出为 `dist/windows/Harbourlife-Windows-x86_64.zip`，构建报告为 `reports/windows-build.json`。脚本在临时副本中导出，并检查游戏源码与本版已验证 Mac 构建的游戏哈希一致；输出目录须为空。使用 Vulkan Forward+，需要支持 Vulkan 的显卡与驱动。[Windows CI 工作流](.github/workflows/windows-package-check.yml)负责构建、解压实际 ZIP，并运行导出的 EXE 做云端 headless 检查。
 
 地图的离线重建步骤见 [CITY_DATA.md](docs/CITY_DATA.md)，Mac 验证命令见 [TESTING.md](docs/TESTING.md)。
 
@@ -167,4 +172,4 @@ Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据�
 
 Harbourlife is a free, offline, single-player Sydney sandbox for **Windows x86_64 and Apple Silicon Mac**. On Windows, extract the complete ZIP and run `Harbourlife.exe` with all accompanying files in place; see the [Windows guide](docs/WINDOWS.md). Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
-**v0.1.8-preview.1 · Readable Chinese UI and stronger artillery feedback.** The game bundles licensed Noto fonts to fix missing Chinese glyphs, adds pooled muzzle/recoil/impact effects and procedural spatial weapon audio, and ships a landscape project trailer recorded from the Apple Silicon App. Existing public spaces, free vehicles, navigation and Sydney's summer day/night cycle remain available. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Its 189 native checks are recorded in [TESTING.md](docs/TESTING.md); Windows validation is recorded separately in [WINDOWS.md](docs/WINDOWS.md). Capture, editing and factual scope are in [PROMO.md](docs/PROMO.md).
+**v0.1.9-preview.1 · Drifting, emergency brakes and triple-speed boost.** Hold Ctrl with A/D to drift, Space to brake, or Shift to boost up to three times each vehicle's speed baseline. Motorcycles turn more responsively, ordinary vehicles withstand more impacts, and hoverboards remain undamaged, including when restoring older saves. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Final build-specific validation is in [TESTING.md](docs/TESTING.md), with Windows results separately in [WINDOWS.md](docs/WINDOWS.md). The linked trailer remains footage of v0.1.8.

@@ -26,6 +26,7 @@ import zipfile
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 RESOURCES = [
+    "res://scripts/road_motion.gd", "res://scripts/driving_validation.gd", "res://scripts/vehicle_durability.gd",
     "res://scripts/ui_fonts.gd", "res://assets/fonts/harbour_ui_font.tres",
     "res://scripts/ui_font_validation.gd", "res://scripts/trailer_capture.gd",
     "res://scripts/weapon_audio.gd", "res://shaders/combat_cloud.gdshader",

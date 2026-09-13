@@ -10,3 +10,5 @@
 # Preserve byte-for-byte Windows release evidence and its published SHA256 sums.
 docs/evidence/v018-windows/windows-validation.json -text
 docs/evidence/v018-windows/Windows-SHA256SUMS.txt -text
+docs/evidence/v019-windows/windows-validation.json -text
+docs/evidence/v019-windows/Windows-SHA256SUMS.txt -text

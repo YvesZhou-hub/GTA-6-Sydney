@@ -202,7 +202,7 @@ class Runner extends Node:
 		var before_repair:float=crash_car.health
 		var dent_count:int=crash_car.get_state().dents.size()
 		crash_car.repair()
-		check("collision_energy_damage_and_repair",before_repair<85.0 and incidents.size()>0 and dent_count>0 and crash_car.health==100.0 and crash_car.get_state().dents.is_empty(),{"impact_count":incidents.size(),"health_before_repair":before_repair,"dent_count":dent_count,"health_after_repair":crash_car.health})
+		check("collision_energy_damage_and_repair",before_repair<100.0 and before_repair>=88.0 and incidents.size()>0 and dent_count>0 and crash_car.health==100.0 and crash_car.get_state().dents.is_empty(),{"impact_count":incidents.size(),"health_before_repair":before_repair,"dent_count":dent_count,"health_after_repair":crash_car.health})
 		await new_stage(false)
 		var stalled_jet:=make("airliner",Vector3(0,180,0))
 		stalled_jet.apply_state({"position":[0,180,0],"velocity":[0,0,0],"fuel":0,"health":100,"frozen":false})

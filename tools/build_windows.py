@@ -30,7 +30,15 @@ def game_hashes():
             if p.is_file() and '.godot' not in p.parts}
 
 
-def windows_preset(templates):
+def project_version():
+    text = (ROOT / 'game/project.godot').read_text(encoding='utf-8')
+    matches = re.findall(r'^config/version="([0-9]+\.[0-9]+\.[0-9]+)"\s*$', text, re.M)
+    if len(matches) != 1 or any(int(part) > 65535 for part in matches[0].split('.')):
+        raise RuntimeError('Expected one numeric major.minor.patch project version')
+    return matches[0]
+
+
+def windows_preset(templates, game_version):
     def quoted(path):
         return json.dumps(path.as_posix(), ensure_ascii=False)
     return f'''[preset.0]
@@ -55,8 +63,8 @@ shader_baker/enabled=false
 codesign/enable=false
 application/modify_resources=true
 application/icon="res://assets/icon.svg"
-application/file_version="0.1.8.0"
-application/product_version="0.1.8.0"
+application/file_version="{game_version}.0"
+application/product_version="{game_version}.0"
 application/product_name="Harbourlife"
 application/file_description="Harbourlife Sydney"
 application/copyright="Harbourlife contributors, 2026"
@@ -105,10 +113,16 @@ def main():
     version = subprocess.check_output([str(engine), '--headless', '--version'], text=True).strip()
     if version != ENGINE_VERSION:
         raise SystemExit(f'Expected {ENGINE_VERSION}, got {version}')
+    game_version = project_version()
+    game_release = f'v{game_version}-preview.1'
+    source_reference = f'docs/evidence/v{game_version.replace(".", "")}-app/build.json'
+    reference_path = ROOT / source_reference
     sources = game_hashes()
-    reference = json.loads((ROOT / 'docs/evidence/v018-app/build.json').read_text(encoding='utf-8'))
+    reference = json.loads(reference_path.read_text(encoding='utf-8'))
     if sources != reference['source_sha256']:
-        raise SystemExit('Game files differ from released v0.1.8. Refusing to attach a changed game to that release.')
+        raise SystemExit(f'Game files differ from the {game_release} macOS build evidence. Refusing mismatched platform packages.')
+    if reference['engine'] != version:
+        raise SystemExit('Windows and macOS build evidence must use the same official Godot version')
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     # An existing output is never silently destroyed; choose another output folder.
     if output.exists() and any(output.iterdir()):
@@ -117,7 +131,7 @@ def main():
     report_path.parent.mkdir(parents=True, exist_ok=True)
     logs = report_path.parent / 'windows-export-logs'
     logs.mkdir(parents=True, exist_ok=True)
-    preset = windows_preset(templates)
+    preset = windows_preset(templates, game_version)
     with tempfile.TemporaryDirectory(prefix='harbourlife-windows-') as temp:
         project = pathlib.Path(temp) / 'game'
         shutil.copytree(ROOT / 'game', project,
@@ -136,16 +150,17 @@ def main():
         for name in ('LICENSE', 'PLAY_PERMISSION.md'):
             shutil.copy2(ROOT / name, package / name)
         (package / 'START-HERE.txt').write_text(
-            'HARBOURLIFE / 悉尼海港 — Windows x86_64 0.1.8\n\n'
+            f'HARBOURLIFE / 悉尼海港 — Windows x86_64 {game_version}\n\n'
             '请先全部解压，再运行 Harbourlife.exe。无需安装 Godot。\n'
             '保留旁边的 PCK 和 licenses；移动时移动整个文件夹。\n'
             '使用 Vulkan 渲染，需要支持 Vulkan 的显卡与驱动。\n'
             'WASD 移动，鼠标观察，Tab 免费新增载具并立即驾驶，M 地图，Esc 菜单。\n'
+            '跑车/摩托车用 Ctrl + A/D 漂移，Space 急刹，Shift 三倍增压。\n'
             'T 调整日夜，F3 诊断，F5 保存；坦克/战斗机用 X 或左键开火。\n\n'
             'Unzip everything, then run Harbourlife.exe. Keep all accompanying files.\n'
             'Uses Vulkan rendering. A Vulkan-capable GPU and driver are required.\n'
             'This preview is unsigned. Verification scope and download checksums:\n'
-            'https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.1.8-preview.1\n'
+            f'https://github.com/YvesZhou-hub/harbourlife/releases/tag/{game_release}\n'
             'Windows instructions: https://github.com/YvesZhou-hub/harbourlife/blob/main/docs/WINDOWS.md\n',
             encoding='utf-8-sig')
         if game_hashes() != sources:
@@ -166,8 +181,10 @@ def main():
             raise RuntimeError('Original game sources changed during packaging')
         report = {
             'engine': version, 'architecture': 'x86_64', 'source_commit': commit,
-            'game_release': 'v0.1.8-preview.1', 'source_sha256': sources,
-            'source_frozen_from': 'Before staging; matches released v0.1.8; checked after export and ZIP packaging',
+            'game_version': game_version, 'game_release': game_release, 'source_sha256': sources,
+            'source_reference': source_reference, 'source_reference_sha256': digest(reference_path),
+            'source_file_count': len(sources),
+            'source_frozen_from': f'Matches {source_reference} before staging; checked after export and ZIP packaging',
             'windows_preset': preset, 'archive_sha256': digest(archive),
             'archive_bytes': archive.stat().st_size,
             'uncompressed_bytes': sum(entry['bytes'] for entry in manifest.values()),

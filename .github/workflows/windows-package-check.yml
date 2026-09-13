@@ -9,7 +9,7 @@ on:
       release_tag:
         description: Existing release to receive the verified Windows assets
         required: true
-        default: v0.1.8-preview.1
+        default: v0.1.9-preview.1
         type: string
       publish:
         description: Upload only after validation; never replace a different existing asset
@@ -149,11 +149,19 @@ jobs:
               current_sources = {str(p.relative_to(root)).replace('\\', '/'): digest(p) for p in sorted((root / 'game').rglob('*'))
                                  if p.is_file() and '.godot' not in p.parts}
               check('game_sources_match_build', current_sources == manifest['source_sha256'])
-              baseline_path = root / 'docs/evidence/v018-app/build.json'
+              game_version = manifest['game_version']
+              check('numeric_game_version', bool(re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', game_version)))
+              expected_reference = f'docs/evidence/v{game_version.replace(".", "")}-app/build.json'
+              check('source_reference_matches_game_version', manifest['source_reference'] == expected_reference)
+              baseline_path = root / expected_reference
               baseline = json.loads(baseline_path.read_text(encoding='utf-8'))
-              report['v018_source_baseline_sha256'] = digest(baseline_path)
-              check('all_199_game_files_match_published_v018', len(current_sources) == 199
+              report['source_baseline_sha256'] = digest(baseline_path)
+              report['source_file_count'] = len(current_sources)
+              check('source_reference_hash_matches_build', report['source_baseline_sha256'] == manifest['source_reference_sha256'])
+              check('all_game_files_match_macos_build', bool(current_sources)
+                    and len(current_sources) == manifest['source_file_count']
                     and current_sources == baseline['source_sha256'])
+              check('same_engine_as_macos_build', manifest['engine'] == baseline['engine'])
               archive = root / 'dist/windows' / report['asset_name']
               report['archive_sha256'] = digest(archive)
               check('zip_matches_build_hash', report['archive_sha256'] == manifest['archive_sha256'])
@@ -240,7 +248,70 @@ jobs:
           }
           if (-not $result.passed) { throw 'Exported EXE did not exit successfully; see process.json.' }
 
-      - name: Require complete world readiness and clean fresh logs
+      - name: Run driving physics QA from the exact extracted release EXE
+        shell: python
+        run: |
+          import datetime, json, os, shutil, subprocess, sys, time
+          from pathlib import Path
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          package = base / 'package/Harbourlife'
+          child_env = dict(os.environ)
+          child_env['APPDATA'] = str(base / 'driving-user/roaming')
+          child_env['LOCALAPPDATA'] = str(base / 'driving-user/local')
+          for key in ('APPDATA', 'LOCALAPPDATA'):
+              Path(child_env[key]).mkdir(parents=True, exist_ok=False)
+          # Godot may resolve the Windows known folder rather than the overridden
+          # environment variable. Observe both fresh runner locations; never assume
+          # the redirect worked, and never delete or overwrite a pre-existing report.
+          user_roots = {Path(os.environ['APPDATA']) / 'Godot/app_userdata',
+                        Path(child_env['APPDATA']) / 'Godot/app_userdata'}
+          def driving_reports():
+              return sorted({p.resolve() for folder in user_roots
+                             for p in folder.glob('*/driving-qa/report.json') if p.is_file()})
+          result = {'passed': False, 'timed_out': False, 'exit_code': None,
+                    'fixed_physics_hz': 60, 'wall_timeout_seconds': 300,
+                    'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    'scope': 'Production exported Windows vehicle physics with bound input actions; headless, no GPU or manual-driving claim.'}
+          started_ns = time.time_ns()
+          try:
+              if driving_reports():
+                  raise RuntimeError('A driving report already exists before this run; refusing stale evidence.')
+              log_names = ('driving-engine.log', 'driving-stdout.log', 'driving-stderr.log')
+              if any((evidence / name).exists() for name in log_names):
+                  raise RuntimeError('Driving logs must be fresh for this run.')
+              with (evidence / 'driving-stdout.log').open('wb') as stdout, (evidence / 'driving-stderr.log').open('wb') as stderr:
+                  completed = subprocess.run(
+                      [str(package / 'Harbourlife.exe'), '--headless', '--fixed-fps', '60',
+                       '--log-file', str(evidence / 'driving-engine.log'), '--', '--driving-qa'],
+                      cwd=package, env=child_env, stdout=stdout, stderr=stderr,
+                      timeout=300, check=False)
+              result['exit_code'] = completed.returncode
+              if completed.returncode != 0:
+                  raise RuntimeError('Driving QA EXE did not exit zero.')
+              reports = driving_reports()
+              if len(reports) != 1:
+                  raise RuntimeError(f'Expected one fresh driving report in observed Windows user directories; found {len(reports)}.')
+              original = reports[0]
+              result['report_original_path'] = str(original)
+              result['observed_user_data_directory'] = str(original.parent.parent)
+              result['report_fresh'] = original.stat().st_mtime_ns >= started_ns - 1_000_000_000
+              if not result['report_fresh']:
+                  raise RuntimeError('Driving report timestamp predates this process.')
+              shutil.copy2(original, evidence / 'driving-report.json')
+              result['passed'] = True
+          except subprocess.TimeoutExpired:
+              result['timed_out'] = True
+              result['error'] = 'Driving QA exceeded 300 seconds; subprocess terminated and waited.'
+          except Exception as exc:
+              result['error'] = f'{type(exc).__name__}: {exc}'
+          finally:
+              result['finished_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+              (evidence / 'driving-process.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+          if not result['passed']:
+              sys.exit(result.get('error', 'Driving QA failed'))
+
+      - name: Require world readiness, driving checks and clean fresh logs
         if: ${{ always() }}
         shell: python
         run: |
@@ -257,12 +328,28 @@ jobs:
               with path.open('rb') as stream:
                   return hashlib.file_digest(stream, 'sha256').hexdigest()
           package, process = read_json('package.json'), read_json('process.json')
+          driving_process, driving = read_json('driving-process.json'), read_json('driving-report.json')
           logs = {name: (evidence / name).read_text(encoding='utf-8-sig', errors='replace')
-                  if (evidence / name).is_file() else '' for name in ('stdout.log', 'stderr.log', 'engine.log')}
+                  if (evidence / name).is_file() else '' for name in
+                  ('stdout.log', 'stderr.log', 'engine.log', 'driving-stdout.log', 'driving-stderr.log', 'driving-engine.log')}
           combined = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs.values()))
           runtime_errors = [line for line in combined.splitlines() if re.search(r'(?:SCRIPT ERROR|SHADER ERROR|FATAL ERROR|ERROR|WARNING):', line)]
           world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', combined, re.M)
           interactive = re.findall(r'^INTERACTIVE_QA_READY world=qa_interactive_\d+ components=(\d+)\s*$', combined, re.M)
+          driving_markers = re.findall(r'^DRIVING_QA_COMPLETE (\d+) passed=true\s*$', combined, re.M)
+          driving_checks = driving.get('checks', [])
+          required_driving_checks = {
+              'car emergency brake beats held throttle', 'motorcycle emergency brake beats held throttle',
+              'car Ctrl turn creates controlled lateral drift', 'motorcycle Ctrl turn creates controlled lateral drift',
+              'motorcycle city turn left responds within 1.25 seconds', 'motorcycle city turn right responds within 1.25 seconds',
+              'car Shift reaches triple speed through acceleration', 'motorcycle Shift reaches triple speed through acceleration',
+              'car combined Ctrl and Shift respects total speed ceiling', 'motorcycle combined Ctrl and Shift respects total speed ceiling',
+              'car Space stops despite held Shift and W', 'motorcycle Space stops despite held Shift and W',
+          }
+          valid_driving_checks = isinstance(driving_checks, list) and bool(driving_checks) and all(
+              isinstance(item, dict) and item.get('passed') is True and isinstance(item.get('name'), str)
+              for item in driving_checks)
+          driving_names = [item['name'] for item in driving_checks] if valid_driving_checks else []
           checks = {
               'package_checks_passed': package.get('passed') is True,
               'process_exit_zero': process.get('passed') is True and process.get('exit_code') == 0 and not process.get('timed_out', True),
@@ -270,6 +357,18 @@ jobs:
               'no_runtime_errors_or_warnings': not runtime_errors,
               'real_world_populated': bool(world) and all(int(a) > 0 and int(b) > 0 for a, b in world),
               'isolated_gameplay_ready': bool(interactive) and all(int(count) > 0 for count in interactive),
+              'driving_process_exit_zero': driving_process.get('passed') is True and driving_process.get('exit_code') == 0
+                  and not driving_process.get('timed_out', True),
+              'fresh_driving_report_and_log': driving_process.get('report_fresh') is True and bool(logs['driving-engine.log'].strip()),
+              'driving_report_passed': driving.get('passed') is True and driving.get('failures') == 0,
+              'every_driving_check_passed': valid_driving_checks,
+              'driving_check_count_complete': driving.get('count') == len(driving_names) > 0
+                  and len(driving_names) == len(set(driving_names)),
+              'requested_driving_behaviors_exercised': required_driving_checks.issubset(driving_names),
+              'driving_completion_marker_matches_report': bool(driving_markers)
+                  and all(int(count) == driving.get('count') for count in driving_markers),
+              'driving_physics_backend': driving.get('backend') == 'Jolt Physics' and driving.get('physics_hz') == 60,
+              'driving_save_guard_confirmed': driving.get('user_saves_touched') is False and driving.get('save_written') is False,
           }
           current = {}
           for field, name in (('executable_sha256', 'Harbourlife.exe'), ('pck_sha256', 'Harbourlife.pck')):
@@ -278,17 +377,21 @@ jobs:
                   current[field] = digest(path)
           checks['exe_pck_unchanged_after_run'] = bool(current) and current == package.get('app_identity')
           report = {'passed': all(checks.values()), 'checks': checks, 'check_count': len(checks),
-                    'package': package, 'process': process, 'app_identity_after': current,
+                    'package': package, 'process': process, 'driving_process': driving_process,
+                    'driving': driving, 'app_identity_after': current,
                     'runtime_errors': runtime_errors, 'world_ready_counts': world,
                     'interactive_ready_components': interactive,
+                    'driving_complete_counts': driving_markers,
                     'log_sha256': {name: digest(evidence / name) for name in logs if (evidence / name).is_file()},
-                    'scope': 'Windows x86_64 release ZIP integrity, PE architecture, exact external PCK hash/header and real production-world headless initialization. PCK resources exercised by startup only; not an exhaustive resource enumeration. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
-                    'save_isolation': 'Fresh GitHub-hosted VM; process-local APPDATA/LOCALAPPDATA under runner scratch; built-in --interactive-qa skips slot/settings reads and creates an unsaved in-memory world. No existing saves copied, opened or deleted.'}
+                    'driving_report_sha256': digest(evidence / 'driving-report.json') if (evidence / 'driving-report.json').is_file() else None,
+                    'scope': 'Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, and production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
+                    'save_isolation': 'Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving report location is observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa and --driving-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving evidence causes failure.'}
           (evidence / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8') as summary:
               summary.write('## Windows package headless check\n\n')
               summary.write(('PASS' if report['passed'] else 'FAIL') + ': ' + str(sum(checks.values())) + '/' + str(len(checks)) + ' runtime gates.\n\n')
               summary.write('ZIP SHA256: `' + package.get('archive_sha256', 'unavailable') + '`\n\n')
+              summary.write('Production driving checks: ' + str(len(driving_names)) + '; report passed: ' + str(driving.get('passed', False)) + '.\n\n')
               summary.write(report['scope'] + '\n')
           print('WINDOWS_PACKAGE_CHECK', json.dumps({'passed': report['passed'], 'checks': checks}))
           if not report['passed']:

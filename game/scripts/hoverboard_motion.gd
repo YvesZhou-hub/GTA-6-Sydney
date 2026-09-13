@@ -4,6 +4,9 @@ const TOP_SPEED := 200.0 / 3.6
 const CLEARANCE := 1.0
 const MAX_LIFT := 180.0
 const SUPPORT_DEPTH := MAX_LIFT + 64.0
+const DRIVE_ACCEL := 20.0
+const STOP_ACCEL := 45.0
+const VELOCITY_GAIN := 2.8
 
 static func setup(body: RigidBody3D) -> void:
 	body.mass = 155.0
@@ -12,7 +15,7 @@ static func setup(body: RigidBody3D) -> void:
 	body.linear_damp = 0.0
 	body.physics_material_override.friction = 0.05
 	body.physics_material_override.bounce = 0.0
-	body.controls_hint = "W/S drive • A/D turn • R/F lift • Space stop • 200 km/h"
+	body.controls_hint = "W/S drive • A/D turn • R/F lift • Space stop • Shift 3x boost • 200 / 600 km/h"
 
 static func _surface(body: RigidBody3D, point: Vector3, upper: float) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(Vector3(point.x,upper,point.z),Vector3(point.x,point.y-SUPPORT_DEPTH,point.z),15,[body.get_rid()])
@@ -23,6 +26,16 @@ static func _surface(body: RigidBody3D, point: Vector3, upper: float) -> Diction
 	if not preload("res://scripts/metro_entrances.gd").contains_dry_volume(point):
 		return {"position":Vector3(point.x,0.0,point.z),"normal":Vector3.UP}
 	return {}
+
+static func _stopping_distance(speed: float, delta: float) -> float:
+	# Above normal speed, braking acceleration is STOP_ACCEL * speed / TOP_SPEED.
+	# Integrate that same law, then the fixed-acceleration lower-speed section.
+	# The velocity servo tapers near rest; include its remaining travel and two
+	# physics ticks of reaction margin rather than assuming full force to zero.
+	var base_speed := minf(speed,TOP_SPEED)
+	var distance := base_speed*base_speed/(2.0*STOP_ACCEL)
+	if speed>TOP_SPEED: distance+=(speed-TOP_SPEED)*TOP_SPEED/STOP_ACCEL
+	return distance+STOP_ACCEL/(2.0*VELOCITY_GAIN*VELOCITY_GAIN)+speed*delta*2.0+3.5
 
 static func tick(body: RigidBody3D, delta: float, f: Vector3, _r: Vector3, u: Vector3, power: float, steer: float, pitch: float, brake: bool) -> void:
 	var position := body.global_position
@@ -58,12 +71,14 @@ static func tick(body: RigidBody3D, delta: float, f: Vector3, _r: Vector3, u: Ve
 	body.grounded = absf(position.y-support-CLEARANCE)<1.5
 	body.stalled = false
 	body.throttle = move_toward(body.throttle,power,delta*3.5)
-	var desired: Vector3 = flat_forward*body.throttle*(TOP_SPEED if body.throttle>=0.0 else 12.0)
+	var multiplier: float = 1.0 if brake or not body.occupied else body.speed_multiplier()
+	var control_scale: float = maxf(1.0,speed/TOP_SPEED)
+	var desired: Vector3 = flat_forward*body.throttle*(TOP_SPEED*multiplier if body.throttle>=0.0 else 12.0)
 	if brake or not body.occupied: desired=Vector3.ZERO
 	# Predict braking distance in metres. Stair tops are traversable; a wall
 	# without a reachable top triggers braking before the physical contact.
 	var obstacle:=false
-	var stop_distance:=speed*speed/80.0+3.5
+	var stop_distance:=_stopping_distance(speed,delta)
 	for lateral in [-0.40,0.0,0.40]:
 		var start:Vector3=position+Vector3.UP*.7+body.global_basis.x*lateral
 		var ray:=PhysicsRayQueryParameters3D.create(start,start+direction*stop_distance,15,[body.get_rid()])
@@ -75,12 +90,18 @@ static func tick(body: RigidBody3D, delta: float, f: Vector3, _r: Vector3, u: Ve
 		var top:=body.get_world_3d().direct_space_state.intersect_ray(top_ray)
 		if top.is_empty() or top.normal.y<.45:obstacle=true;break
 	if obstacle:desired=Vector3.ZERO
-	var acceleration: Vector3 = (desired-horizontal)*2.8
-	acceleration = acceleration.limit_length(45.0 if brake or obstacle else 20.0)
+	var stopping: bool = brake or obstacle or not body.occupied
+	var acceleration: Vector3 = (desired-horizontal)*VELOCITY_GAIN
+	# Braking strength follows actual speed, so releasing Shift or applying
+	# Space never invalidates the distance already used by obstacle avoidance.
+	var acceleration_limit: float = STOP_ACCEL*control_scale if stopping else DRIVE_ACCEL*multiplier
+	acceleration = acceleration.limit_length(acceleration_limit)
 	body.apply_central_force(acceleration*body.mass)
-	var yaw_rate := -steer*lerpf(1.7,0.58,clampf(speed/TOP_SPEED,0.0,1.0))
-	var desired_up: Vector3 = (Vector3.UP-flat_forward*body.throttle*0.045+body.global_basis.x*steer*0.10).normalized()
+	var yaw_rate := -steer*lerpf(1.7,0.58,clampf(speed/TOP_SPEED,0.0,1.0))/pow(control_scale,1.5)
+	var desired_up: Vector3 = (Vector3.UP-flat_forward*body.throttle*0.045+body.global_basis.x*steer*0.10/control_scale).normalized()
 	body._torque_accel(u.cross(desired_up)*20.0-Vector3(body.angular_velocity.x,0.0,body.angular_velocity.z)*7.0+Vector3.UP*(yaw_rate-body.angular_velocity.y)*8.0)
 	body._engine_target = -40.0+clampf(speed/TOP_SPEED,0.0,1.0)*8.0 if body.occupied else -60.0
 	body.set_meta("hover_support_height",support)
 	body.set_meta("hover_target_height",target_height)
+	body.set_meta("hover_stopping_distance",stop_distance)
+	body.set_meta("hover_braking_acceleration",STOP_ACCEL*control_scale)

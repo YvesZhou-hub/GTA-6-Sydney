@@ -1,0 +1,168 @@
+{
+  "checks": [
+    {
+      "health": 100.0,
+      "impact": {},
+      "name": "normal wheel settling causes no damage",
+      "passed": true
+    },
+    {
+      "health": 95.9237284660339,
+      "impact": {
+        "angular_velocity": [
+          4.0776743888855,
+          4.52182973731396e-07,
+          -9.45163059234619
+        ],
+        "closing_mps": 17.6464900970459,
+        "collider": "/root/@Node3D@127/@StaticBody3D@129",
+        "contact_count": 1,
+        "energy_j": 230434.973431403,
+        "health": 95.9237284660339,
+        "impulse_mps": 7.76479030299831,
+        "impulse_normal_mps": 6.47782411317568,
+        "linear_velocity": [
+          0.0,
+          -12.5346593856812,
+          0.0
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "normal_closing": 17.6464900970459,
+        "point": [
+          -0.85999983549118,
+          4.5,
+          -1.4299955368042
+        ],
+        "previous_velocity": [
+          0.0,
+          -17.6464900970459,
+          0.0
+        ],
+        "relative_velocity": [
+          0.0,
+          -17.6464900970459,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "name": "hard landing damages vehicle without instant wrecking",
+      "passed": true
+    },
+    {
+      "health": 100.0,
+      "impact": {},
+      "name": "straight acceleration and emergency brake do not damage body",
+      "passed": true
+    },
+    {
+      "health": 88.0,
+      "impact": {
+        "angular_velocity": [
+          -0.489852100610733,
+          1.52244285800407e-06,
+          1.78752905810597e-08
+        ],
+        "closing_mps": 41.7691612243652,
+        "collider": "/root/@Node3D@208/@StaticBody3D@212",
+        "contact_count": 8,
+        "energy_j": 1291050.49374639,
+        "health": 88.0,
+        "impulse_mps": 23.9900469805743,
+        "impulse_normal_mps": 23.9807511613176,
+        "linear_velocity": [
+          1.68889919410775e-11,
+          -1.36009727924602e-08,
+          3.34724807739258
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "normal_closing": 41.7691612243652,
+        "point": [
+          0.850000143051147,
+          4.69433546066284,
+          -74.0
+        ],
+        "previous_velocity": [
+          1.70667230348087e-11,
+          -1.53799692981238e-08,
+          -41.7691612243652
+        ],
+        "relative_velocity": [
+          1.70667230348087e-11,
+          -1.53799692981238e-08,
+          -41.7691612243652
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "name": "normal throttle into real wall damages body but remains drivable",
+      "passed": true
+    },
+    {
+      "health": 88.0,
+      "impact": {
+        "angular_velocity": [
+          -0.489852100610733,
+          1.52244285800407e-06,
+          1.78752905810597e-08
+        ],
+        "closing_mps": 41.7691612243652,
+        "collider": "/root/@Node3D@208/@StaticBody3D@212",
+        "contact_count": 8,
+        "energy_j": 1291050.49374639,
+        "health": 88.0,
+        "impulse_mps": 23.9900469805743,
+        "impulse_normal_mps": 23.9807511613176,
+        "linear_velocity": [
+          1.68889919410775e-11,
+          -1.36009727924602e-08,
+          3.34724807739258
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "normal_closing": 41.7691612243652,
+        "point": [
+          0.850000143051147,
+          4.69433546066284,
+          -74.0
+        ],
+        "previous_velocity": [
+          1.70667230348087e-11,
+          -1.53799692981238e-08,
+          -41.7691612243652
+        ],
+        "relative_velocity": [
+          1.70667230348087e-11,
+          -1.53799692981238e-08,
+          -41.7691612243652
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "name": "continuing to push wall does not repeatedly deduct impact health",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Native production vehicle contacts on controlled physical surfaces; no user saves"
+}

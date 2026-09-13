@@ -1,0 +1,491 @@
+{
+  "check_count": 23,
+  "checks": [
+    {
+      "metrics": {
+        "braked_mps": 3.17864290444447e-10,
+        "cruise_mps": 40.3259735107422,
+        "health": 100.0,
+        "travel_m": 171.3818359375,
+        "turn_rad": 0.391029119491577
+      },
+      "name": "car_drive_steer_brake",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 99.9791225003564,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_car",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "braked_mps": 0.00120690336916596,
+        "cruise_mps": 30.8800392150879,
+        "health": 100.0,
+        "travel_m": 143.643646240234,
+        "turn_rad": 0.599918782711029
+      },
+      "name": "motorcycle_drive_steer_brake",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 99.9791225003564,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_motorcycle",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "mass_kg": 94000.0,
+        "reference": "Sunseeker 90 Ocean"
+      },
+      "name": "yacht_authored_deck_profile",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "began_in_physical_contact": true,
+        "boat_height_m": 0.968913793563843,
+        "cargo_local": [
+          0.34957817196846,
+          1.8599888086319,
+          8.54952239990234
+        ],
+        "cargo_mass_kg": 120.0,
+        "cargo_physical": true,
+        "cargo_size_m": 0.8,
+        "relative_drift_m": 3.16981422656681e-05,
+        "speed_mps": 10.2499437332153
+      },
+      "name": "yacht_buoyancy_and_physical_cargo",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 99.9248565267345,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_yacht",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "mass_kg": 11500.0,
+        "reference": "Riva Rivamare"
+      },
+      "name": "speedboat_authored_deck_profile",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "began_in_physical_contact": true,
+        "boat_height_m": 0.887056529521942,
+        "cargo_local": [
+          -0.000208451645448804,
+          0.684994518756866,
+          1.59944152832031
+        ],
+        "cargo_mass_kg": 30.0,
+        "cargo_physical": true,
+        "cargo_size_m": 0.45,
+        "relative_drift_m": 6.15368553553708e-05,
+        "speed_mps": 16.1800117492676
+      },
+      "name": "speedboat_buoyancy_and_physical_cargo",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "braked_mps": 1.36115288734436,
+        "cruise_mps": 16.5004844665527,
+        "fuel": 99.9199999999976,
+        "health": 100.0,
+        "travel_m": 57.4580459594727,
+        "turn_rad": 0.255984783172607
+      },
+      "name": "speedboat_drive_steer_brake",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 99.9199999999976,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_speedboat",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "began_in_physical_contact": true,
+        "boat_height_m": 0.86442095041275,
+        "car_frozen": false,
+        "car_health": 100.0,
+        "car_local": [
+          0.000496977940201759,
+          2.13999962806702,
+          9.11209869384766
+        ],
+        "car_mass_kg": 1480.0,
+        "car_parked_yaw_rad": 1.5707963267949,
+        "initial_car_local": [
+          0.000230390971410088,
+          2.13999891281128,
+          9.09935569763184
+        ],
+        "payload_relative_movement_m": 0.0127457845956087,
+        "speed_mps": 7.70234966278076
+      },
+      "name": "yacht_transports_unfrozen_parked_car",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "distance_m": 169.433959960938,
+        "height_m": 142.513229370117,
+        "mechanical_energy_final_per_kg": 1468.17917022705,
+        "mechanical_energy_initial_per_kg": 1634.06996459961,
+        "yaw_rad": -0.678171515464783
+      },
+      "name": "paraglider_unpowered_flight",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 100.0,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_paraglider",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "distance_m": 416.118774414062,
+        "height_m": 140.614532470703,
+        "mechanical_energy_final_per_kg": 1784.52638549805,
+        "mechanical_energy_initial_per_kg": 1959.81340637207,
+        "yaw_rad": -0.476278424263
+      },
+      "name": "glider_unpowered_flight",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 100.0,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_glider",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "altitude_m": 71.5907897949219,
+        "forward_m": 95.1259765625,
+        "health": 100.0,
+        "hover_vertical_mps": -0.00571314804255962
+      },
+      "name": "helicopter_collective_cyclic_hover",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 99.6962666666728,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_helicopter",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "dent_count": 1,
+        "health_after_repair": 100.0,
+        "health_before_repair": 88.0,
+        "impact_count": 1
+      },
+      "name": "collision_energy_damage_and_repair",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "fuel": 0.0,
+        "height_m": 136.624893188477,
+        "stall": true,
+        "vertical_mps": -29.0499649047852
+      },
+      "name": "airliner_zero_airspeed_stalls_without_hover",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "height_m": 4.24000072479248,
+        "speed_mps": 1.55038578668609e-05
+      },
+      "name": "airliner_parked_on_wheels",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "elapsed_s": 349.150000000011,
+        "final_speed_mps": 0.196517959237099,
+        "health": 100.0,
+        "landing_cross_track_m": -9.42824172973633,
+        "liftoff_time_s": 25.0833333333332,
+        "peak_altitude_m": 245.068557739258,
+        "takeoff_run_m": 848.838623046875
+      },
+      "name": "airliner_takeoff_circuit_return_landing",
+      "pass": true
+    },
+    {
+      "metrics": {
+        "frozen": false,
+        "fuel": 98.788155925293,
+        "health": 100.0,
+        "rotation_velocity_throttle_and_dents_restored": true
+      },
+      "name": "save_roundtrip_airliner",
+      "pass": true
+    }
+  ],
+  "engine": "4.7.2-stable (official)",
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "physics_hz": 60,
+  "samples": [
+    {
+      "health": 100.0,
+      "position": [
+        -0.000204331445274875,
+        4.24000072479248,
+        3500.0
+      ],
+      "speed_mps": 1.55038578668609e-05,
+      "throttle": 0.0,
+      "time_s": 0.0166666666666667,
+      "waypoint": 0
+    },
+    {
+      "health": 100.0,
+      "position": [
+        0.000435999128967524,
+        4.24000072479248,
+        2985.75122070312
+      ],
+      "speed_mps": 57.7387313842773,
+      "throttle": 1.0,
+      "time_s": 20.0000000000001,
+      "waypoint": 0
+    },
+    {
+      "health": 100.0,
+      "position": [
+        0.006370201241225,
+        131.195571899414,
+        1427.47875976562
+      ],
+      "speed_mps": 80.9536895751953,
+      "throttle": 0.311463035206,
+      "time_s": 40.0166666666657,
+      "waypoint": 0
+    },
+    {
+      "health": 100.0,
+      "position": [
+        0.0145036866888404,
+        203.859268188477,
+        -236.116577148438
+      ],
+      "speed_mps": 83.2985382080078,
+      "throttle": 0.0,
+      "time_s": 60.0166666666645,
+      "waypoint": 0
+    },
+    {
+      "health": 100.0,
+      "position": [
+        612.232055664062,
+        223.796142578125,
+        -1637.70812988281
+      ],
+      "speed_mps": 83.5273132324219,
+      "throttle": 0.244927034127215,
+      "time_s": 80.0166666666634,
+      "waypoint": 1
+    },
+    {
+      "health": 100.0,
+      "position": [
+        2144.30541992188,
+        229.099716186523,
+        -1607.38122558594
+      ],
+      "speed_mps": 82.5371322631836,
+      "throttle": 0.212389820553983,
+      "time_s": 100.016666666662,
+      "waypoint": 2
+    },
+    {
+      "health": 100.0,
+      "position": [
+        2346.92553710938,
+        239.492050170898,
+        -9.80034255981445
+      ],
+      "speed_mps": 82.2588806152344,
+      "throttle": 0.0809483909942211,
+      "time_s": 120.016666666661,
+      "waypoint": 2
+    },
+    {
+      "health": 100.0,
+      "position": [
+        2074.75,
+        240.097137451172,
+        1625.94567871094
+      ],
+      "speed_mps": 83.3029022216797,
+      "throttle": 0.0474012885199238,
+      "time_s": 140.000000000004,
+      "waypoint": 3
+    },
+    {
+      "health": 100.0,
+      "position": [
+        1725.91027832031,
+        235.837890625,
+        3247.51806640625
+      ],
+      "speed_mps": 83.4185562133789,
+      "throttle": 0.16297642811574,
+      "time_s": 160.000000000019,
+      "waypoint": 3
+    },
+    {
+      "health": 100.0,
+      "position": [
+        1072.39135742188,
+        217.080627441406,
+        4751.95166015625
+      ],
+      "speed_mps": 83.2940826416016,
+      "throttle": 0.160111351821572,
+      "time_s": 180.000000000035,
+      "waypoint": 4
+    },
+    {
+      "health": 100.0,
+      "position": [
+        83.9950561523438,
+        204.20686340332,
+        6085.36572265625
+      ],
+      "speed_mps": 83.0083923339844,
+      "throttle": 0.142448979785045,
+      "time_s": 200.000000000051,
+      "waypoint": 5
+    },
+    {
+      "health": 100.0,
+      "position": [
+        -1359.50988769531,
+        150.526870727539,
+        5980.8193359375
+      ],
+      "speed_mps": 83.2881240844727,
+      "throttle": 0.0730144132431597,
+      "time_s": 220.000000000067,
+      "waypoint": 5
+    },
+    {
+      "health": 100.0,
+      "position": [
+        -962.948791503906,
+        139.544647216797,
+        4546.6650390625
+      ],
+      "speed_mps": 83.1502456665039,
+      "throttle": 0.227487573156134,
+      "time_s": 240.000000000083,
+      "waypoint": 5
+    },
+    {
+      "health": 100.0,
+      "position": [
+        186.935211181641,
+        133.404205322266,
+        3441.77709960938
+      ],
+      "speed_mps": 79.710205078125,
+      "throttle": 0.0,
+      "time_s": 260.000000000092,
+      "waypoint": 6
+    },
+    {
+      "health": 100.0,
+      "position": [
+        46.9340705871582,
+        105.119186401367,
+        1907.99267578125
+      ],
+      "speed_mps": 75.570198059082,
+      "throttle": 0.0,
+      "time_s": 280.000000000074,
+      "waypoint": 6
+    },
+    {
+      "health": 100.0,
+      "position": [
+        -3.2361273765564,
+        54.1712112426758,
+        407.521392822266
+      ],
+      "speed_mps": 74.9865646362305,
+      "throttle": 0.0,
+      "time_s": 300.000000000056,
+      "waypoint": 6
+    },
+    {
+      "health": 100.0,
+      "position": [
+        -8.4940242767334,
+        20.741081237793,
+        -1071.14965820312
+      ],
+      "speed_mps": 72.4117584228516,
+      "throttle": 0.0,
+      "time_s": 320.000000000038,
+      "waypoint": 6
+    },
+    {
+      "health": 100.0,
+      "position": [
+        -9.39034938812256,
+        5.61149597167969,
+        -2510.150390625
+      ],
+      "speed_mps": 72.0461120605469,
+      "throttle": 0.118922942278286,
+      "time_s": 340.000000000019,
+      "waypoint": 6
+    }
+  ],
+  "scope": "Production vehicle physics on deterministic test surfaces; not a city visual or airport geography test"
+}

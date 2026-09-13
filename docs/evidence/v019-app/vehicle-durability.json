@@ -1,0 +1,421 @@
+{
+  "checks": [
+    {
+      "detail": null,
+      "name": "car minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "car minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "car minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "car minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "car minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "car survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "car hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "car damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "motorcycle minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "motorcycle minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "motorcycle minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "motorcycle minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "motorcycle minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "motorcycle survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "motorcycle hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "motorcycle damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "speedboat minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "speedboat minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "speedboat minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "speedboat minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "speedboat minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "speedboat survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "speedboat hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "speedboat damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "yacht minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "yacht minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "yacht minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "yacht minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "yacht minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "yacht survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "yacht hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "yacht damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "glider minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "glider minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "glider minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "glider minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "glider minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "glider survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "glider hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "glider damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paraglider minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paraglider minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paraglider minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paraglider minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paraglider minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "paraglider survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paraglider hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paraglider damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "airliner minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "airliner minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "airliner minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "airliner minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "airliner minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "airliner survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "airliner hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "airliner damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "helicopter minor contact 0.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "helicopter minor contact 2.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "helicopter minor contact 3.5 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "helicopter minor contact 5.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "helicopter minor contact 6.0 m/s stays intact",
+      "passed": true
+    },
+    {
+      "detail": 21,
+      "name": "helicopter survives at least 20 separate moderate hits",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "helicopter hard hit still damages but cannot wreck in one hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "helicopter damage increases with normal impact speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "tank takes no contact damage at any game speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "fighter takes no contact damage at any game speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "hoverboard takes no contact damage at any game speed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "negative relative normal means closing collision",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "positive relative normal is separating motion",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "huge lateral friction impulse is not body damage",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "normal solver impulse still detects stopped wall hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "impulse orientation sign does not hide a hard contact",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "collision speed is consistent across vehicle masses",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "invalid normal has no collision damage",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "invalid closing speed cannot poison health",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "fresh wall contact is eligible",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "ten seconds pushing same wall cannot repeatedly drain health",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "brief contact solver gap cannot double-count collision",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "separating and returning allows a new genuine collision",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "ground and wall on one city body are separate episodes",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "new collision body can still be hit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "minor contact cannot consume collision episode",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "repair and restore can reset transient contact gate",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Deterministic arcade durability and contact episode policy; native physical contact test is separate"
+}

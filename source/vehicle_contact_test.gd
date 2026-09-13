@@ -1,5 +1,5 @@
 extends SceneTree
-## Production contacts: an ordinary settle stays intact; real walls and hard landings still damage.
+## Production contacts: settling/driving stay intact, real hits damage, sustained contact is not repeated damage.
 var stage:Node3D
 var checks:Array=[]
 func _initialize(): call_deferred("run")
@@ -42,7 +42,17 @@ func run():
 	var hard=make_car(Vector3(0,18,0))
 	hard.linear_velocity=Vector3.DOWN*8
 	for i in 240: await physics_frame
-	check("hard landing damages vehicle and leaves contact evidence",hard.health<85 and not hard.last_impact_info.is_empty(),hard)
+	check("hard landing damages vehicle without instant wrecking",hard.health<100 and hard.health>=76 and not hard.last_impact_info.is_empty(),hard)
+	await reset()
+	var driving=make_car(Vector3(0,5.3,50))
+	driving.occupied=true
+	Input.action_press("forward")
+	for i in 150: await physics_frame
+	Input.action_release("forward")
+	Input.action_press("brake")
+	for i in 120: await physics_frame
+	Input.action_release("brake")
+	check("straight acceleration and emergency brake do not damage body",driving.health==100,driving)
 	await reset()
 	ground_box(Vector3(30,12,2),Vector3(0,10.5,-75))
 	var wall=make_car(Vector3(0,5.3,0))
@@ -50,7 +60,12 @@ func run():
 	Input.action_press("forward")
 	for i in 480: await physics_frame
 	Input.action_release("forward")
-	check("normal throttle into real wall damages body",wall.health<85 and not wall.last_impact_info.is_empty(),wall)
+	check("normal throttle into real wall damages body but remains drivable",wall.health<100 and wall.health>=70 and not wall.last_impact_info.is_empty(),wall)
+	var after_first_contact:float=wall.health
+	Input.action_press("forward")
+	for i in 180: await physics_frame
+	Input.action_release("forward")
+	check("continuing to push wall does not repeatedly deduct impact health",is_equal_approx(wall.health,after_first_contact),wall)
 	var passed:=true
 	for result in checks:
 		if not result.passed: passed=false
