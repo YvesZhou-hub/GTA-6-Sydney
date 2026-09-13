@@ -1,0 +1,387 @@
+{
+	"backend": "Jolt Physics",
+	"checks": [
+		{
+			"metrics": {
+				"speed_kmh": 100.102512359619
+			},
+			"name": "car accelerates from rest to 100 km/h",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"engine_cut": true,
+				"remaining_kmh": 0.00000000734206615504718,
+				"stop_distance_m": 20.8940773010254,
+				"stop_seconds": 1.55
+			},
+			"name": "car emergency brake beats held throttle",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"up_dot": 1.0
+			},
+			"name": "car braking keeps chassis stable",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"end_kmh": 88.0352668762207,
+				"max_roll": 0.00000000277031242390535,
+				"max_slip_degrees": 27.8438746762063
+			},
+			"name": "car Ctrl turn creates controlled lateral drift",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"max_frame_acceleration_mps2": 15.8220630884171
+			},
+			"name": "car drift changes velocity through continuous forces",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"slip_degrees": -0.0267258273869635,
+				"up_dot": 1.0,
+				"yaw_mps": 0.000143971657962538
+			},
+			"name": "car release restores grip and straight tracking",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"slip_degrees": 7.46424012445096,
+				"up_dot": 1.0,
+				"yaw_mps": 0.285563558340073
+			},
+			"name": "car countersteer remains responsive",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"boost": false,
+				"brake": true,
+				"braking_accel": 17.0,
+				"drift_active": false,
+				"drift_blend": 0.926666666666667,
+				"drift_requested": true,
+				"drifting": true,
+				"drive_accel": 0.0,
+				"grounded": true,
+				"slip_angle_degrees": 7.851608548625,
+				"steering": -0.799955087571961,
+				"target_slip_degrees": 19.3604856037732,
+				"yaw_rate": 0.177282845183054
+			},
+			"name": "car emergency braking overrides active drift",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"speed_kmh": 100.192126464844
+			},
+			"name": "motorcycle accelerates from rest to 100 km/h",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"engine_cut": true,
+				"remaining_kmh": 0.000397687882650644,
+				"stop_distance_m": 22.1417980194092,
+				"stop_seconds": 1.63333333333333
+			},
+			"name": "motorcycle emergency brake beats held throttle",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"up_dot": 0.99999988079071
+			},
+			"name": "motorcycle braking keeps chassis stable",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"end_kmh": 87.2239334106445,
+				"max_roll": 0.383996725082397,
+				"max_slip_degrees": 19.8776432343433
+			},
+			"name": "motorcycle Ctrl turn creates controlled lateral drift",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"max_frame_acceleration_mps2": 17.820058465004
+			},
+			"name": "motorcycle drift changes velocity through continuous forces",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"slip_degrees": 0.0234881202804375,
+				"up_dot": 0.999962687492371,
+				"yaw_mps": -0.00057473499327898
+			},
+			"name": "motorcycle release restores grip and straight tracking",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"slip_degrees": 7.96694091510597,
+				"up_dot": 0.912255167961121,
+				"yaw_mps": 0.252534449100494
+			},
+			"name": "motorcycle countersteer remains responsive",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"boost": false,
+				"brake": true,
+				"braking_accel": 16.0,
+				"drift_active": false,
+				"drift_blend": 0.926666666666667,
+				"drift_requested": true,
+				"drifting": true,
+				"drive_accel": 0.0,
+				"grounded": true,
+				"slip_angle_degrees": 8.28761411240482,
+				"steering": -0.799992578540948,
+				"target_slip_degrees": 15.1121590171522,
+				"yaw_rate": 0.158967468252767
+			},
+			"name": "motorcycle emergency braking overrides active drift",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"heading_change_degrees": 57.2956973752009,
+				"health": 100.0,
+				"roll": 0.397328764200211,
+				"speed_kmh": 39.0418190002441
+			},
+			"name": "motorcycle city turn left responds within 1.25 seconds",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"heading_change_degrees": -57.3011413871922,
+				"health": 100.0,
+				"roll": -0.396568417549133,
+				"speed_kmh": 39.0416095733643
+			},
+			"name": "motorcycle city turn right responds within 1.25 seconds",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"left_radians": 0.999998566423528,
+				"right_radians": 1.00009358235729
+			},
+			"name": "motorcycle left and right have comparable authority",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"achieved_kmh": 1260.00318603516,
+				"base_kmh": 420.0,
+				"health": 100.0,
+				"peak_kmh": 1260.00395507813
+			},
+			"name": "car Shift reaches triple speed through acceleration",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"turn_radians": -0.0770638734102249,
+				"up_dot": 1.0
+			},
+			"name": "car boost steering stays stable",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"limit_kmh": 1260.0,
+				"slip_degrees": -21.6497582682651,
+				"total_peak_kmh": 1259.97000732422,
+				"up_dot": 1.0
+			},
+			"name": "car combined Ctrl and Shift respects total speed ceiling",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"base_kmh": 420.0,
+				"first_frame_speed_drop_kmh": 2.56267089843755,
+				"remaining_kmh": 420.110211181641
+			},
+			"name": "car release boost smoothly restores normal maximum",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"drive_accel": 0.0,
+				"health": 100.0,
+				"remaining_kmh": 0.0000000134135326845808
+			},
+			"name": "car Space stops despite held Shift and W",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"achieved_kmh": 959.995678710938,
+				"base_kmh": 320.0,
+				"health": 100.0,
+				"peak_kmh": 959.996228027344
+			},
+			"name": "motorcycle Shift reaches triple speed through acceleration",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"turn_radians": -0.0726207713887561,
+				"up_dot": 0.942549169063568
+			},
+			"name": "motorcycle boost steering stays stable",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"health": 100.0,
+				"limit_kmh": 960.0,
+				"slip_degrees": -22.1347570224348,
+				"total_peak_kmh": 959.986889648438,
+				"up_dot": 0.907159864902496
+			},
+			"name": "motorcycle combined Ctrl and Shift respects total speed ceiling",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"base_kmh": 320.0,
+				"first_frame_speed_drop_kmh": 2.0973999023438,
+				"remaining_kmh": 320.00712890625
+			},
+			"name": "motorcycle release boost smoothly restores normal maximum",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"drive_accel": 0.0,
+				"health": 100.0,
+				"remaining_kmh": 0.00024162606569007
+			},
+			"name": "motorcycle Space stops despite held Shift and W",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"heading": 0.0,
+				"speed_mps": 0.00000000372529029846191
+			},
+			"name": "stationary drift input does not spin or launch a car",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"driving": {
+					"boost": false,
+					"brake": false,
+					"braking_accel": 0.0,
+					"drift_active": true,
+					"drift_blend": 1.0,
+					"drift_requested": true,
+					"drifting": true,
+					"drive_accel": 14.0,
+					"grounded": true,
+					"slip_angle_degrees": -33.1471527009662,
+					"steering": 0.999999960087389,
+					"target_slip_degrees": -28.6475424083938,
+					"yaw_rate": -0.236515611797665
+				},
+				"parked": {
+					"boost": false,
+					"brake": true,
+					"braking_accel": 0.00000000141835318490102,
+					"drift_active": false,
+					"drift_blend": 0.0,
+					"drift_requested": false,
+					"drifting": false,
+					"drive_accel": 0.0,
+					"grounded": true,
+					"slip_angle_degrees": 0.00000000807624255823432,
+					"steering": 0.0,
+					"target_slip_degrees": 0.0,
+					"yaw_rate": 0.0
+				},
+				"parked_speed": 0.00000000172577552248754
+			},
+			"name": "separate vehicles do not share steering or drift state",
+			"pass": true,
+			"passed": true
+		},
+		{
+			"metrics": {
+				"grounded": false,
+				"velocity": [
+					0.0,
+					-7.19399785995483,
+					0.0
+				],
+				"yaw_mps": 0.0
+			},
+			"name": "airborne road controls create no artificial thrust or yaw",
+			"pass": true,
+			"passed": true
+		}
+	],
+	"count": 32,
+	"engine": "4.7.2-stable (official)",
+	"failures": 0,
+	"passed": true,
+	"physics_hz": 60,
+	"scope": "Actual production HarborVehicle and input actions on an isolated flat road. No velocity or transform writes after initial placement. This validates arcade controls, not real-world handling or display rendering.",
+	"survival_enabled": true,
+	"survival_instances": 11
+}

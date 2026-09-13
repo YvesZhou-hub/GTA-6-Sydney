@@ -1,6 +1,6 @@
 extends RefCounted
 
-const VERSION = 5
+const VERSION = 6
 const ROOT = "user://worlds/"
 static var last_error = ""
 
@@ -56,7 +56,7 @@ static func read(id: String, backup: bool = false) -> Dictionary:
 	if not data is Dictionary:
 		last_error = "Invalid save. The previous recovery copy may still be available."
 		return {}
-	for key in ["world", "life", "airport", "settings", "navigation", "city_clock"]:
+	for key in ["world", "life", "airport", "settings", "navigation", "city_clock", "survival"]:
 		if data.has(key) and not data[key] is Dictionary:
 			last_error = "Invalid world section: " + key
 			return {}

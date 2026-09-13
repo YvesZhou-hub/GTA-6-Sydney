@@ -1,13 +1,13 @@
 # Windows x86_64 试玩说明
 
-本页面向 Harbourlife v0.1.9 Windows x86_64 下载包，操作说明对应 v0.1.9。游戏为离线单人试玩，不需要账号、源码或 Godot 编辑器。**v0.1.9 已通过 Windows 云端构建、无窗口启动和驾驶物理验证**；下载资产见 [v0.1.9-preview.1 发布页](https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.1.9-preview.1)，具体范围见本页末尾记录。下方另保留 v0.1.8 的历史验证记录。
+本页面向 Harbourlife v0.2.0 Windows x86_64 下载包，操作说明对应 v0.2.0。游戏为离线单人试玩，不需要账号、源码或 Godot 编辑器。新版本的 Windows 管线要求导出的 EXE 通过完整城市启动、驾驶物理与奶龙生存检查后才上传；具体状态以 [v0.2.0-preview.1 发布页](https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.2.0-preview.1) 的 windows-validation.json 为准。下方保留旧版验证记录，不代表本轮 Windows GPU 实测。
 
 ## 下载与启动
 
 1. 在发布页面的 **Assets** 中选择 `Harbourlife-Windows-x86_64.zip`。GitHub 的 **Code → Download ZIP** 和 `Source code` 是源码，不是可直接运行的游戏。
 2. 在资源管理器中对 ZIP 选择 **“全部解压缩”**，解压到一个独立文件夹。
 3. 打开解压后的文件夹，运行其中的 **`Harbourlife.exe`**。保留它旁边的 **`Harbourlife.pck`**和 `licenses` 目录；移动游戏时移动整个文件夹。
-4. 等待加载完成，再从标题页选择 **“开始生活”**、**“自由沙盒”** 或 **“从悉尼机场起飞”**。加载时间取决于设备；本页没有给出 Windows 启动耗时保证。
+4. 等待加载完成，再从标题页选择 **“奶龙危机 · 开始生存”**、**“自由观光 · 无敌人”** 或 **“从悉尼机场起飞”**。加载时间取决于设备；本页没有给出 Windows 启动耗时保证。
 
 `Harbourlife.pck` 是游戏资源包，不能单独打开或与其他版本的 EXE 混用。Godot 的 Windows 导出采用可执行文件配合 PCK，发布时也可以选择嵌入 PCK；本项目采用外部 PCK，必须与 EXE 一起分发。[Godot 官方 Windows 导出说明](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_windows.html)
 
@@ -22,6 +22,8 @@
 上述是引擎运行简单项目的基线，**不是 Harbourlife 已测得的最低配置**。城市规模、分辨率和可用内存都会影响实际表现；尚未通过硬件测试确定本游戏的最低 RAM、显存或推荐显卡，不把引擎示例中的内存与磁盘数字当作本游戏保证。下载和解压所需空间应以该版本 ZIP 及解压后大小为准。
 
 ## 常用操作
+
+奶龙模式中，左键 / X 开火，H 使用医疗包，B 打开维修、补给与升级；高等级怪物击败后获得更多金币。车型损毁后先 E 离舱或 Home 救援，再 B 远程维修。
 
 以下按键来自当前游戏输入绑定。进入游戏后，鼠标控制观察；菜单和地图打开时会释放鼠标。
 

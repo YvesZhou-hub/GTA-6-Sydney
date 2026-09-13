@@ -9,7 +9,7 @@ on:
       release_tag:
         description: Existing release to receive the verified Windows assets
         required: true
-        default: v0.1.9-preview.1
+        default: v0.2.0-preview.1
         type: string
       publish:
         description: Upload only after validation; never replace a different existing asset
@@ -311,7 +311,69 @@ jobs:
           if not result['passed']:
               sys.exit(result.get('error', 'Driving QA failed'))
 
-      - name: Require world readiness, driving checks and clean fresh logs
+      - name: Run survival integration QA from the exact extracted release EXE
+        shell: python
+        run: |
+          import datetime, json, os, shutil, subprocess, sys, time
+          from pathlib import Path
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          package = base / 'package/Harbourlife'
+          child_env = dict(os.environ)
+          child_env['APPDATA'] = str(base / 'survival-user/roaming')
+          child_env['LOCALAPPDATA'] = str(base / 'survival-user/local')
+          for key in ('APPDATA', 'LOCALAPPDATA'):
+              Path(child_env[key]).mkdir(parents=True, exist_ok=False)
+          # Observe the actual known-folder location as well as the requested
+          # process-local redirect, matching the driving report isolation guard.
+          user_roots = {Path(os.environ['APPDATA']) / 'Godot/app_userdata',
+                        Path(child_env['APPDATA']) / 'Godot/app_userdata'}
+          def survival_reports():
+              return sorted({p.resolve() for folder in user_roots
+                             for p in folder.glob('*/survival-qa/report.json') if p.is_file()})
+          result = {'passed': False, 'timed_out': False, 'exit_code': None,
+                    'fixed_physics_hz': 60, 'wall_timeout_seconds': 300,
+                    'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    'scope': 'Production exported Windows survival integration in the full city, including physical H/B input, enemy damage, tank projectile rewards and paid repair; headless, no native rendering claim.'}
+          started_ns = time.time_ns()
+          try:
+              if survival_reports():
+                  raise RuntimeError('A survival report already exists before this run; refusing stale evidence.')
+              log_names = ('survival-engine.log', 'survival-stdout.log', 'survival-stderr.log')
+              if any((evidence / name).exists() for name in (*log_names, 'survival-report.json')):
+                  raise RuntimeError('Survival logs and collected report must be fresh for this run.')
+              with (evidence / 'survival-stdout.log').open('wb') as stdout, (evidence / 'survival-stderr.log').open('wb') as stderr:
+                  completed = subprocess.run(
+                      [str(package / 'Harbourlife.exe'), '--headless', '--fixed-fps', '60',
+                       '--log-file', str(evidence / 'survival-engine.log'), '--', '--survival-qa'],
+                      cwd=package, env=child_env, stdout=stdout, stderr=stderr,
+                      timeout=300, check=False)
+              result['exit_code'] = completed.returncode
+              if completed.returncode != 0:
+                  raise RuntimeError('Survival QA EXE did not exit zero.')
+              reports = survival_reports()
+              if len(reports) != 1:
+                  raise RuntimeError(f'Expected one fresh survival report in observed Windows user directories; found {len(reports)}.')
+              original = reports[0]
+              result['report_original_path'] = str(original)
+              result['observed_user_data_directory'] = str(original.parent.parent)
+              result['report_fresh'] = original.stat().st_mtime_ns >= started_ns - 1_000_000_000
+              if not result['report_fresh']:
+                  raise RuntimeError('Survival report timestamp predates this process.')
+              shutil.copy2(original, evidence / 'survival-report.json')
+              result['passed'] = True
+          except subprocess.TimeoutExpired:
+              result['timed_out'] = True
+              result['error'] = 'Survival QA exceeded 300 seconds; subprocess terminated and waited.'
+          except Exception as exc:
+              result['error'] = f'{type(exc).__name__}: {exc}'
+          finally:
+              result['finished_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+              (evidence / 'survival-process.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+          if not result['passed']:
+              sys.exit(result.get('error', 'Survival QA failed'))
+
+      - name: Require world readiness, driving and survival checks, and clean fresh logs
         if: ${{ always() }}
         shell: python
         run: |
@@ -329,15 +391,21 @@ jobs:
                   return hashlib.file_digest(stream, 'sha256').hexdigest()
           package, process = read_json('package.json'), read_json('process.json')
           driving_process, driving = read_json('driving-process.json'), read_json('driving-report.json')
+          survival_process, survival = read_json('survival-process.json'), read_json('survival-report.json')
           logs = {name: (evidence / name).read_text(encoding='utf-8-sig', errors='replace')
                   if (evidence / name).is_file() else '' for name in
-                  ('stdout.log', 'stderr.log', 'engine.log', 'driving-stdout.log', 'driving-stderr.log', 'driving-engine.log')}
+                  ('stdout.log', 'stderr.log', 'engine.log', 'driving-stdout.log', 'driving-stderr.log', 'driving-engine.log',
+                   'survival-stdout.log', 'survival-stderr.log', 'survival-engine.log')}
           combined = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs.values()))
           runtime_errors = [line for line in combined.splitlines() if re.search(r'(?:SCRIPT ERROR|SHADER ERROR|FATAL ERROR|ERROR|WARNING):', line)]
           world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', combined, re.M)
           interactive = re.findall(r'^INTERACTIVE_QA_READY world=qa_interactive_\d+ components=(\d+)\s*$', combined, re.M)
           driving_markers = re.findall(r'^DRIVING_QA_COMPLETE (\d+) passed=true\s*$', combined, re.M)
+          survival_logs = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs[name] for name in
+              ('survival-stdout.log', 'survival-stderr.log', 'survival-engine.log')))
+          survival_markers = re.findall(r'^SURVIVAL_QA_COMPLETE (\d+) passed=true report=.+\s*$', survival_logs, re.M)
           driving_checks = driving.get('checks', [])
+          survival_checks = survival.get('checks', [])
           required_driving_checks = {
               'car emergency brake beats held throttle', 'motorcycle emergency brake beats held throttle',
               'car Ctrl turn creates controlled lateral drift', 'motorcycle Ctrl turn creates controlled lateral drift',
@@ -350,6 +418,28 @@ jobs:
               isinstance(item, dict) and item.get('passed') is True and isinstance(item.get('name'), str)
               for item in driving_checks)
           driving_names = [item['name'] for item in driving_checks] if valid_driving_checks else []
+          required_survival_checks = {
+              'full existing Sydney city and airport ready',
+              'unsaved survival starts with 120 health, 3 medkits and $50000',
+              'all five production enemy identities spawned',
+              'real nearby enemy winds up then hurts player without instant kill',
+              'physical H routes through main input to heal and consume one kit',
+              'repeat H cannot spend another kit during cooldown',
+              'physical B opens paused service menu with free pointer',
+              'nearby combat blocks purchase and hides combat HUD',
+              'production free tank spawn immediately seats player',
+              'production fire button launches occupied tank projectile',
+              'actual tank blast kills real enemy and credits reward once',
+              'eight-second combat timeout clears while exploration runs',
+              'survival tank armor permits damage and records shared durability',
+              'safe B menu offers enabled paid repair',
+              'real repair menu callback deducts price and restores shared fleet',
+              'leaving services resumes gameplay',
+          }
+          valid_survival_checks = isinstance(survival_checks, list) and bool(survival_checks) and all(
+              isinstance(item, dict) and item.get('passed') is True and isinstance(item.get('name'), str)
+              for item in survival_checks)
+          survival_names = [item['name'] for item in survival_checks] if valid_survival_checks else []
           checks = {
               'package_checks_passed': package.get('passed') is True,
               'process_exit_zero': process.get('passed') is True and process.get('exit_code') == 0 and not process.get('timed_out', True),
@@ -369,6 +459,19 @@ jobs:
                   and all(int(count) == driving.get('count') for count in driving_markers),
               'driving_physics_backend': driving.get('backend') == 'Jolt Physics' and driving.get('physics_hz') == 60,
               'driving_save_guard_confirmed': driving.get('user_saves_touched') is False and driving.get('save_written') is False,
+              'survival_process_exit_zero': survival_process.get('passed') is True and survival_process.get('exit_code') == 0
+                  and not survival_process.get('timed_out', True),
+              'fresh_survival_report_and_log': survival_process.get('report_fresh') is True and bool(logs['survival-engine.log'].strip()),
+              'survival_report_passed': survival.get('passed') is True,
+              'every_survival_check_passed': valid_survival_checks,
+              'survival_check_count_complete': survival.get('count') == len(survival_names) > 0
+                  and len(survival_names) == len(set(survival_names)),
+              'requested_survival_behaviors_exercised': required_survival_checks.issubset(survival_names),
+              'survival_completion_marker_matches_report': bool(survival_markers)
+                  and all(int(count) == survival.get('count') for count in survival_markers),
+              'survival_full_city_ready': survival.get('world_ready') is True,
+              'survival_headless_scope_confirmed': survival.get('native') is False and survival.get('display_driver') == 'headless',
+              'survival_save_guard_confirmed': survival.get('user_saves_touched') is False and survival.get('save_written') is False,
           }
           current = {}
           for field, name in (('executable_sha256', 'Harbourlife.exe'), ('pck_sha256', 'Harbourlife.pck')):
@@ -378,20 +481,23 @@ jobs:
           checks['exe_pck_unchanged_after_run'] = bool(current) and current == package.get('app_identity')
           report = {'passed': all(checks.values()), 'checks': checks, 'check_count': len(checks),
                     'package': package, 'process': process, 'driving_process': driving_process,
-                    'driving': driving, 'app_identity_after': current,
+                    'driving': driving, 'survival_process': survival_process, 'survival': survival, 'app_identity_after': current,
                     'runtime_errors': runtime_errors, 'world_ready_counts': world,
                     'interactive_ready_components': interactive,
                     'driving_complete_counts': driving_markers,
+                    'survival_complete_counts': survival_markers,
                     'log_sha256': {name: digest(evidence / name) for name in logs if (evidence / name).is_file()},
                     'driving_report_sha256': digest(evidence / 'driving-report.json') if (evidence / 'driving-report.json').is_file() else None,
-                    'scope': 'Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, and production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
-                    'save_isolation': 'Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving report location is observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa and --driving-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving evidence causes failure.'}
+                    'survival_report_sha256': digest(evidence / 'survival-report.json') if (evidence / 'survival-report.json').is_file() else None,
+                    'scope': 'Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state; full-city survival enemy spawning, damage, H/B input, tank projectile rewards and paid fleet repair. Exported scripts may be compiled resources; external executable/PCK hashes identify the tested build. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
+                    'save_isolation': 'Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving and survival report locations are observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa, --driving-qa and --survival-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving or survival evidence causes failure.'}
           (evidence / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8') as summary:
               summary.write('## Windows package headless check\n\n')
               summary.write(('PASS' if report['passed'] else 'FAIL') + ': ' + str(sum(checks.values())) + '/' + str(len(checks)) + ' runtime gates.\n\n')
               summary.write('ZIP SHA256: `' + package.get('archive_sha256', 'unavailable') + '`\n\n')
               summary.write('Production driving checks: ' + str(len(driving_names)) + '; report passed: ' + str(driving.get('passed', False)) + '.\n\n')
+              summary.write('Production survival checks: ' + str(len(survival_names)) + '; report passed: ' + str(survival.get('passed', False)) + '.\n\n')
               summary.write(report['scope'] + '\n')
           print('WINDOWS_PACKAGE_CHECK', json.dumps({'passed': report['passed'], 'checks': checks}))
           if not report['passed']:

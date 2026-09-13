@@ -35,7 +35,7 @@ func _init():
 	version_compatibility(id+"_compat")
 	optional_numeric_fields(id+"_numeric")
 	var report={"passed":failures==0,"checks":checks,"current_format":Store.VERSION,"source_hashes":{"res://scripts/save_store.gd":FileAccess.get_sha256("res://scripts/save_store.gd"),"res://../tools/test_save.gd":FileAccess.get_sha256("res://../tools/test_save.gd")},"legacy_reader":{"format":LegacyV012.VERSION,"source":"source/fixtures/save_store_v012.gd","commit":"d6ddb4d","sha256":LEGACY_SHA256,"provenance":"Byte-identical save_store.gd from the v0.1.2 final build manifest"},"user_saves_touched":false,"qa_fixtures_retained":true,"scope":"Actual production save API and immutable v0.1.2 reader; unique qa_store files only; no slots() calls or non-QA save access."}
-	var output:=FileAccess.open("res://../reports/save-v013-format5.json",FileAccess.WRITE)
+	var output:=FileAccess.open("res://../reports/save-v020-format6.json",FileAccess.WRITE)
 	output.store_string(JSON.stringify(report,"\t"));output.close()
 	print("SAVE_TEST COMPLETE checks=",checks.size()," failures=",failures," format=",Store.VERSION)
 	quit(failures)
@@ -83,7 +83,7 @@ func version_compatibility(prefix:String):
 	var loaded_v4:Dictionary={}
 	var original_v4:=PackedByteArray()
 	var v4_id:=""
-	for version in [1,2,3,4]:
+	for version in [1,2,3,4,5]:
 		var id:=prefix+"_v"+str(version)
 		var old={"version":version,"name":"Version compatibility QA","mode":"sandbox","life":{"money":4321},"world":{"destroyed":["opera/shell/1/2"]},"vehicles":[car.duplicate(true)],"player":[12,5.3,30],"owned":["car"],"navigation":{"key":"map_pin","title":"QA marker","position":[300,4.5,400]}}
 		var path:String=Store.ROOT+id+".json"
@@ -91,7 +91,7 @@ func version_compatibility(prefix:String):
 		var before:=FileAccess.get_file_as_bytes(path)
 		var expected:Dictionary=JSON.parse_string(JSON.stringify(old))
 		var loaded:Dictionary=Store.read(id)
-		check("format %d loads into v5 without rewriting source or losing existing state"%version,loaded.get("version",0)==5 and loaded.get("vehicles",[])==expected.vehicles and loaded.get("life",{})==expected.life and loaded.get("world",{})==expected.world and loaded.get("navigation",{})==expected.navigation and FileAccess.get_file_as_bytes(path)==before)
+		check("format %d loads into current format without rewriting source or losing existing state"%version,loaded.get("version",0)==Store.VERSION and loaded.get("vehicles",[])==expected.vehicles and loaded.get("life",{})==expected.life and loaded.get("world",{})==expected.world and loaded.get("navigation",{})==expected.navigation and FileAccess.get_file_as_bytes(path)==before)
 		if version==4:loaded_v4=loaded;original_v4=before;v4_id=id
 	var old_reader_control:Dictionary=LegacyV012.read(v4_id)
 	var expected_car:Dictionary=JSON.parse_string(JSON.stringify(car))
@@ -105,15 +105,15 @@ func version_compatibility(prefix:String):
 	loaded_v4.vehicle=boards[1].id
 	loaded_v4.spawn_target=boards[0].id
 	var path:String=Store.ROOT+v4_id+".json"
-	check("saving an upgraded v4 world emits format 5",Store.write(v4_id,loaded_v4) and JSON.parse_string(FileAccess.get_file_as_string(path)).version==5)
+	check("saving an upgraded v4 world emits format 6",Store.write(v4_id,loaded_v4) and JSON.parse_string(FileAccess.get_file_as_string(path)).version==Store.VERSION)
 	var upgraded:Dictionary=Store.read(v4_id)
 	var expected_boards:Array=JSON.parse_string(JSON.stringify(boards))
-	check("v5 reload preserves both independent hoverboards and occupied target",upgraded.vehicles.size()==3 and upgraded.vehicles[0]==expected_car and upgraded.vehicles[1]==expected_boards[0] and upgraded.vehicles[2]==expected_boards[1] and upgraded.vehicle==boards[1].id and upgraded.spawn_target==boards[0].id)
+	check("v6 reload preserves both independent hoverboards and occupied target",upgraded.vehicles.size()==3 and upgraded.vehicles[0]==expected_car and upgraded.vehicles[1]==expected_boards[0] and upgraded.vehicles[2]==expected_boards[1] and upgraded.vehicle==boards[1].id and upgraded.spawn_target==boards[0].id)
 	check("upgrade retains the exact original v4 recovery bytes",FileAccess.get_file_as_bytes(path+".bak")==original_v4)
 	var new_bytes:=FileAccess.get_file_as_bytes(path)
 	var backup_bytes:=FileAccess.get_file_as_bytes(path+".bak")
-	check("actual shipped v012 reader refuses format 5",LegacyV012.read(v4_id).is_empty() and LegacyV012.last_error=="This world was saved by a newer version.")
+	check("actual shipped v012 reader refuses format 6",LegacyV012.read(v4_id).is_empty() and LegacyV012.last_error=="This world was saved by a newer version.")
 	check("old-reader rejection preserves new save and recovery bytes",FileAccess.get_file_as_bytes(path)==new_bytes and FileAccess.get_file_as_bytes(path+".bak")==backup_bytes)
 	var copy:String=Store.duplicate_world(v4_id)
 	var copied:Dictionary=Store.read(copy)
-	check("copying a v5 world keeps format and independent new-class data",not copy.is_empty() and copy!=v4_id and copied.version==5 and copied.vehicles==upgraded.vehicles and FileAccess.get_file_as_bytes(path)==new_bytes)
+	check("copying a v6 world keeps format and independent new-class data",not copy.is_empty() and copy!=v4_id and copied.version==Store.VERSION and copied.vehicles==upgraded.vehicles and FileAccess.get_file_as_bytes(path)==new_bytes)

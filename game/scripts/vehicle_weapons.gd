@@ -1,10 +1,11 @@
 extends Node3D
 ## Fictional sandbox fire control. Swept physics rays, not camera-only hitscan.
+signal blast_hit(point: Vector3, radius: float, damage: float, owner: RigidBody3D)
 const Effects = preload("res://scripts/combat_effects.gd")
 const PROJECTILE_CAPACITY := 32
 const PROFILES := {
-	"tank":{"speed":440.0, "gravity":9.8, "energy":1.0e9, "radius":16.0, "cooldown":1.15, "life":10.0, "effect":1.0},
-	"fighter":{"speed":1350.0, "gravity":0.0, "energy":1.2e9, "radius":22.0, "cooldown":0.35, "life":7.0, "effect":1.35}
+	"tank":{"speed":440.0, "gravity":9.8, "energy":1.0e9, "damage":90.0, "radius":16.0, "cooldown":1.15, "life":10.0, "effect":1.0},
+	"fighter":{"speed":1350.0, "gravity":0.0, "energy":1.2e9, "damage":70.0, "radius":22.0, "cooldown":0.35, "life":7.0, "effect":1.35}
 }
 const MIN_ELEVATION := deg_to_rad(-12.0)
 const MAX_ELEVATION := deg_to_rad(70.0)
@@ -99,7 +100,7 @@ func _exclusions(vehicle: RigidBody3D) -> Array[RID]:
 
 func _ray(from: Vector3, to: Vector3, exclude: Array[RID]) -> Dictionary:
 	if from.distance_squared_to(to) < 0.000001: return {}
-	var query := PhysicsRayQueryParameters3D.create(from, to, 15, exclude)
+	var query := PhysicsRayQueryParameters3D.create(from, to, 31, exclude)
 	query.hit_from_inside = true
 	query.hit_back_faces = true
 	return get_world_3d().direct_space_state.intersect_ray(query)
@@ -120,9 +121,20 @@ func _initial_obstruction(vehicle: RigidBody3D, marker: Node3D, exclude: Array[R
 		overlap.shape = _muzzle_overlap
 		overlap.transform = Transform3D(Basis.IDENTITY, marker.global_position)
 		overlap.exclude = exclude
-		overlap.collision_mask = 15
+		overlap.collision_mask = 31
 		if not get_world_3d().direct_space_state.intersect_shape(overlap, 1).is_empty(): obstruction = {"position":marker.global_position}
 	return obstruction
+
+func weapon_profile(vehicle: RigidBody3D) -> Dictionary:
+	if not is_instance_valid(vehicle) or not PROFILES.has(str(vehicle.get("kind"))): return {}
+	var profile: Dictionary = PROFILES[str(vehicle.get("kind"))].duplicate()
+	var saved_upgrade: Variant = vehicle.get("weapon_upgrade")
+	var upgrade := 0
+	if (saved_upgrade is int or saved_upgrade is float) and is_finite(float(saved_upgrade)):
+		upgrade = int(clampf(float(saved_upgrade),0.0,3.0))
+	profile.damage *= 1.0 + upgrade * .25
+	profile.cooldown *= 1.0 - upgrade * .10
+	return profile
 
 func aim_point() -> Vector3:
 	# A bounded prediction of this muzzle's trajectory, independent of the
@@ -131,7 +143,7 @@ func aim_point() -> Vector3:
 	if not is_instance_valid(vehicle) or not PROFILES.has(str(vehicle.get("kind"))): return Vector3.ZERO
 	var marker := _muzzle(vehicle)
 	if not is_instance_valid(marker): return vehicle.global_position
-	var profile: Dictionary = PROFILES[str(vehicle.get("kind"))]
+	var profile := weapon_profile(vehicle)
 	var exclude := _exclusions(vehicle)
 	var from := marker.global_position
 	var obstruction := _initial_obstruction(vehicle, marker, exclude)
@@ -197,7 +209,7 @@ func fire_current() -> bool:
 	if slot.is_empty():
 		_pool_rejections += 1
 		return false
-	var profile: Dictionary = PROFILES[str(vehicle.get("kind"))]
+	var profile := weapon_profile(vehicle)
 	var from := marker.global_position
 	var direction := -marker.global_basis.z.normalized()
 	if not from.is_finite() or not direction.is_finite() or direction.length_squared() < 0.9: return false
@@ -238,6 +250,7 @@ func _impact(slot: Dictionary, point: Vector3, normal: Vector3 = Vector3.UP) -> 
 	var source = slot.source.get_ref() if slot.source is WeakRef else null
 	if is_instance_valid(game) and game.has_method("apply_combat_blast"):
 		game.call("apply_combat_blast", point, float(slot.profile.energy), float(slot.profile.radius), source)
+	blast_hit.emit(point,float(slot.profile.radius),float(slot.profile.damage),source)
 	impact_effect(point, float(slot.profile.effect), normal)
 
 func impact_effect(point: Vector3, size: float = 1.0, normal: Vector3 = Vector3.UP) -> void:

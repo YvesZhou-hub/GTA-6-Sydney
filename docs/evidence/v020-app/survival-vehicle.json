@@ -1,0 +1,662 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "actual Jolt backend",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "player starts with 120 HP",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "first hit removes health and stores source",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "same-frame crowd hits cannot bypass protection",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "protection lasts at least a third of a second",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "protection expires on physics clock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "healing clamps to max and returns actual amount",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "defeat is one signal without teleporting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ordinary heal cannot resurrect",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "reset restores player and clears protection",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid damage cannot corrupt player health",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 1.0,
+				"health": 88.0
+			},
+			"name": "car is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 1.0,
+				"health": 88.0
+			},
+			"name": "motorcycle is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 1.0,
+				"health": 88.0
+			},
+			"name": "speedboat is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 4.0,
+				"health": 97.0
+			},
+			"name": "yacht is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 1.0,
+				"health": 88.0
+			},
+			"name": "paraglider is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 1.0,
+				"health": 88.0
+			},
+			"name": "glider is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 1.0,
+				"health": 88.0
+			},
+			"name": "helicopter is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 3.0,
+				"health": 96.0
+			},
+			"name": "airliner is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 1.0,
+				"health": 88.0
+			},
+			"name": "hoverboard is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 6.0,
+				"health": 98.0
+			},
+			"name": "tank is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {
+				"armor": 3.0,
+				"health": 96.0
+			},
+			"name": "fighter is vulnerable with expected armor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter damage and upgrade survive load and physics ticks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter upgrade is bounded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter old zero-health save stays destroyed in survival",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter destroyed boost is disabled",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter partial repair reports actual gain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter full repair remains backwards compatible",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter corrupt survival numbers recover finite defaults",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank classic fixture immunity is unchanged",
+			"passed": true
+		},
+		{
+			"detail": {
+				"drop": 4.76220703125,
+				"velocity": "(0.0, -9.462346, -48.07093)"
+			},
+			"name": "tank destroyed craft falls without freeze or resurrection",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter classic fixture immunity is unchanged",
+			"passed": true
+		},
+		{
+			"detail": {
+				"drop": 4.785400390625,
+				"velocity": "(0.0, -9.530856, -48.78557)"
+			},
+			"name": "fighter destroyed craft falls without freeze or resurrection",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard classic fixture immunity is unchanged",
+			"passed": true
+		},
+		{
+			"detail": {
+				"drop": 4.785400390625,
+				"velocity": "(0.0, -9.530855, -48.78557)"
+			},
+			"name": "hoverboard destroyed craft falls without freeze or resurrection",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter empty fuel cannot trigger boarding launch or boost",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner empty fuel cannot trigger boarding launch or boost",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard empty fuel cannot trigger boarding launch or boost",
+			"passed": true
+		},
+		{
+			"detail": {
+				"health": 94.9097508978075,
+				"impact": {
+					"angular_velocity": [
+						5.11956930160522,
+						0.000000563354205951327,
+						0.0
+					],
+					"closing_mps": 20.5435688634073,
+					"collider": "/root/@Node3D@2/@StaticBody3D@3566",
+					"contact_count": 4,
+					"energy_j": 32707.9621775306,
+					"health": 94.9097508978075,
+					"impulse_mps": 20.5551285282258,
+					"impulse_normal_mps": 20.5435688634073,
+					"linear_velocity": [
+						0.0,
+						-3.96766471862793,
+						-0.785774230957031
+					],
+					"normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"normal_closing": 0.0,
+					"point": [
+						0.545000076293945,
+						3999.57373046875,
+						-9.5
+					],
+					"previous_velocity": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"relative_velocity": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"rotation": [
+						0.0,
+						0.0,
+						0.0
+					]
+				}
+			},
+			"name": "real survival contact damages formerly immune hoverboard",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "upgrade changes damage and cooldown without mutating base profile",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "healthy tank fires once and respects cooldown",
+			"passed": true
+		},
+		{
+			"detail": {
+				"hits": 1
+			},
+			"name": "layer 16 target produces typed gameplay blast independently",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "destroyed tank cannot fire",
+			"passed": true
+		}
+	],
+	"count": 113,
+	"passed": true
+}

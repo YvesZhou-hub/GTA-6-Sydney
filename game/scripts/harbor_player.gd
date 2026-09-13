@@ -9,8 +9,37 @@ var cycle = 0.0
 var last_safe = Vector3.ZERO
 var stamina = 100.0
 var foot_clock = 0.0
+var max_health: float = 120.0
+var health: float = 120.0
+var damage_cooldown: float = 0.0
+var last_damage_origin := Vector3.ZERO
 signal footstep(water: bool)
 signal landed(speed: float)
+signal health_changed(current: float, maximum: float)
+signal defeated
+
+func take_damage(amount: float, origin: Vector3 = Vector3.ZERO) -> float:
+	if not is_finite(amount) or amount <= 0.0 or health <= 0.0 or damage_cooldown > 0.0:
+		return 0.0
+	var removed := minf(health, amount)
+	health = maxf(0.0, health - removed)
+	damage_cooldown = 0.6
+	last_damage_origin = origin if origin.is_finite() else Vector3.ZERO
+	health_changed.emit(health, max_health)
+	if health <= 0.0: defeated.emit()
+	return removed
+
+func reset_health() -> void:
+	health = max_health
+	damage_cooldown = 0.0
+	health_changed.emit(health, max_health)
+
+func heal(amount: float) -> float:
+	if not is_finite(amount) or amount <= 0.0 or health <= 0.0: return 0.0
+	var restored := minf(amount, maxf(0.0, max_health - health))
+	health += restored
+	if restored > 0.0: health_changed.emit(health, max_health)
+	return restored
 
 func _ready():
 	name = "Resident"
@@ -73,7 +102,8 @@ func body(pos: Vector3,size: Vector3,mat: Material,parent:Node3D,round_form=fals
 	parent.add_child(mesh)
 
 func _physics_process(delta):
-	if not enabled: return
+	damage_cooldown = maxf(0.0, damage_cooldown - delta)
+	if not enabled or health <= 0.0: return
 	var direction = Input.get_vector("left","right","forward","back")
 	var move = Vector3(direction.x,0,direction.y).rotated(Vector3.UP,yaw)
 	swimming = global_position.y < 0.65 and not is_on_floor() and not preload("res://scripts/metro_entrances.gd").contains_dry_volume(global_position)

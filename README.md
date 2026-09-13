@@ -1,12 +1,14 @@
 # Harbourlife · 悉尼海港
 
-**v0.1.9-preview.1 · 漂移、急刹、三倍加速与平衡车无损**
+**v0.2.0-preview.1 · 奶龙危机：悉尼街区生存**
 
-[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.9-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.1.9-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
+[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.2.0-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/harbourlife/releases/download/v0.2.0-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/harbourlife/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-本轮新增 **Ctrl + A/D 漂移、空格急刹、Shift 三倍加速**，改善摩托车转向，提高车辆耐撞程度；磁悬浮平衡车不会损坏，旧存档中的破损也会恢复。详见 [更新说明](docs/FIXES_0.1.9.md) 和 [驾驶操作](docs/DRIVING.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 与 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动说明](docs/WINDOWS.md)
+本轮加入 **奶龙危机**：在现有悉尼街区对抗五类统一形象的奶龙，击败高等级敌人获得更多金币。人物拥有生命和医疗包，载具会受损失去动力；金币可用于维修、补给与火控升级。保留无敌人的自由观光模式，以及漂移、急刹和 Shift 三倍加速。[生存规则](docs/SURVIVAL_DESIGN.md) · [驾驶操作](docs/DRIVING.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 与 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动说明](docs/WINDOWS.md)
+
+![v0.2.0 奶龙危机 · 最终 Mac App 实际场景](docs/evidence/v020-app/survival/five-nailong-city-hud.png)
 
 以下宣传素材录制于 v0.1.8：
 
@@ -20,6 +22,14 @@
 ![v0.1.6 歌剧院幕墙细节 · 最终导出 App 实际画面](docs/screenshots/v016/opera-north-curtain-detail.png)
 
 ![v0.1.6 悉尼塔 Skywalk · 最终导出 App 实际画面](docs/screenshots/v016/sydney-tower-skywalk.png)
+
+## 奶龙危机怎么玩
+
+选择“奶龙危机 · 开始生存”：先有 25 秒整备，左键或 X 使用脉冲枪，Tab 免费进入载具。清理街区获得金币与医疗包，H 回复生命，B 在脱战后维修或升级。怪物头顶显示类型、等级和奖励；每完成两轮清理，后续敌人提升一级，最高 Lv.10。
+
+坦克与战机可升级火控三次。车辆耐久归零会失去动力，E 离舱或 Home 呼叫救援；救援保留升级，收费不超过现有余额。此模式没有基地建设。仍可选择“自由观光 · 无敌人”安静游览。
+
+存档格式升级为 6，可读取旧存档并保留金币、载具和导航；新版保存后旧版游戏无法读取，请保留更新前的存档备份。
 
 ## 下载后直接试飞
 
@@ -75,13 +85,13 @@ Mac 发布包采用本地 ad-hoc 签名，未取得 Apple Developer ID 签名或
 
 ## 创造载具与其他玩法
 
-按 **Tab** 选择车型，**每次点击免费新增独立副本并立即进入驾驶位**，之前的载具继续留在原地。不需要下车、找车或解锁。系统检查完整车身、机翼或船体，选择合理的道路、水面或机场位置；附近放不下客机时使用机场空闲位置。没有人为设定副本上限，实际数量受设备性能与可用空间影响。
+按 **Tab** 选择车型，**每次点击免费新增独立副本并立即进入驾驶位**，之前的载具继续留在原地。不需要下车、找车或解锁。系统检查完整车身、机翼或船体，选择合理的道路、水面或机场位置；附近放不下客机时使用机场空闲位置。没有人为设定副本上限，实际数量受设备性能与可用空间影响。当前版本同款载具共享耐久与火控升级，新增副本继承损伤；车型损毁后按 B 远程维修再出发。
 
 ![Aether X1 反重力平衡车，导出 App 实际画面](docs/screenshots/v013/hoverboard.png)
 
-十一类载具包括超跑、运动摩托、反重力平衡车、豪华快艇、多层游艇、滑翔伞、滑翔机、直升机、大型双发客机、无敌坦克和 2,000 km/h 战斗机。坦克支持鼠标瞄准、炮管俯仰，X 或鼠标左键发射；战机发射前向火箭，两者撞击能破坏建筑构件并保存损坏状态。超跑参考 Revuelto，摩托参考 S 1000 RR，客机采用 787-9 的体量与主要特征，两种船分别参考 Rivamare 与 90 Ocean。模型包含轮胎轮毂、灯组、玻璃、发动机、甲板与座舱细节，采用原创程序化几何，不是厂商 CAD 或照片级扫描。[车辆和飞机参考](docs/VEHICLE_REFERENCE.md) · [新航空模型参考](docs/AIR_VEHICLE_REFERENCE.md) · [船艇参考](docs/BOAT_REFERENCE.md)
+十一类载具包括超跑、运动摩托、反重力平衡车、豪华快艇、多层游艇、滑翔伞、滑翔机、直升机、大型双发客机、重装坦克和 2,000 km/h 战斗机。坦克支持鼠标瞄准、炮管俯仰，X 或鼠标左键发射；战机发射前向火箭，两者撞击能破坏建筑构件并保存损坏状态。超跑参考 Revuelto，摩托参考 S 1000 RR，客机采用 787-9 的体量与主要特征，两种船分别参考 Rivamare 与 90 Ocean。模型包含轮胎轮毂、灯组、玻璃、发动机、甲板与座舱细节，采用原创程序化几何，不是厂商 CAD 或照片级扫描。[车辆和飞机参考](docs/VEHICLE_REFERENCE.md) · [新航空模型参考](docs/AIR_VEHICLE_REFERENCE.md) · [船艇参考](docs/BOAT_REFERENCE.md)
 
-**Aether X1 反重力平衡车**是原创科幻载具：W/S 加速或后退，A/D 转向，空格急停；R/F 提升或降低悬浮高度，松开后保持。它自动越过台阶并掠水行驶，不消耗燃料；遇到无法越过的实体墙会辅助制动。
+**Aether X1 反重力平衡车**是原创科幻载具：W/S 加速或后退，A/D 转向，空格急停；R/F 提升或降低悬浮高度，松开后保持。它自动越过台阶并掠水行驶，能源可在 B 菜单补充；遇到无法越过的实体墙会辅助制动。
 
 | 载具 | 常规速度上限 | Shift 加速上限 |
 | --- | ---: | ---: |
@@ -105,6 +115,9 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 | --- | --- |
 | 行走、油门与转向 | WASD / 方向键 |
 | 观察 | 鼠标 |
+| 步行脉冲枪、坦克 / 战机开火 | 左键 / X |
+| 使用医疗包 | H |
+| 维修、补给与火控升级 | B |
 | 步行奔跑；载具三倍加速 | 按住 Shift |
 | 跑车 / 摩托车漂移 | Ctrl + A / D |
 | 跳跃、载具制动 / 减速板 | 空格 |
@@ -138,7 +151,7 @@ Mac 存档位于 `~/Library/Application Support/Godot/app_userdata/Harbourlife �
 
 ## 源码与本地构建
 
-[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；游戏内容使用 `v0.1.9-preview.1` 标签对应的源码；Windows 验证报告记录确切构建提交与游戏文件哈希。
+[仓库源码](https://github.com/YvesZhou-hub/harbourlife)保留程序化建模源资产、地图快照和验证脚本；游戏内容使用相应发布标签对应的源码；Windows 验证报告记录确切构建提交与游戏文件哈希。
 
 **Mac 构建：**需要 macOS、Python 3，以及 [Godot 官方 4.7.2-stable 编辑器与 macOS 导出模板](https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable)。将编辑器应用内 `Contents/MacOS/Godot` 放为 `tools/runtime/godot`，导出模板 `macos.zip` 放为 `tools/runtime/templates/macos.zip`，保持两者版本一致，再运行：
 
@@ -172,4 +185,4 @@ Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据�
 
 Harbourlife is a free, offline, single-player Sydney sandbox for **Windows x86_64 and Apple Silicon Mac**. On Windows, extract the complete ZIP and run `Harbourlife.exe` with all accompanying files in place; see the [Windows guide](docs/WINDOWS.md). Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
-**v0.1.9-preview.1 · Drifting, emergency brakes and triple-speed boost.** Hold Ctrl with A/D to drift, Space to brake, or Shift to boost up to three times each vehicle's speed baseline. Motorcycles turn more responsively, ordinary vehicles withstand more impacts, and hoverboards remain undamaged, including when restoring older saves. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Final build-specific validation is in [TESTING.md](docs/TESTING.md), with Windows results separately in [WINDOWS.md](docs/WINDOWS.md). The linked trailer remains footage of v0.1.8.
+**v0.2.0 · Nailong Survival.** Fight five consistent enemy types in the existing Sydney streets. Higher-level enemies award more coins; spend them on medkits, vehicle repairs and weapon upgrades. Characters and vehicles can take damage, and new copies inherit their vehicle type's durability. H heals, B opens services, and left-click/X fires. Peaceful exploration without enemies remains available. Drift and triple-speed boost are retained. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Final build-specific validation is in [TESTING.md](docs/TESTING.md), with Windows results separately in [WINDOWS.md](docs/WINDOWS.md). The linked trailer remains footage of v0.1.8.

@@ -1,0 +1,148 @@
+{
+	"checks": [
+		{
+			"name": "atomic write",
+			"passed": true
+		},
+		{
+			"name": "read data",
+			"passed": true
+		},
+		{
+			"name": "saved summer time survives actual production store",
+			"passed": true
+		},
+		{
+			"name": "overwrite",
+			"passed": true
+		},
+		{
+			"name": "previous recovery copy",
+			"passed": true
+		},
+		{
+			"name": "independent copy",
+			"passed": true
+		},
+		{
+			"name": "world copy retains independent summer time",
+			"passed": true
+		},
+		{
+			"name": "corrupt rejected",
+			"passed": true
+		},
+		{
+			"name": "backup preserved",
+			"passed": true
+		},
+		{
+			"name": "invalid optional clock section is rejected before runtime load",
+			"passed": true
+		},
+		{
+			"name": "future version rejected",
+			"passed": true
+		},
+		{
+			"name": "legacy reader matches actual v012 source digest",
+			"passed": true
+		},
+		{
+			"name": "format 1 loads into current format without rewriting source or losing existing state",
+			"passed": true
+		},
+		{
+			"name": "format 2 loads into current format without rewriting source or losing existing state",
+			"passed": true
+		},
+		{
+			"name": "format 3 loads into current format without rewriting source or losing existing state",
+			"passed": true
+		},
+		{
+			"name": "format 4 loads into current format without rewriting source or losing existing state",
+			"passed": true
+		},
+		{
+			"name": "format 5 loads into current format without rewriting source or losing existing state",
+			"passed": true
+		},
+		{
+			"name": "actual v012 reader accepts valid v4 control",
+			"passed": true
+		},
+		{
+			"name": "saving an upgraded v4 world emits format 6",
+			"passed": true
+		},
+		{
+			"name": "v6 reload preserves both independent hoverboards and occupied target",
+			"passed": true
+		},
+		{
+			"name": "upgrade retains the exact original v4 recovery bytes",
+			"passed": true
+		},
+		{
+			"name": "actual shipped v012 reader refuses format 6",
+			"passed": true
+		},
+		{
+			"name": "old-reader rejection preserves new save and recovery bytes",
+			"passed": true
+		},
+		{
+			"name": "copying a v6 world keeps format and independent new-class data",
+			"passed": true
+		},
+		{
+			"name": "yaw wrong type rejected before runtime load without changing save or backup",
+			"passed": true
+		},
+		{
+			"name": "yaw nonfinite number rejected before runtime load without changing save or backup",
+			"passed": true
+		},
+		{
+			"name": "pitch wrong type rejected before runtime load without changing save or backup",
+			"passed": true
+		},
+		{
+			"name": "pitch nonfinite number rejected before runtime load without changing save or backup",
+			"passed": true
+		},
+		{
+			"name": "elapsed wrong type rejected before runtime load without changing save or backup",
+			"passed": true
+		},
+		{
+			"name": "elapsed nonfinite number rejected before runtime load without changing save or backup",
+			"passed": true
+		},
+		{
+			"name": "absent legacy camera numbers remain absent for runtime defaults",
+			"passed": true
+		},
+		{
+			"name": "valid legacy camera numbers remain exact",
+			"passed": true
+		}
+	],
+	"current_format": 6,
+	"legacy_reader": {
+		"commit": "d6ddb4d",
+		"format": 4,
+		"provenance": "Byte-identical save_store.gd from the v0.1.2 final build manifest",
+		"sha256": "da9a206bdd26938774f91353aafb7db701ca7658b7f45498a31d590c0609918d",
+		"source": "source/fixtures/save_store_v012.gd"
+	},
+	"passed": true,
+	"qa_fixtures_retained": true,
+	"scope": "Actual production save API and immutable v0.1.2 reader; unique qa_store files only; no slots() calls or non-QA save access.",
+	"source_hashes": {
+		"res://../tools/test_save.gd": "f2f29f98d2955eac3f9c6b2cd58e4607a21a069c560d1a2687d9d8924d298ead",
+		"res://scripts/save_store.gd": "3e213c96e6581500a679da7f169a33c3d3a1f85ae03792fd12f3874c8c4cfece"
+	},
+	"user_saves_touched": false
+}

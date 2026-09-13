@@ -81,7 +81,7 @@ func run(owner_game: Node) -> void:
 	var control_count := check_tree_fonts(game.canvas,mismatches)
 	check("Production menu, HUD and auxiliary Controls inherit bundled font",control_count > 20 and mismatches.is_empty(),{"controls":control_count,"mismatches":mismatches})
 	for kind: String in game.VEHICLE_NAMES:
-		var title: String = game.VEHICLE_NAMES[kind] + " · 免费驾驶"
+		var title: String = game.VEHICLE_NAMES[kind] + " · 耐久 100%"
 		var button := button_named(title)
 		if not is_instance_valid(button):
 			check("Vehicle label exists: " + kind,false)
@@ -91,9 +91,9 @@ func run(owner_game: Node) -> void:
 		var style: StyleBox = button.get_theme_stylebox("normal")
 		var width := font.get_string_size(title,HORIZONTAL_ALIGNMENT_LEFT,-1,size).x
 		check("Complete shaped vehicle label fits: " + kind,missing_glyphs(title,font).is_empty() and width + style.get_minimum_size().x <= button.size.x + .5,{"text":title,"text_width":width,"button_width":button.size.x})
-	var tank := button_named("Harbour Bastion · 无敌坦克 · 免费驾驶")
-	var fighter := button_named("Aster F-27 · 无敌战斗机 · 免费驾驶")
-	check("Original tank and fighter names remain exact",is_instance_valid(tank) and is_instance_valid(fighter))
+	var tank := button_named("Harbour Bastion · 重装坦克 · 耐久 100%")
+	var fighter := button_named("Aster F-27 · 战斗机 · 耐久 100%")
+	check("Current tank and fighter names with durability remain exact",is_instance_valid(tank) and is_instance_valid(fighter))
 	if is_instance_valid(tank) and is_instance_valid(fighter):
 		var scroll: ScrollContainer = game.modal_content.get_parent()
 		scroll.ensure_control_visible(fighter)

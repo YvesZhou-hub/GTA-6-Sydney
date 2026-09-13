@@ -1,3 +1,27 @@
+# v0.2.0 奶龙危机验证
+
+最终导出的 Apple Silicon Mac App 已通过 **40/40 原生完整城市检查**，退出码为 0，并人工检查四张截图。验证包括五型奶龙真实落地、攻击前摇和人物扣血、H 治疗与冷却、坦克弹丸击杀并增加金币、B 暂停/鼠标释放，以及付费维修和装甲减伤。
+
+[最终 App 生存报告](evidence/v020-app/survival/report.json) · [外部 EXE/PCK 哈希与新鲜截图绑定](evidence/v020-app/survival/app-binding.json) · [构建清单](evidence/v020-app/build.json)
+
+| 局部生产脚本验证 | 通过数 |
+| --- | ---: |
+| [战斗、收益、维修、补油与状态恢复](evidence/v020-app/survival-loop.json) | 57/57 |
+| [人物、载具损毁与升级武器](evidence/v020-app/survival-vehicle.json) | 113/113 |
+| [有限耐久下的驾驶](evidence/v020-app/survival-driving.json) | 32/32 |
+| [有限耐久下的各类载具加速](evidence/v020-app/survival-boost.json) | 111/111 |
+| [五类敌人、等级、奖励与物理](evidence/v020-app/nailong-enemies.json) | 52/52 |
+| [生命 HUD 与交互隔离](evidence/v020-app/survival-hud.json) | 31/31 |
+| [实际存档 API、旧版本迁移与备份](evidence/v020-app/save-v020-format6.json) | 32/32 |
+
+原生测试使用引擎输入事件和真实物理，不是手持鼠标的长时间试玩；角色/载具初始位置及证据镜位固定。局部测试与最终 App 测试分别列出，不当作全覆盖或长期难度平衡结论。全部使用独立 QA 世界，未访问玩家存档。
+
+Apple M4、1440×900、五个活动 AI、固定镜位的 90 帧短样本平均 8.24 ms、P95 25.09 ms；它不代表持续驾驶、地图流式加载或其他硬件性能。编译后的 .gdc 不能拿空源码哈希证明身份，最终产物由外部 EXE/PCK SHA-256 绑定。Windows 构建与测试另见 [Windows 说明](WINDOWS.md)。
+
+以下保留 v0.1.9 历史证据，不将它们充作本轮验证。
+
+---
+
 # v0.1.9 验证记录
 
 本轮验证漂移、急刹、三倍加速和载具耐久。最终导出的 Apple Silicon macOS App 完成 **156/156 项原生检查，产出 13 张截图**；局部源码夹具另有 **233/233 项检查**，两类结果分别计数，不累计旧版本结果。文件身份、逐项计数与截图哈希见 [证据索引](evidence/v019-app/evidence-index.json)。

@@ -1,0 +1,72 @@
+{
+  "app": "${APP}",
+  "command": [
+    "${APP}/Contents/MacOS/Harbourlife",
+    "--",
+    "--survival-qa"
+  ],
+  "started_utc": "2026-09-13T08:40:49.392159+00:00",
+  "finished_utc": "2026-09-13T08:42:30.576475+00:00",
+  "wall_seconds": 101.1843159198761,
+  "exit_code": 0,
+  "expected_manifest_sha256": {
+    "Contents/MacOS/Harbourlife": "eff650b05dde7d78996e31ba4d3de096cd6130e744f7510d2777ddca84377873",
+    "Contents/Resources/Harbourlife.pck": "7e2d1f2a0617eaf878bf78ea51722bfc774edbaba490e94bfa832d1347a1440a"
+  },
+  "sha256_before": {
+    "Contents/MacOS/Harbourlife": "eff650b05dde7d78996e31ba4d3de096cd6130e744f7510d2777ddca84377873",
+    "Contents/Resources/Harbourlife.pck": "7e2d1f2a0617eaf878bf78ea51722bfc774edbaba490e94bfa832d1347a1440a"
+  },
+  "sha256_after": {
+    "Contents/MacOS/Harbourlife": "eff650b05dde7d78996e31ba4d3de096cd6130e744f7510d2777ddca84377873",
+    "Contents/Resources/Harbourlife.pck": "7e2d1f2a0617eaf878bf78ea51722bfc774edbaba490e94bfa832d1347a1440a"
+  },
+  "same_app_bytes_before_after": true,
+  "fresh_report_after_start": true,
+  "native_driver": "Metal 4.0 / Forward+ / Apple M4",
+  "native_log_sha256": "6e4db9791aa1e869a1419b275bc9b1c6ff291c1fe0a5e74724550120427e3e89",
+  "engine_errors": [],
+  "artifacts": {
+    "report.json": {
+      "sha256": "b11cb16e33009ba49a7a2d0d3761f8191033d631790829ddb4ad9cd47395b55d",
+      "bytes": 13770,
+      "modified_utc": "2026-09-13T08:42:29.518890+00:00"
+    },
+    "five-nailong-city-hud.png": {
+      "sha256": "652bd311908c2d1aac98251815067454e0a4615a23a902151f3c6779fb14b9e8",
+      "bytes": 648947,
+      "modified_utc": "2026-09-13T08:42:19.168375+00:00"
+    },
+    "services-during-combat-blocked.png": {
+      "sha256": "f425c34cb18d332d4166b19039f6551dc8f12bcec718fd47d549441a3ddf709b",
+      "bytes": 515219,
+      "modified_utc": "2026-09-13T08:42:20.967811+00:00"
+    },
+    "tank-survival-impact-hud.png": {
+      "sha256": "28fbec436b06fb89321e47122c183d51e9d3d98bf0812b2a028781a89a5c3bac",
+      "bytes": 510432,
+      "modified_utc": "2026-09-13T08:42:21.392069+00:00"
+    },
+    "services-paid-repair.png": {
+      "sha256": "560a0a5029883df8c1173da7c5f5f43275e58b8546154335e8a5ffb7940f6725",
+      "bytes": 362275,
+      "modified_utc": "2026-09-13T08:42:29.501841+00:00"
+    }
+  },
+  "visual_review_pending": false,
+  "scope": "Final exported Mac App; no source override and no player save access. Report identifies compiled resources, while this external binding identifies the executable/PCK bytes actually run.",
+  "visual_review": {
+    "all_four_native_images_inspected": true,
+    "five_enemy_models_visible": true,
+    "enemy_level_reward_labels_visible": true,
+    "health_map_compass_driving_hud_legible": true,
+    "final_two_line_vehicle_toast_verified": true,
+    "services_disabled_in_combat": true,
+    "paid_tank_repair_visible_and_activated_via_button_signal": true,
+    "limits": [
+      "Tank remains visible beneath an actual tree crown; the fixed evidence camera is not a promotional composition.",
+      "The service menu uses a scroll container; the lower continue button is below the initial viewport when refuel is present. Scroll input itself was not exercised by this runner.",
+      "Actor positions and cameras are intentionally posed; performance covers only a brief fixed-view native sample with five active enemy AIs."
+    ]
+  }
+}
