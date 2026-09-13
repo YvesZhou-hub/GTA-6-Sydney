@@ -112,7 +112,7 @@ B 面板允许查看状态，但维修、补给和升级都由同一个交易入
 | `game/scripts/nailong_enemy.gd` | `CharacterBody3D` 接地追踪、绕障、攻击意图、前摇/冷却、独立生命、一次性死亡通知 |
 | `game/scripts/nailong_model.gd` | 五型共享网格/材质、程序动作、受击和死亡表现、攻击预警；不处理金币 |
 | `game/scripts/harbor_player.gd` | 人物生命、治疗、伤害间隔及 `defeated` 信号 |
-| `game/scripts/harbor_vehicle.gd` | 真实载具耐久、装甲、失去动力、维修、火控等级保存；通过 `survival_enabled` 区分生存与观光 |
+| `game/scripts/harbor_vehicle.gd` | 真实载具耐久、装甲、失去动力、维修、火控等级保存；两个实际游戏模式都启用 `survival_enabled`，关闭值仅保留给旧版独立测试兼容 |
 | `game/scripts/vehicle_weapons.gd` | 载具弹道与武器伤害，发出 `blast_hit`，火控等级修改基础伤害和冷却 |
 | `game/scripts/survival_hud.gd` | 只显示状态并发出治疗/服务请求，不扣金币、不直接治疗、不直接生成敌人 |
 | `game/scripts/main.gd` | 模式、H/B/武器输入、菜单、主场景和各模块整合 |

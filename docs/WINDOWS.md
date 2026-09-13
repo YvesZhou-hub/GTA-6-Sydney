@@ -1,6 +1,6 @@
 # Windows x86_64 试玩说明
 
-本页面向 Harbourlife v0.2.0 Windows x86_64 下载包，操作说明对应 v0.2.0。游戏为离线单人试玩，不需要账号、源码或 Godot 编辑器。新版本的 Windows 管线要求导出的 EXE 通过完整城市启动、驾驶物理与奶龙生存检查后才上传；具体状态以 [v0.2.0-preview.1 发布页](https://github.com/YvesZhou-hub/harbourlife/releases/tag/v0.2.0-preview.1) 的 windows-validation.json 为准。下方保留旧版验证记录，不代表本轮 Windows GPU 实测。
+本页面向 Harbourlife v0.2.0 Windows x86_64 下载包，操作说明对应 v0.2.0。游戏为离线单人试玩，不需要账号、源码或 Godot 编辑器。本轮 Windows 导出包已经通过完整城市启动、驾驶物理与奶龙生存的无窗口检查，详细证据见下方 v0.2.0 记录；下载附件以 [v0.2.0-preview.1 发布页](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/tag/v0.2.0-preview.1) 为准。Windows GPU 画面与人工操作尚未实测。
 
 ## 下载与启动
 
@@ -77,6 +77,32 @@
 如果无法启动或遇到显示问题，请记录 Windows 版本、CPU、显卡和驱动版本、错误原文、下载包名称及 SHA-256。游戏能打开时可补充 F3 诊断信息和截图。缺少 PCK 时先核对是否完整解压。
 
 ## Windows 验证记录
+
+### v0.2.0：Windows 构建、驾驶与奶龙生存无窗口验证通过
+
+2026-09-13，[Windows 云端构建与验收运行 34748565393](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34748565393)通过。构建提交为 `a5878918436ea90df635075093e204e059602847`，引擎为 Godot `4.7.2.stable.official.ed1daf0bf`。下载该次运行产物后再次核对了报告、日志、ZIP 中的全部文件和源文件清单。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 下载包 | `Harbourlife-Windows-x86_64.zip`，85,371,170 字节；17 个随包文件合计 189,057,526 字节 |
+| 包与源码身份 | 23/23 项包检查通过；215 个游戏源文件逐一匹配同版 Mac 构建；AMD64 PE32+、Godot 4.7.2 外部 PCK、ZIP CRC 与逐文件 SHA-256 均复核通过 |
+| 运行门禁 | 26/26 项通过；从最终 ZIP 解压后启动实际 EXE，城市启动、驾驶和生存三个进程退出码均为 0，九份运行日志无错误或警告 |
+| 世界初始化 | `HARBOR_WORLD_READY buildings=15097 structure_components=21697`；实际城市与机场完成初始化 |
+| 驾驶专项 | Jolt 60 Hz 检查 32/32 通过，覆盖跑车与摩托车急刹、漂移、转向、三倍极速、松开恢复及独立载具状态 |
+| 生存专项 | 30/30 通过：五种奶龙在真实城市地面生成与落地、敌人攻击扣血、程序化 H/B 输入与治疗冷却、战斗期间禁止补给、免费新增并驾驶坦克、实际炮弹击败奖励、坦克受损与共享耐久、付费维修及离开菜单恢复游戏 |
+| 存档与运行身份 | 驾驶和生存分别使用新的临时用户目录，新鲜报告均通过检查；跳过玩家存档读取，未写存档。运行后的 EXE / PCK 哈希与下载 ZIP 中的文件一致 |
+| 验证边界 | 使用 `--headless`；生存报告明确记录 `native=false`、`display_driver=headless`，没有 Windows 截图。GPU 画面、中文视觉效果、音效听感、人工鼠标/驾驶/炮击、FPS、完整游玩与存档重开未实测 |
+| 签名 | 未配置数字签名证书 |
+
+26 项运行门禁包含对包检查、32 项驾驶检查和 30 项生存检查的核验，这些层级不相加作为独立测试总数。驾驶和生存分别从同一份最终 EXE 运行 `--headless --fixed-fps 60 -- --driving-qa` 和 `--headless --fixed-fps 60 -- --survival-qa`，各设 300 秒运行时限。脚本以编译资源导出，因此包内脚本可加载不等于逐字节源码证明；测试版本由外部 EXE / PCK 哈希和构建源清单共同确认。
+
+ZIP SHA-256：
+
+```text
+d0b919ed6cd51f7f68d7a7a2f1eb63adfe0794c4ee20dda8bf7529b459ae7d3b
+```
+
+[v0.2.0 完整 Windows 验证报告](evidence/v020-windows/windows-validation.json)包含 26 项门禁、全部驾驶与生存检查、215 个源文件身份及运行日志哈希。发布附件中的 `Windows-SHA256SUMS.txt` 用于核对 ZIP 和该验证报告。
 
 ### v0.1.9：Windows 构建与物理验证通过
 
