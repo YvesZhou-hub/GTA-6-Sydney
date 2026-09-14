@@ -85,6 +85,6 @@
 
 本版使用存档格式 **7**，保存各车型的模块所有权、等级、装配和难度进度；可以读取格式 **1–6** 的旧档。旧档没有付费模块数据时从未解锁状态开始。v0.2.1 的旧读取器会拒绝直接打开格式 7，避免把新字段当作旧档覆盖丢失。
 
-已完成的无界面源码回归包括模块弹道、真实飞行敌人命中、墙体遮挡、装配交易、装填防绕过、渐进难度和旧档兼容。**v0.2.2 最终 macOS 安装包及 Windows 原生玩法验证尚未完成**；源码测试通过不等于这些平台已完成验收。
+已完成的无界面源码回归包括模块弹道、真实飞行敌人命中、墙体遮挡、装配交易、装填防绕过、渐进难度和旧档兼容。最终 macOS 与 Windows 包的实际验证和未测范围见 [验证记录](TESTING.md)；源码检查、Mac Metal画面与无声混音、Windows无界面玩法分别统计，声音未人工实听。
 
 实现依据：[模块与弹道](../game/scripts/weapon_modules.gd)、[车型武器仓库](../game/scripts/vehicle_armory.gd)、[战斗难度](../game/scripts/combat_progression.gd)、[危机系统](../game/scripts/harbor_survival.gd)、[飞行敌人](../game/scripts/nailong_enemy.gd)、[存档读取器](../game/scripts/save_store.gd)。

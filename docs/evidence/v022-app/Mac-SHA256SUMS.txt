@@ -1,0 +1,2 @@
+04b3f2b9e9950a1885190cb23eb4acbb438ce30ef7e83ce4d6efd4b484b9e017  Harbourlife-macOS-arm64.zip
+e133cc0fc103272f6a15c1078b6f7a2242c5776e57f413ddab1a736358383e72  macos-validation.json

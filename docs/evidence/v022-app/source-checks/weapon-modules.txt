@@ -1,0 +1,88 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WEAPON_MODULES PASS actual Jolt backend {}
+WEAPON_MODULES PASS four selectable module identities {}
+WEAPON_MODULES PASS rotary upgrades real damage and firing rate with free ammunition {}
+WEAPON_MODULES PASS rotary has exactly three increasing purchase costs and a cap {}
+WEAPON_MODULES PASS micro upgrades real damage and firing rate with free ammunition {}
+WEAPON_MODULES PASS micro has exactly three increasing purchase costs and a cap {}
+WEAPON_MODULES PASS laser upgrades real damage and firing rate with free ammunition {}
+WEAPON_MODULES PASS laser has exactly three increasing purchase costs and a cap {}
+WEAPON_MODULES PASS tesla upgrades real damage and firing rate with free ammunition {}
+WEAPON_MODULES PASS tesla has exactly three increasing purchase costs and a cap {}
+WEAPON_MODULES PASS unknown module cannot produce a spec or charge {}
+WEAPON_MODULES PASS loadout deduplicates caps three slots and reads owned levels only {}
+WEAPON_MODULES PASS locked modules and malformed ownership cannot become equipped {}
+WEAPON_MODULES PASS untrusted runtime entries clamp tiers deduplicate and cap slots {}
+WEAPON_MODULES PASS rotary physically damages production enemy with its damage style {"damage":56.0,"shots":9}
+WEAPON_MODULES PASS rotary keeps wallet unchanged without firing main cannon {}
+WEAPON_MODULES PASS rotary uses its own visible model and shared bounded effects {}
+WEAPON_MODULES PASS micro physically damages production enemy with its damage style {"damage":35.8598709106445,"shots":1}
+WEAPON_MODULES PASS micro keeps wallet unchanged without firing main cannon {}
+WEAPON_MODULES PASS micro uses its own visible model and shared bounded effects {}
+WEAPON_MODULES PASS laser physically damages production enemy with its damage style {"damage":39.0,"shots":3}
+WEAPON_MODULES PASS laser keeps wallet unchanged without firing main cannon {}
+WEAPON_MODULES PASS laser uses its own visible model and shared bounded effects {}
+WEAPON_MODULES PASS tesla physically damages production enemy with its damage style {"damage":32.0,"shots":2}
+WEAPON_MODULES PASS tesla keeps wallet unchanged without firing main cannon {}
+WEAPON_MODULES PASS tesla uses its own visible model and shared bounded effects {}
+WEAPON_MODULES PASS rotary level three increases actual first hit damage {"levels":[7.0,11.0]}
+WEAPON_MODULES PASS micro level three increases actual first hit damage {"levels":[35.8598666191101,59.2684189932687]}
+WEAPON_MODULES PASS laser level three increases actual first hit damage {"levels":[13.0,21.0]}
+WEAPON_MODULES PASS tesla level three increases actual first hit damage {"levels":[16.0,24.0]}
+WEAPON_MODULES PASS rotary higher tier fires more shots over five physical seconds {"shots":[29,36]}
+WEAPON_MODULES PASS micro higher tier fires more shots over five physical seconds {"shots":[2,3]}
+WEAPON_MODULES PASS laser higher tier fires more shots over five physical seconds {"shots":[9,11]}
+WEAPON_MODULES PASS tesla higher tier fires more shots over five physical seconds {"shots":[5,6]}
+WEAPON_MODULES PASS rotary projectile exists before target takes damage {}
+WEAPON_MODULES PASS rotary projectile travels at finite authored speed {}
+WEAPON_MODULES PASS rotary thin wall introduced in flight prevents enemy damage {}
+WEAPON_MODULES PASS micro projectile exists before target takes damage {}
+WEAPON_MODULES PASS micro projectile travels at finite authored speed {}
+WEAPON_MODULES PASS micro thin wall introduced in flight prevents enemy damage {}
+WEAPON_MODULES PASS rotary leads and physically hits a moving elevated target {"damage":56.0,"travelled":13.3333263397217}
+WEAPON_MODULES PASS micro leads and physically hits a moving elevated target {"damage":35.8270349502563,"travelled":13.3333263397217}
+WEAPON_MODULES PASS rotary cannot acquire or fire through an existing wall {}
+WEAPON_MODULES PASS micro cannot acquire or fire through an existing wall {}
+WEAPON_MODULES PASS laser cannot acquire or fire through an existing wall {}
+WEAPON_MODULES PASS tesla cannot acquire or fire through an existing wall {}
+WEAPON_MODULES PASS micro cannon damages multiple targets with stronger centre falloff {"center":35.8598666191101,"edge":16.1894183158875}
+WEAPON_MODULES PASS micro blast cannot hurt a target behind a wall or beyond radius {}
+WEAPON_MODULES PASS one lethal blast processes all neighbours despite director removal {}
+WEAPON_MODULES PASS tesla links three distinct targets with decreasing damage {"damage":[16.0,11.52,8.2944]}
+WEAPON_MODULES PASS each lightning link is blocked by its own wall {}
+WEAPON_MODULES PASS upgraded lightning expands from three to five real chained targets {"hit_counts":[3,5]}
+WEAPON_MODULES PASS three equipped modules fire concurrently with distinct cadences {}
+WEAPON_MODULES PASS pause freezes all module clocks and attacks {}
+WEAPON_MODULES PASS V off clears module shots locks models and attack counts {}
+WEAPON_MODULES PASS modal gate suppresses all paid modules {}
+WEAPON_MODULES PASS sightseeing gate suppresses all paid modules {}
+WEAPON_MODULES PASS wrecks cannot keep firing paid modules {}
+WEAPON_MODULES PASS unoccupied copies cannot farm module rewards {}
+WEAPON_MODULES PASS free removal and re-equipping cannot reset reload {}
+WEAPON_MODULES PASS upgrading preserves an airborne shell with its original damage and radius {}
+WEAPON_MODULES PASS switching vehicles clears old shots and binds only the new vehicle target {}
+WEAPON_MODULES PASS car module mount attacks a real elevated target {}
+WEAPON_MODULES PASS motorcycle module mount attacks a real elevated target {}
+WEAPON_MODULES PASS hoverboard module mount attacks a real elevated target {}
+WEAPON_MODULES PASS speedboat module mount attacks a real elevated target {}
+WEAPON_MODULES PASS yacht module mount attacks a real elevated target {}
+WEAPON_MODULES PASS helicopter module mount attacks a real elevated target {}
+WEAPON_MODULES PASS glider module mount attacks a real elevated target {}
+WEAPON_MODULES PASS paraglider module mount attacks a real elevated target {}
+WEAPON_MODULES PASS airliner module mount attacks a real elevated target {}
+WEAPON_MODULES PASS tank module mount attacks a real elevated target {}
+WEAPON_MODULES PASS fighter module mount attacks a real elevated target {}
+WEAPON_MODULES PASS rotary physically hits production winglet flight collider {"actual_damage":56.0,"body_scale":0.95}
+WEAPON_MODULES PASS micro physically hits production winglet flight collider {"actual_damage":35.8440680503845,"body_scale":0.95}
+WEAPON_MODULES PASS laser physically hits production winglet flight collider {"actual_damage":39.0,"body_scale":0.95}
+WEAPON_MODULES PASS tesla physically hits production winglet flight collider {"actual_damage":32.0,"body_scale":0.95}
+WEAPON_MODULES PASS rotary physically hits production stormwing flight collider {"actual_damage":56.0,"body_scale":1.35}
+WEAPON_MODULES PASS micro physically hits production stormwing flight collider {"actual_damage":34.3153433799744,"body_scale":1.35}
+WEAPON_MODULES PASS laser physically hits production stormwing flight collider {"actual_damage":39.0,"body_scale":1.35}
+WEAPON_MODULES PASS tesla physically hits production stormwing flight collider {"actual_damage":32.0,"body_scale":1.35}
+WEAPON_MODULES PASS overlapping module fire awards one real enemy kill only {}
+WEAPON_MODULES PASS freed target safely releases paid projectile lock {}
+WEAPON_MODULES PASS repeated loadout edits preserve fixed node and effect allocations {}
+WEAPON_MODULES PASS repeated setup never duplicates module mount or pools {}
+WEAPON_MODULES_COMPLETE 85 passed=true

@@ -1,14 +1,547 @@
 {
   "schema": 1,
   "passed": true,
-  "started_utc": "2026-09-14T02:19:04.152282+00:00",
-  "finished_utc": "2026-09-14T02:21:18.205402+00:00",
-  "max_parallel_processes": 3,
-  "per_process_timeout_seconds": 300,
-  "native_rendering": false,
-  "source_inputs_unchanged": true,
-  "game_input_count": 235,
-  "game_input_sha256": {
+  "platform": "macOS-arm64",
+  "release_tag": "v0.2.2-preview.1",
+  "candidate_commit": "2dfe366fe499a25c1ded239e35d371f9f5878198",
+  "checked_at_utc": "2026-09-14T02:48:31.245309+00:00",
+  "checks": [
+    {
+      "name": "archive audit and each individual packaging check passed",
+      "passed": true,
+      "detail": {
+        "count": 13
+      }
+    },
+    {
+      "name": "archive executable and PCK match the build manifest",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "current application executable and PCK remain unchanged",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "actual download ZIP matches build and archive digests",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "every exported source input matches the current frozen files",
+      "passed": true,
+      "detail": {
+        "count": 235,
+        "missing": [],
+        "mismatched": []
+      }
+    },
+    {
+      "name": "release candidate resolves to the specified complete commit",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "every exported source input matches candidate commit blobs",
+      "passed": true,
+      "detail": {
+        "count": 235,
+        "mismatched": []
+      }
+    },
+    {
+      "name": "final source regression binds the same frozen inputs",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal raw report.json preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal raw app-binding.json preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal raw arsenal-console.txt preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal raw arsenal-runtime.txt preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal actual nonempty unique checks all passed",
+      "passed": true,
+      "detail": {
+        "count": 35
+      }
+    },
+    {
+      "name": "arsenal launch completed with fresh report and clean binding",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal is a native macOS run with explicit Dummy audio",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal launch uses its own built-in validator",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal production QA guard and physics rate are explicit",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal world and save-isolation guards passed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal source observations remain stable and compiled resources resolve",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal all observed script paths belong to the export manifest",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal unfiltered runtime and console contain no errors or warnings",
+      "passed": true,
+      "detail": {
+        "errors_or_warnings": []
+      }
+    },
+    {
+      "name": "arsenal actually rendered using Metal Forward+",
+      "passed": true,
+      "detail": {
+        "renderer": [
+          "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+        ]
+      }
+    },
+    {
+      "name": "arsenal completion marker records true success",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal Dummy audio resources released before exit",
+      "passed": true,
+      "detail": {
+        "audio_shutdown": [
+          {
+            "complete": true,
+            "elapsed_ms": 45,
+            "remaining": 0,
+            "tracked": 13
+          }
+        ]
+      }
+    },
+    {
+      "name": "arsenal declared screenshot names are unique and match launch",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG captured after launch: armory-three-slots.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG bytes and resolution match report: armory-three-slots.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG captured after launch: cannon-centre-and-edge.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG bytes and resolution match report: cannon-centre-and-edge.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG captured after launch: stormwing-marked-strike.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG bytes and resolution match report: stormwing-marked-strike.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG captured after launch: laser-lightning-airborne-targets.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG bytes and resolution match report: laser-lightning-airborne-targets.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG captured after launch: veteran-natural-reinforcements.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal PNG bytes and resolution match report: veteran-natural-reinforcements.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter raw report.json preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter raw app-binding.json preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter raw encounter-console.txt preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter raw encounter-runtime.txt preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter actual nonempty unique checks all passed",
+      "passed": true,
+      "detail": {
+        "count": 96
+      }
+    },
+    {
+      "name": "encounter launch completed with fresh report and clean binding",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter is a native macOS run with explicit Dummy audio",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter launch uses its own built-in validator",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter production QA guard and physics rate are explicit",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter world and save-isolation guards passed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "natural encounter run contains no direct spawn or forced damage",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter source observations remain stable and compiled resources resolve",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter all observed script paths belong to the export manifest",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter unfiltered runtime and console contain no errors or warnings",
+      "passed": true,
+      "detail": {
+        "errors_or_warnings": []
+      }
+    },
+    {
+      "name": "encounter actually rendered using Metal Forward+",
+      "passed": true,
+      "detail": {
+        "renderer": [
+          "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+        ]
+      }
+    },
+    {
+      "name": "encounter completion marker records true success",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter Dummy audio resources released before exit",
+      "passed": true,
+      "detail": {
+        "audio_shutdown": [
+          {
+            "complete": true,
+            "elapsed_ms": 122,
+            "remaining": 0,
+            "tracked": 13
+          }
+        ]
+      }
+    },
+    {
+      "name": "encounter declared screenshot names are unique and match launch",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG captured after launch: default home.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG bytes and resolution match report: default home.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG captured after launch: Opera public upper podium.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG bytes and resolution match report: Opera public upper podium.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG captured after launch: airport apron.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG bytes and resolution match report: airport apron.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG captured after launch: CBD Pitt Street Mall.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG bytes and resolution match report: CBD Pitt Street Mall.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG captured after launch: tank airport pursuit.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG bytes and resolution match report: tank airport pursuit.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG captured after launch: tank fire control B menu.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG bytes and resolution match report: tank fire control B menu.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG captured after launch: automatic tank support with player H field repairs.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter PNG bytes and resolution match report: automatic tank support with player H field repairs.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival raw report.json preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival raw app-binding.json preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival raw survival-console.txt preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival raw survival-runtime.txt preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival actual nonempty unique checks all passed",
+      "passed": true,
+      "detail": {
+        "count": 40
+      }
+    },
+    {
+      "name": "survival launch completed with fresh report and clean binding",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival is a native macOS run with explicit Dummy audio",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival launch uses its own built-in validator",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival world and save-isolation guards passed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival source observations remain stable and compiled resources resolve",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival all observed script paths belong to the export manifest",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival unfiltered runtime and console contain no errors or warnings",
+      "passed": true,
+      "detail": {
+        "errors_or_warnings": []
+      }
+    },
+    {
+      "name": "survival actually rendered using Metal Forward+",
+      "passed": true,
+      "detail": {
+        "renderer": [
+          "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+        ]
+      }
+    },
+    {
+      "name": "survival completion marker records true success",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival Dummy audio resources released before exit",
+      "passed": true,
+      "detail": {
+        "audio_shutdown": [
+          {
+            "complete": true,
+            "elapsed_ms": 49,
+            "remaining": 0,
+            "tracked": 14
+          }
+        ]
+      }
+    },
+    {
+      "name": "survival declared screenshot names are unique and match launch",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG captured after launch: five-nailong-city-hud.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG bytes and resolution match report: five-nailong-city-hud.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG captured after launch: services-during-combat-blocked.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG bytes and resolution match report: services-during-combat-blocked.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG captured after launch: tank-survival-impact-hud.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG bytes and resolution match report: tank-survival-impact-hud.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG captured after launch: services-paid-repair.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival PNG bytes and resolution match report: services-paid-repair.png",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "initial default-audio failure remains explicitly preserved",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "independent CoreAudio and Dummy diagnosis remains preserved",
+      "passed": true,
+      "detail": {}
+    }
+  ],
+  "aggregate_check_count": 93,
+  "native_gameplay_checks": 171,
+  "native_screenshots": 16,
+  "app_identity": {
+    "executable_sha256": "f2bab4a8567ab1493670f7880784a4822f0581b07d7ac0aac08627fe34c1d66b",
+    "pck_sha256": "7b61aa686f1c811f09abe8fcb3face14666149b1fed22a72b6db5ed526c6e0af"
+  },
+  "archive_sha256": "04b3f2b9e9950a1885190cb23eb4acbb438ce30ef7e83ce4d6efd4b484b9e017",
+  "source_file_count": 235,
+  "source_sha256": {
     "game/assets/bridge_north_approach.json": "7cdb28256e7969d64dfb5fcf472936a8344c3c0913d3ee3323a38e2f25a05b4d",
     "game/assets/city_map.json": "c4708c54e233efce7a1a0c5fd37bab5d60c2420af521c726c3e59a384f50d632",
     "game/assets/darling_precinct_directory.json": "6fa193c4e9c1f94470bff31d9e765e120b545dadaf32a9e5eef246fda2933617",
@@ -245,680 +778,247 @@
     "game/shaders/world_landcover.gdshader": "11025556e8c14fae9f8a793a3c3dc1372362028000fd11793c8a0f5c6437a234",
     "game/shaders/world_landcover.gdshader.uid": "6af3282f73b1d919e374d96190b38b2060198670fa52f692adbf6d773f4475de"
   },
-  "test_source_sha256": {
-    "source/armory_progression_test.gd": "cb4096992fefc7b1612e025e5e47562686e86863afaf1c28a200fec4ea7972b7",
-    "source/arsenal_test.gd": "7ea1aa484d9ccdafba6f4a79bf12949f2d383875f499515987527d6263f9bd3e",
-    "source/combat_feedback_test.gd": "b6e3070ecf5341b1d6e7ca152378e34f027ca2dca3330658480109662f1b2d1d",
-    "source/combat_weapons_test.gd": "d854f9ca5cf809352373620df4f3e383d683e220a9c55653d55a3d360d8a39bd",
-    "source/encounter_director_test.gd": "2bb8689860024621ad49fe5a5c259d7e979819dc89b01d5732ff19facf90475d",
-    "source/enemy_pursuit_test.gd": "26c97eb1c7846faa9298bda8f4bd4bc79f71af75e25a7b4219c1b95d0389e210",
-    "source/field_service_test.gd": "9e9183451b8b3d00f037c58f2f810741a34fe4fdc8e56adbadf8f66e192c98ca",
-    "source/fixtures/save_store_v012.gd": "da9a206bdd26938774f91353aafb7db701ca7658b7f45498a31d590c0609918d",
-    "source/fixtures/save_store_v021.gd": "3e213c96e6581500a679da7f169a33c3d3a1f85ae03792fd12f3874c8c4cfece",
-    "source/flying_enemy_test.gd": "61f5aa3b93757e6327619800ecad1efb19ec35987555d9baef623edda7deb16a",
-    "source/nailong_enemy_test.gd": "aa8a03bc5dc5e3d1bff9e911ece8b949f3b3429e43b66b6420ab0adf138c6537",
-    "source/opera_encounter_test.gd": "a98af5c3c794bbf9e93d83a4d1cbd0da90a13708d56ad6343941bebbaa81ef0d",
-    "source/survival_hud_test.gd": "477fbe78c724e71a9574899edc8d4f3e1fd2515b43d433aa8b2447b5e14228d5",
-    "source/survival_loop_test.gd": "c74148b170f28ae7775d8d520d1badcb6e82518b4ef679e19f7989621bab9f08",
-    "source/survival_vehicle_test.gd": "19e9976d3396c5d86476824b98039767aaed25536d6c97e41afcdcf27c78556c",
-    "source/vehicle_support_test.gd": "ebd57ab58601dbaa76445a19de8129935f5811b0b9d8a1b5cf2b35cbd12b4824",
-    "source/weapon_modules_test.gd": "169b229b3da452c087232c140d3b2b45a2a2ce558ed454aecf26e9c34c0e33b5",
-    "source/weapon_upgrade_test.gd": "434592c796f3db2eb502b46511212d7ca47fc242105f91dd492a9431711b4e6c",
-    "tools/test_save.gd": "599a2cdb6c1e4a69d80addfae4bc793022db120d97b887f186f90e15932c6cd4"
-  },
-  "gameplay_and_save_suites": 16,
-  "gameplay_and_save_checks": 817,
-  "evidence_gate_checks_separate": 17,
-  "suites": [
-    {
-      "name": "nailong-enemies",
-      "passed": true,
-      "checks": 59,
-      "exit_code": 0,
-      "wall_seconds": 1.196,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/nailong_enemy_test.gd"
-      ],
-      "report": "nailong-enemies.json",
-      "report_sha256": "a8dd3f08a440158850b16ec2c4969c8d7bcd3a850452b6c7d26309d42f9f4426",
-      "log": "nailong-enemies.txt",
-      "log_sha256": "cce5d44e01365dcb45008c9dba17be10e89ef2a8c64465ec25cb73ccf953e8f1",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "aa8a03bc5dc5e3d1bff9e911ece8b949f3b3429e43b66b6420ab0adf138c6537",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "flying-enemies",
-      "passed": true,
-      "checks": 50,
-      "exit_code": 0,
-      "wall_seconds": 0.883,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/flying_enemy_test.gd"
-      ],
-      "report": "flying-enemies.json",
-      "report_sha256": "e80f6a5e67b14c506713c781fac165975106f9db4fc722b4232170a951ea1ae9",
-      "log": "flying-enemies.txt",
-      "log_sha256": "453ca6b2f690a8b819277adc2968e28797dd4d9e38d5684f511a358e570f84eb",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "61f5aa3b93757e6327619800ecad1efb19ec35987555d9baef623edda7deb16a",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "enemy-pursuit",
-      "passed": true,
-      "checks": 15,
-      "exit_code": 0,
-      "wall_seconds": 0.959,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/enemy_pursuit_test.gd"
-      ],
-      "report": "enemy-pursuit.json",
-      "report_sha256": "bb1a30d36aef060b55202dec66c58f6bf777e9e9c85d8c689680a43558e9743f",
-      "log": "enemy-pursuit.txt",
-      "log_sha256": "82ebbf260707686728f7089577e6a6aa58085b93cb18b3dcdda51c398a6771df",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "26c97eb1c7846faa9298bda8f4bd4bc79f71af75e25a7b4219c1b95d0389e210",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "opera-encounter",
-      "passed": true,
-      "checks": 23,
-      "exit_code": 0,
-      "wall_seconds": 2.195,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/opera_encounter_test.gd"
-      ],
-      "report": "opera-encounter.json",
-      "report_sha256": "670097331930488cdc07ab89fd95f40a460d83d39443b32092bdb412b86497d5",
-      "log": "opera-encounter.txt",
-      "log_sha256": "2f50a985c2008909e27a83f6fbf46d7e519cc52b5093b6c75cb3fc264bf30a8d",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://scripts/nailong_enemy.gd": {
-          "sha256": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "a98af5c3c794bbf9e93d83a4d1cbd0da90a13708d56ad6343941bebbaa81ef0d",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "survival-vehicle",
-      "passed": true,
-      "checks": 113,
-      "exit_code": 0,
-      "wall_seconds": 0.757,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/survival_vehicle_test.gd"
-      ],
-      "report": "survival-vehicle.json",
-      "report_sha256": "209302971bad86399b9183640acfba290725214cb714a21f3c941249adf1a3eb",
-      "log": "survival-vehicle.txt",
-      "log_sha256": "4cae21e30b6d8541424823d722e0ffd9def4073648f1a8d74cbadb43ebcb8228",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "19e9976d3396c5d86476824b98039767aaed25536d6c97e41afcdcf27c78556c",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "survival-hud",
-      "passed": true,
-      "checks": 37,
-      "exit_code": 0,
-      "wall_seconds": 0.784,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/survival_hud_test.gd"
-      ],
-      "report": "survival-hud.json",
-      "report_sha256": "d54ecd32123a9668969b246664972c9f2671453cffe4d2059ac411c87789a9be",
-      "log": "survival-hud.txt",
-      "log_sha256": "d1aa5c6d66aa817a71b61e3ad08b29d6582622c8d43ff0efd6493b6a6da9ef0a",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "477fbe78c724e71a9574899edc8d4f3e1fd2515b43d433aa8b2447b5e14228d5",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "survival-loop",
-      "passed": true,
-      "checks": 60,
-      "exit_code": 0,
-      "wall_seconds": 0.644,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/survival_loop_test.gd"
-      ],
-      "report": "survival-loop.json",
-      "report_sha256": "e66a881f02ea0d6129082242aeeb24e6ddbf61282856f8650cbae69475eaa173",
-      "log": "survival-loop.txt",
-      "log_sha256": "1fdbab206c9cb528625d46f2b329111a9b8b4b5015ede70d2609bd16639aa9a2",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "c74148b170f28ae7775d8d520d1badcb6e82518b4ef679e19f7989621bab9f08",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "encounter-director",
-      "passed": true,
-      "checks": 38,
-      "exit_code": 0,
-      "wall_seconds": 1.985,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/encounter_director_test.gd"
-      ],
-      "report": "encounter-director.json",
-      "report_sha256": "471d0cb548a9602428e1336ef0cc955c3aa74f32ab5e7f5af8964dcef3d4e2c3",
-      "log": "encounter-director.txt",
-      "log_sha256": "842efbd6126b918a20815d1c57acf214de2a9ebc61512ba155f2a1a61691660e",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "2bb8689860024621ad49fe5a5c259d7e979819dc89b01d5732ff19facf90475d",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "weapon-modules",
-      "passed": true,
-      "checks": 85,
-      "exit_code": 0,
-      "wall_seconds": 1.363,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/weapon_modules_test.gd"
-      ],
-      "report": "weapon-modules.json",
-      "report_sha256": "68d42d59078e4fc90557dc76a3e2de81dcbce2a15f65ae12e6588bf4add6ce18",
-      "log": "weapon-modules.txt",
-      "log_sha256": "4840727fd8a1515fd4d26e86f4f2b133e82f747672cf648efab802c9b92a90cc",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/weapon_modules_test.gd": {
-          "sha256": "169b229b3da452c087232c140d3b2b45a2a2ce558ed454aecf26e9c34c0e33b5",
-          "matches_current": true
-        },
-        "res://scripts/nailong_enemy.gd": {
-          "sha256": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7",
-          "matches_current": true
-        },
-        "res://scripts/vehicle_support_weapons.gd": {
-          "sha256": "43a35c77ea0ff2164153d6c0a1221ec940e3e8c2e81371f287a5099aa0c70c43",
-          "matches_current": true
-        },
-        "res://scripts/weapon_modules.gd": {
-          "sha256": "36fce90bca4df30a58694464373bf21758b179819ce799515cf9554b7687951b",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "169b229b3da452c087232c140d3b2b45a2a2ce558ed454aecf26e9c34c0e33b5",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "armory-progression",
-      "passed": true,
-      "checks": 64,
-      "exit_code": 0,
-      "wall_seconds": 1.568,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/armory_progression_test.gd"
-      ],
-      "report": "armory-progression.json",
-      "report_sha256": "d98aac7e2ebb6546a96fd0bbb3df896c523d17b7219a57182b1b2001bf5c9fe9",
-      "log": "armory-progression.txt",
-      "log_sha256": "6fa9ae58ad6da6ee7f1ec37a810bd8d0f8de99a3e7147cb2154e7b645ad2c5e2",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/armory_progression_test.gd": {
-          "sha256": "cb4096992fefc7b1612e025e5e47562686e86863afaf1c28a200fec4ea7972b7",
-          "matches_current": true
-        },
-        "res://scripts/combat_progression.gd": {
-          "sha256": "33db534a5587d80b2f52344d7308d93be443d3cd849626e3c0c3fa2421c31eef",
-          "matches_current": true
-        },
-        "res://scripts/harbor_survival.gd": {
-          "sha256": "5961221830c828364b91f7486ab1dafb01d4e6b9be2bd8f90caf1a1a7e3efc1c",
-          "matches_current": true
-        },
-        "res://scripts/vehicle_armory.gd": {
-          "sha256": "2ded88e4da674bb585223b7da8d37e04fe72a87f8fddd4be16cd16309edc2522",
-          "matches_current": true
-        },
-        "res://scripts/weapon_modules.gd": {
-          "sha256": "36fce90bca4df30a58694464373bf21758b179819ce799515cf9554b7687951b",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "cb4096992fefc7b1612e025e5e47562686e86863afaf1c28a200fec4ea7972b7",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "vehicle-support",
-      "passed": true,
-      "checks": 47,
-      "exit_code": 0,
-      "wall_seconds": 0.501,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/vehicle_support_test.gd"
-      ],
-      "report": "vehicle-support.json",
-      "report_sha256": "75ae2ca81202f8144213cad5a98e5259418256d51750d50712f4fb1eab95490b",
-      "log": "vehicle-support.txt",
-      "log_sha256": "ad475e83594b9756cdbf51c0c72fc17e72e1d4a09fad1a48ec9f6f8b8cd33280",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/vehicle_support_test.gd": {
-          "sha256": "ebd57ab58601dbaa76445a19de8129935f5811b0b9d8a1b5cf2b35cbd12b4824",
-          "matches_current": true
-        },
-        "res://scripts/nailong_enemy.gd": {
-          "sha256": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7",
-          "matches_current": true
-        },
-        "res://scripts/vehicle_support_weapons.gd": {
-          "sha256": "43a35c77ea0ff2164153d6c0a1221ec940e3e8c2e81371f287a5099aa0c70c43",
-          "matches_current": true
-        },
-        "res://scripts/vehicle_weapons.gd": {
-          "sha256": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "ebd57ab58601dbaa76445a19de8129935f5811b0b9d8a1b5cf2b35cbd12b4824",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "weapon-upgrade",
-      "passed": true,
-      "checks": 47,
-      "exit_code": 0,
-      "wall_seconds": 0.381,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/weapon_upgrade_test.gd"
-      ],
-      "report": "weapon-upgrade.json",
-      "report_sha256": "f57f7027132528fa555725e50422fae35261178d833ef05fc16b38befae1b569",
-      "log": "weapon-upgrade.txt",
-      "log_sha256": "cc48ba4fd498c291e19582587ba8e695733d57b11c7eefef1527295b95438c48",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/weapon_upgrade_test.gd": {
-          "sha256": "434592c796f3db2eb502b46511212d7ca47fc242105f91dd492a9431711b4e6c",
-          "matches_current": true
-        },
-        "res://scripts/harbor_survival.gd": {
-          "sha256": "5961221830c828364b91f7486ab1dafb01d4e6b9be2bd8f90caf1a1a7e3efc1c",
-          "matches_current": true
-        },
-        "res://scripts/vehicle_weapons.gd": {
-          "sha256": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "434592c796f3db2eb502b46511212d7ca47fc242105f91dd492a9431711b4e6c",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "combat-weapons",
-      "passed": true,
-      "checks": 49,
-      "exit_code": 0,
-      "wall_seconds": 0.551,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/combat_weapons_test.gd"
-      ],
-      "report": "combat-weapons.json",
-      "report_sha256": "362cba0e6b743cde29ee27ecee509d6c61d994f16560cd84a1ded47b62249ff1",
-      "log": "combat-weapons.txt",
-      "log_sha256": "70f7589953eafd21d8a6dc11cb0031c76f61579073b398ae076759cebc5a91c6",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/combat_weapons_test.gd": {
-          "sha256": "d854f9ca5cf809352373620df4f3e383d683e220a9c55653d55a3d360d8a39bd",
-          "matches_current": true
-        },
-        "res://assets/fx/artillery_smoke.png": {
-          "sha256": "35980e299a6702614b47b45ddf7fb1472de919f427847b95d8aac81982d5fe5c",
-          "matches_current": true
-        },
-        "res://scripts/combat_effects.gd": {
-          "sha256": "e096bda1ee734d796bc1782aa5b331f8d25fbc2caef2569aa79a7f0b81265d7e",
-          "matches_current": true
-        },
-        "res://scripts/vehicle_weapons.gd": {
-          "sha256": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98",
-          "matches_current": true
-        },
-        "res://scripts/weapon_audio.gd": {
-          "sha256": "44614e08ecba3d11fe5cba4eadfec9f47a9402326d1b44ecc081419e4f8ff752",
-          "matches_current": true
-        },
-        "res://shaders/combat_cloud.gdshader": {
-          "sha256": "25751a0faf6850db6d685e2dc9961271b43edabd3ac36106992f60a862aaf782",
-          "matches_current": true
-        },
-        "res://shaders/combat_pressure.gdshader": {
-          "sha256": "c29d92e22adb813722650df523fbbd66843a3186585869d5d8feeaf53423d513",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "d854f9ca5cf809352373620df4f3e383d683e220a9c55653d55a3d360d8a39bd",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "field-service",
-      "passed": true,
-      "checks": 35,
-      "exit_code": 0,
-      "wall_seconds": 0.685,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/field_service_test.gd"
-      ],
-      "report": "field-service.json",
-      "report_sha256": "f47af1a46f4f15402d01d049509fcaed1db52c40b5ede753f37b777202d4554e",
-      "log": "field-service.txt",
-      "log_sha256": "bfea45a7ef40907ac489045c90b220cd17825c0d35f092963f38d3f7f9068a46",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {},
-      "test_script_sha256": "9e9183451b8b3d00f037c58f2f810741a34fe4fdc8e56adbadf8f66e192c98ca",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "combat-feedback",
-      "passed": true,
-      "checks": 53,
-      "exit_code": 0,
-      "wall_seconds": 0.362,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/combat_feedback_test.gd"
-      ],
-      "report": "combat-feedback.json",
-      "report_sha256": "86d64553dd605ef42194a9ab28e457604eec345935436ccfd0e898c3f089a5d8",
-      "log": "combat-feedback.txt",
-      "log_sha256": "3775c4eed8d1fc56fe75a29955cabf9c4bf075da796092f9e4d6f97e67075d29",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/combat_feedback_test.gd": {
-          "sha256": "b6e3070ecf5341b1d6e7ca152378e34f027ca2dca3330658480109662f1b2d1d",
-          "matches_current": true
-        },
-        "res://scripts/combat_feedback.gd": {
-          "sha256": "c641e5aa6736207aeffd5113e998a84ccdce7d63eb6ace57305a022ed4451502",
-          "matches_current": true
-        },
-        "res://scripts/nailong_enemy.gd": {
-          "sha256": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7",
-          "matches_current": true
-        },
-        "res://scripts/nailong_flight.gd": {
-          "sha256": "69d8f275ddec59e8fcf4c6b96f0232432ec818aa619f2c73ddfa329871ce322b",
-          "matches_current": true
-        },
-        "res://scripts/nailong_model.gd": {
-          "sha256": "274bcc23b259e8bb7d8a67f404ee9727294feee1a1518a795164395baf26735e",
-          "matches_current": true
-        },
-        "res://scripts/survival_hud.gd": {
-          "sha256": "cb856d2c2af322398b44e08b4eb3933a22058dd54a4cced6d8c97c52ad6a2e36",
-          "matches_current": true
-        },
-        "res://scripts/ui_fonts.gd": {
-          "sha256": "879559e1039eae6a91dfd163994bdba1ccdb68be87d347e1566987887dc53bb8",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "b6e3070ecf5341b1d6e7ca152378e34f027ca2dca3330658480109662f1b2d1d",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "save-format-7",
-      "passed": true,
-      "checks": 42,
-      "exit_code": 0,
-      "wall_seconds": 0.238,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../tools/test_save.gd"
-      ],
-      "report": "save-format-7.json",
-      "report_sha256": "1eb4b266ee435223bf38de1441392f4494947de315f533e0cb9680615e51b4dc",
-      "log": "save-format-7.txt",
-      "log_sha256": "5f71205917b22c8198b5c68dd35a4fd7a74c63df8e88bdb210c9fd756dd61d9b",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/fixtures/save_store_v021.gd": {
-          "sha256": "3e213c96e6581500a679da7f169a33c3d3a1f85ae03792fd12f3874c8c4cfece",
-          "matches_current": true
-        },
-        "res://../tools/test_save.gd": {
-          "sha256": "599a2cdb6c1e4a69d80addfae4bc793022db120d97b887f186f90e15932c6cd4",
-          "matches_current": true
-        },
-        "res://scripts/save_store.gd": {
-          "sha256": "15ab4d334a60ea041f2bae689e84c4be7f03be7188dae33841608e075929e4bc",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "599a2cdb6c1e4a69d80addfae4bc793022db120d97b887f186f90e15932c6cd4",
-      "category": "gameplay_and_save_regression"
-    },
-    {
-      "name": "arsenal-evidence-gates",
-      "passed": true,
-      "checks": 17,
-      "exit_code": 0,
-      "wall_seconds": 0.263,
-      "report_fresh": true,
-      "command": [
-        "tools/runtime/godot",
-        "--headless",
-        "--path",
-        "game",
-        "--fixed-fps",
-        "60",
-        "--script",
-        "../source/arsenal_test.gd"
-      ],
-      "report": "arsenal-evidence-gates.json",
-      "report_sha256": "1e2e863e566940f5ab58bc6903b115599b736fa0a4eb36cfc4e1574f8e8188c5",
-      "log": "arsenal-evidence-gates.txt",
-      "log_sha256": "daea87b540c5d3ab4aba7aa5cbed4391dab40fe6215991acffaea0bbda463052",
-      "issues": [],
-      "runtime_errors_or_warnings": [],
-      "failed_checks": [],
-      "reported_source_identity": {
-        "res://../source/arsenal_test.gd": {
-          "sha256": "7ea1aa484d9ccdafba6f4a79bf12949f2d383875f499515987527d6263f9bd3e",
-          "matches_current": true
-        },
-        "res://scripts/arsenal_validation.gd": {
-          "sha256": "a92b5fbf99514aa949b5347fba9d53f6a319a262ea445749745493d7c93e026c",
-          "matches_current": true
-        }
-      },
-      "test_script_sha256": "7ea1aa484d9ccdafba6f4a79bf12949f2d383875f499515987527d6263f9bd3e",
-      "category": "evidence_gate_regression"
-    }
-  ],
-  "scope": "Fresh isolated production gameplay, physics, HUD and unique QA save API regression in headless Godot 4.7.2. Separate 17-case evidence-gate regression is not counted as gameplay. No native rendering, full-city performance, or player save mutation claims. Report and console bytes are preserved without warning filters; actual source inputs and test scripts are SHA256-bound before and after all runs.",
-  "controlled_test_name_update": {
-    "file": "source/survival_hud_test.gd",
-    "change": "Added modal/map names to two existing parameterized loop assertions; no assertion or game changes",
-    "rerun_suites": [
-      "survival-hud"
-    ],
-    "preserved_initial_evidence": "reports/v022-source-batch-initial",
-    "new_sha256": "477fbe78c724e71a9574899edc8d4f3e1fd2515b43d433aa8b2447b5e14228d5"
-  },
-  "full_city_separate": {
+  "audio_driver_override": "Dummy",
+  "audio_listening_verified": false,
+  "default_audio_validation_passed": false,
+  "initial_default_audio_failure_preserved": true,
+  "native_index": "docs/evidence/v022-app/native-index.json",
+  "native_index_sha256": "67e18d3dbce87ff51bd883607cdd9b386ec44ff68c83d4bac445d0268617f2ea",
+  "modes": {
     "arsenal": {
-      "report": "full-city/arsenal.json",
-      "report_sha256": "2ea9a1061b384181f55e8630946de496d609c17a40f6a52ca1bf4b56abc949b1",
-      "process": "full-city/arsenal-process.json",
-      "console": "full-city/arsenal.txt",
-      "checks": 25,
+      "checks": 35,
+      "screenshots": 5,
       "passed": true,
-      "not_included_in_fixture_total": true
+      "report": "arsenal/report.json",
+      "report_sha256": "cb8bc3fd3549a54b7a47e5c30139bfe273bee572277bec5e7e30d7b3e1219123",
+      "app_binding": "arsenal/app-binding.json",
+      "app_binding_sha256": "75f7da852cbcff6e1c120c067a033f41d12050fa05a159ddf13f76e73f3eda6f",
+      "console": "arsenal/arsenal-console.txt",
+      "console_sha256": "8ff430077860941b578782671817f787510573c2a730afdf1a85ff85f737dcf2",
+      "runtime": "arsenal/arsenal-runtime.txt",
+      "runtime_sha256": "8ff430077860941b578782671817f787510573c2a730afdf1a85ff85f737dcf2",
+      "image_sha256": {
+        "armory-three-slots.png": "b8749419d1fe03360cf6399a50b2385465c8831e98701cb027d7ce25f2d60a08",
+        "cannon-centre-and-edge.png": "e7bd2f8342bb5e5e719a03e43b67274f74277de75a3f93beed04bc113a6406af",
+        "stormwing-marked-strike.png": "094b54a7d92d5a5d5b3a8260048d22ec6ff41b1d0a7652bdf5d9c35efcd090d8",
+        "laser-lightning-airborne-targets.png": "9056a4ef1c8e5a6dd0e7af6748c8b75a2aa69a2290ecab5a046e437f8c900217",
+        "veteran-natural-reinforcements.png": "aa4c037a2e981732c78666e01cea7fa43802e8b9ca6e35ffcfe151e1299d3699"
+      },
+      "images": {
+        "armory-three-slots.png": {
+          "file": "arsenal/screenshots/armory-three-slots.png",
+          "sha256": "b8749419d1fe03360cf6399a50b2385465c8831e98701cb027d7ce25f2d60a08",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "cannon-centre-and-edge.png": {
+          "file": "arsenal/screenshots/cannon-centre-and-edge.png",
+          "sha256": "e7bd2f8342bb5e5e719a03e43b67274f74277de75a3f93beed04bc113a6406af",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "stormwing-marked-strike.png": {
+          "file": "arsenal/screenshots/stormwing-marked-strike.png",
+          "sha256": "094b54a7d92d5a5d5b3a8260048d22ec6ff41b1d0a7652bdf5d9c35efcd090d8",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "laser-lightning-airborne-targets.png": {
+          "file": "arsenal/screenshots/laser-lightning-airborne-targets.png",
+          "sha256": "9056a4ef1c8e5a6dd0e7af6748c8b75a2aa69a2290ecab5a046e437f8c900217",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "veteran-natural-reinforcements.png": {
+          "file": "arsenal/screenshots/veteran-natural-reinforcements.png",
+          "sha256": "aa4c037a2e981732c78666e01cea7fa43802e8b9ca6e35ffcfe151e1299d3699",
+          "resolution": [
+            1440,
+            900
+          ]
+        }
+      },
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 45,
+        "remaining": 0,
+        "tracked": 13
+      },
+      "started_utc": "2026-09-14T02:33:03.104038+00:00",
+      "wall_seconds": 104.201,
+      "renderer": [
+        "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+      ],
+      "audio_driver_override": "Dummy",
+      "exit_code": 0
+    },
+    "encounter": {
+      "checks": 96,
+      "screenshots": 7,
+      "passed": true,
+      "report": "encounter/report.json",
+      "report_sha256": "3ba37b1c36eb184a253ad439b5ca69c3bd95d91277808e7dd9467ba8a363c319",
+      "app_binding": "encounter/app-binding.json",
+      "app_binding_sha256": "8628726713be276c97d232dae97f0e3826918d6ddc08615118489dc0506d45d8",
+      "console": "encounter/encounter-console.txt",
+      "console_sha256": "88432988bcd6a68f86044ad666ae84be3a817a6be27f317ad95254d4de67f8fc",
+      "runtime": "encounter/encounter-runtime.txt",
+      "runtime_sha256": "88432988bcd6a68f86044ad666ae84be3a817a6be27f317ad95254d4de67f8fc",
+      "image_sha256": {
+        "default home.png": "ef318f1029a689ca1ff2437910e0ef40bfb5e4bb372fea28770eec010edde50d",
+        "Opera public upper podium.png": "b9aa039d2be3630c08dd9783a3b3e30323bb2836eff19005ff6e5aa2a49599b5",
+        "airport apron.png": "4686f2fcd39c1194b3655ed557946c2b0ee5469da2749e2020c262c56ac278f5",
+        "CBD Pitt Street Mall.png": "2862afc9dd380b6510c84cb9586ee65233786f7831db8903ea38fb2e3a83d073",
+        "tank airport pursuit.png": "f97b6dc6e0213701b75290f6f758e36b056b8d8566cd617db5527e4053a498aa",
+        "tank fire control B menu.png": "d6d458d92059e64b98e3ef1e8ac37b581f4a9d0d73a85989174ae095afb44836",
+        "automatic tank support with player H field repairs.png": "a94253aa13b174891d59d4c88284e116896b278d1a1ab4710f9833d9707e1dc5"
+      },
+      "images": {
+        "default home.png": {
+          "file": "encounter/screenshots/default home.png",
+          "sha256": "ef318f1029a689ca1ff2437910e0ef40bfb5e4bb372fea28770eec010edde50d",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "Opera public upper podium.png": {
+          "file": "encounter/screenshots/Opera public upper podium.png",
+          "sha256": "b9aa039d2be3630c08dd9783a3b3e30323bb2836eff19005ff6e5aa2a49599b5",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "airport apron.png": {
+          "file": "encounter/screenshots/airport apron.png",
+          "sha256": "4686f2fcd39c1194b3655ed557946c2b0ee5469da2749e2020c262c56ac278f5",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "CBD Pitt Street Mall.png": {
+          "file": "encounter/screenshots/CBD Pitt Street Mall.png",
+          "sha256": "2862afc9dd380b6510c84cb9586ee65233786f7831db8903ea38fb2e3a83d073",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "tank airport pursuit.png": {
+          "file": "encounter/screenshots/tank airport pursuit.png",
+          "sha256": "f97b6dc6e0213701b75290f6f758e36b056b8d8566cd617db5527e4053a498aa",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "tank fire control B menu.png": {
+          "file": "encounter/screenshots/tank fire control B menu.png",
+          "sha256": "d6d458d92059e64b98e3ef1e8ac37b581f4a9d0d73a85989174ae095afb44836",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "automatic tank support with player H field repairs.png": {
+          "file": "encounter/screenshots/automatic tank support with player H field repairs.png",
+          "sha256": "a94253aa13b174891d59d4c88284e116896b278d1a1ab4710f9833d9707e1dc5",
+          "resolution": [
+            1440,
+            900
+          ]
+        }
+      },
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 122,
+        "remaining": 0,
+        "tracked": 13
+      },
+      "started_utc": "2026-09-14T02:35:09.880796+00:00",
+      "wall_seconds": 286.208,
+      "renderer": [
+        "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+      ],
+      "audio_driver_override": "Dummy",
+      "exit_code": 0
+    },
+    "survival": {
+      "checks": 40,
+      "screenshots": 4,
+      "passed": true,
+      "report": "survival/report.json",
+      "report_sha256": "9c977248a9263ad771aa776876d0e841c8bbcb2dd3a2c8402472d3ec436240f0",
+      "app_binding": "survival/app-binding.json",
+      "app_binding_sha256": "20d1a627c911b60ff568ce2d698cb0508ac3add277a3be8be21a923ae1f200c7",
+      "console": "survival/survival-console.txt",
+      "console_sha256": "ea59fb34f0c8f25b8c30df0144b4a23fbe119a6ff9ae1dbd73c79c084ac35f76",
+      "runtime": "survival/survival-runtime.txt",
+      "runtime_sha256": "ea59fb34f0c8f25b8c30df0144b4a23fbe119a6ff9ae1dbd73c79c084ac35f76",
+      "image_sha256": {
+        "five-nailong-city-hud.png": "cb9b11124f78d6b52e845a4baacd7c07980ab7e12c427077f8bc186480b0350e",
+        "services-during-combat-blocked.png": "55c4dc5f9311b0345a98c3c1d79c173fbae3afd04215f21c506d860661a6a749",
+        "tank-survival-impact-hud.png": "b64ac2a0a8b7c7b540c3dfa725265ed68bfb52761ef4b9d17af5d60e8b6bdb31",
+        "services-paid-repair.png": "503d9af6781f7ce6f96dc77be8fb0b68e28e98e3964cbfea5f0ee33d825c8e1b"
+      },
+      "images": {
+        "five-nailong-city-hud.png": {
+          "file": "survival/screenshots/five-nailong-city-hud.png",
+          "sha256": "cb9b11124f78d6b52e845a4baacd7c07980ab7e12c427077f8bc186480b0350e",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "services-during-combat-blocked.png": {
+          "file": "survival/screenshots/services-during-combat-blocked.png",
+          "sha256": "55c4dc5f9311b0345a98c3c1d79c173fbae3afd04215f21c506d860661a6a749",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "tank-survival-impact-hud.png": {
+          "file": "survival/screenshots/tank-survival-impact-hud.png",
+          "sha256": "b64ac2a0a8b7c7b540c3dfa725265ed68bfb52761ef4b9d17af5d60e8b6bdb31",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "services-paid-repair.png": {
+          "file": "survival/screenshots/services-paid-repair.png",
+          "sha256": "503d9af6781f7ce6f96dc77be8fb0b68e28e98e3964cbfea5f0ee33d825c8e1b",
+          "resolution": [
+            1440,
+            900
+          ]
+        }
+      },
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 49,
+        "remaining": 0,
+        "tracked": 14
+      },
+      "started_utc": "2026-09-14T02:40:52.733977+00:00",
+      "wall_seconds": 92.316,
+      "renderer": [
+        "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+      ],
+      "audio_driver_override": "Dummy",
+      "exit_code": 0
     }
-  }
+  },
+  "scope": "Final exported macOS ARM64 application: actual Metal Forward+ graphics, Jolt physics, input, UI and gameplay with an explicit per-process Dummy audio driver. Dummy mixing/resource cleanup only; no audible playback, hardware audio, or successful default CoreAudio path is claimed. Compiled scripts are loadable; export provenance is bound by executable/PCK, archive, complete frozen-source SHA256 manifest and matching candidate Git blobs."
 }

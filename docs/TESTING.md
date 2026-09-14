@@ -12,7 +12,17 @@ Mac最终包已通过13项独立ZIP审计，包括235个源文件身份、真实
 
 独立单播放器在不加载任何游戏代码时，也出现默认CoreAudio真实4秒内零混音与2个对象泄漏；同一脚本用进程内Dummy时正常混音，约49ms释放，零警告。[最小脚本](evidence/v022-app/audio-diagnostic/minimal-player.gd) · [CoreAudio日志](evidence/v022-app/audio-diagnostic/coreaudio.txt) · [Dummy对照](evidence/v022-app/audio-diagnostic/dummy.txt)。这支持宿主音频回调停滞的判断，但不能将完整App的56个对象全部归类为同一类型；系统根因未确认。未改系统或游戏音频设置，失败报告保留。后续原生画面/玩法采用进程内Dummy单列，不能据此声称真实扬声器声音已测试。
 
-最终安装包玩法验证在完成后记录于此。下方 v0.2.1 和更早的结果是历史数据，不计入 v0.2.2 通过数。
+同一个最终Mac App的三个原生专项共 **171/171 通过、16张实际Metal截图**，全部退出0、外部门禁无错误或警告、EXE/PCK前后哈希不变：
+
+| 专项 | 检查 | 截图 | 实际范围 |
+| --- | ---: | ---: | --- |
+| [武器与空袭](evidence/v022-app/arsenal/report.json) | 35/35 | 5 | B与真实按钮回调购买、三槽更换、主炮中心/边缘真实扣血、两类空袭、方向输入躲避与实体墙遮挡、激光/闪电攻击飞行敌人、Lv.6增援 |
+| [连续遭遇](evidence/v022-app/encounter/report.json) | 96/96 | 7 | 家门口、歌剧院台阶、机场和CBD的自然刷新/追击，旧怪未清时换区增援，V/B/H、付费火控与快修 |
+| [原有生存](evidence/v022-app/survival/report.json) | 40/40 | 4 | 原五类敌人、人物伤害和H治疗、坦克真实击杀奖励、B补给和完整维修 |
+
+[实际App、各报告与截图的哈希绑定](evidence/v022-app/native-index.json)。三次成功验收均仅在QA进程指定Dummy，仍使用原生Metal画面与Jolt；不修改正式包的默认音频设置。**这些结果不验证实际扬声器音效或CoreAudio硬件路径**，也不证明长期FPS和全地图无缺陷。
+
+Windows同一候选提交实际构建与解压执行后，48项门禁、169项玩法断言、42项独立身份核验全部通过：驾驶32、生存30、连续遭遇82、Arsenal25。使用headless Jolt 60Hz，无Windows原生画面或音频实听结论，不能把Mac截图计为Windows证明。[原始Windows报告](evidence/v022-windows/windows-validation.json) · [范围和校验和](WINDOWS.md#v022-最终包证据)。下方 v0.2.1 和更早的结果是历史数据，不计入 v0.2.2 通过数。
 
 复现新版本的完整城市检查：
 

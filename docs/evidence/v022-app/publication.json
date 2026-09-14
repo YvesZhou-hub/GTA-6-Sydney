@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "published": true,
+  "release_url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/tag/v0.2.2-preview.1",
+  "published_at": "2026-09-14T02:56:20Z",
+  "candidate_commit": "2dfe366fe499a25c1ded239e35d371f9f5878198",
+  "downloads": {
+    "Harbourlife-macOS-arm64.zip": {
+      "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.2.2-preview.1/Harbourlife-macOS-arm64.zip",
+      "http_status": 200,
+      "method": "HEAD following redirects; package not downloaded again"
+    },
+    "Harbourlife-Windows-x86_64.zip": {
+      "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.2.2-preview.1/Harbourlife-Windows-x86_64.zip",
+      "http_status": 200,
+      "method": "HEAD following redirects; package not downloaded again"
+    }
+  },
+  "assets": [
+    {
+      "name": "Harbourlife-macOS-arm64.zip",
+      "size": 75486487,
+      "digest": "sha256:04b3f2b9e9950a1885190cb23eb4acbb438ce30ef7e83ce4d6efd4b484b9e017",
+      "state": "uploaded"
+    },
+    {
+      "name": "Harbourlife-Windows-x86_64.zip",
+      "size": 85489072,
+      "digest": "sha256:e675404485ad07ee6eb493dff685bcd894c9f44aeec31fcc6f0676ad40b3ceb7",
+      "state": "uploaded"
+    },
+    {
+      "name": "Mac-SHA256SUMS.txt",
+      "size": 182,
+      "digest": "sha256:8c0e8f9239f1c3a3e27b39d0de2541930ba791b31d2e6e7182b6873fb223b5db",
+      "state": "uploaded"
+    },
+    {
+      "name": "macos-validation.json",
+      "size": 50466,
+      "digest": "sha256:e133cc0fc103272f6a15c1078b6f7a2242c5776e57f413ddab1a736358383e72",
+      "state": "uploaded"
+    },
+    {
+      "name": "Windows-SHA256SUMS.txt",
+      "size": 189,
+      "digest": "sha256:7f6c1e39f984cff28f0a377e7a4b0159a37ea2e2727e59c2ae9d9dd28254f1fa",
+      "state": "uploaded"
+    },
+    {
+      "name": "windows-validation.json",
+      "size": 149473,
+      "digest": "sha256:9cebc04bdc105e3c9e4176f788e8b47e7a6bb2d5d72c87d8be16d3f2236b05e0",
+      "state": "uploaded"
+    }
+  ],
+  "verified_utc": "2026-09-14T02:56:48.410906+00:00"
+}

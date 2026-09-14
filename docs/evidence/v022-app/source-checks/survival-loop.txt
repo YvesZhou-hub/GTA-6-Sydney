@@ -1,0 +1,63 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SURVIVAL_LOOP PASS fixture runs actual Jolt and production scripts {}
+SURVIVAL_LOOP PASS director creates real enemy with layer16 and lifecycle signals {}
+SURVIVAL_LOOP PASS kill reward and lifetime earnings are credited exactly once {}
+SURVIVAL_LOOP PASS dead enemy leaves the scene without a second reward {}
+SURVIVAL_LOOP PASS higher level kill pays increased gold exactly once {}
+SURVIVAL_LOOP PASS clearance0 selects encounter level {}
+SURVIVAL_LOOP PASS clearance1 selects encounter level {}
+SURVIVAL_LOOP PASS clearance2 selects encounter level {}
+SURVIVAL_LOOP PASS clearance4 selects encounter level {}
+SURVIVAL_LOOP PASS clearance18 selects encounter level {}
+SURVIVAL_LOOP PASS clearance100 selects encounter level {}
+SURVIVAL_LOOP PASS automatic street spawn uses actual encounter level {}
+SURVIVAL_LOOP PASS pause holds medical combat and firing clocks {}
+SURVIVAL_LOOP PASS held menu click cannot become a gameplay shot {}
+SURVIVAL_LOOP PASS release then new press restores blaster fire {}
+SURVIVAL_LOOP PASS full health preserves medkit and cooldown {}
+SURVIVAL_LOOP PASS medical action heals60 spends one kit and starts12s cooldown {}
+SURVIVAL_LOOP PASS medical repeat cannot bypass cooldown {}
+SURVIVAL_LOOP PASS medical cooldown blocks until full12 seconds {}
+SURVIVAL_LOOP PASS partial heal clamps to120 and consumes only one kit {}
+SURVIVAL_LOOP PASS defeated player cannot waste a medical kit {}
+SURVIVAL_LOOP PASS empty medical inventory cannot heal {}
+SURVIVAL_LOOP PASS medical supply purchase charges300 once {}
+SURVIVAL_LOOP PASS insufficient funds preserve money and inventory {}
+SURVIVAL_LOOP PASS same type copies share worst fleet durability {}
+SURVIVAL_LOOP PASS new free copy cannot erase existing fleet damage {}
+SURVIVAL_LOOP PASS repair chargesmissing HP times30 and repairs all same type {}
+SURVIVAL_LOOP PASS undamaged fleet cannot be charged for repair {}
+SURVIVAL_LOOP PASS upgrade1 charges configured amount and propagates {}
+SURVIVAL_LOOP PASS upgrade2 charges configured amount and propagates {}
+SURVIVAL_LOOP PASS upgrade3 charges configured amount and propagates {}
+SURVIVAL_LOOP PASS levelIII cap prevents extra upgrade payment {}
+SURVIVAL_LOOP PASS future copy inherits bought fire control level {}
+SURVIVAL_LOOP PASS nonweapon craft cannot buy tank upgrades {}
+SURVIVAL_LOOP PASS healthy empty vehicle can refuel for300 coins {}
+SURVIVAL_LOOP PASS full energy rejects refuel without charging {}
+SURVIVAL_LOOP PASS insufficient refuel funds preserve money energy and health {}
+SURVIVAL_LOOP PASS refuel only restores current energy without healing or filling others {}
+SURVIVAL_LOOP PASS enemy inside20m permits portable medical supply {}
+SURVIVAL_LOOP PASS enemy inside20m still blocks damaged fleet full repair {}
+SURVIVAL_LOOP PASS enemy outside20m permits paid damaged fleet full repair {}
+SURVIVAL_LOOP PASS enemy at large aircraft nose blocks full repair despite distant center {"center_distance":34.0267906188965,"surface_distance":2.60000038146973}
+SURVIVAL_LOOP PASS director routes damage into real player and startscombat gate {}
+SURVIVAL_LOOP PASS recent damage does not block a purchased medical response {}
+SURVIVAL_LOOP PASS recent damage still blocks damaged full repair for8 seconds {}
+SURVIVAL_LOOP PASS 7.9 seconds is not enough for full repair after combat {}
+SURVIVAL_LOOP PASS 8 second repair gate expires through production clock {}
+SURVIVAL_LOOP PASS moving vehicle permits portable supply purchases {}
+SURVIVAL_LOOP PASS moving damaged vehicle still blocks full repair {}
+SURVIVAL_LOOP PASS remote destroyed aircraft repair is payable without boarding {}
+SURVIVAL_LOOP PASS repaired submerged wreck cannot damage newly summoned same type {"fleet_health":100.0,"new_fighter_health":100.0}
+SURVIVAL_LOOP PASS real enemy windup signal damages player through director {"health":112.0,"state":"chase"}
+SURVIVAL_LOOP PASS survival schema records player fleet resources enemy level and combat timer {}
+SURVIVAL_LOOP PASS JSON roundtrip restores actual player inventory fleet and enemy {}
+SURVIVAL_LOOP PASS save and reload cannot erase combat full repair cooldown {}
+SURVIVAL_LOOP PASS v7 repeated section restoration cannot mint money or full health {}
+SURVIVAL_LOOP PASS legacy save without survival section keeps damaged physical fleet {}
+SURVIVAL_LOOP PASS loading another world does not retain previous fleet dictionaries {}
+SURVIVAL_LOOP PASS invalid numeric schema stays finite and within gameplay bounds {}
+SURVIVAL_LOOP PASS restored enemies respect count and per-type HP caps {}
+SURVIVAL_LOOP_COMPLETE 60 passed=true

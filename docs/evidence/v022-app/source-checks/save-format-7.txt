@@ -1,0 +1,45 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SAVE_TEST atomic write PASS
+SAVE_TEST read data PASS
+SAVE_TEST saved summer time survives actual production store PASS
+SAVE_TEST overwrite PASS
+SAVE_TEST previous recovery copy PASS
+SAVE_TEST independent copy PASS
+SAVE_TEST world copy retains independent summer time PASS
+SAVE_TEST corrupt rejected PASS
+SAVE_TEST backup preserved PASS
+SAVE_TEST invalid optional clock section is rejected before runtime load PASS
+SAVE_TEST future version rejected PASS
+SAVE_TEST legacy reader matches actual v012 source digest PASS
+SAVE_TEST format 1 loads into current format without rewriting source or losing existing state PASS
+SAVE_TEST format 2 loads into current format without rewriting source or losing existing state PASS
+SAVE_TEST format 3 loads into current format without rewriting source or losing existing state PASS
+SAVE_TEST format 4 loads into current format without rewriting source or losing existing state PASS
+SAVE_TEST format 5 loads into current format without rewriting source or losing existing state PASS
+SAVE_TEST format 6 loads into current format without rewriting source or losing existing state PASS
+SAVE_TEST actual v012 reader accepts valid v4 control PASS
+SAVE_TEST saving an upgraded v4 world emits format 7 PASS
+SAVE_TEST v7 reload preserves both independent hoverboards and occupied target PASS
+SAVE_TEST upgrade retains the exact original v4 recovery bytes PASS
+SAVE_TEST actual shipped v012 reader refuses format 7 PASS
+SAVE_TEST old-reader rejection preserves new save and recovery bytes PASS
+SAVE_TEST copying a v7 world keeps format and independent new-class data PASS
+SAVE_TEST immutable v021 reader has original format6 contract and exact digest PASS
+SAVE_TEST actual v021 reader accepts original format6 world PASS
+SAVE_TEST new reader accepts format6 without adding free paid modules or rewriting bytes PASS
+SAVE_TEST module world writes version7 and retains v6 recovery bytes PASS
+SAVE_TEST actual v021 reader refuses newer module world PASS
+SAVE_TEST v021 rejection does not strip modules or mutate recovery PASS
+SAVE_TEST format7 actual store preserves paid armory and difficulty PASS
+SAVE_TEST world copy preserves paid modules and original source bytes PASS
+SAVE_TEST new save keeps a recovery world readable by actual v021 PASS
+SAVE_TEST yaw wrong type rejected before runtime load without changing save or backup PASS
+SAVE_TEST yaw nonfinite number rejected before runtime load without changing save or backup PASS
+SAVE_TEST pitch wrong type rejected before runtime load without changing save or backup PASS
+SAVE_TEST pitch nonfinite number rejected before runtime load without changing save or backup PASS
+SAVE_TEST elapsed wrong type rejected before runtime load without changing save or backup PASS
+SAVE_TEST elapsed nonfinite number rejected before runtime load without changing save or backup PASS
+SAVE_TEST absent legacy camera numbers remain absent for runtime defaults PASS
+SAVE_TEST valid legacy camera numbers remain exact PASS
+SAVE_TEST COMPLETE checks=42 failures=0 format=7

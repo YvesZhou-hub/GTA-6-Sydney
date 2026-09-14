@@ -1,0 +1,50 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WEAPON_UPGRADE PASS real Jolt backend {}
+WEAPON_UPGRADE PASS tank tier 0 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS tank tier 0 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS tank tier 1 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS tank tier 1 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS tank tier 1 expands real coverage and reduces reload {}
+WEAPON_UPGRADE PASS tank tier 2 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS tank tier 2 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS tank tier 2 expands real coverage and reduces reload {}
+WEAPON_UPGRADE PASS tank tier 3 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS tank tier 3 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS tank tier 3 expands real coverage and reduces reload {}
+WEAPON_UPGRADE PASS tank invalid tier clamps to saved tier bounds {}
+WEAPON_UPGRADE PASS tank UI mutation cannot alter shared base or next shell {}
+WEAPON_UPGRADE PASS fighter tier 0 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS fighter tier 0 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS fighter tier 1 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS fighter tier 1 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS fighter tier 1 expands real coverage and reduces reload {}
+WEAPON_UPGRADE PASS fighter tier 2 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS fighter tier 2 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS fighter tier 2 expands real coverage and reduces reload {}
+WEAPON_UPGRADE PASS fighter tier 3 preview uses exact gameplay profiles {}
+WEAPON_UPGRADE PASS fighter tier 3 next tier and cap are explicit {}
+WEAPON_UPGRADE PASS fighter tier 3 expands real coverage and reduces reload {}
+WEAPON_UPGRADE PASS fighter invalid tier clamps to saved tier bounds {}
+WEAPON_UPGRADE PASS fighter UI mutation cannot alter shared base or next shell {}
+WEAPON_UPGRADE PASS unsupported vehicles cannot expose paid fire control {}
+WEAPON_UPGRADE PASS tank maximum upgrade covers 2.56 times area with 0.805 second reload {}
+WEAPON_UPGRADE PASS corrupt vehicle tier falls back without corrupting projectile stats nan {}
+WEAPON_UPGRADE PASS corrupt vehicle tier falls back without corrupting projectile stats inf {}
+WEAPON_UPGRADE PASS corrupt vehicle tier falls back without corrupting projectile stats invalid {}
+WEAPON_UPGRADE PASS corrupt vehicle tier falls back without corrupting projectile stats <null> {}
+WEAPON_UPGRADE PASS zero-wallet tank fires for free {}
+WEAPON_UPGRADE PASS midflight upgrade leaves original projectile snapshot intact {}
+WEAPON_UPGRADE PASS midflight upgrade does not bypass already started reload {}
+WEAPON_UPGRADE PASS base shell cannot hit enemies outside original 16m radius {}
+WEAPON_UPGRADE PASS blast is centered on actual thin-wall impact {}
+WEAPON_UPGRADE PASS fully upgraded shot remains free and still gates repeat fire {}
+WEAPON_UPGRADE PASS changing vehicle tier cannot downgrade already launched shell {}
+WEAPON_UPGRADE PASS upgraded projectile emits actual 25.6m world and enemy payload {}
+WEAPON_UPGRADE PASS upgrade reaches enemy between original and upgraded radius {"remaining_health":928.745405431837}
+WEAPON_UPGRADE PASS expanded coverage retains production distance damage falloff {}
+WEAPON_UPGRADE PASS intact wall still blocks upgraded blast damage {}
+WEAPON_UPGRADE PASS enemy beyond upgraded edge is unharmed {}
+WEAPON_UPGRADE PASS expanded blast effect matches launched radius multiplier {}
+WEAPON_UPGRADE PASS upgrades keep original fixed projectile and effects capacities {}
+WEAPON_UPGRADE_COMPLETE 47 passed=true

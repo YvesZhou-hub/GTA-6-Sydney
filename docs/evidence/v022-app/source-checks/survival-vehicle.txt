@@ -1,0 +1,115 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SURVIVAL PASS actual Jolt backend {}
+SURVIVAL PASS player starts with 120 HP {}
+SURVIVAL PASS first hit removes health and stores source {}
+SURVIVAL PASS same-frame crowd hits cannot bypass protection {}
+SURVIVAL PASS protection lasts at least a third of a second {}
+SURVIVAL PASS protection expires on physics clock {}
+SURVIVAL PASS healing clamps to max and returns actual amount {}
+SURVIVAL PASS defeat is one signal without teleporting {}
+SURVIVAL PASS ordinary heal cannot resurrect {}
+SURVIVAL PASS reset restores player and clears protection {}
+SURVIVAL PASS invalid damage cannot corrupt player health {}
+SURVIVAL PASS car is vulnerable with expected armor {"armor":1.0,"health":88.0}
+SURVIVAL PASS car damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS car upgrade is bounded {}
+SURVIVAL PASS car old zero-health save stays destroyed in survival {}
+SURVIVAL PASS car destroyed boost is disabled {}
+SURVIVAL PASS car partial repair reports actual gain {}
+SURVIVAL PASS car full repair remains backwards compatible {}
+SURVIVAL PASS car corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS motorcycle is vulnerable with expected armor {"armor":1.0,"health":88.0}
+SURVIVAL PASS motorcycle damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS motorcycle upgrade is bounded {}
+SURVIVAL PASS motorcycle old zero-health save stays destroyed in survival {}
+SURVIVAL PASS motorcycle destroyed boost is disabled {}
+SURVIVAL PASS motorcycle partial repair reports actual gain {}
+SURVIVAL PASS motorcycle full repair remains backwards compatible {}
+SURVIVAL PASS motorcycle corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS speedboat is vulnerable with expected armor {"armor":1.0,"health":88.0}
+SURVIVAL PASS speedboat damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS speedboat upgrade is bounded {}
+SURVIVAL PASS speedboat old zero-health save stays destroyed in survival {}
+SURVIVAL PASS speedboat destroyed boost is disabled {}
+SURVIVAL PASS speedboat partial repair reports actual gain {}
+SURVIVAL PASS speedboat full repair remains backwards compatible {}
+SURVIVAL PASS speedboat corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS yacht is vulnerable with expected armor {"armor":4.0,"health":97.0}
+SURVIVAL PASS yacht damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS yacht upgrade is bounded {}
+SURVIVAL PASS yacht old zero-health save stays destroyed in survival {}
+SURVIVAL PASS yacht destroyed boost is disabled {}
+SURVIVAL PASS yacht partial repair reports actual gain {}
+SURVIVAL PASS yacht full repair remains backwards compatible {}
+SURVIVAL PASS yacht corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS paraglider is vulnerable with expected armor {"armor":1.0,"health":88.0}
+SURVIVAL PASS paraglider damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS paraglider upgrade is bounded {}
+SURVIVAL PASS paraglider old zero-health save stays destroyed in survival {}
+SURVIVAL PASS paraglider destroyed boost is disabled {}
+SURVIVAL PASS paraglider partial repair reports actual gain {}
+SURVIVAL PASS paraglider full repair remains backwards compatible {}
+SURVIVAL PASS paraglider corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS glider is vulnerable with expected armor {"armor":1.0,"health":88.0}
+SURVIVAL PASS glider damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS glider upgrade is bounded {}
+SURVIVAL PASS glider old zero-health save stays destroyed in survival {}
+SURVIVAL PASS glider destroyed boost is disabled {}
+SURVIVAL PASS glider partial repair reports actual gain {}
+SURVIVAL PASS glider full repair remains backwards compatible {}
+SURVIVAL PASS glider corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS helicopter is vulnerable with expected armor {"armor":1.0,"health":88.0}
+SURVIVAL PASS helicopter damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS helicopter upgrade is bounded {}
+SURVIVAL PASS helicopter old zero-health save stays destroyed in survival {}
+SURVIVAL PASS helicopter destroyed boost is disabled {}
+SURVIVAL PASS helicopter partial repair reports actual gain {}
+SURVIVAL PASS helicopter full repair remains backwards compatible {}
+SURVIVAL PASS helicopter corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS airliner is vulnerable with expected armor {"armor":3.0,"health":96.0}
+SURVIVAL PASS airliner damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS airliner upgrade is bounded {}
+SURVIVAL PASS airliner old zero-health save stays destroyed in survival {}
+SURVIVAL PASS airliner destroyed boost is disabled {}
+SURVIVAL PASS airliner partial repair reports actual gain {}
+SURVIVAL PASS airliner full repair remains backwards compatible {}
+SURVIVAL PASS airliner corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS hoverboard is vulnerable with expected armor {"armor":1.0,"health":88.0}
+SURVIVAL PASS hoverboard damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS hoverboard upgrade is bounded {}
+SURVIVAL PASS hoverboard old zero-health save stays destroyed in survival {}
+SURVIVAL PASS hoverboard destroyed boost is disabled {}
+SURVIVAL PASS hoverboard partial repair reports actual gain {}
+SURVIVAL PASS hoverboard full repair remains backwards compatible {}
+SURVIVAL PASS hoverboard corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS tank is vulnerable with expected armor {"armor":6.0,"health":98.0}
+SURVIVAL PASS tank damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS tank upgrade is bounded {}
+SURVIVAL PASS tank old zero-health save stays destroyed in survival {}
+SURVIVAL PASS tank destroyed boost is disabled {}
+SURVIVAL PASS tank partial repair reports actual gain {}
+SURVIVAL PASS tank full repair remains backwards compatible {}
+SURVIVAL PASS tank corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS fighter is vulnerable with expected armor {"armor":3.0,"health":96.0}
+SURVIVAL PASS fighter damage and upgrade survive load and physics ticks {}
+SURVIVAL PASS fighter upgrade is bounded {}
+SURVIVAL PASS fighter old zero-health save stays destroyed in survival {}
+SURVIVAL PASS fighter destroyed boost is disabled {}
+SURVIVAL PASS fighter partial repair reports actual gain {}
+SURVIVAL PASS fighter full repair remains backwards compatible {}
+SURVIVAL PASS fighter corrupt survival numbers recover finite defaults {}
+SURVIVAL PASS tank classic fixture immunity is unchanged {}
+SURVIVAL PASS tank destroyed craft falls without freeze or resurrection {"drop":4.76220703125,"velocity":"(0.0, -9.462346, -48.07093)"}
+SURVIVAL PASS fighter classic fixture immunity is unchanged {}
+SURVIVAL PASS fighter destroyed craft falls without freeze or resurrection {"drop":4.785400390625,"velocity":"(0.0, -9.530856, -48.78557)"}
+SURVIVAL PASS hoverboard classic fixture immunity is unchanged {}
+SURVIVAL PASS hoverboard destroyed craft falls without freeze or resurrection {"drop":4.785400390625,"velocity":"(0.0, -9.530855, -48.78557)"}
+SURVIVAL PASS fighter empty fuel cannot trigger boarding launch or boost {}
+SURVIVAL PASS airliner empty fuel cannot trigger boarding launch or boost {}
+SURVIVAL PASS hoverboard empty fuel cannot trigger boarding launch or boost {}
+SURVIVAL PASS real survival contact damages formerly immune hoverboard {"health":94.9097508978075,"impact":{"angular_velocity":[5.11956930160522,0.000000563354205951327,0.0],"closing_mps":20.5435688634073,"collider":"/root/@Node3D@2/@StaticBody3D@3566","contact_count":4,"energy_j":32707.9621775306,"health":94.9097508978075,"impulse_mps":20.5551285282258,"impulse_normal_mps":20.5435688634073,"linear_velocity":[0.0,-3.96766471862793,-0.785774230957031],"normal":[0.0,0.0,1.0],"normal_closing":0.0,"point":[0.545000076293945,3999.57373046875,-9.5],"previous_velocity":[0.0,0.0,0.0],"relative_velocity":[0.0,0.0,0.0],"rotation":[0.0,0.0,0.0]}}
+SURVIVAL PASS upgrade changes damage radius and cooldown without mutating base profile {}
+SURVIVAL PASS healthy tank fires once and respects cooldown {}
+SURVIVAL PASS layer 16 target produces typed gameplay blast independently {"hits":1}
+SURVIVAL PASS destroyed tank cannot fire {}

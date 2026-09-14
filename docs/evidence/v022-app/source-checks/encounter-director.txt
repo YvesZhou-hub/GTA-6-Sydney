@@ -1,0 +1,40 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ENCOUNTER_DIRECTOR PASS encounter fixture uses production scripts and Jolt {}
+ENCOUNTER_DIRECTOR PASS director exposes adaptive concurrent encounter budget {}
+ENCOUNTER_DIRECTOR PASS higher level ground encounters alternate both flying roles {"roles":["winglet","stormwing","winglet","stormwing"]}
+ENCOUNTER_DIRECTOR PASS automatic first encounter arrives while entry damage grace is active {"first_spawn_seconds":1.0,"grace_remaining":11.0,"initial_grace":12.0}
+ENCOUNTER_DIRECTOR PASS first automatic enemy has a real nearby supported position {"distance":22.0001125335693}
+ENCOUNTER_DIRECTOR PASS automatically spawned enemy actively approaches the player {"current_distance":13.8392963409424,"initial_distance":22.0001125335693}
+ENCOUNTER_DIRECTOR PASS entry grace allows encounters without draining player health {"enemies":3,"grace":7.9999999999998,"health":120.0}
+ENCOUNTER_DIRECTOR PASS moving to another street spawns new threats before clearing old enemies {"new_local":2,"old_count":4,"reward_progress":7,"reward_quota":8,"surviving_old":4,"total":6}
+ENCOUNTER_DIRECTOR PASS reward milestone cannot lock a partially uncleared map region {"reward_quota":8,"spawned_counter":13}
+ENCOUNTER_DIRECTOR PASS low health reduces incoming pressure while keeping encounters {"healthy":4,"low_health":2}
+ENCOUNTER_DIRECTOR PASS vehicle combat receives more concurrent targets than early walking {"foot":4,"vehicle":6}
+ENCOUNTER_DIRECTOR PASS progression budgets stay bounded below global enemy limit {"foot":9,"vehicle":11}
+ENCOUNTER_DIRECTOR PASS vehicle encounter autonomously fills its bounded target budget {"actual":6,"budget":6,"grace":1.99999999999982}
+ENCOUNTER_DIRECTOR PASS vehicle spawn group stays outside the actual hull {"enemies":6}
+ENCOUNTER_DIRECTOR PASS open ground produces reliable bounded placement across search bearings {"attempts":20,"successes":20}
+ENCOUNTER_DIRECTOR PASS thin walkable podium is usable despite destructible metadata {"floor_top":4.5,"point":"(19.05256, 4.58, 11.0)"}
+ENCOUNTER_DIRECTOR PASS building roof is rejected even within vertical spawn window {"point":"(inf, inf, inf)"}
+ENCOUNTER_DIRECTOR PASS sea level and submerged placement never creates a ground enemy {}
+ENCOUNTER_DIRECTOR PASS high airborne player does not summon unsupported enemies {}
+ENCOUNTER_DIRECTOR PASS enclosed player has no disconnected exterior spawn {}
+ENCOUNTER_DIRECTOR PASS stale full quota reconciles against zero live enemies {}
+ENCOUNTER_DIRECTOR PASS departed enemies release encounter capacity without a kill {}
+ENCOUNTER_DIRECTOR PASS recycled enemy cannot deliver a delayed duplicate reward {}
+ENCOUNTER_DIRECTOR PASS queued deletion also frees quota without awarding coins {}
+ENCOUNTER_DIRECTOR PASS physically trapped offscreen pursuer is safely recycled {"status":{"blocked_seconds":16.0000000000004,"detouring":true,"pursuit_seconds":16.0000000000004,"stuck_seconds":16.0000000000004}}
+ENCOUNTER_DIRECTOR PASS full resident population outside district leaves room for prompt nearby reinforcement {"nearby":4,"replacement_seconds":0.6,"total":24}
+ENCOUNTER_DIRECTOR PASS capacity recovery retains old pursuers without overcap or false rewards {}
+ENCOUNTER_DIRECTOR PASS capacity recovery preserves visible distant and hidden nearby pursuers {}
+ENCOUNTER_DIRECTOR PASS capacity recovery releases exactly the missing local slots {"desired":4,"local":1,"resident":21}
+ENCOUNTER_DIRECTOR PASS capacity recovery selects farthest eligible hidden actors first {"closest_removed":89.202018737793,"farthest_retained":89.0505447387695}
+ENCOUNTER_DIRECTOR PASS available resident slots prevent unnecessary capacity recycling {}
+ENCOUNTER_DIRECTOR PASS full visible resident population is never removed for spawn pressure {}
+ENCOUNTER_DIRECTOR PASS wave completion grants progress without a forced rest {}
+ENCOUNTER_DIRECTOR PASS next wave replenishes promptly without an eighteen or thirty second gap {"replenishment_seconds":0.6}
+ENCOUNTER_DIRECTOR PASS legacy rest and vanished saved enemies cannot stall loaded play {"grace":5.0,"rest":0.0,"spawned":0}
+ENCOUNTER_DIRECTOR PASS automatic first minute creates actual damage pressure {"damage_events":26,"defeated":true,"duration_seconds":38.25,"first_damage_seconds":12.2333333333333,"survival_after_first_damage_seconds":26.0}
+ENCOUNTER_DIRECTOR PASS initial damage grace expires before enemies can hurt player {"damage_events":26,"defeated":true,"duration_seconds":38.25,"first_damage_seconds":12.2333333333333,"survival_after_first_damage_seconds":26.0}
+ENCOUNTER_DIRECTOR PASS first contact leaves at least twenty two seconds of passive reaction time {"damage_events":26,"defeated":true,"duration_seconds":38.25,"first_damage_seconds":12.2333333333333,"survival_after_first_damage_seconds":26.0}

@@ -1,0 +1,38 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_SERVICE PASS field service fixture uses actual damage armor and fleet propagation {}
+FIELD_SERVICE PASS moving combat full repair remains blocked on a damaged tank {}
+FIELD_SERVICE PASS moving surrounded tank can buy exactly25HP for1125 coins {"message":"战地快修 · 同款耐久 +25%，12 秒冷却 · $1125","ok":true}
+FIELD_SERVICE PASS field repair restores durability without free energy {}
+FIELD_SERVICE PASS successful field repair starts a twelve second shared cooldown {}
+FIELD_SERVICE PASS repeated field repair cannot drain money or bypass cooldown {}
+FIELD_SERVICE PASS H shortcut shares the same paid repair cooldown {}
+FIELD_SERVICE PASS switching vehicle kind cannot bypass the global field cooldown {}
+FIELD_SERVICE PASS physical clock keeps field repair blocked just before twelve seconds {"remaining":0.149999999999825}
+FIELD_SERVICE PASS physical clock unlocks paid field repair after twelve seconds {}
+FIELD_SERVICE PASS partial field repair charges only missing ten HP {"message":"战地快修 · 同款耐久 +10%，12 秒冷却 · $450","ok":true}
+FIELD_SERVICE PASS full durability preserves money and cooldown {}
+FIELD_SERVICE PASS fractional missing durability rounds its actual price up once {"message":"战地快修 · 同款耐久 +0%，12 秒冷却 · $12","ok":true}
+FIELD_SERVICE PASS insufficient funds preserve fleet money cooldown and medical kits {}
+FIELD_SERVICE PASS exact repair funds succeed without a negative wallet {}
+FIELD_SERVICE PASS field repair cooldown is serialized with fleet durability {}
+FIELD_SERVICE PASS save reload retains repair cooldown and prevents instant repeat {}
+FIELD_SERVICE PASS invalid field cooldown clamps safely -5.0 {}
+FIELD_SERVICE PASS invalid field cooldown clamps safely inf {}
+FIELD_SERVICE PASS invalid field cooldown clamps safely nan {}
+FIELD_SERVICE PASS invalid field cooldown clamps safely 999.0 {}
+FIELD_SERVICE PASS occupied submerged tank rejects field repair without charge {}
+FIELD_SERVICE PASS occupied submerged tank also rejects refuel {}
+FIELD_SERVICE PASS portable medkit is purchasable during moving recent combat {}
+FIELD_SERVICE PASS tank fire control can upgrade during moving recent combat {"message":"火控 1 级 · 爆炸半径 19.2 m · 装填 1.03 s · 弹药免费 · $8000","ok":true}
+FIELD_SERVICE PASS moving combat refuel charges only energy without repair {}
+FIELD_SERVICE PASS on foot H consumes one medkit and heals without charging coins {}
+FIELD_SERVICE PASS inside vehicle H repairs vehicle and leaves player health and medkits unchanged {}
+FIELD_SERVICE PASS paused game cannot trigger a paid keyboard recovery {}
+FIELD_SERVICE PASS unboarded field repair cannot charge the player {}
+FIELD_SERVICE PASS repair quote sees fresh shared damage without mutating durability {"quoted":1125}
+FIELD_SERVICE PASS field transaction includes newer same-type damage before pricing {"other_health":65.0,"paid":1125,"tank_health":65.0}
+FIELD_SERVICE PASS field repair recovers paid durability and removes submerged abandoned twin {}
+FIELD_SERVICE PASS recovered underwater wreck cannot redamage a fresh shared fleet copy {}
+FIELD_SERVICE PASS unknown service leaves wallet and resources unchanged {}
+FIELD_SERVICE_COMPLETE 35 passed=true

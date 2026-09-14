@@ -1,0 +1,17 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ENEMY_PURSUIT PASS persistent pursuit routes around a thirty metre facade {"detour_width":19.040002822876,"position":"(1.287556, 0.000927, -23.71324)"}
+ENEMY_PURSUIT PASS detour uses bounded physical movement without wall penetration {"entered_wall":false,"largest_step":0.0466676913201809}
+ENEMY_PURSUIT PASS facade detour eventually reaches target and attacks with sight {"hits":2,"position":"(1.287556, 0.000927, -23.71324)"}
+ENEMY_PURSUIT PASS successful pursuit clears stale obstruction and stuck diagnostics {"blocked_seconds":0.0,"detouring":false,"pursuit_seconds":21.9833333333334,"stuck_seconds":0.0}
+ENEMY_PURSUIT PASS pursuit turns a building corner instead of oscillating {"position":"(80.80537, 0.000927, -28.28208)","status":{"blocked_seconds":0.0,"detouring":false,"pursuit_seconds":14.0000000000003,"stuck_seconds":0.0}}
+ENEMY_PURSUIT PASS ground pursuer respects quay edge with unreachable offshore target {"lowest_y":0.0,"position":"(710.6521, 0.000878, -8.506004)"}
+ENEMY_PURSUIT PASS edge avoidance does not invent an attack across the gap {"attack_range":2.0,"blocked_seconds":0.0,"cooldown_remaining":0.0,"damage":7.0,"dead":false,"detouring":false,"health":60.0,"label":"疾跑奶龙","level":1,"line_of_sight":true,"max_health":60.0,"position":[710.652099609375,0.000877526879776269,-8.50600433349609],"pursuit_seconds":15.0000000000003,"reward":160,"speed":6.2,"state":"chase","stuck_seconds":0.0,"type":"runner","windup_remaining":0.0}
+ENEMY_PURSUIT PASS trapped pursuit exposes real blocked and stationary duration {"blocked_seconds":6.99999999999998,"detouring":true,"pursuit_seconds":6.99999999999998,"stuck_seconds":6.99999999999998}
+ENEMY_PURSUIT PASS unreachable target never receives damage through enclosing walls {"attack_range":2.0,"blocked_seconds":6.99999999999998,"cooldown_remaining":0.0,"damage":8.0,"dead":false,"detouring":true,"health":80.0,"label":"游荡奶龙","level":1,"line_of_sight":false,"max_health":80.0,"position":[160.0,0.0,0.0],"pursuit_seconds":6.99999999999998,"reward":120,"speed":2.8,"state":"chase","stuck_seconds":6.99999999999998,"type":"roamer","windup_remaining":0.0}
+ENEMY_PURSUIT PASS target switch fixture reaches a real attack windup {}
+ENEMY_PURSUIT PASS entering a vehicle clears old windup and warning immediately {"blocked_seconds":0.0,"detouring":false,"pursuit_seconds":0.0,"stuck_seconds":0.0}
+ENEMY_PURSUIT PASS new target receives its own complete attack telegraph {"attack_range":22.0,"blocked_seconds":0.0,"cooldown_remaining":0.0,"damage":12.0,"dead":false,"detouring":false,"health":110.0,"label":"喷吐奶龙","level":1,"line_of_sight":true,"max_health":110.0,"position":[220.0,0.0,0.0],"pursuit_seconds":0.5,"reward":240,"speed":2.7,"state":"windup","stuck_seconds":0.0,"type":"spitter","windup_remaining":0.516666666666665}
+ENEMY_PURSUIT PASS fresh windup can attack the actual new vehicle hull {"hits":1}
+ENEMY_PURSUIT PASS setting unchanged target is idempotent and retains cooldown {}
+ENEMY_PURSUIT PASS leaving pursuit clears diagnostic state safely {"blocked_seconds":0.0,"detouring":false,"pursuit_seconds":0.0,"stuck_seconds":0.0}

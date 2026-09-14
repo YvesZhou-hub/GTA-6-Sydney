@@ -8,7 +8,9 @@
 
 **奶龙危机**跟随玩家所在街区持续增援，加入俯冲与雷击两类空中奶龙。清晰血条和伤害浮字显示每只敌人实际扣掉多少血；炮弹中心伤害更高，边缘较低。11 类载具保留免费自动副武器，还可花金币选装机关枪、微型范围炮、激光与连锁闪电。每种车型三个额外槽位，模块各三级，免费拆装并保留等级；V 控制自动武器，X 手动开火，B 选装升级，H 急救或战地快修。保留无敌人的自由观光模式，以及漂移、急刹和 Shift 三倍加速。[生存规则](docs/SURVIVAL_DESIGN.md) · [驾驶操作](docs/DRIVING.md) · [本版改动](docs/FIXES_0.2.2.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 与 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动说明](docs/WINDOWS.md)
 
-![v0.2.1 持续增援与坦克自动反击 · 最终 Mac App 实际场景](docs/evidence/v021-app/encounter/screenshots/automatic%20tank%20support%20with%20player%20H%20field%20repairs.png)
+![v0.2.2 真实主炮中心与边缘扣血 · 最终Mac App画面，无声混音验收](docs/evidence/v022-app/arsenal/screenshots/cannon-centre-and-edge.png)
+
+![v0.2.2 激光与连锁闪电攻击空中奶龙 · 最终Mac App画面](docs/evidence/v022-app/arsenal/screenshots/laser-lightning-airborne-targets.png)
 
 以下宣传素材录制于 v0.1.8：
 

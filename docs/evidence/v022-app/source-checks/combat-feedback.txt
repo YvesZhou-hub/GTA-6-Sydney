@@ -1,0 +1,56 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS active encounter feedback is visible and input-transparent
+PASS feedback draws below existing HUD
+PASS actual enemy registration creates screen-space health and suppresses 3D labels
+PASS duplicate registration cannot duplicate damage callbacks
+PASS real fractional cannon damage shows exact HP loss
+PASS health bar shows remaining and maximum numeric HP
+PASS damage trail preserves previous HP briefly
+PASS cannon numbers are larger than automatic rounds
+PASS continuous fire merges short burst as unrounded actual sum
+PASS shell and automatic damage remain separate
+PASS later burst begins a new number
+PASS individual shells never merge
+PASS overkill only displays HP actually removed
+PASS fatal damage keeps zero-HP bar briefly
+PASS defeat reward is separate from damage
+PASS dead hits and repeated defeat cannot duplicate damage or reward
+PASS zero-HP bar expires without hiding surviving damage numbers
+PASS floating damage and reward have bounded lifetimes
+PASS number formatting keeps whole values clean and necessary decimal
+PASS positive tiny damage is never shown as zero
+PASS shared blast centre keeps damage anchored to separate victims
+PASS separate blast victims have separated projected damage
+PASS dense fire has fixed 48-number memory cap without changing actual totals
+PASS invalid and zero damage never generate floating numbers
+PASS paused hides feedback and freezes its presentation time
+PASS quitting hides feedback and freezes its presentation time
+PASS visible menu hides feedback
+PASS visible map hides feedback
+PASS title or loading screen never shows enemies
+PASS sightseeing without encounters hides combat feedback
+PASS SceneTree pause hides feedback even if host flag is false
+PASS closing overlays restores valid gameplay feedback
+PASS visible enemy in front of camera has a projected bar
+PASS rendered enemy anchor follows movement between throttled LOS scans
+PASS real world wall hides both HP and new damage text
+PASS removing wall restores real line of sight
+PASS vehicle collision layer also occludes enemy feedback
+PASS enemies behind the camera never project into view
+PASS off-screen enemies are not clamped onto screen edges
+PASS unengaged distant enemies do not clutter the view
+PASS actual automatic lock promotes distant visible target
+PASS module lock is also displayed from actual status
+PASS optional explicit lock can be supplied by the host
+PASS crowded layout keeps lock first and caps bars
+PASS crowded enemy bars never overlap each other
+PASS crowding hides overflow instead of drawing unreadable labels
+PASS stationary layout is stable between frames
+PASS custom HUD exclusions displace or hide bars without overlaps
+PASS screen-space bars keep their pixel size with distance
+PASS unregister disconnects and restores original 3D feedback
+PASS freed enemies leave no retained references
+PASS world reset clears damage counters and restores enemy labels
+PASS feedback teardown hides detached enemy without querying stale transforms
+COMBAT_FEEDBACK_QA {"count":53,"passed":true}

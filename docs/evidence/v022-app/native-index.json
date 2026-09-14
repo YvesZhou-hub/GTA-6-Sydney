@@ -1,0 +1,289 @@
+{
+  "schema": 1,
+  "passed": true,
+  "release_tag": "v0.2.2-preview.1",
+  "source_commit_with_matching_game_files": "2dfe366fe499a25c1ded239e35d371f9f5878198",
+  "source_file_count": 235,
+  "app_identity": {
+    "executable_sha256": "f2bab4a8567ab1493670f7880784a4822f0581b07d7ac0aac08627fe34c1d66b",
+    "pck_sha256": "7b61aa686f1c811f09abe8fcb3face14666149b1fed22a72b6db5ed526c6e0af"
+  },
+  "archive_sha256": "04b3f2b9e9950a1885190cb23eb4acbb438ce30ef7e83ce4d6efd4b484b9e017",
+  "build_manifest": "build.json",
+  "build_manifest_sha256": "5c9eff1a5072f09b938cf2943815efb623ba6028fbdb9f4bce897167fa302ca8",
+  "archive_validation": "archive-validation.json",
+  "archive_validation_sha256": "5ddf11673f6522dab5eb6f7a4233a42b054005ac9f2c04975feedd212d8e665a",
+  "audio_driver_override": "Dummy",
+  "audio_listening_verified": false,
+  "default_audio_validation_passed": false,
+  "scope": "Final exported macOS ARM64 application: actual Metal Forward+ graphics, Jolt physics, input, UI and gameplay with an explicit per-process Dummy audio driver. Dummy mixing/resource cleanup only; no audible playback, hardware audio, or successful default CoreAudio path is claimed. Compiled scripts are loadable; export provenance is bound by executable/PCK, archive, complete frozen-source SHA256 manifest and matching candidate Git blobs.",
+  "modes": {
+    "arsenal": {
+      "checks": 35,
+      "screenshots": 5,
+      "passed": true,
+      "report": "arsenal/report.json",
+      "report_sha256": "cb8bc3fd3549a54b7a47e5c30139bfe273bee572277bec5e7e30d7b3e1219123",
+      "app_binding": "arsenal/app-binding.json",
+      "app_binding_sha256": "75f7da852cbcff6e1c120c067a033f41d12050fa05a159ddf13f76e73f3eda6f",
+      "console": "arsenal/arsenal-console.txt",
+      "console_sha256": "8ff430077860941b578782671817f787510573c2a730afdf1a85ff85f737dcf2",
+      "runtime": "arsenal/arsenal-runtime.txt",
+      "runtime_sha256": "8ff430077860941b578782671817f787510573c2a730afdf1a85ff85f737dcf2",
+      "image_sha256": {
+        "armory-three-slots.png": "b8749419d1fe03360cf6399a50b2385465c8831e98701cb027d7ce25f2d60a08",
+        "cannon-centre-and-edge.png": "e7bd2f8342bb5e5e719a03e43b67274f74277de75a3f93beed04bc113a6406af",
+        "stormwing-marked-strike.png": "094b54a7d92d5a5d5b3a8260048d22ec6ff41b1d0a7652bdf5d9c35efcd090d8",
+        "laser-lightning-airborne-targets.png": "9056a4ef1c8e5a6dd0e7af6748c8b75a2aa69a2290ecab5a046e437f8c900217",
+        "veteran-natural-reinforcements.png": "aa4c037a2e981732c78666e01cea7fa43802e8b9ca6e35ffcfe151e1299d3699"
+      },
+      "images": {
+        "armory-three-slots.png": {
+          "file": "arsenal/screenshots/armory-three-slots.png",
+          "sha256": "b8749419d1fe03360cf6399a50b2385465c8831e98701cb027d7ce25f2d60a08",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "cannon-centre-and-edge.png": {
+          "file": "arsenal/screenshots/cannon-centre-and-edge.png",
+          "sha256": "e7bd2f8342bb5e5e719a03e43b67274f74277de75a3f93beed04bc113a6406af",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "stormwing-marked-strike.png": {
+          "file": "arsenal/screenshots/stormwing-marked-strike.png",
+          "sha256": "094b54a7d92d5a5d5b3a8260048d22ec6ff41b1d0a7652bdf5d9c35efcd090d8",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "laser-lightning-airborne-targets.png": {
+          "file": "arsenal/screenshots/laser-lightning-airborne-targets.png",
+          "sha256": "9056a4ef1c8e5a6dd0e7af6748c8b75a2aa69a2290ecab5a046e437f8c900217",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "veteran-natural-reinforcements.png": {
+          "file": "arsenal/screenshots/veteran-natural-reinforcements.png",
+          "sha256": "aa4c037a2e981732c78666e01cea7fa43802e8b9ca6e35ffcfe151e1299d3699",
+          "resolution": [
+            1440,
+            900
+          ]
+        }
+      },
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 45,
+        "remaining": 0,
+        "tracked": 13
+      },
+      "started_utc": "2026-09-14T02:33:03.104038+00:00",
+      "wall_seconds": 104.201,
+      "renderer": [
+        "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+      ],
+      "audio_driver_override": "Dummy",
+      "exit_code": 0
+    },
+    "encounter": {
+      "checks": 96,
+      "screenshots": 7,
+      "passed": true,
+      "report": "encounter/report.json",
+      "report_sha256": "3ba37b1c36eb184a253ad439b5ca69c3bd95d91277808e7dd9467ba8a363c319",
+      "app_binding": "encounter/app-binding.json",
+      "app_binding_sha256": "8628726713be276c97d232dae97f0e3826918d6ddc08615118489dc0506d45d8",
+      "console": "encounter/encounter-console.txt",
+      "console_sha256": "88432988bcd6a68f86044ad666ae84be3a817a6be27f317ad95254d4de67f8fc",
+      "runtime": "encounter/encounter-runtime.txt",
+      "runtime_sha256": "88432988bcd6a68f86044ad666ae84be3a817a6be27f317ad95254d4de67f8fc",
+      "image_sha256": {
+        "default home.png": "ef318f1029a689ca1ff2437910e0ef40bfb5e4bb372fea28770eec010edde50d",
+        "Opera public upper podium.png": "b9aa039d2be3630c08dd9783a3b3e30323bb2836eff19005ff6e5aa2a49599b5",
+        "airport apron.png": "4686f2fcd39c1194b3655ed557946c2b0ee5469da2749e2020c262c56ac278f5",
+        "CBD Pitt Street Mall.png": "2862afc9dd380b6510c84cb9586ee65233786f7831db8903ea38fb2e3a83d073",
+        "tank airport pursuit.png": "f97b6dc6e0213701b75290f6f758e36b056b8d8566cd617db5527e4053a498aa",
+        "tank fire control B menu.png": "d6d458d92059e64b98e3ef1e8ac37b581f4a9d0d73a85989174ae095afb44836",
+        "automatic tank support with player H field repairs.png": "a94253aa13b174891d59d4c88284e116896b278d1a1ab4710f9833d9707e1dc5"
+      },
+      "images": {
+        "default home.png": {
+          "file": "encounter/screenshots/default home.png",
+          "sha256": "ef318f1029a689ca1ff2437910e0ef40bfb5e4bb372fea28770eec010edde50d",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "Opera public upper podium.png": {
+          "file": "encounter/screenshots/Opera public upper podium.png",
+          "sha256": "b9aa039d2be3630c08dd9783a3b3e30323bb2836eff19005ff6e5aa2a49599b5",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "airport apron.png": {
+          "file": "encounter/screenshots/airport apron.png",
+          "sha256": "4686f2fcd39c1194b3655ed557946c2b0ee5469da2749e2020c262c56ac278f5",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "CBD Pitt Street Mall.png": {
+          "file": "encounter/screenshots/CBD Pitt Street Mall.png",
+          "sha256": "2862afc9dd380b6510c84cb9586ee65233786f7831db8903ea38fb2e3a83d073",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "tank airport pursuit.png": {
+          "file": "encounter/screenshots/tank airport pursuit.png",
+          "sha256": "f97b6dc6e0213701b75290f6f758e36b056b8d8566cd617db5527e4053a498aa",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "tank fire control B menu.png": {
+          "file": "encounter/screenshots/tank fire control B menu.png",
+          "sha256": "d6d458d92059e64b98e3ef1e8ac37b581f4a9d0d73a85989174ae095afb44836",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "automatic tank support with player H field repairs.png": {
+          "file": "encounter/screenshots/automatic tank support with player H field repairs.png",
+          "sha256": "a94253aa13b174891d59d4c88284e116896b278d1a1ab4710f9833d9707e1dc5",
+          "resolution": [
+            1440,
+            900
+          ]
+        }
+      },
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 122,
+        "remaining": 0,
+        "tracked": 13
+      },
+      "started_utc": "2026-09-14T02:35:09.880796+00:00",
+      "wall_seconds": 286.208,
+      "renderer": [
+        "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+      ],
+      "audio_driver_override": "Dummy",
+      "exit_code": 0
+    },
+    "survival": {
+      "checks": 40,
+      "screenshots": 4,
+      "passed": true,
+      "report": "survival/report.json",
+      "report_sha256": "9c977248a9263ad771aa776876d0e841c8bbcb2dd3a2c8402472d3ec436240f0",
+      "app_binding": "survival/app-binding.json",
+      "app_binding_sha256": "20d1a627c911b60ff568ce2d698cb0508ac3add277a3be8be21a923ae1f200c7",
+      "console": "survival/survival-console.txt",
+      "console_sha256": "ea59fb34f0c8f25b8c30df0144b4a23fbe119a6ff9ae1dbd73c79c084ac35f76",
+      "runtime": "survival/survival-runtime.txt",
+      "runtime_sha256": "ea59fb34f0c8f25b8c30df0144b4a23fbe119a6ff9ae1dbd73c79c084ac35f76",
+      "image_sha256": {
+        "five-nailong-city-hud.png": "cb9b11124f78d6b52e845a4baacd7c07980ab7e12c427077f8bc186480b0350e",
+        "services-during-combat-blocked.png": "55c4dc5f9311b0345a98c3c1d79c173fbae3afd04215f21c506d860661a6a749",
+        "tank-survival-impact-hud.png": "b64ac2a0a8b7c7b540c3dfa725265ed68bfb52761ef4b9d17af5d60e8b6bdb31",
+        "services-paid-repair.png": "503d9af6781f7ce6f96dc77be8fb0b68e28e98e3964cbfea5f0ee33d825c8e1b"
+      },
+      "images": {
+        "five-nailong-city-hud.png": {
+          "file": "survival/screenshots/five-nailong-city-hud.png",
+          "sha256": "cb9b11124f78d6b52e845a4baacd7c07980ab7e12c427077f8bc186480b0350e",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "services-during-combat-blocked.png": {
+          "file": "survival/screenshots/services-during-combat-blocked.png",
+          "sha256": "55c4dc5f9311b0345a98c3c1d79c173fbae3afd04215f21c506d860661a6a749",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "tank-survival-impact-hud.png": {
+          "file": "survival/screenshots/tank-survival-impact-hud.png",
+          "sha256": "b64ac2a0a8b7c7b540c3dfa725265ed68bfb52761ef4b9d17af5d60e8b6bdb31",
+          "resolution": [
+            1440,
+            900
+          ]
+        },
+        "services-paid-repair.png": {
+          "file": "survival/screenshots/services-paid-repair.png",
+          "sha256": "503d9af6781f7ce6f96dc77be8fb0b68e28e98e3964cbfea5f0ee33d825c8e1b",
+          "resolution": [
+            1440,
+            900
+          ]
+        }
+      },
+      "audio_shutdown": {
+        "complete": true,
+        "elapsed_ms": 49,
+        "remaining": 0,
+        "tracked": 14
+      },
+      "started_utc": "2026-09-14T02:40:52.733977+00:00",
+      "wall_seconds": 92.316,
+      "renderer": [
+        "Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)"
+      ],
+      "audio_driver_override": "Dummy",
+      "exit_code": 0
+    }
+  },
+  "total_checks": 171,
+  "total_screenshots": 16,
+  "archive_checks": 13,
+  "source_gameplay_and_save_checks_separate": 817,
+  "source_evidence_gate_checks_separate": 17,
+  "initial_default_audio_failure": {
+    "same_app_identity": true,
+    "launch": "initial-default-audio/arsenal-launch.json",
+    "launch_sha256": "5abc2b7ee5db126f7995d6a89e002385a42d290a4cc82b0fbaec49afdeca5ec2",
+    "gameplay_checks_passed": 35,
+    "outer_validation_passed": false,
+    "exit_code": 0,
+    "failure_summary": "The default CoreAudio run completed gameplay checks but reported 56 leaked ObjectDB instances at exit. Independent minimal-player diagnosis observed zero CoreAudio mix cycles and retained WAV/playback references; Dummy mixed and released them. This is retained evidence, not a claim that the host CoreAudio issue has been fixed.",
+    "preserved_files_sha256": {
+      "initial-default-audio/arsenal-console.log": "d8d41698696a88fe96fc2e35124c873e4d9a19b1851715c6894978db40d78b02",
+      "initial-default-audio/arsenal-console.txt": "d8d41698696a88fe96fc2e35124c873e4d9a19b1851715c6894978db40d78b02",
+      "initial-default-audio/arsenal-launch.json": "5abc2b7ee5db126f7995d6a89e002385a42d290a4cc82b0fbaec49afdeca5ec2",
+      "initial-default-audio/arsenal-report.json": "c3270e79e0c09154ec0f50a7fae9a4655eb87cdb87216cd1078270cb5f9deb56",
+      "initial-default-audio/arsenal-runtime.log": "2adec6b25291aaadb3435ae82b549b228d0a26ce79d5501bca251c44cef95f1a",
+      "initial-default-audio/arsenal-runtime.txt": "2adec6b25291aaadb3435ae82b549b228d0a26ce79d5501bca251c44cef95f1a",
+      "initial-default-audio/arsenal-screenshots/armory-three-slots.png": "b8749419d1fe03360cf6399a50b2385465c8831e98701cb027d7ce25f2d60a08",
+      "initial-default-audio/arsenal-screenshots/cannon-centre-and-edge.png": "e7bd2f8342bb5e5e719a03e43b67274f74277de75a3f93beed04bc113a6406af",
+      "initial-default-audio/arsenal-screenshots/laser-lightning-airborne-targets.png": "9056a4ef1c8e5a6dd0e7af6748c8b75a2aa69a2290ecab5a046e437f8c900217",
+      "initial-default-audio/arsenal-screenshots/stormwing-marked-strike.png": "25d5e1bb951c2c155634f22396ba340a671523460af5f1efdb6af9989282c599",
+      "initial-default-audio/arsenal-screenshots/veteran-natural-reinforcements.png": "00c39bc17070139b9092a90a46711016e5cd36a2a5b9fd6812f7881912cd4de4"
+    },
+    "audio_diagnostic_sha256": {
+      "audio-diagnostic/coreaudio.txt": "dee83916e977b8d1038b21906cbcefacabd980ee98516a45ab73006c20e6513a",
+      "audio-diagnostic/dummy.txt": "9f6eeb5acf0e2ca143246128094c708af8fc04f29e3d1fa16c94eb0a71d4de24",
+      "audio-diagnostic/minimal-player.gd": "ebc260b39200d25fbfc0801c4fc308644fd0c15b6952489f04ad3c5f5a9b4ea8"
+    }
+  },
+  "visual_review_scope": "Static images are retained for reviewer inspection; this aggregation does not assert every frame, every camera angle, or audible sound was reviewed."
+}

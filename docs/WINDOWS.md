@@ -1,6 +1,6 @@
 # Windows x86_64 试玩说明
 
-本页操作说明对应 Harbourlife v0.2.2，游戏为离线单人试玩。v0.2.2 的最终 Windows 包正在构建验证，完成后将在此记录实际结果；下方 v0.2.1 结果属于历史版本。Windows GPU 画面、声音实听与人工操作尚未实测。
+本页操作说明对应 Harbourlife v0.2.2，游戏为离线单人试玩。**最终Windows包已通过48项门禁和169项玩法检查**，包括驾驶32、生存30、连续遭遇82、武器与空袭25。下载见 [v0.2.2-preview.1](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/tag/v0.2.2-preview.1)。Windows GPU画面、声音实听与人工操作尚未实测；历史版本记录保留在下方。
 
 ## 下载与启动
 
@@ -80,6 +80,23 @@
 若异常中断后某个世界从列表消失，请先退出游戏并备份整个 `worlds` 文件夹。恢复菜单依赖主 `.json`：若主文件缺失但对应 `.json.bak` 仍存在，可复制该备份，将复制件改成原 `.json` 文件名再启动；保留原 `.bak`。这是此前源码审查记录的恢复入口限制。
 
 如果无法启动或遇到显示问题，请记录 Windows 版本、CPU、显卡和驱动版本、错误原文、下载包名称及 SHA-256。游戏能打开时可补充 F3 诊断信息和截图。缺少 PCK 时先核对是否完整解压。
+
+## v0.2.2 最终包证据
+
+本次 [Windows云端运行34799720266](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34799720266) 已成功完成，构建提交为 `2dfe366fe499a25c1ded239e35d371f9f5878198`。实际解压后的EXE完成四项专项，全部退出0，无运行错误或警告：
+
+| 专项 | 实际检查 |
+| --- | ---: |
+| 驾驶、漂移、急刹与三倍加速 | 32/32 |
+| 生存、伤害、治疗与修理 | 30/30 |
+| 自然刷新、追击、换区增援与自动反击 | 82/82 |
+| 真实购买装配、炮击浮字、两类空袭与Lv.6后增援 | 25/25 |
+
+共169项玩法断言；48项汇总门禁和42项独立文件身份核验另行统计。235个游戏文件SHA与最终Mac构建源码完全一致，EXE/PCK在打包、解压和全部运行后的身份不变。
+
+[原始报告](evidence/v022-windows/windows-validation.json) · [原始校验和](evidence/v022-windows/Windows-SHA256SUMS.txt) · [运行、资产与提交交叉核验](evidence/v022-windows/verification.json)。原始报告按下载字节保存，未重新格式化。ZIP为85,489,072字节，GitHub服务端SHA-256为 `e675404485ad07ee6eb493dff685bcd894c9f44aeec31fcc6f0676ad40b3ceb7`，与构建报告及校验和一致；大包的实际解压和执行发生在Windows CI。
+
+验证采用Windows headless Jolt 60 Hz，不包含Windows GPU截图、声音实听、人工键鼠操作、长时间稳定性或帧率保证。Arsenal使用明确标注的受控初始站位与一面测试遮挡墙；伤害和购买均走生产逻辑，未使用伪造命中或玩家存档。
 
 ## Windows 验证记录
 

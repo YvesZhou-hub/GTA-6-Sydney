@@ -1,0 +1,61 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+NAILONG_ENEMY PASS roamer config health and collision contract { "type": "roamer", "level": 1, "label": "游荡奶龙", "health": 80.0, "max_health": 80.0, "damage": 8.0, "speed": 2.8, "dead": false, "state": "idle", "attack_range": 2.0, "reward": 120, "position": [0.0, 6.0, 80.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS runner config health and collision contract { "type": "runner", "level": 1, "label": "疾跑奶龙", "health": 60.0, "max_health": 60.0, "damage": 7.0, "speed": 6.2, "dead": false, "state": "idle", "attack_range": 2.0, "reward": 160, "position": [9.0, 6.0, 80.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS brute config health and collision contract { "type": "brute", "level": 1, "label": "重装奶龙", "health": 360.0, "max_health": 360.0, "damage": 22.0, "speed": 2.2, "dead": false, "state": "idle", "attack_range": 3.0, "reward": 480, "position": [18.0, 6.0, 80.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS spitter config health and collision contract { "type": "spitter", "level": 1, "label": "喷吐奶龙", "health": 110.0, "max_health": 110.0, "damage": 12.0, "speed": 2.7, "dead": false, "state": "idle", "attack_range": 22.0, "reward": 240, "position": [27.0, 6.0, 80.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS alpha config health and collision contract { "type": "alpha", "level": 1, "label": "首领奶龙", "health": 700.0, "max_health": 700.0, "damage": 28.0, "speed": 3.5, "dead": false, "state": "idle", "attack_range": 4.0, "reward": 1200, "position": [36.0, 6.0, 80.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS winglet config health and collision contract { "type": "winglet", "level": 1, "label": "轻翼奶龙", "health": 95.0, "max_health": 95.0, "damage": 10.0, "speed": 12.0, "dead": false, "state": "idle", "attack_range": 2.8, "reward": 220, "position": [45.0, 6.0, 80.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS stormwing config health and collision contract { "type": "stormwing", "level": 1, "label": "雷翼奶龙", "health": 260.0, "max_health": 260.0, "damage": 15.0, "speed": 8.5, "dead": false, "state": "idle", "attack_range": 32.0, "reward": 520, "position": [54.0, 6.0, 80.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS all five ground archetypes land on physical ground {  }
+NAILONG_ENEMY PASS seven silhouettes reuse shared mesh and material cache { "types": ["roamer", "runner", "brute", "spitter", "alpha", "winglet", "stormwing"], "materials": 12, "shared": true }
+NAILONG_ENEMY PASS instances share geometry without sharing mutable health {  }
+NAILONG_ENEMY PASS unknown type falls back to roamer {  }
+NAILONG_ENEMY PASS grounded chase advances toward target { "position": (0.0, 0.000877, -6.761678) }
+NAILONG_ENEMY PASS runner is physically faster than roamer { "roamer_distance": 6.76167821884155, "runner_distance": 14.2700109481812 }
+NAILONG_ENEMY PASS attack has visible windup before any damage request { "type": "roamer", "level": 1, "label": "游荡奶龙", "health": 80.0, "max_health": 80.0, "damage": 8.0, "speed": 2.8, "dead": false, "state": "windup", "attack_range": 2.0, "reward": 120, "position": [-40.0, 0.0, 0.0], "windup_remaining": 0.25, "cooldown_remaining": 0.0, "line_of_sight": true, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.41666666666667, "detouring": false }
+NAILONG_ENEMY PASS completed windup requests one configured attack { "attacks": 1 }
+NAILONG_ENEMY PASS cooldown prevents per-frame attacks { "attacks": 1 }
+NAILONG_ENEMY PASS moving target outside range cancels pending hit { "attacks": 1 }
+NAILONG_ENEMY PASS solid wall blocks line of sight and ranged damage { "type": "spitter", "level": 1, "label": "喷吐奶龙", "health": 110.0, "max_health": 110.0, "damage": 12.0, "speed": 2.7, "dead": false, "state": "chase", "attack_range": 22.0, "reward": 240, "position": [67.3397674560547, 0.00087750673993, -3.24000120162964], "windup_remaining": 0.0, "cooldown_remaining": 0.0, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 3.99999999999999, "pursuit_seconds": 3.99999999999999, "detouring": true }
+NAILONG_ENEMY PASS enemy never moves through blocking wall { "z": -3.24000120162964 }
+NAILONG_ENEMY PASS removing obstruction restores ranged attack { "type": "spitter", "level": 1, "label": "喷吐奶龙", "health": 110.0, "max_health": 110.0, "damage": 12.0, "speed": 2.7, "dead": false, "state": "chase", "attack_range": 22.0, "reward": 240, "position": [68.1006851196289, 0.00092731253244, -3.24000120162964], "windup_remaining": 0.0, "cooldown_remaining": 1.05000000000001, "line_of_sight": true, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 6.66666666666665, "detouring": false }
+NAILONG_ENEMY PASS ranged windup starts before obstruction {  }
+NAILONG_ENEMY PASS new wall cancels attack at release time { "type": "spitter", "level": 1, "label": "喷吐奶龙", "health": 110.0, "max_health": 110.0, "damage": 12.0, "speed": 2.7, "dead": false, "state": "chase", "attack_range": 22.0, "reward": 240, "position": [-90.0, 0.00087741785683, -2.16416668891907], "windup_remaining": 0.0, "cooldown_remaining": 1.61666666666667, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.88333333333333, "pursuit_seconds": 2.58333333333333, "detouring": false }
+NAILONG_ENEMY PASS damage returns actual amount without accepting invalid input {  }
+NAILONG_ENEMY PASS health belongs to each enemy instance {  }
+NAILONG_ENEMY PASS lethal damage is clamped to remaining health {  }
+NAILONG_ENEMY PASS death emits reward exactly once even with reentrant damage {  }
+NAILONG_ENEMY PASS death hides attack warning health and name immediately {  }
+NAILONG_ENEMY PASS dead enemy expires and never attacks {  }
+NAILONG_ENEMY PASS local obstacle steering passes finite wall { "position": (169.3507, 0.000927, -10.32859) }
+NAILONG_ENEMY PASS freed target returns to grounded idle safely {  }
+NAILONG_ENEMY PASS large vehicle range uses nearest collision surface { "surface_distance": 4.0 }
+NAILONG_ENEMY PASS nearest hull distance respects vehicle rotation { "surface_distance": 10.0 }
+NAILONG_ENEMY PASS large hull receives real melee after surface approach { "hits": 2, "surface_distance": 1.75998210906982, "center_distance": 11.8209543228149 }
+NAILONG_ENEMY PASS enemy attacks hull without entering vehicle collider { "z": 11.7599821090698 }
+NAILONG_ENEMY PASS roamer level 1 to 10 health damage and reward strictly increase { "max_health": 209.6, "max_damage": 12.32, "max_reward": 552 }
+NAILONG_ENEMY PASS roamer speed remains unchanged across levels {  }
+NAILONG_ENEMY PASS runner level 1 to 10 health damage and reward strictly increase { "max_health": 157.2, "max_damage": 10.78, "max_reward": 736 }
+NAILONG_ENEMY PASS runner speed remains unchanged across levels {  }
+NAILONG_ENEMY PASS brute level 1 to 10 health damage and reward strictly increase { "max_health": 943.2, "max_damage": 33.88, "max_reward": 2208 }
+NAILONG_ENEMY PASS brute speed remains unchanged across levels {  }
+NAILONG_ENEMY PASS spitter level 1 to 10 health damage and reward strictly increase { "max_health": 288.2, "max_damage": 18.48, "max_reward": 1104 }
+NAILONG_ENEMY PASS spitter speed remains unchanged across levels {  }
+NAILONG_ENEMY PASS alpha level 1 to 10 health damage and reward strictly increase { "max_health": 1834.0, "max_damage": 43.12, "max_reward": 5520 }
+NAILONG_ENEMY PASS alpha speed remains unchanged across levels {  }
+NAILONG_ENEMY PASS winglet level 1 to 10 health damage and reward strictly increase { "max_health": 248.9, "max_damage": 15.4, "max_reward": 1012 }
+NAILONG_ENEMY PASS winglet speed remains unchanged across levels {  }
+NAILONG_ENEMY PASS stormwing level 1 to 10 health damage and reward strictly increase { "max_health": 681.2, "max_damage": 23.1, "max_reward": 2392 }
+NAILONG_ENEMY PASS stormwing speed remains unchanged across levels {  }
+NAILONG_ENEMY PASS missing level remains backward compatible at level one {  }
+NAILONG_ENEMY PASS invalid levels clamp to one and thirty {  }
+NAILONG_ENEMY PASS level thirty extends health and rewards with gentle damage scaling { "type": "roamer", "level": 30, "label": "游荡奶龙", "health": 593.6, "max_health": 593.6, "damage": 14.72, "speed": 2.8, "dead": false, "state": "idle", "attack_range": 2.0, "reward": 1752, "position": [330.0, 0.0, 20.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS level ten scaled stats use requested formulas { "type": "roamer", "level": 10, "label": "游荡奶龙", "health": 209.6, "max_health": 209.6, "damage": 12.32, "speed": 2.8, "dead": false, "state": "idle", "attack_range": 2.0, "reward": 552, "position": [330.0, 0.0, 0.0], "windup_remaining": 0.0, "cooldown_remaining": 0.7, "line_of_sight": false, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 0.0, "detouring": false }
+NAILONG_ENEMY PASS overhead label includes level type and integer coins {  }
+NAILONG_ENEMY PASS snapshot survives JSON with explicit level and reward {  }
+NAILONG_ENEMY PASS snapshot level recreates matching rank and stats {  }
+NAILONG_ENEMY PASS record without level recreates level one {  }
+NAILONG_ENEMY PASS ranked death awards scaled coins once with reentrant damage {  }
+NAILONG_ENEMY PASS boss heavy windup raises both arms with red full range warning { "type": "alpha", "level": 3, "label": "首领奶龙", "health": 952.0, "max_health": 952.0, "damage": 31.36, "speed": 3.5, "dead": false, "state": "windup", "attack_range": 4.0, "reward": 2160, "position": [380.0, 0.0009355887305, -0.00416666688398], "windup_remaining": 0.53333333333333, "cooldown_remaining": 0.0, "line_of_sight": true, "stuck_seconds": 0.0, "blocked_seconds": 0.0, "pursuit_seconds": 1.66666666666667, "detouring": false }
+NAILONG_ENEMY PASS boss attack signal carries level scaled damage { "hits": [31.36] }

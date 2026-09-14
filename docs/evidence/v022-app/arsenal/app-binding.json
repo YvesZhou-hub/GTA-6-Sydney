@@ -1,0 +1,36 @@
+{
+  "app_identity": {
+    "executable_sha256": "f2bab4a8567ab1493670f7880784a4822f0581b07d7ac0aac08627fe34c1d66b",
+    "pck_sha256": "7b61aa686f1c811f09abe8fcb3face14666149b1fed22a72b6db5ed526c6e0af"
+  },
+  "app_identity_unchanged": true,
+  "mode": "arsenal",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--audio-driver",
+    "Dummy",
+    "--",
+    "--arsenal-qa"
+  ],
+  "audio_driver": "Dummy",
+  "audio_driver_scope": "Explicit override for this QA process only",
+  "audio_listening_verified": false,
+  "audio_validation_scope": "Dummy mixer only; no audible output or hardware sound validation",
+  "started_utc": "2026-09-14T02:33:03.104038+00:00",
+  "wall_seconds": 104.201,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 35,
+  "passed": true,
+  "screenshots": [
+    "veteran-natural-reinforcements.png",
+    "laser-lightning-airborne-targets.png",
+    "stormwing-marked-strike.png",
+    "cannon-centre-and-edge.png",
+    "armory-three-slots.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

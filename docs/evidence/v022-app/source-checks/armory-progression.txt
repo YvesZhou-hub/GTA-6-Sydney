@@ -1,0 +1,67 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ARMORY_PROGRESSION PASS production armory director vehicles and Jolt are integrated {}
+ARMORY_PROGRESSION PASS new vehicle types start with no paid modules {}
+ARMORY_PROGRESSION PASS insufficient funds preserve wallet ownership and fitting {}
+ARMORY_PROGRESSION PASS exact purchase charges coins once and equips level one {}
+ARMORY_PROGRESSION PASS second purchase upgrades same module rather than duplicating it {}
+ARMORY_PROGRESSION PASS max tier rejects purchase without charging or altering ownership {}
+ARMORY_PROGRESSION PASS duplicate equip cannot consume a second slot {}
+ARMORY_PROGRESSION PASS fourth purchase unlocks storage while respecting three fitted slots {}
+ARMORY_PROGRESSION PASS full slots block fitting without charging {}
+ARMORY_PROGRESSION PASS removing a module is free and preserves its paid tier {}
+ARMORY_PROGRESSION PASS free replacement fits once space becomes available {}
+ARMORY_PROGRESSION PASS same-kind physical vehicle reads identical ownership and fitting {}
+ARMORY_PROGRESSION PASS another kind cannot equip the tanks unlocked module {}
+ARMORY_PROGRESSION PASS buying car module does not alter tank tier or fitting {}
+ARMORY_PROGRESSION PASS new copies inherit same-kind purchase without unlocking other kinds {}
+ARMORY_PROGRESSION PASS unknown module request is inert wrong {}
+ARMORY_PROGRESSION PASS unknown module request is inert buy {}
+ARMORY_PROGRESSION PASS unknown module request is inert equip {}
+ARMORY_PROGRESSION PASS unknown module request is inert unequip {}
+ARMORY_PROGRESSION PASS unknown action cannot mutate wallet or ownership {}
+ARMORY_PROGRESSION PASS unboarded purchase preserves wallet {}
+ARMORY_PROGRESSION PASS destroyed vehicle rejects new purchase without charging {}
+ARMORY_PROGRESSION PASS paused B panel may buy exactly one real upgrade {}
+ARMORY_PROGRESSION PASS director emits revision three with paid armory and difficulty {}
+ARMORY_PROGRESSION PASS JSON roundtrip restores independent kinds slots and paid levels {}
+ARMORY_PROGRESSION PASS JSON roundtrip retains partial gradual difficulty clock {}
+ARMORY_PROGRESSION PASS snapshot editing cannot mutate live ownership {}
+ARMORY_PROGRESSION PASS malformed armory is safely empty <null> {}
+ARMORY_PROGRESSION PASS malformed armory is safely empty [] {}
+ARMORY_PROGRESSION PASS malformed armory is safely empty bad {}
+ARMORY_PROGRESSION PASS malformed armory is safely empty { "owned": [] } {}
+ARMORY_PROGRESSION PASS malformed armory is safely empty { "owned": { "tank": ["rotary"] } } {}
+ARMORY_PROGRESSION PASS malformed armory is safely empty { "owned": { "unknown": { "rotary": 3 } } } {}
+ARMORY_PROGRESSION PASS malformed tiers cap finite numbers and reject unowned duplicate entries {}
+ARMORY_PROGRESSION PASS restored loadout cannot exceed three slots {}
+ARMORY_PROGRESSION PASS old survival state does not grant free paid modules {}
+ARMORY_PROGRESSION PASS purchased director module drives real runtime damage without ammo fees {}
+ARMORY_PROGRESSION PASS cooldown control starts with one purchased physical micro shell {}
+ARMORY_PROGRESSION PASS ten rapid V off-on cycles preserve paid reload and cannot refire {}
+ARMORY_PROGRESSION PASS rapid same-kind and different-kind swaps cannot bypass module reload {}
+ARMORY_PROGRESSION PASS real armory remove-refit transactions preserve reload and wallet {}
+ARMORY_PROGRESSION PASS reopening a paused armory does not recharge paid modules {}
+ARMORY_PROGRESSION PASS paid cannon cannot fire before its remaining physical cooldown expires {}
+ARMORY_PROGRESSION PASS paid cannon resumes once only after full active reload elapsed {"active_elapsed":2.44999999999999,"new_shots":1}
+ARMORY_PROGRESSION PASS strong loadout raises future difficulty goal above level one {}
+ARMORY_PROGRESSION PASS difficulty does not jump before eighteen seconds {}
+ARMORY_PROGRESSION PASS eighteen seconds advances by exactly one level {}
+ARMORY_PROGRESSION PASS equipment progression never rewrites existing enemy hp or level {}
+ARMORY_PROGRESSION PASS low durability stops equipment difficulty ramp {}
+ARMORY_PROGRESSION PASS entry protection does not secretly accrue difficulty time {}
+ARMORY_PROGRESSION PASS paused world cannot advance equipment difficulty {}
+ARMORY_PROGRESSION PASS removing loadout lowers future adaptive target immediately {}
+ARMORY_PROGRESSION PASS switching to foot drops equipment pressure without changing existing enemy {}
+ARMORY_PROGRESSION PASS veteran progression extends to bounded level thirty {}
+ARMORY_PROGRESSION PASS level six production director naturally spawns despite a full old quota {"count":6,"types":["roamer","roamer","runner","spitter","winglet","runner"]}
+ARMORY_PROGRESSION PASS level six moving districts continues reinforcement without clearing old enemies {}
+ARMORY_PROGRESSION PASS save restoration preserves an enemy level above ten {}
+ARMORY_PROGRESSION PASS ten metre hover receives flying reinforcements despite surviving ground melee {"nearby":2,"types":["roamer","roamer","roamer","roamer","winglet","winglet"]}
+ARMORY_PROGRESSION PASS new flying pursuit reaches low hovering player without free kill credit {"health":37.6000000000001,"wallet":50000}
+ARMORY_PROGRESSION PASS full low hover fixture has twenty four actors including visible ground and active flyer {"hidden":22,"nearby":1}
+ARMORY_PROGRESSION PASS full hover capacity releases exactly one hidden unreachable ground actor without reward {"released":1,"remaining":23}
+ARMORY_PROGRESSION PASS capacity recovery preserves visible enemy and current flying pursuer {}
+ARMORY_PROGRESSION PASS recovered hover slot fills with aerial support while original flyer keeps chasing {"flyers":2,"total":24}
+ARMORY_PROGRESSION PASS ranged ground attacker within reach still counts toward airborne pressure {}
+ARMORY_PROGRESSION_COMPLETE 64 passed=true

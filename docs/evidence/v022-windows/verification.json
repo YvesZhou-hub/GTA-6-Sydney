@@ -1,0 +1,476 @@
+{
+  "passed": true,
+  "count": 42,
+  "checked_at_utc": "2026-09-14T02:49:20.632023+00:00",
+  "checks": [
+    {
+      "name": "exact dispatched source run finished successfully",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "all workflow job and step conclusions succeeded",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "uploaded report belongs to exact run repository candidate and release",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "all 48 aggregate gates passed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "driving report count unique names and each passing result",
+      "passed": true,
+      "detail": {
+        "count": 32
+      }
+    },
+    {
+      "name": "driving exercises all workflow required scenarios",
+      "passed": true,
+      "detail": {
+        "required_count": 12
+      }
+    },
+    {
+      "name": "driving completion markers match report count",
+      "passed": true,
+      "detail": {
+        "counts": [
+          "32",
+          "32"
+        ]
+      }
+    },
+    {
+      "name": "driving process completed within timeout with fresh isolated report",
+      "passed": true,
+      "detail": {
+        "elapsed_seconds": 48.28972
+      }
+    },
+    {
+      "name": "driving headless scope and save isolation confirmed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "driving runtime log and report hashes present",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival report count unique names and each passing result",
+      "passed": true,
+      "detail": {
+        "count": 30
+      }
+    },
+    {
+      "name": "survival exercises all workflow required scenarios",
+      "passed": true,
+      "detail": {
+        "required_count": 16
+      }
+    },
+    {
+      "name": "survival completion markers match report count",
+      "passed": true,
+      "detail": {
+        "counts": [
+          "30",
+          "30"
+        ]
+      }
+    },
+    {
+      "name": "survival process completed within timeout with fresh isolated report",
+      "passed": true,
+      "detail": {
+        "elapsed_seconds": 37.554536
+      }
+    },
+    {
+      "name": "survival headless scope and save isolation confirmed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "survival runtime log and report hashes present",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter report count unique names and each passing result",
+      "passed": true,
+      "detail": {
+        "count": 82
+      }
+    },
+    {
+      "name": "encounter exercises all workflow required scenarios",
+      "passed": true,
+      "detail": {
+        "required_count": 42
+      }
+    },
+    {
+      "name": "encounter completion markers match report count",
+      "passed": true,
+      "detail": {
+        "counts": [
+          "82",
+          "82"
+        ]
+      }
+    },
+    {
+      "name": "encounter process completed within timeout with fresh isolated report",
+      "passed": true,
+      "detail": {
+        "elapsed_seconds": 46.451586
+      }
+    },
+    {
+      "name": "encounter headless scope and save isolation confirmed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter runtime log and report hashes present",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal report count unique names and each passing result",
+      "passed": true,
+      "detail": {
+        "count": 25
+      }
+    },
+    {
+      "name": "arsenal exercises all workflow required scenarios",
+      "passed": true,
+      "detail": {
+        "required_count": 15
+      }
+    },
+    {
+      "name": "arsenal completion markers match report count",
+      "passed": true,
+      "detail": {
+        "counts": [
+          "25",
+          "25"
+        ]
+      }
+    },
+    {
+      "name": "arsenal process completed within timeout with fresh isolated report",
+      "passed": true,
+      "detail": {
+        "elapsed_seconds": 39.687154
+      }
+    },
+    {
+      "name": "arsenal headless scope and save isolation confirmed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal runtime log and report hashes present",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "driving uses actual 60 Hz Jolt backend",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "natural encounters retain autonomous production loop",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter full city and protected 60 Hz execution",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal full city and protected 60 Hz execution",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "runtime report contains zero errors or warnings",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "all 235 game file hashes equal Mac final build and current frozen sources",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "Windows uses identical official engine and exact Mac source baseline",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "Windows release version architecture and PCK header match",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "extracted EXE and PCK stay identical to build through all tests",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "server ZIP SHA agrees with build report and published checksum",
+      "passed": true,
+      "detail": {
+        "bytes": 85489072,
+        "sha256": "e675404485ad07ee6eb493dff685bcd894c9f44aeec31fcc6f0676ad40b3ceb7",
+        "zip_downloaded": false
+      }
+    },
+    {
+      "name": "downloaded report raw bytes match server digest and checksum",
+      "passed": true,
+      "detail": {
+        "sha256": "9cebc04bdc105e3c9e4176f788e8b47e7a6bb2d5d72c87d8be16d3f2236b05e0",
+        "bytes": 149473
+      }
+    },
+    {
+      "name": "downloaded checksum raw bytes match server digest",
+      "passed": true,
+      "detail": {
+        "sha256": "7f6c1e39f984cff28f0a377e7a4b0159a37ea2e2727e59c2ae9d9dd28254f1fa",
+        "bytes": 189
+      }
+    },
+    {
+      "name": "candidate commit preserves both evidence files as exact bytes",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "release remains draft with exact complete source target",
+      "passed": true,
+      "detail": {}
+    }
+  ],
+  "repository": "YvesZhou-hub/GTA-6-Sydney",
+  "run_id": "34799720266",
+  "source_commit": "2dfe366fe499a25c1ded239e35d371f9f5878198",
+  "run": {
+    "conclusion": "success",
+    "createdAt": "2026-09-14T02:35:28Z",
+    "event": "workflow_dispatch",
+    "headSha": "2dfe366fe499a25c1ded239e35d371f9f5878198",
+    "jobs": [
+      {
+        "completedAt": "2026-09-14T02:40:40Z",
+        "conclusion": "success",
+        "databaseId": 103839749390,
+        "name": "build-check-windows",
+        "startedAt": "2026-09-14T02:35:32Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-14T02:35:34Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-14T02:35:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:35:35Z",
+            "conclusion": "success",
+            "name": "Preserve committed LF bytes on the disposable runner",
+            "number": 2,
+            "startedAt": "2026-09-14T02:35:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:35:49Z",
+            "conclusion": "success",
+            "name": "Checkout the dispatched commit without persisted credentials",
+            "number": 3,
+            "startedAt": "2026-09-14T02:35:35Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:36:15Z",
+            "conclusion": "success",
+            "name": "Download and verify official Godot 4.7.2 tools",
+            "number": 4,
+            "startedAt": "2026-09-14T02:35:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:36:53Z",
+            "conclusion": "success",
+            "name": "Build the unchanged game sources for Windows",
+            "number": 5,
+            "startedAt": "2026-09-14T02:36:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:36:55Z",
+            "conclusion": "success",
+            "name": "Verify build identity and extract the exact ZIP for execution",
+            "number": 6,
+            "startedAt": "2026-09-14T02:36:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:37:33Z",
+            "conclusion": "success",
+            "name": "Run the actual exported EXE and wait for termination",
+            "number": 7,
+            "startedAt": "2026-09-14T02:36:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:38:21Z",
+            "conclusion": "success",
+            "name": "Run driving physics QA from the exact extracted release EXE",
+            "number": 8,
+            "startedAt": "2026-09-14T02:37:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:38:59Z",
+            "conclusion": "success",
+            "name": "Run survival integration QA from the exact extracted release EXE",
+            "number": 9,
+            "startedAt": "2026-09-14T02:38:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:39:45Z",
+            "conclusion": "success",
+            "name": "Run natural encounter QA from the exact extracted release EXE",
+            "number": 10,
+            "startedAt": "2026-09-14T02:38:59Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:40:25Z",
+            "conclusion": "success",
+            "name": "Run aerial arsenal QA from the exact extracted release EXE",
+            "number": 11,
+            "startedAt": "2026-09-14T02:39:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:40:25Z",
+            "conclusion": "success",
+            "name": "Require world readiness, driving, survival, natural encounters and aerial arsenal with clean logs",
+            "number": 12,
+            "startedAt": "2026-09-14T02:40:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:40:29Z",
+            "conclusion": "success",
+            "name": "Keep the package and verification evidence",
+            "number": 13,
+            "startedAt": "2026-09-14T02:40:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:40:37Z",
+            "conclusion": "success",
+            "name": "Upload only verified files to the exact-commit release without publishing it",
+            "number": 14,
+            "startedAt": "2026-09-14T02:40:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:40:39Z",
+            "conclusion": "success",
+            "name": "Post Checkout the dispatched commit without persisted credentials",
+            "number": 28,
+            "startedAt": "2026-09-14T02:40:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-14T02:40:39Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 29,
+            "startedAt": "2026-09-14T02:40:39Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34799720266/job/103839749390"
+      }
+    ],
+    "status": "completed",
+    "updatedAt": "2026-09-14T02:40:41Z",
+    "url": "https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34799720266",
+    "workflowName": "Build and check Windows release"
+  },
+  "release": {
+    "tag": "v0.2.2-preview.1",
+    "is_draft": true,
+    "target_commit": "2dfe366fe499a25c1ded239e35d371f9f5878198",
+    "asset_metadata": [
+      {
+        "name": "Harbourlife-Windows-x86_64.zip",
+        "apiUrl": "https://api.github.com/repos/YvesZhou-hub/GTA-6-Sydney/releases/assets/562410857",
+        "size": 85489072,
+        "digest": "sha256:e675404485ad07ee6eb493dff685bcd894c9f44aeec31fcc6f0676ad40b3ceb7",
+        "state": "uploaded",
+        "createdAt": "2026-09-14T02:40:34Z",
+        "updatedAt": "2026-09-14T02:40:37Z"
+      },
+      {
+        "name": "Windows-SHA256SUMS.txt",
+        "apiUrl": "https://api.github.com/repos/YvesZhou-hub/GTA-6-Sydney/releases/assets/562410859",
+        "size": 189,
+        "digest": "sha256:7f6c1e39f984cff28f0a377e7a4b0159a37ea2e2727e59c2ae9d9dd28254f1fa",
+        "state": "uploaded",
+        "createdAt": "2026-09-14T02:40:34Z",
+        "updatedAt": "2026-09-14T02:40:35Z"
+      },
+      {
+        "name": "windows-validation.json",
+        "apiUrl": "https://api.github.com/repos/YvesZhou-hub/GTA-6-Sydney/releases/assets/562410858",
+        "size": 149473,
+        "digest": "sha256:9cebc04bdc105e3c9e4176f788e8b47e7a6bb2d5d72c87d8be16d3f2236b05e0",
+        "state": "uploaded",
+        "createdAt": "2026-09-14T02:40:34Z",
+        "updatedAt": "2026-09-14T02:40:35Z"
+      }
+    ]
+  },
+  "aggregate_gates": 48,
+  "suite_counts": {
+    "driving": 32,
+    "survival": 30,
+    "encounter": 82,
+    "arsenal": 25
+  },
+  "total_gameplay_checks": 169,
+  "source_file_count": 235,
+  "app_identity": {
+    "executable_sha256": "e8347eda4e9f699ddd66decd85af04b4af9489c2337075d43aa78949d5cf2741",
+    "pck_sha256": "72bdbde9dfb19cbbfa66ebbae172d3a81ae01388f3c43365b548a86b0dbb8253"
+  },
+  "archive_sha256": "e675404485ad07ee6eb493dff685bcd894c9f44aeec31fcc6f0676ad40b3ceb7",
+  "raw_report_sha256": "9cebc04bdc105e3c9e4176f788e8b47e7a6bb2d5d72c87d8be16d3f2236b05e0",
+  "raw_checksums_sha256": "7f6c1e39f984cff28f0a377e7a4b0159a37ea2e2727e59c2ae9d9dd28254f1fa",
+  "scope": "Independent read-only verification of successful real GitHub Windows workflow, uploaded raw report and checksum bytes, every aggregate and per-scenario result, recorded completion markers and source/build identities. Windows EXE was run headlessly by CI: no GPU, native window, human driving, native audio output or listening verified. ZIP itself was not downloaded locally; its SHA256 and size were compared using GitHub server asset metadata, build report and published checksum. Runtime log hashes and extracted marker counts are read from the exact server-digested report; separate raw runtime logs were not downloaded. Release status and assets were not changed by this verification."
+}

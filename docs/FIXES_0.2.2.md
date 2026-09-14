@@ -36,4 +36,4 @@
 
 报告分别为 `reports/weapon-modules.json`、`reports/armory-progression.json`、`reports/save-v022-format7.json`。这些是定向源码夹具结果，不是整座城市、全部硬件或长期平衡的保证。
 
-**v0.2.2 最终 macOS 安装包及 Windows 原生玩法验证尚未完成。** 不应把上述通过数量描述为已发布安装包的验收结果。
+最终包的原生画面与玩法、Windows无界面玩法检查，以及默认CoreAudio的已知宿主异常，分别记录在 [验证证据](TESTING.md)。源码夹具通过数不作为安装包通过数。

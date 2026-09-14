@@ -1,0 +1,50 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+CITY_MAP buildings=15095 reserved=413 roads=64958
+CITY_BUILD_TIMINGS {"complete_ms":69307,"custom_landmarks_ms":64873,"mapped_city_ms":12461,"terrain_and_harbour_ms":10378}
+HARBOR_WORLD_READY buildings=15097 structure_components=21697
+CITY_STARTUP_MS 70961
+SURVIVAL_QA PASS full existing Sydney city and airport ready {"structure_components":21697}
+SURVIVAL_QA PASS unsaved survival starts with 120 health, 3 medkits and $50000 {}
+SURVIVAL_QA PASS Bennelong forecourt has existing walkable city collision {}
+SURVIVAL_QA PASS production spawn finds safe real-city floor: roamer {"point":[400.0,4.57999992370605,-117.0]}
+SURVIVAL_QA PASS production spawn finds safe real-city floor: runner {"point":[389.0,4.57999992370605,-114.052558898926]}
+SURVIVAL_QA PASS production spawn finds safe real-city floor: brute {"point":[380.947448730469,4.57999992370605,-106.0]}
+SURVIVAL_QA PASS production spawn finds safe real-city floor: spitter {"point":[378.0,4.57999992370605,-95.0]}
+SURVIVAL_QA PASS production spawn finds safe real-city floor: alpha {"point":[378.000152587891,4.57999992370605,-94.9208297729492]}
+SURVIVAL_QA PASS spawn settles on floor without wall overlap: roamer {"clear_capsule":true,"on_floor":true,"point":[400.0,4.50039863586426,-117.0]}
+SURVIVAL_QA PASS spawn settles on floor without wall overlap: runner {"clear_capsule":true,"on_floor":true,"point":[389.0,4.50039863586426,-114.052558898926]}
+SURVIVAL_QA PASS spawn settles on floor without wall overlap: brute {"clear_capsule":true,"on_floor":true,"point":[380.947448730469,4.50039863586426,-106.0]}
+SURVIVAL_QA PASS spawn settles on floor without wall overlap: spitter {"clear_capsule":true,"on_floor":true,"point":[378.0,4.50039863586426,-95.0]}
+SURVIVAL_QA PASS spawn settles on floor without wall overlap: alpha {"clear_capsule":true,"on_floor":true,"point":[378.000152587891,4.50039863586426,-94.9208297729492]}
+SURVIVAL_QA PASS all five production enemy identities spawned {}
+SURVIVAL_QA PASS all five photo positions have clear city-floor capsules and sightlines {}
+SURVIVAL_QA PASS city facade stream ready: five-nailong-city-hud {}
+SURVIVAL_QA PASS native Metal image: five-nailong-city-hud {}
+SURVIVAL_QA_NATIVE_FRAMES {"draw_calls_last":2021.0,"enemies":5,"frame_intervals_ms":[10.166,9.642,11.153,9.662,10.641,10.286,9.425,10.866,10.08,9.655,10.703,9.76,10.932,10.121,9.544,10.703,9.706,10.874,10.208,9.633,10.91,9.641,10.652,10.42,9.589,10.903,10.452,10.155,10.963,9.761,10.935,10.462,9.683,10.812,10.767,10.149,11.015,9.845,11.092,10.203,9.859,11.023,10.289,9.823,11.122,9.68,11.118,10.375,9.902,11.059,10.502,9.959,10.913,10.127,11.176,10.534,9.997,11.136,10.473,10.001,11.144,10.817,9.781,11.331,9.886,11.482,10.246,10.272,11.041,10.541,10.105,11.428,10.408,10.366,11.007,10.801,10.399,11.252,10.111,11.469,10.731,10.666,11.66,10.667,10.343,11.283,10.863,10.268,11.433,11.34],"frames":90,"mean_ms":10.4930888888889,"median_ms":10.4675,"p95_ms":11.428,"primitives_last":4306816.0,"resolution":[1440,900],"scope":"Native Metal window with normal buffer swaps; 5 active real enemy AIs, full city and fixed camera. No driving, streaming traversal, sustained balance or isolated GPU measurement. First 20 frames warm up before 90 process-frame intervals.","worst_ms":11.66}
+SURVIVAL_QA PASS real nearby enemy winds up then hurts player without instant kill {"after":112.0,"before":120.0,"physics_frames":41,"saw_windup":true}
+SURVIVAL_QA PASS physical H routes through main input to heal and consume one kit {}
+SURVIVAL_QA PASS repeat H cannot spend another kit during cooldown {}
+SURVIVAL_QA PASS physical B opens paused service menu with free pointer {}
+SURVIVAL_QA PASS nearby combat allows medical supplies while full repair stays blocked {}
+SURVIVAL_QA PASS city facade stream ready: services-during-combat-blocked {}
+SURVIVAL_QA PASS native Metal image: services-during-combat-blocked {}
+SURVIVAL_QA PASS production free tank spawn immediately seats player {}
+SURVIVAL_QA PASS tank target uses open line of sight over existing city floor {}
+SURVIVAL_QA PASS production fire button launches occupied tank projectile {}
+SURVIVAL_QA PASS actual tank blast kills real enemy and credits reward once {"kills_after":1,"kills_before":0,"money_after":50120,"money_before":50000,"weapon_stats":{"active_projectiles":0,"active_recoils":1,"effects":{"active":1,"active_muzzles":1,"allocated":12,"audio_players":20,"capacity":12,"discharges":1,"emitted":1,"muzzle_allocated":8,"muzzle_capacity":8,"particle_instances_per_blast":108,"physical_debris_bodies":0,"stage_seconds":{"dust":2.15,"flash":0.38,"pressure":0.55,"smoke":3.4}},"expired":0,"fired":1,"hits":1,"pool_rejections":0,"projectile_capacity":32,"projectiles_allocated":32,"recoil_capacity":16}}
+SURVIVAL_QA PASS city facade stream ready: tank-survival-impact-hud {}
+SURVIVAL_QA PASS native Metal image: tank-survival-impact-hud {}
+SURVIVAL_QA PASS eight-second combat timeout clears while exploration runs {}
+SURVIVAL_QA PASS survival tank armor permits damage and records shared durability {"damage_after_armor":25.0,"health":75.0}
+SURVIVAL_QA PASS safe B menu offers enabled paid repair {"cost":750,"reason":""}
+SURVIVAL_QA PASS city facade stream ready: services-paid-repair {}
+SURVIVAL_QA PASS native Metal image: services-paid-repair {}
+SURVIVAL_QA PASS real repair menu callback deducts price and restores shared fleet {"after":49370,"before":50120,"cost":750,"tank_health":100.0}
+SURVIVAL_QA PASS leaving services resumes gameplay {}
+SURVIVAL_QA PASS native camera pointer is captured after services {}
+SURVIVAL_QA PASS compiled script resources resolve; external App/PCK hashes must bind this run {}
+SURVIVAL_QA PASS four intended full-city screenshots saved {}
+SURVIVAL_QA_COMPLETE 40 passed=true report=/Users/yveszhou/Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港/survival-qa/report.json
+AUDIO_SHUTDOWN {"complete":true,"elapsed_ms":49,"remaining":0,"tracked":14}

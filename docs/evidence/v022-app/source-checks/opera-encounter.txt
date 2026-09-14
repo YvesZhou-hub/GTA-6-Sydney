@@ -1,0 +1,25 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+OPERA_ENCOUNTER PASS fixture uses production podium stairs, player collision and Jolt {}
+OPERA_ENCOUNTER PASS actual player capsule triggers forward obstruction probe side=-1.0 close=true {}
+OPERA_ENCOUNTER PASS entry grace protects health but expiry leads to natural damage side=-1.0 close=true {"first_damage_seconds":12.1833333333333,"health_after_30_seconds":48.0}
+OPERA_ENCOUNTER PASS cooldown holds legal melee station above Opera stairs side=-1.0 close=true {"furthest_after_contact":1.82315218448639,"lowest_after_contact":15.700927734375,"position":"(410.8603, 15.70093, -259.5283)"}
+OPERA_ENCOUNTER PASS repeated attacks retain full telegraph and cooldown side=-1.0 close=true {"health":48.0,"post_grace_attacks":9}
+OPERA_ENCOUNTER PASS moving target releases cooldown station and resumes pursuit side=-1.0 close=true {"after_three_seconds":5.96544885635376,"initial":14.1616468429565}
+OPERA_ENCOUNTER PASS actual player capsule triggers forward obstruction probe side=-1.0 close=false {}
+OPERA_ENCOUNTER PASS entry grace protects health but expiry leads to natural damage side=-1.0 close=false {"first_damage_seconds":12.15,"health_after_30_seconds":48.0}
+OPERA_ENCOUNTER PASS cooldown holds legal melee station above Opera stairs side=-1.0 close=false {"furthest_after_contact":1.81605875492096,"lowest_after_contact":15.700927734375,"position":"(411.0787, 15.70093, -260.0737)"}
+OPERA_ENCOUNTER PASS repeated attacks retain full telegraph and cooldown side=-1.0 close=false {"health":48.0,"post_grace_attacks":9}
+OPERA_ENCOUNTER PASS moving target releases cooldown station and resumes pursuit side=-1.0 close=false {"after_three_seconds":5.37560892105103,"initial":13.5742521286011}
+OPERA_ENCOUNTER PASS actual player capsule triggers forward obstruction probe side=1.0 close=true {}
+OPERA_ENCOUNTER PASS entry grace protects health but expiry leads to natural damage side=1.0 close=true {"first_damage_seconds":12.1833333333333,"health_after_30_seconds":48.0}
+OPERA_ENCOUNTER PASS cooldown holds legal melee station above Opera stairs side=1.0 close=true {"furthest_after_contact":1.77790653705597,"lowest_after_contact":15.700927734375,"position":"(410.9244, 15.70093, -259.6033)"}
+OPERA_ENCOUNTER PASS repeated attacks retain full telegraph and cooldown side=1.0 close=true {"health":48.0,"post_grace_attacks":9}
+OPERA_ENCOUNTER PASS moving target releases cooldown station and resumes pursuit side=1.0 close=true {"after_three_seconds":5.87346887588501,"initial":14.0688276290894}
+OPERA_ENCOUNTER PASS actual player capsule triggers forward obstruction probe side=1.0 close=false {}
+OPERA_ENCOUNTER PASS entry grace protects health but expiry leads to natural damage side=1.0 close=false {"first_damage_seconds":12.15,"health_after_30_seconds":48.0}
+OPERA_ENCOUNTER PASS cooldown holds legal melee station above Opera stairs side=1.0 close=false {"furthest_after_contact":1.81605875492096,"lowest_after_contact":15.700927734375,"position":"(411.0787, 15.70093, -260.0737)"}
+OPERA_ENCOUNTER PASS repeated attacks retain full telegraph and cooldown side=1.0 close=false {"health":48.0,"post_grace_attacks":9}
+OPERA_ENCOUNTER PASS moving target releases cooldown station and resumes pursuit side=1.0 close=false {"after_three_seconds":5.37560892105103,"initial":13.5742521286011}
+OPERA_ENCOUNTER PASS wall cancellation begins from a natural close-range windup {}
+OPERA_ENCOUNTER PASS new wall cancels windup damage without freezing pursuit {"health_after":120.0,"health_before":120.0,"state":"chase"}

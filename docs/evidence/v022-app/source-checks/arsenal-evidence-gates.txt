@@ -1,0 +1,20 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ARSENAL_GATE PASS actual fractional per-victim damage and distinct reward pass
+ARSENAL_GATE PASS empty hit list cannot pass a damage scenario
+ARSENAL_GATE PASS requested overkill cannot substitute for actual damage
+ARSENAL_GATE PASS missing edge victim is rejected even with correct global total
+ARSENAL_GATE PASS incorrect global damage sum is rejected
+ARSENAL_GATE PASS same explosion centre cannot attribute both losses to one victim
+ARSENAL_GATE PASS duplicate victim records cannot inflate a successful blast
+ARSENAL_GATE PASS nonfinite actual damage fails validation
+ARSENAL_GATE PASS coins cannot be interpreted as player damage
+ARSENAL_GATE PASS multiple true numbers on a victim may sum to its actual loss
+ARSENAL_GATE PASS complete unique true checks pass
+ARSENAL_GATE PASS an empty successful-looking report fails
+ARSENAL_GATE PASS an omitted required scenario fails
+ARSENAL_GATE PASS an explicit failed scenario fails the release gate
+ARSENAL_GATE PASS truthy strings cannot impersonate boolean passes
+ARSENAL_GATE PASS duplicate check names cannot fill a report
+ARSENAL_GATE PASS real full-city contract retains at least fifteen distinct required scenarios
+ARSENAL_GATE_COMPLETE checks=17 passed=true
