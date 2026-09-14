@@ -1,0 +1,252 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "real Jolt backend",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 0 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 0 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 1 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 1 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 1 expands real coverage and reduces reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 2 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 2 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 2 expands real coverage and reduces reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 3 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 3 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank tier 3 expands real coverage and reduces reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank invalid tier clamps to saved tier bounds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank UI mutation cannot alter shared base or next shell",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 0 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 0 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 1 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 1 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 1 expands real coverage and reduces reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 2 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 2 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 2 expands real coverage and reduces reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 3 preview uses exact gameplay profiles",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 3 next tier and cap are explicit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter tier 3 expands real coverage and reduces reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter invalid tier clamps to saved tier bounds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter UI mutation cannot alter shared base or next shell",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unsupported vehicles cannot expose paid fire control",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank maximum upgrade covers 2.56 times area with 0.805 second reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "corrupt vehicle tier falls back without corrupting projectile stats nan",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "corrupt vehicle tier falls back without corrupting projectile stats inf",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "corrupt vehicle tier falls back without corrupting projectile stats invalid",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "corrupt vehicle tier falls back without corrupting projectile stats <null>",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "zero-wallet tank fires for free",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "midflight upgrade leaves original projectile snapshot intact",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "midflight upgrade does not bypass already started reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "base shell cannot hit enemies outside original 16m radius",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "blast is centered on actual thin-wall impact",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fully upgraded shot remains free and still gates repeat fire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "changing vehicle tier cannot downgrade already launched shell",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "upgraded projectile emits actual 25.6m world and enemy payload",
+			"passed": true
+		},
+		{
+			"detail": {
+				"remaining_health": 928.745405431837
+			},
+			"name": "upgrade reaches enemy between original and upgraded radius",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "expanded coverage retains production distance damage falloff",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "intact wall still blocks upgraded blast damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "enemy beyond upgraded edge is unharmed",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "expanded blast effect matches launched radius multiplier",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "upgrades keep original fixed projectile and effects capacities",
+			"passed": true
+		}
+	],
+	"count": 47,
+	"engine": "4.7.2-stable (official)",
+	"headless": true,
+	"passed": true,
+	"scope": "Production weapon launch, impact, blast coverage and LOS fixture; no city, native visuals or user save access.",
+	"source_sha256": {
+		"res://../source/weapon_upgrade_test.gd": "434592c796f3db2eb502b46511212d7ca47fc242105f91dd492a9431711b4e6c",
+		"res://scripts/harbor_survival.gd": "5961221830c828364b91f7486ab1dafb01d4e6b9be2bd8f90caf1a1a7e3efc1c",
+		"res://scripts/vehicle_weapons.gd": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98"
+	},
+	"user_saves_touched": false
+}

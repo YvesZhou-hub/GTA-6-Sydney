@@ -1,0 +1,36 @@
+{
+  "app_identity": {
+    "executable_sha256": "f2bab4a8567ab1493670f7880784a4822f0581b07d7ac0aac08627fe34c1d66b",
+    "pck_sha256": "7b61aa686f1c811f09abe8fcb3face14666149b1fed22a72b6db5ed526c6e0af"
+  },
+  "app_identity_unchanged": true,
+  "mode": "arsenal",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--",
+    "--arsenal-qa"
+  ],
+  "audio_driver": null,
+  "audio_driver_scope": "Engine default; no driver override requested",
+  "audio_listening_verified": false,
+  "audio_validation_scope": "Unattended automated QA; audible sound was not manually verified",
+  "started_utc": "2026-09-14T02:23:09.583894+00:00",
+  "wall_seconds": 172.894,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 35,
+  "passed": false,
+  "screenshots": [
+    "veteran-natural-reinforcements.png",
+    "laser-lightning-airborne-targets.png",
+    "stormwing-marked-strike.png",
+    "cannon-centre-and-edge.png",
+    "armory-three-slots.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": [
+    "ARSENAL_QA PASS multiple weapon hits appear as true per-enemy damage totals {\"actual_damage\":382.4432,\"bar_capacity\":24,\"bars\":[{\"health\":483.0,\"id\":6786820214361,\"label\":\"Lv.12 雷翼奶龙\",\"locked\":true,\"maximum\":806.0,\"rect\":[432.0,303.6484375,184.0,54.0],\"trail\":806.0},{\"health\":771.44,\"id\":6787608743526,\"label\":\"Lv.12 雷翼奶龙\",\"locked\":false,\"maximum\":806.0,\"rect\":[749.236145019531,289.747344970703,184.0,54.0],\"trail\":771.44}],\"clock\":3.06666666666666,\"damage_events\":36,\"floating\":[{\"amount\":18.0,\"hits\":2,\"id\":6786820214361,\"kind\":WARNING: 56 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+  ]
+}

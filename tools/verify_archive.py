@@ -21,11 +21,14 @@ import subprocess
 import sys
 import tempfile
 import time
+import unicodedata
 import zipfile
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 RESOURCES = [
+    "res://scripts/arsenal_validation.gd", "res://scripts/combat_feedback.gd", "res://scripts/weapon_modules.gd",
+    "res://scripts/vehicle_armory.gd", "res://scripts/combat_progression.gd", "res://scripts/nailong_flight.gd",
     "res://scripts/road_motion.gd", "res://scripts/driving_validation.gd", "res://scripts/vehicle_durability.gd",
     "res://scripts/ui_fonts.gd", "res://assets/fonts/harbour_ui_font.tres",
     "res://scripts/ui_font_validation.gd", "res://scripts/trailer_capture.gd",
@@ -119,7 +122,16 @@ def command(args, cwd=Path("/tmp"), timeout=240):
 
 
 def errors(text):
-    return [line for line in text.splitlines() if "SCRIPT ERROR:" in line or "ERROR:" in line]
+    clean = re.sub(r"\x1b\[[0-9;]*m", "", text)
+    return [line for line in clean.splitlines()
+            if re.search(r"(?:SCRIPT ERROR|SHADER ERROR|FATAL ERROR|ERROR|WARNING):", line)]
+
+
+def app_identity_audit(app, expected):
+    actual = {"executable_sha256": digest(app / "Contents/MacOS/Harbourlife"),
+              "pck_sha256": digest(app / "Contents/Resources/Harbourlife.pck")}
+    return {"passed": isinstance(expected, dict) and actual == expected,
+            "actual": actual, "expected": expected}
 
 
 def safe_extract(archive, target):
@@ -129,16 +141,34 @@ def safe_extract(archive, target):
             raise RuntimeError("ZIP CRC failed: " + corrupt)
         names = []
         modes = {}
+        destinations = set()
+        file_destinations = set()
+        planned = []
+        # Validate the complete tree before creating anything. APFS/HFS paths can
+        # alias by case or Unicode normalization; ZIP's raw names are not enough.
         for entry in package.infolist():
             name = PurePosixPath(entry.filename)
             mode = entry.external_attr >> 16
-            if (name.is_absolute() or ".." in name.parts or not name.parts or
-                    name.parts[0] != "Harbourlife.app" or stat.S_ISLNK(mode) or
+            parts = entry.filename.rstrip("/").split("/")
+            if (name.is_absolute() or not parts or parts[0] != "Harbourlife.app" or
+                    any(part in ("", ".", "..") or ":" in part or part.endswith((" ", ".")) for part in parts) or
+                    stat.S_IFMT(mode) not in (0, stat.S_IFREG, stat.S_IFDIR) or
                     "\\" in entry.filename):
                 raise RuntimeError("Unexpected or unsafe ZIP member path")
-            if entry.filename in names:
-                raise RuntimeError("Duplicate ZIP member")
+            key = unicodedata.normalize("NFC", "/".join(parts)).casefold()
+            if key in destinations:
+                raise RuntimeError("Duplicate normalized ZIP destination")
+            destinations.add(key)
+            if not entry.is_dir():
+                file_destinations.add(key)
             names.append(entry.filename)
+            planned.append((entry, name, mode, key))
+        for _entry, _name, _mode, key in planned:
+            if any(str(parent) in file_destinations for parent in PurePosixPath(key).parents):
+                raise RuntimeError("ZIP file conflicts with a parent directory")
+        if any(target.iterdir()):
+            raise RuntimeError("Extraction destination must be empty")
+        for entry, name, mode, _key in planned:
             destination = target.joinpath(*name.parts)
             if entry.is_dir():
                 destination.mkdir(parents=True, exist_ok=True)
@@ -174,7 +204,8 @@ def main():
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--archive", type=Path, default=ROOT / "dist/Harbourlife-macOS-arm64.zip")
     parser.add_argument("--source-archive", type=Path)
-    parser.add_argument("--version", default="0.1.7")
+    parser.add_argument("--version", default="0.2.2")
+    parser.add_argument("--save-format", type=int, default=7)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output.resolve() if args.output else ROOT / "reports" / ("archive-audit-preparation.json" if args.prepare_only else "archive-validation.json")
@@ -225,11 +256,12 @@ def main():
             record["resources"] = sorted(str(p.relative_to(resources)) for p in resources.rglob("*") if p.is_file())
             required = ["Harbourlife.pck", "LICENSE", "PLAY_PERMISSION.md", "licenses/GODOT_LICENSE.txt", "licenses/ASSET_REGISTER.md"]
             record["checks"]["pck_and_resources_present"] = all((resources / name).is_file() for name in required) and (resources / "Harbourlife.pck").stat().st_size > 1024
-            pck_hash = digest(resources / "Harbourlife.pck")
-            record["pck_sha256"] = pck_hash
-            record["checks"]["extracted_pck_matches_built_app"] = pck_hash == digest(Path(manifest["app"]) / "Contents/Resources/Harbourlife.pck")
+            identity = app_identity_audit(app, manifest.get("app_identity"))
+            record["app_identity"] = identity
+            record["pck_sha256"] = identity["actual"]["pck_sha256"]
+            record["checks"]["extracted_executable_and_pck_match_final_build"] = identity["passed"]
             script = extracted / "resource_probe.gd"
-            script.write_text('extends SceneTree\nfunc _initialize():\n\tvar failed:=false\n\tfor path in ' + json.dumps(RESOURCES) + ':\n\t\tvar okay:bool=FileAccess.file_exists(path) if str(path).ends_with(".json") else (ResourceLoader.exists(path) and load(path)!=null)\n\t\tprint("ARCHIVE_RESOURCE ",path," ",okay)\n\t\tif not okay:failed=true\n\tvar packed_store=load("res://scripts/save_store.gd")\n\tprint("ARCHIVE_SAVE_FORMAT ",packed_store.VERSION)\n\tif packed_store.VERSION!=5:failed=true\n\tquit(1 if failed else 0)\n')
+            script.write_text('extends SceneTree\nfunc _initialize():\n\tvar failed:=false\n\tfor path in ' + json.dumps(RESOURCES) + ':\n\t\tvar okay:bool=FileAccess.file_exists(path) if str(path).ends_with(".json") else (ResourceLoader.exists(path) and load(path)!=null)\n\t\tprint("ARCHIVE_RESOURCE ",path," ",okay)\n\t\tif not okay:failed=true\n\tvar packed_store=load("res://scripts/save_store.gd")\n\tprint("ARCHIVE_SAVE_FORMAT ",packed_store.VERSION)\n\tif packed_store.VERSION!=' + str(args.save_format) + ':failed=true\n\tquit(1 if failed else 0)\n')
             # Release templates do not support the tools-only --script flag.
             # The matching official toolchain loads this exact extracted PCK;
             # the App itself is tested separately through its bundled QA flag.
@@ -240,8 +272,8 @@ def main():
             (ROOT / "reports/archive-resources.log").write_text(text)
             format_match = re.search(r"^ARCHIVE_SAVE_FORMAT (\d+)$", text, re.MULTILINE)
             packed_format = int(format_match.group(1)) if format_match else None
-            record["resource_probe"] = {"returncode": code, "resources": len(RESOURCES), "packed_save_format": packed_format, "expected_save_format": 5, "errors": errors(text), "engine": version_text.strip(), "method": "Matching official Godot version independently loads scripts and JSON from this extracted PCK and reads its actual save-store VERSION; not a claim that the release template accepts external --script."}
-            record["checks"]["bundled_models_and_qa_resources_loadable"] = version_code == 0 and version_text.strip() == manifest["engine"] and code == 0 and text.count("ARCHIVE_RESOURCE ") == len(RESOURCES) and not errors(text) and " false" not in text and packed_format == 5
+            record["resource_probe"] = {"returncode": code, "resources": len(RESOURCES), "packed_save_format": packed_format, "expected_save_format": args.save_format, "errors": errors(text), "engine": version_text.strip(), "method": "Matching official Godot version independently loads scripts and JSON from this extracted PCK and reads its actual save-store VERSION; not a claim that the release template accepts external --script."}
+            record["checks"]["bundled_models_and_qa_resources_loadable"] = version_code == 0 and version_text.strip() == manifest["engine"] and code == 0 and text.count("ARCHIVE_RESOURCE ") == len(RESOURCES) and not errors(text) and " false" not in text and packed_format == args.save_format
             smoke_command = [executable, "--headless", "--quit-after", "15", "--log-file", extracted / "isolated-engine.log", "--", "--interactive-qa"]
             started = time.monotonic()
             code, smoke = command(smoke_command)

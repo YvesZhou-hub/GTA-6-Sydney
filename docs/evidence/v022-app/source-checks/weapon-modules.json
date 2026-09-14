@@ -1,0 +1,535 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "actual Jolt backend",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "four selectable module identities",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary upgrades real damage and firing rate with free ammunition",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary has exactly three increasing purchase costs and a cap",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro upgrades real damage and firing rate with free ammunition",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro has exactly three increasing purchase costs and a cap",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "laser upgrades real damage and firing rate with free ammunition",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "laser has exactly three increasing purchase costs and a cap",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tesla upgrades real damage and firing rate with free ammunition",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tesla has exactly three increasing purchase costs and a cap",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown module cannot produce a spec or charge",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "loadout deduplicates caps three slots and reads owned levels only",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "locked modules and malformed ownership cannot become equipped",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "untrusted runtime entries clamp tiers deduplicate and cap slots",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 56.0,
+				"shots": 9
+			},
+			"name": "rotary physically damages production enemy with its damage style",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary keeps wallet unchanged without firing main cannon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary uses its own visible model and shared bounded effects",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 35.8598709106445,
+				"shots": 1
+			},
+			"name": "micro physically damages production enemy with its damage style",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro keeps wallet unchanged without firing main cannon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro uses its own visible model and shared bounded effects",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 39.0,
+				"shots": 3
+			},
+			"name": "laser physically damages production enemy with its damage style",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "laser keeps wallet unchanged without firing main cannon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "laser uses its own visible model and shared bounded effects",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 32.0,
+				"shots": 2
+			},
+			"name": "tesla physically damages production enemy with its damage style",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tesla keeps wallet unchanged without firing main cannon",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tesla uses its own visible model and shared bounded effects",
+			"passed": true
+		},
+		{
+			"detail": {
+				"levels": [
+					7.0,
+					11.0
+				]
+			},
+			"name": "rotary level three increases actual first hit damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"levels": [
+					35.8598666191101,
+					59.2684189932687
+				]
+			},
+			"name": "micro level three increases actual first hit damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"levels": [
+					13.0,
+					21.0
+				]
+			},
+			"name": "laser level three increases actual first hit damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"levels": [
+					16.0,
+					24.0
+				]
+			},
+			"name": "tesla level three increases actual first hit damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"shots": [
+					29,
+					36
+				]
+			},
+			"name": "rotary higher tier fires more shots over five physical seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"shots": [
+					2,
+					3
+				]
+			},
+			"name": "micro higher tier fires more shots over five physical seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"shots": [
+					9,
+					11
+				]
+			},
+			"name": "laser higher tier fires more shots over five physical seconds",
+			"passed": true
+		},
+		{
+			"detail": {
+				"shots": [
+					5,
+					6
+				]
+			},
+			"name": "tesla higher tier fires more shots over five physical seconds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary projectile exists before target takes damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary projectile travels at finite authored speed",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary thin wall introduced in flight prevents enemy damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro projectile exists before target takes damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro projectile travels at finite authored speed",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro thin wall introduced in flight prevents enemy damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 56.0,
+				"travelled": 13.3333263397217
+			},
+			"name": "rotary leads and physically hits a moving elevated target",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": 35.8270349502563,
+				"travelled": 13.3333263397217
+			},
+			"name": "micro leads and physically hits a moving elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rotary cannot acquire or fire through an existing wall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro cannot acquire or fire through an existing wall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "laser cannot acquire or fire through an existing wall",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tesla cannot acquire or fire through an existing wall",
+			"passed": true
+		},
+		{
+			"detail": {
+				"center": 35.8598666191101,
+				"edge": 16.1894183158875
+			},
+			"name": "micro cannon damages multiple targets with stronger centre falloff",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "micro blast cannot hurt a target behind a wall or beyond radius",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "one lethal blast processes all neighbours despite director removal",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage": [
+					16.0,
+					11.52,
+					8.2944
+				]
+			},
+			"name": "tesla links three distinct targets with decreasing damage",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "each lightning link is blocked by its own wall",
+			"passed": true
+		},
+		{
+			"detail": {
+				"hit_counts": [
+					3,
+					5
+				]
+			},
+			"name": "upgraded lightning expands from three to five real chained targets",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "three equipped modules fire concurrently with distinct cadences",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "pause freezes all module clocks and attacks",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "V off clears module shots locks models and attack counts",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "modal gate suppresses all paid modules",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "sightseeing gate suppresses all paid modules",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "wrecks cannot keep firing paid modules",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unoccupied copies cannot farm module rewards",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free removal and re-equipping cannot reset reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "upgrading preserves an airborne shell with its original damage and radius",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "switching vehicles clears old shots and binds only the new vehicle target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "car module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "motorcycle module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hoverboard module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "speedboat module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "yacht module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "helicopter module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "glider module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paraglider module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "airliner module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fighter module mount attacks a real elevated target",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 56.0,
+				"body_scale": 0.95
+			},
+			"name": "rotary physically hits production winglet flight collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 35.8440680503845,
+				"body_scale": 0.95
+			},
+			"name": "micro physically hits production winglet flight collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 39.0,
+				"body_scale": 0.95
+			},
+			"name": "laser physically hits production winglet flight collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 32.0,
+				"body_scale": 0.95
+			},
+			"name": "tesla physically hits production winglet flight collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 56.0,
+				"body_scale": 1.35
+			},
+			"name": "rotary physically hits production stormwing flight collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 34.3153433799744,
+				"body_scale": 1.35
+			},
+			"name": "micro physically hits production stormwing flight collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 39.0,
+				"body_scale": 1.35
+			},
+			"name": "laser physically hits production stormwing flight collider",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 32.0,
+				"body_scale": 1.35
+			},
+			"name": "tesla physically hits production stormwing flight collider",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "overlapping module fire awards one real enemy kill only",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "freed target safely releases paid projectile lock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeated loadout edits preserve fixed node and effect allocations",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeated setup never duplicates module mount or pools",
+			"passed": true
+		}
+	],
+	"count": 85,
+	"engine": "4.7.2-stable (official)",
+	"passed": true,
+	"scope": "Production optional modules, Nailong damage lifecycle and actual Jolt collision. Isolated fixtures, no native window or user saves.",
+	"source_sha256": {
+		"res://../source/weapon_modules_test.gd": "169b229b3da452c087232c140d3b2b45a2a2ce558ed454aecf26e9c34c0e33b5",
+		"res://scripts/nailong_enemy.gd": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7",
+		"res://scripts/vehicle_support_weapons.gd": "43a35c77ea0ff2164153d6c0a1221ec940e3e8c2e81371f287a5099aa0c70c43",
+		"res://scripts/weapon_modules.gd": "36fce90bca4df30a58694464373bf21758b179819ce799515cf9554b7687951b"
+	}
+}

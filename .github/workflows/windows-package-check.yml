@@ -9,7 +9,7 @@ on:
       release_tag:
         description: Existing draft or published release pinned to this exact source commit
         required: true
-        default: v0.2.1-preview.1
+        default: v0.2.2-preview.1
         type: string
       publish:
         description: Upload only after validation; never replace a different existing asset
@@ -435,7 +435,69 @@ jobs:
           if not result['passed']:
               sys.exit(result.get('error', 'Encounter QA failed'))
 
-      - name: Require world readiness, driving, survival and natural encounters with clean logs
+      - name: Run aerial arsenal QA from the exact extracted release EXE
+        shell: python
+        run: |
+          import datetime, json, os, shutil, subprocess, sys, time
+          from pathlib import Path
+          base = Path(os.environ['QA_ROOT'])
+          evidence = base / 'evidence'
+          package = base / 'package/Harbourlife'
+          child_env = dict(os.environ)
+          child_env['APPDATA'] = str(base / 'arsenal-user/roaming')
+          child_env['LOCALAPPDATA'] = str(base / 'arsenal-user/local')
+          for key in ('APPDATA', 'LOCALAPPDATA'):
+              Path(child_env[key]).mkdir(parents=True, exist_ok=False)
+          # Observe the actual known-folder location as well as the requested
+          # process-local redirect, matching the driving report isolation guard.
+          user_roots = {Path(os.environ['APPDATA']) / 'Godot/app_userdata',
+                        Path(child_env['APPDATA']) / 'Godot/app_userdata'}
+          def arsenal_reports():
+              return sorted({p.resolve() for folder in user_roots
+                             for p in folder.glob('*/arsenal-qa/report.json') if p.is_file()})
+          result = {'passed': False, 'timed_out': False, 'exit_code': None,
+                    'fixed_physics_hz': 60, 'wall_timeout_seconds': 300,
+                    'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    'scope': 'Production exported Windows full-city arsenal integration: real module purchases, tank blast damage feedback, aerial enemy pursuit and telegraphs, physical evasion and wall protection, purchased support weapons and veteran progression. Controlled scenario actor placement is disclosed; headless, no GPU or human-input claim.'}
+          started_ns = time.time_ns()
+          try:
+              if arsenal_reports():
+                  raise RuntimeError('An arsenal report already exists before this run; refusing stale evidence.')
+              log_names = ('arsenal-engine.log', 'arsenal-stdout.log', 'arsenal-stderr.log')
+              if any((evidence / name).exists() for name in (*log_names, 'arsenal-report.json')):
+                  raise RuntimeError('Arsenal logs and collected report must be fresh for this run.')
+              with (evidence / 'arsenal-stdout.log').open('wb') as stdout, (evidence / 'arsenal-stderr.log').open('wb') as stderr:
+                  completed = subprocess.run(
+                      [str(package / 'Harbourlife.exe'), '--headless', '--fixed-fps', '60',
+                       '--log-file', str(evidence / 'arsenal-engine.log'), '--', '--arsenal-qa'],
+                      cwd=package, env=child_env, stdout=stdout, stderr=stderr,
+                      timeout=300, check=False)
+              result['exit_code'] = completed.returncode
+              if completed.returncode != 0:
+                  raise RuntimeError('Arsenal QA EXE did not exit zero.')
+              reports = arsenal_reports()
+              if len(reports) != 1:
+                  raise RuntimeError(f'Expected one fresh arsenal report in observed Windows user directories; found {len(reports)}.')
+              original = reports[0]
+              result['report_original_path'] = str(original)
+              result['observed_user_data_directory'] = str(original.parent.parent)
+              result['report_fresh'] = original.stat().st_mtime_ns >= started_ns - 1_000_000_000
+              if not result['report_fresh']:
+                  raise RuntimeError('Arsenal report timestamp predates this process.')
+              shutil.copy2(original, evidence / 'arsenal-report.json')
+              result['passed'] = True
+          except subprocess.TimeoutExpired:
+              result['timed_out'] = True
+              result['error'] = 'Arsenal QA exceeded 300 seconds; subprocess terminated and waited.'
+          except Exception as exc:
+              result['error'] = f'{type(exc).__name__}: {exc}'
+          finally:
+              result['finished_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+              (evidence / 'arsenal-process.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+          if not result['passed']:
+              sys.exit(result.get('error', 'Arsenal QA failed'))
+
+      - name: Require world readiness, driving, survival, natural encounters and aerial arsenal with clean logs
         if: ${{ always() }}
         shell: python
         run: |
@@ -455,11 +517,13 @@ jobs:
           driving_process, driving = read_json('driving-process.json'), read_json('driving-report.json')
           survival_process, survival = read_json('survival-process.json'), read_json('survival-report.json')
           encounter_process, encounter = read_json('encounter-process.json'), read_json('encounter-report.json')
+          arsenal_process, arsenal = read_json('arsenal-process.json'), read_json('arsenal-report.json')
           logs = {name: (evidence / name).read_text(encoding='utf-8-sig', errors='replace')
                   if (evidence / name).is_file() else '' for name in
                   ('stdout.log', 'stderr.log', 'engine.log', 'driving-stdout.log', 'driving-stderr.log', 'driving-engine.log',
                    'survival-stdout.log', 'survival-stderr.log', 'survival-engine.log',
-                   'encounter-stdout.log', 'encounter-stderr.log', 'encounter-engine.log')}
+                   'encounter-stdout.log', 'encounter-stderr.log', 'encounter-engine.log',
+                   'arsenal-stdout.log', 'arsenal-stderr.log', 'arsenal-engine.log')}
           combined = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs.values()))
           runtime_errors = [line for line in combined.splitlines() if re.search(r'(?:SCRIPT ERROR|SHADER ERROR|FATAL ERROR|ERROR|WARNING):', line)]
           world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', combined, re.M)
@@ -472,6 +536,11 @@ jobs:
               ('encounter-stdout.log', 'encounter-stderr.log', 'encounter-engine.log')))
           encounter_markers = re.findall(r'^ENCOUNTER_QA_COMPLETE checks=(\d+) passed=true\s*$', encounter_logs, re.M)
           encounter_world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', encounter_logs, re.M)
+          arsenal_logs = re.sub(r'\x1b\[[0-9;]*m', '', '\n'.join(logs[name] for name in
+              ('arsenal-stdout.log', 'arsenal-stderr.log', 'arsenal-engine.log')))
+          arsenal_markers = re.findall(r'^ARSENAL_QA_COMPLETE checks=(\d+) passed=true\s*$', arsenal_logs, re.M)
+          arsenal_world = re.findall(r'^HARBOR_WORLD_READY buildings=(\d+) structure_components=(\d+)\s*$', arsenal_logs, re.M)
+          arsenal_checks = arsenal.get('checks', [])
           encounter_checks = encounter.get('checks', [])
           driving_checks = driving.get('checks', [])
           survival_checks = survival.get('checks', [])
@@ -557,6 +626,27 @@ jobs:
               isinstance(item, dict) and item.get('passed') is True and isinstance(item.get('name'), str)
               for item in encounter_checks)
           encounter_names = [item['name'] for item in encounter_checks] if valid_encounter_checks else []
+          required_arsenal_checks = {
+              'complete production Sydney city and airport loaded',
+              'physical B opens armory and hides combat feedback',
+              'actual armory buttons buy three modules with exact coin costs',
+              'fourth module remains stored until a slot is freed',
+              'paid module upgrade improves stats without changing existing enemy HP',
+              'real tank shell produces stronger centre than edge damage',
+              'actual damage feedback matches each blast victim',
+              'production winglet dive damages the real player',
+              'production stormwing strike damages the real player',
+              'moving out of the marked strike avoids damage',
+              'real wall blocks released aerial strike damage',
+              'three purchased modules damage airborne enemies with free ammunition',
+              'version 7 in-memory restore preserves purchased equipment and enemy level',
+              'veteran level six continuously spawns real reinforcements',
+              'equipment pressure increases one level only after the gradual interval',
+          }
+          valid_arsenal_checks = isinstance(arsenal_checks, list) and bool(arsenal_checks) and all(
+              isinstance(item, dict) and item.get('passed') is True and isinstance(item.get('name'), str)
+              for item in arsenal_checks)
+          arsenal_names = [item['name'] for item in arsenal_checks] if valid_arsenal_checks else []
           checks = {
               'package_checks_passed': package.get('passed') is True,
               'process_exit_zero': process.get('passed') is True and process.get('exit_code') == 0 and not process.get('timed_out', True),
@@ -607,6 +697,25 @@ jobs:
                   and encounter.get('user_saves_touched') is False and encounter.get('save_written') is False,
               'encounter_uses_production_automatic_loop': encounter.get('direct_enemy_spawn_calls') == 0
                   and encounter.get('forced_damage_calls') == 0 and encounter.get('auto_spawn_enabled') is True,
+              'arsenal_process_exit_zero': arsenal_process.get('passed') is True and arsenal_process.get('exit_code') == 0
+                  and not arsenal_process.get('timed_out', True),
+              'fresh_arsenal_report_and_log': arsenal_process.get('report_fresh') is True and bool(logs['arsenal-engine.log'].strip()),
+              'arsenal_runtime_logs_present': all((evidence / name).is_file() for name in
+                  ('arsenal-stdout.log', 'arsenal-stderr.log', 'arsenal-engine.log')),
+              'arsenal_report_passed': arsenal.get('passed') is True,
+              'every_arsenal_check_passed': valid_arsenal_checks,
+              'arsenal_check_count_complete': arsenal.get('count') == len(arsenal_names) > 0
+                  and len(arsenal_names) == len(set(arsenal_names)),
+              'requested_arsenal_behaviors_exercised': required_arsenal_checks.issubset(arsenal_names),
+              'arsenal_completion_marker_matches_report': bool(arsenal_markers)
+                  and all(int(count) == arsenal.get('count') for count in arsenal_markers),
+              'arsenal_full_city_ready': arsenal.get('world_ready') is True and bool(arsenal_world)
+                  and all(int(buildings) > 10000 and int(components) > 10000 for buildings, components in arsenal_world),
+              'arsenal_headless_scope_confirmed': arsenal.get('native') is False
+                  and arsenal.get('display_driver') == 'headless' and arsenal.get('physics_hz') == 60,
+              'arsenal_save_guard_confirmed': arsenal.get('qa_running') is True
+                  and arsenal.get('user_saves_touched') is False and arsenal.get('save_written') is False,
+
 
           }
           current = {}
@@ -618,18 +727,21 @@ jobs:
           report = {'passed': all(checks.values()), 'checks': checks, 'check_count': len(checks),
                     'package': package, 'process': process, 'driving_process': driving_process,
                     'driving': driving, 'survival_process': survival_process, 'survival': survival,
-                    'encounter_process': encounter_process, 'encounter': encounter, 'app_identity_after': current,
+                    'encounter_process': encounter_process, 'encounter': encounter,
+                    'arsenal_process': arsenal_process, 'arsenal': arsenal, 'app_identity_after': current,
                     'runtime_errors': runtime_errors, 'world_ready_counts': world,
                     'interactive_ready_components': interactive,
                     'driving_complete_counts': driving_markers,
                     'survival_complete_counts': survival_markers,
                     'encounter_complete_counts': encounter_markers, 'encounter_world_ready_counts': encounter_world,
+                    'arsenal_complete_counts': arsenal_markers, 'arsenal_world_ready_counts': arsenal_world,
                     'log_sha256': {name: digest(evidence / name) for name in logs if (evidence / name).is_file()},
                     'driving_report_sha256': digest(evidence / 'driving-report.json') if (evidence / 'driving-report.json').is_file() else None,
                     'survival_report_sha256': digest(evidence / 'survival-report.json') if (evidence / 'survival-report.json').is_file() else None,
                     'encounter_report_sha256': digest(evidence / 'encounter-report.json') if (evidence / 'encounter-report.json').is_file() else None,
-                    'scope': 'Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state; full-city survival enemy spawning, damage, H/B input, tank projectile rewards and paid fleet repair; natural home/Opera/airport/CBD encounters, pursuit and neighbouring reinforcement while old enemies remain, stale-wave recovery, V/B controls and paid fire-control upgrades, automatic tank support with actual H field repairs. Exported scripts may be compiled resources; external executable/PCK hashes identify the tested build. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
-                    'save_isolation': 'Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving, survival and encounter report locations are observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa, --driving-qa, --survival-qa and --encounter-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving, survival or encounter evidence causes failure.'}
+                    'arsenal_report_sha256': digest(evidence / 'arsenal-report.json') if (evidence / 'arsenal-report.json').is_file() else None,
+                    'scope': 'Windows x86_64 exact release ZIP/PE/PCK integrity, full production-world headless initialization, production Jolt vehicle physics for emergency braking, drift, motorcycle steering, triple-speed boost, release recovery, stationary and airborne input, and independent vehicle state; full-city survival enemy spawning, damage, H/B input, tank projectile rewards and paid fleet repair; natural home/Opera/airport/CBD encounters, pursuit and neighbouring reinforcement while old enemies remain, stale-wave recovery, V/B controls and paid fire-control upgrades, automatic tank support with actual H field repairs; purchased arsenal modules, shell falloff and exact damage feedback, real aerial pursuit and telegraphs, input evasion and wall protection, version 7 equipment restoration and continuous level-six progression. Arsenal actor poses and its blocking-wall setup are controlled fixtures. Exported scripts may be compiled resources; external executable/PCK hashes identify the tested build. No GPU rendering, screenshots, human controls, audio listening, FPS benchmark or complete gameplay regression.',
+                    'save_isolation': 'Fresh GitHub-hosted VM; per-process APPDATA/LOCALAPPDATA redirection requested. Actual driving, survival, encounter and arsenal report locations are observed and recorded because Windows known-folder resolution may use the runner profile. --interactive-qa, --driving-qa, --survival-qa, --encounter-qa and --arsenal-qa skip slot/settings reads and create unsaved worlds. No existing saves copied, opened or deleted; pre-existing driving, survival, encounter or arsenal evidence causes failure.'}
           (evidence / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8') as summary:
               summary.write('## Windows package headless check\n\n')
@@ -638,6 +750,7 @@ jobs:
               summary.write('Production driving checks: ' + str(len(driving_names)) + '; report passed: ' + str(driving.get('passed', False)) + '.\n\n')
               summary.write('Production survival checks: ' + str(len(survival_names)) + '; report passed: ' + str(survival.get('passed', False)) + '.\n\n')
               summary.write('Production natural encounter checks: ' + str(len(encounter_names)) + '; report passed: ' + str(encounter.get('passed', False)) + '.\n\n')
+              summary.write('Production aerial arsenal checks: ' + str(len(arsenal_names)) + '; report passed: ' + str(arsenal.get('passed', False)) + '.\n\n')
               summary.write(report['scope'] + '\n')
           print('WINDOWS_PACKAGE_CHECK', json.dumps({'passed': report['passed'], 'checks': checks}))
           if not report['passed']:

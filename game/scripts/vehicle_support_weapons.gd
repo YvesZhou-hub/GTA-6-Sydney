@@ -3,6 +3,7 @@ extends Node3D
 ## The heavy tank cannon and fighter rockets remain separate manual weapons.
 const CAPACITY := 8
 const HIT_CAPACITY := 8
+const Modules = preload("res://scripts/weapon_modules.gd")
 const KINDS := ["car", "motorcycle", "hoverboard", "speedboat", "yacht", "helicopter", "glider", "paraglider", "airliner", "tank", "fighter"]
 const AIR_KINDS := ["helicopter", "glider", "paraglider", "airliner", "fighter"]
 const MOUNTS := {
@@ -30,6 +31,7 @@ var _landed := 0
 var _blocked := 0
 var _expired := 0
 var _active_time := 0.0
+var modules: Node3D
 
 static func profile_for(kind: String, upgrade: int = 0) -> Dictionary:
 	if not KINDS.has(kind): return {}
@@ -46,6 +48,9 @@ func setup(host: Node3D) -> void:
 	_properties.clear()
 	for info: Dictionary in game.get_property_list(): _properties[str(info.name)] = true
 	_prepare()
+	if not is_instance_valid(modules):
+		modules = Modules.new(); modules.name = "OptionalWeaponModules"; add_child(modules)
+	modules.setup(self)
 	clear()
 
 func _material(color: Color, emission := false) -> StandardMaterial3D:
@@ -147,7 +152,7 @@ func _ray(from: Vector3, to: Vector3, exclude: Array[RID]) -> Dictionary:
 	return get_world_3d().direct_space_state.intersect_ray(query)
 
 func _aim_point(enemy: Node3D) -> Vector3:
-	return enemy.global_position + Vector3.UP * (1.2 * float(enemy.get_meta("support_body_scale", 1.0)))
+	return enemy.global_position + Vector3.UP * (1.2 * float(enemy.get_meta("enemy_body_scale", enemy.get_meta("support_body_scale", 1.0))))
 
 func _can_reach(enemy: Node3D, vehicle: RigidBody3D, profile: Dictionary, exclude: Array[RID]) -> bool:
 	if not _valid_enemy(enemy): return false
@@ -239,6 +244,7 @@ func _tick_shots(delta: float) -> void:
 			# An enemy body must be the first physical hit. No proximity damage
 			# shortcut can carry a pulse through a wall or across another vehicle.
 			if _valid_enemy(collider):
+				collider.set_meta("damage_style", "support")
 				if float(collider.call("take_damage", float(shot.profile.damage), impact.position)) > 0.0: _landed += 1
 			else: _blocked += 1
 			_spark(impact.position); _end_shot(shot); continue
@@ -269,8 +275,10 @@ func tick(delta: float) -> void:
 	_update_mount(vehicle, dt)
 	_tick_shots(dt)
 	_fire(vehicle, profile)
+	if is_instance_valid(modules): modules.tick(vehicle, dt)
 
 func clear() -> void:
+	if is_instance_valid(modules): modules.clear()
 	_target_ref = null; _vehicle_ref = null; _reload = 0.0; _scan = 0.0
 	if is_instance_valid(_mount): _mount.visible = false
 	for shot: Dictionary in _shots: _end_shot(shot)
@@ -291,4 +299,5 @@ func status() -> Dictionary:
 		"reload_remaining":_reload, "profile":profile, "ammo_cost":0,
 		"projectile_capacity":CAPACITY, "active_projectiles":active,
 		"projectiles_allocated":_shots.size(), "mount_count":1 if is_instance_valid(_mount) else 0,
-		"fired":_fired, "hits":_landed, "blocked":_blocked, "expired":_expired, "simulation_seconds":_active_time}
+		"fired":_fired, "hits":_landed, "blocked":_blocked, "expired":_expired, "simulation_seconds":_active_time,
+		"modules":modules.status() if is_instance_valid(modules) else {}}

@@ -85,13 +85,14 @@ func run() -> void:
 	hud._process(2.0)
 	hud.update_state(state)
 	check("remaining at low health does not flash continuously", is_zero_approx(hud._low_entry_time) and is_zero_approx(hud._damage_time))
-	for panel: Control in [host.modal, host.map_panel]:
+	for panel_case: Array in [["modal", host.modal], ["map", host.map_panel]]:
+		var panel: Control = panel_case[1]
 		panel.visible = true
 		hud._process(0.016)
 		hud._request_heal()
 		hud._request_service()
-		check("visible panel hides and disables combat overlay", not hud.visible and hud._heal_button.disabled and hud._service_button.disabled)
-		check("panel cannot receive behind-panel HUD actions", healing == 1 and services == 0)
+		check("visible %s panel hides and disables combat overlay" % panel_case[0], not hud.visible and hud._heal_button.disabled and hud._service_button.disabled)
+		check("%s panel cannot receive behind-panel HUD actions" % panel_case[0], healing == 1 and services == 0)
 		panel.visible = false
 		hud._process(0.016)
 	host.paused = true

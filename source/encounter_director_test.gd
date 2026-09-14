@@ -89,6 +89,16 @@ func run() -> void:
 	if not director.has_method("desired_enemies"):
 		await finish(); return
 
+	# Ground reinforcements reserve every sixth attempt for air support. Both air
+	# roles must remain in that schedule after Lv.4 (the slot itself is always even).
+	director.cleared = 6
+	var ground_air_roles: Array[String] = []
+	for sequence in [4, 10, 16, 22]:
+		director._spawn_sequence = sequence
+		ground_air_roles.append(director._next_type())
+	check("higher level ground encounters alternate both flying roles", ground_air_roles == ["winglet", "stormwing", "winglet", "stormwing"], {"roles": ground_air_roles})
+	director.reset_mode(true)
+
 	# Let the engine tick the director: no manual spawn or direct clock tick.
 	director.reset_mode(true); director._rng.seed=90213; director.auto_spawn=true
 	var initial_grace: float=director.grace

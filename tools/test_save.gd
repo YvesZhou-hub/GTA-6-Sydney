@@ -1,7 +1,9 @@
 extends SceneTree
 const Store=preload("res://scripts/save_store.gd")
 const LegacyV012=preload("res://../source/fixtures/save_store_v012.gd")
+const LegacyV021=preload("res://../source/fixtures/save_store_v021.gd")
 const LEGACY_SHA256="da9a206bdd26938774f91353aafb7db701ca7658b7f45498a31d590c0609918d"
+const V021_SHA256="3e213c96e6581500a679da7f169a33c3d3a1f85ae03792fd12f3874c8c4cfece"
 var failures=0
 var checks:Array=[]
 func _init():
@@ -33,9 +35,12 @@ func _init():
 	invalid.close()
 	check("future version rejected",Store.read(id).is_empty())
 	version_compatibility(id+"_compat")
+	module_version_compatibility(id+"_armory")
 	optional_numeric_fields(id+"_numeric")
 	var report={"passed":failures==0,"checks":checks,"current_format":Store.VERSION,"source_hashes":{"res://scripts/save_store.gd":FileAccess.get_sha256("res://scripts/save_store.gd"),"res://../tools/test_save.gd":FileAccess.get_sha256("res://../tools/test_save.gd")},"legacy_reader":{"format":LegacyV012.VERSION,"source":"source/fixtures/save_store_v012.gd","commit":"d6ddb4d","sha256":LEGACY_SHA256,"provenance":"Byte-identical save_store.gd from the v0.1.2 final build manifest"},"user_saves_touched":false,"qa_fixtures_retained":true,"scope":"Actual production save API and immutable v0.1.2 reader; unique qa_store files only; no slots() calls or non-QA save access."}
-	var output:=FileAccess.open("res://../reports/save-v020-format6.json",FileAccess.WRITE)
+	report["legacy_v021_reader"]={"format":LegacyV021.VERSION,"source":"source/fixtures/save_store_v021.gd","commit":"44cdc69987fa3f9f946afb9d875e3ed34d1b499e","sha256":V021_SHA256,"provenance":"Byte-identical save_store.gd from actual v0.2.1 commit"}
+	report.source_hashes["res://../source/fixtures/save_store_v021.gd"]=FileAccess.get_sha256("res://../source/fixtures/save_store_v021.gd")
+	var output:=FileAccess.open("res://../reports/save-v022-format7.json",FileAccess.WRITE)
 	output.store_string(JSON.stringify(report,"\t"));output.close()
 	print("SAVE_TEST COMPLETE checks=",checks.size()," failures=",failures," format=",Store.VERSION)
 	quit(failures)
@@ -83,7 +88,7 @@ func version_compatibility(prefix:String):
 	var loaded_v4:Dictionary={}
 	var original_v4:=PackedByteArray()
 	var v4_id:=""
-	for version in [1,2,3,4,5]:
+	for version in [1,2,3,4,5,6]:
 		var id:=prefix+"_v"+str(version)
 		var old={"version":version,"name":"Version compatibility QA","mode":"sandbox","life":{"money":4321},"world":{"destroyed":["opera/shell/1/2"]},"vehicles":[car.duplicate(true)],"player":[12,5.3,30],"owned":["car"],"navigation":{"key":"map_pin","title":"QA marker","position":[300,4.5,400]}}
 		var path:String=Store.ROOT+id+".json"
@@ -105,15 +110,38 @@ func version_compatibility(prefix:String):
 	loaded_v4.vehicle=boards[1].id
 	loaded_v4.spawn_target=boards[0].id
 	var path:String=Store.ROOT+v4_id+".json"
-	check("saving an upgraded v4 world emits format 6",Store.write(v4_id,loaded_v4) and JSON.parse_string(FileAccess.get_file_as_string(path)).version==Store.VERSION)
+	check("saving an upgraded v4 world emits format 7",Store.write(v4_id,loaded_v4) and JSON.parse_string(FileAccess.get_file_as_string(path)).version==7)
 	var upgraded:Dictionary=Store.read(v4_id)
 	var expected_boards:Array=JSON.parse_string(JSON.stringify(boards))
-	check("v6 reload preserves both independent hoverboards and occupied target",upgraded.vehicles.size()==3 and upgraded.vehicles[0]==expected_car and upgraded.vehicles[1]==expected_boards[0] and upgraded.vehicles[2]==expected_boards[1] and upgraded.vehicle==boards[1].id and upgraded.spawn_target==boards[0].id)
+	check("v7 reload preserves both independent hoverboards and occupied target",upgraded.vehicles.size()==3 and upgraded.vehicles[0]==expected_car and upgraded.vehicles[1]==expected_boards[0] and upgraded.vehicles[2]==expected_boards[1] and upgraded.vehicle==boards[1].id and upgraded.spawn_target==boards[0].id)
 	check("upgrade retains the exact original v4 recovery bytes",FileAccess.get_file_as_bytes(path+".bak")==original_v4)
 	var new_bytes:=FileAccess.get_file_as_bytes(path)
 	var backup_bytes:=FileAccess.get_file_as_bytes(path+".bak")
-	check("actual shipped v012 reader refuses format 6",LegacyV012.read(v4_id).is_empty() and LegacyV012.last_error=="This world was saved by a newer version.")
+	check("actual shipped v012 reader refuses format 7",LegacyV012.read(v4_id).is_empty() and LegacyV012.last_error=="This world was saved by a newer version.")
 	check("old-reader rejection preserves new save and recovery bytes",FileAccess.get_file_as_bytes(path)==new_bytes and FileAccess.get_file_as_bytes(path+".bak")==backup_bytes)
 	var copy:String=Store.duplicate_world(v4_id)
 	var copied:Dictionary=Store.read(copy)
-	check("copying a v6 world keeps format and independent new-class data",not copy.is_empty() and copy!=v4_id and copied.version==Store.VERSION and copied.vehicles==upgraded.vehicles and FileAccess.get_file_as_bytes(path)==new_bytes)
+	check("copying a v7 world keeps format and independent new-class data",not copy.is_empty() and copy!=v4_id and copied.version==Store.VERSION and copied.vehicles==upgraded.vehicles and FileAccess.get_file_as_bytes(path)==new_bytes)
+
+func module_version_compatibility(id:String):
+	var legacy_path:="res://../source/fixtures/save_store_v021.gd"
+	check("immutable v021 reader has original format6 contract and exact digest",LegacyV021.VERSION==6 and FileAccess.get_sha256(legacy_path)==V021_SHA256)
+	var old:={"version":6,"name":"Armory migration QA","player":[1,5,3],"life":{"money":17654},"survival":{"revision":2,"health":87,"kills":21,"cleared":3,"fleet_health":{"tank":62},"fleet_upgrades":{"tank":2}}}
+	var path:String=Store.ROOT+id+".json"
+	var writer:=FileAccess.open(path,FileAccess.WRITE);writer.store_string(JSON.stringify(old,"\t"));writer.close()
+	var original:=FileAccess.get_file_as_bytes(path)
+	check("actual v021 reader accepts original format6 world",not LegacyV021.read(id).is_empty())
+	var upgraded:Dictionary=Store.read(id)
+	check("new reader accepts format6 without adding free paid modules or rewriting bytes",upgraded.get("version")==7 and not upgraded.survival.has("armory") and upgraded.survival.kills==21 and upgraded.life.money==17654 and FileAccess.get_file_as_bytes(path)==original)
+	upgraded.survival.revision=3
+	upgraded.survival.armory={"revision":1,"owned":{"tank":{"rotary":3,"micro":2}},"equipped":{"tank":["rotary","micro"]}}
+	upgraded.survival.adaptive_level=6;upgraded.survival.difficulty_clock=9.75
+	check("module world writes version7 and retains v6 recovery bytes",Store.write(id,upgraded) and JSON.parse_string(FileAccess.get_file_as_string(path)).version==7 and FileAccess.get_file_as_bytes(path+".bak")==original)
+	var current:=FileAccess.get_file_as_bytes(path);var backup:=FileAccess.get_file_as_bytes(path+".bak")
+	check("actual v021 reader refuses newer module world",LegacyV021.read(id).is_empty() and LegacyV021.last_error=="This world was saved by a newer version.")
+	check("v021 rejection does not strip modules or mutate recovery",FileAccess.get_file_as_bytes(path)==current and FileAccess.get_file_as_bytes(path+".bak")==backup)
+	var reloaded:Dictionary=Store.read(id)
+	check("format7 actual store preserves paid armory and difficulty",reloaded.survival.armory==JSON.parse_string(JSON.stringify(upgraded.survival.armory)) and reloaded.survival.difficulty_clock==9.75 and reloaded.survival.adaptive_level==6)
+	var copied_id:String=Store.duplicate_world(id);var copied:Dictionary=Store.read(copied_id)
+	check("world copy preserves paid modules and original source bytes",copied.version==7 and copied.survival.armory==reloaded.survival.armory and FileAccess.get_file_as_bytes(path)==current)
+	check("new save keeps a recovery world readable by actual v021",LegacyV021.read(id,true).get("version")==6 and LegacyV021.read(id,true).survival.revision==2)

@@ -1,3 +1,30 @@
+# v0.2.2 武器选装与空中战斗验证
+
+本轮新增伤害浮字、两类飞行敌人、四类付费武器与最高 Lv.30 的渐进增援。冻结源码的16个玩法 / 存档专项 **817/817 通过**，全部进程正常退出、日志无错误或警告，235个游戏输入文件在验证前后保持一致。[各专项结果、源码哈希和原始证据](evidence/v022-app/source-checks/index.json)
+
+完整城市的源码版 Arsenal 检查 **25/25 通过**，与817项定向夹具分开记录。[完整城市原始报告](evidence/v022-app/source-checks/full-city/arsenal.json)
+
+另外，Arsenal报告负向门禁17/17、Windows流程门禁模拟62/62、ZIP审计工具负例37/37通过；这些检查验证工具如何拒绝错误证据，不作为游戏玩法断言或平台实测。[Windows门禁](evidence/v022-app/windows-ci-gates.json) · [ZIP门禁](evidence/v022-app/archive-gates.json)
+
+Mac最终包已通过13项独立ZIP审计，包括235个源文件身份、真实包内EXE/PCK哈希、版本0.2.2、存档格式7、80资源加载与完整城市启动。[真实包审计](evidence/v022-app/archive-validation.json)
+
+第一次默认CoreAudio的最终App运行：新玩法35/35通过并生成5张实机图，但退出时15个播放对象未释放、56个ObjectDB对象泄漏，因此外部原生门禁判为失败。[原始失败门禁](evidence/v022-app/initial-default-audio/arsenal-launch.json)
+
+独立单播放器在不加载任何游戏代码时，也出现默认CoreAudio真实4秒内零混音与2个对象泄漏；同一脚本用进程内Dummy时正常混音，约49ms释放，零警告。[最小脚本](evidence/v022-app/audio-diagnostic/minimal-player.gd) · [CoreAudio日志](evidence/v022-app/audio-diagnostic/coreaudio.txt) · [Dummy对照](evidence/v022-app/audio-diagnostic/dummy.txt)。这支持宿主音频回调停滞的判断，但不能将完整App的56个对象全部归类为同一类型；系统根因未确认。未改系统或游戏音频设置，失败报告保留。后续原生画面/玩法采用进程内Dummy单列，不能据此声称真实扬声器声音已测试。
+
+最终安装包玩法验证在完成后记录于此。下方 v0.2.1 和更早的结果是历史数据，不计入 v0.2.2 通过数。
+
+复现新版本的完整城市检查：
+
+```sh
+tools/runtime/godot --headless --path game --fixed-fps 60 -- --arsenal-qa
+python3 tools/verify_native.py arsenal --app /path/to/Harbourlife.app --output reports/v022-final-app/arsenal
+```
+
+`--arsenal-qa` 使用隔离的内存世界与受控初始站位；购买操作、真实主炮弹道、飞行敌人攻击与实际方向输入躲避均运行生产逻辑。源码门禁的合成报告用于检验验证器是否拒绝不完整证据，不作为游戏玩法通过数。
+
+---
+
 # v0.2.1 持续遭遇验证
 
 最终导出的 Mac App 已通过 **136/136 项原生检查，生成 11 张新截图**。两次运行均使用默认音频驱动、Metal 画面与同一 EXE/PCK，正常退出，日志零错误/警告。截图 SHA-256 已逐张核对；歌剧院同平台攻击、B 火控菜单，以及坦克底部两行按键和炮管角度均做了图像检查。

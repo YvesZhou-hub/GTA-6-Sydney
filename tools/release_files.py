@@ -24,7 +24,8 @@ SOURCE_FILES = ('world_osm_reference.json', 'world_osm_water.json', 'world_geogr
                 'tank_motion_test.gd', 'fighter_flight_test.gd', 'combat_vehicle_state_test.gd',
                 'combat_crush_test.gd', 'combat_crush_envelope_test.gd', 'combat_weapons_test.gd', 'combat_effects_test.gd', 'combat_spawn_test.gd',
                 'runtime_diagnostics_test.gd', 'material_roles_test.gd', 'facade_night_test.gd', 'facade_stream_test.gd',
-                'render_environment_test.gd', 'daylight_cycle_test.gd', 'city_clock_test.gd', 'vehicle_factory_cache_test.gd', 'public_lighting_test.gd', 'ui_font_test.gd', 'nailong_enemy_test.gd', 'survival_vehicle_test.gd', 'survival_driving_test.gd', 'survival_boost_test.gd', 'survival_hud_test.gd', 'survival_loop_test.gd', 'enemy_pursuit_test.gd', 'encounter_director_test.gd', 'encounter_test.gd', 'encounter_baseline.gd', 'weapon_upgrade_test.gd', 'vehicle_support_test.gd', 'field_service_test.gd', 'windows_package_gate_test.py', 'fixtures/save_store_v012.gd')
+                'render_environment_test.gd', 'daylight_cycle_test.gd', 'city_clock_test.gd', 'vehicle_factory_cache_test.gd', 'public_lighting_test.gd', 'ui_font_test.gd', 'nailong_enemy_test.gd', 'survival_vehicle_test.gd', 'survival_driving_test.gd', 'survival_boost_test.gd', 'survival_hud_test.gd', 'survival_loop_test.gd', 'enemy_pursuit_test.gd', 'encounter_director_test.gd', 'encounter_test.gd', 'encounter_baseline.gd', 'weapon_upgrade_test.gd', 'vehicle_support_test.gd', 'field_service_test.gd', 'windows_package_gate_test.py', 'fixtures/save_store_v012.gd', 'fixtures/save_store_v021.gd',
+                'flying_enemy_test.gd', 'weapon_modules_test.gd', 'combat_feedback_test.gd', 'armory_progression_test.gd', 'arsenal_test.gd', 'archive_gate_test.py')
 
 def public_files(root: Path):
     files = [root / name for name in ROOT_FILES]

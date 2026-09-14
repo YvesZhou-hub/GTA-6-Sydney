@@ -1,0 +1,1133 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "complete production Sydney city and airport loaded",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "arsenal fixture uses existing Bennelong city surface",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production tank spawn seats the player for paid weapon fitting",
+			"passed": true
+		},
+		{
+			"detail": {
+				"observed": [
+					{
+						"level": 1,
+						"position": [
+							468.140319824219,
+							4.50087738037109,
+							-174.155334472656
+						],
+						"type": "roamer"
+					},
+					{
+						"level": 1,
+						"position": [
+							466.416198730469,
+							4.50087738037109,
+							-177.043502807617
+						],
+						"type": "roamer"
+					},
+					{
+						"level": 1,
+						"position": [
+							463.543151855469,
+							4.50087690353394,
+							-168.626525878906
+						],
+						"type": "runner"
+					},
+					{
+						"level": 1,
+						"position": [
+							450.912780761719,
+							4.50087738037109,
+							-162.128692626953
+						],
+						"type": "spitter"
+					},
+					{
+						"level": 1,
+						"position": [
+							444.596221923828,
+							12.5564470291138,
+							-144.575073242188
+						],
+						"type": "winglet"
+					}
+				]
+			},
+			"name": "production early reinforcements include a flying winglet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "physical B opens armory and hides combat feedback",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 32500,
+				"before": 50000,
+				"loadout": [
+					{
+						"id": "rotary",
+						"level": 1
+					},
+					{
+						"id": "micro",
+						"level": 1
+					},
+					{
+						"id": "laser",
+						"level": 1
+					}
+				]
+			},
+			"name": "actual armory buttons buy three modules with exact coin costs",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fourth module remains stored until a slot is freed",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paid module upgrade improves stats without changing existing enemy HP",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free loadout replacement preserves owned tiers and exact balance",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "closing armory restores combat feedback and same occupied tank",
+			"passed": true
+		},
+		{
+			"detail": {
+				"at_17_seconds": 1,
+				"at_19_seconds": 2,
+				"initial": 1,
+				"old_enemy_health": 360.0,
+				"target": 5
+			},
+			"name": "equipment pressure increases one level only after the gradual interval",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "main shell targets have real city floor and open sightlines",
+			"passed": true
+		},
+		{
+			"detail": {
+				"blast": {
+					"center_damage": 90.0,
+					"hits": [
+						{
+							"actual": 86.5199864543974,
+							"distance": 0.883812963962555,
+							"id": 6344891567858
+						},
+						{
+							"actual": 48.5100454688072,
+							"distance": 10.5371313095093,
+							"id": 6345478771248
+						}
+					],
+					"radius": 16.0,
+					"total": 135.030031923205
+				},
+				"loss": [
+					86.5199864543974,
+					48.5100454688072,
+					0.0
+				],
+				"positions": [
+					[
+						475.0,
+						4.53999996185303,
+						-132.128692626953
+					],
+					[
+						485.5,
+						4.53999996185303,
+						-132.128692626953
+					],
+					[
+						497.0,
+						4.53999996185303,
+						-132.128692626953
+					]
+				]
+			},
+			"name": "real tank shell produces stronger centre than edge damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"blast": {
+					"center_damage": 90.0,
+					"hits": [
+						{
+							"actual": 86.5199864543974,
+							"distance": 0.883812963962555,
+							"id": 6344891567858
+						},
+						{
+							"actual": 48.5100454688072,
+							"distance": 10.5371313095093,
+							"id": 6345478771248
+						}
+					],
+					"radius": 16.0,
+					"total": 135.030031923205
+				},
+				"feedback": {
+					"actual_damage": 135.030031923205,
+					"bar_capacity": 24,
+					"bars": [
+						{
+							"health": 273.480013545603,
+							"id": 6344891567858,
+							"label": "Lv.1 重装奶龙",
+							"locked": false,
+							"maximum": 360.0,
+							"rect": [
+								431.999877929688,
+								300.347320556641,
+								184.0,
+								54.0
+							],
+							"trail": 360.0
+						}
+					],
+					"clock": 0.183333333333333,
+					"damage_events": 2,
+					"floating": [
+						{
+							"amount": 86.5199864543974,
+							"hits": 1,
+							"id": 6344891567858,
+							"kind": "damage",
+							"style": "cannon",
+							"text": "−86.5"
+						},
+						{
+							"amount": 48.5100454688072,
+							"hits": 1,
+							"id": 6345478771248,
+							"kind": "damage",
+							"style": "splash",
+							"text": "−48.5"
+						}
+					],
+					"number_capacity": 48,
+					"registered": 3,
+					"reward_events": 0,
+					"visible": true,
+					"visible_numbers": 2
+				}
+			},
+			"name": "actual damage feedback matches each blast victim",
+			"passed": true
+		},
+		{
+			"detail": {
+				"early_damage": false,
+				"enemy": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						475.867797851562,
+						5.67431259155273,
+						-149.411422729492
+					],
+					"pursuit_seconds": 4.19999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"health_after": 110.0,
+				"health_before": 120.0,
+				"mark": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"marked": false,
+				"player": [
+					475.0,
+					4.49111080169678,
+					-150.0
+				],
+				"test_wall_added_after_release": false,
+				"windup_seen": true
+			},
+			"name": "production winglet dive damages the real player",
+			"passed": true
+		},
+		{
+			"detail": {
+				"early_damage": false,
+				"enemy": {
+					"attack_range": 32.0,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 3.4,
+					"damage": 15.0,
+					"dead": false,
+					"detouring": false,
+					"health": 260.0,
+					"label": "雷翼奶龙",
+					"level": 1,
+					"line_of_sight": false,
+					"max_health": 260.0,
+					"position": [
+						475.0,
+						10.5,
+						-174.0
+					],
+					"pursuit_seconds": 0.0,
+					"reward": 520,
+					"speed": 8.5,
+					"state": "idle",
+					"stuck_seconds": 0.0,
+					"type": "stormwing",
+					"windup_remaining": 0.0
+				},
+				"health_after": 95.0,
+				"health_before": 110.0,
+				"mark": [
+					475.0,
+					5.3414568901062,
+					-150.0
+				],
+				"marked": true,
+				"player": [
+					475.0,
+					4.49145698547363,
+					-150.0
+				],
+				"test_wall_added_after_release": false,
+				"windup_seen": true
+			},
+			"name": "production stormwing strike damages the real player",
+			"passed": true
+		},
+		{
+			"detail": {
+				"early_damage": false,
+				"enemy": {
+					"attack_range": 32.0,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 3.4,
+					"damage": 15.0,
+					"dead": false,
+					"detouring": false,
+					"health": 260.0,
+					"label": "雷翼奶龙",
+					"level": 1,
+					"line_of_sight": false,
+					"max_health": 260.0,
+					"position": [
+						475.0,
+						10.5,
+						-174.0
+					],
+					"pursuit_seconds": 0.0,
+					"reward": 520,
+					"speed": 8.5,
+					"state": "idle",
+					"stuck_seconds": 0.0,
+					"type": "stormwing",
+					"windup_remaining": 0.0
+				},
+				"health_after": 95.0,
+				"health_before": 95.0,
+				"mark": [
+					475.0,
+					5.3414568901062,
+					-150.0
+				],
+				"marked": true,
+				"player": [
+					483.5830078125,
+					4.49087715148926,
+					-150.0
+				],
+				"test_wall_added_after_release": false,
+				"windup_seen": true
+			},
+			"name": "moving out of the marked strike avoids damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"early_damage": false,
+				"enemy": {
+					"attack_range": 32.0,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 3.4,
+					"damage": 15.0,
+					"dead": false,
+					"detouring": false,
+					"health": 260.0,
+					"label": "雷翼奶龙",
+					"level": 1,
+					"line_of_sight": false,
+					"max_health": 260.0,
+					"position": [
+						475.0,
+						10.5,
+						-174.0
+					],
+					"pursuit_seconds": 0.0,
+					"reward": 520,
+					"speed": 8.5,
+					"state": "idle",
+					"stuck_seconds": 0.0,
+					"type": "stormwing",
+					"windup_remaining": 0.0
+				},
+				"health_after": 95.0,
+				"health_before": 95.0,
+				"mark": [
+					475.0,
+					5.3414568901062,
+					-150.0
+				],
+				"marked": true,
+				"player": [
+					475.0,
+					4.49145698547363,
+					-150.0
+				],
+				"test_wall_added_after_release": true,
+				"windup_seen": true
+			},
+			"name": "real wall blocks released aerial strike damage",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": {
+					"active_projectiles": 1,
+					"ammo_cost": 0,
+					"blocked": 0,
+					"burst_capacity": 12,
+					"fired": {
+						"laser": 5,
+						"rotary": 19,
+						"tesla": 3
+					},
+					"hits": {
+						"laser": 5,
+						"rotary": 18,
+						"tesla": 9
+					},
+					"line_capacity": 48,
+					"loadout": [
+						{
+							"id": "rotary",
+							"level": 2
+						},
+						{
+							"id": "laser",
+							"level": 1
+						},
+						{
+							"id": "tesla",
+							"level": 1
+						}
+					],
+					"locks": {
+						"laser": 6393964925125,
+						"rotary": 6393964925125,
+						"tesla": 6393964925125
+					},
+					"mount_capacity": 3,
+					"projectile_capacity": 24,
+					"reloads": {
+						"laser": 0.1,
+						"rotary": 0.128333333333333,
+						"tesla": 0.133333333333332
+					},
+					"simulation_seconds": 2.99999999999999
+				},
+				"before": {
+					"active_projectiles": 0,
+					"ammo_cost": 0,
+					"blocked": 0,
+					"burst_capacity": 12,
+					"fired": {},
+					"hits": {},
+					"line_capacity": 48,
+					"loadout": [],
+					"locks": {},
+					"mount_capacity": 3,
+					"projectile_capacity": 24,
+					"reloads": {},
+					"simulation_seconds": 0.0
+				},
+				"health": [
+					[
+						483.0,
+						806.0
+					],
+					[
+						771.44,
+						806.0
+					],
+					[
+						781.1168,
+						806.0
+					]
+				],
+				"money_after": 15000,
+				"money_before": 15000
+			},
+			"name": "three purchased modules damage airborne enemies with free ammunition",
+			"passed": true
+		},
+		{
+			"detail": {
+				"actual_damage": 382.4432,
+				"bar_capacity": 24,
+				"bars": [],
+				"clock": 3.06666666666666,
+				"damage_events": 36,
+				"floating": [
+					{
+						"amount": 18.0,
+						"hits": 2,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "rotary",
+						"text": "−18"
+					},
+					{
+						"amount": 13.0,
+						"hits": 1,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "laser",
+						"text": "−13"
+					},
+					{
+						"amount": 18.0,
+						"hits": 2,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "rotary",
+						"text": "−18"
+					},
+					{
+						"amount": 16.0,
+						"hits": 1,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "tesla",
+						"text": "−16"
+					},
+					{
+						"amount": 11.52,
+						"hits": 1,
+						"id": 6394753453767,
+						"kind": "damage",
+						"style": "tesla",
+						"text": "−11.5"
+					},
+					{
+						"amount": 8.2944,
+						"hits": 1,
+						"id": 6395541982874,
+						"kind": "damage",
+						"style": "tesla",
+						"text": "−8.3"
+					},
+					{
+						"amount": 12.0,
+						"hits": 1,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "support",
+						"text": "−12"
+					},
+					{
+						"amount": 18.0,
+						"hits": 2,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "rotary",
+						"text": "−18"
+					},
+					{
+						"amount": 13.0,
+						"hits": 1,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "laser",
+						"text": "−13"
+					},
+					{
+						"amount": 18.0,
+						"hits": 2,
+						"id": 6393964925125,
+						"kind": "damage",
+						"style": "rotary",
+						"text": "−18"
+					}
+				],
+				"number_capacity": 48,
+				"registered": 3,
+				"reward_events": 0,
+				"visible": true,
+				"visible_numbers": 3
+			},
+			"name": "multiple weapon hits appear as true per-enemy damage totals",
+			"passed": true
+		},
+		{
+			"detail": {
+				"memory_only_no_save_io": true,
+				"restored_equipment": {
+					"equipped": {
+						"airliner": [],
+						"car": [],
+						"fighter": [],
+						"glider": [],
+						"helicopter": [],
+						"hoverboard": [],
+						"motorcycle": [],
+						"paraglider": [],
+						"speedboat": [],
+						"tank": [
+							"rotary",
+							"laser",
+							"tesla"
+						],
+						"yacht": []
+					},
+					"owned": {
+						"airliner": {},
+						"car": {},
+						"fighter": {},
+						"glider": {},
+						"helicopter": {},
+						"hoverboard": {},
+						"motorcycle": {},
+						"paraglider": {},
+						"speedboat": {},
+						"tank": {
+							"laser": 1,
+							"micro": 1,
+							"rotary": 2,
+							"tesla": 1
+						},
+						"yacht": {}
+					},
+					"revision": 1
+				},
+				"save_version": 7
+			},
+			"name": "version 7 in-memory restore preserves purchased equipment and enemy level",
+			"passed": true
+		},
+		{
+			"detail": {
+				"observed": [
+					{
+						"level": 6,
+						"position": [
+							461.446380615234,
+							4.57999992370605,
+							-138.653121948242
+						],
+						"type": "runner"
+					},
+					{
+						"level": 6,
+						"position": [
+							475.0,
+							4.5799994468689,
+							-135.021438598633
+						],
+						"type": "roamer"
+					},
+					{
+						"level": 6,
+						"position": [
+							488.553619384766,
+							4.5799994468689,
+							-138.653121948242
+						],
+						"type": "roamer"
+					},
+					{
+						"level": 6,
+						"position": [
+							498.475555419922,
+							4.5799994468689,
+							-148.575073242188
+						],
+						"type": "runner"
+					},
+					{
+						"level": 6,
+						"position": [
+							498.524200439453,
+							4.5799994468689,
+							-148.659637451172
+						],
+						"type": "alpha"
+					},
+					{
+						"level": 6,
+						"position": [
+							505.403778076172,
+							12.5564470291138,
+							-179.682312011719
+						],
+						"type": "stormwing"
+					}
+				],
+				"rest": 0.0,
+				"spawn_sequence": 11
+			},
+			"name": "veteran level six continuously spawns real reinforcements",
+			"passed": true
+		},
+		{
+			"detail": {
+				"observed": [
+					{
+						"level": 6,
+						"position": [
+							461.446380615234,
+							4.57999992370605,
+							-138.653121948242
+						],
+						"type": "runner"
+					},
+					{
+						"level": 6,
+						"position": [
+							475.0,
+							4.5799994468689,
+							-135.021438598633
+						],
+						"type": "roamer"
+					},
+					{
+						"level": 6,
+						"position": [
+							488.553619384766,
+							4.5799994468689,
+							-138.653121948242
+						],
+						"type": "roamer"
+					},
+					{
+						"level": 6,
+						"position": [
+							498.475555419922,
+							4.5799994468689,
+							-148.575073242188
+						],
+						"type": "runner"
+					},
+					{
+						"level": 6,
+						"position": [
+							498.524200439453,
+							4.5799994468689,
+							-148.659637451172
+						],
+						"type": "alpha"
+					},
+					{
+						"level": 6,
+						"position": [
+							505.403778076172,
+							12.5564470291138,
+							-179.682312011719
+						],
+						"type": "stormwing"
+					}
+				]
+			},
+			"name": "production veteran reinforcement includes a flying stormwing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tested arsenal sources stayed unchanged during the run",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all required arsenal scenarios passed without missing or duplicate checks",
+			"passed": true
+		}
+	],
+	"count": 25,
+	"display_driver": "headless",
+	"native": false,
+	"passed": true,
+	"physics_hz": 60,
+	"qa_running": true,
+	"save_written": false,
+	"scenarios": {
+		"stormwing_dodge": {
+			"early_damage": false,
+			"enemy": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 3.4,
+				"damage": 15.0,
+				"dead": false,
+				"detouring": false,
+				"health": 260.0,
+				"label": "雷翼奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 260.0,
+				"position": [
+					475.0,
+					10.5,
+					-174.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 520,
+				"speed": 8.5,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "stormwing",
+				"windup_remaining": 0.0
+			},
+			"health_after": 95.0,
+			"health_before": 95.0,
+			"mark": [
+				475.0,
+				5.3414568901062,
+				-150.0
+			],
+			"marked": true,
+			"player": [
+				483.5830078125,
+				4.49087715148926,
+				-150.0
+			],
+			"test_wall_added_after_release": false,
+			"windup_seen": true
+		},
+		"stormwing_hit": {
+			"early_damage": false,
+			"enemy": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 3.4,
+				"damage": 15.0,
+				"dead": false,
+				"detouring": false,
+				"health": 260.0,
+				"label": "雷翼奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 260.0,
+				"position": [
+					475.0,
+					10.5,
+					-174.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 520,
+				"speed": 8.5,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "stormwing",
+				"windup_remaining": 0.0
+			},
+			"health_after": 95.0,
+			"health_before": 110.0,
+			"mark": [
+				475.0,
+				5.3414568901062,
+				-150.0
+			],
+			"marked": true,
+			"player": [
+				475.0,
+				4.49145698547363,
+				-150.0
+			],
+			"test_wall_added_after_release": false,
+			"windup_seen": true
+		},
+		"stormwing_wall": {
+			"early_damage": false,
+			"enemy": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 3.4,
+				"damage": 15.0,
+				"dead": false,
+				"detouring": false,
+				"health": 260.0,
+				"label": "雷翼奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 260.0,
+				"position": [
+					475.0,
+					10.5,
+					-174.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 520,
+				"speed": 8.5,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "stormwing",
+				"windup_remaining": 0.0
+			},
+			"health_after": 95.0,
+			"health_before": 95.0,
+			"mark": [
+				475.0,
+				5.3414568901062,
+				-150.0
+			],
+			"marked": true,
+			"player": [
+				475.0,
+				4.49145698547363,
+				-150.0
+			],
+			"test_wall_added_after_release": true,
+			"windup_seen": true
+		},
+		"winglet_hit": {
+			"early_damage": false,
+			"enemy": {
+				"attack_range": 2.8,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 2.3,
+				"damage": 10.0,
+				"dead": false,
+				"detouring": true,
+				"health": 95.0,
+				"label": "轻翼奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 95.0,
+				"position": [
+					475.867797851562,
+					5.67431259155273,
+					-149.411422729492
+				],
+				"pursuit_seconds": 4.19999999999999,
+				"reward": 220,
+				"speed": 12.0,
+				"state": "windup",
+				"stuck_seconds": 0.0,
+				"type": "winglet",
+				"windup_remaining": 0.0
+			},
+			"health_after": 110.0,
+			"health_before": 120.0,
+			"mark": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"marked": false,
+			"player": [
+				475.0,
+				4.49111080169678,
+				-150.0
+			],
+			"test_wall_added_after_release": false,
+			"windup_seen": true
+		}
+	},
+	"scope": "Actual full Sydney city, B/button purchases, real tank shell falloff and feedback, real enemy windup/strike, player input evasion and purchased modules. Actor/camera poses, one explicit temporary strike-blocking wall, paused actors for photographs and veteran progress loaded from an in-memory fixture are controlled setup. No player save reads/writes, fake damage or forced kill credit. Correctness, not sustained FPS or broad balance research.",
+	"screenshots": [],
+	"simulation_seconds": 51.1999999999984,
+	"source_evidence": {
+		"res://scripts/arsenal_validation.gd": {
+			"representation": "readable_source",
+			"sha256": "a92b5fbf99514aa949b5347fba9d53f6a319a262ea445749745493d7c93e026c"
+		},
+		"res://scripts/audio_shutdown.gd": {
+			"representation": "readable_source",
+			"sha256": "e9e460452c66b141563263a1a1fef450f68629315415153b76ee950a765d5de7"
+		},
+		"res://scripts/combat_feedback.gd": {
+			"representation": "readable_source",
+			"sha256": "c641e5aa6736207aeffd5113e998a84ccdce7d63eb6ace57305a022ed4451502"
+		},
+		"res://scripts/combat_progression.gd": {
+			"representation": "readable_source",
+			"sha256": "33db534a5587d80b2f52344d7308d93be443d3cd849626e3c0c3fa2421c31eef"
+		},
+		"res://scripts/encounter_spawn.gd": {
+			"representation": "readable_source",
+			"sha256": "5d74867e00c94a5f94080525bdb9cb066e258cae55d54a3cb28272e189d52382"
+		},
+		"res://scripts/harbor_survival.gd": {
+			"representation": "readable_source",
+			"sha256": "5961221830c828364b91f7486ab1dafb01d4e6b9be2bd8f90caf1a1a7e3efc1c"
+		},
+		"res://scripts/main.gd": {
+			"representation": "readable_source",
+			"sha256": "d27e1d6ded3e820387b513ea727ceaebef379a0d950a8ddd8cf9aac2c0ed3696"
+		},
+		"res://scripts/nailong_enemy.gd": {
+			"representation": "readable_source",
+			"sha256": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7"
+		},
+		"res://scripts/nailong_flight.gd": {
+			"representation": "readable_source",
+			"sha256": "69d8f275ddec59e8fcf4c6b96f0232432ec818aa619f2c73ddfa329871ce322b"
+		},
+		"res://scripts/nailong_model.gd": {
+			"representation": "readable_source",
+			"sha256": "274bcc23b259e8bb7d8a67f404ee9727294feee1a1518a795164395baf26735e"
+		},
+		"res://scripts/save_store.gd": {
+			"representation": "readable_source",
+			"sha256": "15ab4d334a60ea041f2bae689e84c4be7f03be7188dae33841608e075929e4bc"
+		},
+		"res://scripts/survival_hud.gd": {
+			"representation": "readable_source",
+			"sha256": "cb856d2c2af322398b44e08b4eb3933a22058dd54a4cced6d8c97c52ad6a2e36"
+		},
+		"res://scripts/vehicle_armory.gd": {
+			"representation": "readable_source",
+			"sha256": "2ded88e4da674bb585223b7da8d37e04fe72a87f8fddd4be16cd16309edc2522"
+		},
+		"res://scripts/vehicle_support_weapons.gd": {
+			"representation": "readable_source",
+			"sha256": "43a35c77ea0ff2164153d6c0a1221ec940e3e8c2e81371f287a5099aa0c70c43"
+		},
+		"res://scripts/vehicle_weapons.gd": {
+			"representation": "readable_source",
+			"sha256": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98"
+		},
+		"res://scripts/weapon_modules.gd": {
+			"representation": "readable_source",
+			"sha256": "36fce90bca4df30a58694464373bf21758b179819ce799515cf9554b7687951b"
+		}
+	},
+	"source_evidence_start": {
+		"res://scripts/arsenal_validation.gd": {
+			"representation": "readable_source",
+			"sha256": "a92b5fbf99514aa949b5347fba9d53f6a319a262ea445749745493d7c93e026c"
+		},
+		"res://scripts/audio_shutdown.gd": {
+			"representation": "readable_source",
+			"sha256": "e9e460452c66b141563263a1a1fef450f68629315415153b76ee950a765d5de7"
+		},
+		"res://scripts/combat_feedback.gd": {
+			"representation": "readable_source",
+			"sha256": "c641e5aa6736207aeffd5113e998a84ccdce7d63eb6ace57305a022ed4451502"
+		},
+		"res://scripts/combat_progression.gd": {
+			"representation": "readable_source",
+			"sha256": "33db534a5587d80b2f52344d7308d93be443d3cd849626e3c0c3fa2421c31eef"
+		},
+		"res://scripts/encounter_spawn.gd": {
+			"representation": "readable_source",
+			"sha256": "5d74867e00c94a5f94080525bdb9cb066e258cae55d54a3cb28272e189d52382"
+		},
+		"res://scripts/harbor_survival.gd": {
+			"representation": "readable_source",
+			"sha256": "5961221830c828364b91f7486ab1dafb01d4e6b9be2bd8f90caf1a1a7e3efc1c"
+		},
+		"res://scripts/main.gd": {
+			"representation": "readable_source",
+			"sha256": "d27e1d6ded3e820387b513ea727ceaebef379a0d950a8ddd8cf9aac2c0ed3696"
+		},
+		"res://scripts/nailong_enemy.gd": {
+			"representation": "readable_source",
+			"sha256": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7"
+		},
+		"res://scripts/nailong_flight.gd": {
+			"representation": "readable_source",
+			"sha256": "69d8f275ddec59e8fcf4c6b96f0232432ec818aa619f2c73ddfa329871ce322b"
+		},
+		"res://scripts/nailong_model.gd": {
+			"representation": "readable_source",
+			"sha256": "274bcc23b259e8bb7d8a67f404ee9727294feee1a1518a795164395baf26735e"
+		},
+		"res://scripts/save_store.gd": {
+			"representation": "readable_source",
+			"sha256": "15ab4d334a60ea041f2bae689e84c4be7f03be7188dae33841608e075929e4bc"
+		},
+		"res://scripts/survival_hud.gd": {
+			"representation": "readable_source",
+			"sha256": "cb856d2c2af322398b44e08b4eb3933a22058dd54a4cced6d8c97c52ad6a2e36"
+		},
+		"res://scripts/vehicle_armory.gd": {
+			"representation": "readable_source",
+			"sha256": "2ded88e4da674bb585223b7da8d37e04fe72a87f8fddd4be16cd16309edc2522"
+		},
+		"res://scripts/vehicle_support_weapons.gd": {
+			"representation": "readable_source",
+			"sha256": "43a35c77ea0ff2164153d6c0a1221ec940e3e8c2e81371f287a5099aa0c70c43"
+		},
+		"res://scripts/vehicle_weapons.gd": {
+			"representation": "readable_source",
+			"sha256": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98"
+		},
+		"res://scripts/weapon_modules.gd": {
+			"representation": "readable_source",
+			"sha256": "36fce90bca4df30a58694464373bf21758b179819ce799515cf9554b7687951b"
+		}
+	},
+	"source_sha256": {
+		"res://scripts/arsenal_validation.gd": "a92b5fbf99514aa949b5347fba9d53f6a319a262ea445749745493d7c93e026c",
+		"res://scripts/audio_shutdown.gd": "e9e460452c66b141563263a1a1fef450f68629315415153b76ee950a765d5de7",
+		"res://scripts/combat_feedback.gd": "c641e5aa6736207aeffd5113e998a84ccdce7d63eb6ace57305a022ed4451502",
+		"res://scripts/combat_progression.gd": "33db534a5587d80b2f52344d7308d93be443d3cd849626e3c0c3fa2421c31eef",
+		"res://scripts/encounter_spawn.gd": "5d74867e00c94a5f94080525bdb9cb066e258cae55d54a3cb28272e189d52382",
+		"res://scripts/harbor_survival.gd": "5961221830c828364b91f7486ab1dafb01d4e6b9be2bd8f90caf1a1a7e3efc1c",
+		"res://scripts/main.gd": "d27e1d6ded3e820387b513ea727ceaebef379a0d950a8ddd8cf9aac2c0ed3696",
+		"res://scripts/nailong_enemy.gd": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7",
+		"res://scripts/nailong_flight.gd": "69d8f275ddec59e8fcf4c6b96f0232432ec818aa619f2c73ddfa329871ce322b",
+		"res://scripts/nailong_model.gd": "274bcc23b259e8bb7d8a67f404ee9727294feee1a1518a795164395baf26735e",
+		"res://scripts/save_store.gd": "15ab4d334a60ea041f2bae689e84c4be7f03be7188dae33841608e075929e4bc",
+		"res://scripts/survival_hud.gd": "cb856d2c2af322398b44e08b4eb3933a22058dd54a4cced6d8c97c52ad6a2e36",
+		"res://scripts/vehicle_armory.gd": "2ded88e4da674bb585223b7da8d37e04fe72a87f8fddd4be16cd16309edc2522",
+		"res://scripts/vehicle_support_weapons.gd": "43a35c77ea0ff2164153d6c0a1221ec940e3e8c2e81371f287a5099aa0c70c43",
+		"res://scripts/vehicle_weapons.gd": "1411256b9641de98338cf53cf0bfd1e96775649be1b30121204025161e76df98",
+		"res://scripts/weapon_modules.gd": "36fce90bca4df30a58694464373bf21758b179819ce799515cf9554b7687951b"
+	},
+	"user_saves_touched": false,
+	"world_ready": true
+}

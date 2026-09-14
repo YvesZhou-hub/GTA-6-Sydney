@@ -35,13 +35,16 @@ steps = workflow["jobs"]["build-check-windows"]["steps"]
 python_steps = [step for step in steps if step.get("shell") == "python"]
 for step in python_steps:
     compile(step["run"], step["name"], "exec")
-check("YAML parses and every embedded Python step compiles", len(python_steps) == 7)
+check("YAML parses and every embedded Python step compiles", len(python_steps) == 8)
 
 dispatch = workflow.get("on", workflow.get(True))["workflow_dispatch"]
-check("manual release defaults to v0.2.1-preview.1", dispatch["inputs"]["release_tag"]["default"] == "v0.2.1-preview.1")
+check("manual release defaults to v0.2.2-preview.1", dispatch["inputs"]["release_tag"]["default"] == "v0.2.2-preview.1")
 runner = next(step["run"] for step in python_steps if step["name"].startswith("Run natural encounter"))
 check("encounter EXE runner has isolated user directories, fresh evidence and 300-second timeout",
       all(part in runner for part in ("encounter-user/roaming", "encounter-user/local", "exist_ok=False", "--encounter-qa", "timeout=300", "started_ns", "report_fresh", "encounter_reports()", "encounter-engine.log", "encounter-stdout.log", "encounter-stderr.log")))
+arsenal_runner = next(step["run"] for step in python_steps if step["name"].startswith("Run aerial arsenal"))
+check("arsenal runner executes the exported EXE with isolated data and fresh bounded evidence",
+      all(part in arsenal_runner for part in ("package/Harbourlife", "Harbourlife.exe", "arsenal-user/roaming", "arsenal-user/local", "exist_ok=False", "--arsenal-qa", "timeout=300", "started_ns", "report_fresh", "arsenal_reports()", "arsenal-engine.log", "arsenal-stdout.log", "arsenal-stderr.log", "arsenal-report.json")))
 gate = next(step["run"] for step in python_steps if step["name"].startswith("Require world readiness"))
 required = {}
 for node in ast.walk(ast.parse(gate)):
@@ -49,7 +52,10 @@ for node in ast.walk(ast.parse(gate)):
         for target in node.targets:
             if isinstance(target, ast.Name) and target.id.startswith("required_"):
                 required[target.id] = ast.literal_eval(node.value)
-check("gate requires driving, survival and natural encounter behaviors", set(required) == {"required_driving_checks", "required_survival_checks", "required_encounter_checks"})
+check("gate requires driving, survival, natural encounter and aerial arsenal behaviors", set(required) == {"required_driving_checks", "required_survival_checks", "required_encounter_checks", "required_arsenal_checks"})
+arsenal_source = (ROOT / "game/scripts/arsenal_validation.gd").read_text()
+source_names = json.loads(next(line.removeprefix("const REQUIRED := ") for line in arsenal_source.splitlines() if line.startswith("const REQUIRED := ")))
+check("arsenal workflow names match every production required scenario", required["required_arsenal_checks"] == set(source_names) and len(source_names) == 15)
 
 
 def passing_report(names, **metadata):
@@ -60,17 +66,20 @@ def passing_report(names, **metadata):
 driving = passing_report(required["required_driving_checks"], failures=0, backend="Jolt Physics", physics_hz=60, user_saves_touched=False, save_written=False)
 survival = passing_report(required["required_survival_checks"], world_ready=True, native=False, display_driver="headless", user_saves_touched=False, save_written=False)
 encounter = passing_report(required["required_encounter_checks"], world_ready=True, native=False, display_driver="headless", physics_hz=60, qa_running=True, user_saves_touched=False, save_written=False, direct_enemy_spawn_calls=0, forced_damage_calls=0, auto_spawn_enabled=True)
+arsenal = passing_report(required["required_arsenal_checks"], world_ready=True, native=False, display_driver="headless", physics_hz=60, qa_running=True, user_saves_touched=False, save_written=False)
 process = {"passed": True, "exit_code": 0, "timed_out": False, "report_fresh": True}
 baseline = {"package.json": {"passed": True, "archive_sha256": "synthetic-test-only"}, "process.json": dict(process),
             "driving-process.json": dict(process), "driving-report.json": driving,
             "survival-process.json": dict(process), "survival-report.json": survival,
-            "encounter-process.json": dict(process), "encounter-report.json": encounter}
+            "encounter-process.json": dict(process), "encounter-report.json": encounter,
+            "arsenal-process.json": dict(process), "arsenal-report.json": arsenal}
 log_baseline = {
     "engine.log": "HARBOR_WORLD_READY buildings=15097 structure_components=21697\nINTERACTIVE_QA_READY world=qa_interactive_123 components=21697\n",
     "stdout.log": "", "stderr.log": "",
     "driving-engine.log": f"DRIVING_QA_COMPLETE {driving['count']} passed=true\n", "driving-stdout.log": "", "driving-stderr.log": "",
     "survival-engine.log": f"SURVIVAL_QA_COMPLETE {survival['count']} passed=true report=synthetic\n", "survival-stdout.log": "", "survival-stderr.log": "",
     "encounter-engine.log": f"HARBOR_WORLD_READY buildings=15097 structure_components=21697\nENCOUNTER_QA_COMPLETE checks={encounter['count']} passed=true\n", "encounter-stdout.log": "", "encounter-stderr.log": "",
+    "arsenal-engine.log": f"HARBOR_WORLD_READY buildings=15097 structure_components=21697\nARSENAL_QA_COMPLETE checks={arsenal['count']} passed=true\n", "arsenal-stdout.log": "", "arsenal-stderr.log": "",
 }
 
 
@@ -101,9 +110,15 @@ def run_case(name, mutate=None, expected=True):
         accepted = result.returncode == 0 and report.get("passed") is True
         failed_gates = [key for key, value in report.get("checks", {}).items() if value is not True]
         check(name, accepted == expected and bool(report), {"expected_accept": expected, "exit_code": result.returncode, "failed_gates": failed_gates, "gate_count": report.get("check_count"), "stderr": result.stderr[-1200:]})
+        return report
 
 
-run_case("complete synthetic evidence is accepted")
+accepted_report = run_case("complete synthetic evidence is accepted")
+check("aggregate binds full arsenal process, report and all runtime logs by identity",
+      accepted_report.get("arsenal") == arsenal and accepted_report.get("arsenal_process") == process
+      and accepted_report.get("arsenal_report_sha256") == hashlib.sha256(json.dumps(arsenal).encode()).hexdigest()
+      and all(accepted_report.get("log_sha256", {}).get(name) == hashlib.sha256(log_baseline[name].encode()).hexdigest()
+              for name in ("arsenal-engine.log", "arsenal-stdout.log", "arsenal-stderr.log")))
 run_case("missing encounter report is rejected", lambda records, _logs: records.pop("encounter-report.json"), False)
 run_case("failed encounter report is rejected", lambda records, _logs: records["encounter-report.json"].update(passed=False), False)
 
@@ -139,11 +154,55 @@ run_case("timed-out encounter process is rejected", lambda records, _logs: recor
 run_case("missing encounter completion marker is rejected", lambda _records, logs: logs.update({"encounter-engine.log": "HARBOR_WORLD_READY buildings=15097 structure_components=21697\n"}), False)
 run_case("runtime warning from encounter phase is rejected", lambda _records, logs: logs.update({"encounter-stderr.log": "WARNING: synthetic fixture warning\n"}), False)
 
+
+def update_arsenal_count(records, logs):
+    data = records["arsenal-report.json"]
+    data["count"] = len(data["checks"])
+    logs["arsenal-engine.log"] = log_baseline["arsenal-engine.log"].replace(f"checks={arsenal['count']}", f"checks={data['count']}")
+
+
+def remove_arsenal_required(records, logs):
+    records["arsenal-report.json"]["checks"].pop(0)
+    update_arsenal_count(records, logs)
+
+
+def duplicate_arsenal_check(records, logs):
+    rows = records["arsenal-report.json"]["checks"]
+    rows.append(dict(rows[0]))
+    update_arsenal_count(records, logs)
+
+
+run_case("missing arsenal report is rejected", lambda records, _logs: records.pop("arsenal-report.json"), False)
+run_case("failed arsenal report is rejected", lambda records, _logs: records["arsenal-report.json"].update(passed=False), False)
+run_case("missing required arsenal scenario is rejected despite matching count and marker", remove_arsenal_required, False)
+run_case("failed individual arsenal check is rejected", lambda records, _logs: records["arsenal-report.json"]["checks"][0].update(passed=False), False)
+run_case("duplicate passing arsenal names are rejected", duplicate_arsenal_check, False)
+run_case("incorrect arsenal count is rejected", lambda records, _logs: records["arsenal-report.json"].update(count=1), False)
+run_case("malformed arsenal checks are rejected", lambda records, _logs: records["arsenal-report.json"].update(checks=["not a check"]), False)
+run_case("arsenal native evidence cannot impersonate headless Windows", lambda records, _logs: records["arsenal-report.json"].update(native=True), False)
+run_case("arsenal wrong display driver is rejected", lambda records, _logs: records["arsenal-report.json"].update(display_driver="windows"), False)
+run_case("arsenal wrong physics rate is rejected", lambda records, _logs: records["arsenal-report.json"].update(physics_hz=30), False)
+run_case("arsenal missing world-ready state is rejected", lambda records, _logs: records["arsenal-report.json"].update(world_ready=False), False)
+run_case("arsenal missing save-isolation mode is rejected", lambda records, _logs: records["arsenal-report.json"].update(qa_running=False), False)
+run_case("arsenal player-save reads are rejected", lambda records, _logs: records["arsenal-report.json"].update(user_saves_touched=True), False)
+run_case("arsenal player-save writes are rejected", lambda records, _logs: records["arsenal-report.json"].update(save_written=True), False)
+run_case("arsenal stale report is rejected", lambda records, _logs: records["arsenal-process.json"].update(report_fresh=False), False)
+run_case("arsenal timeout is rejected", lambda records, _logs: records["arsenal-process.json"].update(timed_out=True), False)
+run_case("arsenal nonzero process exit is rejected", lambda records, _logs: records["arsenal-process.json"].update(exit_code=1), False)
+run_case("arsenal completion cannot be borrowed from encounter logs", lambda _records, logs: logs.update({"encounter-stdout.log": log_baseline["arsenal-engine.log"], "arsenal-engine.log": "HARBOR_WORLD_READY buildings=15097 structure_components=21697\n"}), False)
+run_case("arsenal mismatched completion count is rejected", lambda _records, logs: logs.update({"arsenal-engine.log": log_baseline["arsenal-engine.log"].replace(f"checks={arsenal['count']}", "checks=1")}), False)
+run_case("arsenal full-city marker cannot be borrowed from earlier stages", lambda _records, logs: logs.update({"arsenal-engine.log": f"ARSENAL_QA_COMPLETE checks={arsenal['count']} passed=true\n"}), False)
+run_case("arsenal partial world is rejected", lambda _records, logs: logs.update({"arsenal-engine.log": log_baseline["arsenal-engine.log"].replace("buildings=15097", "buildings=20")}), False)
+run_case("missing arsenal stderr file is rejected", lambda _records, logs: logs.pop("arsenal-stderr.log"), False)
+run_case("arsenal warning is rejected even after all scenarios passed", lambda _records, logs: logs.update({"arsenal-stderr.log": "WARNING: synthetic fixture warning\n"}), False)
+run_case("arsenal runtime error is rejected even after all scenarios passed", lambda _records, logs: logs.update({"arsenal-stdout.log": "SCRIPT ERROR: synthetic fixture failure\n"}), False)
+run_case("arsenal controlled scenarios are not subject to natural-encounter-only counters", lambda records, _logs: records["arsenal-report.json"].update(direct_enemy_spawn_calls=8, forced_damage_calls=2, auto_spawn_enabled=False))
+
 # Execute the actual final step with all external commands intercepted. This
 # challenges tag/commit and asset preflight logic without touching GitHub.
 upload = next(step["run"] for step in python_steps if step["name"].startswith("Upload only verified"))
 fixture_commit = "a" * 40
-fixture_tag = "v0.2.1-preview.1"
+fixture_tag = "v0.2.2-preview.1"
 fixture_repo = "fixture-only/harbourlife"
 
 

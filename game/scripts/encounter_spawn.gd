@@ -71,6 +71,7 @@ static func approach_clear(game: Node3D, from: Vector3, to: Vector3) -> bool:
 	return true
 
 static func find(game: Node3D, kind: String, sequence: int, failures: int = 0) -> Dictionary:
+	if bool(Enemy.TYPES.get(kind,{}).get("air",false)):return find_air(game,kind,sequence,failures)
 	var ground := target_ground(game)
 	if ground.is_empty(): return {"position": Vector3.INF, "reason": "离开地面 · 落地后自动恢复遭遇", "candidates": 0}
 	var center: Vector3 = ground.position
@@ -100,3 +101,37 @@ static func find(game: Node3D, kind: String, sequence: int, failures: int = 0) -
 	# No unverified fallback or forced placement in a wall. The director retries
 	# quickly and releases abandoned actors instead of exhausting a wave forever.
 	return {"position": Vector3.INF, "reason": "正在寻找通路 · 移向街道或开阔平台", "candidates": count, "failures": failures + 1}
+
+static func air_approach_clear(game: Node3D, from: Vector3, to: Vector3, kind: String) -> bool:
+	var scale:float=Enemy.TYPES.get(kind,Enemy.TYPES.winglet).scale
+	var shape:=SphereShape3D.new();shape.radius=.59*scale+.08
+	var query:=PhysicsShapeQueryParameters3D.new();query.shape=shape
+	query.transform.origin=from+Vector3.UP*(1.22*scale)
+	query.motion=to+Vector3.UP*(1.22*scale)-query.transform.origin
+	query.collision_mask=1|4;query.exclude=exclusions(game)
+	return game.get_world_3d().direct_space_state.cast_motion(query)[0]>.98
+
+static func find_air(game: Node3D, kind: String, sequence: int, failures: int = 0) -> Dictionary:
+	var target:Node3D=game.current_vehicle if is_instance_valid(game.current_vehicle) else game.player
+	var center:Vector3=target.global_position
+	var hull_padding:=0.0
+	var minimum_y:=center.y+6.0
+	if target is RigidBody3D:
+		var box:AABB=target.global_transform*VehicleSpawn.envelope(target)
+		hull_padding=maxf(box.size.x,box.size.z)*.5
+		minimum_y=maxf(minimum_y,box.end.y+4.0)
+	var forward:Vector3=-game.camera.global_basis.z;forward.y=0.0
+	if forward.length_squared()<.01:forward=Vector3.FORWARD
+	forward=forward.normalized()
+	var rotation:=float(sequence%12)*TAU/12.0
+	var count:=0
+	for rise in [0.0,8.0,18.0]:
+		for radius in [30.0,40.0,24.0,48.0]:
+			for offset in [0.0,.52,-.52,1.05,-1.05,1.57,-1.57,2.09,-2.09,2.62,-2.62,PI]:
+				count+=1
+				var direction:=forward.rotated(Vector3.UP,rotation+offset)
+				var point:=center+direction*(float(radius)+hull_padding)
+				point.y=maxf(3.0,minimum_y+float(rise))
+				if not clear_body(game,point,kind) or not air_approach_clear(game,point,center,kind):continue
+				return {"position":point,"reason":"空袭接近 · 注意空中预警","candidates":count,"air":true}
+	return {"position":Vector3.INF,"reason":"空域受阻 · 等待安全接近路线","candidates":count,"failures":failures+1,"air":true}

@@ -1,0 +1,745 @@
+{
+  "passed": true,
+  "count": 62,
+  "checks": [
+    {
+      "name": "YAML parses and every embedded Python step compiles",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "manual release defaults to v0.2.2-preview.1",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "encounter EXE runner has isolated user directories, fresh evidence and 300-second timeout",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal runner executes the exported EXE with isolated data and fresh bounded evidence",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "gate requires driving, survival, natural encounter and aerial arsenal behaviors",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "arsenal workflow names match every production required scenario",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "complete synthetic evidence is accepted",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "exit_code": 0,
+        "failed_gates": [],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "aggregate binds full arsenal process, report and all runtime logs by identity",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "missing encounter report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_report_passed",
+          "every_encounter_check_passed",
+          "encounter_check_count_complete",
+          "requested_natural_encounters_exercised",
+          "encounter_completion_marker_matches_report",
+          "encounter_full_city_ready",
+          "encounter_headless_scope_confirmed",
+          "encounter_save_guard_confirmed",
+          "encounter_uses_production_automatic_loop"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "failed encounter report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_report_passed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing required encounter behavior is rejected even with a consistent count",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "requested_natural_encounters_exercised"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "failed individual encounter check is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "every_encounter_check_passed",
+          "encounter_check_count_complete",
+          "requested_natural_encounters_exercised"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "duplicate passing encounter check names are rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_check_count_complete"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "incorrect encounter check count is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_check_count_complete",
+          "encounter_completion_marker_matches_report"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "native report cannot impersonate Windows headless evidence",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_headless_scope_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing production world readiness is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_full_city_ready"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "disabled save guard is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_save_guard_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "player-save access is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_save_guard_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "disabled production autospawn is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_uses_production_automatic_loop"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "manually spawned enemy evidence is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_uses_production_automatic_loop"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "stale encounter report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "fresh_encounter_report_and_log"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "timed-out encounter process is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_process_exit_zero"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing encounter completion marker is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "encounter_completion_marker_matches_report"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "runtime warning from encounter phase is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "no_runtime_errors_or_warnings"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing arsenal report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_report_passed",
+          "every_arsenal_check_passed",
+          "arsenal_check_count_complete",
+          "requested_arsenal_behaviors_exercised",
+          "arsenal_completion_marker_matches_report",
+          "arsenal_full_city_ready",
+          "arsenal_headless_scope_confirmed",
+          "arsenal_save_guard_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "failed arsenal report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_report_passed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing required arsenal scenario is rejected despite matching count and marker",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "requested_arsenal_behaviors_exercised"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "failed individual arsenal check is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "every_arsenal_check_passed",
+          "arsenal_check_count_complete",
+          "requested_arsenal_behaviors_exercised"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "duplicate passing arsenal names are rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_check_count_complete"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "incorrect arsenal count is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_check_count_complete",
+          "arsenal_completion_marker_matches_report"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "malformed arsenal checks are rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "every_arsenal_check_passed",
+          "arsenal_check_count_complete",
+          "requested_arsenal_behaviors_exercised"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal native evidence cannot impersonate headless Windows",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_headless_scope_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal wrong display driver is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_headless_scope_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal wrong physics rate is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_headless_scope_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal missing world-ready state is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_full_city_ready"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal missing save-isolation mode is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_save_guard_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal player-save reads are rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_save_guard_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal player-save writes are rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_save_guard_confirmed"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal stale report is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "fresh_arsenal_report_and_log"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal timeout is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_process_exit_zero"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal nonzero process exit is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_process_exit_zero"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal completion cannot be borrowed from encounter logs",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_completion_marker_matches_report"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal mismatched completion count is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_completion_marker_matches_report"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal full-city marker cannot be borrowed from earlier stages",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_full_city_ready"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal partial world is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_full_city_ready"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing arsenal stderr file is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "arsenal_runtime_logs_present"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal warning is rejected even after all scenarios passed",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "no_runtime_errors_or_warnings"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal runtime error is rejected even after all scenarios passed",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "exit_code": 1,
+        "failed_gates": [
+          "no_runtime_errors_or_warnings"
+        ],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arsenal controlled scenarios are not subject to natural-encounter-only counters",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "exit_code": 0,
+        "failed_gates": [],
+        "gate_count": 48,
+        "stderr": ""
+      }
+    },
+    {
+      "name": "exact-commit draft accepts verified assets before its Git tag exists",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "matching existing lightweight tag accepts verified assets",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "annotated tag is resolved to the validated commit",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "exact-commit published release accepts verified assets without status mutation",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": true,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "floating release target main is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Release must use the specified tag and full source commit, not a floating branch"
+      }
+    },
+    {
+      "name": "wrong full release target commit is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Release must use the specified tag and full source commit, not a floating branch"
+      }
+    },
+    {
+      "name": "wrong release tag is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Release must use the specified tag and full source commit, not a floating branch"
+      }
+    },
+    {
+      "name": "package source commit mismatch is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Validated package must match the requested tag, repository and exact dispatched commit"
+      }
+    },
+    {
+      "name": "package repository mismatch is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Validated package must match the requested tag, repository and exact dispatched commit"
+      }
+    },
+    {
+      "name": "existing tag on another commit is rejected before upload",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Existing Git tag does not resolve to the validated source commit"
+      }
+    },
+    {
+      "name": "published release without an exact Git tag is rejected",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Published release must have exactly one matching Git tag"
+      }
+    },
+    {
+      "name": "identical existing assets are retained without upload or clobber",
+      "passed": true,
+      "detail": {
+        "expected_accept": true,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "different same-name asset rejects the whole upload during preflight",
+      "passed": true,
+      "detail": {
+        "expected_accept": false,
+        "uploaded": false,
+        "release_status_changed": false,
+        "error": "RuntimeError: Existing release asset differs; refusing replacement: windows-validation.json"
+      }
+    }
+  ],
+  "embedded_python_steps_compiled": 8,
+  "required_name_counts": {
+    "required_driving_checks": 12,
+    "required_survival_checks": 16,
+    "required_encounter_checks": 42,
+    "required_arsenal_checks": 15
+  },
+  "workflow_sha256": "ec23110cebf8a4d574928604196301cd8c5eeb41d5470e4e4ef3871c4dcd615a",
+  "scope": "Local YAML/Python compilation, adversarial synthetic inputs to the real aggregate Windows CI gate, and mocked exact-commit release upload/preflight. No Windows EXE execution, build, actual GitHub operation or user save access."
+}

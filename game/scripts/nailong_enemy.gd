@@ -2,15 +2,19 @@ extends CharacterBody3D
 ## Enemy intent lives here; the director owns target damage, rewards and wave state.
 signal defeated(enemy, reward: int)
 signal attack_requested(enemy, damage: float, attack_range: float)
+signal damaged(enemy, actual: float, hit_position: Vector3, remaining: float)
 
 const Model = preload("res://scripts/nailong_model.gd")
 const FontSet = preload("res://scripts/ui_fonts.gd")
+const Flight = preload("res://scripts/nailong_flight.gd")
 const TYPES := {
 	"roamer":{"label":"游荡奶龙","hp":80.0,"speed":2.8,"damage":8.0,"range":2.0,"cooldown":1.5,"windup":.65,"reward":120,"scale":1.0},
 	"runner":{"label":"疾跑奶龙","hp":60.0,"speed":6.2,"damage":7.0,"range":2.0,"cooldown":1.3,"windup":.65,"reward":160,"scale":.85},
 	"brute":{"label":"重装奶龙","hp":360.0,"speed":2.2,"damage":22.0,"range":3.0,"cooldown":2.2,"windup":1.3,"reward":480,"scale":1.45},
 	"spitter":{"label":"喷吐奶龙","hp":110.0,"speed":2.7,"damage":12.0,"range":22.0,"cooldown":2.5,"windup":1.0,"reward":240,"scale":1.0},
-	"alpha":{"label":"首领奶龙","hp":700.0,"speed":3.5,"damage":28.0,"range":4.0,"cooldown":2.5,"windup":1.5,"reward":1200,"scale":1.9}
+	"alpha":{"label":"首领奶龙","hp":700.0,"speed":3.5,"damage":28.0,"range":4.0,"cooldown":2.5,"windup":1.5,"reward":1200,"scale":1.9},
+	"winglet":{"label":"轻翼奶龙","hp":95.0,"speed":12.0,"damage":10.0,"range":2.8,"cooldown":2.3,"windup":1.0,"reward":220,"scale":.95,"air":true,"attack_mode":"dive","cruise_height":7.0,"acceleration":18.0},
+	"stormwing":{"label":"雷翼奶龙","hp":260.0,"speed":8.5,"damage":15.0,"range":32.0,"cooldown":3.4,"windup":1.6,"reward":520,"scale":1.35,"air":true,"attack_mode":"ranged","cruise_height":10.0,"acceleration":13.0}
 }
 var enemy_type: String = "roamer"
 var level: int = 1
@@ -45,17 +49,19 @@ var _detour_direction := Vector3.ZERO
 var _stuck_seconds := 0.0
 var _blocked_seconds := 0.0
 var _pursuit_seconds := 0.0
+var _feedback_managed := false
 
 func configure(type: String, level: int = 1) -> void:
 	# A configured enemy has one identity and one health/reward lifecycle.
 	if _configured: return
 	enemy_type = type if TYPES.has(type) else "roamer"
-	self.level = clampi(level,1,10)
+	self.level = clampi(level,1,30)
 	spec = TYPES[enemy_type].duplicate()
-	var progression := float(self.level-1)
-	spec.hp = float(spec.hp)*(1.0+.18*progression)
-	spec.damage = float(spec.damage)*(1.0+.06*progression)
-	spec.reward = roundi(float(spec.reward)*(1.0+.4*progression))
+	var progression := float(mini(self.level-1,9))
+	var advanced := float(maxi(self.level-10,0))
+	spec.hp = float(spec.hp)*(1.0+.18*progression+.24*advanced)
+	spec.damage = float(spec.damage)*(1.0+.06*progression+.015*advanced)
+	spec.reward = roundi(float(spec.reward)*(1.0+.4*progression+.5*advanced))
 	health = float(spec.hp)
 	max_health = health
 	_body_scale = float(spec.scale)
@@ -64,9 +70,14 @@ func configure(type: String, level: int = 1) -> void:
 	collision_mask = 1|4
 	floor_snap_length = .65
 	floor_max_angle = deg_to_rad(48)
+	if is_flying():
+		motion_mode=CharacterBody3D.MOTION_MODE_FLOATING
+		floor_snap_length=0.0
 	set_meta("enemy",true)
 	set_meta("enemy_type",enemy_type)
 	set_meta("enemy_level",self.level)
+	set_meta("enemy_body_scale",_body_scale)
+	set_meta("enemy_feedback_height",3.0*_body_scale+.24)
 	_collision = CollisionShape3D.new()
 	var capsule := CapsuleShape3D.new()
 	capsule.radius = .59*_body_scale
@@ -102,9 +113,27 @@ func configure(type: String, level: int = 1) -> void:
 		part.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		if is_health: part.position.z = -.022; _bar_fill = part
 		_bar.add_child(part)
+	set_feedback_managed(_feedback_managed)
+
+func is_flying() -> bool:
+	return bool(spec.get("air",false))
+
+func feedback_anchor() -> Vector3:
+	return global_position+Vector3.UP*float(get_meta("enemy_feedback_height",3.24))
+
+func set_feedback_managed(value: bool) -> void:
+	_feedback_managed=value
+	# The HUD also releases ownership during scene teardown, after the enemy or
+	# its target may have left the tree. Never query global transforms then.
+	var show_legacy := not value and not dead and is_inside_tree()
+	if show_legacy and is_instance_valid(target):
+		show_legacy = target.is_inside_tree() and distance_to_target_surface() < 45.0
+	if is_instance_valid(_label): _label.visible = show_legacy
+	if is_instance_valid(_bar): _bar.visible = show_legacy
 
 func _label_text() -> String:
 	var action := " · 重击蓄力" if enemy_type=="alpha" and state=="windup" else ""
+	if is_flying() and state=="windup":action=" · 雷翼蓄力" if enemy_type=="stormwing" else " · 俯冲预警"
 	return "Lv.%d %s%s\n击败 +%d 金币" % [level,str(spec.label),action,int(spec.reward)]
 
 func _ready() -> void:
@@ -133,10 +162,12 @@ func set_target(value: Node3D) -> void:
 func take_damage(amount: float, hit_position: Vector3 = Vector3.ZERO) -> float:
 	if dead or not is_finite(amount) or amount<=0.0: return 0.0
 	var actual := minf(health,amount)
+	if actual<=0.0:return 0.0
 	health -= actual
 	_hurt_left = .18
 	set_meta("last_hit_position",hit_position)
-	if health<=0.0:
+	var killed := health<=0.0
+	if killed:
 		dead = true
 		state = "dead"
 		_windup_left = 0.0
@@ -147,8 +178,9 @@ func take_damage(amount: float, hit_position: Vector3 = Vector3.ZERO) -> float:
 		_warning.visible = false
 		_label.visible = false
 		_bar.visible = false
-		# Set dead before signaling: synchronous listeners cannot award twice.
-		defeated.emit(self,int(spec.reward))
+	# Death state is settled before either signal, including reentrant listeners.
+	damaged.emit(self,actual,hit_position,health)
+	if killed:defeated.emit(self,int(spec.reward))
 	return actual
 
 func _collect_target_shapes(node: Node) -> void:
@@ -250,7 +282,7 @@ func _has_walkable_floor(direction: Vector3, look_ahead: float) -> bool:
 	return not hit.is_empty() and hit.normal.y>=cos(floor_max_angle)
 
 func _attack_allowed(distance: float) -> bool:
-	return distance<=float(spec.range) and _line_clear and is_on_floor()
+	return distance<=float(spec.range) and _line_clear and (is_flying() or is_on_floor())
 
 func _physics_process(delta: float) -> void:
 	if not _configured: return
@@ -267,12 +299,12 @@ func _physics_process(delta: float) -> void:
 	var distance := distance_to_target_surface() if has_target else INF
 	var flat := Vector3(offset.x,0,offset.z)
 	var wanted := flat.normalized() if flat.length_squared()>.01 else Vector3.ZERO
-	if has_target and distance<260.0:
+	if has_target and distance<(650.0 if is_flying() else 260.0):
 		_pursuit_seconds += delta
 		if _sensing_left<=0.0:
 			_sensing_left = .19
 			_line_clear = has_line_of_sight()
-			_steering = _choose_direction(wanted)
+			_steering = Flight.steer(self,(Flight.destination(self)-global_position).normalized()) if is_flying() else _choose_direction(wanted)
 		if wanted.length_squared()>.01:
 			_model_holder.rotation.y = lerp_angle(_model_holder.rotation.y,atan2(-wanted.x,-wanted.z),minf(1.0,delta*6.0))
 		if _windup_left>0.0:
@@ -301,13 +333,16 @@ func _physics_process(delta: float) -> void:
 	# Once a strike is possible, keep that position through its cooldown. The
 	# target's own collider can otherwise create a detour that walks past it.
 	if _attack_allowed(distance): movement=Vector3.ZERO
-	velocity.x = move_toward(velocity.x,movement.x*float(spec.speed),delta*15)
-	velocity.z = move_toward(velocity.z,movement.z*float(spec.speed),delta*15)
-	velocity.y = -.5 if is_on_floor() else maxf(-45.0,velocity.y-22.0*delta)
 	var before_move := global_position
-	move_and_slide()
+	if is_flying():
+		Flight.move(self,movement,delta)
+	else:
+		velocity.x = move_toward(velocity.x,movement.x*float(spec.speed),delta*15)
+		velocity.z = move_toward(velocity.z,movement.z*float(spec.speed),delta*15)
+		velocity.y = -.5 if is_on_floor() else maxf(-45.0,velocity.y-22.0*delta)
+		move_and_slide()
 	# A tiny stair is climbed only after physical clearance and floor probes succeed.
-	if state=="chase" and is_on_floor() and get_slide_collision_count()>0 and movement.length_squared()>.01:
+	if not is_flying() and state=="chase" and is_on_floor() and get_slide_collision_count()>0 and movement.length_squared()>.01:
 		var raised := global_transform
 		raised.origin.y += .30
 		if test_move(global_transform,movement*.18) and not test_move(global_transform,Vector3.UP*.30) and not test_move(raised,movement*.28):
@@ -316,22 +351,23 @@ func _physics_process(delta: float) -> void:
 			if test_move(landing,Vector3.DOWN*.36):
 				global_position.y += .30
 				reset_physics_interpolation()
-	var displacement := Vector2(global_position.x-before_move.x,global_position.z-before_move.z).length()
+	# A flyer climbing toward a target is making progress even with unchanged XZ.
+	var displacement := global_position.distance_to(before_move) if is_flying() else Vector2(global_position.x-before_move.x,global_position.z-before_move.z).length()
 	var should_advance := state=="chase" and (not _line_clear or distance>float(spec.range))
 	if should_advance and displacement<float(spec.speed)*delta*.12:
 		_stuck_seconds += delta
 	else:
 		_stuck_seconds = maxf(0.0,_stuck_seconds-delta*2.0)
 	var planar := Vector2(velocity.x,velocity.z).length()
-	_stride += delta*planar*4.0
+	_stride += delta*(8.0+velocity.length()*.25) if is_flying() else delta*planar*4.0
 	var windup := 1.0-_windup_left/float(spec.windup) if _windup_left>0 else 0.0
 	Model.animate(_parts,_stride,planar,windup,_hurt_left/.18,0)
 	_warning.visible = _windup_left>0.0
 	var warning_range: float = float(spec.range) if enemy_type=="alpha" else minf(float(spec.range),3.6)
 	var radius := warning_range*(.82+.18*windup)
 	_warning.scale = Vector3(radius,1,radius)
-	_label.visible = distance<45.0
-	_bar.visible = distance<45.0
+	_label.visible = not _feedback_managed and distance<45.0
+	_bar.visible = not _feedback_managed and distance<45.0
 	_label.modulate = Color("ff8062") if state=="windup" else Color("fff2c6")
 	var text := _label_text()
 	if _label.text!=text: _label.text=text

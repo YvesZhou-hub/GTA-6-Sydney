@@ -93,7 +93,7 @@ func run() -> void:
 	check("higher level kill pays increased gold exactly once",game.life.money==money_before+312 and game.life.lifetime_earnings==earnings_before+312 and director.kills==2 and director._reward_text.contains("Lv.5") and director._reward_text.contains("312"))
 	for cleared_count in [0,1,2,4,18,100]:
 		director.cleared=cleared_count
-		var expected_level:=clampi(1+floori(cleared_count/2.0),1,10)
+		var expected_level:=clampi(1+floori(cleared_count/2.0),1,30)
 		check("clearance"+str(cleared_count)+" selects encounter level",director.encounter_level()==expected_level)
 	director.cleared=4; director.wave_spawned=0; director.wave_kills=0; director.grace=0.0; director.rest=0.0; director._spawn_clock=0.0
 	director.auto_spawn=true; director._rng.seed=62964; director._physics_process(.02); director.auto_spawn=false
@@ -236,7 +236,7 @@ func run() -> void:
 	summoned.take_combat_damage(120.0); director.sync_fleet()
 	var saved_enemy=director.spawn_enemy("brute",game.player.position+Vector3(40,0,0),-1.0,5); saved_enemy.take_damage(50.0)
 	var saved: Dictionary=JSON.parse_string(JSON.stringify(director.get_state()))
-	check("survival schema records player fleet resources enemy level and combat timer",saved.revision==2 and saved.health==85.0 and saved.medkits==4 and saved.heal_cooldown==6.5 and saved.combat_cooldown==4.2 and saved.fleet_health.tank==80.0 and saved.fleet_upgrades.tank==3 and saved.enemies.size()==1 and is_equal_approx(saved.enemies[0].health,569.2) and saved.enemies[0].level==5)
+	check("survival schema records player fleet resources enemy level and combat timer",saved.revision==3 and saved.health==85.0 and saved.medkits==4 and saved.heal_cooldown==6.5 and saved.combat_cooldown==4.2 and saved.fleet_health.tank==80.0 and saved.fleet_upgrades.tank==3 and saved.enemies.size()==1 and is_equal_approx(saved.enemies[0].health,569.2) and saved.enemies[0].level==5)
 	director.reset_mode(true)
 	director.apply_state(saved)
 	check("JSON roundtrip restores actual player inventory fleet and enemy",game.player.health==85.0 and director.medkits==4 and director.heal_cooldown==6.5 and director.kills==7 and director.cleared==1 and director.wave_kills==2 and summoned.health==80.0 and summoned.weapon_upgrade==3 and director.enemies.size()==1 and is_equal_approx(director.enemies[0].health,569.2) and director.enemies[0].level==5 and director.enemies[0].spec.reward==1248)
@@ -247,7 +247,7 @@ func run() -> void:
 	for repeat_index in 3:
 		game.life.money=50000; game.player.reset_health()
 		game.life.apply_state(packed_save.life); director.apply_state(packed_save.survival)
-	check("v6 repeated section restoration cannot mint money or full health",packed_save.version==6 and game.life.money==8765 and game.life.lifetime_earnings==4321 and game.player.health==85.0 and director.fleet_health.tank==80.0 and director._hurt_clock==4.2)
+	check("v7 repeated section restoration cannot mint money or full health",packed_save.version==7 and game.life.money==8765 and game.life.lifetime_earnings==4321 and game.player.health==85.0 and director.fleet_health.tank==80.0 and director._hurt_clock==4.2)
 	director.reset_mode(true); director.apply_state({})
 	check("legacy save without survival section keeps damaged physical fleet",game.player.health==120.0 and director.fleet_health.tank==80.0 and summoned.health==80.0 and director.fleet_upgrades.tank==3)
 	# Remove the physical fleet to isolate dictionary replacement semantics when

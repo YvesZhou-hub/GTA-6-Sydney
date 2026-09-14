@@ -1,0 +1,323 @@
+{
+  "checks": [
+    {
+      "name": "active encounter feedback is visible and input-transparent",
+      "passed": true
+    },
+    {
+      "name": "feedback draws below existing HUD",
+      "passed": true
+    },
+    {
+      "name": "actual enemy registration creates screen-space health and suppresses 3D labels",
+      "passed": true
+    },
+    {
+      "name": "duplicate registration cannot duplicate damage callbacks",
+      "passed": true
+    },
+    {
+      "name": "real fractional cannon damage shows exact HP loss",
+      "passed": true
+    },
+    {
+      "name": "health bar shows remaining and maximum numeric HP",
+      "passed": true
+    },
+    {
+      "name": "damage trail preserves previous HP briefly",
+      "passed": true
+    },
+    {
+      "name": "cannon numbers are larger than automatic rounds",
+      "passed": true
+    },
+    {
+      "name": "continuous fire merges short burst as unrounded actual sum",
+      "passed": true
+    },
+    {
+      "name": "shell and automatic damage remain separate",
+      "passed": true
+    },
+    {
+      "name": "later burst begins a new number",
+      "passed": true
+    },
+    {
+      "name": "individual shells never merge",
+      "passed": true
+    },
+    {
+      "name": "overkill only displays HP actually removed",
+      "passed": true
+    },
+    {
+      "name": "fatal damage keeps zero-HP bar briefly",
+      "passed": true
+    },
+    {
+      "name": "defeat reward is separate from damage",
+      "passed": true
+    },
+    {
+      "name": "dead hits and repeated defeat cannot duplicate damage or reward",
+      "passed": true
+    },
+    {
+      "name": "zero-HP bar expires without hiding surviving damage numbers",
+      "passed": true
+    },
+    {
+      "name": "floating damage and reward have bounded lifetimes",
+      "passed": true
+    },
+    {
+      "name": "number formatting keeps whole values clean and necessary decimal",
+      "passed": true
+    },
+    {
+      "name": "positive tiny damage is never shown as zero",
+      "passed": true
+    },
+    {
+      "name": "shared blast centre keeps damage anchored to separate victims",
+      "passed": true
+    },
+    {
+      "detail": {
+        "bars": [
+          {
+            "health": 55.0,
+            "id": 31960597996,
+            "label": "Lv.1 游荡奶龙",
+            "locked": false,
+            "maximum": 80.0,
+            "rect": [
+              498.189392089844,
+              360.213348388672,
+              184.0,
+              54.0
+            ],
+            "trail": 80.0
+          },
+          {
+            "health": 71.0,
+            "id": 32514246194,
+            "label": "Lv.1 游荡奶龙",
+            "locked": false,
+            "maximum": 80.0,
+            "rect": [
+              757.810607910156,
+              360.213348388672,
+              184.0,
+              54.0
+            ],
+            "trail": 80.0
+          }
+        ],
+        "size": "(1440.0, 900.0)",
+        "views": []
+      },
+      "name": "separate blast victims have separated projected damage",
+      "passed": true
+    },
+    {
+      "name": "dense fire has fixed 48-number memory cap without changing actual totals",
+      "passed": true
+    },
+    {
+      "name": "invalid and zero damage never generate floating numbers",
+      "passed": true
+    },
+    {
+      "name": "paused hides feedback and freezes its presentation time",
+      "passed": true
+    },
+    {
+      "name": "quitting hides feedback and freezes its presentation time",
+      "passed": true
+    },
+    {
+      "name": "visible menu hides feedback",
+      "passed": true
+    },
+    {
+      "name": "visible map hides feedback",
+      "passed": true
+    },
+    {
+      "name": "title or loading screen never shows enemies",
+      "passed": true
+    },
+    {
+      "name": "sightseeing without encounters hides combat feedback",
+      "passed": true
+    },
+    {
+      "name": "SceneTree pause hides feedback even if host flag is false",
+      "passed": true
+    },
+    {
+      "name": "closing overlays restores valid gameplay feedback",
+      "passed": true
+    },
+    {
+      "name": "visible enemy in front of camera has a projected bar",
+      "passed": true
+    },
+    {
+      "name": "rendered enemy anchor follows movement between throttled LOS scans",
+      "passed": true
+    },
+    {
+      "name": "real world wall hides both HP and new damage text",
+      "passed": true
+    },
+    {
+      "name": "removing wall restores real line of sight",
+      "passed": true
+    },
+    {
+      "name": "vehicle collision layer also occludes enemy feedback",
+      "passed": true
+    },
+    {
+      "name": "enemies behind the camera never project into view",
+      "passed": true
+    },
+    {
+      "name": "off-screen enemies are not clamped onto screen edges",
+      "passed": true
+    },
+    {
+      "name": "unengaged distant enemies do not clutter the view",
+      "passed": true
+    },
+    {
+      "name": "actual automatic lock promotes distant visible target",
+      "passed": true
+    },
+    {
+      "name": "module lock is also displayed from actual status",
+      "passed": true
+    },
+    {
+      "name": "optional explicit lock can be supplied by the host",
+      "passed": true
+    },
+    {
+      "name": "crowded layout keeps lock first and caps bars",
+      "passed": true
+    },
+    {
+      "name": "crowded enemy bars never overlap each other",
+      "passed": true
+    },
+    {
+      "name": "crowding hides overflow instead of drawing unreadable labels",
+      "passed": true
+    },
+    {
+      "name": "stationary layout is stable between frames",
+      "passed": true
+    },
+    {
+      "name": "custom HUD exclusions displace or hide bars without overlaps",
+      "passed": true
+    },
+    {
+      "name": "screen-space bars keep their pixel size with distance",
+      "passed": true
+    },
+    {
+      "name": "unregister disconnects and restores original 3D feedback",
+      "passed": true
+    },
+    {
+      "name": "freed enemies leave no retained references",
+      "passed": true
+    },
+    {
+      "name": "world reset clears damage counters and restores enemy labels",
+      "passed": true
+    },
+    {
+      "name": "feedback teardown hides detached enemy without querying stale transforms",
+      "passed": true
+    }
+  ],
+  "count": 53,
+  "display": "headless",
+  "native_rendering": false,
+  "passed": true,
+  "scope": "isolated production feedback, actual enemy damage, Jolt walls and Camera3D projection; no full city or save access",
+  "screenshots": [],
+  "snapshots": {
+    "crowded": {
+      "actual_damage": 0.0,
+      "bar_capacity": 24,
+      "bars": [
+        {
+          "health": 80.0,
+          "id": 51539610091,
+          "label": "Lv.1 游荡奶龙",
+          "locked": true,
+          "maximum": 80.0,
+          "rect": [
+            653.405151367188,
+            296.976226806641,
+            184.0,
+            54.0
+          ],
+          "trail": 80.0
+        },
+        {
+          "health": 80.0,
+          "id": 38252054227,
+          "label": "Lv.1 游荡奶龙",
+          "locked": false,
+          "maximum": 80.0,
+          "rect": [
+            432.0,
+            348.213348388672,
+            184.0,
+            54.0
+          ],
+          "trail": 80.0
+        },
+        {
+          "health": 80.0,
+          "id": 39912998710,
+          "label": "Lv.1 游荡奶龙",
+          "locked": false,
+          "maximum": 80.0,
+          "rect": [
+            843.471618652344,
+            348.213348388672,
+            184.0,
+            54.0
+          ],
+          "trail": 80.0
+        }
+      ],
+      "clock": 0.048,
+      "damage_events": 0,
+      "floating": [],
+      "number_capacity": 48,
+      "registered": 30,
+      "reward_events": 0,
+      "visible": true,
+      "visible_numbers": 0
+    }
+  },
+  "sources": {
+    "res://../source/combat_feedback_test.gd": "b6e3070ecf5341b1d6e7ca152378e34f027ca2dca3330658480109662f1b2d1d",
+    "res://scripts/combat_feedback.gd": "c641e5aa6736207aeffd5113e998a84ccdce7d63eb6ace57305a022ed4451502",
+    "res://scripts/nailong_enemy.gd": "dc7b4924b58c4709fdff5f910b03b682b47101fad9509575f03d4baf252a14e7",
+    "res://scripts/nailong_flight.gd": "69d8f275ddec59e8fcf4c6b96f0232432ec818aa619f2c73ddfa329871ce322b",
+    "res://scripts/nailong_model.gd": "274bcc23b259e8bb7d8a67f404ee9727294feee1a1518a795164395baf26735e",
+    "res://scripts/survival_hud.gd": "cb856d2c2af322398b44e08b4eb3933a22058dd54a4cced6d8c97c52ad6a2e36",
+    "res://scripts/ui_fonts.gd": "879559e1039eae6a91dfd163994bdba1ccdb68be87d347e1566987887dc53bb8"
+  }
+}

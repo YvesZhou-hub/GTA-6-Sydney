@@ -2,6 +2,8 @@ extends Node3D
 ## Street encounters use the existing city's physical surfaces. No replacement map.
 const Enemy = preload("res://scripts/nailong_enemy.gd")
 const Spawn = preload("res://scripts/encounter_spawn.gd")
+const Armory = preload("res://scripts/vehicle_armory.gd")
+const Progression = preload("res://scripts/combat_progression.gd")
 const ENEMY_LIMIT := 24
 const MEDKIT_LIMIT := 5
 const REPAIR_RATE := 30
@@ -20,6 +22,11 @@ var grace := 12.0
 var rest := 0.0
 var fleet_health: Dictionary = {}
 var fleet_upgrades: Dictionary = {}
+var armory := Armory.new()
+var _adaptive_level := 1
+var _difficulty_clock := 0.0
+var _air_context := false
+var _last_blast: Dictionary = {}
 var _spawn_clock := 1.0
 var _spawn_sequence := 0
 var _spawn_failures := 0
@@ -66,6 +73,9 @@ func reset_mode(with_encounters: bool) -> void:
 	_hurt_clock = 0.0; _hurt_flash = 0.0; _rescue_pending = false
 	_reward_clock = 0.0; _shot_cooldown = 0.0; _last_ram_vehicle = null
 	fleet_health.clear(); fleet_upgrades.clear()
+	armory.clear()
+	_adaptive_level = 1; _difficulty_clock = 0.0; _air_context = false
+	_last_blast.clear()
 	game.player.reset_health()
 
 func clear_enemies() -> void:
@@ -74,6 +84,7 @@ func clear_enemies() -> void:
 			enemy.set_physics_process(false)
 			enemy.queue_free()
 	enemies.clear()
+	if is_instance_valid(game) and game.has_method("reset_combat_feedback"): game.reset_combat_feedback()
 	for hazard in _hazards:
 		if is_instance_valid(hazard.view): hazard.view.queue_free()
 		if is_instance_valid(hazard.orb): hazard.orb.queue_free()
@@ -93,17 +104,44 @@ func desired_enemies() -> int:
 	var target := subject()
 	var health_ratio: float = target.health / (100.0 if vehicle else target.max_health)
 	if health_ratio <= 0.30: return 2
+	if _air_context: return Progression.allowed_air_count(encounter_level(), false, true)
 	return mini(12 if vehicle else 10, (6 if vehicle else 4) + mini(cleared, 5) + (1 if night_factor() > 0.5 else 0))
 
 func nearby_enemies() -> int:
 	var count := 0
 	for enemy in enemies:
-		if is_instance_valid(enemy) and not enemy.is_queued_for_deletion() and enemy.distance_to_target_surface(subject()) <= 48.0:
-			count += 1
+		if not is_instance_valid(enemy) or enemy.is_queued_for_deletion(): continue
+		var distance: float = enemy.distance_to_target_surface(subject())
+		if distance <= 48.0 and _counts_toward_local_budget(enemy, distance): count += 1
 	return count
 
+func _counts_toward_local_budget(enemy: Node3D, distance: float) -> bool:
+	# Melee actors below a hovering craft cannot fill its aerial encounter budget.
+	# Keep nearby ranged attackers relevant when they can still reach the hull.
+	return not _air_context or enemy.is_flying() or distance <= float(enemy.spec.range) + .15
+
 func encounter_level() -> int:
-	return clampi(1 + int(cleared / 2.0), 1, 10)
+	return clampi(maxi(1 + int(cleared / 2.0), _adaptive_level), 1, Progression.MAX_LEVEL)
+
+func weapon_loadout(kind: String) -> Array[Dictionary]:
+	return armory.loadout(kind)
+
+func target_encounter_level() -> int:
+	var vehicle = game.current_vehicle
+	return Progression.target_level(cleared, vehicle.weapon_upgrade if is_instance_valid(vehicle) else 0, weapon_loadout(vehicle.kind) if is_instance_valid(vehicle) else [], is_instance_valid(vehicle))
+
+func _tick_difficulty(delta: float) -> void:
+	var goal := target_encounter_level()
+	if _adaptive_level > goal: _adaptive_level = goal; _difficulty_clock = 0.0
+	var target := subject()
+	var healthy: bool = target.health / (100.0 if target is RigidBody3D else target.max_health) > .30
+	if goal <= _adaptive_level or not healthy or grace > 0.0:
+		_difficulty_clock = 0.0
+		return
+	_difficulty_clock += delta
+	if _difficulty_clock >= Progression.RAMP_SECONDS:
+		_adaptive_level += 1
+		_difficulty_clock = 0.0
 
 func night_factor() -> float:
 	return float(game.city_clock.solar_state().get("night_factor", 0.0)) if is_instance_valid(game.city_clock) else 0.0
@@ -111,6 +149,7 @@ func night_factor() -> float:
 func _physics_process(delta: float) -> void:
 	if not _running(): return
 	grace = maxf(0.0, grace - delta)
+	_tick_difficulty(delta)
 	rest = 0.0 # Clearance rewards never suspend the next encounter.
 	_incoming_budget = minf(18.0, _incoming_budget + delta * 4.0)
 	field_repair_cooldown = maxf(0.0, field_repair_cooldown - delta)
@@ -128,6 +167,7 @@ func _physics_process(delta: float) -> void:
 		_fleet_clock = 0.15
 		sync_fleet()
 		_retarget()
+		_air_context = Spawn.target_ground(game).is_empty()
 	if not enabled: return
 	if not Input.is_action_pressed("fire"): trigger_released = true
 	if trigger_released and Input.is_action_pressed("fire") and not is_instance_valid(game.current_vehicle):
@@ -156,6 +196,14 @@ func _physics_process(delta: float) -> void:
 			else: _spawn_clock = 0.8
 
 func _next_type() -> String:
+	var airborne_count := 0
+	for enemy in enemies:
+		if is_instance_valid(enemy) and enemy.is_flying(): airborne_count += 1
+	var health_ratio: float = subject().health / (100.0 if subject() is RigidBody3D else subject().max_health)
+	var air_limit := Progression.allowed_air_count(encounter_level(), health_ratio <= .30, _air_context)
+	if _air_context or (airborne_count < air_limit and _spawn_sequence % 6 == 4):
+		var air_variant := _spawn_sequence % 2 if _air_context else int(_spawn_sequence / 6) % 2
+		return "stormwing" if encounter_level() >= 4 and air_variant == 1 else "winglet"
 	if cleared >= 2 and _spawn_sequence % 10 == 9:
 		if not enemies.any(func(enemy): return is_instance_valid(enemy) and enemy.enemy_type == "alpha"):
 			return "alpha"
@@ -185,6 +233,7 @@ func spawn_enemy(kind: String, at: Vector3, hp: float = -1.0, level: int = 1):
 	enemy.attack_requested.connect(_enemy_attack)
 	if hp >= 0.0: enemy.health = clampf(hp, 1.0, enemy.max_health)
 	enemies.append(enemy)
+	if game.has_method("register_combat_enemy"): game.register_combat_enemy(enemy)
 	return enemy
 
 func _retarget() -> void:
@@ -206,13 +255,13 @@ func _recycle_unreachable() -> void:
 		var distance: float = enemy.distance_to_target_surface(subject())
 		var pursuit: Dictionary = enemy.pursuit_status()
 		var hidden := _enemy_offscreen(enemy)
-		var abandoned := distance > 95.0 or absf(enemy.global_position.y - subject().global_position.y) > 20.0
+		var abandoned: bool = distance > 95.0 or (not enemy.is_flying() and absf(enemy.global_position.y - subject().global_position.y) > 20.0)
 		var unreachable: bool = age > 15.0 and (pursuit.stuck_seconds > 10.0 or pursuit.blocked_seconds > 18.0)
 		if (abandoned or unreachable) and distance > 14.0 and hidden:
 			enemies.erase(enemy); enemy.queue_free() # No kill or coin credit.
-	# A full older district can occupy every resident slot while still walking
-	# toward the player from 49-95 m away. Reserve only the missing local capacity;
-	# preserve visible pursuers and all enemies already in the current district.
+	# Old districts and unreachable melee actors below a low hover can occupy
+	# every slot. Release only the missing local capacity, never visible actors
+	# or flying pursuers already able to engage the current craft.
 	var needed := maxi(0, desired_enemies() - nearby_enemies())
 	var release_count := maxi(0, needed - (ENEMY_LIMIT - enemies.size()))
 	if release_count > 0:
@@ -220,7 +269,8 @@ func _recycle_unreachable() -> void:
 		for enemy in enemies:
 			if not is_instance_valid(enemy) or enemy.is_queued_for_deletion(): continue
 			var distance: float = enemy.distance_to_target_surface(subject())
-			if distance > 48.0 and _enemy_offscreen(enemy): distant.append({"enemy": enemy, "distance": distance})
+			var unable_to_engage := not _counts_toward_local_budget(enemy, distance)
+			if (distance > 48.0 or unable_to_engage) and _enemy_offscreen(enemy): distant.append({"enemy": enemy, "distance": distance})
 		distant.sort_custom(func(a: Dictionary, b: Dictionary): return float(a.distance) > float(b.distance))
 		for candidate in distant.slice(0, release_count):
 			enemies.erase(candidate.enemy)
@@ -266,6 +316,8 @@ func _enemy_attack(enemy, damage: float, attack_range: float) -> void:
 	if not _clear_line(enemy.global_position + Vector3.UP * 1.2, enemy.target_surface_point(target), exclude): return
 	if str(enemy.enemy_type) == "spitter":
 		_add_hazard(enemy.global_position + Vector3.UP * 1.6, enemy.target_surface_point(target), damage, 3.2)
+	elif str(enemy.enemy_type) == "stormwing":
+		_add_hazard(enemy.global_position + Vector3.UP * 1.6, enemy.target_surface_point(target), damage, 3.4, false, true)
 	elif str(enemy.enemy_type) == "alpha":
 		_add_hazard(enemy.global_position + Vector3.UP, enemy.global_position, damage, 4.0, true)
 	else: _hurt_target(damage, enemy.global_position)
@@ -289,7 +341,7 @@ func _hurt_target(damage: float, origin: Vector3, limit_crowd: bool = true) -> f
 		if target.health <= 0.0: game.notify("载具已失去动力 · E 离舱反击，或 Home 呼叫救援", false)
 	return actual
 
-func _add_hazard(from: Vector3, at: Vector3, damage: float, radius: float, shockwave: bool = false) -> void:
+func _add_hazard(from: Vector3, at: Vector3, damage: float, radius: float, shockwave: bool = false, electric: bool = false) -> void:
 	if _hazards.size() >= 12: return
 	var view := MeshInstance3D.new()
 	var mesh := TorusMesh.new()
@@ -297,14 +349,15 @@ func _add_hazard(from: Vector3, at: Vector3, damage: float, radius: float, shock
 	mesh.rings = 24; mesh.ring_segments = 8
 	view.mesh = mesh
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color("ff704d"); mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color("bb91ff") if electric else Color("ff704d"); mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	view.material_override = mat
 	add_child(view); view.global_position = at + Vector3.UP * 0.1
 	var orb := MeshInstance3D.new()
 	var orb_mesh := SphereMesh.new(); orb_mesh.radius = 0.28; orb_mesh.height = 0.56
 	orb.mesh = orb_mesh; orb.material_override = mat
 	add_child(orb); orb.global_position = from; orb.visible = not shockwave
-	_hazards.append({"view": view, "orb": orb, "at": at, "origin": from, "damage": damage, "radius": radius, "time": 0.85})
+	var duration := 1.15 if electric else .85
+	_hazards.append({"view": view, "orb": orb, "at": at, "origin": from, "damage": damage, "radius": radius, "time": duration, "duration":duration})
 
 func _distance_to_body(point: Vector3, target: Node3D) -> float:
 	if target is RigidBody3D:
@@ -320,7 +373,7 @@ func _tick_hazards(delta: float) -> void:
 		hazard.time -= delta
 		if hazard.time > 0.0:
 			hazard.view.scale = Vector3.ONE * (1.0 + sin(hazard.time * 20.0) * 0.05)
-			var t: float = 1.0 - hazard.time / 0.85
+			var t: float = 1.0 - hazard.time / float(hazard.get("duration", .85))
 			hazard.orb.global_position = hazard.origin.lerp(hazard.at, t) + Vector3.UP * sin(t * PI) * 2.0
 			continue
 		var target := subject()
@@ -332,6 +385,7 @@ func _tick_hazards(delta: float) -> void:
 
 func damage_blast(point: Vector3, radius: float, damage: float, owner: RigidBody3D) -> void:
 	if not enabled: return
+	_last_blast = {"hits":[], "total":0.0, "radius":radius, "center_damage":damage}
 	for enemy in enemies.duplicate():
 		if not is_instance_valid(enemy): continue
 		var distance := point.distance_to(enemy.global_position + Vector3.UP)
@@ -339,7 +393,11 @@ func damage_blast(point: Vector3, radius: float, damage: float, owner: RigidBody
 		var exclude: Array[RID] = [enemy.get_rid(), game.player.get_rid()]
 		if is_instance_valid(owner): exclude.append(owner.get_rid())
 		if _clear_line(point + Vector3.UP * 0.25, enemy.global_position + Vector3.UP, exclude):
-			enemy.take_damage(damage * lerpf(1.0, 0.3, distance / maxf(1.0, radius)), point)
+			enemy.set_meta("damage_style", "cannon" if distance < radius * .3 else "splash")
+			var actual: float = enemy.take_damage(damage * lerpf(1.0, 0.3, distance / maxf(1.0, radius)), point)
+			if actual > 0.0:
+				_last_blast.hits.append({"id":enemy.get_instance_id(), "distance":distance, "actual":actual})
+				_last_blast.total += actual
 	# Friendly splash requires care near your own vehicle, with a modest ceiling.
 	if is_instance_valid(owner) and point.distance_to(owner.global_position) < radius * 0.45:
 		owner.take_combat_damage(minf(35.0, damage * 0.12))
@@ -359,6 +417,7 @@ func _ram_enemies() -> void:
 		var previous: Vector3 = relative + vehicle.global_basis.inverse() * (vehicle.global_position - from)
 		# Sweep the hull over its actual recent movement, including boosted speed.
 		if not box.has_point(relative) and not box.has_point(previous) and box.intersects_segment(previous, relative) == null: continue
+		enemy.set_meta("damage_style", "ram")
 		enemy.take_damage(minf(280.0, vehicle.linear_velocity.length() * 8.0), vehicle.global_position)
 		vehicle.take_combat_damage(6.0 if vehicle.kind == "tank" else 12.0)
 
@@ -378,6 +437,7 @@ func fire_blaster() -> bool:
 	var close_hit := get_world_3d().direct_space_state.intersect_ray(query)
 	if not close_hit.is_empty(): hit = close_hit; aim = hit.position
 	if not hit.is_empty() and is_instance_valid(hit.collider) and hit.collider.is_in_group("nailong_enemies"):
+		hit.collider.set_meta("damage_style", "blaster")
 		if hit.collider.take_damage(28.0, aim) > 0.0: _hit_flash = 1.0
 	_draw_beam(muzzle, aim)
 	return true
@@ -533,6 +593,18 @@ func transact(action: String, kind: String = "") -> Dictionary:
 		message.upgrade = "火控 %d 级 · 爆炸半径 %.1f m · 装填 %.2f s · 弹药免费" % [vehicle.weapon_upgrade, stats.radius, stats.cooldown]
 	return {"ok": true, "message": str(message[action]) + " · $%d" % cost}
 
+func transact_module(action: String, id: String) -> Dictionary:
+	if not is_instance_valid(game) or not game.active or _rescue_pending:
+		return {"ok":false, "message":"进入游戏后再选装武器"}
+	var vehicle = game.current_vehicle
+	if not is_instance_valid(vehicle): return {"ok":false, "message":"先进入需要选装武器的载具"}
+	if vehicle.health <= 0.0: return {"ok":false, "message":"载具已损毁 · 先维修，再进行选装"}
+	var result := armory.transact(vehicle.kind, id, action, game.life.money)
+	if result.ok:
+		game.life.money = int(result.balance)
+		game.life.money_changed.emit(game.life.money)
+	return result
+
 func _landed(speed: float) -> void:
 	if enabled and _running() and speed > 18.0: _hurt_target(minf(75.0, (speed - 18.0) * 2.2), game.player.global_position - Vector3.UP, false)
 
@@ -578,7 +650,7 @@ func hud_state() -> Dictionary:
 		var right := heading.dot(game.camera.global_basis.x)
 		var front := heading.dot(-game.camera.global_basis.z)
 		var direction := ("右侧" if right > 0 else "左侧") if absf(right) > absf(front) else ("前方" if front > 0 else "后方")
-		hint = "最近奶龙 · %s %.0f m · 正在追击" % [direction, distance]
+		hint = "%s · %s %.0f m · %s" % ["空中奶龙" if nearest.is_flying() else "最近奶龙", direction, distance, "攻击蓄力！" if nearest.state == "windup" else "正在追击"]
 	var auto: Dictionary = game.weapons.auto_status()
 	var support_label := ""
 	if is_instance_valid(vehicle):
@@ -596,9 +668,10 @@ func get_state() -> Dictionary:
 	var records: Array = []
 	for enemy in enemies:
 		if is_instance_valid(enemy) and enemy.health > 0.0: records.append(enemy.snapshot())
-	return {"revision": 2, "health": game.player.health, "medkits": medkits, "heal_cooldown": heal_cooldown, "combat_cooldown": _hurt_clock, "field_repair_cooldown": field_repair_cooldown,
+	return {"revision": 3, "health": game.player.health, "medkits": medkits, "heal_cooldown": heal_cooldown, "combat_cooldown": _hurt_clock, "field_repair_cooldown": field_repair_cooldown,
 		"kills": kills, "cleared": cleared, "wave_kills": wave_kills, "wave_spawned": wave_spawned, "grace": grace, "rest": rest,
-		"fleet_health": fleet_health.duplicate(), "fleet_upgrades": fleet_upgrades.duplicate(), "enemies": records}
+		"fleet_health": fleet_health.duplicate(), "fleet_upgrades": fleet_upgrades.duplicate(), "enemies": records,
+		"armory":armory.snapshot(), "adaptive_level":_adaptive_level, "difficulty_clock":_difficulty_clock}
 
 func _number(value, fallback: float, low: float, high: float) -> float:
 	return clampf(float(value), low, high) if (value is float or value is int) and is_finite(float(value)) else fallback
@@ -606,6 +679,10 @@ func _number(value, fallback: float, low: float, high: float) -> float:
 func apply_state(data: Dictionary) -> void:
 	clear_enemies()
 	fleet_health.clear(); fleet_upgrades.clear()
+	armory.restore(data.get("armory", {}))
+	_adaptive_level = int(_number(data.get("adaptive_level", 1), 1, 1, Progression.MAX_LEVEL))
+	_difficulty_clock = _number(data.get("difficulty_clock", 0.0), 0.0, 0.0, Progression.RAMP_SECONDS)
+	_air_context = false
 	game.player.health = _number(data.get("health", 120.0), 120.0, 1.0, 120.0)
 	medkits = int(_number(data.get("medkits", 3), 3, 0, MEDKIT_LIMIT))
 	heal_cooldown = _number(data.get("heal_cooldown", 0.0), 0.0, 0.0, 12.0)
@@ -633,5 +710,5 @@ func apply_state(data: Dictionary) -> void:
 			var coords = record.get("position", [])
 			if not coords is Array or coords.size() != 3: continue
 			var at := Vector3(_number(coords[0], 0, -50000, 50000), _number(coords[1], 5, -10, 5000), _number(coords[2], 0, -50000, 50000))
-			if at.distance_to(game.player.global_position) <= 240.0: spawn_enemy(str(record.get("type", "roamer")), at, _number(record.get("health", 80), 80, 1, 10000), int(_number(record.get("level", 1), 1, 1, 10)))
+			if at.distance_to(game.player.global_position) <= 240.0: spawn_enemy(str(record.get("type", "roamer")), at, _number(record.get("health", 80), 80, 1, 10000), int(_number(record.get("level", 1), 1, 1, Progression.MAX_LEVEL)))
 	wave_spawned = wave_kills + enemies.size()

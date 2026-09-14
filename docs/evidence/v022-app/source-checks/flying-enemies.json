@@ -1,0 +1,973 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "fixture uses production enemy and Jolt",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 2.8,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 10.0,
+				"dead": false,
+				"detouring": false,
+				"health": 95.0,
+				"label": "轻翼奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 95.0,
+				"position": [
+					20.0,
+					30.0,
+					0.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 220,
+				"speed": 12.0,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "winglet",
+				"windup_remaining": 0.0
+			},
+			"name": "winglet remains physically suspended with no supporting terrain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "winglet has animated paired wings on the shared Nailong body",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 15.0,
+				"dead": false,
+				"detouring": false,
+				"health": 260.0,
+				"label": "雷翼奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 260.0,
+				"position": [
+					20.0,
+					30.0,
+					0.0
+				],
+				"pursuit_seconds": 0.0,
+				"reward": 520,
+				"speed": 8.5,
+				"state": "idle",
+				"stuck_seconds": 0.0,
+				"type": "stormwing",
+				"windup_remaining": 0.0
+			},
+			"name": "stormwing remains physically suspended with no supporting terrain",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "stormwing has animated paired wings on the shared Nailong body",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 388,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.56774544715881,
+						"frame": 447,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						-0.855127334594727,
+						5.67283153533936,
+						0.592493832111359
+					],
+					"pursuit_seconds": 4.19999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000122189522,
+				"minimum_y": 5.67283153533936
+			},
+			"name": "winglet closes and dives toward physical player side -1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 388,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.56774544715881,
+						"frame": 447,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						-0.855127334594727,
+						5.67283153533936,
+						0.592493832111359
+					],
+					"pursuit_seconds": 4.19999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000122189522,
+				"minimum_y": 5.67283153533936
+			},
+			"name": "winglet keeps full visible one second warning before valid contact side -1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 388,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.56774544715881,
+						"frame": 447,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						-0.855127334594727,
+						5.67283153533936,
+						0.592493832111359
+					],
+					"pursuit_seconds": 4.19999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000122189522,
+				"minimum_y": 5.67283153533936
+			},
+			"name": "winglet reaches ground encounter without tunneling or dropping below surface side -1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 646,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.56774544715881,
+						"frame": 705,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						0.855127334594727,
+						5.67283153533936,
+						0.592493832111359
+					],
+					"pursuit_seconds": 4.19999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000122189522,
+				"minimum_y": 5.67283153533936
+			},
+			"name": "winglet closes and dives toward physical player side 1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 646,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.56774544715881,
+						"frame": 705,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						0.855127334594727,
+						5.67283153533936,
+						0.592493832111359
+					],
+					"pursuit_seconds": 4.19999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000122189522,
+				"minimum_y": 5.67283153533936
+			},
+			"name": "winglet keeps full visible one second warning before valid contact side 1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 646,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.56774544715881,
+						"frame": 705,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						0.855127334594727,
+						5.67283153533936,
+						0.592493832111359
+					],
+					"pursuit_seconds": 4.19999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000122189522,
+				"minimum_y": 5.67283153533936
+			},
+			"name": "winglet reaches ground encounter without tunneling or dropping below surface side 1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 2.8,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 10.0,
+				"dead": false,
+				"detouring": true,
+				"health": 95.0,
+				"label": "轻翼奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 95.0,
+				"position": [
+					0.0,
+					5.69999980926514,
+					-2.0
+				],
+				"pursuit_seconds": 0.700000000000001,
+				"reward": 220,
+				"speed": 12.0,
+				"state": "windup",
+				"stuck_seconds": 0.0,
+				"type": "winglet",
+				"windup_remaining": 1.0
+			},
+			"name": "dive windup is visibly telegraphed before evasion",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 2.8,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 2.21666666666667,
+				"damage": 10.0,
+				"dead": false,
+				"detouring": false,
+				"health": 95.0,
+				"label": "轻翼奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 95.0,
+				"position": [
+					0.0743775889277458,
+					5.69744348526001,
+					-1.99070286750793
+				],
+				"pursuit_seconds": 1.78333333333333,
+				"reward": 220,
+				"speed": 12.0,
+				"state": "chase",
+				"stuck_seconds": 0.0333333333333333,
+				"type": "winglet",
+				"windup_remaining": 0.0
+			},
+			"name": "moving clear during dive warning cancels the pending hit",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 1039,
+				"hits": [
+					{
+						"damage": 15.0,
+						"distance": 29.4015502929688,
+						"frame": 1135,
+						"los": true,
+						"range": 32.0
+					}
+				],
+				"last": {
+					"attack_range": 32.0,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 3.4,
+					"damage": 15.0,
+					"dead": false,
+					"detouring": false,
+					"health": 260.0,
+					"label": "雷翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 260.0,
+					"position": [
+						0.0,
+						229.353500366211,
+						-32.5660743713379
+					],
+					"pursuit_seconds": 5.18333333333332,
+					"reward": 520,
+					"speed": 8.5,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "stormwing",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.141666740179062,
+				"minimum_y": 229.353500366211
+			},
+			"name": "stormwing pursues a real high altitude vehicle without a floor",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 1039,
+				"hits": [
+					{
+						"damage": 15.0,
+						"distance": 29.4015502929688,
+						"frame": 1135,
+						"los": true,
+						"range": 32.0
+					}
+				],
+				"last": {
+					"attack_range": 32.0,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 3.4,
+					"damage": 15.0,
+					"dead": false,
+					"detouring": false,
+					"health": 260.0,
+					"label": "雷翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 260.0,
+					"position": [
+						0.0,
+						229.353500366211,
+						-32.5660743713379
+					],
+					"pursuit_seconds": 5.18333333333332,
+					"reward": 520,
+					"speed": 8.5,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "stormwing",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.141666740179062,
+				"minimum_y": 229.353500366211
+			},
+			"name": "stormwing ranged release waits full warning and respects real hull range",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 1039,
+				"hits": [
+					{
+						"damage": 15.0,
+						"distance": 29.4015502929688,
+						"frame": 1135,
+						"los": true,
+						"range": 32.0
+					}
+				],
+				"last": {
+					"attack_range": 32.0,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 3.4,
+					"damage": 15.0,
+					"dead": false,
+					"detouring": false,
+					"health": 260.0,
+					"label": "雷翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 260.0,
+					"position": [
+						0.0,
+						229.353500366211,
+						-32.5660743713379
+					],
+					"pursuit_seconds": 5.18333333333332,
+					"reward": 520,
+					"speed": 8.5,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "stormwing",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.141666740179062,
+				"minimum_y": 229.353500366211
+			},
+			"name": "air pursuit moves continuously within configured speed",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 2.8,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 10.0,
+				"dead": false,
+				"detouring": false,
+				"health": 95.0,
+				"label": "轻翼奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 95.0,
+				"position": [
+					0.0,
+					124.099388122559,
+					0.0
+				],
+				"pursuit_seconds": 3.99999999999999,
+				"reward": 220,
+				"speed": 12.0,
+				"state": "chase",
+				"stuck_seconds": 0.0,
+				"type": "winglet",
+				"windup_remaining": 0.0
+			},
+			"name": "vertical pursuit climbs without being reported as stuck",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 15.0,
+				"dead": false,
+				"detouring": false,
+				"health": 260.0,
+				"label": "雷翼奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 260.0,
+				"position": [
+					0.0,
+					30.0,
+					-24.0
+				],
+				"pursuit_seconds": 0.700000000000001,
+				"reward": 520,
+				"speed": 8.5,
+				"state": "windup",
+				"stuck_seconds": 0.0,
+				"type": "stormwing",
+				"windup_remaining": 1.6
+			},
+			"name": "stormwing has visible warning before an obstruction is inserted",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.05,
+				"cooldown_remaining": 3.35,
+				"damage": 15.0,
+				"dead": false,
+				"detouring": false,
+				"health": 260.0,
+				"label": "雷翼奶龙",
+				"level": 1,
+				"line_of_sight": false,
+				"max_health": 260.0,
+				"position": [
+					0.0,
+					30.0044174194336,
+					-23.9787902832031
+				],
+				"pursuit_seconds": 2.36666666666666,
+				"reward": 520,
+				"speed": 8.5,
+				"state": "chase",
+				"stuck_seconds": 0.05,
+				"type": "stormwing",
+				"windup_remaining": 0.0
+			},
+			"name": "real wall inserted during air windup cancels release",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "changing to a vehicle cancels inherited air windup immediately",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 15.0,
+				"dead": false,
+				"detouring": false,
+				"health": 260.0,
+				"label": "雷翼奶龙",
+				"level": 1,
+				"line_of_sight": true,
+				"max_health": 260.0,
+				"position": [
+					0.0,
+					30.0,
+					-24.0
+				],
+				"pursuit_seconds": 1.0,
+				"reward": 520,
+				"speed": 8.5,
+				"state": "windup",
+				"stuck_seconds": 0.0,
+				"type": "stormwing",
+				"windup_remaining": 0.616666666666668
+			},
+			"name": "new aerial target receives its own complete warning",
+			"passed": true
+		},
+		{
+			"detail": {
+				"hits": [
+					{
+						"frame": 1745,
+						"target": 88751474214
+					}
+				],
+				"switched_at": 1648
+			},
+			"name": "new vehicle hull receives only its own delayed air attack",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 2043,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.59213960170746,
+						"frame": 2102,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						-0.126027941703796,
+						5.73416662216187,
+						0.997926950454712
+					],
+					"pursuit_seconds": 5.64999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000628829002,
+				"minimum_y": 5.73416662216187
+			},
+			"name": "air avoidance routes around finite solid wall side -1.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "air detour finishes outside the solid obstacle side -1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"first_windup": 2388,
+				"hits": [
+					{
+						"damage": 10.0,
+						"distance": 1.59213960170746,
+						"frame": 2447,
+						"los": true,
+						"range": 2.8
+					}
+				],
+				"last": {
+					"attack_range": 2.8,
+					"blocked_seconds": 0.0,
+					"cooldown_remaining": 2.3,
+					"damage": 10.0,
+					"dead": false,
+					"detouring": true,
+					"health": 95.0,
+					"label": "轻翼奶龙",
+					"level": 1,
+					"line_of_sight": true,
+					"max_health": 95.0,
+					"position": [
+						0.126027941703796,
+						5.73416662216187,
+						0.997926950454712
+					],
+					"pursuit_seconds": 5.64999999999999,
+					"reward": 220,
+					"speed": 12.0,
+					"state": "windup",
+					"stuck_seconds": 0.0,
+					"type": "winglet",
+					"windup_remaining": 0.0
+				},
+				"max_step": 0.200000628829002,
+				"minimum_y": 5.73416662216187
+			},
+			"name": "air avoidance routes around finite solid wall side 1.0",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "air detour finishes outside the solid obstacle side 1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"air": true,
+				"candidates": 1,
+				"position": "(0.0, 7.0, -30.0)",
+				"reason": "空袭接近 · 注意空中预警"
+			},
+			"name": "winglet safely spawns in open air at altitude 1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"air": true,
+				"candidates": 1,
+				"position": "(0.0, 7.0, -30.0)",
+				"reason": "空袭接近 · 注意空中预警"
+			},
+			"name": "stormwing safely spawns in open air at altitude 1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"candidates": 0,
+				"position": "(inf, inf, inf)",
+				"reason": "离开地面 · 落地后自动恢复遭遇"
+			},
+			"name": "land enemies still reject unsupported water or flight at altitude 1.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"air": true,
+				"candidates": 1,
+				"position": "(0.0, 236.0, -30.0)",
+				"reason": "空袭接近 · 注意空中预警"
+			},
+			"name": "winglet safely spawns in open air at altitude 230.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"air": true,
+				"candidates": 1,
+				"position": "(0.0, 236.0, -30.0)",
+				"reason": "空袭接近 · 注意空中预警"
+			},
+			"name": "stormwing safely spawns in open air at altitude 230.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"candidates": 0,
+				"position": "(inf, inf, inf)",
+				"reason": "离开地面 · 落地后自动恢复遭遇"
+			},
+			"name": "land enemies still reject unsupported water or flight at altitude 230.0",
+			"passed": true
+		},
+		{
+			"detail": {
+				"air": true,
+				"candidates": 1,
+				"position": "(0.0, 243.0, -77.72971)",
+				"reason": "空袭接近 · 注意空中预警"
+			},
+			"name": "large rotated aircraft reserves complete hull clearance for air spawn",
+			"passed": true
+		},
+		{
+			"detail": {
+				"air": true,
+				"candidates": 144,
+				"failures": 1,
+				"position": "(inf, inf, inf)",
+				"reason": "空域受阻 · 等待安全接近路线"
+			},
+			"name": "winglet cannot materialize an air attack into a sealed interior",
+			"passed": true
+		},
+		{
+			"detail": {
+				"air": true,
+				"candidates": 144,
+				"failures": 1,
+				"position": "(inf, inf, inf)",
+				"reason": "空域受阻 · 等待安全接近路线"
+			},
+			"name": "stormwing cannot materialize an air attack into a sealed interior",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "air full body overlap rejects an occupied building volume",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "managed feedback keeps legacy label and health strip hidden through physics",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unmanaged nearby feedback restores normal label and strip",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unmanaged feedback does not reveal distant legacy labels",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "invalid attacks emit no damage feedback",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nonlethal damaged event carries exact real damage hit location and remaining HP",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "lethal feedback caps overkill and remains exactly once under reentrant callbacks",
+			"passed": true
+		},
+		{
+			"detail": {
+				"attack_range": 32.0,
+				"blocked_seconds": 0.0,
+				"cooldown_remaining": 0.0,
+				"damage": 27.6,
+				"dead": true,
+				"detouring": false,
+				"health": 0.0,
+				"label": "雷翼奶龙",
+				"level": 30,
+				"line_of_sight": true,
+				"max_health": 1929.2,
+				"position": [
+					0.0,
+					12.0,
+					-20.0
+				],
+				"pursuit_seconds": 1.66666666666667,
+				"reward": 7592,
+				"speed": 8.5,
+				"state": "dead",
+				"stuck_seconds": 0.0,
+				"type": "stormwing",
+				"windup_remaining": 0.0
+			},
+			"name": "level 30 flyer damage rises gently while HP and rewards keep growing",
+			"passed": true
+		},
+		{
+			"detail": {
+				"level30_damage": 14.72,
+				"level30_health": 593.6,
+				"level30_reward": 1752
+			},
+			"name": "roamer grows in health damage and reward through every level 1 to 30",
+			"passed": true
+		},
+		{
+			"detail": {
+				"level30_damage": 12.88,
+				"level30_health": 445.2,
+				"level30_reward": 2336
+			},
+			"name": "runner grows in health damage and reward through every level 1 to 30",
+			"passed": true
+		},
+		{
+			"detail": {
+				"level30_damage": 40.48,
+				"level30_health": 2671.2,
+				"level30_reward": 7008
+			},
+			"name": "brute grows in health damage and reward through every level 1 to 30",
+			"passed": true
+		},
+		{
+			"detail": {
+				"level30_damage": 22.08,
+				"level30_health": 816.2,
+				"level30_reward": 3504
+			},
+			"name": "spitter grows in health damage and reward through every level 1 to 30",
+			"passed": true
+		},
+		{
+			"detail": {
+				"level30_damage": 51.52,
+				"level30_health": 5194.0,
+				"level30_reward": 17520
+			},
+			"name": "alpha grows in health damage and reward through every level 1 to 30",
+			"passed": true
+		},
+		{
+			"detail": {
+				"level30_damage": 18.4,
+				"level30_health": 704.9,
+				"level30_reward": 3212
+			},
+			"name": "winglet grows in health damage and reward through every level 1 to 30",
+			"passed": true
+		},
+		{
+			"detail": {
+				"level30_damage": 27.6,
+				"level30_health": 1929.2,
+				"level30_reward": 7592
+			},
+			"name": "stormwing grows in health damage and reward through every level 1 to 30",
+			"passed": true
+		}
+	],
+	"count": 50,
+	"passed": true,
+	"physics": "Jolt Physics",
+	"physics_hz": 60
+}

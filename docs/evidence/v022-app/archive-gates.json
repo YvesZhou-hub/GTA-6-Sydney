@@ -1,0 +1,325 @@
+{
+  "passed": true,
+  "count": 37,
+  "checks": [
+    {
+      "name": "valid app archive preserves executable mode and directory structure",
+      "passed": true,
+      "detail": {
+        "accepted": true,
+        "untouched_after_rejection": false,
+        "error": ""
+      }
+    },
+    {
+      "name": "actual extracted executable retains 0755 archive permissions",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "rejects parent traversal before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects absolute path before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects foreign root before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects backslash path before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects dot normalization alias before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects empty path component before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects drive or stream component before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects trailing-space component before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects trailing-dot component before extracting any entry",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects raw duplicate destinations",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Duplicate normalized ZIP destination"
+      }
+    },
+    {
+      "name": "rejects casefold duplicate destinations",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Duplicate normalized ZIP destination"
+      }
+    },
+    {
+      "name": "rejects Unicode normalized duplicate destinations",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Duplicate normalized ZIP destination"
+      }
+    },
+    {
+      "name": "rejects symlink ZIP entries",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects FIFO ZIP entries",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects device ZIP entries",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Unexpected or unsafe ZIP member path"
+      }
+    },
+    {
+      "name": "rejects file versus casefolded parent-directory conflicts",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "ZIP file conflicts with a parent directory"
+      }
+    },
+    {
+      "name": "rejects parent-directory conflicts regardless of entry order",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "ZIP file conflicts with a parent directory"
+      }
+    },
+    {
+      "name": "rejects CRC-corrupted bytes before extraction",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "ZIP CRC failed: Harbourlife.app/Contents/a"
+      }
+    },
+    {
+      "name": "refuses to overwrite a nonempty extraction destination",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "untouched_after_rejection": true,
+        "error": "Extraction destination must be empty"
+      }
+    },
+    {
+      "name": "WARNING is a fatal audit diagnostic including ANSI color",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "ERROR is a fatal audit diagnostic including ANSI color",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "SCRIPT ERROR is a fatal audit diagnostic including ANSI color",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "SHADER ERROR is a fatal audit diagnostic including ANSI color",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "FATAL ERROR is a fatal audit diagnostic including ANSI color",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "ordinary status messages do not trigger diagnostic rejection",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "complete actual aggregate gate accepts matching ZIP identities without original build path",
+      "passed": true,
+      "detail": {
+        "accepted": true,
+        "failed_gates": [],
+        "failure": null
+      }
+    },
+    {
+      "name": "aggregate records both extracted SHA256 values directly against manifest",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "wrong executable identity fails even when ZIP hash is correct",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "extracted_executable_and_pck_match_final_build"
+        ],
+        "failure": null
+      }
+    },
+    {
+      "name": "wrong PCK identity fails even when ZIP hash is correct",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "extracted_executable_and_pck_match_final_build"
+        ],
+        "failure": null
+      }
+    },
+    {
+      "name": "missing manifest identities cannot pass aggregate validation",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "extracted_executable_and_pck_match_final_build"
+        ],
+        "failure": null
+      }
+    },
+    {
+      "name": "partial manifest identity cannot pass aggregate validation",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "extracted_executable_and_pck_match_final_build"
+        ],
+        "failure": null
+      }
+    },
+    {
+      "name": "resource-load warnings fail the actual aggregate gate",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "bundled_models_and_qa_resources_loadable"
+        ],
+        "failure": null
+      }
+    },
+    {
+      "name": "smoke-run ObjectDB warnings fail the actual aggregate gate",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "fresh_extracted_app_full_world_ready_without_errors"
+        ],
+        "failure": null
+      }
+    },
+    {
+      "name": "old packed save format fails despite zero probe process exit",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "bundled_models_and_qa_resources_loadable"
+        ],
+        "failure": null
+      }
+    },
+    {
+      "name": "archive SHA mismatch still fails aggregate validation",
+      "passed": true,
+      "detail": {
+        "accepted": false,
+        "failed_gates": [
+          "archive_matches_final_build_manifest"
+        ],
+        "failure": null
+      }
+    }
+  ],
+  "tool_sha256": "1f92c130a7588af4d6cd3a934e8fd02e9094078f443969b8faa8852640487f2b",
+  "scope": "Real temporary ZIP extraction/CRC/mode checks, diagnostic rejection and real aggregate auditor execution over synthetic app bytes. Only lipo, codesign and Godot execution are substituted; no real game, signing, release package or user data touched."
+}

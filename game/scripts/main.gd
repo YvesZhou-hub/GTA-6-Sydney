@@ -8,6 +8,7 @@ const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
 const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 重装坦克","fighter":"Aster F-27 · 战斗机"}
 var survival: Node3D
 var survival_hud: Control
+var combat_feedback: Control
 var airport: Node3D
 var world: Node3D
 var player: CharacterBody3D
@@ -99,7 +100,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -157,6 +158,10 @@ func _ready():
 	survival_hud.setup(self)
 	survival_hud.service_requested.connect(survival_menu)
 	survival_hud.heal_requested.connect(func(): notify(survival.quick_recovery()))
+	combat_feedback=load("res://scripts/combat_feedback.gd").new()
+	canvas.add_child(combat_feedback)
+	canvas.move_child(combat_feedback,0)
+	combat_feedback.setup(self)
 	if not qa_running: load_settings()
 	else: apply_settings()
 	city_clock=load("res://scripts/city_clock.gd").new()
@@ -195,6 +200,8 @@ func _ready():
 		add_child(load("res://scripts/driving_validation.gd").new())
 	elif "--survival-qa" in arguments:
 		add_child(load("res://scripts/survival_validation.gd").new())
+	elif "--arsenal-qa" in arguments:
+		add_child(load("res://scripts/arsenal_validation.gd").new())
 	elif "--encounter-qa" in arguments:
 		add_child(load("res://scripts/encounter_validation.gd").new())
 	elif "--visual-qa" in arguments:
@@ -854,6 +861,8 @@ func survival_menu():
 	var medicine=button("补充医疗包  ·  $300  ·  H 恢复 60 生命",func(): _survival_transaction("medkit"))
 	medicine.disabled=survival.medkits>=5 or life.money<300
 	if is_instance_valid(current_vehicle):
+		var fitted:Array=survival.weapon_loadout(current_vehicle.kind)
+		button("选装武器 · %d / 3 槽\n机关枪 / 范围炮 / 激光 / 闪电"%fitted.size(),armory_menu)
 		var field_cost:int=survival.field_repair_cost()
 		var field_reason:String=survival.service_block_reason("field_repair")
 		var quick=button("H 快修最多 +25%% 耐久 · $%d · 12 秒冷却"%field_cost,func(): _survival_transaction("field_repair"))
@@ -895,6 +904,59 @@ func survival_menu():
 func _survival_transaction(action:String,kind:String=""):
 	var result:Dictionary=survival.transact(action,kind)
 	survival_menu()
+	notify(str(result.message),bool(result.ok))
+
+func register_combat_enemy(enemy:Node3D):
+	if is_instance_valid(combat_feedback): combat_feedback.register_enemy(enemy)
+
+func reset_combat_feedback():
+	if is_instance_valid(combat_feedback): combat_feedback.clear()
+
+func armory_menu():
+	if not active or not is_instance_valid(current_vehicle): return
+	var modules=preload("res://scripts/weapon_modules.gd")
+	var kind:String=current_vehicle.kind
+	var fitted:Array=survival.weapon_loadout(kind)
+	active_panel="armory"
+	clear_panel("武器选装。","%s · 金币 $%d\n三个额外槽位 · 同款共享 · 弹药免费 · V 控制全部自动武器"%[VEHICLE_NAMES[kind].split(" · ")[0],life.money])
+	modal_content.add_child(label("已装配 %d / 3 · 原有免费副炮不占槽"%fitted.size(),19,Color("96ddc7")))
+	for item:Dictionary in fitted:
+		button("%s %s · 卸下（保留等级）"%[modules.CATALOG[item.id].label,["I","II","III"][item.level-1]],func(): _module_transaction("unequip",item.id))
+	if fitted.is_empty(): modal_content.add_child(label("买第一件模块后会自动装入空槽。",16))
+	var threat=label("增援 Lv.%d · 随战斗进度与装配逐步成长；升级不会给场上敌人加血。"%survival.encounter_level(),15,Color("a9c0bc"))
+	threat.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	modal_content.add_child(threat)
+	for id:String in modules.CATALOG:
+		var tier:int=survival.armory.level(kind,id)
+		var data:Dictionary=modules.CATALOG[id]
+		modal_content.add_child(label(data.label+" · "+(["I","II","III"][tier-1]+" 级" if tier>0 else "未解锁"),23,modules.COLORS[id]))
+		var description=label(data.description,16)
+		description.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+		modal_content.add_child(description)
+		var stats:Dictionary=modules.spec(id,maxi(1,tier))
+		var detail:String="伤害 %.0f · 间隔 %.2f s · 射程 %.0f m"%[stats.damage,stats.cooldown,stats.range]
+		if stats.radius>0: detail+=" · 半径 %.0f m"%stats.radius
+		if stats.chain_count>1: detail+=" · 连锁 %d 个"%stats.chain_count
+		var stat_label=label(detail,15)
+		stat_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+		modal_content.add_child(stat_label)
+		if tier<3:
+			var price:int=modules.cost(id,tier)
+			var action:String="购买并装配" if fitted.size()<3 else "购买到仓库"
+			if tier>0:
+				var next:Dictionary=modules.spec(id,tier+1)
+				action="升级到 %s · 伤害 %.0f / %.2f s"%[["II","III"][tier-1],next.damage,next.cooldown]
+			var buy=button(action+" · $%d"%price,func(): _module_transaction("buy",id))
+			buy.disabled=life.money<price or current_vehicle.health<=0.0
+		if tier>0 and not survival.armory.is_equipped(kind,id):
+			var equip=button("免费装配 "+data.label,func(): _module_transaction("equip",id))
+			equip.disabled=fitted.size()>=3 or current_vehicle.health<=0.0
+	button("返回战地整备",survival_menu)
+	button("继续战斗 · Esc",close_panel)
+
+func _module_transaction(action:String,id:String):
+	var result:Dictionary=survival.transact_module(action,id)
+	armory_menu()
 	notify(str(result.message),bool(result.ok))
 
 func next_vehicle_id(kind:String) -> String:

@@ -1,0 +1,371 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "production armory director vehicles and Jolt are integrated",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new vehicle types start with no paid modules",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "insufficient funds preserve wallet ownership and fitting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "exact purchase charges coins once and equips level one",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "second purchase upgrades same module rather than duplicating it",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "max tier rejects purchase without charging or altering ownership",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "duplicate equip cannot consume a second slot",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fourth purchase unlocks storage while respecting three fitted slots",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "full slots block fitting without charging",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "removing a module is free and preserves its paid tier",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "free replacement fits once space becomes available",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "same-kind physical vehicle reads identical ownership and fitting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "another kind cannot equip the tanks unlocked module",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "buying car module does not alter tank tier or fitting",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new copies inherit same-kind purchase without unlocking other kinds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown module request is inert wrong",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown module request is inert buy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown module request is inert equip",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown module request is inert unequip",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unknown action cannot mutate wallet or ownership",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unboarded purchase preserves wallet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "destroyed vehicle rejects new purchase without charging",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paused B panel may buy exactly one real upgrade",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "director emits revision three with paid armory and difficulty",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "JSON roundtrip restores independent kinds slots and paid levels",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "JSON roundtrip retains partial gradual difficulty clock",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "snapshot editing cannot mutate live ownership",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed armory is safely empty <null>",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed armory is safely empty []",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed armory is safely empty bad",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed armory is safely empty { \"owned\": [] }",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed armory is safely empty { \"owned\": { \"tank\": [\"rotary\"] } }",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed armory is safely empty { \"owned\": { \"unknown\": { \"rotary\": 3 } } }",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed tiers cap finite numbers and reject unowned duplicate entries",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "restored loadout cannot exceed three slots",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "old survival state does not grant free paid modules",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "purchased director module drives real runtime damage without ammo fees",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "cooldown control starts with one purchased physical micro shell",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ten rapid V off-on cycles preserve paid reload and cannot refire",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "rapid same-kind and different-kind swaps cannot bypass module reload",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "real armory remove-refit transactions preserve reload and wallet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "reopening a paused armory does not recharge paid modules",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paid cannon cannot fire before its remaining physical cooldown expires",
+			"passed": true
+		},
+		{
+			"detail": {
+				"active_elapsed": 2.44999999999999,
+				"new_shots": 1
+			},
+			"name": "paid cannon resumes once only after full active reload elapsed",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "strong loadout raises future difficulty goal above level one",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "difficulty does not jump before eighteen seconds",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "eighteen seconds advances by exactly one level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "equipment progression never rewrites existing enemy hp or level",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "low durability stops equipment difficulty ramp",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "entry protection does not secretly accrue difficulty time",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "paused world cannot advance equipment difficulty",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "removing loadout lowers future adaptive target immediately",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "switching to foot drops equipment pressure without changing existing enemy",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "veteran progression extends to bounded level thirty",
+			"passed": true
+		},
+		{
+			"detail": {
+				"count": 6,
+				"types": [
+					"roamer",
+					"roamer",
+					"runner",
+					"spitter",
+					"winglet",
+					"runner"
+				]
+			},
+			"name": "level six production director naturally spawns despite a full old quota",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "level six moving districts continues reinforcement without clearing old enemies",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "save restoration preserves an enemy level above ten",
+			"passed": true
+		},
+		{
+			"detail": {
+				"nearby": 2,
+				"types": [
+					"roamer",
+					"roamer",
+					"roamer",
+					"roamer",
+					"winglet",
+					"winglet"
+				]
+			},
+			"name": "ten metre hover receives flying reinforcements despite surviving ground melee",
+			"passed": true
+		},
+		{
+			"detail": {
+				"health": 37.6000000000001,
+				"wallet": 50000
+			},
+			"name": "new flying pursuit reaches low hovering player without free kill credit",
+			"passed": true
+		},
+		{
+			"detail": {
+				"hidden": 22,
+				"nearby": 1
+			},
+			"name": "full low hover fixture has twenty four actors including visible ground and active flyer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"released": 1,
+				"remaining": 23
+			},
+			"name": "full hover capacity releases exactly one hidden unreachable ground actor without reward",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "capacity recovery preserves visible enemy and current flying pursuer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"flyers": 2,
+				"total": 24
+			},
+			"name": "recovered hover slot fills with aerial support while original flyer keeps chasing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "ranged ground attacker within reach still counts toward airborne pressure",
+			"passed": true
+		}
+	],
+	"count": 64,
+	"engine": "4.7.2-stable (official)",
+	"passed": true,
+	"scope": "Actual production director, armory, weapons, vehicle and enemy scripts in isolated Jolt fixtures. JSON state roundtrip without real user slots. No native window.",
+	"source_sha256": {
+		"res://../source/armory_progression_test.gd": "cb4096992fefc7b1612e025e5e47562686e86863afaf1c28a200fec4ea7972b7",
+		"res://scripts/combat_progression.gd": "33db534a5587d80b2f52344d7308d93be443d3cd849626e3c0c3fa2421c31eef",
+		"res://scripts/harbor_survival.gd": "5961221830c828364b91f7486ab1dafb01d4e6b9be2bd8f90caf1a1a7e3efc1c",
+		"res://scripts/vehicle_armory.gd": "2ded88e4da674bb585223b7da8d37e04fe72a87f8fddd4be16cd16309edc2522",
+		"res://scripts/weapon_modules.gd": "36fce90bca4df30a58694464373bf21758b179819ce799515cf9554b7687951b"
+	},
+	"user_saves_touched": false
+}

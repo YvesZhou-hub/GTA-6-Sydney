@@ -1,0 +1,79 @@
+{
+	"checks": [
+		{
+			"name": "actual fractional per-victim damage and distinct reward pass",
+			"passed": true
+		},
+		{
+			"name": "empty hit list cannot pass a damage scenario",
+			"passed": true
+		},
+		{
+			"name": "requested overkill cannot substitute for actual damage",
+			"passed": true
+		},
+		{
+			"name": "missing edge victim is rejected even with correct global total",
+			"passed": true
+		},
+		{
+			"name": "incorrect global damage sum is rejected",
+			"passed": true
+		},
+		{
+			"name": "same explosion centre cannot attribute both losses to one victim",
+			"passed": true
+		},
+		{
+			"name": "duplicate victim records cannot inflate a successful blast",
+			"passed": true
+		},
+		{
+			"name": "nonfinite actual damage fails validation",
+			"passed": true
+		},
+		{
+			"name": "coins cannot be interpreted as player damage",
+			"passed": true
+		},
+		{
+			"name": "multiple true numbers on a victim may sum to its actual loss",
+			"passed": true
+		},
+		{
+			"name": "complete unique true checks pass",
+			"passed": true
+		},
+		{
+			"name": "an empty successful-looking report fails",
+			"passed": true
+		},
+		{
+			"name": "an omitted required scenario fails",
+			"passed": true
+		},
+		{
+			"name": "an explicit failed scenario fails the release gate",
+			"passed": true
+		},
+		{
+			"name": "truthy strings cannot impersonate boolean passes",
+			"passed": true
+		},
+		{
+			"name": "duplicate check names cannot fill a report",
+			"passed": true
+		},
+		{
+			"name": "real full-city contract retains at least fifteen distinct required scenarios",
+			"passed": true
+		}
+	],
+	"count": 17,
+	"passed": true,
+	"scope": "Negative regression for production full-city QA evidence gates; gameplay requires separate actual --arsenal-qa run",
+	"source_sha256": {
+		"res://../source/arsenal_test.gd": "7ea1aa484d9ccdafba6f4a79bf12949f2d383875f499515987527d6263f9bd3e",
+		"res://scripts/arsenal_validation.gd": "a92b5fbf99514aa949b5347fba9d53f6a319a262ea445749745493d7c93e026c"
+	}
+}

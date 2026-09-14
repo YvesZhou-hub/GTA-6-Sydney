@@ -18,7 +18,7 @@ def digest(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("encounter", "survival", "driving", "experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access", "combat", "diagnostics", "daylight", "ui-font"))
+    parser.add_argument("mode", choices=("arsenal", "encounter", "survival", "driving", "experience", "visual", "qa", "flight", "mobility", "air-vehicle", "navigation-input", "precinct", "opera-access", "combat", "diagnostics", "daylight", "ui-font"))
     parser.add_argument("--app", type=Path, default=Path("dist/Harbourlife.app"))
     parser.add_argument("--output", type=Path, default=Path("reports/release-v018-native"))
     parser.add_argument("--audio-driver", default=None,
@@ -29,6 +29,7 @@ def main():
     identity = {"executable_sha256": digest(app), "pck_sha256": digest(pck)}
     user_data = Path.home() / "Library/Application Support/Godot/app_userdata/Harbourlife · 悉尼海港"
     cases = {
+        "arsenal": (["--arsenal-qa"], "arsenal-qa/report.json", "arsenal-qa"),
         "encounter": (["--encounter-qa"], "encounter-qa/report.json", "encounter-qa"),
         "survival": (["--survival-qa"], "survival-qa/report.json", "survival-qa"),
         "driving": (["--driving-qa"], "driving-qa/report.json", "driving-qa"),
@@ -52,7 +53,7 @@ def main():
     log = out / (args.mode + "-runtime.log")
     console_path = out / (args.mode + "-console.log")
     launch_flags = ["--disable-vsync"]
-    if args.mode in ("encounter", "driving", "flight", "mobility", "air-vehicle", "precinct", "opera-access", "combat"):
+    if args.mode in ("arsenal", "encounter", "driving", "flight", "mobility", "air-vehicle", "precinct", "opera-access", "combat"):
         launch_flags += ["--fixed-fps", "60"]
     if args.audio_driver is not None:
         launch_flags += ["--audio-driver", args.audio_driver]

@@ -1,0 +1,157 @@
+{
+  "captured_pointer_tested": false,
+  "checks": [
+    {
+      "name": "production HUD is visible in active gameplay",
+      "passed": true
+    },
+    {
+      "name": "full-screen HUD ignores input",
+      "passed": true
+    },
+    {
+      "name": "full health cannot consume a medical kit",
+      "passed": true
+    },
+    {
+      "name": "full-health callback emits no heal request",
+      "passed": true
+    },
+    {
+      "name": "HUD fits viewport (1440.0, 900.0)",
+      "passed": true
+    },
+    {
+      "name": "HUD stays below activity text (1440.0, 900.0)",
+      "passed": true
+    },
+    {
+      "name": "HUD leaves lower navigation clear (1440.0, 900.0)",
+      "passed": true
+    },
+    {
+      "name": "HUD leaves map and center aim clear (1440.0, 900.0)",
+      "passed": true
+    },
+    {
+      "name": "buttons remain inside card (1440.0, 900.0)",
+      "passed": true
+    },
+    {
+      "name": "HUD fits viewport (1280.0, 720.0)",
+      "passed": true
+    },
+    {
+      "name": "HUD stays below activity text (1280.0, 720.0)",
+      "passed": true
+    },
+    {
+      "name": "HUD leaves lower navigation clear (1280.0, 720.0)",
+      "passed": true
+    },
+    {
+      "name": "HUD leaves map and center aim clear (1280.0, 720.0)",
+      "passed": true
+    },
+    {
+      "name": "buttons remain inside card (1280.0, 720.0)",
+      "passed": true
+    },
+    {
+      "name": "damage pulse carries actual supplied direction",
+      "passed": true
+    },
+    {
+      "name": "held damage values never restart the pulse",
+      "passed": true
+    },
+    {
+      "name": "eligible heal emits one request",
+      "passed": true
+    },
+    {
+      "name": "cooldown blocks requests and displays time",
+      "passed": true
+    },
+    {
+      "name": "empty inventory blocks heal requests",
+      "passed": true
+    },
+    {
+      "name": "entering low health triggers one bounded pulse",
+      "passed": true
+    },
+    {
+      "name": "remaining at low health does not flash continuously",
+      "passed": true
+    },
+    {
+      "name": "visible modal panel hides and disables combat overlay",
+      "passed": true
+    },
+    {
+      "name": "modal panel cannot receive behind-panel HUD actions",
+      "passed": true
+    },
+    {
+      "name": "visible map panel hides and disables combat overlay",
+      "passed": true
+    },
+    {
+      "name": "map panel cannot receive behind-panel HUD actions",
+      "passed": true
+    },
+    {
+      "name": "host pause guards action callbacks",
+      "passed": true
+    },
+    {
+      "name": "released pointer can click real HUD buttons",
+      "passed": true
+    },
+    {
+      "name": "unblocked service emits a request only",
+      "passed": true
+    },
+    {
+      "name": "inactive survival HUD cannot issue requests",
+      "passed": true
+    },
+    {
+      "name": "UI clamps invalid display values",
+      "passed": true
+    },
+    {
+      "name": "new run clears previous attack pulses",
+      "passed": true
+    },
+    {
+      "name": "full-health driver can click contextual vehicle repair",
+      "passed": true
+    },
+    {
+      "name": "repair button emits contextual recovery once",
+      "passed": true
+    },
+    {
+      "name": "repair cooldown disables the same button and shows time",
+      "passed": true
+    },
+    {
+      "name": "unaffordable field repair cannot be submitted",
+      "passed": true
+    },
+    {
+      "name": "undamaged vehicle cannot spend money through HUD",
+      "passed": true
+    },
+    {
+      "name": "leaving vehicle restores medical kit action",
+      "passed": true
+    }
+  ],
+  "count": 37,
+  "display": "headless",
+  "passed": true,
+  "scope": "isolated production survival HUD; actual city integration is separate"
+}
