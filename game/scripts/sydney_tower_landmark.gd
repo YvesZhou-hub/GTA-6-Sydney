@@ -1,6 +1,7 @@
 extends RefCounted
 ## Sydney Tower exterior; documented main dimensions and mapped plan position.
 ## This is not a surveyed BIM or an operating tower visitor/elevator simulation.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Geo=preload("res://scripts/city_landmarks.gd")
 const CENTER:=Vector3(-143.48673656,4.5,1168.3552663)
 const BASE_POINTS:=[[-51.449543, -22.427186], [-53.316023, 12.605218], [-29.236583, 15.889158], [-29.208863, 14.34181], [-5.803943, 17.414242], [16.288897, 17.536694], [16.335097, 15.610858], [22.821577, 15.766706], [22.775377, 16.891038], [39.601417, 16.468022], [41.569537, -18.60891], [24.189097, -20.690594], [24.281497, -14.901954], [16.852537, -15.592138], [17.286817, -25.499618], [-26.640143, -27.614698], [-27.444023, -17.55137], [-34.503383, -17.651558], [-34.374023, -23.685102]]
@@ -48,7 +49,7 @@ static func _lathe(profile:Array[Vector2],segments:int=112) -> ArrayMesh:
 		for i in segments:
 			var a:=TAU*i/segments;var b:=TAU*(i+1)/segments
 			Geo._triangle(st,Vector3(0,ring.y,0),Vector3(cos(a)*ring.x,ring.y,sin(a)*ring.x),Vector3(cos(b)*ring.x,ring.y,sin(b)*ring.x),Vector3.DOWN if end==0 else Vector3.UP,Vector2.ZERO,Vector2(cos(a),sin(a)),Vector2(cos(b),sin(b)))
-	return st.commit()
+	return CpuMesh.commit(st)
 
 static func _solid(w:Node3D,id:String,profile:Array[Vector2],mat:String) -> StaticBody3D:
 	return w._structure_mesh("sydney_tower/"+id,_lathe(profile),CENTER,"sydney_tower_"+mat,240000)

@@ -1,6 +1,7 @@
 extends RefCounted
 ## Actual OSM pier polygons, original authored fittings from operator photos.
 ## Heights stay estimates in the flat world. See docs/MANOWAR_REFERENCE.md.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Geo=preload("res://scripts/city_landmarks.gd")
 const PIER_Y:=4.58
 const FLOAT_Y:=2.55
@@ -103,7 +104,7 @@ static func _gangway(w:Node3D,data:Array):
 		if (face_index<2 and n.y<0) or (face_index in [2,3] and n.y>0) or (face_index>=4 and n.dot(vertices[0]-((a+b)*.5-Vector3.UP*.16))<0):n=-n
 		Geo._triangle(s,vertices[0],vertices[1],vertices[2],n,Vector2.ZERO,Vector2.ONE,Vector2.ONE)
 		Geo._triangle(s,vertices[0],vertices[2],vertices[3],n,Vector2.ZERO,Vector2.ONE,Vector2.ZERO)
-	var body:StaticBody3D=w._structure_mesh("quay/manowar/gangway/"+data[0],s.commit(),Vector3.ZERO,"mw_timber",24000000)
+	var body:StaticBody3D=w._structure_mesh("quay/manowar/gangway/"+data[0],CpuMesh.commit(s),Vector3.ZERO,"mw_timber",24000000)
 	var rails:=_surface();var seams:=_surface()
 	for sign_value:int in [-1,1]:
 		var edge:=side*sign_value

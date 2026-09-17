@@ -1,6 +1,7 @@
 extends RefCounted
 ## Original public-space reconstruction from official 2024 plans and photographs.
 ## Room circulation, fitting counts and decorative dimensions remain game estimates.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Geo = preload("res://scripts/city_landmarks.gd")
 const CENTER := Vector3(427.2947742677,4.5,-321.4544052467)
 const ANGLE := -13.232864688
@@ -114,7 +115,7 @@ static func _cylinder(batch:Dictionary,key:String,p:Vector3,radius:float,height:
 		_tri(st,p+frame*Vector3(0,height*.5,0),p+frame*c,p+frame*d,frame.y)
 static func _flush(w:Node3D,parent:Node3D,batch:Dictionary) -> void:
 	for key:String in batch:
-		var view:=MeshInstance3D.new();view.mesh=batch[key].commit();view.material_override=w.materials["opi_"+key];parent.add_child(view)
+		var view:=MeshInstance3D.new();view.mesh=CpuMesh.commit(batch[key]);view.material_override=w.materials["opi_"+key];parent.add_child(view)
 		view.transform=parent.global_transform.affine_inverse()*Transform3D(basis(),CENTER)
 static func _attach_batch(w:Node3D,id:String,batch:Dictionary) -> void:
 	_flush(w,w.structures["opera/interior/"+id].node,batch);batch.clear()
@@ -259,7 +260,7 @@ static func _concert_vault() -> ArrayMesh:
 				var d:=Vector3(CONCERT_X+x3,_concert_ceiling_y(x3,z1)+inset,z1)
 				var n:Vector3=(b-a).cross(c-a).normalized()*(1 if layer==0 else -1)
 				_tri(st,a,b,c,n);_tri(st,c,b,d,n)
-	return st.commit()
+	return CpuMesh.commit(st)
 static func _concert_end_wall(w:Node3D,id:String,z:float) -> void:
 	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for side in [-1,1]:
@@ -268,7 +269,7 @@ static func _concert_end_wall(w:Node3D,id:String,z:float) -> void:
 			var a:=Vector3(CONCERT_X+x0,UPPER,z+side*.19);var b:=Vector3(CONCERT_X+x1,UPPER,z+side*.19)
 			var c:=Vector3(a.x,_concert_ceiling_y(x0,z)+.28,a.z);var d:=Vector3(b.x,_concert_ceiling_y(x1,z)+.28,b.z)
 			_tri(st,a,b,c,Vector3.BACK*side);_tri(st,c,b,d,Vector3.BACK*side)
-	var body:StaticBody3D=w._structure_mesh("opera/interior/"+id,st.commit(),CENTER,"opi_brushbox",125000,basis())
+	var body:StaticBody3D=w._structure_mesh("opera/interior/"+id,CpuMesh.commit(st),CENTER,"opi_brushbox",125000,basis())
 	body.set_meta("opera_acoustic_enclosure",true)
 
 static func _concert_side_wall(w:Node3D,side:int,z0:float,z1:float,bottom:float) -> void:
@@ -282,7 +283,7 @@ static func _concert_side_wall(w:Node3D,side:int,z0:float,z1:float,bottom:float)
 			var a:=Vector3(xa,bottom,za);var b:=Vector3(xb,bottom,zb)
 			var c:=Vector3(xa,_concert_ceiling_y(concert_half_width(za),za)+.28,za);var d:=Vector3(xb,_concert_ceiling_y(concert_half_width(zb),zb)+.28,zb)
 			_tri(st,a,b,c,Vector3.RIGHT*face);_tri(st,c,b,d,Vector3.RIGHT*face)
-	var body:StaticBody3D=w._structure_mesh("opera/interior/concert/side_%s_%s"%[side,z0],st.commit(),CENTER,"opi_brushbox",125000,basis())
+	var body:StaticBody3D=w._structure_mesh("opera/interior/concert/side_%s_%s"%[side,z0],CpuMesh.commit(st),CENTER,"opi_brushbox",125000,basis())
 	body.set_meta("opera_acoustic_enclosure",true)
 
 static func _concert(w:Node3D,b:Dictionary) -> void:
@@ -491,8 +492,8 @@ static func _curved_foyer_stairs(w:Node3D,cx:float,north:float,south:float,half:
 		_quad(visible,la,ld,lc,lb,Vector3.DOWN)
 		_quad(visible,la,lb,b,a,Vector3.FORWARD)
 		_quad(visible,ld,d,c,lc,Vector3.BACK)
-	var body:Node3D=w._structure_mesh("opera/interior/"+name+"/broad_stairs",ramp.commit(),CENTER,"opi_"+carpet,180000,basis())
-	body.get_child(0).mesh=visible.commit()
+	var body:Node3D=w._structure_mesh("opera/interior/"+name+"/broad_stairs",CpuMesh.commit(ramp),CENTER,"opi_"+carpet,180000,basis())
+	body.get_child(0).mesh=CpuMesh.commit(visible)
 	body.set_meta("curved_carpet_treads",treads)
 	landing.append(Vector2(cx+half,south-.65));landing.append(Vector2(cx-half,south-.65))
 	_slab(w,name+"/upper_landing",landing,UPPER+1.94,UPPER+2.2,"stone")

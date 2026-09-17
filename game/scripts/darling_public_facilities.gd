@@ -1,6 +1,7 @@
 extends RefCounted
 ## Original geometry; photographed Darling Quarter equipment at mapped OSM points.
 ## The adjoining square and playground are separate places, not interchangeable.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Geo=preload("res://scripts/city_landmarks.gd")
 const DATA="res://assets/darling_public_facilities.json"
 const GROUND=4.5
@@ -76,7 +77,7 @@ static func _shelters(w:Node3D,source:Dictionary):
 				var n:Vector3=(vertices[1]-vertices[0]).cross(vertices[2]-vertices[0]).normalized()
 				for j in [0,2,1]:st.set_normal(n);st.add_vertex(vertices[j])
 				for j in [0,1,2]:st.set_normal(-n);st.add_vertex(vertices[j]-Vector3.UP*.025)
-			var body=w._structure_mesh("darling_detail/shelter/membrane",st.commit(),at,"dp_cream",160000)
+			var body=w._structure_mesh("darling_detail/shelter/membrane",CpuMesh.commit(st),at,"dp_cream",160000)
 			body.set_meta("source_osm",item.id)
 			var p:=Part.new(w,"shelter/membrane_posts",at)
 			for v in [poly[0],poly[6],poly[15],poly[21]]:p.cylinder(Vector3(v.x,3.3,v.y),.075,6.6,"steel",Basis.IDENTITY,true)
@@ -134,7 +135,7 @@ class Part:
 	func finish():
 		var bounds:=AABB(Vector3(-.15,0,-.15),Vector3(.3,.14,.3))
 		for key in surfaces:
-			var m:=MeshInstance3D.new();m.mesh=surfaces[key].commit();m.material_override=w.materials["dp_"+key];m.set_meta("intact_material",m.material_override);m.visibility_range_end=400;body.add_child(m)
+			var m:=MeshInstance3D.new();m.mesh=CpuMesh.commit(surfaces[key]);m.material_override=w.materials["dp_"+key];m.set_meta("intact_material",m.material_override);m.visibility_range_end=400;body.add_child(m)
 			bounds=bounds.merge(m.mesh.get_aabb())
 		var id:String=body.get_meta("damage_id")
 		w.structures[id].position=body.position+bounds.get_center()
@@ -166,7 +167,7 @@ static func _fountain(w:Node3D,area:Dictionary):
 			jets.append_from(jet,0,Transform3D(Basis.IDENTITY,Vector3(x,.17+height*.5,z)))
 			count+=1
 	if count:
-		var m:=MeshInstance3D.new();m.mesh=jets.commit();m.material_override=w.materials.dp_jet;m.set_meta("intact_material",m.material_override);floor_body.add_child(m)
+		var m:=MeshInstance3D.new();m.mesh=CpuMesh.commit(jets);m.material_override=w.materials.dp_jet;m.set_meta("intact_material",m.material_override);floor_body.add_child(m)
 	floor_body.set_meta("jet_count",count)
 
 static func _octanet(w:Node3D):
@@ -232,7 +233,7 @@ static func _slide(w:Node3D,origin:Vector3,width:float,length:float,height:float
 	for i in range(0,polys.size(),3):
 		var normal:Vector3=-(polys[i+1]-polys[i]).cross(polys[i+2]-polys[i]).normalized()
 		for j in 3:st.set_normal(normal);st.add_vertex(polys[i+j]+Vector3.UP*.07)
-	var mesh=st.commit();p.append(mesh,Transform3D.IDENTITY,"steel")
+	var mesh=CpuMesh.commit(st);p.append(mesh,Transform3D.IDENTITY,"steel")
 	var shape:=ConcavePolygonShape3D.new();shape.set_faces(polys);shape.backface_collision=true
 	var collision:=CollisionShape3D.new();collision.shape=shape;collision.position.y=.07;p.body.add_child(collision)
 	for row in ceili(height/.17):

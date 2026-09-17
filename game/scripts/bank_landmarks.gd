@@ -1,5 +1,6 @@
 extends RefCounted
 ## Native bank headquarters exteriors; research confidence is in docs/BANK_REFERENCE.md.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Geo = preload("res://scripts/city_landmarks.gd")
 
 const WESTPAC_HEIGHT := 166.0
@@ -397,7 +398,7 @@ static func vaulted_roof(outline: PackedVector2Array) -> ArrayMesh:
 			Geo._triangle(surface,pa,pb,pc,normal,Vector2(u,35),Vector2(v,35),Vector2(v,pc.y))
 			Geo._triangle(surface,pa,pc,pd,normal,Vector2(u,35),Vector2(v,pc.y),Vector2(u,pd.y))
 		perimeter_distance+=a.distance_to(b)
-	return surface.commit()
+	return CpuMesh.commit(surface)
 
 static func _roof_triangle(surface: SurfaceTool, a: Vector2, b: Vector2, c: Vector2) -> void:
 	var normal := roof_normal((a+b+c)/3.0)
