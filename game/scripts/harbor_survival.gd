@@ -1,5 +1,6 @@
 extends Node3D
 ## Street encounters use the existing city's physical surfaces. No replacement map.
+const GameSettings = preload("res://scripts/game_settings.gd")
 const Enemy = preload("res://scripts/nailong_enemy.gd")
 const Spawn = preload("res://scripts/encounter_spawn.gd")
 const Armory = preload("res://scripts/vehicle_armory.gd")
@@ -654,8 +655,8 @@ func hud_state() -> Dictionary:
 	var auto: Dictionary = game.weapons.auto_status()
 	var support_label := ""
 	if is_instance_valid(vehicle):
-		support_label = "V 自动武器 · " + (str(auto.state) if auto.enabled else "已关闭")
-		if auto.locked: support_label = "V 自动锁定 · %.0f m · 免费弹药" % float(auto.target_distance)
+		support_label = GameSettings.keys("{auto_support} 自动武器 · ") + (str(auto.state) if auto.enabled else "已关闭")
+		if auto.locked: support_label = GameSettings.keys("{auto_support} 自动锁定 · %.0f m · 免费弹药") % float(auto.target_distance)
 	return {"active": game.active and enabled, "player_health": game.player.health, "max_health": game.player.max_health,
 		"vehicle_health": vehicle.health if is_instance_valid(vehicle) else -1.0, "vehicle_name": str(game.VEHICLE_NAMES.get(vehicle.kind, vehicle.kind)).split(" · ")[0] if is_instance_valid(vehicle) else "",
 		"enemy_count": nearby_enemies(), "kills": kills, "threat": clampf(nearby_enemies() / 10.0 + night_factor() * 0.2, 0.0, 1.0),

@@ -26,7 +26,10 @@ const REBINDABLE := [
 	["拍照", ["photo"]], ["保存", ["save"]], ["救援", ["recover"]],
 ]
 
+const KEY_NAMES := {"Space": "空格", "Escape": "Esc"}
+
 static var default_keys: Dictionary = {}
+static var _hint_cache: Dictionary = {}
 
 
 static func sanitized(data: Dictionary) -> Dictionary:
@@ -136,6 +139,7 @@ static func capture_default_keys() -> void:
 
 static func apply_bindings(bindings: Dictionary) -> void:
 	capture_default_keys()
+	_hint_cache.clear()
 	for group: Array in REBINDABLE:
 		var custom: Variant = bindings.get(group[1][0], null)
 		for action: String in group[1]:
@@ -154,6 +158,33 @@ static func key_label(action: String) -> String:
 				var keycode := DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)
 				names.append(OS.get_keycode_string(keycode if keycode != KEY_NONE else event.physical_keycode))
 	return " / ".join(names) if not names.is_empty() else "未绑定"
+
+
+## First keyboard key of an action, as hints show it. Follows rebinding and keyboard layout.
+static func primary_key(action: String) -> String:
+	if InputMap.has_action(action):
+		for event: InputEvent in InputMap.action_get_events(action):
+			if event is InputEventKey:
+				var keycode := DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)
+				var label := OS.get_keycode_string(keycode if keycode != KEY_NONE else event.physical_keycode)
+				return KEY_NAMES.get(label, label)
+	return "未绑定"
+
+
+## Fills {action} placeholders in a hint with current keys; {move} is the four walking keys.
+## Results are cached per template until bindings change, so HUD code can call it every frame.
+static func keys(template: String) -> String:
+	if _hint_cache.has(template): return _hint_cache[template]
+	var result := template
+	for found: RegExMatch in RegEx.create_from_string("\\{([a-z_]+)\\}").search_all(template):
+		var action := found.get_string(1)
+		var label := primary_key(action)
+		if action == "move":
+			var parts := PackedStringArray(["forward", "left", "back", "right"].map(func(name: String): return primary_key(name)))
+			label = "".join(parts) if Array(parts).all(func(part: String): return part.length() == 1) else "/".join(parts)
+		result = result.replace(found.get_string(), label)
+	_hint_cache[template] = result
+	return result
 
 
 static func conflicts(bindings: Dictionary, group_key: String, code: int) -> Array:
