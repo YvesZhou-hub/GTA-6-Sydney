@@ -155,9 +155,16 @@ static func key_label(action: String) -> String:
 	if InputMap.has_action(action):
 		for event: InputEvent in InputMap.action_get_events(action):
 			if event is InputEventKey:
-				var keycode := DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)
-				names.append(OS.get_keycode_string(keycode if keycode != KEY_NONE else event.physical_keycode))
+				names.append(_key_name(event.physical_keycode))
 	return " / ".join(names) if not names.is_empty() else "未绑定"
+
+
+## Name of a physical key on the player's keyboard layout. Headless runs have no
+## layout and the lookup logs an error per call, so they use the physical name.
+static func _key_name(physical: Key) -> String:
+	if DisplayServer.get_name() == "headless": return OS.get_keycode_string(physical)
+	var keycode := DisplayServer.keyboard_get_keycode_from_physical(physical)
+	return OS.get_keycode_string(keycode if keycode != KEY_NONE else physical)
 
 
 ## First keyboard key of an action, as hints show it. Follows rebinding and keyboard layout.
@@ -165,8 +172,7 @@ static func primary_key(action: String) -> String:
 	if InputMap.has_action(action):
 		for event: InputEvent in InputMap.action_get_events(action):
 			if event is InputEventKey:
-				var keycode := DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)
-				var label := OS.get_keycode_string(keycode if keycode != KEY_NONE else event.physical_keycode)
+				var label := _key_name(event.physical_keycode)
 				return KEY_NAMES.get(label, label)
 	return "未绑定"
 
