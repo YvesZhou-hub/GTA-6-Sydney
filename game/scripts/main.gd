@@ -9,6 +9,7 @@ const GameSettings = preload("res://scripts/game_settings.gd")
 const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 重装坦克","fighter":"Aster F-27 · 战斗机"}
 var survival: Node3D
 var survival_hud: Control
+var campaign: Node
 var combat_feedback: Control
 var airport: Node3D
 var world: Node3D
@@ -110,7 +111,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -172,6 +173,9 @@ func _ready():
 	canvas.add_child(combat_feedback)
 	canvas.move_child(combat_feedback,0)
 	combat_feedback.setup(self)
+	campaign=load("res://scripts/campaign.gd").new()
+	add_child(campaign)
+	campaign.setup(self)
 	if not qa_running: load_settings()
 	else: apply_settings()
 	city_clock=load("res://scripts/city_clock.gd").new()
@@ -242,6 +246,10 @@ func _ready():
 		var validation=load("res://scripts/hud_validation.gd").new()
 		add_child(validation)
 		validation.call_deferred("run",self)
+	elif "--campaign-qa" in arguments:
+		var campaign_validation=load("res://scripts/campaign_validation.gd").new()
+		add_child(campaign_validation)
+		campaign_validation.call_deferred("run",self)
 	elif "--ui-font-qa" in arguments:
 		var validation=load("res://scripts/ui_font_validation.gd").new()
 		add_child(validation)
@@ -619,6 +627,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	landmark_target_name=""
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
 	if survival.enabled: life.status_text="奶龙持续增援 · 击败赚金币 · 无需清完上一批\nH 急救 / 快修 · B 战地升级 · V 自动武器"
+	if is_instance_valid(campaign): campaign.start_new()
 	reset_fleet()
 	player.global_position=world.anchors.get("home",Vector3(-140,6,150))+Vector3(0,1,15)
 	player.last_safe=player.global_position
@@ -756,6 +765,7 @@ func save_world() -> bool:
 	data["navigation"]={"key":landmark_target_key,"title":landmark_target_name,"position":vec(landmark_target_position)}
 	if is_instance_valid(city_clock):data["city_clock"]=city_clock.get_state()
 	if is_instance_valid(survival): data["survival"]=survival.get_state()
+	if is_instance_valid(campaign): data["campaign"]=campaign.get_state()
 	var ok=Store.write(world_id,data)
 	save_indicator.text="已保存 · "+Time.get_time_string_from_system() if ok else "保存失败"
 	if not ok: notify(Store.last_error,false)
@@ -805,6 +815,8 @@ func load_world(id:String,backup=false):
 		relocated+=preload("res://scripts/map_migration.gd").repair_old_approach(self,occupied_id)
 	var model_adjustments:Array=preload("res://scripts/vehicle_model_migration.gd").apply(self,occupied_id)
 	if is_instance_valid(survival): survival.apply_state(data.get("survival",{}))
+	# Worlds saved before the campaign existed start chapter one from the first step.
+	if is_instance_valid(campaign): campaign.apply_state(data.get("campaign",{}))
 	set_meta("last_vehicle_model_adjustments",model_adjustments)
 	for v in vehicles:
 		if v.vehicle_id==occupied_id: enter_vehicle(v)
@@ -838,6 +850,7 @@ func pause_menu():
 	active_panel="pause"
 	clear_panel("海港会等你。",world_name+"  /  "+("自由沙盒" if mode=="sandbox" else "生活模式"))
 	button("继续游玩",close_panel)
+	if is_instance_valid(campaign): button(campaign.menu_label(),objectives_menu)
 	if not survival.enabled: button("开启奶龙危机 · 保留当前世界与财富",enable_encounters)
 	button("战地补给与武器升级  ·  B",survival_menu)
 	button("保存世界",func():
@@ -846,6 +859,7 @@ func pause_menu():
 	button("我的载具",vehicles_menu)
 	button("地图与位置",map_menu)
 	button("时间与晚霞  ·  T",time_menu)
+	button("拍照 · 关闭菜单后拍摄",photo_from_menu)
 	button("城市体验 · 美食、场馆与海滨",experiences_menu)
 	button("设置与操作",settings_menu)
 	button("存档与恢复",worlds_menu)
@@ -1238,7 +1252,7 @@ func set_landmark_target(key:String):
 		set_navigation_target(key,str(landmark.title),landmark.position)
 		return
 
-func set_navigation_target(key:String,title:String,position:Vector3):
+func set_navigation_target(key:String,title:String,position:Vector3,announce:=true):
 	if not position.is_finite(): return
 	landmark_target_key=key
 	landmark_target_name=title.left(100)
@@ -1249,10 +1263,11 @@ func set_navigation_target(key:String,title:String,position:Vector3):
 	map_panel.refresh()
 	# Keep the pointer available to adjust or clear a map pin. Services and other
 	# menus still return to play when they supply a destination.
-	if active_panel!="map": close_panel()
+	# Objectives re-point quietly; their own completion message is already on screen.
+	if announce and active_panel!="map": close_panel()
 	update_navigation(1.0)
 	update_landmark_marker()
-	notify("目的地已标记 · "+landmark_target_name+"\n跟随黄色标记与小地图；M 更换目的地。")
+	if announce: notify("目的地已标记 · "+landmark_target_name+"\n跟随黄色标记与小地图；M 更换目的地。")
 
 func set_map_waypoint(position:Vector3,title:String="我的标记"):
 	set_navigation_target("map_pin",title,position)
@@ -1269,7 +1284,8 @@ func restore_navigation(data:Dictionary):
 				return
 	var point:=unvec(data.get("position",[0,4.5,0]))
 	if not point.is_finite(): return
-	landmark_target_key="map_pin"
+	# Objective markers keep their key so the campaign can clear them after a step.
+	landmark_target_key=key if key.begins_with("campaign_") else "map_pin"
 	landmark_target_name=str(data.get("title","我的标记")).left(100)
 	landmark_target_position=point
 
@@ -1284,14 +1300,14 @@ func update_navigation(delta:float):
 		_navigation_tick=0
 		minimap.sync_navigation(snapshot)
 
-func clear_landmark_target():
+func clear_landmark_target(announce:=true):
 	landmark_target_key=""
 	landmark_target_name=""
 	if is_instance_valid(landmark_marker): landmark_marker.visible=false
 	map_panel.target_key=""
 	map_panel.refresh()
 	update_navigation(1.0)
-	notify("地标指引已清除")
+	if announce: notify("地标指引已清除")
 
 func update_landmark_marker():
 	if not is_instance_valid(landmark_marker):
@@ -1373,6 +1389,10 @@ func refresh_map_results(query:String):
 			map_panel.refresh()
 		)
 		map_results.add_child(choice)
+
+func objectives_menu():
+	active_panel="objectives"
+	campaign.build_menu()
 
 func settings_menu():
 	active_panel="settings"
@@ -1655,7 +1675,15 @@ func take_photo():
 	var image_path=path+Time.get_datetime_string_from_system().replace(":","-")+".png"
 	get_viewport().get_texture().get_image().save_png(image_path)
 	notify("照片已保存到本机相册文件夹")
+	if is_instance_valid(campaign): campaign.record_photo(current_vehicle.global_position if is_instance_valid(current_vehicle) else player.global_position)
 	if life.has_method("take_photo"): life.take_photo(player.global_position)
+
+## Controllers have no spare button for photos, so the pause menu closes itself first.
+func photo_from_menu():
+	close_panel()
+	for i in 3: await get_tree().process_frame
+	photo_cooldown=0
+	take_photo()
 
 func _physics_process(delta):
 	if not active or paused: return
@@ -1696,6 +1724,7 @@ func _process(delta):
 	update_spawn_marker()
 	update_landmark_marker()
 	update_hud()
+	if is_instance_valid(campaign): campaign.tick(delta)
 	update_combat_reticle(delta)
 	if is_instance_valid(survival_hud): survival_hud.update_state(survival.hud_state())
 	if qa_manual_render:
@@ -1814,6 +1843,16 @@ func update_hud():
 	if not is_equal_approx(vehicle_panel.offset_bottom,readout_bottom):
 		vehicle_panel.offset_bottom=readout_bottom
 		vehicle_panel.offset_top=readout_bottom
+	if is_instance_valid(landmark_marker) and landmark_marker.visible:
+		# Destination text sits above the control strip and beside the survival card,
+		# so a two-line hint bar or a taller left column never covers it.
+		var marker_left:=38.0
+		if is_instance_valid(survival_hud) and survival_hud.is_visible_in_tree():
+			marker_left=survival_hud.global_position.x-hud.global_position.x+survival_hud._card_rect.end.x+18.0
+		var marker_bottom:=hint_panel.get_global_rect().position.y-hud.global_position.y-10.0
+		landmark_marker.size=landmark_marker.get_combined_minimum_size()
+		landmark_marker.position=Vector2(marker_left,marker_bottom-landmark_marker.size.y)
+	if is_instance_valid(campaign): campaign.update_panel()
 	if is_instance_valid(survival_hud) and survival_hud.has_method("set_top_limit"):
 		survival_hud.set_top_limit(left_column.get_global_rect().end.y-hud.global_position.y+10.0)
 
