@@ -44,7 +44,7 @@ func _draw():
 	var width:=minf(460.0,size.x*0.33)
 	var center:=Vector2(size.x*0.52,43)
 	var heading:=fposmod(-rad_to_deg(player_heading),360.0)
-	draw_style_box(panel_style,Rect2(center-Vector2(width*0.5,21),Vector2(width,47)))
+	draw_style_box(panel_style,Rect2(center-Vector2(width*0.5,21),Vector2(width,60)))
 	for i in range(0,360,15):
 		var relative:=wrapf(float(i)-heading,-180.0,180.0)
 		if absf(relative)>60: continue
@@ -54,7 +54,7 @@ func _draw():
 			var title:String=["北","东北","东","东南","南","西南","西","西北"][i/45]
 			_text(Vector2(x-10,center.y+5),title,Color("e6ede0"),14)
 	draw_colored_polygon(PackedVector2Array([center+Vector2(-4,-19),center+Vector2(4,-19),center+Vector2(0,-12)]),Color("fff0a6"))
-	_text(center+Vector2(-18,45),"%03d°"%int(heading),Color("a3cecb"),13)
+	_text(center+Vector2(-15,34),"%03d°"%int(heading),Color("a3cecb"),12)
 	if target_key.is_empty() or not is_instance_valid(view_camera): return
 	var delta_position:=target_position-player_position
 	var distance:=Vector2(delta_position.x,delta_position.z).length()

@@ -29,6 +29,7 @@ var _damage_time := 0.0
 var _low_entry_time := 0.0
 var _hit_time := 0.0
 var _hurt_label := ""
+var _top_limit := 0.0
 
 
 func setup(owner_host: Node) -> void:
@@ -92,11 +93,19 @@ func _button(button_name: String, value: String, tip: String) -> Button:
 	return result
 
 
+func set_top_limit(value: float) -> void:
+	# The host stacks status panels above the card and reports where they end.
+	if is_equal_approx(value, _top_limit): return
+	_top_limit = value
+	_layout()
+
+
 func _layout() -> void:
 	if not _built: return
 	# At 720p this ends at y=552, before the existing lower-left guidance.
 	# Do not occupy the compass, right map, speedometer or lower driving strip.
 	var top := minf(292.0, maxf(180.0, size.y - 428.0))
+	if _top_limit > 0.0: top = minf(_top_limit, size.y - CARD_SIZE.y - 100.0)
 	_card_rect = Rect2(Vector2(28, top), CARD_SIZE)
 	_heal_button.position = _card_rect.position + Vector2(16, 218)
 	_heal_button.size = Vector2(128, 30)
@@ -257,13 +266,15 @@ func _draw() -> void:
 	_bar(Vector2(16, 89), 268, 10, _health_visual, DANGER if low else MINT)
 	var vehicle_name: String = str(_state.get("vehicle_name", ""))
 	if not vehicle_name.is_empty():
-		_text(Vector2(16, 117), vehicle_name, 12, MUTED, 185)
+		# Name and percentage sit above the bar and the support line below it, so
+		# the bar never runs through the text at any font scale.
+		_text(Vector2(16, 116), vehicle_name, 12, MUTED, 185)
+		_text(Vector2(210, 116), "%d%%" % int(_state.vehicle_health), 14, INK, 74)
+		_bar(Vector2(16, 123), 268, 5, float(_state.vehicle_health) / 100.0, Color("80bed1"))
 		_text(Vector2(16, 146), str(_state.get("support_label", "V 自动武器 · 免费弹药")), 11, MINT)
-		_text(Vector2(210, 123), "%d%%" % int(_state.vehicle_health), 14, INK, 74)
-		_bar(Vector2(16, 133), 268, 5, float(_state.vehicle_health) / 100.0, Color("80bed1"))
 	else:
-		_text(Vector2(16, 123), "步行中 · Tab 新增载具", 13, MUTED)
-		_bar(Vector2(16, 133), 268, 5, 0, MUTED)
+		_text(Vector2(16, 116), "步行中 · Tab 新增载具", 13, MUTED)
+		_bar(Vector2(16, 123), 268, 5, 0, MUTED)
 	draw_line(_card_rect.position + Vector2(16, 155), _card_rect.position + Vector2(284, 155), Color("2b4649"), 1)
 	_text(Vector2(16, 177), "%d" % int(_state.enemy_count), 23, INK, 65)
 	_text(Vector2(68, 176), "附近奶龙", 12, MUTED, 91)
