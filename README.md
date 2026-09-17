@@ -113,6 +113,10 @@ Mac 发布包采用本地 ad-hoc 签名，未取得 Apple Developer ID 签名或
 
 NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与碰撞，并随世界保存。室内、活动和 NPC 内容仍有限，破坏系统不等同于现实建筑倒塌模拟。
 
+## 主线与成就
+
+新世界自动开始主线第一章 **港城第一天**：上车、开到环形码头、给歌剧院拍照、完成一份工作、驾车过海港大桥、飞或开船去曼利、品尝城市美食、击败 5 只奶龙。每步自动导航并发放奖励，全章完成额外 $20,000。左侧卡片显示当前目标与距离；Esc → 目标与成就可查看进度、跳过步骤、隐藏追踪或重新开始（奖励不重复发放）。15 个成就保存在本机、所有世界共享。[主线与成就说明](docs/CAMPAIGN_AND_ACHIEVEMENTS.md)
+
 ## 操作
 
 | 操作 | 按键 |
@@ -191,3 +195,5 @@ Godot 适用 MIT，OSM 派生地理数据适用 ODbL，OurAirports 跑道数据�
 Harbourlife is a free, offline, single-player Sydney sandbox for **Windows x86_64 and Apple Silicon Mac**. On Windows, extract the complete ZIP and run `Harbourlife.exe` with all accompanying files in place; see the [Windows guide](docs/WINDOWS.md). Start on runway 34L at Sydney Airport, fly to the Opera House and Harbour Bridge, or explore the mapped CBD, Darling Harbour and Manly. Press **M** for destinations and **Tab** to create independent vehicle copies.
 
 **v0.2.0 · Nailong Survival.** Fight five consistent enemy types in the existing Sydney streets. Higher-level enemies award more coins; spend them on medkits, vehicle repairs and weapon upgrades. Characters and vehicles can take damage, and new copies inherit their vehicle type's durability. H heals, B opens services, and left-click/X fires. Peaceful exploration without enemies remains available. Drift and triple-speed boost are retained. This is an original reconstruction with estimated details, not a complete 1:1 city scan. The Apple Silicon App is ad-hoc signed and not notarized. Final build-specific validation is in [TESTING.md](docs/TESTING.md), with Windows results separately in [WINDOWS.md](docs/WINDOWS.md). The linked trailer remains footage of v0.1.8.
+
+**Chapter one and achievements.** New worlds start *A Day in the Harbour City*, an eight-step guided route (take a vehicle, reach Circular Quay, photograph the Opera House, finish a job, drive across the Harbour Bridge, fly or sail to Manly, try a city experience, defeat five Nailong) with navigation, rewards and a $20,000 chapter bonus. Esc → 目标与成就 shows progress, lets you skip steps, hide the tracker or restart without re-earning rewards, and lists 15 local achievements shared by every world. See [CAMPAIGN_AND_ACHIEVEMENTS.md](docs/CAMPAIGN_AND_ACHIEVEMENTS.md).

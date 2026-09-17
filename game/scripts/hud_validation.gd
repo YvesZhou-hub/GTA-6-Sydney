@@ -44,6 +44,7 @@ func element_rects() -> Dictionary:
 	var top: Control = game.region_label.get_parent().get_parent()
 	if top.is_visible_in_tree(): rects["status_panel"] = top.get_global_rect()
 	if game.activity_panel.is_visible_in_tree(): rects["activity_panel"] = game.activity_panel.get_global_rect()
+	if is_instance_valid(game.campaign) and game.campaign.panel.is_visible_in_tree(): rects["objective_panel"] = game.campaign.panel.get_global_rect()
 	if game.survival_hud.is_visible_in_tree():
 		rects["survival_card"] = Rect2(game.survival_hud.global_position + game.survival_hud._card_rect.position, game.survival_hud._card_rect.size)
 	if game.minimap.is_visible_in_tree(): rects["minimap"] = game.minimap.get_global_rect()
@@ -55,6 +56,8 @@ func element_rects() -> Dictionary:
 	if game.vehicle_panel.is_visible_in_tree(): rects["vehicle_readout"] = game.vehicle_panel.get_global_rect()
 	if game.toast_panel.is_visible_in_tree() and game.toast_panel.modulate.a > 0.05: rects["toast"] = game.toast_panel.get_global_rect()
 	if game.fire_button.is_visible_in_tree(): rects["fire_button"] = game.fire_button.get_global_rect()
+	var destination := label_text_rect(game.landmark_marker)
+	if destination.has_area(): rects["destination_readout"] = destination
 	var save := label_text_rect(game.save_indicator)
 	if save.has_area(): rects["save_indicator"] = save
 	return rects
@@ -108,6 +111,8 @@ func run(host: Node) -> void:
 	game.new_world("survival", "HUD QA - no save", false)
 	game.survival.auto_spawn = false
 	game.notify("$50,000 已到账 · 12 秒保护，奶龙正在接近\n左键反击 / Tab 武装载具 · H 急救 / 快修 · B 升级", false)
+	# A long destination name exercises the bottom-left readout against the hint bar.
+	game.set_navigation_target("campaign_quay", "港城第一天 · 开到环形码头", game.world.anchors.quay, false)
 	await frames(45)
 	var window := get_tree().root
 	for window_size: Vector2i in SIZES:
