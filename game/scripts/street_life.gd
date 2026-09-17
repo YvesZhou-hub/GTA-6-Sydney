@@ -85,6 +85,10 @@ func _process(delta: float) -> void:
 	if _clock < 0.25: return
 	_clock = 0.0
 	var wanted: Array = DENSITY[density()]
+	# Liberated districts feel busier; districts the Nailong still hold feel empty.
+	var factor := 1.0
+	if is_instance_valid(game.districts): factor = float(game.districts.street_factor(here))
+	wanted = [roundi(float(wanted[0]) * factor), roundi(float(wanted[1]) * factor)]
 	while cars.size() > int(wanted[0]): _release(cars.back(), cars)
 	while pedestrians.size() > int(wanted[1]): _release(pedestrians.back(), pedestrians)
 	# A few per tick fills an empty street quickly without a spike on one frame.

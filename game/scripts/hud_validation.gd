@@ -45,6 +45,7 @@ func element_rects() -> Dictionary:
 	if top.is_visible_in_tree(): rects["status_panel"] = top.get_global_rect()
 	if game.activity_panel.is_visible_in_tree(): rects["activity_panel"] = game.activity_panel.get_global_rect()
 	if is_instance_valid(game.campaign) and game.campaign.panel.is_visible_in_tree(): rects["objective_panel"] = game.campaign.panel.get_global_rect()
+	if is_instance_valid(game.districts) and game.districts.panel.is_visible_in_tree(): rects["district_panel"] = game.districts.panel.get_global_rect()
 	if game.survival_hud.is_visible_in_tree():
 		rects["survival_card"] = Rect2(game.survival_hud.global_position + game.survival_hud._card_rect.position, game.survival_hud._card_rect.size)
 	if game.minimap.is_visible_in_tree(): rects["minimap"] = game.minimap.get_global_rect()

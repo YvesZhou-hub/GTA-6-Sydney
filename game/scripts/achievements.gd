@@ -20,6 +20,8 @@ const LIST := [
 	{"id": "nailong_100", "title": "港城守护者", "detail": "累计击败 100 只奶龙"},
 	{"id": "money_100k", "title": "海港富翁", "detail": "持有 $100,000"},
 	{"id": "landmark_tour", "title": "悉尼通", "detail": "到访歌剧院、海港大桥、悉尼塔、QVB、ICC 与曼利"},
+	{"id": "first_district", "title": "夺回第一个港区", "detail": "解放任意一个港区"},
+	{"id": "city_free", "title": "港城解放", "detail": "解放全部九个港区"},
 ]
 
 static var _unlocked: Dictionary = {}

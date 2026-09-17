@@ -11,6 +11,7 @@ const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超
 var survival: Node3D
 var survival_hud: Control
 var campaign: Node
+var districts: Node
 var street: Node3D
 var combat_feedback: Control
 var airport: Node3D
@@ -113,7 +114,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa","--district-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -181,6 +182,9 @@ func _ready():
 	campaign=load("res://scripts/campaign.gd").new()
 	add_child(campaign)
 	campaign.setup(self)
+	districts=load("res://scripts/districts.gd").new()
+	add_child(districts)
+	districts.setup(self)
 	street=load("res://scripts/street_life.gd").new()
 	add_child(street)
 	street.setup(self)
@@ -262,6 +266,10 @@ func _ready():
 		var street_validation=load("res://scripts/street_validation.gd").new()
 		add_child(street_validation)
 		street_validation.call_deferred("run",self)
+	elif "--district-qa" in arguments:
+		var district_validation=load("res://scripts/district_validation.gd").new()
+		add_child(district_validation)
+		district_validation.call_deferred("run",self)
 	elif "--ui-font-qa" in arguments:
 		var validation=load("res://scripts/ui_font_validation.gd").new()
 		add_child(validation)
@@ -638,6 +646,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
 	if survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
 	if is_instance_valid(campaign): campaign.start_new()
+	if is_instance_valid(districts): districts.reset()
 	if is_instance_valid(street): street.clear()
 	reset_fleet()
 	player.global_position=world.anchors.get("home",Vector3(-140,6,150))+Vector3(0,1,15)
@@ -777,6 +786,7 @@ func save_world() -> bool:
 	if is_instance_valid(city_clock):data["city_clock"]=city_clock.get_state()
 	if is_instance_valid(survival): data["survival"]=survival.get_state()
 	if is_instance_valid(campaign): data["campaign"]=campaign.get_state()
+	if is_instance_valid(districts): data["districts"]=districts.get_state()
 	var ok=Store.write(world_id,data)
 	save_indicator.text="已保存 · "+Time.get_time_string_from_system() if ok else "保存失败"
 	if not ok: notify(Store.last_error,false)
@@ -828,6 +838,7 @@ func load_world(id:String,backup=false):
 	if is_instance_valid(survival): survival.apply_state(data.get("survival",{}))
 	# Worlds saved before the campaign existed start chapter one from the first step.
 	if is_instance_valid(campaign): campaign.apply_state(data.get("campaign",{}))
+	if is_instance_valid(districts): districts.apply_state(data.get("districts",{}))
 	set_meta("last_vehicle_model_adjustments",model_adjustments)
 	for v in vehicles:
 		if v.vehicle_id==occupied_id: enter_vehicle(v)
@@ -869,6 +880,7 @@ func pause_menu():
 	button("地图与位置",map_menu)
 	button("拍照 · 关闭菜单后拍摄",photo_from_menu)
 	section("战斗与世界")
+	if is_instance_valid(districts): button(districts_label(),districts_menu)
 	if not survival.enabled: button("开启奶龙危机 · 保留当前世界与财富",enable_encounters)
 	button("战地补给与武器升级  ·  B",survival_menu)
 	button("时间与晚霞  ·  T",time_menu)
@@ -1407,6 +1419,24 @@ func refresh_map_results(query:String):
 			map_panel.refresh()
 		)
 		map_results.add_child(choice)
+
+func districts_label() -> String:
+	var cleared:int=districts.liberated.size()
+	return "城市与港区 · 已解放 %d / %d"%[cleared,districts.DISTRICTS.size()]
+
+func districts_menu():
+	active_panel="districts"
+	clear_panel("城市与港区","奶龙占住了各个港区。在一个港区里击败奶龙、完成工作或城市体验，就能把它夺回来；解放后街上的人和车会回来，并开放下一个港区。")
+	for row:Dictionary in districts.summary():
+		var state:String="已解放" if row.liberated else ("清剿中 %d / %d"%[row.done,row.need] if row.unlocked else "未开放")
+		section(str(row.name)+" · "+state)
+		if row.unlocked:
+			button("导航到"+str(row.name),func():
+				set_navigation_target("district_"+str(row.id),"港区 · "+str(row.name),row.centre)
+				close_panel())
+		else:
+			note("先解放上一个港区。")
+	button("返回",pause_menu if active else main_menu,"GhostButton")
 
 func objectives_menu():
 	active_panel="objectives"

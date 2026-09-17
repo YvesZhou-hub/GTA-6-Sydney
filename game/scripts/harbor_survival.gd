@@ -15,6 +15,8 @@ var auto_spawn := true
 var enemies: Array = []
 var kills := 0
 var cleared := 0
+## Emitted where a Nailong went down, so the district loop can credit the work.
+signal enemy_defeated(at: Vector3, level: int)
 var wave_spawned := 0
 var wave_kills := 0
 var medkits := 3
@@ -287,8 +289,11 @@ func _enemy_offscreen(enemy: Node3D) -> bool:
 
 func _enemy_defeated(enemy, reward: int) -> void:
 	if not enemies.has(enemy): return
+	var at: Vector3 = enemy.global_position if is_instance_valid(enemy) else game.player.global_position
+	var level: int = int(enemy.level) if is_instance_valid(enemy) else 1
 	enemies.erase(enemy)
 	kills += 1; wave_kills += 1
+	enemy_defeated.emit(at, level)
 	_credit(reward)
 	_reward_text = "击败 Lv.%d %s · +%d 金币" % [enemy.level, enemy.spec.label, reward]
 	_reward_clock = 3.0
