@@ -100,6 +100,28 @@
 
 ## Windows 验证记录
 
+### v0.3.0：Windows 最终 EXE 验收通过
+
+2026-09-18（悉尼时间），[Windows 云端运行 35248186862](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/35248186862) 完成。运行与构建提交均为 `d8a249d0a76134d62e0a98c1c722619410727b93`（发布标签 `v0.3.0-preview.1` 指向同一提交），引擎为 Godot `4.7.2.stable.official.ed1daf0bf`。发布后下载了原始报告与校验和逐项核对，不只依据 Actions 的绿色状态。
+
+| 项目 | 实际结果 |
+| --- | --- |
+| 下载包 | `Harbourlife-Windows-x86_64.zip`，85,558,439 字节 |
+| 包与源码 | 包检查 23/23；249 个游戏文件与同版 Mac 构建清单逐一匹配；AMD64 PE32+、外部 PCK 与 ZIP CRC 通过 |
+| 流程门禁 | 48/48；从最终 ZIP 解压出的 EXE 完成启动与四个玩法专项，全部退出码 0，日志无错误或警告 |
+| 世界 | 15,097 栋建筑、21,697 个结构组件，每个进程都完成城市初始化 |
+| 玩法断言 | 169 项：驾驶 32/32、生存 30/30、连续遭遇 82/82、武器与空袭 25/25 |
+| 身份 | EXE/PCK 在导出、解压和全部运行结束后 SHA-256 一致；GitHub 服务端资产哈希与报告一致 |
+| 边界 | Windows `--headless`，没有 Windows 截图；未测 Windows 显卡画面、声音、实体键鼠与手柄、长期游玩或 FPS；主线、HUD 与设置的原生检查只在 Mac 上运行 |
+
+| 文件 | SHA-256 |
+| --- | --- |
+| Windows ZIP | `c65550480d1ee319324c3918cdb6fd1341f1da976b9c4b26dd4ae448acce92de` |
+| EXE | `59320026e0aa1d8f00219d8212dd10d0af016c10c51d1ffb5fffe56984807a9f` |
+| PCK | `4d5721ace4a3af0c8fb63ccf5a99adcfb00d0c240720725cbffb3687d5120a5a` |
+
+[原始 Windows 报告](evidence/v030-windows/windows-validation.json) · [原始校验和](evidence/v030-windows/Windows-SHA256SUMS.txt)。同版 [Mac 验收](evidence/v030-app/native-index.json)另外通过 295/295 项原生检查，不计入本节 Windows 结果。
+
 ### v0.2.1：Windows 最终 EXE 与自然遭遇验收通过
 
 2026-09-14（悉尼时间），[Windows 云端运行 34769213189](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/runs/34769213189)完成。运行、工作流与构建提交均为 `44cdc69987fa3f9f946afb9d875e3ed34d1b499e`，引擎为 Godot `4.7.2.stable.official.ed1daf0bf`。再次下载并逐项核对了发布资产中的原始报告和校验和，不只依据 Actions 的绿色状态。

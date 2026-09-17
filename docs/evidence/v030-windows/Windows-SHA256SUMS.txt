@@ -1,0 +1,2 @@
+c65550480d1ee319324c3918cdb6fd1341f1da976b9c4b26dd4ae448acce92de  Harbourlife-Windows-x86_64.zip
+b30842f82a18d0b0e18c8752a2f2c0a9a8fa3856a73394115fa997403f7061e0  windows-validation.json
