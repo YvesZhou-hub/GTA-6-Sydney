@@ -125,7 +125,7 @@ func check_refinement(world:Node3D,space:PhysicsDirectSpaceState3D) -> void:
 			for mesh:MeshInstance3D in pod_root.find_children("*","MeshInstance3D",true,false):
 				for surface in mesh.mesh.get_surface_count():
 					var arrays:Array=mesh.mesh.surface_get_arrays(surface)
-					var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX];var idx:PackedInt32Array=arrays[Mesh.ARRAY_INDEX]
+					var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX];var idx:PackedInt32Array=arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX]!=null else PackedInt32Array()
 					for k in range(0,idx.size() if not idx.is_empty() else vertices.size(),3):
 						var a:Vector3=vertices[idx[k] if not idx.is_empty() else k]
 						var b:Vector3=vertices[idx[k+1] if not idx.is_empty() else k+1]

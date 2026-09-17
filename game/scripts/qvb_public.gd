@@ -46,7 +46,9 @@ static func _append_mesh(s:SurfaceTool,mesh:Mesh,surface_index:int,pose:Transfor
 	# SurfaceTool cannot mix indexed primitives and unindexed procedural faces:
 	# an existing index buffer would silently omit later unindexed vertices.
 	# Emit one uniform triangle stream, including every primitive face.
-	var arrays:=mesh.surface_get_arrays(surface_index)
+	_append_arrays(s,mesh.surface_get_arrays(surface_index),pose)
+
+static func _append_arrays(s:SurfaceTool,arrays:Array,pose:Transform3D) -> void:
 	var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
 	var normals:PackedVector3Array=arrays[Mesh.ARRAY_NORMAL]
 	var indices:PackedInt32Array=arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX]!=null else PackedInt32Array()
@@ -59,7 +61,7 @@ static func _append_mesh(s:SurfaceTool,mesh:Mesh,surface_index:int,pose:Transfor
 		s.add_vertex(pose*vertices[at])
 
 static func _box(s:SurfaceTool,p:Vector3,size:Vector3,basis:=Basis.IDENTITY) -> void:
-	var m:=BoxMesh.new();m.size=size;_append_mesh(s,m,0,Transform3D(basis,p))
+	G._append_box(s,p,size,basis)
 
 static func _beam(s:SurfaceTool,a:Vector3,b:Vector3,w:float,d:float) -> void:
 	var delta:=b-a
@@ -67,9 +69,15 @@ static func _beam(s:SurfaceTool,a:Vector3,b:Vector3,w:float,d:float) -> void:
 	var up:=Vector3.UP if absf(delta.normalized().y)<.95 else Vector3.RIGHT
 	_box(s,(a+b)*.5,Vector3(w,d,delta.length()),Basis.looking_at(delta.normalized(),up))
 
+static var _cylinder_meshes: Dictionary = {}
+
 static func _cylinder(s:SurfaceTool,p:Vector3,r:float,h:float,top:float=-1.0) -> void:
-	var m:=CylinderMesh.new();m.bottom_radius=r;m.top_radius=r if top<0 else top;m.height=h;m.radial_segments=16;m.rings=1
-	_append_mesh(s,m,0,Transform3D(Basis.IDENTITY,p))
+	# Identical columns share one primitive, so its Metal readback happens once.
+	var key:=Vector3(r,r if top<0 else top,h)
+	if not _cylinder_meshes.has(key):
+		var m:=CylinderMesh.new();m.bottom_radius=key.x;m.top_radius=key.y;m.height=key.z;m.radial_segments=16;m.rings=1
+		_cylinder_meshes[key]=m.surface_get_arrays(0)
+	_append_arrays(s,_cylinder_meshes[key],Transform3D(Basis.IDENTITY,p))
 
 static func _commit(world:Node3D,owner:StaticBody3D,s:SurfaceTool,key:String) -> void:
 	G._commit_detail(world,owner,s,key)

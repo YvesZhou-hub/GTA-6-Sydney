@@ -429,17 +429,15 @@ static func _build_rear_joint(world:Node3D,main_index:int,foyer_index:int) -> vo
 
 static func _beam_mesh(st: SurfaceTool, a: Vector3, b: Vector3, width: float) -> void:
 	if a.distance_to(b)<0.001: return
-	var mesh := BoxMesh.new()
-	mesh.size = Vector3(width,width,a.distance_to(b))
 	var facing := Basis.looking_at((b-a).normalized(),Vector3.RIGHT if absf((b-a).normalized().y)>0.97 else Vector3.UP)
-	st.append_from(mesh,0,Transform3D(facing,(a+b)*0.5))
+	# CPU box: a BoxMesh per beam forced blocking Metal uploads and readbacks.
+	Geo._append_box(st,(a+b)*0.5,Vector3(width,width,a.distance_to(b)),facing)
 
 static func _blade_mesh(st:SurfaceTool,a:Vector3,b:Vector3,width:float,depth:float) -> void:
 	var along:=(b-a).normalized()
 	var inward:=(Vector3.BACK-along*Vector3.BACK.dot(along)).normalized()
 	var across:=along.cross(inward).normalized()
-	var mesh:=BoxMesh.new();mesh.size=Vector3(width,a.distance_to(b),depth)
-	st.append_from(mesh,0,Transform3D(Basis(across,along,inward),(a+b)*.5+inward*(depth*.5+.01)))
+	Geo._append_box(st,(a+b)*.5+inward*(depth*.5+.01),Vector3(width,a.distance_to(b),depth),Basis(across,along,inward))
 
 static func _prism(poly: PackedVector2Array, height: float) -> ArrayMesh:
 	var st := SurfaceTool.new()
@@ -562,9 +560,7 @@ static func _steps_mesh(segment: int,x0:float=-STAIR_HALF_WIDTH,x1:float=STAIR_H
 	var tread:=(STAIR_FOOT_Z-STAIR_HEAD_Z)/STAIR_TREADS
 	var per_course:=STAIR_TREADS/STAIR_COURSES
 	for step in range(segment*per_course,(segment+1)*per_course):
-		var mesh := BoxMesh.new()
-		mesh.size = Vector3(x1-x0,STAIR_FINISH_THICKNESS,tread)
-		st.append_from(mesh,0,Transform3D(Basis.IDENTITY,Vector3((x0+x1)*.5,(step+1)*rise-STAIR_FINISH_THICKNESS*.5,STAIR_FOOT_Z-(step+.5)*tread)))
+		Geo._append_box(st,Vector3((x0+x1)*.5,(step+1)*rise-STAIR_FINISH_THICKNESS*.5,STAIR_FOOT_Z-(step+.5)*tread),Vector3(x1-x0,STAIR_FINISH_THICKNESS,tread),Basis.IDENTITY)
 	return st.commit()
 
 static func _build_promenade(world: Node3D, basis: Basis) -> void:
