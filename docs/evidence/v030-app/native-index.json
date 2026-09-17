@@ -1,0 +1,55 @@
+{
+  "app_identity": {
+    "executable_sha256": "6d3a3e846f5d0bd1df052d09a2135ecd19ddc737811101946b4a7403932b8388",
+    "pck_sha256": "eb6a84270934d8a59e2ddb0eaead9d3f1d27680672c919f829dd9041e745a2b7"
+  },
+  "archive_sha256": "4b86d4a75e29cac826cbeb3d1bb5f0dfe7f020abd59f1f9843e7be334b512704",
+  "audio_driver": "Dummy for QA processes only; no audible output or CoreAudio hardware validation",
+  "suites": {
+    "survival": {
+      "checks": 40,
+      "passed": true,
+      "exit_code": 0,
+      "runtime_errors": [],
+      "screenshots": 4,
+      "app_identity_unchanged": true,
+      "report_sha256": "7b2a68eb0516484f0fa8e3e3c0a39e5ec69a83ef7be362962478eea3f7070558"
+    },
+    "encounter": {
+      "checks": 96,
+      "passed": true,
+      "exit_code": 0,
+      "runtime_errors": [],
+      "screenshots": 7,
+      "app_identity_unchanged": true,
+      "report_sha256": "b909578cf82094663f19f03c59b29da02dd72f07f26100e3a2208ee06ae614f2"
+    },
+    "arsenal": {
+      "checks": 35,
+      "passed": true,
+      "exit_code": 0,
+      "runtime_errors": [],
+      "screenshots": 5,
+      "app_identity_unchanged": true,
+      "report_sha256": "f10dc93577b62d41a40efdb746244927638d23cf9791c2ce737b2481b05f6d8f"
+    },
+    "campaign": {
+      "checks": 71,
+      "passed": true,
+      "runtime_errors": [],
+      "native": true,
+      "report_sha256": "30e050f8f2d96c83e72776a8e0f0304d7393fe59ae7bda1bd3f647a8dc27d589",
+      "launch": "Harbourlife --audio-driver Dummy -- --campaign-qa"
+    },
+    "hud": {
+      "checks": 53,
+      "passed": true,
+      "runtime_errors": [],
+      "native": true,
+      "report_sha256": "ae8d7168011c6b7f892026f99e7f50ee1fd97766d7b76dd14650b1eb164edf31",
+      "launch": "Harbourlife --audio-driver Dummy -- --hud-qa"
+    }
+  },
+  "total_checks": 295,
+  "all_passed": true
+}
