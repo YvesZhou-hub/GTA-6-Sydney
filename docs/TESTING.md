@@ -1,3 +1,35 @@
+# v0.3.0 主线、设置、画面与加载验证
+
+## 最终 Mac App
+
+`Harbourlife-macOS-arm64.zip` 由 `tools/build.sh` 从提交后的源码构建，249 个游戏文件的哈希与 git 跟踪文件逐一一致。[构建清单](evidence/v030-app/build.json) · [校验和](evidence/v030-app/Mac-SHA256SUMS.txt)
+
+- **压缩包审计 13/13**：版本 0.3.0、arm64、签名校验、PCK 与全部源文件身份、从解压副本启动完整城市。第一次构建因 `Info.plist` 仍写着 0.2.2 被审计拦下，修正导出配置后重新构建。[审计报告](evidence/v030-app/archive-validation.json)
+- **原生玩法与界面 295/295**，全部用打好的 App 在 Metal 窗口运行，退出码 0，日志无错误或警告，EXE/PCK 哈希前后不变：
+
+| 专项 | 检查 | 范围 |
+| --- | ---: | --- |
+| [主线与成就](evidence/v030-app/campaign/report.json) | 71/71 | 8 个步骤的正确与错误条件、奖励总额与不重复发放、导航切换、成就与平台接口、改键与手柄文字、暂停菜单、存读档与旧存档 |
+| [HUD 与设置](evidence/v030-app/hud/report.json) | 53/53 | 6 种分辨率步行与驾驶的重叠、越界与黑边，设置清洗、FSR、视野、改键及提示同步、手柄 Start/B 与右摇杆 |
+| [连续遭遇](evidence/v030-app/encounter/report.json) | 96/96 | 家门口、歌剧院、机场和 CBD 的刷新与追击，V/B/H |
+| [原有生存](evidence/v030-app/survival/report.json) | 40/40 | 五类敌人、H 治疗、坦克击杀奖励、B 补给与维修 |
+| [武器与空袭](evidence/v030-app/arsenal/report.json) | 35/35 | 选装购买与三槽、主炮中心/边缘伤害、两类空中敌人、激光与闪电 |
+
+[汇总与哈希](evidence/v030-app/native-index.json)。QA 进程与上一版一样使用 Dummy 音频驱动，**不验证实际扬声器声音**；也不代表长期帧率或所有硬件。打包后的 App 完整城市启动约 11–12 秒。
+
+遭遇与歌剧院专项会故意清空键盘绑定，防止真实键盘干扰测试，所以这些截图底部提示显示“未绑定”；正式游戏不会这样修改按键。
+
+## 源码检查
+
+- Windows 发布门禁要求的 5 个无界面专项在源码上全部通过，日志零错误或警告：交互启动、驾驶 32、生存 30、自然遭遇 82、武器 25。修复前，按键提示在无界面模式下查询键盘布局，每次都记一条错误（交互启动 94 条），会让 Windows 门禁失败。
+- `tools/test_save.gd` 42/42（存档格式 7）；`source/cell_batch_equivalence_test.gd` 8/8；`source/key_hint_test.gd` 9/9。
+- 36 个城市、地标与世界测试中 34 个通过；`world_road_probe` 与无界面 `bridge_drive_test` 在未改动的代码上结果相同。
+- `--visual-qa` 前后 14 个机位逐像素比较，差异只在随时间变化的水面上。详见 [运行性能](PERFORMANCE.md)。
+
+Windows 包的实际构建与运行结果见 [Windows 验证记录](WINDOWS.md#windows-验证记录)。下方 v0.2.2 及更早的结果是历史数据，不计入 v0.3.0。
+
+---
+
 # v0.2.2 武器选装与空中战斗验证
 
 本轮新增伤害浮字、两类飞行敌人、四类付费武器与最高 Lv.30 的渐进增援。冻结源码的16个玩法 / 存档专项 **817/817 通过**，全部进程正常退出、日志无错误或警告，235个游戏输入文件在验证前后保持一致。[各专项结果、源码哈希和原始证据](evidence/v022-app/source-checks/index.json)

@@ -1,0 +1,38 @@
+{
+  "app_identity": {
+    "executable_sha256": "6d3a3e846f5d0bd1df052d09a2135ecd19ddc737811101946b4a7403932b8388",
+    "pck_sha256": "eb6a84270934d8a59e2ddb0eaead9d3f1d27680672c919f829dd9041e745a2b7"
+  },
+  "app_identity_unchanged": true,
+  "mode": "encounter",
+  "launch_flags": [
+    "--disable-vsync",
+    "--fixed-fps",
+    "60",
+    "--audio-driver",
+    "Dummy",
+    "--",
+    "--encounter-qa"
+  ],
+  "audio_driver": "Dummy",
+  "audio_driver_scope": "Explicit override for this QA process only",
+  "audio_listening_verified": false,
+  "audio_validation_scope": "Dummy mixer only; no audible output or hardware sound validation",
+  "started_utc": "2026-09-17T16:22:33.855090+00:00",
+  "wall_seconds": 93.967,
+  "exit_code": 0,
+  "report_fresh": true,
+  "checks": 96,
+  "passed": true,
+  "screenshots": [
+    "tank airport pursuit.png",
+    "CBD Pitt Street Mall.png",
+    "automatic tank support with player H field repairs.png",
+    "tank fire control B menu.png",
+    "Opera public upper podium.png",
+    "airport apron.png",
+    "default home.png"
+  ],
+  "runtime_log_fresh": true,
+  "runtime_errors": []
+}

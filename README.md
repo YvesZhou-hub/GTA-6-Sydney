@@ -1,12 +1,16 @@
 # Harbourlife · 悉尼海港
 
-**v0.2.2-preview.1 · 伤害浮字、空中奶龙与武器选装**
+**v0.3.0-preview.1 · 主线目标、手柄与设置、画面翻新、更快加载**
 
-[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.2.2-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.2.2-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases)
+[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.3.0-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.3.0-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
 
-**奶龙危机**跟随玩家所在街区持续增援，加入俯冲与雷击两类空中奶龙。清晰血条和伤害浮字显示每只敌人实际扣掉多少血；炮弹中心伤害更高，边缘较低。11 类载具保留免费自动副武器，还可花金币选装机关枪、微型范围炮、激光与连锁闪电。每种车型三个额外槽位，模块各三级，免费拆装并保留等级；V 控制自动武器，X 手动开火，B 选装升级，H 急救或战地快修。保留无敌人的自由观光模式，以及漂移、急刹和 Shift 三倍加速。[生存规则](docs/SURVIVAL_DESIGN.md) · [驾驶操作](docs/DRIVING.md) · [本版改动](docs/FIXES_0.2.2.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 与 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动说明](docs/WINDOWS.md)
+**v0.3.0 新内容：** 新世界自动开始主线第一章“港城第一天”，8 步带导航和奖励，另有 15 个本机成就；完整设置菜单（显示模式、帧率、渲染分辨率、抗锯齿、视野）、手柄支持与键盘改键，提示文字会跟着键位变化；光照、临街店面、树木草坪和路面全面翻新；加载从约 74 秒降到约 13 秒，并有进度条、不再“未响应”。[本版改动](docs/FIXES_0.3.0.md) · [主线与成就](docs/CAMPAIGN_AND_ACHIEVEMENTS.md) · [设置与手柄](docs/SETTINGS_AND_CONTROLS.md)
+
+![v0.3.0 主线目标卡片与新 HUD · 最终 Mac App 画面](docs/screenshots/v030/objective-hud.png)
+
+**奶龙危机**跟随玩家所在街区持续增援，加入俯冲与雷击两类空中奶龙。清晰血条和伤害浮字显示每只敌人实际扣掉多少血；炮弹中心伤害更高，边缘较低。11 类载具保留免费自动副武器，还可花金币选装机关枪、微型范围炮、激光与连锁闪电。每种车型三个额外槽位，模块各三级，免费拆装并保留等级；V 控制自动武器，X 手动开火，B 选装升级，H 急救或战地快修。保留无敌人的自由观光模式，以及漂移、急刹和 Shift 三倍加速。[生存规则](docs/SURVIVAL_DESIGN.md) · [驾驶操作](docs/DRIVING.md) · [武器选装](docs/FIXES_0.2.2.md)。试玩包面向 **Windows x86_64（Intel / AMD 64 位）** 与 **Apple Silicon Mac（M 系列芯片）**，离线游玩免费。[Windows 启动说明](docs/WINDOWS.md)
 
 ![v0.2.2 真实主炮中心与边缘扣血 · 最终Mac App画面，无声混音验收](docs/evidence/v022-app/arsenal/screenshots/cannon-centre-and-edge.png)
 
@@ -143,7 +147,7 @@ NPC 有行走、对话和危险躲避；局部建筑损伤同时改变画面与�
 | 坦克炮塔左右 / 炮管上下 | Q / Z、R / F |
 | 临时显示鼠标、点击小地图 | 按住 Alt / Option |
 | 保存截图 / 保存世界 | P / F5 |
-| 暂停、设置、存档与恢复 | Esc |
+| 暂停、目标与成就、设置、存档与恢复 | Esc |
 | 角色返回个人空间 | Home |
 
 ## 存档与旧世界
