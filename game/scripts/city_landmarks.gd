@@ -801,8 +801,9 @@ static func _unit_box() -> Array:
 static func _append_box(surface: SurfaceTool, position: Vector3, size: Vector3, basis: Basis) -> void:
 	# Built on the CPU from the cached unit box. Creating a BoxMesh per box cost two
 	# Metal uploads and two blocking readbacks each, which dominated native startup.
-	# Tangents are omitted: no world material uses normal maps and cell batching
-	# keeps only positions, normals and UVs.
+	# Tangents are omitted: landmark box materials have no normal maps (only the
+	# triplanar foliage does, which derives its own tangent frame) and cell
+	# batching keeps only positions, normals and UVs.
 	var arrays:=_unit_box()
 	var pose:=Transform3D(basis,position)
 	var vertices: PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]

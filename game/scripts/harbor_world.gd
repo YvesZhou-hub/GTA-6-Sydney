@@ -148,7 +148,7 @@ func _make_materials() -> void:
 	_mat("paving", Color("c3b7a1"), 0.94)
 	_mat("lightstone", Color("dbcfb6"), 0.82)
 	_mat("concrete", Color("b8b4a7"), 0.91)
-	_mat("road", Color("3f494b"), 0.94)
+	_mat("road", Color("5b5c5f"), 0.94)
 	_mat("white", Color("efede1"), 0.62)
 	_mat("yellow", Color("d4b35c"), 0.72)
 	_mat("steel", Color("344b4d"), 0.54, 0.62)
@@ -158,11 +158,11 @@ func _make_materials() -> void:
 	_mat("slate", Color("4a595b"), 0.85)
 	_mat("copper", Color("739284"), 0.68, 0.25)
 	_mat("wood", Color("806446"), 0.93)
-	_mat("tree", Color("477153"), 0.99)
-	_mat("tree_light", Color("6e855a"), 0.99)
+	_mat("tree", Color("557d58"), 0.99)
+	_mat("tree_light", Color("819a63"), 0.99)
 	_mat("bark", Color("665342"), 1.0)
-	_mat("grass", Color("78866a"), 1.0)
-	_mat("hedge", Color("42634d"), 0.99)
+	_mat("grass", Color("7f9068"), 1.0)
+	_mat("hedge", Color("4d7152"), 0.99)
 	_mat("coral", Color("bd735d"), 0.81)
 	_mat("teal", Color("1e6f78"), 0.72)
 	_mat("navy", Color("223c50"), 0.77)
@@ -175,12 +175,85 @@ func _make_materials() -> void:
 	glow.emission_enabled = true
 	glow.emission = Color("ffe0a2")
 	glow.emission_energy_multiplier = 1.4
+	_apply_natural_surfaces()
 	# Original tile/paving textures, generated deterministically; no downloaded imagery.
 	for key in ["paving", "sandstone", "lightstone", "concrete", "roof"]:
 		var tex := _surface_texture(str(key))
 		materials[key].albedo_texture = tex
 		materials[key].uv1_triplanar = true
 		materials[key].uv1_scale = Vector3(0.35,0.35,0.35)
+
+static func _noise_image(seed: int, frequency: float, octaves: int, size: int = 256) -> Image:
+	var noise := FastNoiseLite.new()
+	noise.seed = seed
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	noise.frequency = frequency
+	noise.fractal_octaves = octaves
+	return noise.get_seamless_image(size, size)
+
+func _apply_natural_surfaces() -> void:
+	# Deterministic noise textures, mapped in world space so neighbouring crowns,
+	# lawns and roads never repeat visibly. Materials stay StandardMaterial3D so
+	# material roles and diagnostics tuning keep working.
+	var leaves := _noise_image(9411, 0.045, 4)
+	var clusters := Image.create(256, 256, false, Image.FORMAT_RGB8)
+	for y in 256:
+		for x in 256:
+			var v := leaves.get_pixel(x, y).r
+			# Bright leaf clusters over darker gaps.
+			var shade := 0.58 + 0.42 * smoothstep(0.28, 0.78, v)
+			clusters.set_pixel(x, y, Color(shade, shade * 1.02, shade * 0.94))
+	clusters.generate_mipmaps()
+	var leaf_bump := _noise_image(1847, 0.09, 3)
+	leaf_bump.bump_map_to_normal_map(6.0)
+	leaf_bump.generate_mipmaps()
+	var leaf_albedo := ImageTexture.create_from_image(clusters)
+	var leaf_normal := ImageTexture.create_from_image(leaf_bump)
+	for key in ["tree", "tree_light", "hedge"]:
+		var foliage: StandardMaterial3D = materials[key]
+		foliage.albedo_texture = leaf_albedo
+		foliage.normal_enabled = true
+		foliage.normal_texture = leaf_normal
+		foliage.normal_scale = 0.85
+		foliage.uv1_triplanar = true
+		foliage.uv1_world_triplanar = true
+		foliage.uv1_scale = Vector3.ONE * 0.42
+		# Sunlight passing through the crown from behind.
+		foliage.backlight_enabled = true
+		foliage.backlight = Color(0.2, 0.26, 0.09)
+	var lawn_noise := _noise_image(5521, 0.012, 3)
+	var speckle := _noise_image(733, 0.21, 2)
+	var lawn := Image.create(256, 256, false, Image.FORMAT_RGB8)
+	for y in 256:
+		for x in 256:
+			var patch := lawn_noise.get_pixel(x, y).r
+			var grain := speckle.get_pixel(x, y).r
+			var value := 0.8 + 0.2 * patch + (grain - 0.5) * 0.08
+			# Worn patches drift towards dry yellow-green.
+			lawn.set_pixel(x, y, Color(value * (1.0 + (0.5 - patch) * 0.12), value, value * (0.92 + patch * 0.08)))
+	lawn.generate_mipmaps()
+	var grass: StandardMaterial3D = materials["grass"]
+	grass.albedo_texture = ImageTexture.create_from_image(lawn)
+	grass.uv1_triplanar = true
+	grass.uv1_world_triplanar = true
+	grass.uv1_scale = Vector3.ONE * 0.02
+	var aggregate := _noise_image(3319, 0.35, 2)
+	var wear := _noise_image(6007, 0.018, 3)
+	var asphalt := Image.create(256, 256, false, Image.FORMAT_RGB8)
+	for y in 256:
+		for x in 256:
+			var fine := aggregate.get_pixel(x, y).r
+			var patch := wear.get_pixel(x, y).r
+			var value := 0.86 + (fine - 0.5) * 0.16 + (patch - 0.5) * 0.22
+			asphalt.set_pixel(x, y, Color(value, value, value))
+	asphalt.generate_mipmaps()
+	var road: StandardMaterial3D = materials["road"]
+	road.albedo_texture = ImageTexture.create_from_image(asphalt)
+	road.uv1_triplanar = true
+	road.uv1_world_triplanar = true
+	road.uv1_scale = Vector3.ONE * 0.08
+	# Rough asphalt should not mirror the blue sky at grazing street-level angles.
+	road.metallic_specular = 0.22
 
 func _surface_texture(key: String) -> ImageTexture:
 	var im := Image.create(128,128,false,Image.FORMAT_RGB8)
@@ -864,8 +937,8 @@ func _tree(p: Vector3, scale: float = 1.0) -> bool:
 		sphere = SphereMesh.new()
 		sphere.radius = 1
 		sphere.height = 2
-		sphere.radial_segments = 12
-		sphere.rings = 6
+		sphere.radial_segments = 18
+		sphere.rings = 9
 		materials["tree_mesh"] = sphere
 	var crowns:=_tree_crowns(p,scale)
 	for part in range(3):

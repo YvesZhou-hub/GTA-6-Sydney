@@ -5,6 +5,10 @@ const SUNSET_PANORAMA = preload("res://assets/environment/qwantani_sunset_puresk
 const NIGHT_PANORAMA = preload("res://assets/environment/qwantani_night_puresky_2k.hdr")
 const SKY_SHADER = preload("res://assets/environment/daylight.gdshader")
 const CYCLE_SKY_INTERVAL_MS := 500
+const DAY_AMBIENT := 0.55
+const DAY_SKY_CONTRIBUTION := 0.55
+const DAY_AMBIENT_COLOR := Color("d9cdb8")
+const NIGHT_AMBIENT_COLOR := Color("8193bb")
 const CYCLE_PROPERTY_KEYS := {"tonemap_exposure":"exposure","ambient_light_energy":"ambient","fog_density":"fog_density","fog_light_energy":"fog_light_energy","glow_intensity":"glow_intensity","ssao_intensity":"ssao_intensity"}
 # Brightest source pixel centre, measured from the unchanged 2048 x 1024 HDR.
 const SUN_UV := Vector2(1222.5 / 2048.0, 350.5 / 1024.0)
@@ -20,7 +24,7 @@ const TUNING_LIMITS := {
 static func quality_profile(quality: int) -> Dictionary:
 	var level := clampi(quality,0,2)
 	return {"quality":level,"name":["light","standard","fine"][level],
-		"ssao_enabled":level>0,"ssao_radius":.95,"ssao_intensity":.9,"ssao_power":1.3,
+		"ssao_enabled":level>0,"ssao_radius":.95,"ssao_intensity":1.15,"ssao_power":1.3,
 		"glow_enabled":level>0,"glow_intensity":.2 if level==1 else .27,
 		"glow_hdr_threshold":1.6,"glow_hdr_scale":.8,
 		"ssr_enabled":level==2,"ssr_max_steps":64,"ssr_depth_tolerance":.25}
@@ -40,12 +44,17 @@ static func make_environment() -> Environment:
 	env.sky = sky
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 	env.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
-	env.ambient_light_energy = 0.6
-	env.tonemap_mode = Environment.TONE_MAPPER_ACES
+	# The blue HDR sky alone tinted every shadow and pale surface blue. Part of the
+	# ambient term is a warm neutral in daylight and a cool blue at night.
+	env.ambient_light_energy = DAY_AMBIENT
+	env.ambient_light_sky_contribution = DAY_SKY_CONTRIBUTION
+	env.ambient_light_color = DAY_AMBIENT_COLOR
+	# AgX rolls off sunlit paving and the horizon sky instead of clipping them to white.
+	env.tonemap_mode = Environment.TONE_MAPPER_AGX
 	env.tonemap_exposure = 1.0
 	env.adjustment_enabled = true
-	env.adjustment_contrast = 1.03
-	env.adjustment_saturation = 1.05
+	env.adjustment_contrast = 1.1
+	env.adjustment_saturation = 1.16
 	env.fog_enabled = true
 	env.fog_light_color = Color("c4d4de")
 	env.fog_density = 0.000025
@@ -119,12 +128,13 @@ static func cycle_profile(state: Dictionary, quality: int = 1) -> Dictionary:
 	var warmth := 1.0-smoothstep(3.0,22.0,elevation)
 	var evening := 1.0-smoothstep(-2.0,7.0,elevation)
 	var above_horizon := smoothstep(-.833,2.5,elevation)
-	var sunlight := 1.15*above_horizon*lerpf(.25,1.0,sqrt(maxf(0,sin(deg_to_rad(elevation)))))
+	var sunlight := 1.32*above_horizon*lerpf(.25,1.0,sqrt(maxf(0,sin(deg_to_rad(elevation)))))
 	var profile := quality_profile(quality)
-	return {"exposure":lerpf(1.0,1.18,night),"ambient":lerpf(.6,.78,night),
+	return {"exposure":lerpf(1.0,1.18,night),"ambient":lerpf(DAY_AMBIENT,.78,night),
+		"ambient_color":DAY_AMBIENT_COLOR.lerp(NIGHT_AMBIENT_COLOR,night),"sky_contribution":lerpf(DAY_SKY_CONTRIBUTION,.85,night),
 		"sun_energy":sunlight,"fog_density":lerpf(.000025,.000018,night),
 		"fog_light_energy":lerpf(1.0,.16,night),"glow_intensity":float(profile.glow_intensity)*lerpf(1.0,1.15,night),
-		"ssao_intensity":lerpf(.9,.62,night),"day_weight":daylight,"night_weight":night,
+		"ssao_intensity":lerpf(float(profile.ssao_intensity),.62,night),"day_weight":daylight,"night_weight":night,
 		"sun_color":Color("ffad6b").lerp(Color("fff1dd"),1.0-warmth),
 		"fog_color":Color("c4d4de").lerp(Color("ae8a99"),warmth*(1-night)).lerp(Color("344b73"),night),
 		"sunset_tint":Vector3(1.24,.84,.66).lerp(Vector3(1.25,.77,.75),evening),
@@ -154,6 +164,8 @@ static func apply_cycle(env: Environment, sun: DirectionalLight3D, state: Dictio
 	env.glow_intensity=values.glow_intensity
 	env.ssao_intensity=values.ssao_intensity
 	env.fog_light_color=profile.fog_color
+	env.ambient_light_color=profile.ambient_color
+	env.ambient_light_sky_contribution=profile.sky_contribution
 	sun.basis=Basis.looking_at(-direction,Vector3.RIGHT if absf(direction.y)>.999 else Vector3.UP)
 	sun.light_color=profile.sun_color
 	sun.light_energy=values.sun_energy
