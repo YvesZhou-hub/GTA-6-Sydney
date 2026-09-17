@@ -42,7 +42,7 @@ func run():
 	var toggles:=[env.ssao_enabled,env.glow_enabled,env.ssr_enabled,env.volumetric_fog_enabled]
 	apply_now(env,light,day)
 	check("clock direction controls actual sunlight",light.basis.z.dot(day.sun_direction)>.99999)
-	check("day profile maintains readable daytime light",light.light_energy>1.0 and is_equal_approx(env.ambient_light_energy,.6))
+	check("day profile maintains readable daytime light",light.light_energy>1.0 and is_equal_approx(env.ambient_light_energy,.55) and env.ambient_light_color.r>env.ambient_light_color.b)
 	check("sky switches to incremental radiance updates",env.sky.process_mode==Sky.PROCESS_MODE_INCREMENTAL and env.sky.radiance_size==Sky.RADIANCE_SIZE_256)
 	check("sky receives the same solar direction",env.sky.sky_material.get_shader_parameter("sun_direction").is_equal_approx(day.sun_direction))
 	var initial_updates:int=env.get_meta("cycle_sky_updates")
@@ -61,7 +61,7 @@ func run():
 	apply_now(env,light,night)
 	check("night has no below-horizon direct sun",light.light_energy==0)
 	check("night panorama and blend are selected",env.sky.sky_material.get_shader_parameter("night_panorama")==Daylight.NIGHT_PANORAMA and env.sky.sky_material.get_shader_parameter("night_weight")==1)
-	check("night keeps finite ambient and lower fog light",env.ambient_light_energy>.1 and env.fog_light_energy<.3)
+	check("night keeps finite ambient and lower fog light",env.ambient_light_energy>.1 and env.fog_light_energy<.3 and env.ambient_light_color.b>env.ambient_light_color.r)
 	check("clock never toggles expensive effect flags",toggles==[env.ssao_enabled,env.glow_enabled,env.ssr_enabled,env.volumetric_fog_enabled])
 	var base:Dictionary=env.get_meta("cycle_base_values")
 	check("F3 base contract provides all seven controls",base.size()==7 and base.has("sun_energy") and base.has("fog_light_energy"))

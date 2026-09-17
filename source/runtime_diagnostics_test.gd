@@ -213,7 +213,7 @@ func run():
 	production_diag.tune({"exposure":1.3,"sun_energy":float(production_base.sun_energy)*1.4,"ambient":.9})
 	daylight.apply_cycle(env,game.sun,dusk)
 	var dusk_base: Dictionary=env.get_meta("cycle_base_values")
-	check("Actual Daylight resource preserves Diagnostics multipliers at dusk",is_equal_approx(env.tonemap_exposure,float(dusk_base.exposure)*1.3) and is_equal_approx(env.ambient_light_energy,float(dusk_base.ambient)*1.5) and is_equal_approx(game.sun.light_energy,float(dusk_base.sun_energy)*1.4))
+	check("Actual Daylight resource preserves Diagnostics multipliers at dusk",is_equal_approx(env.tonemap_exposure,float(dusk_base.exposure)*1.3) and is_equal_approx(env.ambient_light_energy,float(dusk_base.ambient)*(.9/float(production_base.ambient))) and is_equal_approx(game.sun.light_energy,float(dusk_base.sun_energy)*1.4))
 	daylight.apply_cycle(env,game.sun,night)
 	check("Actual Daylight night remains dark in direct sun despite retained multiplier",game.sun.light_energy==0 and env.get_meta("cycle_tuning_multipliers").sun_energy>1.3)
 	production_diag.tune({"fog_light_energy":2.0})
