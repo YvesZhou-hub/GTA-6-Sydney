@@ -11,6 +11,7 @@ const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超
 var survival: Node3D
 var survival_hud: Control
 var campaign: Node
+var street: Node3D
 var combat_feedback: Control
 var airport: Node3D
 var world: Node3D
@@ -112,7 +113,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -180,6 +181,9 @@ func _ready():
 	campaign=load("res://scripts/campaign.gd").new()
 	add_child(campaign)
 	campaign.setup(self)
+	street=load("res://scripts/street_life.gd").new()
+	add_child(street)
+	street.setup(self)
 	if not qa_running: load_settings()
 	else: apply_settings()
 	city_clock=load("res://scripts/city_clock.gd").new()
@@ -254,6 +258,10 @@ func _ready():
 		var campaign_validation=load("res://scripts/campaign_validation.gd").new()
 		add_child(campaign_validation)
 		campaign_validation.call_deferred("run",self)
+	elif "--street-qa" in arguments:
+		var street_validation=load("res://scripts/street_validation.gd").new()
+		add_child(street_validation)
+		street_validation.call_deferred("run",self)
 	elif "--ui-font-qa" in arguments:
 		var validation=load("res://scripts/ui_font_validation.gd").new()
 		add_child(validation)
@@ -632,6 +640,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
 	if survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
 	if is_instance_valid(campaign): campaign.start_new()
+	if is_instance_valid(street): street.clear()
 	reset_fleet()
 	player.global_position=world.anchors.get("home",Vector3(-140,6,150))+Vector3(0,1,15)
 	player.last_safe=player.global_position
@@ -1423,6 +1432,8 @@ func settings_menu():
 	_settings_option("抗锯齿",aa.map(func(row):return row[1]),aa.map(func(row):return row[0]).find(settings.antialiasing),func(i): settings.antialiasing=aa[i][0]; _settings_changed())
 	_settings_option("画质",["轻盈 · 关闭实时阴影","标准 · 实时阴影","精细 · 更远阴影与反射"],int(settings.quality),func(i): settings.quality=i; _settings_changed())
 	_settings_slider("视野",55,95,1,float(settings.fov),func(v):return "%d°"%v,func(v): settings.fov=v; _settings_changed())
+	var street_life:Array=GameSettings.STREET_LIFE
+	_settings_option("街上人车",street_life.map(func(row):return row[0]+" · "+row[1]),clampi(int(settings.street_life),0,street_life.size()-1),func(i): settings.street_life=i; _settings_changed())
 	_settings_section("声音")
 	_settings_slider("主音量",0,1,0.05,float(settings.volume),func(v):return "%d%%"%roundi(v*100),func(v): settings.volume=v; _settings_changed())
 	_settings_toggle("切到其他窗口时静音",settings.mute_unfocused,func(v): settings.mute_unfocused=v; _settings_changed())
