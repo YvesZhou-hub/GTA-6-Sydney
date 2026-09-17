@@ -786,10 +786,32 @@ static func _triangle(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, 
 	surface.set_uv(ub); surface.add_vertex(b)
 	surface.set_uv(uc); surface.add_vertex(c)
 
+static var _unit_box_arrays: Array = []
+
+static func _unit_box() -> Array:
+	# Godot's BoxMesh positions scale linearly with size while normals and UVs do
+	# not, so one deindexed unit box describes every box exactly.
+	if _unit_box_arrays.is_empty():
+		var expanded:=SurfaceTool.new()
+		expanded.create_from(BoxMesh.new(),0)
+		expanded.deindex()
+		_unit_box_arrays=expanded.commit_to_arrays()
+	return _unit_box_arrays
+
 static func _append_box(surface: SurfaceTool, position: Vector3, size: Vector3, basis: Basis) -> void:
-	var box := BoxMesh.new()
-	box.size=size
-	_append_mesh_triangles(surface,box,Transform3D(basis,position))
+	# Built on the CPU from the cached unit box. Creating a BoxMesh per box cost two
+	# Metal uploads and two blocking readbacks each, which dominated native startup.
+	# Tangents are omitted: no world material uses normal maps and cell batching
+	# keeps only positions, normals and UVs.
+	var arrays:=_unit_box()
+	var pose:=Transform3D(basis,position)
+	var vertices: PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array=arrays[Mesh.ARRAY_NORMAL]
+	var uvs: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV]
+	for i in vertices.size():
+		surface.set_normal(basis*normals[i])
+		surface.set_uv(uvs[i])
+		surface.add_vertex(pose*(vertices[i]*size))
 
 static func _append_mesh_triangles(surface:SurfaceTool,mesh:Mesh,pose:=Transform3D.IDENTITY) -> void:
 	# A SurfaceTool containing primitive indices silently omits subsequently
