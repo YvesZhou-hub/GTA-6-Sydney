@@ -3,6 +3,7 @@ extends Node3D
 ## Geometry is meter-scale, +X east, +Z south, Y=0 mean water. Stable component IDs are save keys.
 const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Loading = preload("res://scripts/loading_progress.gd")
+const Models = preload("res://scripts/model_library.gd")
 
 signal structure_damaged(point: Vector3, severity: float)
 
@@ -25,6 +26,7 @@ var road_segments: Array = []
 var _batch_boxes: Dictionary = {}
 var _batch_cylinders: Dictionary = {}
 var _batch_foliage: Dictionary = {}
+var _batch_models: Dictionary = {}
 var _visual_cells: Dictionary = {}
 var _dirty_cells: Dictionary = {}
 var _visual_refresh_queued := false
@@ -75,6 +77,7 @@ func _ready() -> void:
 	_build_water()
 	Loading.report(0.04,"铺设街道")
 	_build_streets()
+	_build_street_furniture()
 	Loading.report(0.22,"搭建海港大桥")
 	_build_bridge()
 	Loading.report(0.29,"建造悉尼歌剧院")
@@ -353,9 +356,42 @@ func _flush_batches() -> void:
 				inst.visibility_range_end = 2600.0 if source==_batch_foliage else 1200.0
 				inst.visibility_range_end_margin = 120.0
 				add_child(inst)
+	_flush_model_batches()
 	_batch_boxes.clear()
 	_batch_cylinders.clear()
 	_batch_foliage.clear()
+
+
+## Places one model many times. Trees, lamps and benches all come through here.
+func _batch_model(path: String, pose: Transform3D) -> void:
+	if not _batch_models.has(path): _batch_models[path] = []
+	_batch_models[path].append(pose)
+
+
+## Imported models keep their own materials, so each mesh of a model becomes one
+## MultiMesh per spatial cell instead of sharing the world material palette.
+func _flush_model_batches() -> void:
+	for path: String in _batch_models:
+		var parts: Array = Models.parts(path)
+		if parts.is_empty(): continue
+		var cells: Dictionary = {}
+		for pose: Transform3D in _batch_models[path]:
+			var cell := Vector2i(floori(pose.origin.x / 160.0), floori(pose.origin.z / 160.0))
+			if not cells.has(cell): cells[cell] = []
+			cells[cell].append(pose)
+		for cell: Vector2i in cells:
+			for part: Array in parts:
+				var multi := MultiMesh.new()
+				multi.transform_format = MultiMesh.TRANSFORM_3D
+				multi.mesh = part[0]
+				multi.instance_count = cells[cell].size()
+				for i in multi.instance_count: multi.set_instance_transform(i, cells[cell][i] * (part[1] as Transform3D))
+				var instance := MultiMeshInstance3D.new()
+				instance.multimesh = multi
+				instance.visibility_range_end = 900.0
+				instance.visibility_range_end_margin = 90.0
+				add_child(instance)
+	_batch_models.clear()
 
 func _beam(a: Vector3, b: Vector3, width: float, key: String, depth: float = -1.0) -> void:
 	var delta := b-a
@@ -971,25 +1007,15 @@ func _tree_canopy_intersects_helipad(p: Vector3, scale: float) -> bool:
 func _tree(p: Vector3, scale: float = 1.0) -> bool:
 	if _tree_canopy_intersects_helipad(p,scale): return false
 	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),5.0*scale): return false
-	_batch_cylinder(p+Vector3(0,3.1*scale,0),0.36*scale,6.2*scale,"bark")
-	for branch in [-1,1]:
-		_beam(p+Vector3(0,2.5*scale,0),p+Vector3(branch*1.8*scale,5.8*scale,0.4*scale),0.2*scale,"bark")
-	# Merged ellipsoidal foliage mesh reused by all trees; no flat billboards in the detailed area.
-	var sphere: SphereMesh
-	if materials.has("tree_mesh"):
-		sphere = materials["tree_mesh"]
-	else:
-		sphere = SphereMesh.new()
-		sphere.radius = 1
-		sphere.height = 2
-		sphere.radial_segments = 18
-		sphere.rings = 9
-		materials["tree_mesh"] = sphere
+	# A modelled tree replaces the three ellipsoid crowns that stood in for one.
+	# _tree_crowns still describes the canopy for helipad clearance and diagnostics.
+	var choice: int = absi(hash(Vector2i(roundi(p.x), roundi(p.z)))) % Models.TREES.size()
+	var path: String = Models.TREES[choice]
+	var model_height: float = maxf(1.0, Models.size(path).y)
+	var basis := Basis(Vector3.UP, fposmod(float(hash(Vector2i(roundi(p.z), roundi(p.x)))) * 0.001, TAU))
+	_batch_model(path, Transform3D(basis.scaled(Vector3.ONE * (8.0 * scale / model_height)), p))
 	var crowns:=_tree_crowns(p,scale)
 	for part in range(3):
-		var key := "tree_light" if part==1 else "tree"
-		if not _batch_foliage.has(key): _batch_foliage[key] = []
-		_batch_foliage[key].append(crowns[part])
 		# Preserve only the small nearby set of exact renderer inputs for
 		# clearance diagnostics; headless MultiMesh readback has no transforms.
 		var bounds:AABB=crowns[part]*AABB(-Vector3.ONE,Vector3.ONE*2)
@@ -1000,6 +1026,61 @@ func _tree(p: Vector3, scale: float = 1.0) -> bool:
 			retained.append(bounds)
 			set_meta("helipad_retained_crown_bounds",retained)
 	return true
+
+## Lamp posts, bins, benches and signals along the mapped carriageways. Spacing
+## follows the road width, so laneways stay clear and main streets get a rhythm.
+func _build_street_furniture() -> void:
+	var lamp_height: float = maxf(0.5, Models.size(Models.STREET_LIGHT).y)
+	var signal_height: float = maxf(0.5, Models.size(Models.TRAFFIC_LIGHT).y)
+	var bench_width: float = maxf(0.5, Models.size(Models.BENCH).x)
+	var bin_height: float = maxf(0.5, Models.size(Models.BIN).y)
+	var lamps := 0
+	var props := 0
+	var junctions: Dictionary = {}
+	for segment: Array in road_segments:
+		var a: Vector2 = segment[0]
+		var b: Vector2 = segment[1]
+		var width := float(segment[2])
+		var length := a.distance_to(b)
+		if width < 9.0 or length < 18.0: continue
+		var direction := (b - a) / length
+		var side_vector := Vector2(-direction.y, direction.x)
+		var kerb := width * 0.5 + 1.1
+		var index := 0
+		var station := 6.0
+		while station < length - 6.0 and lamps < 5200:
+			var side := 1.0 if index % 2 == 0 else -1.0
+			var point := a + direction * station + side_vector * side * kerb
+			station += 34.0
+			index += 1
+			if _in_bridge_corridor(point, 1.0): continue
+			var at := Vector3(point.x, GROUND, point.y)
+			var facing := Basis(Vector3.UP, atan2(-side_vector.x * side, -side_vector.y * side))
+			_batch_model(Models.STREET_LIGHT, Transform3D(facing.scaled(Vector3.ONE * (6.4 / lamp_height)), at))
+			lamps += 1
+			if index % 4 == 2 and props < 1400:
+				var extra := Vector3(point.x, GROUND, point.y) + Vector3(direction.x, 0.0, direction.y) * 6.0
+				if index % 8 == 2:
+					_batch_model(Models.BENCH, Transform3D(facing.scaled(Vector3.ONE * (1.9 / bench_width)), extra))
+				else:
+					_batch_model(Models.BIN, Transform3D(facing.scaled(Vector3.ONE * (1.25 / bin_height)), extra))
+				props += 1
+		for point: Vector2 in [a, b]:
+			var key := Vector2i(roundi(point.x * 0.5), roundi(point.y * 0.5))
+			var row: Array = junctions.get(key, [point, 0.0, 0])
+			junctions[key] = [point, maxf(float(row[1]), width), int(row[2]) + 1]
+	var signals := 0
+	for key: Vector2i in junctions:
+		var row: Array = junctions[key]
+		if int(row[2]) < 3 or float(row[1]) < 9.0 or signals >= 900: continue
+		var point: Vector2 = row[0]
+		if _in_bridge_corridor(point, 1.0): continue
+		var at := Vector3(point.x, GROUND, point.y)
+		_batch_model(Models.TRAFFIC_LIGHT, Transform3D(Basis(Vector3.UP, fposmod(float(key.x), TAU)).scaled(Vector3.ONE * (3.6 / signal_height)), at))
+		signals += 1
+	set_meta("street_furniture", {"lamps": lamps, "props": props, "signals": signals})
+	print("STREET_FURNITURE ", JSON.stringify(get_meta("street_furniture")))
+
 
 func _lamp(p: Vector3) -> void:
 	if p.y<GROUND+1.0 and _in_bridge_corridor(Vector2(p.x,p.z),0.5): return
