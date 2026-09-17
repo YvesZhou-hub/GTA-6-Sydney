@@ -1,5 +1,6 @@
 extends Control
 ## Combat information only. The host owns input, health, economy and transactions.
+const GameSettings = preload("res://scripts/game_settings.gd")
 signal service_requested()
 signal heal_requested()
 
@@ -182,10 +183,10 @@ func _can_heal() -> bool:
 func _refresh_buttons() -> void:
 	if not _built: return
 	var cooldown: float = float(_state.get("heal_cooldown", 0))
-	_heal_button.text = "H  治疗 %.1f s" % cooldown if cooldown > 0 else "H  治疗 ×%d" % int(_state.get("medkits", 0))
+	_heal_button.text = GameSettings.keys("{heal}  治疗 %.1f s") % cooldown if cooldown > 0 else GameSettings.keys("{heal}  治疗 ×%d") % int(_state.get("medkits", 0))
 	if bool(_state.get("vehicle_active", false)):
 		var repair_cooldown: float = float(_state.get("field_repair_cooldown", 0))
-		_heal_button.text = "H 快修 %.0f s" % ceil(repair_cooldown) if repair_cooldown > 0 else "H 快修 $%d" % int(_state.get("field_repair_cost", 0))
+		_heal_button.text = GameSettings.keys("{heal} 快修 %.0f s") % ceil(repair_cooldown) if repair_cooldown > 0 else GameSettings.keys("{heal} 快修 $%d") % int(_state.get("field_repair_cost", 0))
 		_heal_button.tooltip_text = "战斗中补充最多25%载具耐久；每点45金币，12秒冷却"
 	else: _heal_button.tooltip_text = "医疗包恢复60生命，12秒冷却"
 	_heal_button.disabled = not _can_heal()
@@ -285,7 +286,7 @@ func _draw() -> void:
 		objective = "受到攻击" + (" · " + _hurt_label if not _hurt_label.is_empty() else "")
 		objective_color = DANGER
 	elif low:
-		objective = "H 治疗，先拉开距离" if _can_heal() else "先拉开距离，再寻找补给"
+		objective = GameSettings.keys("{heal} 治疗，先拉开距离") if _can_heal() else "先拉开距离，再寻找补给"
 		objective_color = DANGER
 	elif _hit_time > 0:
 		objective = "命中 · 继续清理"

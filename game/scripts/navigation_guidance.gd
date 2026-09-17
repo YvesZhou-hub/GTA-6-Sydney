@@ -1,5 +1,6 @@
 extends Control
 ## Screen-space destination pin and heading ribbon over the production 3D view.
+const GameSettings = preload("res://scripts/game_settings.gd")
 var view_camera: Camera3D
 var player_position := Vector3.ZERO
 var player_heading := 0.0
@@ -84,7 +85,7 @@ func _draw():
 	var text_x:=clampf(at.x-80,28,size.x-300)
 	_text(Vector2(text_x,at.y+54),short_name,color,16)
 	var status:=distance_text+(" · 后方" if behind else "")
-	if has_arrived(player_position,target_position,arrival_radius,arrival_height): status="已到达 · K 附近体验"
+	if has_arrived(player_position,target_position,arrival_radius,arrival_height): status=GameSettings.keys("已到达 · {experiences} 附近体验")
 	elif distance<arrival_radius and absf(delta_position.y)>arrival_height: status+=" · 目的地在地面"
 	_text(Vector2(text_x,at.y+76),status,Color("edf3df"),14)
 

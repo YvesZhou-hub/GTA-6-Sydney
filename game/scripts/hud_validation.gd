@@ -199,8 +199,15 @@ func check_settings_and_gamepad(window: Window) -> void:
 	game.apply_settings()
 	jump_keys = InputMap.action_get_events("jump").filter(func(event: InputEvent): return event is InputEventKey).map(func(event: InputEventKey): return event.physical_keycode)
 	check("default keys restore after clearing bindings", jump_keys == [KEY_SPACE], {"jump": jump_keys})
+	game.settings.bindings = {"map": [KEY_N], "heal": [KEY_U]}
+	game.apply_settings()
 	game.close_panel()
 	await frames(5)
+	check("control hints follow rebound keys", "N 地图" in game.context_hint.text and not "M 地图" in game.context_hint.text and game.survival_hud._heal_button.text.begins_with("U "), {"hint": game.context_hint.text, "heal": game.survival_hud._heal_button.text})
+	game.settings.bindings = {}
+	game.apply_settings()
+	await frames(5)
+	check("control hints return to default keys", "M 地图" in game.context_hint.text and game.survival_hud._heal_button.text.begins_with("H "), {"hint": game.context_hint.text})
 	await press_pad(JOY_BUTTON_START)
 	await frames(5)
 	var focus: Control = game.get_viewport().gui_get_focus_owner()

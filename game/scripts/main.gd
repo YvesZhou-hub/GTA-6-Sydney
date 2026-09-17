@@ -630,7 +630,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	landmark_target_key=""
 	landmark_target_name=""
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
-	if survival.enabled: life.status_text="奶龙持续增援 · 击败赚金币 · 无需清完上一批\nH 急救 / 快修 · B 战地升级 · V 自动武器"
+	if survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
 	if is_instance_valid(campaign): campaign.start_new()
 	reset_fleet()
 	player.global_position=world.anchors.get("home",Vector3(-140,6,150))+Vector3(0,1,15)
@@ -663,7 +663,7 @@ func enable_encounters():
 	survival.grace=12.0
 	survival._spawn_clock=0.6
 	survival.rest=0.0
-	life.status_text="奶龙跟随街区持续增援 · 击败赚金币\nH 急救 / 快修 · B 升级 · V 自动武器"
+	life.status_text=GameSettings.keys("奶龙跟随街区持续增援 · 击败赚金币\n{heal} 急救 / 快修 · {survival_services} 升级 · {auto_support} 自动武器")
 	close_panel()
 	notify("奶龙危机已开启 · 保留当前财富、载具与位置\n12 秒保护，奶龙正在接近 · Tab 新增武装载具")
 
@@ -948,7 +948,7 @@ func survival_menu():
 	var blocked:String=survival.service_block_reason()
 	if not blocked.is_empty():
 		var reason=label(blocked,17,Color("f3cb80"))
-		reason.text="完整维修需安全停车；战斗中可用 H 快修。"
+		reason.text=GameSettings.keys("完整维修需安全停车；战斗中可用 {heal} 快修。")
 		reason.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 		modal_content.add_child(reason)
 	modal_content.add_child(label("生命 %d / 120 · 医疗包 %d / 5"%[player.health,survival.medkits],19))
@@ -1330,8 +1330,10 @@ func update_landmark_marker():
 	var distance:float=Vector2(offset.x,offset.z).length()
 	var bearing:float=fposmod(rad_to_deg(atan2(offset.x,-offset.z)),360.0)
 	var direction:String=["北","东北","东","东南","南","西南","西","西北"][int(roundf(bearing/45.0))%8]
-	landmark_marker.text=("◎ 已到达 · "+landmark_target_name+"
-K 城市体验  ·  M 选择下一个目的地") if distance<25 and absf(offset.y)<12 else ("◎ %s · %s · %s\n方向 %03d°  ·  M 地图  ·  K 城市体验"%[landmark_target_name,("%.2f km"%(distance/1000.0)) if distance>=1000 else ("%.0f m"%distance),direction,int(bearing)])
+	if distance<25 and absf(offset.y)<12:
+		landmark_marker.text="◎ 已到达 · "+landmark_target_name+"\n"+GameSettings.keys("{experiences} 城市体验  ·  {map} 选择下一个目的地")
+	else:
+		landmark_marker.text="◎ %s · %s · %s\n方向 %03d°  ·  "%[landmark_target_name,("%.2f km"%(distance/1000.0)) if distance>=1000 else ("%.0f m"%distance),direction,int(bearing)]+GameSettings.keys("{map} 地图  ·  {experiences} 城市体验")
 
 func map_menu():
 	active_panel="map"
@@ -1834,12 +1836,15 @@ func update_hud():
 			info.text="航向 %03d° · 海港 %.1f km" %[fposmod(rad_to_deg(atan2(forward.x,-forward.z)),360),current_vehicle.global_position.distance_to(world.anchors.opera)/1000]
 		if current_vehicle.is_boosting():
 			speed_label.text+="\n3倍加速中 · 上限 %d km/h"%current_vehicle.effective_top_speed_kmh()
-		context_hint.text=vehicle_help(current_vehicle.kind)+" · Shift 3倍加速   E 离开   Tab 新增   M 地图"+("\nV 自动武器   H 战地快修   B 补给 / 升级 · 弹药免费" if survival.enabled else "   T 时间")
+		context_hint.text=vehicle_help(current_vehicle.kind)+GameSettings.keys(" · {boost} 3倍加速   {interact} 离开   {vehicles} 新增   {map} 地图")+(GameSettings.keys("\n{auto_support} 自动武器   {heal} 战地快修   {survival_services} 补给 / 升级 · 弹药免费") if survival.enabled else "   T 时间")
 	else:
 		speed_label.text="游泳" if player.swimming else ""
 		var near=nearest_vehicle()
-		var hint="E 进入 "+VEHICLE_NAMES[near.kind] if near else life.available_actions(player.global_position)
-		context_hint.text=(hint+"   ·   " if hint!="" else "")+("左键 / X 反击 · H 治疗 · B 整备 · " if survival.enabled else "")+"WASD 行走   Shift 奔跑   Tab 载具   M 地图"
+		var hint=GameSettings.keys("{interact} 进入 ")+VEHICLE_NAMES[near.kind] if near else life.available_actions(player.global_position)
+		# Life actions name their default key first; show the player's binding instead.
+		if hint.begins_with("E  "): hint=GameSettings.keys("{interact}")+hint.substr(1)
+		elif hint.begins_with("G  "): hint=GameSettings.keys("{carry}")+hint.substr(1)
+		context_hint.text=(hint+"   ·   " if hint!="" else "")+(GameSettings.keys("左键 / {fire} 反击 · {heal} 治疗 · {survival_services} 整备 · ") if survival.enabled else "")+GameSettings.keys("{move} 行走   {sprint} 奔跑   {vehicles} 载具   {map} 地图")
 	if _using_pad: context_hint.text=GameSettings.pad_hint(current_vehicle.kind if is_instance_valid(current_vehicle) else "",survival.enabled)
 	vehicle_panel.visible=not speed_label.text.is_empty()
 	# Sit above the control strip, whose height changes with wrapped vehicle hints.
@@ -2044,13 +2049,16 @@ func airport_start():
 	notify("34L 跑道 · 按住 W 加油门，约 250 km/h 时 R 抬头，A/D 转弯。海港约在北偏东 12 km。")
 
 func vehicle_help(kind:String) -> String:
+	return GameSettings.keys(_vehicle_help_template(kind))
+
+func _vehicle_help_template(kind:String) -> String:
 	match kind:
-		"tank": return "W/S 履带 · A/D 转向 · 鼠标瞄准 · Q/Z 旋塔 · R/F 俯仰 · X/左键 发射 · B 维修升级"
-		"fighter": return "W/S 推力 · A/D 转弯 · R/F 俯仰 · X/左键 发射 · 2000 km/h · B 维修升级"
-		"car": return "W/S 加速倒车 · A/D 转向 · 空格 急刹 · Ctrl + A/D 漂移 · 常速 420 km/h"
-		"motorcycle": return "W/S 加速倒车 · A/D 转向 · 空格 急刹 · Ctrl + A/D 漂移 · 常速 320 km/h"
-		"yacht","speedboat": return "W/S 双机推力   A/D 船舵   空格 反向推力"
-		"hoverboard": return "W/S 加速 / 后退 · 200 km/h   A/D 转向   R/F 升降   空格 急停 · 自动越阶 / 掠水"
-		"helicopter": return "W/S 俯仰   A/D 偏航   R/F 升降 · 极速 350 km/h"
-		"paraglider","glider": return "A/D 转弯   R/F 俯仰   空格 减速板 · 无动力"
-		_: return "W/S 推力   A/D 转弯   R/F 俯仰   空格 减速板 · 极速 800 km/h"
+		"tank": return "{forward}/{back} 履带 · {left}/{right} 转向 · 鼠标瞄准 · {combat_yaw_left}/{combat_yaw_right} 旋塔 · {combat_raise}/{combat_lower} 俯仰 · {fire}/左键 发射 · {survival_services} 维修升级"
+		"fighter": return "{forward}/{back} 推力 · {left}/{right} 转弯 · {rise}/{fall} 俯仰 · {fire}/左键 发射 · 2000 km/h · {survival_services} 维修升级"
+		"car": return "{forward}/{back} 加速倒车 · {left}/{right} 转向 · {brake} 急刹 · {drift} + {left}/{right} 漂移 · 常速 420 km/h"
+		"motorcycle": return "{forward}/{back} 加速倒车 · {left}/{right} 转向 · {brake} 急刹 · {drift} + {left}/{right} 漂移 · 常速 320 km/h"
+		"yacht","speedboat": return "{forward}/{back} 双机推力   {left}/{right} 船舵   {brake} 反向推力"
+		"hoverboard": return "{forward}/{back} 加速 / 后退 · 200 km/h   {left}/{right} 转向   {rise}/{fall} 升降   {brake} 急停 · 自动越阶 / 掠水"
+		"helicopter": return "{forward}/{back} 俯仰   {left}/{right} 偏航   {rise}/{fall} 升降 · 极速 350 km/h"
+		"paraglider","glider": return "{left}/{right} 转弯   {rise}/{fall} 俯仰   {brake} 减速板 · 无动力"
+		_: return "{forward}/{back} 推力   {left}/{right} 转弯   {rise}/{fall} 俯仰   {brake} 减速板 · 极速 800 km/h"
