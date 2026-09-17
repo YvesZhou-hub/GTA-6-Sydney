@@ -15,6 +15,8 @@ var auto_spawn := true
 var enemies: Array = []
 var kills := 0
 var cleared := 0
+## Emitted where a Nailong went down, so the district loop can credit the work.
+signal enemy_defeated(at: Vector3, level: int)
 var wave_spawned := 0
 var wave_kills := 0
 var medkits := 3
@@ -161,6 +163,7 @@ func _physics_process(delta: float) -> void:
 	_reward_clock = maxf(0.0, _reward_clock - delta)
 	_shot_cooldown = maxf(0.0, _shot_cooldown - delta)
 	_gun.visible = enabled and not is_instance_valid(game.current_vehicle)
+	if game.player.has_method("set_armed"): game.player.set_armed(_gun.visible)
 	_tick_beams(delta)
 	_tick_hazards(delta)
 	_fleet_clock -= delta
@@ -286,8 +289,11 @@ func _enemy_offscreen(enemy: Node3D) -> bool:
 
 func _enemy_defeated(enemy, reward: int) -> void:
 	if not enemies.has(enemy): return
+	var at: Vector3 = enemy.global_position if is_instance_valid(enemy) else game.player.global_position
+	var level: int = int(enemy.level) if is_instance_valid(enemy) else 1
 	enemies.erase(enemy)
 	kills += 1; wave_kills += 1
+	enemy_defeated.emit(at, level)
 	_credit(reward)
 	_reward_text = "击败 Lv.%d %s · +%d 金币" % [enemy.level, enemy.spec.label, reward]
 	_reward_clock = 3.0
@@ -446,8 +452,11 @@ func fire_blaster() -> bool:
 func _build_blaster() -> void:
 	_gun = Node3D.new()
 	_gun.name = "PulseBlaster"
-	game.player.visual.add_child(_gun)
-	_gun.position = Vector3(0.34, 1.17, -0.27)
+	# Held in the hand so it follows the animation instead of floating at the hip.
+	var hand: Node3D = game.player.visual.mount("Wrist.R")
+	hand.add_child(_gun)
+	_gun.position = Vector3(0.0, 0.02, 0.16)
+	_gun.rotation = Vector3(deg_to_rad(-90.0), 0.0, 0.0)
 	for spec in [[Vector3.ZERO, Vector3(0.18, 0.20, 0.48), Color("234654")], [Vector3(0, 0.01, -0.34), Vector3(0.11, 0.11, 0.29), Color("93efd6")], [Vector3(0, -0.16, 0.08), Vector3(0.11, 0.26, 0.12), Color("172a31")]]:
 		var view := MeshInstance3D.new()
 		var mesh := BoxMesh.new(); mesh.size = spec[1]

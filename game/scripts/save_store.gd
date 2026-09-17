@@ -56,7 +56,7 @@ static func read(id: String, backup: bool = false) -> Dictionary:
 	if not data is Dictionary:
 		last_error = "Invalid save. The previous recovery copy may still be available."
 		return {}
-	for key in ["world", "life", "airport", "settings", "navigation", "city_clock", "survival", "campaign"]:
+	for key in ["world", "life", "airport", "settings", "navigation", "city_clock", "survival", "campaign", "districts"]:
 		if data.has(key) and not data[key] is Dictionary:
 			last_error = "Invalid world section: " + key
 			return {}

@@ -1,11 +1,15 @@
 extends CharacterBody3D
+## The resident the player controls. The model and its animation clips are CC0
+## by Quaternius; see assets/thirdparty/SOURCES.md.
+const Visual = preload("res://scripts/character_visual.gd")
+const HEIGHT := 1.8
 
 var enabled = false
 var yaw = 0.0
 var swimming = false
-var visual: Node3D
-var limbs: Array[Node3D] = []
-var cycle = 0.0
+var visual: Visual
+var model_key := "casual"
+var armed_pose := false
 var last_safe = Vector3.ZERO
 var stamina = 100.0
 var foot_clock = 0.0
@@ -26,12 +30,14 @@ func take_damage(amount: float, origin: Vector3 = Vector3.ZERO) -> float:
 	damage_cooldown = 0.6
 	last_damage_origin = origin if origin.is_finite() else Vector3.ZERO
 	health_changed.emit(health, max_health)
+	if is_instance_valid(visual): visual.set_state("death" if health <= 0.0 else "hit", 1.1, true)
 	if health <= 0.0: defeated.emit()
 	return removed
 
 func reset_health() -> void:
 	health = max_health
 	damage_cooldown = 0.0
+	if is_instance_valid(visual): visual.set_state("idle", 1.0, true)
 	health_changed.emit(health, max_health)
 
 func heal(amount: float) -> float:
@@ -50,56 +56,11 @@ func _ready():
 	shape.shape = capsule
 	shape.position.y = 0.9
 	add_child(shape)
-	visual = Node3D.new()
+	visual = Visual.new()
 	add_child(visual)
-	var jacket = material(Color("bb714b"))
-	var denim = material(Color("243e4e"))
-	var skin = material(Color("d6aa84"))
-	var shoe = material(Color("e2dfd1"))
-	body(Vector3(0,1.19,0),Vector3(0.53,0.63,0.28),jacket,visual)
-	body(Vector3(0,1.71,-0.015),Vector3(0.28,0.32,0.28),skin,visual,true)
-	body(Vector3(0,1.86,0.015),Vector3(0.29,0.13,0.28),material(Color("332c29")),visual,true)
-	for side in [-1,1]:
-		var leg = Node3D.new()
-		leg.position = Vector3(side*0.16,0.91,0)
-		visual.add_child(leg)
-		body(Vector3(0,-0.35,0),Vector3(0.19,0.7,0.22),denim,leg)
-		body(Vector3(0,-0.8,-0.055),Vector3(0.23,0.14,0.36),shoe,leg)
-		limbs.append(leg)
-		var arm = Node3D.new()
-		arm.position = Vector3(side*0.35,1.43,0)
-		visual.add_child(arm)
-		body(Vector3(0,-0.25,0),Vector3(0.17,0.5,0.21),jacket,arm)
-		body(Vector3(0,-0.54,0),Vector3(0.14,0.15,0.17),skin,arm,true)
-		limbs.append(arm)
-	body(Vector3(0,1.31,-0.15),Vector3(0.022,0.38,0.018),material(Color("dacba5")),visual)
-	body(Vector3(0,0.95,-0.01),Vector3(0.51,0.07,0.29),denim,visual)
-	for eye_x in [-0.062,0.062]:
-		body(Vector3(eye_x,1.75,-0.147),Vector3(0.032,0.023,0.022),material(Color("272c2d")),visual,true)
+	visual.setup(model_key, HEIGHT)
 	floor_snap_length = 0.55
 	floor_max_angle = deg_to_rad(48)
-
-func material(color: Color) -> StandardMaterial3D:
-	var m = StandardMaterial3D.new()
-	m.albedo_color = color
-	m.roughness = 0.8
-	return m
-
-func body(pos: Vector3,size: Vector3,mat: Material,parent:Node3D,round_form=false):
-	var mesh = MeshInstance3D.new()
-	if round_form:
-		var s = SphereMesh.new()
-		s.radius = 0.5
-		s.height = 1
-		s.radial_segments = 16
-		s.rings = 8
-		mesh.mesh = s
-	else:
-		mesh.mesh = rounded_box()
-	mesh.scale = size
-	mesh.position = pos
-	mesh.material_override = mat
-	parent.add_child(mesh)
 
 func _physics_process(delta):
 	damage_cooldown = maxf(0.0, damage_cooldown - delta)
@@ -133,11 +94,8 @@ func _physics_process(delta):
 		var other = hit.get_collider()
 		if other is RigidBody3D:
 			other.apply_central_impulse(-hit.get_normal()*minf(60,other.mass*0.35))
-	if move.length() > 0.1:
-		visual.rotation.y = lerp_angle(visual.rotation.y,atan2(-move.x,-move.z),delta*12)
-	cycle += delta*velocity.length()*1.9
-	for i in limbs.size():
-		limbs[i].rotation.x = sin(cycle + (PI if i==1 or i==2 else 0))*minf(velocity.length()/13,0.65)
+	if move.length() > 0.1: visual.face(move, delta)
+	_animate(delta)
 	visual.rotation.x = lerpf(visual.rotation.x,-0.8 if swimming else 0,delta*4)
 	if move.length()>0.1 and (is_on_floor() or swimming):
 		foot_clock += delta
@@ -151,21 +109,27 @@ func recover():
 	reset_physics_interpolation()
 	velocity = Vector3.ZERO
 
-func rounded_box() -> ArrayMesh:
-	var st=SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for face in [Vector3.RIGHT,Vector3.LEFT,Vector3.UP,Vector3.DOWN,Vector3.FORWARD,Vector3.BACK]:
-		var u=face.cross(Vector3.UP).normalized() if absf(face.y)<0.9 else Vector3.RIGHT
-		var v=face.cross(u).normalized()
-		for x in 5:
-			for y in 5:
-				var points=[]
-				for corner in [Vector2(x,y),Vector2(x+1,y),Vector2(x+1,y+1),Vector2(x,y+1)]:
-					points.append(face*0.5+u*(corner.x/5-0.5)+v*(corner.y/5-0.5))
-				for index in [0,2,1,0,3,2]:
-					var p:Vector3=points[index]
-					var core=p.clamp(Vector3.ONE*-0.41,Vector3.ONE*0.41)
-					var normal=(p-core).normalized()
-					st.set_normal(normal)
-					st.add_vertex(core+normal*0.09)
-	return st.commit()
+
+## Picks the clip that matches how the resident is actually moving.
+func _animate(delta: float) -> void:
+	if health <= 0.0:
+		visual.set_state("death", 1.0, true)
+		return
+	if visual.playing_one_shot(): return
+	var armed := armed_pose
+	var speed := Vector2(velocity.x, velocity.z).length()
+	if swimming:
+		visual.set_state("swim", clampf(speed / 3.2, 0.6, 1.4))
+	elif not is_on_floor():
+		visual.set_state("air", 1.0)
+	elif speed < 0.35:
+		visual.set_state("idle_armed" if armed else "idle")
+	elif speed < 3.4:
+		visual.set_state("walk", clampf(speed / 1.6, 0.7, 1.8))
+	else:
+		visual.set_state("run_armed" if armed else "run", clampf(speed / 5.2, 0.8, 1.7))
+
+
+## Survival mode shows a weapon; the armed clips keep the hands on it.
+func set_armed(value: bool) -> void:
+	armed_pose = value

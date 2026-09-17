@@ -11,6 +11,8 @@ const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超
 var survival: Node3D
 var survival_hud: Control
 var campaign: Node
+var districts: Node
+var street: Node3D
 var combat_feedback: Control
 var airport: Node3D
 var world: Node3D
@@ -112,7 +114,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa","--district-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -180,6 +182,12 @@ func _ready():
 	campaign=load("res://scripts/campaign.gd").new()
 	add_child(campaign)
 	campaign.setup(self)
+	districts=load("res://scripts/districts.gd").new()
+	add_child(districts)
+	districts.setup(self)
+	street=load("res://scripts/street_life.gd").new()
+	add_child(street)
+	street.setup(self)
 	if not qa_running: load_settings()
 	else: apply_settings()
 	city_clock=load("res://scripts/city_clock.gd").new()
@@ -254,6 +262,14 @@ func _ready():
 		var campaign_validation=load("res://scripts/campaign_validation.gd").new()
 		add_child(campaign_validation)
 		campaign_validation.call_deferred("run",self)
+	elif "--street-qa" in arguments:
+		var street_validation=load("res://scripts/street_validation.gd").new()
+		add_child(street_validation)
+		street_validation.call_deferred("run",self)
+	elif "--district-qa" in arguments:
+		var district_validation=load("res://scripts/district_validation.gd").new()
+		add_child(district_validation)
+		district_validation.call_deferred("run",self)
 	elif "--ui-font-qa" in arguments:
 		var validation=load("res://scripts/ui_font_validation.gd").new()
 		add_child(validation)
@@ -303,23 +319,8 @@ func setup_environment():
 func setup_ui():
 	canvas=CanvasLayer.new()
 	add_child(canvas)
-	var theme=preload("res://scripts/ui_fonts.gd").make_theme()
+	var theme=preload("res://scripts/ui_theme.gd").build()
 	font=theme.default_font
-	theme.set_color("font_color","Label",Color("f1f1df"))
-	var button_style=panel_style(Color(0.11,0.22,0.25,0.96),8)
-	button_style.content_margin_left=18
-	button_style.content_margin_right=18
-	button_style.content_margin_top=13
-	button_style.content_margin_bottom=13
-	theme.set_stylebox("normal","Button",button_style)
-	var hover=button_style.duplicate()
-	hover.bg_color=Color("28545b")
-	theme.set_stylebox("hover","Button",hover)
-	var focus=button_style.duplicate()
-	focus.border_color=Color("92d4c5")
-	focus.set_border_width_all(2)
-	theme.set_stylebox("focus","Button",focus)
-	theme.set_color("font_color","Button",Color("f1efdc"))
 	var root=Control.new()
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -433,11 +434,11 @@ func setup_ui():
 	hud.add_child(save_indicator)
 	modal=PanelContainer.new()
 	modal.position=Vector2(44,40)
-	modal.size=Vector2(520,820)
-	modal.add_theme_stylebox_override("panel",panel_style(Color(0.025,0.075,0.1,0.96),14))
+	modal.size=Vector2(560,820)
+	modal.theme_type_variation="ModalPanel"
 	root.add_child(modal)
 	var scroll=ScrollContainer.new()
-	scroll.custom_minimum_size=Vector2(490,780)
+	scroll.custom_minimum_size=Vector2(500,760)
 	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED
 	modal.add_child(scroll)
 	modal_content=VBoxContainer.new()
@@ -518,15 +519,24 @@ func clear_panel(title:String,subtitle:String=""):
 	for child in modal_content.get_children():
 		modal_content.remove_child(child)
 		child.queue_free()
-	modal_content.add_child(label("H A R B O U R L I F E",15,Color("8ed1c1")))
-	modal_content.add_child(label(title,36))
+	var eyebrow=Label.new()
+	eyebrow.text="H A R B O U R L I F E"
+	eyebrow.theme_type_variation="SectionLabel"
+	modal_content.add_child(eyebrow)
+	var heading=Label.new()
+	heading.text=title
+	heading.theme_type_variation="TitleLabel"
+	heading.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	heading.custom_minimum_size.x=470
+	modal_content.add_child(heading)
 	if subtitle!="":
-		var sub=label(subtitle,16,Color("bbc8c5"))
+		var sub=Label.new()
+		sub.text=subtitle
+		sub.theme_type_variation="QuietLabel"
 		sub.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-		sub.custom_minimum_size.x=430
+		sub.custom_minimum_size.x=470
 		modal_content.add_child(sub)
-	var line=HSeparator.new()
-	modal_content.add_child(line)
+	modal_content.add_child(HSeparator.new())
 	_pad_focus_pending=true
 	modal.visible=true
 	hud.visible=false
@@ -539,10 +549,11 @@ func clear_panel(title:String,subtitle:String=""):
 	if is_instance_valid(minimap): minimap.visible=false
 	if is_instance_valid(navigation_hud): navigation_hud.visible=false
 
-func button(text_value:String,action:Callable):
+func button(text_value:String,action:Callable,variant:String=""):
 	var b=Button.new()
 	b.text=text_value
 	b.alignment=HORIZONTAL_ALIGNMENT_LEFT
+	if variant!="": b.theme_type_variation=variant
 	b.pressed.connect(action)
 	modal_content.add_child(b)
 	_focus_for_pad(b)
@@ -558,30 +569,33 @@ func main_menu():
 	if is_instance_valid(weapons): weapons.clear()
 	active_panel="main"
 	hud.visible=false
-	clear_panel("属于你的海港。","A life by the water.\n悉尼核心海港 · 单人离线世界 · v"+str(ProjectSettings.get_setting("application/config/version")))
+	clear_panel("属于你的海港。","A life by the water. · 悉尼核心海港 · 单人离线世界")
+	section("开始新世界")
 	name_edit=LineEdit.new()
 	name_edit.placeholder_text="为你的世界取个名字"
 	name_edit.text="我的悉尼"
-	name_edit.custom_minimum_size.y=45
+	name_edit.custom_minimum_size.y=46
 	modal_content.add_child(name_edit)
-	button("奶龙危机 · 开始生存  →",func(): new_world("life",name_edit.text))
-	button("自由观光 · 无敌人  →",func(): new_world("sandbox",name_edit.text))
+	button("奶龙危机 · 开始生存  →",func(): new_world("life",name_edit.text),"PrimaryButton")
+	button("自由观光 · 无敌人  →",func(): new_world("sandbox",name_edit.text),"PrimaryButton")
 	if is_instance_valid(airport): button("机场出发 · 奶龙危机  ↗",airport_start)
-	modal_content.add_child(label("奶龙跟随所在街区持续增援 · 免费弹药、免费载具\nV 自动锁定 · H 急救 / 快修 · B 战地升级 · M 地图\n清理奖金自动到账，不必清完上一批也会遇到新敌人。",15,Color("b7c4bc")))
+	note(GameSettings.keys("奶龙跟随所在街区持续增援 · 免费弹药、免费载具\n{auto_support} 自动锁定 · {heal} 急救 / 快修 · {survival_services} 战地升级 · {map} 地图"))
 	var worlds=[] if qa_running else Store.slots()
 	if not worlds.is_empty():
-		modal_content.add_child(label("继续你的世界",21))
+		section("继续你的世界")
 		for entry in worlds.slice(0,4):
 			if entry.mode=="sandbox":
 				button(str(entry.name)+" · 继续并开启奶龙危机",func():
 					load_world(entry.id)
 					if active and world_id==entry.id: enable_encounters())
-				button("继续原有观光 · 无敌人 · "+str(entry.name),func(): load_world(entry.id))
+				button("继续原有观光 · 无敌人 · "+str(entry.name),func(): load_world(entry.id),"GhostButton")
 			else: button(str(entry.name)+" · 继续奶龙危机",func(): load_world(entry.id))
-	button("存档与恢复",worlds_menu)
-	button("操作与设置",settings_menu)
-	button("制作与资料来源",credits_menu)
-	button("退出",func(): get_tree().quit())
+	section("其他")
+	button("存档与恢复",worlds_menu,"GhostButton")
+	button("操作与设置",settings_menu,"GhostButton")
+	button("制作与资料来源",credits_menu,"GhostButton")
+	button("退出",func(): get_tree().quit(),"GhostButton")
+	note("v"+str(ProjectSettings.get_setting("application/config/version"))+" · 离线单人 · 不需要账号")
 
 func close_panel():
 	modal.visible=false
@@ -632,6 +646,8 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
 	if survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
 	if is_instance_valid(campaign): campaign.start_new()
+	if is_instance_valid(districts): districts.reset()
+	if is_instance_valid(street): street.clear()
 	reset_fleet()
 	player.global_position=world.anchors.get("home",Vector3(-140,6,150))+Vector3(0,1,15)
 	player.last_safe=player.global_position
@@ -770,6 +786,7 @@ func save_world() -> bool:
 	if is_instance_valid(city_clock):data["city_clock"]=city_clock.get_state()
 	if is_instance_valid(survival): data["survival"]=survival.get_state()
 	if is_instance_valid(campaign): data["campaign"]=campaign.get_state()
+	if is_instance_valid(districts): data["districts"]=districts.get_state()
 	var ok=Store.write(world_id,data)
 	save_indicator.text="已保存 · "+Time.get_time_string_from_system() if ok else "保存失败"
 	if not ok: notify(Store.last_error,false)
@@ -821,6 +838,7 @@ func load_world(id:String,backup=false):
 	if is_instance_valid(survival): survival.apply_state(data.get("survival",{}))
 	# Worlds saved before the campaign existed start chapter one from the first step.
 	if is_instance_valid(campaign): campaign.apply_state(data.get("campaign",{}))
+	if is_instance_valid(districts): districts.apply_state(data.get("districts",{}))
 	set_meta("last_vehicle_model_adjustments",model_adjustments)
 	for v in vehicles:
 		if v.vehicle_id==occupied_id: enter_vehicle(v)
@@ -853,20 +871,25 @@ func worlds_menu():
 func pause_menu():
 	active_panel="pause"
 	clear_panel("海港会等你。",world_name+"  /  "+("自由沙盒" if mode=="sandbox" else "生活模式"))
-	button("继续游玩",close_panel)
+	button("继续游玩",close_panel,"PrimaryButton")
+	section("这一趟")
 	if is_instance_valid(campaign): button(campaign.menu_label(),objectives_menu)
-	if not survival.enabled: button("开启奶龙危机 · 保留当前世界与财富",enable_encounters)
-	button("战地补给与武器升级  ·  B",survival_menu)
-	button("保存世界",func():
-		if save_world(): notify("世界已保存"))
 	button("工作与活动",jobs_menu)
+	button("城市体验 · 美食、场馆与海滨",experiences_menu)
 	button("我的载具",vehicles_menu)
 	button("地图与位置",map_menu)
-	button("时间与晚霞  ·  T",time_menu)
 	button("拍照 · 关闭菜单后拍摄",photo_from_menu)
-	button("城市体验 · 美食、场馆与海滨",experiences_menu)
-	button("设置与操作",settings_menu)
-	button("存档与恢复",worlds_menu)
+	section("战斗与世界")
+	if is_instance_valid(districts): button(districts_label(),districts_menu)
+	if not survival.enabled: button("开启奶龙危机 · 保留当前世界与财富",enable_encounters)
+	button("战地补给与武器升级  ·  B",survival_menu)
+	button("时间与晚霞  ·  T",time_menu)
+	button("保存世界",func():
+		if save_world(): notify("世界已保存"))
+	section("设置与存档")
+	button("设置与操作",settings_menu,"GhostButton")
+	button("存档与恢复",worlds_menu,"GhostButton")
+	section("卡住了？")
 	button("返回个人空间 · 救援",recover_player)
 	button("找回遗失货物",func(): notify(life.recover_cargo()))
 	button("修复建筑 · "+("免费" if mode=="sandbox" else "$500"),func():
@@ -874,6 +897,7 @@ func pause_menu():
 			world.repair_all()
 			airport.repair_all()
 			notify("海港与机场建筑已修复"))
+	section("离开")
 	button("保存并回到标题",func():
 		if save_world():
 			active=false
@@ -881,7 +905,7 @@ func pause_menu():
 			player.enabled=false
 			get_tree().paused=false
 			main_menu())
-	button("保存并退出",quit_game)
+	button("保存并退出",quit_game,"GhostButton")
 
 func jobs_menu():
 	active_panel="jobs"
@@ -1396,6 +1420,24 @@ func refresh_map_results(query:String):
 		)
 		map_results.add_child(choice)
 
+func districts_label() -> String:
+	var cleared:int=districts.liberated.size()
+	return "城市与港区 · 已解放 %d / %d"%[cleared,districts.DISTRICTS.size()]
+
+func districts_menu():
+	active_panel="districts"
+	clear_panel("城市与港区","奶龙占住了各个港区。在一个港区里击败奶龙、完成工作或城市体验，就能把它夺回来；解放后街上的人和车会回来，并开放下一个港区。")
+	for row:Dictionary in districts.summary():
+		var state:String="已解放" if row.liberated else ("清剿中 %d / %d"%[row.done,row.need] if row.unlocked else "未开放")
+		section(str(row.name)+" · "+state)
+		if row.unlocked:
+			button("导航到"+str(row.name),func():
+				set_navigation_target("district_"+str(row.id),"港区 · "+str(row.name),row.centre)
+				close_panel())
+		else:
+			note("先解放上一个港区。")
+	button("返回",pause_menu if active else main_menu,"GhostButton")
+
 func objectives_menu():
 	active_panel="objectives"
 	campaign.build_menu()
@@ -1423,6 +1465,8 @@ func settings_menu():
 	_settings_option("抗锯齿",aa.map(func(row):return row[1]),aa.map(func(row):return row[0]).find(settings.antialiasing),func(i): settings.antialiasing=aa[i][0]; _settings_changed())
 	_settings_option("画质",["轻盈 · 关闭实时阴影","标准 · 实时阴影","精细 · 更远阴影与反射"],int(settings.quality),func(i): settings.quality=i; _settings_changed())
 	_settings_slider("视野",55,95,1,float(settings.fov),func(v):return "%d°"%v,func(v): settings.fov=v; _settings_changed())
+	var street_life:Array=GameSettings.STREET_LIFE
+	_settings_option("街上人车",street_life.map(func(row):return row[0]+" · "+row[1]),clampi(int(settings.street_life),0,street_life.size()-1),func(i): settings.street_life=i; _settings_changed())
 	_settings_section("声音")
 	_settings_slider("主音量",0,1,0.05,float(settings.volume),func(v):return "%d%%"%roundi(v*100),func(v): settings.volume=v; _settings_changed())
 	_settings_toggle("切到其他窗口时静音",settings.mute_unfocused,func(v): settings.mute_unfocused=v; _settings_changed())
@@ -1460,10 +1504,23 @@ func _settings_changed():
 	save_settings()
 
 func _settings_section(title:String):
-	var heading=label(title,17,Color("8ed1c1"))
+	section(title)
+
+func section(title:String):
+	var heading=Label.new()
+	heading.text=title
+	heading.theme_type_variation="SectionLabel"
 	heading.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-	heading.custom_minimum_size.x=430
+	heading.custom_minimum_size.x=470
 	modal_content.add_child(heading)
+
+func note(text_value:String):
+	var body=Label.new()
+	body.text=text_value
+	body.theme_type_variation="QuietLabel"
+	body.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	body.custom_minimum_size.x=470
+	modal_content.add_child(body)
 
 func _settings_row(title:String) -> HBoxContainer:
 	var row=HBoxContainer.new()

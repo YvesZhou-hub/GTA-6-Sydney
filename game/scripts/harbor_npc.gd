@@ -1,6 +1,9 @@
 class_name HarborNPC
 extends CharacterBody3D
-## Small deterministic pedestrian with local collision avoidance and persistent memory.
+## Small deterministic pedestrian with local collision avoidance and persistent
+## memory. The model and its clips are CC0 by Quaternius; see
+## assets/thirdparty/SOURCES.md.
+const Visual = preload("res://scripts/character_visual.gd")
 
 var stable_id: String = ""
 var display_name: String = ""
@@ -16,15 +19,9 @@ var _player_vehicle: String = ""
 var _danger_time: float = 0.0
 var _greeting_time: float = 0.0
 var _blocked_time: float = 0.0
-var _stride: float = 0.0
 var _rest_time: float = 0.0
-var _body: Node3D
-var _left_arm: Node3D
-var _right_arm: Node3D
-var _left_leg: Node3D
-var _right_leg: Node3D
+var _body: Visual
 var _label: Label3D
-var _material: StandardMaterial3D
 var _base_speed: float = 1.35
 
 func configure(object_id: String, person_name: String, role: String, points: Array, hue: float, assignment: String = "") -> void:
@@ -61,58 +58,13 @@ func configure(object_id: String, person_name: String, role: String, points: Arr
 	_label.modulate = Color("f1eee1")
 	add_child(_label)
 
-func _mat(color: Color, rough: float = 0.8) -> StandardMaterial3D:
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.roughness = rough
-	return mat
-
-func _part(parent: Node3D, at: Vector3, radius: float, height: float, material: Material) -> MeshInstance3D:
-	var mesh := MeshInstance3D.new()
-	var capsule := CapsuleMesh.new()
-	capsule.radius = radius
-	capsule.height = height
-	capsule.radial_segments = 10
-	capsule.rings = 3
-	mesh.mesh = capsule
-	mesh.material_override = material
-	mesh.position = at
-	parent.add_child(mesh)
-	return mesh
-
+## Every resident uses one of the shared models, chosen from their own hue so a
+## saved world keeps the same faces.
 func _build_person(hue: float) -> void:
-	_body = Node3D.new()
+	_body = Visual.new()
 	add_child(_body)
-	var skin := _mat(Color("d2a786").lerp(Color("765446"), fposmod(hue * 3.5, 1.0)))
-	_material = _mat(Color.from_hsv(hue, 0.28, 0.72))
-	var trousers := _mat(Color("263944").lerp(Color("746e61"), hue))
-	var shoes := _mat(Color("2a2726"))
-	_part(_body, Vector3(0, 1.17, 0), 0.235, 0.61, _material)
-	_part(_body, Vector3(0, 1.67, 0), 0.135, 0.29, skin)
-	_part(_body, Vector3(0, 1.765, 0.022), 0.14, 0.17, _mat(Color("39302a")))
-	# Small face details establish forward direction without using licensed art.
-	var eyes := _mat(Color("212c32"))
-	for side in [-1, 1]:
-		_part(_body, Vector3(float(side) * 0.048, 1.69, -0.124), 0.012, 0.016, eyes)
-	_left_arm = Node3D.new()
-	_left_arm.position = Vector3(-0.285, 1.4, 0)
-	_body.add_child(_left_arm)
-	_right_arm = Node3D.new()
-	_right_arm.position = Vector3(0.285, 1.4, 0)
-	_body.add_child(_right_arm)
-	for arm in [_left_arm, _right_arm]:
-		_part(arm, Vector3(0, -0.16, 0), 0.078, 0.38, _material)
-		_part(arm, Vector3(0, -0.38, -0.03), 0.052, 0.20, skin)
-	_left_leg = Node3D.new()
-	_left_leg.position = Vector3(-0.115, 0.9, 0)
-	_body.add_child(_left_leg)
-	_right_leg = Node3D.new()
-	_right_leg.position = Vector3(0.115, 0.9, 0)
-	_body.add_child(_right_leg)
-	for leg in [_left_leg, _right_leg]:
-		_part(leg, Vector3(0, -0.36, 0), 0.085, 0.73, trousers)
-		var foot := _part(leg, Vector3(0, -0.80, -0.06), 0.08, 0.21, shoes)
-		foot.rotation.x = PI / 2.0
+	var keys: Array = Visual.model_keys()
+	_body.setup(str(keys[int(fposmod(hue * keys.size() * 7.0, keys.size()))]), 1.78)
 
 func update_context(player_pos: Vector3, player_vehicle: String, player_speed: float) -> void:
 	_player_pos = player_pos
@@ -175,8 +127,7 @@ func _physics_process(delta: float) -> void:
 		_label.text = display_name + "\n" + occupation
 		var face := _player_pos - global_position
 		face.y = 0
-		if face.length_squared() > 0.05:
-			_body.rotation.y = lerp_angle(_body.rotation.y, atan2(-face.x, -face.z), delta * 5.0)
+		if face.length_squared() > 0.05: _body.face(face, delta, 5.0)
 	elif _rest_time > 0.0:
 		mood = "resting"
 	else:
@@ -198,8 +149,7 @@ func _physics_process(delta: float) -> void:
 	if _blocked_time > 1.1:
 		direction = direction.rotated(Vector3.UP, 1.25)
 		mood = "avoiding obstruction"
-	if direction.length_squared() > 0.01:
-		_body.rotation.y = lerp_angle(_body.rotation.y, atan2(-direction.x, -direction.z), delta * 6.0)
+	if direction.length_squared() > 0.01: _body.face(direction, delta, 6.0)
 	velocity.x = move_toward(velocity.x, direction.x * walk_speed, delta * 4.0)
 	velocity.z = move_toward(velocity.z, direction.z * walk_speed, delta * 4.0)
 	if not is_on_floor():
@@ -215,19 +165,7 @@ func _physics_process(delta: float) -> void:
 	if _blocked_time > 5.0:
 		route_index = (route_index + 1) % route.size()
 		_blocked_time = 0.0
-	var planar := Vector2(velocity.x, velocity.z).length()
-	_stride += delta * planar * 4.7
-	var gait := sin(_stride) * minf(planar / 1.3, 1.0) * 0.45
-	_left_leg.rotation.x = gait
-	_right_leg.rotation.x = -gait
-	_left_arm.rotation.x = -gait * 0.8
-	_right_arm.rotation.x = gait * 0.8
-	_body.position.y = absf(sin(_stride)) * minf(planar, 1.0) * 0.035
-	if _greeting_time > 3.0:
-		_right_arm.rotation.z = -0.45
-		_right_arm.rotation.x = -0.8
-	else:
-		_right_arm.rotation.z = lerpf(_right_arm.rotation.z, 0.0, delta * 5.0)
+	_animate(Vector2(velocity.x, velocity.z).length())
 	# A pedestrian who falls into a damaged quay swims toward their route start;
 	# recovery is announced by their next dialogue and does not block a job forever.
 	if global_position.y < -3.0:
@@ -235,6 +173,18 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		memories["accidents"] = int(memories.get("accidents", 0)) + 1
 		_danger_time = 5.0
+
+## Walking, hurrying away from traffic, greeting or standing still.
+func _animate(planar: float) -> void:
+	if _greeting_time > 3.0:
+		_body.set_state("wave")
+	elif planar < 0.15:
+		_body.set_state("idle")
+	elif planar > 2.4 or _danger_time > 0.0:
+		_body.set_state("run", clampf(planar / 3.3, 0.7, 1.4))
+	else:
+		_body.set_state("walk", clampf(planar / 1.35, 0.7, 1.5))
+
 
 func get_state() -> Dictionary:
 	return {"id": stable_id, "position": [global_position.x, global_position.y, global_position.z],
