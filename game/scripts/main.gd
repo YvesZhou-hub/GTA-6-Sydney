@@ -5,6 +5,7 @@ const Player = preload("res://scripts/harbor_player.gd")
 const Sound = preload("res://scripts/harbor_audio.gd")
 const AudioShutdown = preload("res://scripts/audio_shutdown.gd")
 const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
+const GameSettings = preload("res://scripts/game_settings.gd")
 const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 重装坦克","fighter":"Aster F-27 · 战斗机"}
 var survival: Node3D
 var survival_hud: Control
@@ -32,6 +33,11 @@ var modal: PanelContainer
 var modal_content: VBoxContainer
 var info: Label
 var context_hint: Label
+var left_column: VBoxContainer
+var activity_panel: PanelContainer
+var vehicle_panel: PanelContainer
+var toast_panel: PanelContainer
+var hint_panel: PanelContainer
 var toast_label: Label
 var activity_label: Label
 var region_label: Label
@@ -53,7 +59,11 @@ var world_id=""
 var world_name=""
 var mode="life"
 var owned: Array=["car"]
-var settings={"volume":0.65,"sensitivity":0.003,"quality":1,"invert":false,"large_text":false}
+var settings:Dictionary=GameSettings.DEFAULTS.duplicate(true)
+var _using_pad:=false
+var _pad_focus_pending:=false
+var _rebind_group:=""
+var _settings_notice:=""
 var active_panel=""
 var name_edit: LineEdit
 var map_search: LineEdit
@@ -100,7 +110,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -228,6 +238,10 @@ func _ready():
 		var recorder=load("res://scripts/trailer_capture.gd").new()
 		add_child(recorder)
 		recorder.call_deferred("run",self)
+	elif "--hud-qa" in arguments:
+		var validation=load("res://scripts/hud_validation.gd").new()
+		add_child(validation)
+		validation.call_deferred("run",self)
 	elif "--ui-font-qa" in arguments:
 		var validation=load("res://scripts/ui_font_validation.gd").new()
 		add_child(validation)
@@ -264,6 +278,8 @@ func setup_input():
 	var cursor_key:=InputEventKey.new()
 	cursor_key.physical_keycode=KEY_ALT
 	if not InputMap.action_has_event("cursor",cursor_key): InputMap.action_add_event("cursor",cursor_key)
+	GameSettings.add_gamepad_bindings()
+	GameSettings.capture_default_keys()
 
 func setup_environment():
 	environment=WorldEnvironment.new()
@@ -301,11 +317,19 @@ func setup_ui():
 	hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hud.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	root.add_child(hud)
+	# Status, guidance and the survival card stack in one column so a taller
+	# panel pushes the next element down instead of drawing over it.
+	left_column=VBoxContainer.new()
+	left_column.name="LeftColumn"
+	left_column.position=Vector2(28,24)
+	left_column.custom_minimum_size.x=365
+	left_column.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	left_column.add_theme_constant_override("separation",10)
+	hud.add_child(left_column)
 	var top=PanelContainer.new()
-	top.position=Vector2(28,24)
-	top.size=Vector2(365,105)
 	top.add_theme_stylebox_override("panel",panel_style(Color(0.025,0.09,0.12,0.82),10))
-	hud.add_child(top)
+	top.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	left_column.add_child(top)
 	var topbox=VBoxContainer.new()
 	topbox.add_theme_constant_override("separation",5)
 	top.add_child(topbox)
@@ -315,44 +339,80 @@ func setup_ui():
 	topbox.add_child(region_label)
 	info=label("",15,Color("d0d6c9"))
 	topbox.add_child(info)
-	activity_label=label("",18)
-	activity_label.add_theme_color_override("font_shadow_color",Color(0,0,0,0.95))
-	activity_label.add_theme_constant_override("shadow_offset_x",1)
-	activity_label.add_theme_constant_override("shadow_offset_y",2)
-	activity_label.position=Vector2(28,147)
-	activity_label.size=Vector2(520,140)
+	activity_panel=PanelContainer.new()
+	var activity_style=panel_style(Color(0.025,0.09,0.12,0.72),10)
+	activity_style.content_margin_top=11
+	activity_style.content_margin_bottom=11
+	activity_panel.add_theme_stylebox_override("panel",activity_style)
+	activity_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	activity_panel.visible=false
+	left_column.add_child(activity_panel)
+	activity_label=label("",15,Color("e9eedf"))
+	activity_label.custom_minimum_size.x=321
 	activity_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-	activity_label.max_lines_visible=3
-	hud.add_child(activity_label)
-	speed_label=label("",25)
-	speed_label.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	speed_label.position=Vector2(-350,-295)
-	speed_label.size=Vector2(320,140)
+	activity_label.max_lines_visible=4
+	activity_panel.add_child(activity_label)
+	vehicle_panel=PanelContainer.new()
+	vehicle_panel.name="VehicleReadout"
+	var vehicle_style=panel_style(Color(0.025,0.09,0.12,0.80),10)
+	vehicle_style.content_margin_top=12
+	vehicle_style.content_margin_bottom=12
+	vehicle_panel.add_theme_stylebox_override("panel",vehicle_style)
+	vehicle_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	vehicle_panel.anchor_left=1.0
+	vehicle_panel.anchor_right=1.0
+	vehicle_panel.anchor_top=1.0
+	vehicle_panel.anchor_bottom=1.0
+	vehicle_panel.grow_horizontal=Control.GROW_DIRECTION_BEGIN
+	vehicle_panel.grow_vertical=Control.GROW_DIRECTION_BEGIN
+	vehicle_panel.offset_right=-28
+	vehicle_panel.offset_left=-28
+	vehicle_panel.offset_bottom=-92
+	vehicle_panel.offset_top=-92
+	vehicle_panel.visible=false
+	hud.add_child(vehicle_panel)
+	speed_label=label("",19)
 	speed_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-	hud.add_child(speed_label)
-	var bottom=PanelContainer.new()
-	bottom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	bottom.grow_vertical=Control.GROW_DIRECTION_BEGIN
-	bottom.offset_left=28
-	bottom.offset_right=-28
-	bottom.offset_top=-76
-	bottom.offset_bottom=-24
-	bottom.add_theme_stylebox_override("panel",panel_style(Color(0.025,0.09,0.12,0.86),10))
-	hud.add_child(bottom)
-	context_hint=label("",16)
+	vehicle_panel.add_child(speed_label)
+	hint_panel=PanelContainer.new()
+	hint_panel.name="HintBar"
+	hint_panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	hint_panel.grow_vertical=Control.GROW_DIRECTION_BEGIN
+	hint_panel.offset_left=28
+	hint_panel.offset_right=-28
+	hint_panel.offset_top=-24
+	hint_panel.offset_bottom=-24
+	var hint_style=panel_style(Color(0.025,0.09,0.12,0.72),10)
+	hint_style.content_margin_top=9
+	hint_style.content_margin_bottom=9
+	hint_panel.add_theme_stylebox_override("panel",hint_style)
+	hint_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	hud.add_child(hint_panel)
+	hud.resized.connect(_layout_hud)
+	var bottom=hint_panel
+	context_hint=label("",14,Color("dfe7da"))
 	context_hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	context_hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	context_hint.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	bottom.add_child(context_hint)
-	toast_label=label("",21,Color("f5e4b6"))
-	toast_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-	toast_label.position=Vector2(-320,154)
-	toast_label.add_theme_color_override("font_shadow_color",Color(0,0,0,0.9))
-	toast_label.add_theme_constant_override("shadow_offset_y",2)
-	toast_label.size=Vector2(800,100)
+	toast_panel=PanelContainer.new()
+	toast_panel.name="Toast"
+	var toast_style=panel_style(Color(0.02,0.07,0.09,0.78),12)
+	toast_style.content_margin_top=12
+	toast_style.content_margin_bottom=12
+	toast_panel.add_theme_stylebox_override("panel",toast_style)
+	toast_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	toast_panel.anchor_left=0.5
+	toast_panel.anchor_right=0.5
+	toast_panel.grow_horizontal=Control.GROW_DIRECTION_BOTH
+	toast_panel.offset_top=104
+	toast_panel.offset_bottom=104
+	toast_panel.modulate.a=0
+	hud.add_child(toast_panel)
+	toast_label=label("",19,Color("f5e4b6"))
 	toast_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
-	toast_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-	hud.add_child(toast_label)
+	toast_label.autowrap_mode=TextServer.AUTOWRAP_OFF
+	toast_panel.add_child(toast_label)
 	save_indicator=label("",14,Color("a6d9c9"))
 	save_indicator.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	save_indicator.position=Vector2(-260,30)
@@ -413,6 +473,14 @@ func setup_ui():
 	combat_reticle.visible=false
 	hud.add_child(combat_reticle)
 	life.service_completed.connect(on_service_completed)
+	_layout_hud()
+
+func _layout_hud():
+	# Keep the control strip readable on ultrawide canvases instead of stretching edge to edge.
+	if not is_instance_valid(hint_panel): return
+	var side:=maxf(28.0,(hud.size.x-1180.0)*0.5)
+	hint_panel.offset_left=side
+	hint_panel.offset_right=-side
 
 func panel_style(color:Color,radius:int) -> StyleBoxFlat:
 	var style=StyleBoxFlat.new()
@@ -447,6 +515,7 @@ func clear_panel(title:String,subtitle:String=""):
 		modal_content.add_child(sub)
 	var line=HSeparator.new()
 	modal_content.add_child(line)
+	_pad_focus_pending=true
 	modal.visible=true
 	hud.visible=false
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
@@ -464,7 +533,14 @@ func button(text_value:String,action:Callable):
 	b.alignment=HORIZONTAL_ALIGNMENT_LEFT
 	b.pressed.connect(action)
 	modal_content.add_child(b)
+	_focus_for_pad(b)
 	return b
+
+func _focus_for_pad(control:Control):
+	# Controller players need a focused control; mouse and keyboard players keep the old behaviour.
+	if _pad_focus_pending and _using_pad:
+		_pad_focus_pending=false
+		control.call_deferred("grab_focus")
 
 func main_menu():
 	if is_instance_valid(weapons): weapons.clear()
@@ -1300,57 +1376,153 @@ func refresh_map_results(query:String):
 
 func settings_menu():
 	active_panel="settings"
-	clear_panel("让操作适合你。","WASD 移动 / 油门转向，鼠标观察，Shift 奔跑\nE 互动 / 上下车，空格跳跃 / 制动\nR / F 飞行升降，G 拿起 / 放下物件\nTab 免费新增并入座，J 工作，K 城市体验，M 开关地图\n按住 Alt / Option 显示鼠标，可点击小地图；松开继续观察\n左键 / X 反击，H 治疗，B 维修补给与升级\nF5 保存，Esc 暂停，P 摄影，Home 付费救援")
-	modal_content.add_child(label("音量",18))
-	var volume=HSlider.new()
-	volume.min_value=0
-	volume.max_value=1
-	volume.step=0.05
-	volume.value=settings.volume
-	volume.value_changed.connect(func(v): settings.volume=v; apply_settings(); save_settings())
-	modal_content.add_child(volume)
-	modal_content.add_child(label("鼠标灵敏度",18))
-	var sensitivity=HSlider.new()
-	sensitivity.min_value=0.001
-	sensitivity.max_value=0.008
-	sensitivity.step=0.0005
-	sensitivity.value=settings.sensitivity
-	sensitivity.value_changed.connect(func(v): settings.sensitivity=v; save_settings())
-	modal_content.add_child(sensitivity)
-	var quality=OptionButton.new()
-	quality.add_item("轻盈 · 关闭实时阴影")
-	quality.add_item("标准 · 实时阴影")
-	quality.add_item("精细 · 更远阴影")
-	quality.select(int(settings.quality))
-	quality.item_selected.connect(func(i): settings.quality=i; apply_settings(); save_settings())
-	modal_content.add_child(quality)
-	var invert=CheckButton.new()
-	invert.text="反转垂直视角"
-	invert.button_pressed=settings.invert
-	invert.toggled.connect(func(v): settings.invert=v; save_settings())
-	modal_content.add_child(invert)
-	var large=CheckButton.new()
-	large.text="加大游戏提示文字"
-	large.button_pressed=settings.large_text
-	large.toggled.connect(func(v): settings.large_text=v; apply_settings(); save_settings())
-	modal_content.add_child(large)
+	clear_panel("设置","修改立即生效并自动保存。键盘、鼠标与手柄均可操作菜单。")
+	if not _settings_notice.is_empty():
+		var notice=label(_settings_notice,15,Color("f3cb80"))
+		notice.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+		notice.custom_minimum_size.x=430
+		modal_content.add_child(notice)
+		_settings_notice=""
+	_settings_section("画面")
+	var modes:Array=GameSettings.WINDOW_MODES
+	_settings_option("显示模式",modes.map(func(row):return row[1]),modes.map(func(row):return row[0]).find(settings.window_mode),func(i): settings.window_mode=modes[i][0]; _settings_changed())
+	_settings_toggle("垂直同步",settings.vsync,func(v): settings.vsync=v; _settings_changed())
+	_settings_option("帧率上限",GameSettings.FPS_LIMITS.map(func(v):return "不限制" if v==0 else "%d FPS"%v),GameSettings.FPS_LIMITS.find(int(settings.max_fps)),func(i): settings.max_fps=GameSettings.FPS_LIMITS[i]; _settings_changed())
+	var scales:Array=GameSettings.RENDER_SCALES
+	var scale_index:=0
+	for i in scales.size():
+		if absf(scales[i]-float(settings.render_scale))<absf(scales[scale_index]-float(settings.render_scale)): scale_index=i
+	_settings_option("渲染分辨率",scales.map(func(v):return "100% · 原生" if v>=0.999 else "%d%% · FSR 1 放大"%roundi(v*100)),scale_index,func(i): settings.render_scale=scales[i]; _settings_changed())
+	var aa:Array=GameSettings.ANTIALIASING
+	_settings_option("抗锯齿",aa.map(func(row):return row[1]),aa.map(func(row):return row[0]).find(settings.antialiasing),func(i): settings.antialiasing=aa[i][0]; _settings_changed())
+	_settings_option("画质",["轻盈 · 关闭实时阴影","标准 · 实时阴影","精细 · 更远阴影与反射"],int(settings.quality),func(i): settings.quality=i; _settings_changed())
+	_settings_slider("视野",55,95,1,float(settings.fov),func(v):return "%d°"%v,func(v): settings.fov=v; _settings_changed())
+	_settings_section("声音")
+	_settings_slider("主音量",0,1,0.05,float(settings.volume),func(v):return "%d%%"%roundi(v*100),func(v): settings.volume=v; _settings_changed())
+	_settings_toggle("切到其他窗口时静音",settings.mute_unfocused,func(v): settings.mute_unfocused=v; _settings_changed())
+	_settings_section("操作")
+	_settings_slider("鼠标灵敏度",0.001,0.008,0.0005,float(settings.sensitivity),func(v):return "%.1f"%(v*1000),func(v): settings.sensitivity=v; _settings_changed())
+	_settings_slider("手柄视角速度",0.8,6.0,0.1,float(settings.pad_sensitivity),func(v):return "%.1f"%v,func(v): settings.pad_sensitivity=v; _settings_changed())
+	_settings_toggle("反转垂直视角",settings.invert,func(v): settings.invert=v; _settings_changed())
+	_settings_toggle("加大游戏提示文字",settings.large_text,func(v): settings.large_text=v; _settings_changed())
+	_settings_section("键盘按键")
+	for group:Array in GameSettings.REBINDABLE:
+		var row=_settings_row(group[0])
+		var rebind=Button.new()
+		rebind.text=GameSettings.key_label(group[1][0])
+		rebind.custom_minimum_size.x=190
+		rebind.pressed.connect(func():
+			_rebind_group=group[1][0]
+			rebind.text="按下新按键 · Esc 取消")
+		row.add_child(rebind)
+		_focus_for_pad(rebind)
+	button("恢复默认按键",func():
+		settings.bindings={}
+		_settings_changed()
+		_settings_notice="已恢复默认按键。"
+		settings_menu())
+	_settings_section("手柄（Xbox 布局，PlayStation 与 Steam Deck 按对应位置）")
+	var pad_help=label("左摇杆 移动 / 驾驶 · 右摇杆 视角\nA 跳跃 / 刹车 · B 互动 / 上下车 · X 漂移 · Y 载具\nRT 开火 · LT 奔跑 / 3 倍加速 · RB / LB 升降\n十字键 ↑ 地图 · ↓ 急救 · ← 工作 · → 整备\nR3 自动武器 · Back 城市体验 · Start 暂停",14,Color("bbc8c5"))
+	pad_help.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	pad_help.custom_minimum_size.x=430
+	modal_content.add_child(pad_help)
 	button("返回",pause_menu if active else main_menu)
+
+func _settings_changed():
+	settings=GameSettings.sanitized(settings)
+	apply_settings()
+	save_settings()
+
+func _settings_section(title:String):
+	var heading=label(title,17,Color("8ed1c1"))
+	heading.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	heading.custom_minimum_size.x=430
+	modal_content.add_child(heading)
+
+func _settings_row(title:String) -> HBoxContainer:
+	var row=HBoxContainer.new()
+	row.add_theme_constant_override("separation",12)
+	var name_label=label(title,15,Color("e3e8dc"))
+	name_label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	name_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	row.add_child(name_label)
+	modal_content.add_child(row)
+	return row
+
+func _settings_option(title:String,items:Array,selected:int,changed:Callable):
+	var row=_settings_row(title)
+	var option=OptionButton.new()
+	for item in items: option.add_item(str(item))
+	option.select(maxi(selected,0))
+	option.custom_minimum_size.x=240
+	option.clip_text=true
+	option.item_selected.connect(changed)
+	row.add_child(option)
+	_focus_for_pad(option)
+
+func _settings_toggle(title:String,value:bool,changed:Callable):
+	var row=_settings_row(title)
+	var toggle=CheckButton.new()
+	toggle.button_pressed=value
+	toggle.toggled.connect(changed)
+	row.add_child(toggle)
+	_focus_for_pad(toggle)
+
+func _settings_slider(title:String,minimum:float,maximum:float,step:float,value:float,format:Callable,changed:Callable):
+	var row=_settings_row(title)
+	var readout=label(format.call(value),15,Color("f1efdf"))
+	readout.custom_minimum_size.x=52
+	readout.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	var slider=HSlider.new()
+	slider.min_value=minimum
+	slider.max_value=maximum
+	slider.step=step
+	slider.value=value
+	slider.custom_minimum_size.x=170
+	slider.size_flags_vertical=Control.SIZE_SHRINK_CENTER
+	slider.value_changed.connect(func(v):
+		readout.text=format.call(v)
+		changed.call(v))
+	row.add_child(slider)
+	row.add_child(readout)
+	_focus_for_pad(slider)
+
+func _capture_rebind(event:InputEvent):
+	if not event is InputEventKey or not event.pressed: return
+	get_viewport().set_input_as_handled()
+	var group:=_rebind_group
+	_rebind_group=""
+	if event.keycode==KEY_ESCAPE or event.physical_keycode==KEY_NONE:
+		settings_menu()
+		return
+	var code:=int(event.physical_keycode)
+	var shared:Array=GameSettings.conflicts(settings.bindings,group,code)
+	settings.bindings[group]=[code]
+	_settings_changed()
+	_settings_notice="已绑定 %s。"%GameSettings.key_label(group)+("该按键同时用于：%s。"%"、".join(shared) if not shared.is_empty() else "")
+	settings_menu()
 
 func load_settings():
 	if FileAccess.file_exists("user://settings.json"):
 		var data=JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))
-		if data is Dictionary: settings.merge(data,true)
+		if data is Dictionary: settings=GameSettings.sanitized(data)
 	apply_settings()
 
 func apply_settings():
 	AudioServer.set_bus_volume_db(0,linear_to_db(maxf(float(settings.volume),0.001)))
+	GameSettings.apply_bindings(settings.bindings)
+	# QA runs size their own windows; only players' settings change the window.
+	GameSettings.apply_display(settings,get_viewport(),camera,not qa_running)
 	preload("res://scripts/daylight_environment.gd").apply_quality(environment.environment,int(settings.quality))
 	sun.shadow_enabled=int(settings.quality)>0
 	sun.directional_shadow_max_distance=700 if int(settings.quality)==2 else 350
-	context_hint.add_theme_font_size_override("font_size",20 if settings.large_text else 16)
-	activity_label.add_theme_font_size_override("font_size",22 if settings.large_text else 18)
+	context_hint.add_theme_font_size_override("font_size",17 if settings.large_text else 14)
+	activity_label.add_theme_font_size_override("font_size",18 if settings.large_text else 15)
+	toast_label.add_theme_font_size_override("font_size",22 if settings.large_text else 19)
 
 func save_settings():
+	# QA shares the player's user data folder; never overwrite real preferences.
+	if qa_running: return
 	var file=FileAccess.open("user://settings.json",FileAccess.WRITE)
 	if file: file.store_string(JSON.stringify(settings))
 
@@ -1377,6 +1549,29 @@ func _input(event):
 	# These shortcuts must run before focused GUI controls and before the paused
 	# gameplay guard. Otherwise M cannot close the very map it opened.
 	if event is InputEventKey and event.echo: return
+	if _rebind_group!="":
+		_capture_rebind(event)
+		return
+	if event is InputEventJoypadButton or (event is InputEventJoypadMotion and absf(event.axis_value)>0.5):
+		if not _using_pad:
+			_using_pad=true
+			if modal.visible and get_viewport().gui_get_focus_owner()==null:
+				_pad_focus_pending=true
+				for child in modal_content.get_children():
+					if child is Control and child.focus_mode!=Control.FOCUS_NONE:
+						_focus_for_pad(child)
+						break
+	elif event is InputEventKey or event is InputEventMouseButton:
+		_using_pad=false
+	if event is InputEventJoypadButton and event.is_action_pressed("pause"):
+		if modal.visible and active: close_panel()
+		elif active: pause_menu()
+		get_viewport().set_input_as_handled()
+		return
+	if event is InputEventJoypadButton and event.pressed and event.button_index==JOY_BUTTON_B and modal.visible and active:
+		close_panel()
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.pressed and event.physical_keycode==KEY_F3:
 		if is_instance_valid(diagnostics_panel): diagnostics_panel.toggle()
 		get_viewport().set_input_as_handled()
@@ -1476,6 +1671,7 @@ func _process(delta):
 		toast_time-=delta
 		toast_label.modulate.a=minf(1,toast_time)
 	else: toast_label.modulate.a=0
+	if is_instance_valid(toast_panel): toast_panel.modulate.a=toast_label.modulate.a if not toast_label.text.is_empty() else 0.0
 	if not active:
 		menu_orbit+=delta*0.015
 		camera.global_position=Vector3(690+sin(menu_orbit)*35,170,-15)
@@ -1489,6 +1685,11 @@ func _process(delta):
 	if autosave>60 and not qa_running:
 		autosave=0
 		save_world()
+	var look:=Input.get_vector("look_left","look_right","look_up","look_down")
+	if look!=Vector2.ZERO and not modal.visible and not map_panel.visible:
+		var turn:float=float(settings.pad_sensitivity)*delta
+		yaw-=look.x*turn
+		pitch=clampf(pitch-look.y*turn*(-1 if settings.invert else 1),-1.05,0.65)
 	_update_follow_camera(delta)
 	world.stream_view(camera.global_position,current_vehicle.linear_velocity if is_instance_valid(current_vehicle) else player.velocity,delta)
 	update_navigation(delta)
@@ -1586,6 +1787,7 @@ func update_hud():
 	if player.global_position.z>7400 and player.global_position.z<12800 and player.global_position.x>-5700 and player.global_position.x<0:
 		region_label.text="Sydney Airport · 悉尼机场"
 	activity_label.text=life.status_text
+	activity_panel.visible=not life.status_text.strip_edges().is_empty()
 	if is_instance_valid(current_vehicle):
 		speed_label.text="%d km/h  ·  %d m\n%s  %d%%" %[current_vehicle.linear_velocity.length()*3.6,current_vehicle.global_position.y,VEHICLE_NAMES[current_vehicle.kind].split(" · ")[0],current_vehicle.health]
 		if current_vehicle.kind=="hoverboard":
@@ -1605,9 +1807,22 @@ func update_hud():
 		var near=nearest_vehicle()
 		var hint="E 进入 "+VEHICLE_NAMES[near.kind] if near else life.available_actions(player.global_position)
 		context_hint.text=(hint+"   ·   " if hint!="" else "")+("左键 / X 反击 · H 治疗 · B 整备 · " if survival.enabled else "")+"WASD 行走   Shift 奔跑   Tab 载具   M 地图"
+	if _using_pad: context_hint.text=GameSettings.pad_hint(current_vehicle.kind if is_instance_valid(current_vehicle) else "",survival.enabled)
+	vehicle_panel.visible=not speed_label.text.is_empty()
+	# Sit above the control strip, whose height changes with wrapped vehicle hints.
+	var readout_bottom:=-(hud.size.y-(hint_panel.get_global_rect().position.y-hud.global_position.y)+12.0)
+	if not is_equal_approx(vehicle_panel.offset_bottom,readout_bottom):
+		vehicle_panel.offset_bottom=readout_bottom
+		vehicle_panel.offset_top=readout_bottom
+	if is_instance_valid(survival_hud) and survival_hud.has_method("set_top_limit"):
+		survival_hud.set_top_limit(left_column.get_global_rect().end.y-hud.global_position.y+10.0)
 
 func _notification(what):
 	if what==NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
+	elif what==NOTIFICATION_APPLICATION_FOCUS_OUT:
+		if bool(settings.get("mute_unfocused",false)): AudioServer.set_bus_mute(0,true)
+	elif what==NOTIFICATION_APPLICATION_FOCUS_IN:
+		AudioServer.set_bus_mute(0,false)
 	elif what==NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		# The OS may release Option in another app without delivering key-up here.
 		_cursor_held=false
