@@ -1,6 +1,7 @@
 extends RefCounted
 ## Original, reference-led Sydney Harbour Bridge geometry; dimensions in metres.
 ## Photographs are references only. See docs/BRIDGE_REFERENCE.md.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 
 const SPAN := 503.0
 const DECK_Y := 54.0
@@ -322,7 +323,7 @@ static func _taper_mesh(world: Node3D, bottom: Vector2, top: Vector2, height: fl
 	# Keep explicit indices: world cell batching consumes indexed surfaces.
 	for index in range(indices.size()): surface.add_index(index)
 	surface.generate_normals()
-	return surface.commit()
+	return CpuMesh.commit(surface)
 
 static func _window(world: Node3D, parent: Node3D, center: Vector3, face: int) -> void:
 	# Deep arched recess silhouette and individually modelled radial voussoirs.
@@ -436,7 +437,7 @@ static func _warp_north_piece(body: StaticBody3D, from: float, to: float, length
 					var point:Vector3=vertices[index]
 					surface.set_uv(Vector2(point.x,point.z));surface.add_vertex(point)
 			surface.generate_normals();surface.index()
-			child.mesh=surface.commit();child.transform=Transform3D.IDENTITY
+			child.mesh=CpuMesh.commit(surface);child.transform=Transform3D.IDENTITY
 		elif child is CollisionShape3D and child.shape is BoxShape3D and child.shape.size.z>length*0.85:
 			var faces:=PackedVector3Array()
 			var size:Vector3=child.shape.size

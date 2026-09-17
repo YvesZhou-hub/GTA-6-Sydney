@@ -1,5 +1,6 @@
 extends RefCounted
 ## Photo-referenced public Grand Walk; see docs/QVB_REFERENCE.md.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const G = preload("res://scripts/city_landmarks.gd")
 const CENTER := Vector3(-352.277,4.5,1309.448)
 const ANGLE := 0.0431
@@ -46,7 +47,7 @@ static func _append_mesh(s:SurfaceTool,mesh:Mesh,surface_index:int,pose:Transfor
 	# SurfaceTool cannot mix indexed primitives and unindexed procedural faces:
 	# an existing index buffer would silently omit later unindexed vertices.
 	# Emit one uniform triangle stream, including every primitive face.
-	_append_arrays(s,mesh.surface_get_arrays(surface_index),pose)
+	_append_arrays(s,CpuMesh.surface_arrays(mesh)[surface_index],pose)
 
 static func _append_arrays(s:SurfaceTool,arrays:Array,pose:Transform3D) -> void:
 	var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
@@ -131,7 +132,7 @@ static func _clipped_block(s:SurfaceTool,poly:PackedVector2Array,x0:float,x1:flo
 		if piece.size()>2:_append_mesh(s,G.prism(piece,low,high),0,Transform3D.IDENTITY)
 
 static func _body(world:Node3D,id:String,s:SurfaceTool,key:String) -> StaticBody3D:
-	var body:StaticBody3D=world._structure_mesh(id,s.commit(),CENTER,key,320000.0,Basis(Vector3.UP,ANGLE))
+	var body:StaticBody3D=world._structure_mesh(id,CpuMesh.commit(s),CENTER,key,320000.0,Basis(Vector3.UP,ANGLE))
 	body.set_meta("qvb_public",true)
 	return body
 
@@ -191,7 +192,7 @@ static func build(world:Node3D) -> void:
 			if id in ["way/568422349","way/568422351"]:
 				var shifted:=_surface()
 				var source_center:=Basis(Vector3.UP,ANGLE).inverse()*(Vector3(part.center[0],4.5,part.center[1])-CENTER)
-				_append_mesh(shifted,s.commit(),0,Transform3D(Basis.IDENTITY,source_center));s=shifted
+				_append_mesh(shifted,CpuMesh.commit(s),0,Transform3D(Basis.IDENTITY,source_center));s=shifted
 			var body:=_body(world,"osm/%s/storey_group/%s"%[id,level],s,key)
 			if id=="way/40717424":_facades(world,body);_arcade(world,body)
 			if id=="way/568422349":_dome_detail(world,body,level)
@@ -368,7 +369,7 @@ static func _minor_detail(world:Node3D,owner:StaticBody3D,part:Dictionary,level:
 		_arch(frames,p,.40,.12,.18,basis)
 	for y in [HEIGHT.end_eaves,base-.04]:
 		var collar:=_surface();_drum(collar,r*1.015,y-.10,y+.10,.18)
-		_append_mesh(frames,collar.commit(),0,Transform3D(Basis.IDENTITY,c))
+		_append_mesh(frames,CpuMesh.commit(collar),0,Transform3D(Basis.IDENTITY,c))
 	_commit(world,owner,frames,"qvb_trim");_commit(world,owner,windows,"qvb_glass")
 
 static func _dome_detail(world:Node3D,owner:StaticBody3D,level:int) -> void:
@@ -397,7 +398,7 @@ static func _dome_detail(world:Node3D,owner:StaticBody3D,level:int) -> void:
 				_beam(lead,p-Vector3.UP*.025,u-Vector3.UP*.025,.045,.045);_beam(lead,p-Vector3.UP*.025,q-Vector3.UP*.025,.045,.045)
 	var offset:=Basis(Vector3.UP,ANGLE).inverse()*(Vector3(-352.176,4.5,1309.888)-CENTER)
 	for row in [[ribs,"qvb_trim"],[glazing,"qvb_amber"],[green,"qvb_green"],[outer_glass,"qvb_glass"],[lead,"qvb_iron"]]:
-		var mesh:Mesh=row[0].commit()
+		var mesh:Mesh=CpuMesh.commit(row[0])
 		if mesh==null or mesh.get_surface_count()==0:continue
 		var aligned:=_surface();_append_mesh(aligned,mesh,0,Transform3D(Basis.IDENTITY,offset));_commit(world,owner,aligned,row[1])
 

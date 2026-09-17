@@ -2,6 +2,7 @@ extends RefCounted
 ## Photo-referenced, metre-scale original Opera House exterior. See docs/OPERA_REFERENCE.md.
 ## Both halves of every roof are cut from an equal-radius sphere and meet at a sharp ridge.
 ## Geometry and its closed collider are the same mesh; ribs live on their damage component.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 
 # OSM relation/9596872 outer-ring centroid and minimum-area long-axis bearing.
 # These align the authored reconstruction, not a claim that every shell is surveyed.
@@ -175,7 +176,7 @@ static func shell_mesh(surface: Dictionary, from: float, to: float, roof_index:i
 			if normal.dot((a+b+c+d)*0.25-middle)<0.0: normal = -normal
 			_triangle(st,a,b,c,normal)
 			_triangle(st,c,b,d,normal)
-	return st.commit()
+	return CpuMesh.commit(st)
 
 static func _add_ribs(world: Node3D, body: Node3D, surface: Dictionary, from: float, to: float,roof_index:int=-1) -> void:
 	# Thin rim and fan ribs are one mesh per chunk, so destruction cannot leave floating ribs.
@@ -202,7 +203,7 @@ static func _add_ribs(world: Node3D, body: Node3D, surface: Dictionary, from: fl
 			_triangle(st,q0-rib_edge,q1-rib_edge,q0+rib_edge,-normal)
 			_triangle(st,q0+rib_edge,q1-rib_edge,q1+rib_edge,-normal)
 	var mi := MeshInstance3D.new()
-	mi.mesh = st.commit()
+	mi.mesh = CpuMesh.commit(st)
 	mi.material_override = world.materials["opera_edge"]
 	body.add_child(mi)
 
@@ -272,8 +273,8 @@ static func _build_foyer(world: Node3D, index: int, spec: Array, origin: Vector3
 			_beam_mesh(frames,a+inward,b+inward,.11)
 			_beam_mesh(frames,a,b+inward,.047)
 			_beam_mesh(frames,a+inward,b,.047)
-	var body:Node3D=world._structure_mesh("opera/glass/%s"%index,st.commit(),origin,"opera_glass",105000,basis)
-	var mullions:=MeshInstance3D.new();mullions.name="BronzeCurtainBlades";mullions.mesh=frames.commit();mullions.material_override=world.materials.opera_mullion;body.add_child(mullions)
+	var body:Node3D=world._structure_mesh("opera/glass/%s"%index,CpuMesh.commit(st),origin,"opera_glass",105000,basis)
+	var mullions:=MeshInstance3D.new();mullions.name="BronzeCurtainBlades";mullions.mesh=CpuMesh.commit(frames);mullions.material_override=world.materials.opera_mullion;body.add_child(mullions)
 	body.set_meta("curtain_blade_depth",.72 if index in [0,4] else .15)
 
 static func _prepare_fields() -> void:
@@ -358,7 +359,7 @@ static func _trimmed_shell_mesh(surface:Dictionary,from:float,to:float,index:int
 		var c:=shell_point(surface,edge[0].x,edge[0].y,SHELL_THICKNESS);var d:=shell_point(surface,edge[1].x,edge[1].y,SHELL_THICKNESS)
 		var n:Vector3=(b-a).cross(c-a).normalized()
 		_triangle(st,a,b,c,n);_triangle(st,c,b,d,n)
-	return st.commit()
+	return CpuMesh.commit(st)
 
 static func _room_clearance(p:Vector3) -> float:
 	# Acoustic chamber envelopes are shared with the independent interior module.
@@ -406,8 +407,8 @@ static func _build_interstitial(world:Node3D,index:int,spec:Array,origin:Vector3
 			var normal:=Vector3(0,.185,.11).normalized()
 			_triangle(blades,p,q,r,normal);_triangle(blades,r,q,s,normal)
 			_triangle(blades,p,r,q,-normal);_triangle(blades,r,s,q,-normal)
-	var body:Node3D=world._structure_mesh("opera/infill/louvres/"+str(index),panel.commit(),origin,"opera_recess",140000,basis)
-	var mesh:=MeshInstance3D.new();mesh.mesh=blades.commit();mesh.material_override=world.materials.opera_bronze;body.add_child(mesh)
+	var body:Node3D=world._structure_mesh("opera/infill/louvres/"+str(index),CpuMesh.commit(panel),origin,"opera_recess",140000,basis)
+	var mesh:=MeshInstance3D.new();mesh.mesh=CpuMesh.commit(blades);mesh.material_override=world.materials.opera_bronze;body.add_child(mesh)
 
 static func _build_rear_joint(world:Node3D,main_index:int,foyer_index:int) -> void:
 	# Opposing southern roofs meet at the same elevated ridge. A recessed curved
@@ -425,7 +426,7 @@ static func _build_rear_joint(world:Node3D,main_index:int,foyer_index:int) -> vo
 			var c:=b_origin+second*shell_point(right,u0,1.0,SHELL_THICKNESS)
 			var d:=b_origin+second*shell_point(right,u1,1.0,SHELL_THICKNESS)
 			_triangle(st,a,b,c,Vector3(side,0,0));_triangle(st,c,b,d,Vector3(side,0,0))
-		world._structure_mesh("opera/infill/rear/%d/%d"%[main_index,side],st.commit(),CENTER,"opera_bronze",140000,site_basis())
+		world._structure_mesh("opera/infill/rear/%d/%d"%[main_index,side],CpuMesh.commit(st),CENTER,"opera_bronze",140000,site_basis())
 
 static func _beam_mesh(st: SurfaceTool, a: Vector3, b: Vector3, width: float) -> void:
 	if a.distance_to(b)<0.001: return
@@ -453,7 +454,7 @@ static func _prism(poly: PackedVector2Array, height: float) -> ArrayMesh:
 		var normal := Vector3((a+b).x,0.0,(a+b).z).normalized()
 		_triangle(st,a,b,a+Vector3.UP*height,normal)
 		_triangle(st,a+Vector3.UP*height,b,b+Vector3.UP*height,normal)
-	return st.commit()
+	return CpuMesh.commit(st)
 
 static func _build_podium(world: Node3D, basis: Basis) -> void:
 	# Hollow podium, based on CMP ground/upper plans. Interior owns its intermediate
@@ -551,7 +552,7 @@ static func _stair_profile_mesh(profile:PackedVector2Array,x0:float,x1:float) ->
 		var p:=Vector3(x0,a.y,a.x);var q:=Vector3(x0,b.y,b.x)
 		var r:=Vector3(x1,b.y,b.x);var s:=Vector3(x1,a.y,a.x)
 		_triangle(st,p,q,r,normal);_triangle(st,p,r,s,normal)
-	return st.commit()
+	return CpuMesh.commit(st)
 
 static func _steps_mesh(segment: int,x0:float=-STAIR_HALF_WIDTH,x1:float=STAIR_HALF_WIDTH) -> ArrayMesh:
 	var st := SurfaceTool.new()
@@ -561,7 +562,7 @@ static func _steps_mesh(segment: int,x0:float=-STAIR_HALF_WIDTH,x1:float=STAIR_H
 	var per_course:=STAIR_TREADS/STAIR_COURSES
 	for step in range(segment*per_course,(segment+1)*per_course):
 		Geo._append_box(st,Vector3((x0+x1)*.5,(step+1)*rise-STAIR_FINISH_THICKNESS*.5,STAIR_FOOT_Z-(step+.5)*tread),Vector3(x1-x0,STAIR_FINISH_THICKNESS,tread),Basis.IDENTITY)
-	return st.commit()
+	return CpuMesh.commit(st)
 
 static func _build_promenade(world: Node3D, basis: Basis) -> void:
 	for z in range(-70,100,14):

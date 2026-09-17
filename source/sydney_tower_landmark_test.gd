@@ -22,7 +22,10 @@ func batched_vertices(w:Node3D,material:Material)->int:
 		var mesh:ArrayMesh=cell.instance.mesh
 		if mesh==null:continue
 		for surface in mesh.get_surface_count():
-			if mesh.surface_get_material(surface)==material:total+=mesh.surface_get_arrays(surface)[Mesh.ARRAY_VERTEX].size()
+			if mesh.surface_get_material(surface)!=material:continue
+			# Cell batches are indexed; count drawn corners so the result matches get_faces().
+			var corners:=mesh.surface_get_array_index_len(surface)
+			total+=corners if corners>0 else mesh.surface_get_array_len(surface)
 	return total
 func _initialize()->void:call_deferred("run")
 func run()->void:

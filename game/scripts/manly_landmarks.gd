@@ -2,6 +2,7 @@ extends RefCounted
 ## Original Manly exteriors reconstructed from map data and inspected photos.
 ## Map positions are sourced; heights and facade details are visual estimates.
 ## See docs/MANLY_REFERENCE.md.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 
 const WHARF_FLOOR := 0.04 # Physical surface above coincident mapped ground.
 const WHARF_CENTER := Vector3(6823.55121,4.5,-6681.92745)
@@ -83,7 +84,7 @@ static func _triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, norma
 
 static func _finish(st: SurfaceTool) -> ArrayMesh:
 	# The world's destructive-component batching reads indexed triangle arrays.
-	var mesh := st.commit()
+	var mesh := CpuMesh.commit(st)
 	var arrays := mesh.surface_get_arrays(0)
 	var count: int = arrays[Mesh.ARRAY_VERTEX].size()
 	var indices := PackedInt32Array()

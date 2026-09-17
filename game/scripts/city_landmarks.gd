@@ -2,6 +2,7 @@ extends RefCounted
 ## Four independently researched exteriors. OSM defines positions and footprints;
 ## public architecture references define massing. See docs/CITY_REFERENCE.md for
 ## the distinction between measured map data and inferred facade dimensions.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 
 const TOWER_PODIUM_CENTER := Vector3(-775.00336,4.5,427.86918)
 const TOWER_PODIUM_POINTS := [[48.49912,47.23345],[-2.441,26.90642],[-46.63592,6.95788],[-50.18408,-34.9875],[-11.1266,-38.6054],[-4.39988,-35.2992],[-6.137,-31.77035],[32.21824,-14.96103],[42.67792,-11.0203],[45.52384,15.15103]]
@@ -298,7 +299,7 @@ static func _boc_lobby_mesh() -> ArrayMesh:
 		# Keep all appended solids non-indexed. Mixing BoxMesh's indexed
 		# arrays after non-indexed prisms would silently drop the floor faces.
 		st.append_from(prism(column_poly,0.035,4.845),0,Transform3D.IDENTITY)
-	return st.commit()
+	return CpuMesh.commit(st)
 
 static func _boc_colonnade_details(world:Node3D,lobby:StaticBody3D) -> void:
 	var stone:=SurfaceTool.new();stone.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -616,7 +617,7 @@ static func _ribbon_hex_cell(copper:SurfaceTool,dark:SurfaceTool,origin:Vector3,
 
 static func _ribbon_arrival_detail(world:Node3D,part:String,st:SurfaceTool,key:String,label:String) -> void:
 	var body:StaticBody3D=world.structures["city/ribbon/entry/"+part].node
-	var mesh:=st.commit()
+	var mesh:=CpuMesh.commit(st)
 	if mesh==null:return
 	var view:=MeshInstance3D.new();view.name=label;view.mesh=mesh;view.material_override=world.materials[key]
 	body.add_child(view)
@@ -750,7 +751,7 @@ static func prism(poly: PackedVector2Array, low: float, high: float) -> ArrayMes
 		_triangle(surface,p,q,r,normal,Vector2(offset,low),Vector2(offset+length,low),Vector2(offset+length,high))
 		_triangle(surface,p,r,s,normal,Vector2(offset,low),Vector2(offset+length,high),Vector2(offset,high))
 		offset+=length
-	return surface.commit()
+	return CpuMesh.commit(surface)
 
 static func profile_solid(poly: PackedVector2Array, half_depth: float) -> ArrayMesh:
 	var surface := SurfaceTool.new()
@@ -773,7 +774,7 @@ static func profile_solid(poly: PackedVector2Array, half_depth: float) -> ArrayM
 		var s := Vector3(a.x,a.y,half_depth)
 		_triangle(surface,p,q,r,normal,Vector2(-half_depth,a.y),Vector2(-half_depth,b.y),Vector2(half_depth,b.y))
 		_triangle(surface,p,r,s,normal,Vector2(-half_depth,a.y),Vector2(half_depth,b.y),Vector2(half_depth,a.y))
-	return surface.commit()
+	return CpuMesh.commit(surface)
 
 static func _triangle(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, normal: Vector3, ua: Vector2, ub: Vector2, uc: Vector2) -> void:
 	if (b-a).cross(c-a).length_squared()<0.0000000001: return
@@ -830,7 +831,7 @@ static func _append_beam(surface: SurfaceTool, a: Vector3, b: Vector3, width: fl
 	_append_box(surface,(a+b)*0.5,Vector3(width,depth,delta.length()+0.03),basis)
 
 static func _commit_detail(world: Node3D, body: StaticBody3D, surface: SurfaceTool, key: String) -> void:
-	var mesh := surface.commit()
+	var mesh := CpuMesh.commit(surface)
 	if mesh!=null and mesh.get_surface_count()>0: _detail(world,body,mesh,key)
 
 static func _detail(world: Node3D, body: StaticBody3D, mesh: ArrayMesh, key: String) -> void:

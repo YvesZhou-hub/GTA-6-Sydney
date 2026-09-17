@@ -1,6 +1,8 @@
 extends Node3D
 ## Original reusable harbour environment. Geographic data attribution is in assets/world_geography.json.
 ## Geometry is meter-scale, +X east, +Z south, Y=0 mean water. Stable component IDs are save keys.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
+const Loading = preload("res://scripts/loading_progress.gd")
 
 signal structure_damaged(point: Vector3, severity: float)
 
@@ -64,30 +66,41 @@ func _ready() -> void:
 	var build_started:=Time.get_ticks_msec()
 	var timings:Dictionary={}
 	_rng.seed = 940219
+	# Progress fractions follow measured native build time, not step count.
+	Loading.report(0.01,"读取城市地图")
 	_make_materials()
 	geography = JSON.parse_string(FileAccess.get_file_as_string("res://assets/world_geography.json"))
 	map_snapshot = CityMap.data()
 	_build_land()
 	_build_water()
+	Loading.report(0.04,"铺设街道")
 	_build_streets()
+	Loading.report(0.22,"搭建海港大桥")
 	_build_bridge()
+	Loading.report(0.29,"建造悉尼歌剧院")
 	_build_opera()
+	Loading.report(0.42,"布置环形码头")
 	_build_quay()
 	_build_home()
 	timings["terrain_and_harbour_ms"]=Time.get_ticks_msec()-build_started
+	Loading.report(0.49,"生成城市建筑")
 	CityMap.build_buildings(self,map_snapshot)
 	CityMap.build_places(self,map_snapshot)
 	timings["mapped_city_ms"]=Time.get_ticks_msec()-build_started
-	for model in LANDMARK_MODELS:
+	for index in LANDMARK_MODELS.size():
+		Loading.report(0.69+0.11*index/LANDMARK_MODELS.size(),"添加地标细节")
+		var model=LANDMARK_MODELS[index]
 		model.build(self)
 		if model.has_method("metadata"):
 			for item in model.metadata():
 				if item.has("center") and not anchors.has(item.id): anchors[item.id]=item.get("arrival",item.center)
 	_register_landmark_geography()
+	Loading.report(0.80,"种植树木与草坪")
 	CityMap.build_vegetation(self,map_snapshot)
 	_build_observatory()
 	_build_helipad()
 	timings["custom_landmarks_ms"]=Time.get_ticks_msec()-build_started
+	Loading.report(0.82,"合并城市网格")
 	_flush_batches()
 	for id in structures:
 		for child in structures[id]["node"].get_children():
@@ -375,7 +388,20 @@ func _build_structure_batches() -> void:
 			if child is MeshInstance3D:
 				child.visible = false
 				if child.get_meta("near_facade",false): _visual_cells[cell].has_near=true
+				# Streamed near detail rebuilds later; keep its CPU copy instead of a runtime readback.
+				if child.mesh!=null and not _mesh_array_cache.has(child.mesh) and CpuMesh.has_cpu_arrays(child.mesh):
+					_mesh_array_cache[child.mesh]=CpuMesh.surface_arrays(child.mesh)
 	for cell in _visual_cells: _rebuild_visual_cell(cell,is_instance_valid(facade_stream))
+	CpuMesh.release()
+
+## One material's geometry inside a visual cell, gathered as indexed arrays.
+class CellGroup:
+	var material: Material
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var uv := PackedVector2Array()
+	var uv2 := PackedVector2Array()
+	var indices := PackedInt32Array()
 
 func _rebuild_visual_cell(cell: Vector2i,base_only:=false,detail_only:=false) -> void:
 	if is_instance_valid(facade_stream) and not detail_only:
@@ -391,62 +417,81 @@ func _rebuild_visual_cell(cell: Vector2i,base_only:=false,detail_only:=false) ->
 			if (base_only and near) or (detail_only and not near) or not cpu_surface.has("arrays"):continue
 			var arrays: Array=cpu_surface.arrays
 			if arrays.size()!=Mesh.ARRAY_MAX or arrays[Mesh.ARRAY_VERTEX]==null or arrays[Mesh.ARRAY_VERTEX].is_empty():continue
-			var target: Dictionary=groups[near]
 			var material: Material=materials.rubble if float(partial_damage.get(id,0.0))>0.22 else cpu_surface.material
-			var key: int=material.get_instance_id()
-			if not target.has(key):
-				var surface:=SurfaceTool.new()
-				surface.begin(Mesh.PRIMITIVE_TRIANGLES)
-				surface.set_material(material)
-				target[key]=surface
-			var vertices: PackedVector3Array=node.transform*arrays[Mesh.ARRAY_VERTEX]
-			var normals: PackedVector3Array=Transform3D(node.basis,Vector3.ZERO)*arrays[Mesh.ARRAY_NORMAL]
-			var uv: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV]
-			var uv2:PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV2] if arrays[Mesh.ARRAY_TEX_UV2]!=null else PackedVector2Array()
-			for index in arrays[Mesh.ARRAY_INDEX]:
-				target[key].set_normal(normals[index])
-				target[key].set_uv(uv[index])
-				target[key].set_uv2(uv2[index] if not uv2.is_empty() else Vector2.ZERO)
-				target[key].add_vertex(vertices[index])
+			_append_cell_arrays(_cell_group(groups[near],material),arrays,node.transform,node.basis)
 		for child in node.get_children():
 			if not child is MeshInstance3D or child.get_meta("collision_only",false): continue
 			var near:bool=child.get_meta("near_facade",false)
 			if (base_only and near) or (detail_only and not near):continue
-			var target: Dictionary=groups[near]
-			var material: Material = child.material_override
-			var key: int = material.get_instance_id()
-			if not target.has(key):
-				var surface := SurfaceTool.new()
-				surface.begin(Mesh.PRIMITIVE_TRIANGLES)
-				surface.set_material(material)
-				target[key] = surface
-			if not _mesh_array_cache.has(child.mesh):
-				var cached:Array=[]
-				for surface_index in child.mesh.get_surface_count(): cached.append(child.mesh.surface_get_arrays(surface_index))
-				_mesh_array_cache[child.mesh]=cached
+			var group:=_cell_group(groups[near],child.material_override)
+			if not _mesh_array_cache.has(child.mesh): _mesh_array_cache[child.mesh]=CpuMesh.surface_arrays(child.mesh)
 			for arrays in _mesh_array_cache[child.mesh]:
-				_append_cached_arrays(target[key],arrays,node.transform*child.transform)
+				_append_cached_arrays(group,arrays,node.transform*child.transform)
 	for near in [false,true]:
 		if (base_only and near) or (detail_only and not near):continue
 		var mesh := ArrayMesh.new()
-		for key in groups[near]: groups[near][key].commit(mesh)
-		data["detail" if near else "instance"].mesh = mesh if groups[near].size()>0 else null
+		for key in groups[near]:
+			var group:CellGroup=groups[near][key]
+			if group.indices.is_empty(): continue
+			var arrays:=[]
+			arrays.resize(Mesh.ARRAY_MAX)
+			arrays[Mesh.ARRAY_VERTEX]=group.vertices
+			arrays[Mesh.ARRAY_NORMAL]=group.normals
+			arrays[Mesh.ARRAY_TEX_UV]=group.uv
+			arrays[Mesh.ARRAY_TEX_UV2]=group.uv2
+			arrays[Mesh.ARRAY_INDEX]=group.indices
+			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+			mesh.surface_set_material(mesh.get_surface_count()-1,group.material)
+		data["detail" if near else "instance"].mesh = mesh if mesh.get_surface_count()>0 else null
 
-func _append_cached_arrays(surface: SurfaceTool, arrays: Array, pose: Transform3D) -> void:
+func _cell_group(target: Dictionary, material: Material) -> CellGroup:
+	var key: int=material.get_instance_id()
+	if not target.has(key):
+		var group:=CellGroup.new()
+		group.material=material
+		target[key]=group
+	return target[key]
+
+## Appends indexed geometry with whole-array transforms. Cells used to expand
+## every index through four SurfaceTool calls, about ten seconds of native startup.
+func _append_cell_arrays(group: CellGroup, arrays: Array, pose: Transform3D, normal_basis: Basis, normalize:=false) -> void:
+	var source: PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+	var count:=source.size()
+	var base:=group.vertices.size()
+	group.vertices.append_array(pose*source)
+	var normals: PackedVector3Array=Transform3D(normal_basis,Vector3.ZERO)*arrays[Mesh.ARRAY_NORMAL]
+	if normalize:
+		for i in normals.size(): normals[i]=normals[i].normalized()
+	group.normals.append_array(normals)
+	group.uv.append_array(_uv_channel(arrays[Mesh.ARRAY_TEX_UV],count))
+	group.uv2.append_array(_uv_channel(arrays[Mesh.ARRAY_TEX_UV2],count))
+	var source_indices: PackedInt32Array=arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX]!=null else PackedInt32Array()
+	var length:=count if source_indices.is_empty() else source_indices.size()
+	var shifted:=PackedInt32Array()
+	shifted.resize(length)
+	if source_indices.is_empty():
+		for i in length: shifted[i]=base+i
+	else:
+		for i in length: shifted[i]=source_indices[i]+base
+	group.indices.append_array(shifted)
+
+static func _uv_channel(values: Variant, count: int) -> PackedVector2Array:
+	if values is PackedVector2Array and values.size()==count: return values
+	var zeros:=PackedVector2Array()
+	zeros.resize(count)
+	return zeros
+
+func _append_cached_arrays(group: CellGroup, arrays: Array, pose: Transform3D) -> void:
 	# Native Metal readback is paid once per source mesh, including the thousands
 	# of repeated mullions/treads. Damage rebuilds reuse the same CPU geometry.
-	var vertices: PackedVector3Array=pose*arrays[Mesh.ARRAY_VERTEX]
 	var normal_basis:=pose.basis.inverse().transposed()
-	var normals: PackedVector3Array=Transform3D(normal_basis,Vector3.ZERO)*arrays[Mesh.ARRAY_NORMAL]
-	var uv: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV] if arrays[Mesh.ARRAY_TEX_UV]!=null else PackedVector2Array()
-	var uv2:PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV2] if arrays[Mesh.ARRAY_TEX_UV2]!=null else PackedVector2Array()
-	var indices: PackedInt32Array=arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX]!=null else PackedInt32Array()
-	for cursor in (vertices.size() if indices.is_empty() else indices.size()):
-		var index:int=cursor if indices.is_empty() else indices[cursor]
-		surface.set_normal(normals[index].normalized())
-		surface.set_uv(uv[index] if not uv.is_empty() else Vector2.ZERO)
-		surface.set_uv2(uv2[index] if not uv2.is_empty() else Vector2.ZERO)
-		surface.add_vertex(vertices[index])
+	var lengths:=Vector3(normal_basis.x.length(),normal_basis.y.length(),normal_basis.z.length())
+	var orthogonal:=absf(normal_basis.x.dot(normal_basis.y))<1e-5 and absf(normal_basis.y.dot(normal_basis.z))<1e-5 and absf(normal_basis.x.dot(normal_basis.z))<1e-5
+	if orthogonal and absf(lengths.x-lengths.y)<1e-5 and absf(lengths.y-lengths.z)<1e-5 and lengths.x>0.0:
+		# Rotation with uniform scale: unit source normals stay unit after one division.
+		_append_cell_arrays(group,arrays,pose,normal_basis.scaled(Vector3.ONE/lengths.x))
+	else:
+		_append_cell_arrays(group,arrays,pose,normal_basis,true)
 
 func _mark_visual_dirty(id: String) -> void:
 	if not structures[id].has("cell"): return
@@ -496,7 +541,7 @@ func _structure_mesh(id: String, mesh: ArrayMesh, pos: Vector3, key: String, str
 	mi.material_override = materials[key]
 	body.add_child(mi)
 	var c := CollisionShape3D.new()
-	c.shape = mesh.create_trimesh_shape()
+	c.shape = CpuMesh.trimesh_shape(mesh)
 	body.add_child(c)
 	var bounds := mesh.get_aabb()
 	structures[id] = {"node":body,"position":pos+basis*bounds.get_center(),"half":bounds.size*0.5,"basis":basis,"strength":strength,"color":key}
@@ -533,7 +578,7 @@ func _array_mesh(vertices: PackedVector3Array, indices: PackedInt32Array, uv: Pa
 		st.add_vertex(vertices[i])
 	for idx in indices: st.add_index(idx)
 	st.generate_normals()
-	return st.commit()
+	return CpuMesh.commit(st)
 
 func _land_mesh(poly: PackedVector2Array) -> ArrayMesh:
 	var tri := Geometry2D.triangulate_polygon(poly)

@@ -1,5 +1,6 @@
 extends RefCounted
 ## Real Circular Quay exteriors; see docs/QUAY_REFERENCE.md for precision limits.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Geo=preload("res://scripts/city_landmarks.gd")
 const QQT_HEIGHT:=206.0
 const SALESFORCE_HEIGHT:=263.0
@@ -356,7 +357,7 @@ static func _ring_mesh(outline: PackedVector2Array, inset_scale: float, low: flo
 			var p: Vector2=edge[0];var q: Vector2=edge[1];var normal: Vector3=edge[2]
 			Geo._triangle(surface,Vector3(p.x,low,p.y),Vector3(q.x,low,q.y),Vector3(q.x,high,q.y),normal,Vector2(0,low),Vector2(p.distance_to(q),low),Vector2(p.distance_to(q),high))
 			Geo._triangle(surface,Vector3(p.x,low,p.y),Vector3(q.x,high,q.y),Vector3(p.x,high,p.y),normal,Vector2(0,low),Vector2(p.distance_to(q),high),Vector2(0,high))
-	return surface.commit()
+	return CpuMesh.commit(surface)
 
 const QQT_CENTER:=Vector3(94.871112,4.5,329.616717)
 const QQT_BASE_POINTS:=[

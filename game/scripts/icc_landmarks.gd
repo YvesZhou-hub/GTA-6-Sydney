@@ -1,6 +1,7 @@
 extends RefCounted
 ## Public architectural reconstruction; mapped OSM footprint, public venue plans
 ## and completed-building photographs. This is not a complete BIM or event fitout.
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
 const Geo = preload("res://scripts/city_landmarks.gd")
 const DATA = preload("res://assets/icc_geometry.json")
 const GROUND := 4.5
@@ -137,7 +138,7 @@ static func _triangle(batch: Dictionary, key: String, a: Vector3, b: Vector3, c:
 static func _flush(w: Node3D, parent: Node3D, batch: Dictionary) -> void:
 	# One GPU mesh per material, not one mesh per seat, fin or tread.
 	for key: String in batch:
-		var mesh := MeshInstance3D.new(); mesh.mesh=batch[key].commit()
+		var mesh := MeshInstance3D.new(); mesh.mesh=CpuMesh.commit(batch[key])
 		mesh.material_override=w.materials["icc_"+key.trim_suffix("_sheet")]; parent.add_child(mesh)
 
 static func _root(w: Node3D, name: String, o: Vector3) -> Node3D:

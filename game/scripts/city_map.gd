@@ -1,6 +1,7 @@
 extends RefCounted
 ## Reproducible real footprint/centerline map. Heights and facade confidence are
 ## explicitly retained in city_map.json. Ordinary exteriors are reconstructions.
+const Loading = preload("res://scripts/loading_progress.gd")
 const DATA_PATH := "res://assets/city_map.json"
 const FACADE := preload("res://shaders/city_facade.gdshader")
 const DARLING_FACILITY_IDS := ["way/1136058496","way/1241018456","way/1241018457","way/1241018458"]
@@ -69,7 +70,10 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 	var nodes := {}
 	var excavations := _road_excavations(snapshot)
 	var rendered := 0
+	var road_index := 0
 	for road in snapshot.roads:
+		road_index += 1
+		Loading.report(0.04 + 0.13 * road_index / snapshot.roads.size(), "铺设街道")
 		# These mapped paths are now solid stone pier / sloping gangway geometry.
 		if road.get("id", "") in preload("res://scripts/manowar_detail.gd").REPLACED_ROADS:continue
 		var tags: Dictionary = road.tags
@@ -124,6 +128,7 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 					world._batch_box(av + (bv - av).normalized() * n + Vector3.UP * 0.038, Vector3(0.10, 0.012, 3), "white", basis)
 			rendered += 1
 	var joined := 0
+	Loading.report(0.18, "铺设街道")
 	for entry in nodes.values():
 		if entry.directions.size() < 2: continue
 		if entry.directions.size() == 2 and entry.directions[0].dot(entry.directions[1]) < -0.99999: continue
@@ -136,12 +141,16 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 	# Road carriageways own their footprint. Coplanar pedestrian ribbons are
 	# geometrically subtracted here, preventing competing white/asphalt pixels
 	# at crossings and beside rounded road edges without raising either surface.
-	for outline in area_paving:
+	for index in area_paving.size():
+		Loading.report(0.18 + 0.01 * index / area_paving.size(), "铺设人行道")
+		var outline: PackedVector2Array = area_paving[index]
 		for piece in _road_paving_pieces(outline, road_masks):
 			_road_add_polygon(batches, piece, "lightstone", excavations, world.GROUND + 0.085)
 	# Explicit pedestrian polygons own their footprint. Clip only the portions
 	# of centreline paving inside them, leaving connecting paths in place.
-	for outline in paving:
+	for index in paving.size():
+		Loading.report(0.19 + 0.03 * index / paving.size(), "铺设人行道")
+		var outline: PackedVector2Array = paving[index]
 		for outside_area in _road_paving_pieces(outline, area_masks):
 			for piece in _road_paving_pieces(outside_area, road_masks):
 				_road_add_polygon(batches, piece, "lightstone", excavations, world.GROUND + 0.085)
@@ -453,7 +462,10 @@ static func _reserved(world: Node3D, item: Dictionary) -> bool:
 static func build_buildings(world: Node3D, snapshot: Dictionary) -> void:
 	var count := 0
 	var skipped := 0
+	var building_index := 0
 	for item in snapshot.buildings:
+		building_index += 1
+		Loading.report(0.49 + 0.19 * building_index / snapshot.buildings.size(), "生成城市建筑")
 		if _reserved(world,item): skipped+=1; continue
 		var center:=Vector3(item.center[0],world.GROUND,item.center[1])
 		var bounds:=AABB(center+Vector3(item.outline[0][0],item.base,item.outline[0][1]),Vector3.ZERO)

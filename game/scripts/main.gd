@@ -6,6 +6,7 @@ const Sound = preload("res://scripts/harbor_audio.gd")
 const AudioShutdown = preload("res://scripts/audio_shutdown.gd")
 const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
 const GameSettings = preload("res://scripts/game_settings.gd")
+const Loading = preload("res://scripts/loading_progress.gd")
 const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 重装坦克","fighter":"Aster F-27 · 战斗机"}
 var survival: Node3D
 var survival_hud: Control
@@ -119,6 +120,7 @@ func _ready():
 	world.set_meta("stream_details",true)
 	add_child(world)
 	world.process_mode=Node.PROCESS_MODE_PAUSABLE
+	Loading.report(0.88,"准备悉尼机场")
 	if ResourceLoader.exists("res://scripts/airport_world.gd"):
 		airport=load("res://scripts/airport_world.gd").new()
 		add_child(airport)
@@ -127,6 +129,7 @@ func _ready():
 		world.anchors.merge(airport.anchors)
 	# Measured first summon spent about one second building immutable footprint
 	# lookup data. Pay that once behind the existing loading screen.
+	Loading.report(0.93,"检查载具停放空间")
 	var occupancy_started:=Time.get_ticks_usec()
 	preload("res://scripts/map_migration.gd")._geometry(world)
 	set_meta("occupancy_preload_ms",(Time.get_ticks_usec()-occupancy_started)/1000.0)
@@ -157,6 +160,7 @@ func _ready():
 	life.process_mode=Node.PROCESS_MODE_PAUSABLE
 	life.setup(world.anchors,false)
 	life.connect("notification",func(t): notify(t))
+	Loading.report(0.97,"准备界面")
 	setup_ui()
 	weapons=load("res://scripts/vehicle_weapons.gd").new()
 	add_child(weapons)
@@ -1857,7 +1861,9 @@ func update_hud():
 		survival_hud.set_top_limit(left_column.get_global_rect().end.y-hud.global_position.y+10.0)
 
 func _notification(what):
-	if what==NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
+	# Closing during loading has no world to save yet.
+	if what==NOTIFICATION_WM_CLOSE_REQUEST and Loading.active(): get_tree().quit()
+	elif what==NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
 	elif what==NOTIFICATION_APPLICATION_FOCUS_OUT:
 		if bool(settings.get("mute_unfocused",false)): AudioServer.set_bus_mute(0,true)
 	elif what==NOTIFICATION_APPLICATION_FOCUS_IN:
