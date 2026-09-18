@@ -7,12 +7,13 @@ const DEFAULTS := {
 	"volume": 0.65, "sensitivity": 0.003, "quality": 1, "invert": false, "large_text": false,
 	"window_mode": "windowed", "vsync": true, "max_fps": 0, "render_scale": 1.0,
 	"antialiasing": "msaa2", "fov": 68.0, "pad_sensitivity": 2.6, "mute_unfocused": false,
-	"street_life": 1,
+	"street_life": 1, "combat_difficulty": 1,
 	"bindings": {},
 }
 const WINDOW_MODES := [["windowed", "窗口"], ["borderless", "全屏（无边框）"], ["fullscreen", "独占全屏"]]
 const FPS_LIMITS := [0, 30, 60, 120, 144, 240]
 const RENDER_SCALES := [1.0, 0.85, 0.75, 0.67, 0.5]
+const COMBAT_DIFFICULTY := [["轻松", "奶龙更少更弱，保护更久"], ["标准", "默认平衡"], ["硬核", "奶龙更多更强，保护更短，奖金更高"]]
 const STREET_LIFE := [["关闭", "街上没有车流和行人"], ["正常", "附近有车流和行人"], ["热闹", "更多车流和行人 · 更吃性能"]]
 const ANTIALIASING := [["off", "关闭"], ["fxaa", "FXAA · 最省性能"], ["msaa2", "MSAA 2× · 默认"], ["msaa4", "MSAA 4× · 更平滑"], ["taa", "TAA · 首次开启需编译数秒"]]
 const PAD_DEADZONE := 0.2
@@ -48,6 +49,7 @@ static func sanitized(data: Dictionary) -> Dictionary:
 	result.sensitivity = clampf(float(result.sensitivity), 0.0005, 0.02)
 	result.quality = clampi(int(result.quality), 0, 2)
 	result.street_life = clampi(int(result.street_life), 0, 2)
+	result.combat_difficulty = clampi(int(result.combat_difficulty), 0, 2)
 	result.max_fps = int(result.max_fps) if int(result.max_fps) in FPS_LIMITS else 0
 	result.render_scale = clampf(float(result.render_scale), 0.5, 1.0)
 	result.fov = clampf(float(result.fov), 55.0, 95.0)

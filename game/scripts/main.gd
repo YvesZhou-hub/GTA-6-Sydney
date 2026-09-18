@@ -14,6 +14,7 @@ var campaign: Node
 var districts: Node
 var street: Node3D
 var street_lights: Node3D
+var combat_feel: Node
 var combat_feedback: Control
 var airport: Node3D
 var world: Node3D
@@ -115,7 +116,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa","--district-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa","--district-qa","--feel-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
@@ -176,6 +177,9 @@ func _ready():
 	survival_hud.setup(self)
 	survival_hud.service_requested.connect(survival_menu)
 	survival_hud.heal_requested.connect(func(): notify(survival.quick_recovery()))
+	combat_feel=load("res://scripts/combat_feel.gd").new()
+	add_child(combat_feel)
+	combat_feel.setup(self)
 	combat_feedback=load("res://scripts/combat_feedback.gd").new()
 	canvas.add_child(combat_feedback)
 	canvas.move_child(combat_feedback,0)
@@ -277,6 +281,10 @@ func _ready():
 		var district_validation=load("res://scripts/district_validation.gd").new()
 		add_child(district_validation)
 		district_validation.call_deferred("run",self)
+	elif "--feel-qa" in arguments:
+		var feel_validation=load("res://scripts/feel_validation.gd").new()
+		add_child(feel_validation)
+		feel_validation.call_deferred("run",self)
 	elif "--ui-font-qa" in arguments:
 		var validation=load("res://scripts/ui_font_validation.gd").new()
 		add_child(validation)
@@ -744,6 +752,9 @@ func can_auto_fire_weapon() -> bool:
 	return active and not paused and not modal.visible and not map_panel.visible and is_instance_valid(survival) and survival.enabled and is_instance_valid(current_vehicle) and current_vehicle.occupied and current_vehicle.health>0
 
 func apply_combat_blast(point:Vector3,energy:float,radius:float,source:RigidBody3D) -> void:
+	if is_instance_valid(combat_feel) and is_instance_valid(camera):
+		var reach:float=camera.global_position.distance_to(point)
+		combat_feel.shake(clampf(radius*0.02*(1.0-clampf(reach/90.0,0.0,1.0)),0.0,0.5))
 	world.damage_at(point,energy,radius)
 	if is_instance_valid(airport): airport.apply_impact(point,energy)
 	_allow_combat_debris_passage(source)
@@ -1474,6 +1485,9 @@ func settings_menu():
 	_settings_slider("视野",55,95,1,float(settings.fov),func(v):return "%d°"%v,func(v): settings.fov=v; _settings_changed())
 	var street_life:Array=GameSettings.STREET_LIFE
 	_settings_option("街上人车",street_life.map(func(row):return row[0]+" · "+row[1]),clampi(int(settings.street_life),0,street_life.size()-1),func(i): settings.street_life=i; _settings_changed())
+	_settings_section("战斗")
+	var difficulty:Array=GameSettings.COMBAT_DIFFICULTY
+	_settings_option("战斗难度",difficulty.map(func(row):return row[0]+" · "+row[1]),clampi(int(settings.combat_difficulty),0,difficulty.size()-1),func(i): settings.combat_difficulty=i; _settings_changed())
 	_settings_section("声音")
 	_settings_slider("主音量",0,1,0.05,float(settings.volume),func(v):return "%d%%"%roundi(v*100),func(v): settings.volume=v; _settings_changed())
 	_settings_toggle("切到其他窗口时静音",settings.mute_unfocused,func(v): settings.mute_unfocused=v; _settings_changed())
@@ -1838,6 +1852,8 @@ func _update_follow_camera(delta: float):
 	_camera_boom=allowed if allowed<_camera_boom or snap else lerpf(_camera_boom,allowed,1.0-exp(-delta*7.0))
 	camera.global_position=_camera_focus+direction*_camera_boom
 	if camera.global_position.distance_to(_camera_focus)>0.1: camera.look_at(_camera_focus)
+	# Shake and recoil ride on top of the placed camera, never inside its smoothing.
+	if is_instance_valid(combat_feel): combat_feel.apply_camera(camera,delta)
 
 func update_combat_reticle(delta:float):
 	if active and not paused and survival.enabled and not is_instance_valid(current_vehicle):

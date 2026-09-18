@@ -69,7 +69,7 @@ func reset_mode(with_encounters: bool) -> void:
 	clear_enemies()
 	enabled = with_encounters
 	kills = 0; cleared = 0; wave_spawned = 0; wave_kills = 0
-	medkits = 3; heal_cooldown = 0.0; grace = 12.0; rest = 0.0
+	medkits = 3; heal_cooldown = 0.0; grace = 12.0 * float(difficulty_profile().grace); rest = 0.0
 	_spawn_clock = 1.0; _spawn_sequence = 0; _spawn_failures = 0
 	_spawn_reason = "奶龙正在集结"; _spawn_diagnostics.clear()
 	_incoming_budget = 18.0; field_repair_cooldown = 0.0; _recycle_clock = 0.0
@@ -99,16 +99,27 @@ func _running() -> bool:
 func subject() -> Node3D:
 	return game.current_vehicle if is_instance_valid(game.current_vehicle) else game.player
 
+## The player's 战斗难度 setting; standard when a world has no settings yet.
+func difficulty_index() -> int:
+	if not is_instance_valid(game) or not game.settings is Dictionary: return 1
+	return clampi(int(game.settings.get("combat_difficulty", 1)), 0, Progression.DIFFICULTY.size() - 1)
+
+
+func difficulty_profile() -> Dictionary:
+	return Progression.difficulty(difficulty_index())
+
+
 func quota() -> int:
-	return mini(18, 8 + cleared * 2)
+	return Progression.wave_quota(cleared)
 
 func desired_enemies() -> int:
 	var vehicle := is_instance_valid(game.current_vehicle)
 	var target := subject()
 	var health_ratio: float = target.health / (100.0 if vehicle else target.max_health)
-	if health_ratio <= 0.30: return 2
-	if _air_context: return Progression.allowed_air_count(encounter_level(), false, true)
-	return mini(12 if vehicle else 10, (6 if vehicle else 4) + mini(cleared, 5) + (1 if night_factor() > 0.5 else 0))
+	var shift := int(difficulty_profile().count)
+	if health_ratio <= 0.30: return maxi(1, 2 + mini(shift, 1))
+	if _air_context: return maxi(1, Progression.allowed_air_count(encounter_level(), false, true) + mini(shift, 1))
+	return maxi(2, mini(12 if vehicle else 10, (6 if vehicle else 4) + mini(cleared, 5) + (1 if night_factor() > 0.5 else 0)) + shift)
 
 func nearby_enemies() -> int:
 	var count := 0
@@ -124,7 +135,8 @@ func _counts_toward_local_budget(enemy: Node3D, distance: float) -> bool:
 	return not _air_context or enemy.is_flying() or distance <= float(enemy.spec.range) + .15
 
 func encounter_level() -> int:
-	return clampi(maxi(1 + int(cleared / 2.0), _adaptive_level), 1, Progression.MAX_LEVEL)
+	var taken := int(game.districts.liberated.size()) if is_instance_valid(game) and is_instance_valid(game.districts) else 0
+	return Progression.encounter_level(cleared, taken, _adaptive_level, difficulty_index())
 
 func weapon_loadout(kind: String) -> Array[Dictionary]:
 	return armory.loadout(kind)
@@ -228,6 +240,8 @@ func spawn_enemy(kind: String, at: Vector3, hp: float = -1.0, level: int = 1):
 	if enemies.size() >= ENEMY_LIMIT or not at.is_finite(): return null
 	var enemy = Enemy.new()
 	enemy.configure(kind, level)
+	var profile := difficulty_profile()
+	enemy.scale_for_difficulty(float(profile.health), float(profile.damage), float(profile.reward))
 	add_child(enemy)
 	enemy.global_position = at
 	enemy.reset_physics_interpolation()
@@ -296,6 +310,7 @@ func _enemy_defeated(enemy, reward: int) -> void:
 	enemy_defeated.emit(at, level)
 	_credit(reward)
 	_reward_text = "击败 Lv.%d %s · +%d 金币" % [enemy.level, enemy.spec.label, reward]
+	if is_instance_valid(game.combat_feel): game.combat_feel.shake(0.10 + 0.05 * float(enemy.spec.get("scale", 1.0)))
 	_reward_clock = 3.0
 	if _rng.randf() < 0.2: medkits = mini(MEDKIT_LIMIT, medkits + 1)
 	if wave_kills >= quota():
@@ -431,6 +446,7 @@ func _ram_enemies() -> void:
 func fire_blaster() -> bool:
 	if not _running() or not enabled or _shot_cooldown > 0.0 or game.player.health <= 0.0 or is_instance_valid(game.current_vehicle): return false
 	_shot_cooldown = 0.24
+	if is_instance_valid(game.combat_feel): game.combat_feel.kick(0.035)
 	var camera: Camera3D = game.camera
 	var center := get_viewport().get_visible_rect().size * 0.5
 	var ray_from := camera.project_ray_origin(center)
