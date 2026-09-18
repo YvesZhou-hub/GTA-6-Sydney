@@ -48,8 +48,10 @@ func run():
 		await preview(specimens)
 		return
 	var ground_specimens := specimens.filter(func(e):return not e.is_flying())
-	check("all five ground archetypes land on physical ground",ground_specimens.size()==5 and ground_specimens.all(func(e): return e.is_on_floor() and absf(e.position.y)<.1))
-	check("seven silhouettes reuse shared mesh and material cache",Model.cache_snapshot().types.size()==7 and Model.cache_snapshot().materials<=12,Model.cache_snapshot())
+	# Six ground archetypes since the leaper joined the roster.
+	check("all six ground archetypes land on physical ground",ground_specimens.size()==6 and ground_specimens.all(func(e): return e.is_on_floor() and absf(e.position.y)<.1),{"ground":ground_specimens.size()})
+	# v0.5 added the leaper, the eighth silhouette; it reuses the same materials.
+	check("eight silhouettes reuse shared mesh and material cache",Model.cache_snapshot().types.size()==8 and Model.cache_snapshot().materials<=12,Model.cache_snapshot())
 	var twin = creature("roamer",Vector3(-10,0,80))
 	check("instances share geometry without sharing mutable health",twin._parts.head.get_child(0).mesh==specimens[0]._parts.head.get_child(0).mesh and twin._parts.root!=specimens[0]._parts.root)
 	var invalid = creature("unknown",Vector3(-20,0,80))
@@ -200,7 +202,50 @@ func run():
 	await steps(100)
 	check("boss heavy windup raises both arms with red full range warning",boss.state=="windup" and boss._warning.visible and boss._warning.scale.x>3.6 and boss._parts.arms[0].rotation.x< -1.4 and boss._parts.arms[1].rotation.x< -1.4 and boss._label.text.contains("重击蓄力") and boss_hits.is_empty(),boss.snapshot())
 	await steps(45)
-	check("boss attack signal carries level scaled damage",boss_hits.size()==1 and is_equal_approx(float(boss_hits[0]),31.36),{"hits":boss_hits})
+	# The boss now lands its attack as two strikes 0.45 s apart; the level-scaled
+	# total is unchanged, so its damage per cycle still matches the type table.
+	check("boss first strike carries half of the level scaled damage",
+		boss_hits.size()==1 and is_equal_approx(float(boss_hits[0]),15.68),{"hits":boss_hits})
+	await steps(40)
+	var boss_total: float = boss_hits.reduce(func(sum: float, value: float): return sum + value, 0.0)
+	check("the second strike completes the same total damage",
+		boss_hits.size()==2 and is_equal_approx(boss_total,31.36),{"hits":boss_hits,"state":boss.state})
+	# A volley reads as several spits with pauses, not one instant hit.
+	var spitter = creature("spitter",Vector3(420,0,0))
+	var volley: Array = []
+	spitter.attack_requested.connect(func(_e,d,_r): volley.append(d))
+	spitter.set_target(goal(Vector3(420,0,-12.0)))
+	await steps(125)
+	var mid_volley: int = volley.size()
+	await steps(60)
+	var volley_total: float = volley.reduce(func(sum: float, value: float): return sum + value, 0.0)
+	check("a spitter fires its attack as three spaced spits totalling the same damage",
+		volley.size()==3 and mid_volley>=1 and mid_volley<3 and is_equal_approx(volley_total,12.0) and is_equal_approx(float(volley[0]),4.0),
+		{"volley":volley,"spits_at_125_steps":mid_volley})
+	check("the volley is followed by a recovery opening", spitter._recover_left>0.0 or spitter.state in ["recover","chase"],{"state":spitter.state,"recover":spitter._recover_left})
+	# A leaper crouches, then jumps at where the target stood; it only hurts on landing.
+	var leaper = creature("leaper",Vector3(460,0,0))
+	var leaps: Array = []
+	leaper.attack_requested.connect(func(_e,d,r): leaps.append({"damage":d,"range":r}))
+	var perch := goal(Vector3(460,0,-7.0))
+	leaper.set_target(perch)
+	var start_z: float = leaper.position.z
+	await steps(150)
+	check("a leaper jumps across the gap and lands one hit",
+		leaps.size()==1 and is_equal_approx(float(leaps[0].damage),14.0) and leaper.position.z < start_z-3.0,
+		{"hits":leaps,"travelled":start_z-leaper.position.z,"state":leaper.state})
+	var dodger = creature("leaper",Vector3(500,0,0))
+	var dodged: Array = []
+	dodger.attack_requested.connect(func(_e,_d,_r): dodged.append(1))
+	var mark := goal(Vector3(500,0,-7.0))
+	dodger.set_target(mark)
+	var crouched := false
+	for i in 150:
+		await physics_frame
+		if dodger.state=="windup" and not crouched:
+			crouched = true
+			mark.position = Vector3(514,0,-7.0)
+	check("stepping aside during the crouch makes the leap miss", crouched and dodged.is_empty(), {"crouched":crouched,"hits":dodged.size()})
 	var passed: bool = checks.all(func(c): return c.passed)
 	var report := {"passed":passed,"count":checks.size(),"checks":checks,"physics":ProjectSettings.get_setting("physics/3d/physics_engine"),"physics_hz":Engine.physics_ticks_per_second}
 	var output := FileAccess.open("res://../reports/nailong-enemies.json",FileAccess.WRITE)

@@ -21,8 +21,16 @@ const DISTRICTS := [
 const TASK_VALUE := 2
 const BASE_REWARD := 6000
 const STEP_REWARD := 2000
+## Timed calls for help inside a district: clear a siege, or sweep three points.
+const EVENT_SECONDS := 180.0
+const EVENT_GAP := 150.0
+const EVENT_WORK := 3
+const EVENT_REWARD := 3000
+const SIEGE_RADIUS := 70.0
+const SWEEP_RADIUS := 22.0
 
 signal district_changed(id: String)
+signal event_changed(state: Dictionary)
 
 var game: Node
 var progress: Dictionary = {}
@@ -30,6 +38,8 @@ var liberated: Dictionary = {}
 var centres: Dictionary = {}
 var panel: PanelContainer
 var _jobs_seen := 0
+var event: Dictionary = {}
+var _event_gap := 60.0
 var _title: Label
 var _detail: Label
 var _bar: ProgressBar
@@ -55,6 +65,8 @@ func reset() -> void:
 	progress.clear()
 	liberated.clear()
 	_jobs_seen = 0
+	end_event("")
+	_event_gap = 60.0
 	if is_instance_valid(panel): panel.visible = false
 
 
@@ -118,6 +130,7 @@ func add_work(position: Vector3, amount: int, reason: String) -> void:
 
 func _on_enemy_defeated(position: Vector3, _level: int) -> void:
 	add_work(position, 1, "清剿奶龙")
+	_event_kill(position)
 
 
 func _liberate(id: String, _reason: String) -> void:
@@ -213,6 +226,9 @@ func update_panel() -> void:
 		_title.text = "%s · 清剿中  %d / %d" % [str(row.name), done(id), need(id)]
 		_bar.value = float(done(id)) / maxf(1.0, float(need(id)))
 		_detail.text = "击败这里的奶龙，或在这里完成工作与城市体验。"
+	if not event.is_empty() and str(event.district) == id:
+		var left := int(ceil(float(event.left)))
+		_detail.text = "%s  %d / %d · 剩余 %d:%02d" % [str(event.title), int(event.done), int(event.need), left / 60, left % 60]
 	# Placed last: the card is only as wide as the text it just received.
 	_place_panel()
 
@@ -239,6 +255,91 @@ func _process(delta: float) -> void:
 	if jobs > _jobs_seen:
 		if _jobs_seen > 0: add_work(game.player.global_position, TASK_VALUE, "完成工作")
 		_jobs_seen = jobs
+	_tick_event(0.25)
+
+
+## A district in trouble calls for help: either a siege to break, or three
+## points to sweep. Sweeps also work in the sandbox, where there are no Nailong.
+func start_event(id: String, kind: String = "") -> Dictionary:
+	if not unlocked(id) or liberated.has(id) or not event.is_empty(): return {}
+	var fights: bool = is_instance_valid(game.survival) and bool(game.survival.enabled)
+	var chosen := kind if kind != "" else ("siege" if fights else "sweep")
+	if chosen == "siege" and not fights: chosen = "sweep"
+	var middle := centre(id)
+	var radius: float = float(definition(id).radius) * 0.55
+	var angle := fposmod(float(Time.get_ticks_msec()) * 0.001, TAU)
+	var points: Array = []
+	for i in (3 if chosen == "sweep" else 1):
+		var turn := angle + TAU * float(i) / 3.0
+		points.append(middle + Vector3(sin(turn), 0.0, cos(turn)) * radius * (0.5 + 0.5 * float(i % 2)))
+	event = {"district": id, "kind": chosen, "left": EVENT_SECONDS, "points": points, "index": 0,
+		"need": 5 if chosen == "siege" else 3, "done": 0,
+		"title": ("奶龙围攻 · %s" % str(definition(id).name)) if chosen == "siege" else ("巡查 · %s" % str(definition(id).name))}
+	game.set_navigation_target("district_event", str(event.title), points[0], false)
+	game.notify("%s\n%s" % [str(event.title), "在标记附近击退 5 只奶龙" if chosen == "siege" else "在时间内走访 3 个标记点"])
+	event_changed.emit(event)
+	return event
+
+
+func end_event(reason: String) -> void:
+	if event.is_empty(): return
+	var finished := event.duplicate()
+	event = {}
+	_event_gap = EVENT_GAP
+	if str(game.landmark_target_key) == "district_event": game.clear_landmark_target(false)
+	if reason == "done":
+		var id := str(finished.district)
+		var reward := EVENT_REWARD
+		game.life.money += reward
+		game.life.lifetime_earnings += reward
+		game.life.money_changed.emit(game.life.money)
+		add_work(centre(id), EVENT_WORK, "")
+		game.notify("%s 完成  +$%s\n港区清剿 +%d" % [str(finished.title), _money(reward), EVENT_WORK])
+	elif reason == "timeout":
+		game.notify("%s 超时 · 稍后还会有新的求助" % str(finished.title), false)
+	elif reason == "left":
+		game.notify("%s 已取消 · 你离开了这个港区" % str(finished.title), false)
+	event_changed.emit({})
+
+
+func _tick_event(delta: float) -> void:
+	var here: Vector3 = game.player.global_position
+	if event.is_empty():
+		_event_gap = maxf(0.0, _event_gap - delta)
+		var id := at(here)
+		if _event_gap <= 0.0 and not id.is_empty() and unlocked(id) and not liberated.has(id): start_event(id)
+		return
+	if not event.has("district") or not event.has("points"):
+		event = {}
+		return
+	event.left = float(event.left) - delta
+	# Driving right out of the area cancels the call instead of leaving a timer
+	# running on the other side of the harbour.
+	var away := here.distance_to(centre(str(event.district)))
+	if away > float(definition(str(event.district)).radius) * 1.8:
+		end_event("left")
+		return
+	if str(event.kind) == "sweep":
+		var target: Vector3 = event.points[int(event.index)]
+		if Vector2(here.x - target.x, here.z - target.z).length() < SWEEP_RADIUS:
+			event.index = int(event.index) + 1
+			event.done = int(event.done) + 1
+			if int(event.done) >= int(event.need):
+				end_event("done")
+				return
+			game.set_navigation_target("district_event", str(event.title), event.points[int(event.index)], false)
+			game.notify("%s  %d / %d" % [str(event.title), int(event.done), int(event.need)], false)
+	if float(event.left) <= 0.0: end_event("timeout")
+
+
+## Siege progress comes from Nailong defeated near the marked point.
+func _event_kill(position: Vector3) -> void:
+	if event.is_empty() or str(event.kind) != "siege": return
+	var target: Vector3 = event.points[0]
+	if Vector2(position.x - target.x, position.z - target.z).length() > SIEGE_RADIUS: return
+	event.done = int(event.done) + 1
+	if int(event.done) >= int(event.need): end_event("done")
+	else: game.notify("%s  %d / %d" % [str(event.title), int(event.done), int(event.need)], false)
 
 
 func summary() -> Array:

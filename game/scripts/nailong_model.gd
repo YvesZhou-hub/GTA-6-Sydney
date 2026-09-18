@@ -95,6 +95,12 @@ static func _recipe(kind: String) -> Dictionary:
 			_part(head,Vector3(0,-.32,-.668),Vector3(.115,.095,.053),"orange")
 			_part(head,Vector3(0,-.32,-.716),Vector3(.061,.052,.011),"black")
 			_part(torso,Vector3(0,1.40,-.37),Vector3(.25,.18,.18),"orange")
+		"leaper":
+			# Spring pads on the knees and a crouched headband mark the jumper.
+			_part(head,Vector3(0,.30,.0),Vector3(.72,.085,.6),"strap")
+			for side in [-1.0,1.0]:
+				_part(torso,Vector3(side*.28,.42,-.18),Vector3(.2,.16,.2),"orange")
+				_part(head,Vector3(side*.36,.34,-.12),Vector3(.12,.2,.1),"orange",side*.35)
 		"alpha":
 			_part(head,Vector3(0,.51,.02),Vector3(.49,.115,.36),"orange")
 			for i in [-1,0,1]: _part(head,Vector3(i*.32,.66,.02),Vector3(.09,.23 if i==0 else .17,.10),"orange")

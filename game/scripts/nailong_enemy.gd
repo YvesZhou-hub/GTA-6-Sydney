@@ -7,14 +7,19 @@ signal damaged(enemy, actual: float, hit_position: Vector3, remaining: float)
 const Model = preload("res://scripts/nailong_model.gd")
 const FontSet = preload("res://scripts/ui_fonts.gd")
 const Flight = preload("res://scripts/nailong_flight.gd")
+## damage is the whole attack; burst splits it into that many strikes, gap apart,
+## and recover is the opening the player gets afterwards. Damage per cycle and
+## windup + cooldown per cycle match v0.4.0 for every type except the runner and
+## winglet, which attack a little more often, so damage per second never drops.
 const TYPES := {
-	"roamer":{"label":"游荡奶龙","hp":80.0,"speed":2.8,"damage":8.0,"range":2.0,"cooldown":1.5,"windup":.65,"reward":120,"scale":1.0},
-	"runner":{"label":"疾跑奶龙","hp":60.0,"speed":6.2,"damage":7.0,"range":2.0,"cooldown":1.3,"windup":.65,"reward":160,"scale":.85},
-	"brute":{"label":"重装奶龙","hp":360.0,"speed":2.2,"damage":22.0,"range":3.0,"cooldown":2.2,"windup":1.3,"reward":480,"scale":1.45},
-	"spitter":{"label":"喷吐奶龙","hp":110.0,"speed":2.7,"damage":12.0,"range":22.0,"cooldown":2.5,"windup":1.0,"reward":240,"scale":1.0},
-	"alpha":{"label":"首领奶龙","hp":700.0,"speed":3.5,"damage":28.0,"range":4.0,"cooldown":2.5,"windup":1.5,"reward":1200,"scale":1.9},
-	"winglet":{"label":"轻翼奶龙","hp":95.0,"speed":12.0,"damage":10.0,"range":2.8,"cooldown":2.3,"windup":1.0,"reward":220,"scale":.95,"air":true,"attack_mode":"dive","cruise_height":7.0,"acceleration":18.0},
-	"stormwing":{"label":"雷翼奶龙","hp":260.0,"speed":8.5,"damage":15.0,"range":32.0,"cooldown":3.4,"windup":1.6,"reward":520,"scale":1.35,"air":true,"attack_mode":"ranged","cruise_height":10.0,"acceleration":13.0}
+	"roamer":{"label":"游荡奶龙","hp":80.0,"speed":2.8,"damage":8.0,"range":2.0,"cooldown":1.45,"windup":.7,"reward":120,"scale":1.0,"recover":.35},
+	"runner":{"label":"疾跑奶龙","hp":60.0,"speed":6.2,"damage":7.0,"range":2.0,"cooldown":1.05,"windup":.5,"reward":160,"scale":.85,"recover":.2},
+	"brute":{"label":"重装奶龙","hp":360.0,"speed":2.2,"damage":22.0,"range":3.0,"cooldown":1.95,"windup":1.55,"reward":480,"scale":1.45,"recover":.75},
+	"spitter":{"label":"喷吐奶龙","hp":110.0,"speed":2.7,"damage":12.0,"range":22.0,"cooldown":2.5,"windup":1.0,"reward":240,"scale":1.0,"burst":3,"burst_gap":.3,"recover":.5},
+	"leaper":{"label":"跳袭奶龙","hp":120.0,"speed":3.4,"damage":14.0,"range":9.0,"cooldown":2.2,"windup":.8,"reward":260,"scale":1.05,"attack_mode":"leap","recover":.6},
+	"alpha":{"label":"首领奶龙","hp":700.0,"speed":3.5,"damage":28.0,"range":4.0,"cooldown":2.5,"windup":1.5,"reward":1200,"scale":1.9,"burst":2,"burst_gap":.45,"recover":.7},
+	"winglet":{"label":"轻翼奶龙","hp":95.0,"speed":12.0,"damage":10.0,"range":2.8,"cooldown":2.0,"windup":1.0,"reward":220,"scale":.95,"air":true,"attack_mode":"dive","cruise_height":7.0,"acceleration":18.0,"recover":.45},
+	"stormwing":{"label":"雷翼奶龙","hp":260.0,"speed":8.5,"damage":15.0,"range":32.0,"cooldown":3.4,"windup":1.6,"reward":520,"scale":1.35,"air":true,"attack_mode":"ranged","cruise_height":10.0,"acceleration":13.0,"burst":2,"burst_gap":.5,"recover":.8}
 }
 var enemy_type: String = "roamer"
 var level: int = 1
@@ -52,6 +57,13 @@ var _pursuit_seconds := 0.0
 ## Push from the last hit, so a shot visibly moves a light enemy and barely
 ## budges a brute. It decays in _physics_process and never carries a fight.
 var _knock := Vector3.ZERO
+var _burst_left := 0
+var _burst_gap := 0.0
+var _recover_left := 0.0
+## A leaper's lunge: it only hurts if it actually lands next to the target.
+var _leap_left := 0.0
+var _leap_velocity := Vector3.ZERO
+var _leap_hit := false
 var _feedback_managed := false
 
 func configure(type: String, level: int = 1) -> void:
@@ -147,7 +159,7 @@ func set_feedback_managed(value: bool) -> void:
 	if is_instance_valid(_bar): _bar.visible = show_legacy
 
 func _label_text() -> String:
-	var action := " · 重击蓄力" if enemy_type=="alpha" and state=="windup" else ""
+	var action := " · 重击蓄力" if enemy_type=="alpha" and state=="windup" else (" · 起跳预警" if enemy_type=="leaper" and state=="windup" else "")
 	if is_flying() and state=="windup":action=" · 雷翼蓄力" if enemy_type=="stormwing" else " · 俯冲预警"
 	return "Lv.%d %s%s\n击败 +%d 金币" % [level,str(spec.label),action,int(spec.reward)]
 
@@ -205,6 +217,32 @@ func take_damage(amount: float, hit_position: Vector3 = Vector3.ZERO) -> float:
 	damaged.emit(self,actual,hit_position,health)
 	if killed:defeated.emit(self,int(spec.reward))
 	return actual
+
+## One strike of an attack. A burst sends several, each carrying its share of
+## the attack's damage, so the total per cycle matches the type's damage value.
+func _strike(distance: float) -> void:
+	# A moved target or a newly inserted wall cancels the strike.
+	_line_clear = has_line_of_sight()
+	if not _attack_allowed(distance): return
+	if str(spec.get("attack_mode","")) == "leap":
+		_start_leap()
+		return
+	var strikes := maxi(1,int(spec.get("burst",1)))
+	attack_requested.emit(self,float(spec.damage)/float(strikes),float(spec.range))
+
+
+## Launches toward where the target is now, not where it will be: stepping
+## aside during the crouch makes the leap miss.
+func _start_leap() -> void:
+	if not is_instance_valid(target): return
+	var flat := target_surface_point(target) - global_position
+	flat.y = 0.0
+	var reach := flat.length()
+	if reach < 0.3: return
+	_leap_left = 0.5
+	_leap_hit = false
+	_leap_velocity = flat / reach * clampf(reach / 0.5, 6.0, 18.0) + Vector3.UP * 5.5
+
 
 func _collect_target_shapes(node: Node) -> void:
 	for child: Node in node.get_children():
@@ -330,15 +368,31 @@ func _physics_process(delta: float) -> void:
 			_steering = Flight.steer(self,(Flight.destination(self)-global_position).normalized()) if is_flying() else _choose_direction(wanted)
 		if wanted.length_squared()>.01:
 			_model_holder.rotation.y = lerp_angle(_model_holder.rotation.y,atan2(-wanted.x,-wanted.z),minf(1.0,delta*6.0))
-		if _windup_left>0.0:
+		if _leap_left>0.0:
+			state = "leap"
+		elif _windup_left>0.0:
 			state = "windup"
 			_windup_left = maxf(0.0,_windup_left-delta)
 			if _windup_left<=0.0:
 				_cooldown = float(spec.cooldown)
-				# A moved target or newly inserted wall cancels the strike.
-				_line_clear = has_line_of_sight()
-				if _attack_allowed(distance): attack_requested.emit(self,float(spec.damage),float(spec.range))
+				_burst_left = maxi(1,int(spec.get("burst",1)))-1
+				_strike(distance)
 				if dead: return
+				if _burst_left>0: _burst_gap = float(spec.get("burst_gap",.3))
+				else: _recover_left = float(spec.get("recover",0.0))
+		elif _burst_gap>0.0:
+			state = "strike"
+			_burst_gap = maxf(0.0,_burst_gap-delta)
+			if _burst_gap<=0.0:
+				_burst_left -= 1
+				_strike(distance)
+				if dead: return
+				if _burst_left>0: _burst_gap = float(spec.get("burst_gap",.3))
+				else: _recover_left = float(spec.get("recover",0.0))
+		elif _recover_left>0.0:
+			# The opening after an attack: no new strike, no chasing.
+			state = "recover"
+			_recover_left = maxf(0.0,_recover_left-delta)
 		elif _cooldown<=0.0 and _attack_allowed(distance):
 			_windup_left = float(spec.windup)
 			state = "windup"
@@ -348,6 +402,10 @@ func _physics_process(delta: float) -> void:
 		state = "idle"
 		_steering = Vector3.ZERO
 		_windup_left = 0.0
+		_burst_gap = 0.0
+		_burst_left = 0
+		_recover_left = 0.0
+		_leap_left = 0.0
 		_detour_direction = Vector3.ZERO
 		_pursuit_seconds = 0.0
 	_blocked_seconds = _blocked_seconds+delta if has_target and state=="chase" and not _line_clear else 0.0
@@ -359,7 +417,21 @@ func _physics_process(delta: float) -> void:
 	var before_move := global_position
 	# A hit shoves the body back for a moment; heavier types barely move.
 	_knock = _knock.move_toward(Vector3.ZERO, delta * 24.0)
-	if is_flying():
+	if _leap_left > 0.0:
+		_leap_left = maxf(0.0, _leap_left - delta)
+		_leap_velocity.y -= 22.0 * delta
+		velocity = _leap_velocity
+		move_and_slide()
+		_leap_velocity.y = velocity.y
+		if not _leap_hit and has_target and distance_to_target_surface() <= 2.0:
+			_leap_hit = true
+			attack_requested.emit(self,float(spec.damage),2.5)
+			if dead: return
+		if _leap_left <= 0.0:
+			_recover_left = float(spec.get("recover",0.0))
+			velocity.x = 0.0
+			velocity.z = 0.0
+	elif is_flying():
 		Flight.move(self,movement,delta)
 		if _knock.length_squared() > 0.0004: global_position += _knock * delta
 	else:
@@ -389,7 +461,8 @@ func _physics_process(delta: float) -> void:
 	var windup := 1.0-_windup_left/float(spec.windup) if _windup_left>0 else 0.0
 	Model.animate(_parts,_stride,planar,windup,clampf(_hurt_left/.18,0.0,1.0),0)
 	_warning.visible = _windup_left>0.0
-	var warning_range: float = float(spec.range) if enemy_type=="alpha" else minf(float(spec.range),3.6)
+	# The alpha's slam and the leaper's jump show their full reach while charging.
+	var warning_range: float = float(spec.range) if enemy_type in ["alpha","leaper"] else minf(float(spec.range),3.6)
 	var radius := warning_range*(.82+.18*windup)
 	_warning.scale = Vector3(radius,1,radius)
 	_label.visible = not _feedback_managed and distance<45.0
