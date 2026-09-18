@@ -200,21 +200,21 @@ func update_panel() -> void:
 	var id := at(game.player.global_position) if is_instance_valid(game.player) else ""
 	panel.visible = bool(game.active) and not id.is_empty()
 	if not panel.visible: return
-	_place_panel()
 	var row := definition(id)
 	if liberated.has(id):
 		_title.text = "%s · 已解放" % str(row.name)
 		_bar.value = 1.0
 		_detail.text = "街上恢复了往来的人和车。"
-		return
-	if not unlocked(id):
+	elif not unlocked(id):
 		_title.text = "%s · 未开放" % str(row.name)
 		_bar.value = 0.0
 		_detail.text = "先解放前一个港区。"
-		return
-	_title.text = "%s · 清剿中  %d / %d" % [str(row.name), done(id), need(id)]
-	_bar.value = float(done(id)) / maxf(1.0, float(need(id)))
-	_detail.text = "击败这里的奶龙，或在这里完成工作与城市体验。"
+	else:
+		_title.text = "%s · 清剿中  %d / %d" % [str(row.name), done(id), need(id)]
+		_bar.value = float(done(id)) / maxf(1.0, float(need(id)))
+		_detail.text = "击败这里的奶龙，或在这里完成工作与城市体验。"
+	# Placed last: the card is only as wide as the text it just received.
+	_place_panel()
 
 
 ## Keeps the card under the minimap, whatever the window size is.
@@ -223,8 +223,9 @@ func _place_panel() -> void:
 	var top := 96.0
 	if is_instance_valid(game.minimap) and game.minimap.is_visible_in_tree():
 		top = game.minimap.get_global_rect().end.y - game.hud.global_position.y + 12.0
-	panel.size = panel.get_combined_minimum_size()
-	panel.position = Vector2(game.hud.size.x - panel.size.x - 28.0, top)
+	var wanted: Vector2 = panel.get_combined_minimum_size()
+	panel.size = wanted
+	panel.position = Vector2(maxf(12.0, game.hud.size.x - wanted.x - 28.0), top)
 
 
 func _process(delta: float) -> void:
@@ -238,7 +239,6 @@ func _process(delta: float) -> void:
 	if jobs > _jobs_seen:
 		if _jobs_seen > 0: add_work(game.player.global_position, TASK_VALUE, "完成工作")
 		_jobs_seen = jobs
-	update_panel()
 
 
 func summary() -> Array:

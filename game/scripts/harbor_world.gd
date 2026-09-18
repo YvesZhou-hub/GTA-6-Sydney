@@ -27,6 +27,8 @@ var _batch_boxes: Dictionary = {}
 var _batch_cylinders: Dictionary = {}
 var _batch_foliage: Dictionary = {}
 var _batch_models: Dictionary = {}
+## Where the street lamp heads ended up, for the small pool of night lights.
+var lamp_positions: PackedVector3Array = PackedVector3Array()
 var _visual_cells: Dictionary = {}
 var _dirty_cells: Dictionary = {}
 var _visual_refresh_queued := false
@@ -98,6 +100,7 @@ func _ready() -> void:
 			for item in model.metadata():
 				if item.has("center") and not anchors.has(item.id): anchors[item.id]=item.get("arrival",item.center)
 	_register_landmark_geography()
+	_paint_urban_ground()
 	Loading.report(0.80,"种植树木与草坪")
 	CityMap.build_vegetation(self,map_snapshot)
 	_build_observatory()
@@ -1027,6 +1030,34 @@ func _tree(p: Vector3, scale: float = 1.0) -> bool:
 			set_meta("helipad_retained_crown_bounds",retained)
 	return true
 
+## Ground between buildings should read as city pavement, not parkland. A mask
+## stamped from the mapped footprints tells the landcover shader where the city
+## is; parks and beaches keep their own surfaces drawn on top.
+func _paint_urban_ground() -> void:
+	var landcover: ShaderMaterial = materials["north_landcover"]
+	if _building_plots.is_empty(): return
+	var bounds := Rect2(Vector2(_building_plots[0].position.x, _building_plots[0].position.z), Vector2.ZERO)
+	for plot: AABB in _building_plots:
+		bounds = bounds.expand(Vector2(plot.position.x, plot.position.z))
+		bounds = bounds.expand(Vector2(plot.end.x, plot.end.z))
+	bounds = bounds.grow(220.0)
+	var resolution := 512
+	var mask := Image.create(resolution, resolution, false, Image.FORMAT_R8)
+	var scale := Vector2(float(resolution) / maxf(1.0, bounds.size.x), float(resolution) / maxf(1.0, bounds.size.y))
+	for plot: AABB in _building_plots:
+		var origin := (Vector2(plot.position.x, plot.position.z) - bounds.position) * scale
+		var span := Vector2(plot.size.x, plot.size.z) * scale
+		var rect := Rect2i(Vector2i(origin.floor()) - Vector2i.ONE, Vector2i(span.ceil()) + Vector2i.ONE * 2)
+		mask.fill_rect(rect.intersection(Rect2i(0, 0, resolution, resolution)), Color(1, 1, 1))
+	# Downscale and back up: a cheap blur, so blocks fade into open ground.
+	mask.resize(96, 96, Image.INTERPOLATE_BILINEAR)
+	mask.resize(resolution, resolution, Image.INTERPOLATE_BILINEAR)
+	mask.generate_mipmaps()
+	landcover.set_shader_parameter("urban_mask", ImageTexture.create_from_image(mask))
+	landcover.set_shader_parameter("mask_area", Vector4(bounds.position.x, bounds.position.y, bounds.size.x, bounds.size.y))
+	set_meta("urban_mask_area", {"origin": [bounds.position.x, bounds.position.y], "size": [bounds.size.x, bounds.size.y], "plots": _building_plots.size()})
+
+
 ## Lamp posts, bins, benches and signals along the mapped carriageways. Spacing
 ## follows the road width, so laneways stay clear and main streets get a rhythm.
 func _build_street_furniture() -> void:
@@ -1057,6 +1088,11 @@ func _build_street_furniture() -> void:
 			var at := Vector3(point.x, GROUND, point.y)
 			var facing := Basis(Vector3.UP, atan2(-side_vector.x * side, -side_vector.y * side))
 			_batch_model(Models.STREET_LIGHT, Transform3D(facing.scaled(Vector3.ONE * (6.4 / lamp_height)), at))
+			# A small emissive head so the street reads as lit after dark.
+			if not _batch_foliage.has("lamp"): _batch_foliage["lamp"] = []
+			var head := at + facing * Vector3(0.0, 5.75, -0.85)
+			_batch_foliage["lamp"].append(Transform3D(Basis.IDENTITY.scaled(Vector3(0.26, 0.16, 0.26)), head))
+			lamp_positions.append(head)
 			lamps += 1
 			if index % 4 == 2 and props < 1400:
 				var extra := Vector3(point.x, GROUND, point.y) + Vector3(direction.x, 0.0, direction.y) * 6.0
