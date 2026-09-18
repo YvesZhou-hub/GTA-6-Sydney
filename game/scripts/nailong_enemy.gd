@@ -49,6 +49,9 @@ var _detour_direction := Vector3.ZERO
 var _stuck_seconds := 0.0
 var _blocked_seconds := 0.0
 var _pursuit_seconds := 0.0
+## Push from the last hit, so a shot visibly moves a light enemy and barely
+## budges a brute. It decays in _physics_process and never carries a fight.
+var _knock := Vector3.ZERO
 var _feedback_managed := false
 
 func configure(type: String, level: int = 1) -> void:
@@ -115,6 +118,18 @@ func configure(type: String, level: int = 1) -> void:
 		_bar.add_child(part)
 	set_feedback_managed(_feedback_managed)
 
+## Applied by the director right after configure(), before the enemy is seen.
+## Existing enemies are never rescaled mid-fight.
+func scale_for_difficulty(health_multiplier: float, damage_multiplier: float, reward_multiplier: float) -> void:
+	if not _configured or dead: return
+	spec.hp = maxf(1.0, float(spec.hp) * maxf(0.1, health_multiplier))
+	spec.damage = maxf(1.0, float(spec.damage) * maxf(0.1, damage_multiplier))
+	spec.reward = maxi(1, roundi(float(spec.reward) * maxf(0.1, reward_multiplier)))
+	health = float(spec.hp)
+	max_health = health
+	if is_instance_valid(_label): _label.text = _label_text()
+
+
 func is_flying() -> bool:
 	return bool(spec.get("air",false))
 
@@ -164,7 +179,15 @@ func take_damage(amount: float, hit_position: Vector3 = Vector3.ZERO) -> float:
 	var actual := minf(health,amount)
 	if actual<=0.0:return 0.0
 	health -= actual
-	_hurt_left = .18
+	_hurt_left = maxf(_hurt_left, clampf(.14 + actual / float(max_health) * .5, .14, .42))
+	# A committed strike is not interrupted: knockback would otherwise turn any
+	# rapid weapon into crowd control and drain the pressure out of a fight.
+	if hit_position.is_finite() and hit_position != Vector3.ZERO and _windup_left <= 0.0:
+		var push := global_position - hit_position
+		push.y = 0.0
+		if push.length_squared() > 0.0004:
+			var resistance := maxf(0.6, float(spec.get("scale", 1.0)) * 1.5)
+			_knock = push.normalized() * clampf(actual / float(max_health) * 10.0, 0.3, 3.0) / resistance
 	set_meta("last_hit_position",hit_position)
 	var killed := health<=0.0
 	if killed:
@@ -334,11 +357,14 @@ func _physics_process(delta: float) -> void:
 	# target's own collider can otherwise create a detour that walks past it.
 	if _attack_allowed(distance): movement=Vector3.ZERO
 	var before_move := global_position
+	# A hit shoves the body back for a moment; heavier types barely move.
+	_knock = _knock.move_toward(Vector3.ZERO, delta * 24.0)
 	if is_flying():
 		Flight.move(self,movement,delta)
+		if _knock.length_squared() > 0.0004: global_position += _knock * delta
 	else:
-		velocity.x = move_toward(velocity.x,movement.x*float(spec.speed),delta*15)
-		velocity.z = move_toward(velocity.z,movement.z*float(spec.speed),delta*15)
+		velocity.x = move_toward(velocity.x,movement.x*float(spec.speed)+_knock.x,delta*15)
+		velocity.z = move_toward(velocity.z,movement.z*float(spec.speed)+_knock.z,delta*15)
 		velocity.y = -.5 if is_on_floor() else maxf(-45.0,velocity.y-22.0*delta)
 		move_and_slide()
 	# A tiny stair is climbed only after physical clearance and floor probes succeed.
@@ -361,7 +387,7 @@ func _physics_process(delta: float) -> void:
 	var planar := Vector2(velocity.x,velocity.z).length()
 	_stride += delta*(8.0+velocity.length()*.25) if is_flying() else delta*planar*4.0
 	var windup := 1.0-_windup_left/float(spec.windup) if _windup_left>0 else 0.0
-	Model.animate(_parts,_stride,planar,windup,_hurt_left/.18,0)
+	Model.animate(_parts,_stride,planar,windup,clampf(_hurt_left/.18,0.0,1.0),0)
 	_warning.visible = _windup_left>0.0
 	var warning_range: float = float(spec.range) if enemy_type=="alpha" else minf(float(spec.range),3.6)
 	var radius := warning_range*(.82+.18*windup)
