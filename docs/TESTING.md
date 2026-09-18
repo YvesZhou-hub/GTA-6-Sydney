@@ -26,7 +26,11 @@
 - 世界与地标测试：`helipad_clearance`、`city_geometry`、`city_landmark`、`mesh_composition`、`manly_landmark`、`road_join`、`life_experience`、`survival_hud`、`field_service`、`nailong_enemy`、`survival_loop`、`enemy_pursuit` 通过。
 - 已知与本版无关的历史失败：`world_road_probe`（退出码 8）、无头模式下的 `bridge_drive_test`，在未改动的代码上结果相同。
 
-Windows 包的实际构建与运行结果见 [Windows 验证记录](WINDOWS.md#windows-验证记录)。下方 v0.3.0 及更早的结果是历史数据，不计入 v0.4.0。
+## Windows 包
+
+同一提交由 GitHub 云端构建并实际解压运行：流程门禁 48/48、包检查 23/23，玩法断言 169 项全部通过（驾驶 32、生存 30、连续遭遇 82、武器 25），日志零错误；两平台 430 个游戏文件哈希一致。无界面模式，不含 Windows 画面或声音。[详细结果与校验和](WINDOWS.md#v040windows-最终-exe-验收通过)
+
+下方 v0.3.0 及更早的结果是历史数据，不计入 v0.4.0。
 
 ---
 
