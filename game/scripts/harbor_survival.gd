@@ -101,8 +101,10 @@ func subject() -> Node3D:
 
 ## The player's 战斗难度 setting; standard when a world has no settings yet.
 func difficulty_index() -> int:
-	if not is_instance_valid(game) or not game.settings is Dictionary: return 1
-	return clampi(int(game.settings.get("combat_difficulty", 1)), 0, Progression.DIFFICULTY.size() - 1)
+	# Hosts without settings (test fixtures, tools) play at the standard difficulty.
+	var settings: Variant = game.get("settings") if is_instance_valid(game) else null
+	if not settings is Dictionary: return 1
+	return clampi(int(settings.get("combat_difficulty", 1)), 0, Progression.DIFFICULTY.size() - 1)
 
 
 func difficulty_profile() -> Dictionary:
@@ -135,7 +137,8 @@ func _counts_toward_local_budget(enemy: Node3D, distance: float) -> bool:
 	return not _air_context or enemy.is_flying() or distance <= float(enemy.spec.range) + .15
 
 func encounter_level() -> int:
-	var taken := int(game.districts.liberated.size()) if is_instance_valid(game) and is_instance_valid(game.districts) else 0
+	var districts: Variant = game.get("districts") if is_instance_valid(game) else null
+	var taken := int(districts.liberated.size()) if districts is Node and is_instance_valid(districts) else 0
 	return Progression.encounter_level(cleared, taken, _adaptive_level, difficulty_index())
 
 func weapon_loadout(kind: String) -> Array[Dictionary]:
@@ -223,7 +226,9 @@ func _next_type() -> String:
 	if cleared >= 2 and _spawn_sequence % 10 == 9:
 		if not enemies.any(func(enemy): return is_instance_valid(enemy) and enemy.enemy_type == "alpha"):
 			return "alpha"
-	var sequence := ["roamer", "roamer", "runner", "spitter", "brute", "runner"]
+	# From level three a leaper takes one of the roamer slots, so the early
+	# streets stay simple and the jumper arrives once the player is armed.
+	var sequence := ["roamer", "leaper" if encounter_level() >= 3 else "roamer", "runner", "spitter", "brute", "runner"]
 	return sequence[_spawn_sequence % sequence.size()]
 
 func find_spawn_position(kind: String = "roamer") -> Vector3:
@@ -310,7 +315,8 @@ func _enemy_defeated(enemy, reward: int) -> void:
 	enemy_defeated.emit(at, level)
 	_credit(reward)
 	_reward_text = "击败 Lv.%d %s · +%d 金币" % [enemy.level, enemy.spec.label, reward]
-	if is_instance_valid(game.combat_feel): game.combat_feel.shake(0.10 + 0.05 * float(enemy.spec.get("scale", 1.0)))
+	var feel: Variant = game.get("combat_feel")
+	if feel is Node and is_instance_valid(feel): feel.shake(0.10 + 0.05 * float(enemy.spec.get("scale", 1.0)))
 	_reward_clock = 3.0
 	if _rng.randf() < 0.2: medkits = mini(MEDKIT_LIMIT, medkits + 1)
 	if wave_kills >= quota():
@@ -446,7 +452,8 @@ func _ram_enemies() -> void:
 func fire_blaster() -> bool:
 	if not _running() or not enabled or _shot_cooldown > 0.0 or game.player.health <= 0.0 or is_instance_valid(game.current_vehicle): return false
 	_shot_cooldown = 0.24
-	if is_instance_valid(game.combat_feel): game.combat_feel.kick(0.035)
+	var feel: Variant = game.get("combat_feel")
+	if feel is Node and is_instance_valid(feel): feel.kick(0.035)
 	var camera: Camera3D = game.camera
 	var center := get_viewport().get_visible_rect().size * 0.5
 	var ray_from := camera.project_ray_origin(center)
