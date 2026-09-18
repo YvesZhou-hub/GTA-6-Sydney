@@ -111,9 +111,16 @@ func run(host: Node) -> void:
 	check("the 关闭 setting empties the streets", street.cars.is_empty() and street.pedestrians.is_empty(), street.stats())
 	game.player.global_position = george
 	game.settings.street_life = 2
-	await settle(5.0)
+	await settle(7.0)
 	var busy: Dictionary = street.stats()
-	check("the 热闹 setting adds more", int(busy.cars) > 18 and int(busy.pedestrians) > 26, busy)
+	# Density also follows the district state, so compare against that expectation.
+	var factor: float = game.districts.street_factor(game.player.global_position) if is_instance_valid(game.districts) else 1.0
+	var expect_cars := roundi(float(street.DENSITY[2][0]) * factor)
+	var expect_people := roundi(float(street.DENSITY[2][1]) * factor)
+	# Spawning is gradual and a few are released as they drive away, so the check
+	# is that the busy setting gets close to its target, not exactly on it.
+	check("the 热闹 setting adds more", float(busy.cars) >= expect_cars * 0.7 and float(busy.pedestrians) >= expect_people * 0.7 and int(busy.cars) > 12,
+		{"cars": busy.cars, "pedestrians": busy.pedestrians, "expected": [expect_cars, expect_people], "district_factor": factor})
 	# Frame cost of a busy street, for the record rather than as a hard limit.
 	await frames(10)
 	var started := Time.get_ticks_usec()
@@ -123,6 +130,16 @@ func run(host: Node) -> void:
 	var average := ((Time.get_ticks_usec() - started) / 1000.0) / maxf(1.0, float(drawn))
 	check("a busy street still draws frames", drawn > 20 and average < 60.0, {"frames": drawn, "average_frame_ms": snappedf(average, 0.01), "cars": busy.cars, "pedestrians": busy.pedestrians})
 	await capture("street-busy")
+	# Evening: lamp heads glow and windows light up.
+	if is_instance_valid(game.city_clock):
+		game.city_clock.set_hour(21.5)
+		await settle(2.0)
+		var lit: Dictionary = game.street_lights.stats()
+		check("street lamps light up at night near the player", int(lit.lit) > 0 and float(lit.night) > 0.5, lit)
+		await capture("street-night")
+		game.city_clock.set_hour(12.0)
+		await settle(1.0)
+		check("street lamps switch off in daylight", int(game.street_lights.stats().lit) == 0, game.street_lights.stats())
 	finish()
 
 func finish() -> void:

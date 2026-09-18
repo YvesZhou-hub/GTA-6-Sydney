@@ -72,6 +72,12 @@ func _housing(p:Vector3,target:Vector3) -> void:
 
 func apply_cycle(state:Dictionary) -> void:
 	_last_night=clampf(float(state.get("night_factor",0.0)),0,1)
+	# Street lamp heads are emissive geometry, not lights: they glow after dark
+	# without adding thousands of real light sources.
+	if is_instance_valid(_world) and _world.materials.has("lamp"):
+		var head:StandardMaterial3D=_world.materials["lamp"]
+		var target:=lerpf(0.05,3.2,_last_night)
+		if not is_equal_approx(head.emission_energy_multiplier,target): head.emission_energy_multiplier=target
 	for row:Dictionary in _lights:
 		var intact:=_owner_intact(row.owner)
 		# Do not toggle visible, shadows or material features on clock ticks.

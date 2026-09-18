@@ -2,6 +2,7 @@ extends RefCounted
 ## Reproducible real footprint/centerline map. Heights and facade confidence are
 ## explicitly retained in city_map.json. Ordinary exteriors are reconstructions.
 const Loading = preload("res://scripts/loading_progress.gd")
+const Models = preload("res://scripts/model_library.gd")
 const DATA_PATH := "res://assets/city_map.json"
 const FACADE := preload("res://shaders/city_facade.gdshader")
 const DARLING_FACILITY_IDS := ["way/1136058496","way/1241018456","way/1241018457","way/1241018458"]
@@ -59,6 +60,35 @@ static func build_terrain(world: Node3D, snapshot: Dictionary) -> void:
 			view.position.y=0.026 if collection==snapshot.beaches else 0.021
 			view.material_override=world.materials.map_sand if collection==snapshot.beaches else world.materials.grass
 			world.add_child(view)
+			if collection==snapshot.parks: _scatter_park(world,poly)
+
+## A few bushes and grass tufts inside a park, placed from the polygon itself so
+## the same park looks the same every run and nothing lands on the footpath.
+static func _scatter_park(world: Node3D, poly: PackedVector2Array) -> void:
+	if world.get_meta("park_scatter_count", 0) > 2200 or poly.size() < 3: return
+	var bounds := Rect2(poly[0], Vector2.ZERO)
+	for point: Vector2 in poly: bounds = bounds.expand(point)
+	var area := bounds.size.x * bounds.size.y
+	if area < 220.0: return
+	var wanted := clampi(int(area / 900.0), 1, 6)
+	var placed := 0
+	var seed := absi(hash(bounds.position.snapped(Vector2.ONE)))
+	for attempt in wanted * 4:
+		if placed >= wanted: break
+		seed = (seed * 1103515245 + 12345) & 0x7fffffff
+		var u := float(seed % 1000) / 1000.0
+		seed = (seed * 1103515245 + 12345) & 0x7fffffff
+		var v := float(seed % 1000) / 1000.0
+		var point := bounds.position + Vector2(bounds.size.x * u, bounds.size.y * v)
+		if not Geometry2D.is_point_in_polygon(point, poly): continue
+		var models: Array = Models.BUSHES if (placed + attempt) % 3 != 0 else Models.GRASS
+		var path: String = models[(seed / 7) % models.size()]
+		var height: float = maxf(0.2, Models.size(path).y)
+		var scale: float = (1.1 if models == Models.BUSHES else 0.8) / height
+		world._batch_model(path, Transform3D(Basis(Vector3.UP, u * TAU).scaled(Vector3.ONE * scale), Vector3(point.x, world.GROUND + 0.02, point.y)))
+		placed += 1
+	world.set_meta("park_scatter_count", int(world.get_meta("park_scatter_count", 0)) + placed)
+
 
 static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 	var batches := {}

@@ -1,3 +1,35 @@
+# v0.4.0 街上人车、城市氛围与港区玩法验证
+
+## 最终 Mac App
+
+`Harbourlife-macOS-arm64.zip` 由 `tools/build.sh` 从提交后的源码构建，430 个游戏文件的哈希与 git 跟踪文件逐一一致。[构建清单](evidence/v040-app/build.json) · [校验和](evidence/v040-app/Mac-SHA256SUMS.txt)
+
+- **压缩包审计 13/13**：版本 0.4.0、arm64、签名校验、PCK 与全部源文件身份、从解压副本启动完整城市。[审计报告](evidence/v040-app/archive-validation.json)
+- **原生玩法与界面 332/332**，全部用打好的 App 在 Metal 窗口运行，退出码 0，日志无错误或警告，EXE/PCK 哈希前后不变：
+
+| 专项 | 检查 | 范围 |
+| --- | ---: | --- |
+| [连续遭遇](evidence/v040-app/encounter/report.json) | 96/96 | 家门口、歌剧院、机场和 CBD 的刷新与追击，V/B/H |
+| [主线与成就](evidence/v040-app/campaign/report.json) | 71/71 | 八个步骤、奖励只发一次、导航切换、成就与平台接口、存读档 |
+| [HUD 与设置](evidence/v040-app/hud/report.json) | 53/53 | 六种分辨率的重叠与越界（含新的港区卡片）、设置、FSR、改键与手柄 |
+| [原有生存](evidence/v040-app/survival/report.json) | 40/40 | 五类敌人、H 治疗、坦克击杀奖励、B 补给与维修 |
+| [武器与空袭](evidence/v040-app/arsenal/report.json) | 35/35 | 选装购买与三槽、主炮伤害、空中敌人、激光与闪电 |
+| [港区玩法](evidence/v040-app/district/report.json) | 24/24 | 范围判定、开放顺序、两种推进方式、解放奖励与成就、街上人车倍率、菜单、存读档与旧存档 |
+| [街上人车](evidence/v040-app/street/report.json) | 13/13 | 路网索引、车辆在路上、行人在路侧、受惊跑开、回收、三档设置、夜间路灯开关、繁忙时帧时间 |
+
+[汇总与哈希](evidence/v040-app/native-index.json)。QA 进程使用 Dummy 音频驱动，**不验证实际扬声器声音**。
+
+## 源码检查
+
+- Windows 发布门禁要求的 5 个无界面专项全部通过，日志零错误或警告：交互启动、驾驶 32、生存 30、自然遭遇 82、武器 25。
+- `--daylight-qa` 51/51；`--street-qa` 13/13（含“热闹”档 29 车 41 人时平均 12.41 ms 一帧）。
+- 世界与地标测试：`helipad_clearance`、`city_geometry`、`city_landmark`、`mesh_composition`、`manly_landmark`、`road_join`、`life_experience`、`survival_hud`、`field_service`、`nailong_enemy`、`survival_loop`、`enemy_pursuit` 通过。
+- 已知与本版无关的历史失败：`world_road_probe`（退出码 8）、无头模式下的 `bridge_drive_test`，在未改动的代码上结果相同。
+
+Windows 包的实际构建与运行结果见 [Windows 验证记录](WINDOWS.md#windows-验证记录)。下方 v0.3.0 及更早的结果是历史数据，不计入 v0.4.0。
+
+---
+
 # v0.3.0 主线、设置、画面与加载验证
 
 ## 最终 Mac App

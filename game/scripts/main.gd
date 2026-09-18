@@ -13,6 +13,7 @@ var survival_hud: Control
 var campaign: Node
 var districts: Node
 var street: Node3D
+var street_lights: Node3D
 var combat_feedback: Control
 var airport: Node3D
 var world: Node3D
@@ -196,7 +197,13 @@ func _ready():
 	public_lighting=load("res://scripts/public_lighting.gd").new()
 	add_child(public_lighting)
 	public_lighting.setup(self)
-	city_clock.changed.connect(func(_state):public_lighting.apply_cycle(city_clock.solar_state()))
+	street_lights=load("res://scripts/street_lights.gd").new()
+	add_child(street_lights)
+	street_lights.setup(self)
+	city_clock.changed.connect(func(_state):
+		public_lighting.apply_cycle(city_clock.solar_state())
+		street_lights.apply_cycle(city_clock.solar_state()))
+	street_lights.apply_cycle(city_clock.solar_state())
 	# QA orchestration owns time explicitly, keeping fixed-camera evidence stable.
 	city_clock.set_process(not qa_running)
 	var diagnostics=get_node("/root/RuntimeDiagnostics")
@@ -1919,6 +1926,8 @@ func update_hud():
 		landmark_marker.size=landmark_marker.get_combined_minimum_size()
 		landmark_marker.position=Vector2(marker_left,marker_bottom-landmark_marker.size.y)
 	if is_instance_valid(campaign): campaign.update_panel()
+	# Placed with the rest of the HUD so a window resize moves it the same frame.
+	if is_instance_valid(districts): districts.update_panel()
 	if is_instance_valid(survival_hud) and survival_hud.has_method("set_top_limit"):
 		survival_hud.set_top_limit(left_column.get_global_rect().end.y-hud.global_position.y+10.0)
 
