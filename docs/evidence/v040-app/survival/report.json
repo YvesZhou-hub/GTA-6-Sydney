@@ -1,0 +1,707 @@
+{
+	"checks": [
+		{
+			"detail": {
+				"structure_components": 21697
+			},
+			"name": "full existing Sydney city and airport ready",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unsaved survival starts with 120 health, 3 medkits and $50000",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "Bennelong forecourt has existing walkable city collision",
+			"passed": true
+		},
+		{
+			"detail": {
+				"point": [
+					400.0,
+					4.57999992370605,
+					-117.0
+				]
+			},
+			"name": "production spawn finds safe real-city floor: roamer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"point": [
+					389.0,
+					4.57999992370605,
+					-114.052558898926
+				]
+			},
+			"name": "production spawn finds safe real-city floor: runner",
+			"passed": true
+		},
+		{
+			"detail": {
+				"point": [
+					380.947448730469,
+					4.57999992370605,
+					-106.0
+				]
+			},
+			"name": "production spawn finds safe real-city floor: brute",
+			"passed": true
+		},
+		{
+			"detail": {
+				"point": [
+					378.0,
+					4.57999992370605,
+					-95.0
+				]
+			},
+			"name": "production spawn finds safe real-city floor: spitter",
+			"passed": true
+		},
+		{
+			"detail": {
+				"point": [
+					378.000152587891,
+					4.57999992370605,
+					-94.9208297729492
+				]
+			},
+			"name": "production spawn finds safe real-city floor: alpha",
+			"passed": true
+		},
+		{
+			"detail": {
+				"clear_capsule": true,
+				"on_floor": true,
+				"point": [
+					400.0,
+					4.50039863586426,
+					-117.0
+				]
+			},
+			"name": "spawn settles on floor without wall overlap: roamer",
+			"passed": true
+		},
+		{
+			"detail": {
+				"clear_capsule": true,
+				"on_floor": true,
+				"point": [
+					389.0,
+					4.50039863586426,
+					-114.052558898926
+				]
+			},
+			"name": "spawn settles on floor without wall overlap: runner",
+			"passed": true
+		},
+		{
+			"detail": {
+				"clear_capsule": true,
+				"on_floor": true,
+				"point": [
+					380.947448730469,
+					4.50039863586426,
+					-106.0
+				]
+			},
+			"name": "spawn settles on floor without wall overlap: brute",
+			"passed": true
+		},
+		{
+			"detail": {
+				"clear_capsule": true,
+				"on_floor": true,
+				"point": [
+					378.0,
+					4.50039863586426,
+					-95.0
+				]
+			},
+			"name": "spawn settles on floor without wall overlap: spitter",
+			"passed": true
+		},
+		{
+			"detail": {
+				"clear_capsule": true,
+				"on_floor": true,
+				"point": [
+					378.000152587891,
+					4.50039863586426,
+					-94.9208297729492
+				]
+			},
+			"name": "spawn settles on floor without wall overlap: alpha",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all five production enemy identities spawned",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "all five photo positions have clear city-floor capsules and sightlines",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "city facade stream ready: five-nailong-city-hud",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native Metal image: five-nailong-city-hud",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 112.0,
+				"before": 120.0,
+				"physics_frames": 41,
+				"saw_windup": true
+			},
+			"name": "real nearby enemy winds up then hurts player without instant kill",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "physical H routes through main input to heal and consume one kit",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "repeat H cannot spend another kit during cooldown",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "physical B opens paused service menu with free pointer",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "nearby combat allows medical supplies while full repair stays blocked",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "city facade stream ready: services-during-combat-blocked",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native Metal image: services-during-combat-blocked",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production free tank spawn immediately seats player",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tank target uses open line of sight over existing city floor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production fire button launches occupied tank projectile",
+			"passed": true
+		},
+		{
+			"detail": {
+				"kills_after": 1,
+				"kills_before": 0,
+				"money_after": 50120,
+				"money_before": 50000,
+				"weapon_stats": {
+					"active_projectiles": 0,
+					"active_recoils": 1,
+					"effects": {
+						"active": 1,
+						"active_muzzles": 1,
+						"allocated": 12,
+						"audio_players": 20,
+						"capacity": 12,
+						"discharges": 1,
+						"emitted": 1,
+						"muzzle_allocated": 8,
+						"muzzle_capacity": 8,
+						"particle_instances_per_blast": 108,
+						"physical_debris_bodies": 0,
+						"stage_seconds": {
+							"dust": 2.15,
+							"flash": 0.38,
+							"pressure": 0.55,
+							"smoke": 3.4
+						}
+					},
+					"expired": 0,
+					"fired": 1,
+					"hits": 1,
+					"pool_rejections": 0,
+					"projectile_capacity": 32,
+					"projectiles_allocated": 32,
+					"recoil_capacity": 16
+				}
+			},
+			"name": "actual tank blast kills real enemy and credits reward once",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "city facade stream ready: tank-survival-impact-hud",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native Metal image: tank-survival-impact-hud",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "eight-second combat timeout clears while exploration runs",
+			"passed": true
+		},
+		{
+			"detail": {
+				"damage_after_armor": 25.0,
+				"health": 75.0
+			},
+			"name": "survival tank armor permits damage and records shared durability",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cost": 750,
+				"reason": ""
+			},
+			"name": "safe B menu offers enabled paid repair",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "city facade stream ready: services-paid-repair",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native Metal image: services-paid-repair",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 49370,
+				"before": 50120,
+				"cost": 750,
+				"tank_health": 100.0
+			},
+			"name": "real repair menu callback deducts price and restores shared fleet",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "leaving services resumes gameplay",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native camera pointer is captured after services",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "compiled script resources resolve; external App/PCK hashes must bind this run",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "four intended full-city screenshots saved",
+			"passed": true
+		}
+	],
+	"count": 40,
+	"display_driver": "macOS",
+	"native": true,
+	"passed": true,
+	"performance_sample": {
+		"draw_calls_last": 1969.0,
+		"enemies": 5,
+		"frame_intervals_ms": [
+			12.351,
+			11.879,
+			10.889,
+			12.363,
+			12.337,
+			12.335,
+			11.216,
+			12.293,
+			11.734,
+			11.577,
+			12.141,
+			12.03,
+			12.313,
+			11.328,
+			12.974,
+			12.046,
+			11.64,
+			12.604,
+			12.159,
+			11.761,
+			10.982,
+			12.727,
+			11.787,
+			11.18,
+			11.991,
+			11.322,
+			12.006,
+			11.372,
+			12.441,
+			11.691,
+			10.959,
+			12.835,
+			11.797,
+			12.147,
+			11.22,
+			12.649,
+			11.814,
+			11.217,
+			12.22,
+			11.669,
+			11.14,
+			12.522,
+			11.61,
+			11.72,
+			11.2,
+			12.432,
+			11.027,
+			11.425,
+			13.04,
+			11.258,
+			12.369,
+			11.266,
+			13.065,
+			13.659,
+			12.06,
+			12.133,
+			13.137,
+			12.171,
+			11.98,
+			11.622,
+			13.046,
+			11.777,
+			11.505,
+			11.751,
+			12.165,
+			11.737,
+			11.283,
+			12.463,
+			11.086,
+			11.499,
+			12.477,
+			11.669,
+			11.424,
+			12.195,
+			11.731,
+			11.705,
+			11.276,
+			12.273,
+			11.751,
+			11.253,
+			12.298,
+			11.819,
+			11.841,
+			11.158,
+			12.271,
+			12.101,
+			11.32,
+			12.207,
+			11.82,
+			11.081
+		],
+		"frames": 90,
+		"mean_ms": 11.8979333333333,
+		"median_ms": 11.8165,
+		"p95_ms": 13.04,
+		"primitives_last": 3824644.0,
+		"resolution": [
+			1440,
+			900
+		],
+		"scope": "Native Metal window with normal buffer swaps; 5 active real enemy AIs, full city and fixed camera. No driving, streaming traversal, sustained balance or isolated GPU measurement. First 20 frames warm up before 90 process-frame intervals.",
+		"worst_ms": 13.659
+	},
+	"save_written": false,
+	"scope": "Full main, existing Sydney city and airport. Production spawn queries, real enemy physics/windup/damage, actual H/B input, tank projectile collision/reward and paid repair UI callback. Initial actor/camera poses frozen for reproducible native captures; fixed projectile step. Separate native 90-frame sample with active enemy AI; not a player-drive or sustained balance test.",
+	"screenshots": [
+		{
+			"detail": {
+				"five_actual_enemy_models": true,
+				"posed_for_capture_after_spawn_test": true
+			},
+			"draw_calls": 1960.0,
+			"eye": [
+				414.0,
+				10.0,
+				-121.0
+			],
+			"file": "five-nailong-city-hud.png",
+			"primitives": 3823918.0,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "27fb5cb3ffb298fc1dbd64703c2a7f0c40df5e4a1f4b9e4c1bc182b2b5e34c6e",
+			"target": [
+				409.0,
+				7.5,
+				-145.0
+			]
+		},
+		{
+			"detail": {
+				"full_repair_blocked_near_enemy": true,
+				"medical_supplies_available": true,
+				"physical_B": true
+			},
+			"draw_calls": 1830.0,
+			"eye": [
+				414.0,
+				10.0,
+				-121.0
+			],
+			"file": "services-during-combat-blocked.png",
+			"primitives": 3792557.0,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "913ee37c9544622fab4b3bf0a63103ae2f758dcbd3a40c15f617bca96ed85710",
+			"target": [
+				409.0,
+				7.5,
+				-145.0
+			]
+		},
+		{
+			"detail": {
+				"fixed_step_seconds": 0.00833333333333333,
+				"frozen_tank_pose": true,
+				"production_projectile": true
+			},
+			"draw_calls": 2206.0,
+			"eye": [
+				426.0,
+				8.38532066345215,
+				-119.128692626953
+			],
+			"file": "tank-survival-impact-hud.png",
+			"primitives": 3757372.0,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "a9ffd0a42001ec2ebcb9c976c110bcccd382661e4ee6e4c77387131eeda95330",
+			"target": [
+				414.0,
+				6.88532066345215,
+				-133.128692626953
+			]
+		},
+		{
+			"detail": {
+				"actual_menu": true,
+				"cost": 750
+			},
+			"draw_calls": 2098.0,
+			"eye": [
+				426.0,
+				8.38532066345215,
+				-119.128692626953
+			],
+			"file": "services-paid-repair.png",
+			"primitives": 3753425.0,
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true,
+			"sha256": "e643fb6cb9c8e1b85e07eeb30d300bc6a7c2d4e62ef7f251a34a19b38be7184b",
+			"target": [
+				414.0,
+				6.88532066345215,
+				-133.128692626953
+			]
+		}
+	],
+	"source_evidence": {
+		"res://scripts/audio_shutdown.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_player.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_survival.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_vehicle.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/main.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_enemy.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_model.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/survival_hud.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/survival_validation.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_support_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		}
+	},
+	"source_evidence_start": {
+		"res://scripts/audio_shutdown.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_player.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_survival.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/harbor_vehicle.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/main.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_enemy.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/nailong_model.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/survival_hud.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/survival_validation.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_support_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		},
+		"res://scripts/vehicle_weapons.gd": {
+			"loadable": true,
+			"representation": "compiled_resource"
+		}
+	},
+	"source_sha256": {},
+	"source_verification": "Compiled resources resolve only; use external final App executable/PCK SHA256 evidence to identify this tested build",
+	"spawns": [
+		{
+			"initial": [
+				400.0,
+				4.57999992370605,
+				-117.0
+			],
+			"kind": "roamer",
+			"settled": [
+				400.0,
+				4.50039863586426,
+				-117.0
+			]
+		},
+		{
+			"initial": [
+				389.0,
+				4.57999992370605,
+				-114.052558898926
+			],
+			"kind": "runner",
+			"settled": [
+				389.0,
+				4.50039863586426,
+				-114.052558898926
+			]
+		},
+		{
+			"initial": [
+				380.947448730469,
+				4.57999992370605,
+				-106.0
+			],
+			"kind": "brute",
+			"settled": [
+				380.947448730469,
+				4.50039863586426,
+				-106.0
+			]
+		},
+		{
+			"initial": [
+				378.0,
+				4.57999992370605,
+				-95.0
+			],
+			"kind": "spitter",
+			"settled": [
+				378.0,
+				4.50039863586426,
+				-95.0
+			]
+		},
+		{
+			"initial": [
+				378.000152587891,
+				4.57999992370605,
+				-94.9208297729492
+			],
+			"kind": "alpha",
+			"settled": [
+				378.000152587891,
+				4.50039863586426,
+				-94.9208297729492
+			]
+		}
+	],
+	"user_saves_touched": false,
+	"world_ready": true
+}

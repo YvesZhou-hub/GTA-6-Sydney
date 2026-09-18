@@ -1,0 +1,498 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "QA never writes player achievements",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "UI font has the checklist symbols",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "new world starts chapter one at the first step",
+			"passed": true
+		},
+		{
+			"detail": {
+				"header": "主线 · 港城第一天   1 / 8"
+			},
+			"name": "objective tracker is shown in the left HUD column",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "walking alone does not complete the ride step",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "spawned and entered car",
+			"passed": true
+		},
+		{
+			"detail": {
+				"money": 2000,
+				"step": 1
+			},
+			"name": "entering a vehicle completes step 1 and pays $2,000",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "step 1 unlocks 上路",
+			"passed": true
+		},
+		{
+			"detail": {
+				"key": "campaign_quay"
+			},
+			"name": "step 2 points navigation at Circular Quay",
+			"passed": true
+		},
+		{
+			"detail": {
+				"distance": "451 m"
+			},
+			"name": "tracker shows the distance to the quay",
+			"passed": true
+		},
+		{
+			"detail": {
+				"step": 2
+			},
+			"name": "arriving at the quay completes step 2",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "a photo far from the opera house does not count",
+			"passed": true
+		},
+		{
+			"detail": {
+				"native_photo_path": true,
+				"step": 3
+			},
+			"name": "a photo near the opera house completes step 3",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "photo taken from the pause menu returns to gameplay",
+			"passed": true
+		},
+		{
+			"detail": {
+				"key": ""
+			},
+			"name": "a step without a place clears the previous objective marker",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "completing a job completes step 4",
+			"passed": true
+		},
+		{
+			"detail": {
+				"key": "campaign_bridge"
+			},
+			"name": "step 5 points navigation at the north bridge entry",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "spawned and entered helicopter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "flying over the north bridge entry does not count as driving across",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "spawned and entered car",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "driving to the north bridge entry completes step 5",
+			"passed": true
+		},
+		{
+			"detail": {
+				"distance": "8.4 km · 需要飞行器或船"
+			},
+			"name": "tracker names the vehicle requirement",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "driving a car to Manly does not complete the air or sea step",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "spawned and entered helicopter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "flying to Manly Wharf completes step 6",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "an experience completes step 7",
+			"passed": true
+		},
+		{
+			"detail": {
+				"detail": "进度 4 / 5 · 奶龙危机中按 左键 / X 反击；自由观光世界可在暂停菜单开启奶龙危机。"
+			},
+			"name": "four kills are not enough for step 8",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "fifth kill finishes the chapter",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected": 49000,
+				"paid": 49000
+			},
+			"name": "chapter pays every step plus the $20,000 bonus exactly once",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "chapter unlocks 港城第一天 and seven step achievements",
+			"passed": true
+		},
+		{
+			"detail": {
+				"key": ""
+			},
+			"name": "finished chapter hides the tracker and clears its marker",
+			"passed": true
+		},
+		{
+			"detail": {
+				"toast": "目标完成 · 击败 5 只奶龙  +$5,000\n第一章完成 · 港城第一天  +$20,000\n成就解锁 · 港城第一天"
+			},
+			"name": "completion toast reports the chapter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "restart returns to step 1, and sitting in a vehicle re-completes it",
+			"passed": true
+		},
+		{
+			"detail": {
+				"delta": 0
+			},
+			"name": "restarted steps never pay twice",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "skip advances without marking the step complete",
+			"passed": true
+		},
+		{
+			"detail": {
+				"key": "campaign_opera_photo"
+			},
+			"name": "skip points navigation at the next target",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "skipping the last step ends the chapter without a marker",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "spawned and entered car",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "walking pace does not unlock 风驰电掣",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "300 km/h in a ground vehicle unlocks 风驰电掣",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "holding $100,000 unlocks 海港富翁",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tour place opera has an anchor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tour place bridge has an anchor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tour place sydney_tower has an anchor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tour place qvb has an anchor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tour place icc has an anchor",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tour place manly has an anchor",
+			"passed": true
+		},
+		{
+			"detail": {
+				"visited": [
+					"opera",
+					"manly",
+					"bridge",
+					"sydney_tower",
+					"qvb",
+					"icc"
+				]
+			},
+			"name": "visiting six landmarks unlocks 悉尼通",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "unlocking twice returns nothing",
+			"passed": true
+		},
+		{
+			"detail": {
+				"ids": [
+					"first_ride",
+					"quay_arrival",
+					"opera_photo",
+					"first_job",
+					"bridge_cross",
+					"manly_trip",
+					"taste_city",
+					"chapter_one",
+					"speed_300",
+					"money_100k",
+					"landmark_tour",
+					"nailong_10"
+				]
+			},
+			"name": "platform backend receives existing unlocks when attached",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "platform backend receives new unlocks with stable IDs",
+			"passed": true
+		},
+		{
+			"detail": {
+				"text": "走到家门口的车旁按 F 上车，或按 Tab 免费新增一辆。"
+			},
+			"name": "objective text follows rebound keys",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "objective text switches to controller buttons",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "objective text never shows unfilled placeholders",
+			"passed": true
+		},
+		{
+			"detail": {
+				"text": "目标与成就 · 主线 1 / 8 · 成就 12 / 17"
+			},
+			"name": "pause menu lists 目标与成就 with progress",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "objectives menu lists all eight steps",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "objectives menu lists every achievement",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "objectives menu can hide the tracker",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hidden tracker stays hidden in play",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "tracker returns when shown again",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": {
+					"baseline": {
+						"experiences": 1,
+						"jobs": 1,
+						"kills": 5,
+						"photos": 2
+					},
+					"chapter": "harbour_first_day",
+					"completed": [],
+					"finished": false,
+					"hidden": false,
+					"photos": 2,
+					"rewarded": [
+						"ride",
+						"quay",
+						"opera_photo",
+						"job",
+						"bridge",
+						"manly",
+						"taste",
+						"nailong",
+						"chapter"
+					],
+					"step": 2,
+					"visited": [
+						"opera",
+						"manly",
+						"bridge",
+						"sydney_tower",
+						"qvb",
+						"icc"
+					]
+				},
+				"before": {
+					"baseline": {
+						"experiences": 1,
+						"jobs": 1,
+						"kills": 5,
+						"photos": 2
+					},
+					"chapter": "harbour_first_day",
+					"completed": [],
+					"finished": false,
+					"hidden": false,
+					"photos": 2,
+					"rewarded": [
+						"ride",
+						"quay",
+						"opera_photo",
+						"job",
+						"bridge",
+						"manly",
+						"taste",
+						"nailong",
+						"chapter"
+					],
+					"step": 2,
+					"visited": [
+						"opera",
+						"manly",
+						"bridge",
+						"sydney_tower",
+						"qvb",
+						"icc"
+					]
+				}
+			},
+			"name": "campaign state survives a JSON round trip",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed campaign data loads as a safe chapter start",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "out-of-range step loads as a finished chapter",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production save writes the world",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "save file contains the campaign section",
+			"passed": true
+		},
+		{
+			"detail": {
+				"step": 2
+			},
+			"name": "loading the world restores the campaign step",
+			"passed": true
+		},
+		{
+			"detail": {
+				"key": "campaign_opera_photo",
+				"name": "港城第一天 · 给歌剧院拍张照"
+			},
+			"name": "loading restores the objective marker with its campaign key",
+			"passed": true
+		},
+		{
+			"detail": {
+				"key": ""
+			},
+			"name": "a loaded objective marker is cleared when the next step has no place",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production save keeps step 2 for the old-save check",
+			"passed": true
+		},
+		{
+			"detail": {
+				"step": 1
+			},
+			"name": "worlds saved before the campaign start chapter one",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "save validation rejects a campaign section that is not a dictionary",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true
+}

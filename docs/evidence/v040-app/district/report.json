@@ -1,0 +1,170 @@
+{
+	"checks": [
+		{
+			"detail": {},
+			"name": "the city starts with every district held",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "only the first district is open",
+			"passed": true
+		},
+		{
+			"detail": {
+				"title": "环形码头 · 清剿中  0 / 6"
+			},
+			"name": "standing in a district shows its card",
+			"passed": true
+		},
+		{
+			"detail": {
+				"factor": 0.7
+			},
+			"name": "the streets stay quiet while it is held",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "work outside a district counts for nothing",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "a locked district cannot be cleared early",
+			"passed": true
+		},
+		{
+			"detail": {
+				"done": 1
+			},
+			"name": "defeating a Nailong credits the district it fell in",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "clearing the work liberates the district",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected": 6000,
+				"paid": 6000
+			},
+			"name": "liberation pays its reward",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "liberation opens the next district",
+			"passed": true
+		},
+		{
+			"detail": {
+				"factor": 1.4
+			},
+			"name": "a liberated district gets busier streets",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "first liberation unlocks 夺回第一个港区",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "further work in a cleared district is ignored",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "the cleared district stays at full",
+			"passed": true
+		},
+		{
+			"detail": {
+				"done": 2
+			},
+			"name": "a city experience counts as clearing work",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "the district menu lists every district",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "the menu shows what is done and what is locked",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": {
+					"liberated": [
+						"quay"
+					],
+					"progress": {
+						"quay": 6,
+						"rocks": 2
+					}
+				},
+				"before": {
+					"liberated": [
+						"quay"
+					],
+					"progress": {
+						"quay": 6,
+						"rocks": 2
+					}
+				}
+			},
+			"name": "district progress survives a JSON round trip",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "malformed district data loads as a clean city",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "production save writes the world",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "the save file carries the district section",
+			"passed": true
+		},
+		{
+			"detail": {
+				"state": {
+					"liberated": [
+						"quay"
+					],
+					"progress": {
+						"quay": 6,
+						"rocks": 2
+					}
+				}
+			},
+			"name": "loading restores liberated districts and progress",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "worlds saved before the districts start with the city held",
+			"passed": true
+		},
+		{
+			"detail": {
+				"liberated": 9
+			},
+			"name": "clearing every district unlocks 港城解放",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true
+}

@@ -1,0 +1,1408 @@
+{
+	"checks": [
+		{
+			"detail": {
+				"canvas": [
+					1600.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "foot 1280x720: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						328.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						602.0,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						736.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1278.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"hint_bar": [
+						210.0,
+						827.0,
+						1180.0,
+						49.0
+					],
+					"minimap": [
+						1282.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						123.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						429.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						565.5,
+						104.0,
+						469.0,
+						111.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "foot 1280x720: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.778,
+				"window_aspect": 1.778
+			},
+			"name": "foot 1280x720: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1440.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "foot 1280x800: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						328.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						518.8,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						736.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1118.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"hint_bar": [
+						130.0,
+						827.0,
+						1180.0,
+						49.0
+					],
+					"minimap": [
+						1122.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						123.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						429.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						485.5,
+						104.0,
+						469.0,
+						111.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "foot 1280x800: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.6,
+				"window_aspect": 1.6
+			},
+			"name": "foot 1280x800: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1440.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "foot 1440x900: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						328.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						518.8,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						736.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1118.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"hint_bar": [
+						130.0,
+						827.0,
+						1180.0,
+						49.0
+					],
+					"minimap": [
+						1122.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						123.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						429.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						485.5,
+						104.0,
+						469.0,
+						111.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "foot 1440x900: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.6,
+				"window_aspect": 1.6
+			},
+			"name": "foot 1440x900: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1600.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "foot 1920x1080: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						328.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						602.0,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						736.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1278.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"hint_bar": [
+						210.0,
+						827.0,
+						1180.0,
+						49.0
+					],
+					"minimap": [
+						1282.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						123.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						429.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						565.5,
+						104.0,
+						469.0,
+						111.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "foot 1920x1080: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.778,
+				"window_aspect": 1.778
+			},
+			"name": "foot 1920x1080: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1600.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "foot 2560x1440: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						328.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						602.0,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						736.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1278.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"hint_bar": [
+						210.0,
+						827.0,
+						1180.0,
+						49.0
+					],
+					"minimap": [
+						1282.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						123.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						429.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						565.5,
+						104.0,
+						469.0,
+						111.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "foot 2560x1440: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.778,
+				"window_aspect": 1.778
+			},
+			"name": "foot 2560x1440: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					2133.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "foot 2560x1080: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						328.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						879.2,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						736.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1811.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"hint_bar": [
+						476.5,
+						827.0,
+						1180.0,
+						49.0
+					],
+					"minimap": [
+						1815.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						123.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						429.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						832.0,
+						104.0,
+						469.0,
+						111.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "foot 2560x1080: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 2.37,
+				"window_aspect": 2.37
+			},
+			"name": "foot 2560x1080: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "armed vehicle spawned for the driving HUD",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1600.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "tank 1280x720: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						359.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						602.0,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						702.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1278.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"fire_button": [
+						1344.0,
+						540.0,
+						226.0,
+						65.0
+					],
+					"hint_bar": [
+						210.0,
+						793.0,
+						1180.0,
+						83.0
+					],
+					"minimap": [
+						1282.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						154.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						460.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						630.5,
+						104.0,
+						339.0,
+						156.0
+					],
+					"vehicle_readout": [
+						1324.0,
+						625.0,
+						248.0,
+						156.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "tank 1280x720: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.778,
+				"window_aspect": 1.778
+			},
+			"name": "tank 1280x720: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1440.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "tank 1280x800: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						359.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						518.8,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						702.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1118.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"fire_button": [
+						1184.0,
+						540.0,
+						226.0,
+						65.0
+					],
+					"hint_bar": [
+						130.0,
+						793.0,
+						1180.0,
+						83.0
+					],
+					"minimap": [
+						1122.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						154.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						460.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						550.5,
+						104.0,
+						339.0,
+						156.0
+					],
+					"vehicle_readout": [
+						1164.0,
+						625.0,
+						248.0,
+						156.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "tank 1280x800: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.6,
+				"window_aspect": 1.6
+			},
+			"name": "tank 1280x800: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1440.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "tank 1440x900: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						359.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						518.8,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						702.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1118.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"fire_button": [
+						1184.0,
+						540.0,
+						226.0,
+						65.0
+					],
+					"hint_bar": [
+						130.0,
+						793.0,
+						1180.0,
+						83.0
+					],
+					"minimap": [
+						1122.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						154.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						460.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						550.5,
+						104.0,
+						339.0,
+						156.0
+					],
+					"vehicle_readout": [
+						1164.0,
+						625.0,
+						248.0,
+						156.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "tank 1440x900: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.6,
+				"window_aspect": 1.6
+			},
+			"name": "tank 1440x900: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1600.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "tank 1920x1080: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						359.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						602.0,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						702.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1278.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"fire_button": [
+						1344.0,
+						540.0,
+						226.0,
+						65.0
+					],
+					"hint_bar": [
+						210.0,
+						793.0,
+						1180.0,
+						83.0
+					],
+					"minimap": [
+						1282.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						154.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						460.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						630.5,
+						104.0,
+						339.0,
+						156.0
+					],
+					"vehicle_readout": [
+						1324.0,
+						625.0,
+						248.0,
+						156.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "tank 1920x1080: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.778,
+				"window_aspect": 1.778
+			},
+			"name": "tank 1920x1080: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					1600.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "tank 2560x1440: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						359.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						602.0,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						702.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1278.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"fire_button": [
+						1344.0,
+						540.0,
+						226.0,
+						65.0
+					],
+					"hint_bar": [
+						210.0,
+						793.0,
+						1180.0,
+						83.0
+					],
+					"minimap": [
+						1282.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						154.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						460.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						630.5,
+						104.0,
+						339.0,
+						156.0
+					],
+					"vehicle_readout": [
+						1324.0,
+						625.0,
+						248.0,
+						156.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "tank 2560x1440: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 1.778,
+				"window_aspect": 1.778
+			},
+			"name": "tank 2560x1440: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas": [
+					2133.0,
+					900.0
+				],
+				"outside": []
+			},
+			"name": "tank 2560x1080: HUD elements stay inside the visible canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"layout": {
+					"activity_panel": [
+						28.0,
+						359.0,
+						365.0,
+						91.0
+					],
+					"compass": [
+						879.2,
+						22.0,
+						460.0,
+						60.0
+					],
+					"destination_readout": [
+						346.0,
+						702.0,
+						385.0,
+						78.0
+					],
+					"district_panel": [
+						1811.0,
+						366.0,
+						294.0,
+						117.0
+					],
+					"fire_button": [
+						1877.0,
+						540.0,
+						226.0,
+						65.0
+					],
+					"hint_bar": [
+						476.5,
+						793.0,
+						1180.0,
+						83.0
+					],
+					"minimap": [
+						1815.0,
+						66.0,
+						290.0,
+						288.0
+					],
+					"objective_panel": [
+						28.0,
+						195.0,
+						365.0,
+						154.0
+					],
+					"status_panel": [
+						28.0,
+						24.0,
+						365.0,
+						161.0
+					],
+					"survival_card": [
+						28.0,
+						460.0,
+						300.0,
+						260.0
+					],
+					"toast": [
+						897.0,
+						104.0,
+						339.0,
+						156.0
+					],
+					"vehicle_readout": [
+						1857.0,
+						625.0,
+						248.0,
+						156.0
+					]
+				},
+				"overlaps": []
+			},
+			"name": "tank 2560x1080: HUD elements do not overlap",
+			"passed": true
+		},
+		{
+			"detail": {
+				"canvas_aspect": 2.37,
+				"window_aspect": 2.37
+			},
+			"name": "tank 2560x1080: canvas matches the window aspect (no letterbox bars)",
+			"passed": true
+		},
+		{
+			"detail": {
+				"antialiasing": "msaa2",
+				"bindings": {
+					"map": [
+						78
+					]
+				},
+				"fov": 95.0,
+				"invert": false,
+				"large_text": false,
+				"max_fps": 0,
+				"mute_unfocused": false,
+				"pad_sensitivity": 2.6,
+				"quality": 1,
+				"render_scale": 0.5,
+				"sensitivity": 0.003,
+				"street_life": 1,
+				"volume": 0.65,
+				"vsync": true,
+				"window_mode": "windowed"
+			},
+			"name": "invalid saved settings are clamped or reset",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "render scale below 100% switches to FSR 1 and keeps MSAA",
+			"passed": true
+		},
+		{
+			"detail": {
+				"seconds": 0.023
+			},
+			"name": "switching render scale does not stall rendering",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "field of view setting reaches the gameplay camera",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "native resolution restores bilinear scaling with MSAA 4x",
+			"passed": true
+		},
+		{
+			"detail": {
+				"modal": [
+					44.0,
+					40.0,
+					560.0,
+					820.0
+				]
+			},
+			"name": "settings 1440x900: menu panel fits the canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"modal": [
+					44.0,
+					40.0,
+					560.0,
+					820.0
+				]
+			},
+			"name": "settings 1280x800: menu panel fits the canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"modal": [
+					44.0,
+					40.0,
+					560.0,
+					820.0
+				]
+			},
+			"name": "settings 1920x1080: menu panel fits the canvas",
+			"passed": true
+		},
+		{
+			"detail": {
+				"brake": [
+					74
+				],
+				"jump": [
+					74
+				]
+			},
+			"name": "rebinding jump moves the paired brake action to the same key",
+			"passed": true
+		},
+		{
+			"detail": {
+				"notice": "已绑定 J。该按键同时用于：工作与活动。"
+			},
+			"name": "rebinding J warns that Jobs already uses it",
+			"passed": true
+		},
+		{
+			"detail": {
+				"jump": [
+					32
+				]
+			},
+			"name": "default keys restore after clearing bindings",
+			"passed": true
+		},
+		{
+			"detail": {
+				"heal": "U 快修 $0",
+				"hint": "W/S 履带 · A/D 转向 · 鼠标瞄准 · Q/Z 旋塔 · R/F 俯仰 · X/左键 发射 · B 维修升级 · Shift 3倍加速   E 离开   Tab 新增   N 地图\nV 自动武器   U 战地快修   B 补给 / 升级 · 弹药免费"
+			},
+			"name": "control hints follow rebound keys",
+			"passed": true
+		},
+		{
+			"detail": {
+				"hint": "W/S 履带 · A/D 转向 · 鼠标瞄准 · Q/Z 旋塔 · R/F 俯仰 · X/左键 发射 · B 维修升级 · Shift 3倍加速   E 离开   Tab 新增   M 地图\nV 自动武器   H 战地快修   B 补给 / 升级 · 弹药免费"
+			},
+			"name": "control hints return to default keys",
+			"passed": true
+		},
+		{
+			"detail": {
+				"focus": "@Button@62128:<Button#3295330571610>",
+				"panel": "pause"
+			},
+			"name": "controller Start opens the pause menu with a focused button",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "controller B closes the menu back to gameplay",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": -0.6858722,
+				"before": 0.0
+			},
+			"name": "right stick turns the camera",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true,
+	"screenshots": [
+		{
+			"file": "foot-1280x720.png",
+			"resolution": [
+				1280,
+				720
+			],
+			"saved": true
+		},
+		{
+			"file": "foot-1280x800.png",
+			"resolution": [
+				1280,
+				800
+			],
+			"saved": true
+		},
+		{
+			"file": "foot-1440x900.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"file": "foot-1920x1080.png",
+			"resolution": [
+				1920,
+				1080
+			],
+			"saved": true
+		},
+		{
+			"file": "foot-2560x1440.png",
+			"resolution": [
+				2560,
+				1440
+			],
+			"saved": true
+		},
+		{
+			"file": "foot-2560x1080.png",
+			"resolution": [
+				2560,
+				1080
+			],
+			"saved": true
+		},
+		{
+			"file": "tank-1280x720.png",
+			"resolution": [
+				1280,
+				720
+			],
+			"saved": true
+		},
+		{
+			"file": "tank-1280x800.png",
+			"resolution": [
+				1280,
+				800
+			],
+			"saved": true
+		},
+		{
+			"file": "tank-1440x900.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"file": "tank-1920x1080.png",
+			"resolution": [
+				1920,
+				1080
+			],
+			"saved": true
+		},
+		{
+			"file": "tank-2560x1440.png",
+			"resolution": [
+				2560,
+				1440
+			],
+			"saved": true
+		},
+		{
+			"file": "tank-2560x1080.png",
+			"resolution": [
+				2560,
+				1080
+			],
+			"saved": true
+		},
+		{
+			"file": "settings-1440x900.png",
+			"resolution": [
+				1440,
+				900
+			],
+			"saved": true
+		},
+		{
+			"file": "settings-1280x800.png",
+			"resolution": [
+				1280,
+				800
+			],
+			"saved": true
+		},
+		{
+			"file": "settings-1920x1080.png",
+			"resolution": [
+				1920,
+				1080
+			],
+			"saved": true
+		}
+	]
+}

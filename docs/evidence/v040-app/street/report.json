@@ -1,0 +1,122 @@
+{
+	"checks": [
+		{
+			"detail": {
+				"cars": 10,
+				"density": 1,
+				"pedestrians": 14,
+				"segments": 9489
+			},
+			"name": "mapped roads are indexed for traffic",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cars": 10,
+				"density": 1,
+				"pedestrians": 14,
+				"segments": 9489
+			},
+			"name": "cars and pedestrians appear in the city",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cars": 10,
+				"off_road": 0
+			},
+			"name": "traffic stays on mapped roads",
+			"passed": true
+		},
+		{
+			"detail": {
+				"far": 0
+			},
+			"name": "nothing spawns beyond the release radius",
+			"passed": true
+		},
+		{
+			"detail": {
+				"off": 0
+			},
+			"name": "pedestrians keep to the footpaths beside roads",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cars": 10,
+				"moved": 8
+			},
+			"name": "traffic drives along its route",
+			"passed": true
+		},
+		{
+			"detail": {
+				"people": 14,
+				"ran": 14
+			},
+			"name": "alarmed pedestrians move away quickly",
+			"passed": true
+		},
+		{
+			"detail": {
+				"stale": 0
+			},
+			"name": "street life follows the player and releases what is left behind",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cars": 0,
+				"density": 0,
+				"pedestrians": 0,
+				"segments": 9489
+			},
+			"name": "the 关闭 setting empties the streets",
+			"passed": true
+		},
+		{
+			"detail": {
+				"cars": 17,
+				"district_factor": 0.55,
+				"expected": [
+					17,
+					24
+				],
+				"pedestrians": 24
+			},
+			"name": "the 热闹 setting adds more",
+			"passed": true
+		},
+		{
+			"detail": {
+				"average_frame_ms": 16.17,
+				"cars": 17,
+				"frames": 187,
+				"pedestrians": 24
+			},
+			"name": "a busy street still draws frames",
+			"passed": true
+		},
+		{
+			"detail": {
+				"lit": 4,
+				"night": 1.0,
+				"pool": 10
+			},
+			"name": "street lamps light up at night near the player",
+			"passed": true
+		},
+		{
+			"detail": {
+				"lit": 0,
+				"night": 0.0,
+				"pool": 10
+			},
+			"name": "street lamps switch off in daylight",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true
+}
