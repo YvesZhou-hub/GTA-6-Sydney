@@ -72,7 +72,9 @@
 ```sh
 tools/runtime/godot --headless --path game --script ../source/combat_curve_test.gd
 tools/runtime/godot --path game -- --feel-qa
+tools/runtime/godot --headless --path game --script ../source/nailong_enemy_test.gd
 ```
 
 - `combat_curve_test.gd`（15 项）：每波数量、等级公式、港区与难度的影响、上下限、难度档位之间的单调关系。
 - `--feel-qa`（17 项）：三档难度下**真实生成**的奶龙血量、伤害、奖金、在场数量与入场保护；解放港区后等级上升；轻型被击退而重装几乎不动；开火后坐、受击抖动、受击方向弧线的出现与淡出、低血量阈值；抖动只改镜头位置且会归零。结果写入 `user://feel-qa/report.json`，原生窗口下附带截图。
+- `nailong_enemy_test.gd`（67 项）新增：首领两段打满同样总伤害、喷吐奶龙三连发、跳袭奶龙扑中一次 14 点、蓄力时走开就扑空。
