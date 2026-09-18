@@ -204,7 +204,7 @@ def main():
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--archive", type=Path, default=ROOT / "dist/Harbourlife-macOS-arm64.zip")
     parser.add_argument("--source-archive", type=Path)
-    parser.add_argument("--version", default="0.3.0")
+    parser.add_argument("--version", default="0.4.0")
     parser.add_argument("--save-format", type=int, default=7)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
