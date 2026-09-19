@@ -1,0 +1,92 @@
+name: Regression checks
+
+# The headless regression suite, on every pull request and every push to main.
+# What runs, and what is left out and why, is listed in tools/checks.json; the
+# same checks run locally with `python3 tools/run_checks.py`.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regression-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: ${{ matrix.group }} ${{ matrix.shard }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { group: source, shard: 1/4 }
+          - { group: source, shard: 2/4 }
+          - { group: source, shard: 3/4 }
+          - { group: source, shard: 4/4 }
+          - { group: qa, shard: 1/2 }
+          - { group: qa, shard: 2/2 }
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Download and verify official Godot 4.7.2
+        shell: python
+        run: |
+          import hashlib, os, shutil, stat, urllib.request, zipfile
+          from pathlib import Path
+          name = 'Godot_v4.7.2-stable_linux.x86_64.zip'
+          # SHA-256 of the official asset, as published by godotengine/godot-builds.
+          expected = 'cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4'
+          tools = Path(os.environ['RUNNER_TEMP']) / 'godot'
+          tools.mkdir(parents=True, exist_ok=True)
+          target = tools / name
+          url = 'https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/' + name
+          request = urllib.request.Request(url, headers={'User-Agent': 'Harbourlife-CI'})
+          with urllib.request.urlopen(request, timeout=180) as response, target.open('wb') as output:
+              shutil.copyfileobj(response, output)
+          with target.open('rb') as stream:
+              actual = hashlib.file_digest(stream, 'sha256').hexdigest()
+          if actual != expected:
+              raise RuntimeError('Godot download SHA256 mismatch: ' + actual)
+          with zipfile.ZipFile(target) as archive:
+              members = archive.namelist()
+              if len(members) != 1 or '/' in members[0] or not members[0].endswith('linux.x86_64'):
+                  raise RuntimeError('Unexpected Godot archive members: ' + repr(members))
+              archive.extract(members[0], tools)
+          binary = tools / members[0]
+          binary.chmod(binary.stat().st_mode | stat.S_IXUSR)
+          target.unlink()
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as env:
+              env.write(f'GODOT={binary}\n')
+
+      - name: Restore imported assets
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: game/.godot
+          key: godot-import-4.7.2-${{ hashFiles('game/project.godot', 'game/**/*.import') }}
+          restore-keys: godot-import-4.7.2-
+
+      - name: Import the project
+        run: |
+          "$GODOT" --version
+          "$GODOT" --headless --path game --import > "$RUNNER_TEMP/import.log" 2>&1 || { tail -n 60 "$RUNNER_TEMP/import.log"; exit 1; }
+          tail -n 5 "$RUNNER_TEMP/import.log"
+
+      - name: Run ${{ matrix.group }} checks, shard ${{ matrix.shard }}
+        run: python3 tools/run_checks.py --group ${{ matrix.group }} --shard ${{ matrix.shard }} --summary "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the logs of a failed run
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: check-logs-${{ matrix.group }}-${{ strategy.job-index }}
+          path: reports/checks/
+          retention-days: 14

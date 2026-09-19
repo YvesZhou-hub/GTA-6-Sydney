@@ -151,13 +151,15 @@ func run(host: Node) -> void:
 	check("the 热闹 setting adds more", float(busy.cars) >= expect_cars * 0.7 and float(busy.pedestrians) >= expect_people * 0.7 and int(busy.cars) > 12,
 		{"cars": busy.cars, "pedestrians": busy.pedestrians, "expected": [expect_cars, expect_people], "district_factor": factor})
 	# Frame cost of a busy street, for the record rather than as a hard limit.
-	await frames(10)
-	var started := Time.get_ticks_usec()
-	var first := Engine.get_frames_drawn()
-	await settle(3.0)
-	var drawn: int = Engine.get_frames_drawn() - first
-	var average := ((Time.get_ticks_usec() - started) / 1000.0) / maxf(1.0, float(drawn))
-	check("a busy street still draws frames", drawn > 20 and average < 60.0, {"frames": drawn, "average_frame_ms": snappedf(average, 0.01), "cars": busy.cars, "pedestrians": busy.pedestrians})
+	# Only a real window draws frames; headless runs (CI) skip this one check.
+	if native:
+		await frames(10)
+		var started := Time.get_ticks_usec()
+		var first := Engine.get_frames_drawn()
+		await settle(3.0)
+		var drawn: int = Engine.get_frames_drawn() - first
+		var average := ((Time.get_ticks_usec() - started) / 1000.0) / maxf(1.0, float(drawn))
+		check("a busy street still draws frames", drawn > 20 and average < 60.0, {"frames": drawn, "average_frame_ms": snappedf(average, 0.01), "cars": busy.cars, "pedestrians": busy.pedestrians})
 	await capture("street-busy")
 	# Evening: lamp heads glow and windows light up.
 	if is_instance_valid(game.city_clock):
