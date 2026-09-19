@@ -88,6 +88,8 @@ func run():
 		hashes[path]=FileAccess.get_sha256("res://../"+path)
 	var passed:=checks.all(func(r):return r.passed)
 	var report:={"passed":passed,"count":checks.size(),"checks":checks,"hashes":hashes,"headless":DisplayServer.get_name()=="headless","native_brightness_validated":false,"user_saves_touched":false,"fixture":"production ICC / Opera / bridge geometry in isolated LocalWorld; no full city","lights":snapshot}
+	# A fresh checkout (CI) has no reports/public-lighting folder yet.
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://../reports/public-lighting"))
 	FileAccess.open("res://../reports/public-lighting/checks.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("PUBLIC_LIGHTING_COMPLETE ",checks.size()," passed=",passed)
 	quit(0 if passed else 1)

@@ -1,5 +1,7 @@
 # Harbourlife · 悉尼海港
 
+[![Regression checks](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/workflows/pr-checks.yml/badge.svg?branch=main)](https://github.com/YvesZhou-hub/GTA-6-Sydney/actions/workflows/pr-checks.yml) · [每个 PR 自动跑的检查](docs/AUTOMATED_CHECKS.md)
+
 **v0.5.0-preview.1 · 战斗手感、奶龙新节奏与港区限时求助**
 
 [下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.5.0-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.5.0-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases)
