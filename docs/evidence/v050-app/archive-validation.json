@@ -1,0 +1,116 @@
+{
+  "checked_at_utc": "2026-09-19T08:53:00.770619+00:00",
+  "mode": "final_archive_audit",
+  "checks": {
+    "public_allowlist_excludes_runtime_saves_private_credentials": true,
+    "archive_matches_final_build_manifest": true,
+    "all_game_hashes_match_final_build": true,
+    "zip_crc_and_safe_entries": true,
+    "executable_permissions_preserved": true,
+    "plist_version_and_executable": true,
+    "arm64_only": true,
+    "strict_codesign": true,
+    "pck_and_resources_present": true,
+    "extracted_executable_and_pck_match_final_build": true,
+    "bundled_models_and_qa_resources_loadable": true,
+    "fresh_extracted_app_full_world_ready_without_errors": true,
+    "game_hashes_still_match_after_smoke": true
+  },
+  "public_source_allowlist": {
+    "file_count": 1426,
+    "forbidden_paths": [],
+    "credential_pattern_paths": [],
+    "scope": "Explicit source allowlist and high-confidence credential scan; no matching values printed; no user-data or ignored private files opened.",
+    "passed": true
+  },
+  "archive_sha256": "d0a41b5526135e57c4544529745267dde0395791012146997115756881c7b73f",
+  "source_hashes": {
+    "file_count": 436,
+    "expected_count": 436,
+    "missing": [],
+    "extra": [],
+    "mismatched": []
+  },
+  "extraction_directory": "/tmp/harbourlife-zip-audit-py_bz_p3",
+  "archive_entries": 21,
+  "executable_mode": "0o755",
+  "plist": {
+    "CFBundleExecutable": "Harbourlife",
+    "CFBundleIdentifier": "local.yveszhou.harbourlife",
+    "CFBundleShortVersionString": "0.5.0",
+    "CFBundleVersion": "0.5.0"
+  },
+  "architecture": "arm64",
+  "codesign": {
+    "returncode": 0,
+    "output": "/tmp/harbourlife-zip-audit-py_bz_p3/Harbourlife.app: valid on disk\n/tmp/harbourlife-zip-audit-py_bz_p3/Harbourlife.app: satisfies its Designated Requirement\n",
+    "notarization": "Not tested; project distributes an ad-hoc signed local preview."
+  },
+  "resources": [
+    "Harbourlife.pck",
+    "LICENSE",
+    "PLAY_PERMISSION.md",
+    "PrivacyInfo.xcprivacy",
+    "icon.icns",
+    "licenses/ASSET_REGISTER.md",
+    "licenses/DAYLIGHT_CYCLE.md",
+    "licenses/DAYLIGHT_ENVIRONMENT.md",
+    "licenses/FONTS.md",
+    "licenses/GENERATED_EFFECTS.md",
+    "licenses/GEOGRAPHY.md",
+    "licenses/GODOT_COPYRIGHT.txt",
+    "licenses/GODOT_LICENSE.txt",
+    "licenses/NotoSansCJK-OFL.txt",
+    "licenses/notosans-OFL.txt",
+    "licenses/notosansarabic-OFL.txt",
+    "licenses/notosansmath-OFL.txt"
+  ],
+  "app_identity": {
+    "passed": true,
+    "actual": {
+      "executable_sha256": "89d6ea5cad865b87b432437dfa89862344d90b347e759bb0c591e3035bbe6bc5",
+      "pck_sha256": "1b3b6710c773d14e118893bf433f6198fed4c80c73697634b67750212d12f78b"
+    },
+    "expected": {
+      "executable_sha256": "89d6ea5cad865b87b432437dfa89862344d90b347e759bb0c591e3035bbe6bc5",
+      "pck_sha256": "1b3b6710c773d14e118893bf433f6198fed4c80c73697634b67750212d12f78b"
+    }
+  },
+  "pck_sha256": "1b3b6710c773d14e118893bf433f6198fed4c80c73697634b67750212d12f78b",
+  "resource_probe": {
+    "returncode": 0,
+    "resources": 80,
+    "packed_save_format": 7,
+    "expected_save_format": 7,
+    "errors": [],
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "method": "Matching official Godot version independently loads scripts and JSON from this extracted PCK and reads its actual save-store VERSION; not a claim that the release template accepts external --script."
+  },
+  "smoke": {
+    "returncode": 0,
+    "elapsed_seconds": 12.911,
+    "cwd": "/tmp",
+    "command": [
+      "/tmp/harbourlife-zip-audit-py_bz_p3/Harbourlife.app/Contents/MacOS/Harbourlife",
+      "--headless",
+      "--quit-after",
+      "15",
+      "--log-file",
+      "/tmp/harbourlife-zip-audit-py_bz_p3/isolated-engine.log",
+      "--",
+      "--interactive-qa"
+    ],
+    "world_ready_lines": [
+      "HARBOR_WORLD_READY buildings=15097 structure_components=21697"
+    ],
+    "qa_ready_lines": [
+      "INTERACTIVE_QA_READY world=qa_interactive_11333346 components=21697"
+    ],
+    "errors": [],
+    "save_isolation": "Built-in --interactive-qa skips normal slot/settings reads; no existing user saves read or deleted. Headless only; no native GPU validation in this audit."
+  },
+  "public_source_zip": {
+    "status": "Not supplied; source allowlist checked, source ZIP not verified in this run."
+  },
+  "passed": true
+}

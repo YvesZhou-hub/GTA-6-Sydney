@@ -1,0 +1,159 @@
+{
+	"checks": [
+		{
+			"detail": {
+				"0": {
+					"damage": 5.76,
+					"health": 62.4,
+					"level": 1,
+					"reward": 108,
+					"wanted": 3
+				},
+				"1": {
+					"damage": 8.0,
+					"health": 80.0,
+					"level": 1,
+					"reward": 120,
+					"wanted": 4
+				},
+				"2": {
+					"damage": 10.24,
+					"health": 104.0,
+					"level": 2,
+					"reward": 150,
+					"wanted": 6
+				}
+			},
+			"name": "easier enemies have less health, hardcore more",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "difficulty scales the damage they deal",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "hardcore pays more per kill",
+			"passed": true
+		},
+		{
+			"detail": {
+				"0": {
+					"damage": 5.76,
+					"health": 62.4,
+					"level": 1,
+					"reward": 108,
+					"wanted": 3
+				},
+				"1": {
+					"damage": 8.0,
+					"health": 80.0,
+					"level": 1,
+					"reward": 120,
+					"wanted": 4
+				},
+				"2": {
+					"damage": 10.24,
+					"health": 104.0,
+					"level": 2,
+					"reward": 150,
+					"wanted": 6
+				}
+			},
+			"name": "hardcore keeps more of them around",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "the level shifts with difficulty",
+			"passed": true
+		},
+		{
+			"detail": {
+				"easy": 18.0,
+				"standard": 12.0
+			},
+			"name": "easy gives longer entry protection",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 2,
+				"before": 1
+			},
+			"name": "taking districts back raises the encounter level",
+			"passed": true
+		},
+		{
+			"detail": {
+				"moved": 0.61
+			},
+			"name": "a hit knocks a light Nailong back",
+			"passed": true
+		},
+		{
+			"detail": {
+				"brute": 0.46,
+				"runner": 0.61
+			},
+			"name": "a brute shrugs the same hit off",
+			"passed": true
+		},
+		{
+			"detail": {
+				"recoil": 0.035,
+				"trauma": 0.032
+			},
+			"name": "firing kicks the view",
+			"passed": true
+		},
+		{
+			"detail": {
+				"offset": 0.185
+			},
+			"name": "shake moves the camera and nothing else",
+			"passed": true
+		},
+		{
+			"detail": {
+				"trauma": 0.443
+			},
+			"name": "being hit shakes the view",
+			"passed": true
+		},
+		{
+			"detail": {
+				"hits": 1
+			},
+			"name": "an arc records where the hit came from",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "the rim only appears when health is low",
+			"passed": true
+		},
+		{
+			"detail": {
+				"ratio": 0.25
+			},
+			"name": "low health crosses the rim threshold",
+			"passed": true
+		},
+		{
+			"detail": {},
+			"name": "arcs fade away on their own",
+			"passed": true
+		},
+		{
+			"detail": {
+				"trauma": 0.0
+			},
+			"name": "shake settles back to nothing",
+			"passed": true
+		}
+	],
+	"native": true,
+	"passed": true
+}

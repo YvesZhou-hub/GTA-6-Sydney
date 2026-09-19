@@ -1,3 +1,35 @@
+# v0.5.0 战斗手感、攻击节奏与港区限时求助验证
+
+## 最终 Mac App
+
+`Harbourlife-macOS-arm64.zip` 由 `tools/build.sh` 从提交后的源码构建，436 个游戏文件的哈希与 git 跟踪文件逐一一致。[构建清单](evidence/v050-app/build.json) · [校验和](evidence/v050-app/Mac-SHA256SUMS.txt)
+
+- **压缩包审计 13/13**：版本 0.5.0、arm64、签名校验、PCK 与全部源文件身份、从解压副本启动完整城市。[审计报告](evidence/v050-app/archive-validation.json)
+- **原生玩法与界面 365/365**，全部用打好的 App 在 Metal 窗口运行，退出码 0，日志无错误或警告，EXE/PCK 哈希前后不变：
+
+| 专项 | 检查 | 范围 |
+| --- | ---: | --- |
+| [连续遭遇](evidence/v050-app/encounter/report.json) | 96/96 | 家门口、歌剧院、机场和 CBD 的刷新与追击，V/B/H；新的攻击节奏下坦克仍会被打到需要维修 |
+| [主线与成就](evidence/v050-app/campaign/report.json) | 71/71 | 八个步骤、奖励只发一次、导航切换、成就与平台接口、存读档 |
+| [HUD 与设置](evidence/v050-app/hud/report.json) | 53/53 | 六种分辨率的重叠与越界、设置、FSR、改键与手柄 |
+| [原有生存](evidence/v050-app/survival/report.json) | 40/40 | 敌人类型、H 治疗、坦克击杀奖励、B 补给与维修 |
+| [港区玩法](evidence/v050-app/district/report.json) | 40/40 | 原有 24 项，加上限时求助：巡查、围攻、远处击杀不算、超时、同时只有一个、离开即取消、已解放与未开放港区不触发 |
+| [武器与空袭](evidence/v050-app/arsenal/report.json) | 35/35 | 选装购买与三槽、主炮伤害、空中敌人、激光与闪电 |
+| [战斗手感](evidence/v050-app/feel/report.json) | 17/17 | 三档难度下真实生成的奶龙数值、解放港区后等级上升、击退、后坐、受击抖动与方向弧线、低血量红框 |
+| [街上人车](evidence/v050-app/street/report.json) | 13/13 | 路网索引、车辆在路上、行人在路侧、受惊跑开、回收、三档设置、夜间路灯、繁忙时帧时间 |
+
+[汇总与哈希](evidence/v050-app/native-index.json)。QA 进程使用 Dummy 音频驱动，**不验证实际扬声器声音**。连续遭遇的截图里底部提示显示「未绑定」，是因为这个专项会故意清掉移动与开火键，防止真实键盘干扰，正常游戏不会出现。
+
+## 源码检查
+
+- Windows 发布门禁要求的 5 个无界面专项全部通过，日志零错误或警告：交互启动、驾驶 32、生存 30、自然遭遇 82、武器 25。
+- `nailong_enemy` 67 项（新增首领两段伤害、喷吐三连发、跳袭扑中与躲开）、`survival_loop` 60、`armory_progression` 64、`weapon_modules` 85、`field_service` 35、`combat_feedback` 53、`combat_curve`、`encounter_director`、`enemy_pursuit`、`flying_enemy` 全部通过，零脚本错误。
+- 已知与本版无关的历史失败：`world_road_probe`（退出码 8）、无头模式下的 `bridge_drive_test`，在未改动的代码上结果相同。
+
+Windows 包的实际构建与运行结果见 [Windows 验证记录](WINDOWS.md#windows-验证记录)。下方 v0.4.0 及更早的结果是历史数据，不计入 v0.5.0。
+
+---
+
 # v0.4.0 街上人车、城市氛围与港区玩法验证
 
 ## 最终 Mac App
