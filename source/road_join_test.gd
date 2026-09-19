@@ -6,6 +6,7 @@ class RoadWorld extends Node3D:
 	const GROUND = 4.5
 	var materials := {"road": StandardMaterial3D.new(), "lightstone": StandardMaterial3D.new()}
 	var road_segments := []
+	var road_rules := []
 	var markings := []
 	func _batch_box(pos: Vector3, size: Vector3, key: String, basis: Basis = Basis.IDENTITY) -> void:
 		markings.append([pos, size, key, basis])

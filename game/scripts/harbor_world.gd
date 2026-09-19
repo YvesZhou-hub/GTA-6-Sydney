@@ -23,6 +23,10 @@ var map_snapshot: Dictionary = {}
 var south_polygon: PackedVector2Array
 var north_polygon: PackedVector2Array
 var road_segments: Array = []
+## One entry per road_segments entry: [kind, oneway]. kind is the mapped
+## highway type ("road" for the built-in streets); oneway 1 allows only a to b,
+## -1 only b to a, 0 both ways.
+var road_rules: Array = []
 var _batch_boxes: Dictionary = {}
 var _batch_cylinders: Dictionary = {}
 var _batch_foliage: Dictionary = {}
@@ -692,7 +696,9 @@ func _road(a: Vector3, b: Vector3, width: float = 13.0, stripes: bool = true, re
 	var d := b-a
 	if d.length()<0.1: return
 	# Keep the exact original gameplay/layout centerline while clipping only flat painted surfaces to real land.
-	if record: road_segments.append([Vector2(a.x,a.z),Vector2(b.x,b.z),width])
+	if record:
+		road_segments.append([Vector2(a.x,a.z),Vector2(b.x,b.z),width])
+		road_rules.append(["road",0])
 	if clip_visual and absf(a.y-GROUND)<0.22 and absf(b.y-GROUND)<0.22:
 		var line := PackedVector2Array([Vector2(a.x,a.z),Vector2(b.x,b.z)])
 		for polygon in [south_polygon,north_polygon]:

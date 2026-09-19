@@ -12,6 +12,17 @@ const STREET_WIDTH := {"motorway":13.0,"trunk":12.0,"primary":10.5,"secondary":1
 static func data() -> Dictionary:
 	return JSON.parse_string(FileAccess.get_file_as_string(DATA_PATH))
 
+## Which way traffic may use a mapped way: 1 along its points, -1 against them,
+## 0 both. Motorways and roundabouts are one-way unless tagged otherwise.
+static func oneway_of(tags: Dictionary) -> int:
+	var value := str(tags.get("oneway", "")).to_lower()
+	if value in ["yes", "true", "1"]: return 1
+	if value in ["-1", "reverse"]: return -1
+	if value != "": return 0
+	if str(tags.get("highway", "")) == "motorway" or str(tags.get("junction", "")) in ["roundabout", "circular"]: return 1
+	return 0
+
+
 static func polygon(points: Array) -> PackedVector2Array:
 	var result := PackedVector2Array()
 	for p in points: result.append(Vector2(p[0],p[1]))
@@ -116,6 +127,7 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 		if str(tags.get("width", "")).is_valid_float(): width = clampf(float(tags.width), 1.0, 35.0)
 		elif str(tags.get("lanes", "")).is_valid_float() and kind in ["primary", "secondary", "tertiary", "trunk", "motorway"]: width = float(tags.lanes) * 3.15
 		var pedestrian := kind in ["pedestrian", "footway", "path", "steps", "cycleway"]
+		var oneway := oneway_of(tags)
 		var material := "lightstone" if pedestrian else "road"
 		var mapped_area: bool = road.get("surface_geometry", "") == "area"
 		if road.has("surface_triangles") and road.surface_triangles.is_empty(): continue
@@ -138,6 +150,7 @@ static func build_roads(world: Node3D, snapshot: Dictionary) -> void:
 			var delta := b - a
 			if delta.length() < 0.08: continue
 			world.road_segments.append([a, b, width])
+			world.road_rules.append([kind, oneway])
 			var perpendicular := Vector2(-delta.y, delta.x).normalized() * width * 0.5
 			if not road.has("surface_triangles"):
 				_road_register_surface(batches, PackedVector2Array([a + perpendicular, b + perpendicular, b - perpendicular, a - perpendicular]), material, excavations, world.GROUND + 0.085, road_masks, paving)

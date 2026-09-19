@@ -3,6 +3,9 @@ extends CharacterBody3D
 ## by Quaternius; see assets/thirdparty/SOURCES.md.
 const Visual = preload("res://scripts/character_visual.gd")
 const HEIGHT := 1.8
+## After a hit the player ignores further damage this long, so several Nailong
+## striking together cannot wipe out a full bar in one frame.
+const HIT_PROTECTION := 0.6
 
 var enabled = false
 var yaw = 0.0
@@ -27,7 +30,7 @@ func take_damage(amount: float, origin: Vector3 = Vector3.ZERO) -> float:
 		return 0.0
 	var removed := minf(health, amount)
 	health = maxf(0.0, health - removed)
-	damage_cooldown = 0.6
+	damage_cooldown = HIT_PROTECTION
 	last_damage_origin = origin if origin.is_finite() else Vector3.ZERO
 	health_changed.emit(health, max_health)
 	if is_instance_valid(visual): visual.set_state("death" if health <= 0.0 else "hit", 1.1, true)

@@ -32,4 +32,5 @@ static func report(fraction: float, stage: String) -> void:
 	_listener.call(clampf(fraction, 0.0, 1.0), stage)
 	if DisplayServer.get_name() == "headless": return
 	DisplayServer.process_events()
-	RenderingServer.force_draw(false)
+	# Swap buffers: drawing without presenting leaves the window showing 0%.
+	RenderingServer.force_draw(true)

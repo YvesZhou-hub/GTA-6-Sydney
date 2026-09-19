@@ -9,6 +9,7 @@ signal notification(text: String)
 signal money_changed(value: int)
 signal activity_changed
 signal service_completed(result: Dictionary)
+signal job_completed(id: String)
 
 const STARTING_MONEY := 50000
 const ECONOMY_VERSION := 1
@@ -548,6 +549,7 @@ func _complete_job() -> void:
 	money += reward
 	lifetime_earnings += reward
 	completed_jobs[id] = int(completed_jobs.get(id, 0)) + 1
+	job_completed.emit(id)
 	for npc in npcs:
 		if npc.job_id == id:
 			npc.memories["jobs_completed"] = int(npc.memories.get("jobs_completed", 0)) + 1

@@ -659,7 +659,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	landmark_target_key=""
 	landmark_target_name=""
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
-	if survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
+	if is_instance_valid(survival) and survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
 	if is_instance_valid(campaign): campaign.start_new()
 	if is_instance_valid(districts): districts.reset()
 	if is_instance_valid(street): street.clear()
@@ -681,7 +681,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	yaw=0
 	pitch=-0.17
 	autosave=0
-	notify("$50,000 已到账 · 12 秒保护，奶龙正在接近\n左键反击 / Tab 武装载具 · H 急救 / 快修 · B 升级" if survival.enabled else "自由观光 · 奶龙刷新关闭 · B 可原地开启奶龙危机")
+	notify("$50,000 已到账 · 12 秒保护，奶龙正在接近\n左键反击 / Tab 武装载具 · H 急救 / 快修 · B 升级" if is_instance_valid(survival) and survival.enabled else "自由观光 · 奶龙刷新关闭 · B 可原地开启奶龙危机")
 	if save_now: save_world()
 
 func enable_encounters():

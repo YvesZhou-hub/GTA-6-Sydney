@@ -3,6 +3,9 @@ extends Control
 ## panel: arcs pointing at whoever just hit you, and a red rim when you are low.
 
 var feel: Node
+## What the last draw showed, so tests can see the screen rather than the state.
+var drawn_rim := 0.0
+var drawn_arcs: Array = []
 
 
 func _ready() -> void:
@@ -12,12 +15,17 @@ func _ready() -> void:
 
 
 func _draw() -> void:
+	drawn_rim = 0.0
+	drawn_arcs = []
 	if not is_instance_valid(feel) or not is_instance_valid(feel.game) or not feel.game.active: return
 	var ratio: float = feel.health_ratio()
-	if ratio < feel.VIGNETTE_AT and ratio > 0.0: _draw_rim(1.0 - ratio / feel.VIGNETTE_AT)
-	var facing: float = float(feel.game.yaw)
+	if ratio < feel.VIGNETTE_AT and ratio > 0.0:
+		drawn_rim = 1.0 - ratio / feel.VIGNETTE_AT
+		_draw_rim(drawn_rim)
 	for hit: Dictionary in feel.hits():
-		_draw_arc_marker(float(hit.heading) - facing, clampf(float(hit.time) / feel.HIT_SECONDS, 0.0, 1.0))
+		var angle: float = feel.screen_angle(hit.origin)
+		drawn_arcs.append(angle)
+		_draw_arc_marker(angle, clampf(float(hit.time) / feel.HIT_SECONDS, 0.0, 1.0))
 
 
 ## Bands of translucent red along the edges; cheaper than a full-screen shader

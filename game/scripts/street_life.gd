@@ -10,6 +10,8 @@ const CELL := 160.0
 const SPAWN_NEAR := 26.0
 const SPAWN_FAR := 115.0
 const RELEASE := 190.0
+## Mapped ways people walk on but cars never enter.
+const WALK_ONLY := ["pedestrian", "footway", "path", "steps", "cycleway"]
 ## Cars and pedestrians for each 街上人车 setting: 关闭 / 正常 / 热闹.
 const DENSITY := [[0, 0], [18, 26], [30, 44]]
 
@@ -36,14 +38,19 @@ func setup(host: Node) -> void:
 
 ## Mapped centrelines become a lookup grid plus a junction table, so a car can
 ## keep driving from one way into the next without searching the whole city.
+## Each entry is [a, b, width, open to cars, oneway] from the map's road rules.
 func _index_roads() -> void:
-	for segment: Array in game.world.road_segments:
+	var rules: Variant = game.world.get("road_rules")
+	if not rules is Array: rules = []
+	for i in game.world.road_segments.size():
+		var segment: Array = game.world.road_segments[i]
 		var a: Vector2 = segment[0]
 		var b: Vector2 = segment[1]
 		var width := float(segment[2])
 		if a.distance_to(b) < 6.0 or width < 6.0: continue
+		var rule: Array = rules[i] if i < rules.size() else ["road", 0]
 		var index := _segments.size()
-		_segments.append([a, b, width])
+		_segments.append([a, b, width, not str(rule[0]) in WALK_ONLY, int(rule[1])])
 		var cell := Vector2i(floori((a.x + b.x) * 0.5 / CELL), floori((a.y + b.y) * 0.5 / CELL))
 		if not _grid.has(cell): _grid[cell] = []
 		_grid[cell].append(index)
@@ -77,6 +84,7 @@ func _process(delta: float) -> void:
 	var has_threat: bool = threat.is_finite()
 	for car in cars.duplicate():
 		if not is_instance_valid(car): cars.erase(car); continue
+		_extend(car)
 		if not car.advance(delta, _ground) or car.global_position.distance_to(here) > RELEASE: _release(car, cars)
 	for person in pedestrians.duplicate():
 		if not is_instance_valid(person): pedestrians.erase(person); continue
@@ -133,34 +141,60 @@ func _nearby_segments(here: Vector3) -> Array:
 
 
 ## Picks a mapped segment in the spawn ring and follows junctions into a route.
-## Returns the centreline points and the road width, which sets lanes and paths.
-func _route_from(here: Vector3, length: int) -> Dictionary:
+## Cars only use ways open to traffic, and one-way streets only in their mapped
+## direction; people may walk any way, pedestrian streets included. The ring
+## check is made on the point where the car or person actually appears.
+## Returns the points, the road width (lanes and footpaths) and the segments.
+func _route_from(here: Vector3, length: int, for_cars: bool = true) -> Dictionary:
 	var candidates := _nearby_segments(here)
 	if candidates.is_empty(): return {}
 	for attempt in 12:
 		var index: int = candidates[_rng.randi_range(0, candidates.size() - 1)]
 		var segment: Array = _segments[index]
-		var middle := Vector3((segment[0].x + segment[1].x) * 0.5, road_y, (segment[0].y + segment[1].y) * 0.5)
-		var distance := middle.distance_to(here)
-		if distance < SPAWN_NEAR or distance > SPAWN_FAR: continue
-		var width := float(segment[2])
-		var forward := _rng.randf() < 0.5
-		var points: Array = [Vector3(segment[0].x, road_y, segment[0].y), Vector3(segment[1].x, road_y, segment[1].y)]
-		if not forward: points.reverse()
+		if for_cars and not bool(segment[3]): continue
+		var a := Vector3(segment[0].x, road_y, segment[0].y)
+		var b := Vector3(segment[1].x, road_y, segment[1].y)
+		var way: int = int(segment[4]) if for_cars else 0
+		var starts: Array = []
+		if way >= 0 and in_spawn_ring(a, here): starts.append([a, b])
+		if way <= 0 and in_spawn_ring(b, here): starts.append([b, a])
+		if starts.is_empty(): continue
+		var points: Array = starts[_rng.randi_range(0, starts.size() - 1)]
 		var used := {index: true}
+		var path: Array = [index]
 		for step in length:
-			var tail: Vector3 = points[points.size() - 1]
-			var before: Vector3 = points[points.size() - 2]
-			var next := _continue(tail, before, used)
+			var next := _continue(points[points.size() - 1], points[points.size() - 2], used, for_cars)
 			if next.is_empty(): break
 			points.append(next[0])
 			used[int(next[1])] = true
-		return {"points": points, "width": width} if points.size() >= 2 else {}
+			path.append(int(next[1]))
+		return {"points": points, "width": float(segment[2]), "segments": path}
 	return {}
 
 
+## Close enough to be part of the street around the player, far enough not to
+## appear out of nowhere beside them. Height is ignored.
+func in_spawn_ring(point: Vector3, here: Vector3) -> bool:
+	var distance := Vector2(point.x - here.x, point.z - here.z).length()
+	return distance >= SPAWN_NEAR and distance <= SPAWN_FAR
+
+
+## Keeps a car's route a few junctions ahead, so it drives on instead of
+## vanishing where its first route happened to end.
+func _extend(car: Node3D) -> void:
+	var route: Array = car.route
+	if route.size() < 2 or car.route_index + 3 < route.size(): return
+	var used := {}
+	for index: int in car.route_segments.slice(-8): used[index] = true
+	var next := _continue(route[route.size() - 1], route[route.size() - 2], used, true)
+	if next.is_empty(): return
+	route.append(next[0])
+	car.route_segments.append(int(next[1]))
+
+
 ## Prefers going straight on at a junction, like a car keeping to its road.
-func _continue(tail: Vector3, before: Vector3, used: Dictionary) -> Array:
+## Cars skip ways closed to them and one-way streets entered from the wrong end.
+func _continue(tail: Vector3, before: Vector3, used: Dictionary, for_cars: bool = true) -> Array:
 	var key := _joint_key(Vector2(tail.x, tail.z))
 	if not _joints.has(key): return []
 	var heading := (tail - before).normalized()
@@ -169,9 +203,12 @@ func _continue(tail: Vector3, before: Vector3, used: Dictionary) -> Array:
 	for index: int in _joints[key]:
 		if used.has(index): continue
 		var segment: Array = _segments[index]
+		if for_cars and not bool(segment[3]): continue
 		var a := Vector3(segment[0].x, road_y, segment[0].y)
 		var b := Vector3(segment[1].x, road_y, segment[1].y)
-		var far: Vector3 = b if a.distance_to(tail) < b.distance_to(tail) else a
+		var from_a := a.distance_to(tail) < b.distance_to(tail)
+		if for_cars and ((int(segment[4]) == 1 and not from_a) or (int(segment[4]) == -1 and from_a)): continue
+		var far: Vector3 = b if from_a else a
 		if far.distance_to(tail) < 1.0: continue
 		var score := heading.dot((far - tail).normalized())
 		if score > best_score:
@@ -181,12 +218,13 @@ func _continue(tail: Vector3, before: Vector3, used: Dictionary) -> Array:
 
 
 func _spawn_car(here: Vector3) -> Node3D:
-	var route := _route_from(here, 7)
+	var route := _route_from(here, 7, true)
 	if route.is_empty(): return null
 	var car: RigidBody3D = Car.new()
 	add_child(car)
 	car.setup(_rng.randi())
 	car.route = route.points
+	car.route_segments = route.segments
 	# Keep left, half a lane in from the kerb, however wide the mapped road is.
 	car.lane = clampf(float(route.width) * 0.24, 1.5, 3.4)
 	car.speed = 7.0 + _rng.randf() * 4.0
@@ -197,7 +235,7 @@ func _spawn_car(here: Vector3) -> Node3D:
 
 
 func _spawn_pedestrian(here: Vector3) -> Node3D:
-	var found := _route_from(here, 4)
+	var found := _route_from(here, 4, false)
 	if found.is_empty(): return null
 	var route: Array = found.points
 	var footpath := clampf(float(found.width) * 0.5 + 1.7, 4.0, 9.5)
