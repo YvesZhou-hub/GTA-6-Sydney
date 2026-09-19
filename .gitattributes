@@ -20,3 +20,5 @@ docs/evidence/v030-windows/windows-validation.json -text
 docs/evidence/v030-windows/Windows-SHA256SUMS.txt -text
 docs/evidence/v040-windows/windows-validation.json -text
 docs/evidence/v040-windows/Windows-SHA256SUMS.txt -text
+docs/evidence/v050-windows/windows-validation.json -text
+docs/evidence/v050-windows/Windows-SHA256SUMS.txt -text

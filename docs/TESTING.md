@@ -26,7 +26,11 @@
 - `nailong_enemy` 67 项（新增首领两段伤害、喷吐三连发、跳袭扑中与躲开）、`survival_loop` 60、`armory_progression` 64、`weapon_modules` 85、`field_service` 35、`combat_feedback` 53、`combat_curve`、`encounter_director`、`enemy_pursuit`、`flying_enemy` 全部通过，零脚本错误。
 - 已知与本版无关的历史失败：`world_road_probe`（退出码 8）、无头模式下的 `bridge_drive_test`，在未改动的代码上结果相同。
 
-Windows 包的实际构建与运行结果见 [Windows 验证记录](WINDOWS.md#windows-验证记录)。下方 v0.4.0 及更早的结果是历史数据，不计入 v0.5.0。
+## Windows 包
+
+同一提交由 GitHub 云端构建并实际解压运行：流程门禁 48/48、包检查 23/23，玩法断言 169 项全部通过（驾驶 32、生存 30、连续遭遇 82、武器 25），日志零错误；两平台 436 个游戏文件哈希一致。无界面模式，不含 Windows 画面或声音。[详细结果与校验和](WINDOWS.md#v050windows-最终-exe-验收通过)
+
+下方 v0.4.0 及更早的结果是历史数据，不计入 v0.5.0。
 
 ---
 
