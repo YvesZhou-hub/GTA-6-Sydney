@@ -2,6 +2,7 @@
   "about": "Regression checks run on every pull request by .github/workflows/pr-checks.yml and locally by tools/run_checks.py. Seconds are measured on an Apple M4 and only used to balance shards and set timeouts. A check passes when it exits 0, prints no ERROR, WARNING or FAIL line, and reports that it ran.",
   "source": {
     "survival_driving_test": 252,
+    "bridge_drive_test": 184,
     "road_handling_test": 252,
     "opera_interior_test": 252,
     "manly_landmark_test": 198,
@@ -30,9 +31,13 @@
     "vehicle_contact_test": 25,
     "helipad_clearance_test": 21,
     "landmark_alignment_test": 20,
+    "world_road_probe": 19,
+    "vehicle_spawn_test": 19,
+    "experience_flow_test": 18,
     "world_damage_probe": 18,
     "bridge_landmark_test": 18,
     "city_map_ui_test": 16,
+    "combat_vehicle_state_test": 10,
     "landmark_visual_check": 14,
     "attack_delivery_test": 13,
     "survival_vehicle_test": 6,
@@ -102,11 +107,6 @@
     "interactive": "INTERACTIVE_QA_READY"
   },
   "not_run": {
-    "bridge_drive_test": "Fails headless on main as well; needs a look of its own.",
-    "world_road_probe": "Exits 8 on main as well; a probe, not a pass/fail test.",
-    "vehicle_spawn_test": "Two failures on main as well.",
-    "experience_flow_test": "Eleven failures on main as well.",
-    "combat_vehicle_state_test": "Two speed-bound failures on main as well.",
     "survival_boost_test": "Runs longer than seven minutes.",
     "vehicle_boost_test": "Runs longer than seven minutes.",
     "vehicle_speed_test": "Runs longer than seven minutes.",

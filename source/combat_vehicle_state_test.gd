@@ -55,9 +55,13 @@ func run() -> void:
 	for i in 3:await physics_frame
 	verify("actual rigid-body integration restores fighter high speed",fcopy.linear_velocity.length()>550 and fcopy.position.z<297 and not fcopy._restore_motion_pending,{"speed_mps":fcopy.linear_velocity.length(),"position_z":fcopy.position.z})
 	live.velocity=[0.0,0.0,-2000.0];live.frozen=true;fcopy.apply_state(live)
-	verify("fighter corrupt excessive speed remains bounded at620mps",is_equal_approx(fcopy.linear_velocity.length(),620.0))
+	# The restore guard admits boosted motion (Shift triples top speed), so it is
+	# 3.25x top speed, never less than the old 620/240 m/s floors; above it is corrupt.
+	verify("fighter corrupt excessive speed is bounded at its restore guard",is_equal_approx(fcopy.linear_velocity.length(),fcopy.velocity_guard()) and fcopy.velocity_guard()>=maxf(620.0,fcopy.base_top_speed_kmh()/3.6*3.0),
+		{"speed_mps":fcopy.linear_velocity.length(),"guard_mps":fcopy.velocity_guard()})
 	var car=fresh("car","guard_car");var cs:Dictionary=car.get_state();cs.velocity=[0.0,0.0,-555.0];cs.health=37;cs.fuel=42;car.apply_state(cs)
-	verify("ordinary car keeps240mps guard and finite health fuel",is_equal_approx(car.linear_velocity.length(),240.0) and car.health==37 and car.fuel==42)
+	verify("ordinary car is bounded at its restore guard with finite health fuel",is_equal_approx(car.linear_velocity.length(),car.velocity_guard()) and car.velocity_guard()>=maxf(240.0,car.base_top_speed_kmh()/3.6*3.0) and car.velocity_guard()<555.0 and car.health==37 and car.fuel==42,
+		{"speed_mps":car.linear_velocity.length(),"guard_mps":car.velocity_guard()})
 	# Run the real physics callback to enforce persistent health/fuel behaviour.
 	fighter.health=1;fighter.fuel=2;fighter._physics_process(1.0/60.0)
 	verify("fighter health and fuel remain100on subsequent production ticks",fighter.health==100 and fighter.fuel==100)
