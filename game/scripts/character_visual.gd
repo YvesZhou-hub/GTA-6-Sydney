@@ -59,6 +59,8 @@ static func scene(key: String) -> PackedScene:
 func setup(key: String, height := 0.0) -> void:
 	model_key = key if MODELS.has(key) else "casual"
 	_model = scene(model_key).instantiate()
+	# The Quaternius characters face +Z; everything here walks towards -Z.
+	_model.rotation.y = PI
 	add_child(_model)
 	for found: AnimationPlayer in _model.find_children("*", "AnimationPlayer", true, false):
 		_player = found

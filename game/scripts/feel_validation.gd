@@ -112,15 +112,43 @@ func run(host: Node) -> void:
 		{"offset": snappedf(before_position.distance_to(camera.global_position), 0.001)})
 	feel.trauma = 0.0
 	feel._offset = Vector3.ZERO
-	game.player.health = 120.0
-	game.player.take_damage(24.0, game.player.global_position + Vector3(0, 0, -9))
-	await frames(2)
-	check("being hit shakes the view", feel.trauma > 0.0, {"trauma": snappedf(feel.trauma, 0.001)})
+	game.player.reset_health()
+	feel.hits().clear()
+	# Where the arc is drawn, read back from the overlay's last draw. In front of
+	# the camera must be the top of the ring, its right the right, behind the bottom.
+	var ahead: Vector3 = -camera.global_basis.z
+	ahead.y = 0.0
+	ahead = ahead.normalized()
+	var right: Vector3 = camera.global_basis.x
+	right.y = 0.0
+	right = right.normalized()
+	var arcs := {}
+	var hit_trauma := 0.0
+	for side: String in ["front", "right", "behind"]:
+		feel.hits().clear()
+		game.player.damage_cooldown = 0.0
+		var from: Vector3 = {"front": ahead, "right": right, "behind": -ahead}[side] * 9.0
+		game.player.take_damage(6.0, game.player.global_position + from)
+		# Read the shake at once: it decays with time, and slow frames would hide it.
+		hit_trauma = maxf(hit_trauma, feel.trauma)
+		await frames(3)
+		arcs[side] = snappedf(float(feel.overlay.drawn_arcs[0]), 0.01) if feel.overlay.drawn_arcs.size() == 1 else INF
+	check("being hit shakes the view", hit_trauma > 0.0, {"trauma": snappedf(hit_trauma, 0.001)})
 	check("an arc records where the hit came from", feel.hits().size() == 1, {"hits": feel.hits().size()})
-	check("the rim only appears when health is low", feel.health_ratio() > feel.VIGNETTE_AT)
-	game.player.health = 30.0
-	check("low health crosses the rim threshold", feel.health_ratio() < feel.VIGNETTE_AT, {"ratio": snappedf(feel.health_ratio(), 0.01)})
+	check("a hit from in front is drawn at the top of the ring", absf(float(arcs.front)) < 0.1, arcs)
+	check("a hit from the right is drawn on the right", absf(float(arcs.right) - PI * 0.5) < 0.1, arcs)
+	check("a hit from behind is drawn at the bottom", absf(absf(float(arcs.behind)) - PI) < 0.1, arcs)
+	check("the rim only appears when health is low", feel.health_ratio() > feel.VIGNETTE_AT and feel.overlay.drawn_rim == 0.0)
+	game.player.damage_cooldown = 0.0
+	game.player.take_damage(game.player.health - 30.0, game.player.global_position + ahead * 9.0)
+	await frames(3)
+	check("low health crosses the rim threshold and the rim is drawn", feel.health_ratio() < feel.VIGNETTE_AT and feel.overlay.drawn_rim > 0.0,
+		{"ratio": snappedf(feel.health_ratio(), 0.01), "rim": snappedf(feel.overlay.drawn_rim, 0.01)})
 	await capture("low-health")
+	game.player.heal(80.0)
+	await frames(3)
+	check("healing clears the rim from the screen", feel.health_ratio() > feel.VIGNETTE_AT and feel.overlay.drawn_rim == 0.0,
+		{"ratio": snappedf(feel.health_ratio(), 0.01), "rim": snappedf(feel.overlay.drawn_rim, 0.01)})
 	await get_tree().create_timer(feel.HIT_SECONDS + 0.4, true, false, true).timeout
 	check("arcs fade away on their own", feel.hits().is_empty())
 	check("shake settles back to nothing", feel.trauma < 0.05, {"trauma": snappedf(feel.trauma, 0.001)})

@@ -15,6 +15,9 @@ static var _scenes: Dictionary = {}
 var speed := 11.0
 var target_speed := 11.0
 var route: Array = []
+## The street_life segment behind each step of the route, so it can be extended
+## and checked against the road rules.
+var route_segments: Array = []
 var route_index := 0
 var progress := 0.0
 var lane := 2.2
@@ -41,6 +44,9 @@ func setup(model_index: int) -> void:
 	shape.position.y = BODY_SIZE.y * 0.5
 	add_child(shape)
 	_model = scene(MODELS[model_index % MODELS.size()]).instantiate()
+	# The Quaternius cars face +Z (front wheels at +1.2 m); the car drives
+	# towards -Z, where its obstacle probe looks.
+	_model.rotation.y = PI
 	add_child(_model)
 	_probe = RayCast3D.new()
 	_probe.target_position = Vector3(0, 0, -9.0)

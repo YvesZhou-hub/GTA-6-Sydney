@@ -37,7 +37,6 @@ var progress: Dictionary = {}
 var liberated: Dictionary = {}
 var centres: Dictionary = {}
 var panel: PanelContainer
-var _jobs_seen := 0
 var event: Dictionary = {}
 var _event_gap := 60.0
 var _title: Label
@@ -57,6 +56,7 @@ func setup(host: Node) -> void:
 		game.survival.enemy_defeated.connect(_on_enemy_defeated)
 	if is_instance_valid(game.life):
 		game.life.service_completed.connect(func(_result: Dictionary): add_work(game.player.global_position, TASK_VALUE, "城市体验"))
+		game.life.job_completed.connect(func(_id: String): add_work(game.player.global_position, TASK_VALUE, "完成工作"))
 	_build_panel()
 	reset()
 
@@ -64,7 +64,6 @@ func setup(host: Node) -> void:
 func reset() -> void:
 	progress.clear()
 	liberated.clear()
-	_jobs_seen = 0
 	end_event("")
 	_event_gap = 60.0
 	if is_instance_valid(panel): panel.visible = false
@@ -249,12 +248,6 @@ func _process(delta: float) -> void:
 	_clock += delta
 	if _clock < 0.25: return
 	_clock = 0.0
-	# Finished jobs count as clearing work; life has no per-job signal to listen to.
-	var jobs := 0
-	for id: Variant in game.life.completed_jobs: jobs += int(game.life.completed_jobs[id])
-	if jobs > _jobs_seen:
-		if _jobs_seen > 0: add_work(game.player.global_position, TASK_VALUE, "完成工作")
-		_jobs_seen = jobs
 	_tick_event(0.25)
 
 

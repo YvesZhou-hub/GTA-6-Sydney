@@ -118,7 +118,6 @@ func run(host: Node) -> void:
 		if FileAccess.file_exists(Store.ROOT + QA_WORLD + suffix): DirAccess.remove_absolute(Store.ROOT + QA_WORLD + suffix)
 	# Timed calls for help inside a district.
 	districts.reset()
-	districts._jobs_seen = 999
 	game.survival.enabled = false
 	game.player.global_position = districts.centre("quay") + Vector3(0, 1.0, 0)
 	await settle()
@@ -150,7 +149,6 @@ func run(host: Node) -> void:
 	check("kills at the marked point break the siege", districts.event.is_empty())
 	# Breaking the siege also cleared the district, so start from a clean city.
 	districts.reset()
-	districts._jobs_seen = 999
 	game.player.global_position = districts.centre("quay") + Vector3(0, 1.0, 0)
 	await settle()
 	check("a timed call can be started again after a reset", not districts.start_event("quay", "sweep").is_empty())
@@ -167,6 +165,23 @@ func run(host: Node) -> void:
 	districts.liberated["quay"] = true
 	check("a liberated district stops asking for help", districts.start_event("quay", "sweep").is_empty())
 	check("a locked district never asks", districts.start_event("manly", "sweep").is_empty())
+	districts.reset()
+
+	# Finishing real jobs in a brand-new world: the very first one counts.
+	game.life.completed_jobs.clear()
+	game.player.global_position = districts.centre("quay") + Vector3(0, 1.0, 0)
+	await settle()
+	var jobs_before: int = districts.done("quay")
+	game.life.start_job("photo")
+	game.life._complete_job()
+	await settle()
+	check("the first job in a new world counts toward the district", districts.done("quay") == jobs_before + districts.TASK_VALUE,
+		{"before": jobs_before, "after": districts.done("quay")})
+	game.life.start_job("photo")
+	game.life._complete_job()
+	await settle()
+	check("every later job counts once more", districts.done("quay") == jobs_before + districts.TASK_VALUE * 2,
+		{"before": jobs_before, "after": districts.done("quay")})
 	districts.reset()
 
 	for row: Dictionary in districts.summary(): clear_district(str(row.id))

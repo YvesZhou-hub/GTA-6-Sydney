@@ -8,18 +8,20 @@ const Model = preload("res://scripts/nailong_model.gd")
 const FontSet = preload("res://scripts/ui_fonts.gd")
 const Flight = preload("res://scripts/nailong_flight.gd")
 ## damage is the whole attack; burst splits it into that many strikes, gap apart,
-## and recover is the opening the player gets afterwards. Damage per cycle and
+## and recover is the opening the player gets afterwards. Every gap is longer
+## than the player's hit protection (harbor_player.HIT_PROTECTION), otherwise the
+## later strikes of a burst would land during it and do nothing. Damage per cycle and
 ## windup + cooldown per cycle match v0.4.0 for every type except the runner and
 ## winglet, which attack a little more often, so damage per second never drops.
 const TYPES := {
 	"roamer":{"label":"游荡奶龙","hp":80.0,"speed":2.8,"damage":8.0,"range":2.0,"cooldown":1.45,"windup":.7,"reward":120,"scale":1.0,"recover":.35},
 	"runner":{"label":"疾跑奶龙","hp":60.0,"speed":6.2,"damage":7.0,"range":2.0,"cooldown":1.05,"windup":.5,"reward":160,"scale":.85,"recover":.2},
 	"brute":{"label":"重装奶龙","hp":360.0,"speed":2.2,"damage":22.0,"range":3.0,"cooldown":1.95,"windup":1.55,"reward":480,"scale":1.45,"recover":.75},
-	"spitter":{"label":"喷吐奶龙","hp":110.0,"speed":2.7,"damage":12.0,"range":22.0,"cooldown":2.5,"windup":1.0,"reward":240,"scale":1.0,"burst":3,"burst_gap":.3,"recover":.5},
+	"spitter":{"label":"喷吐奶龙","hp":110.0,"speed":2.7,"damage":12.0,"range":22.0,"cooldown":2.5,"windup":1.0,"reward":240,"scale":1.0,"burst":3,"burst_gap":.7,"recover":.5},
 	"leaper":{"label":"跳袭奶龙","hp":120.0,"speed":3.4,"damage":14.0,"range":9.0,"cooldown":2.2,"windup":.8,"reward":260,"scale":1.05,"attack_mode":"leap","recover":.6},
-	"alpha":{"label":"首领奶龙","hp":700.0,"speed":3.5,"damage":28.0,"range":4.0,"cooldown":2.5,"windup":1.5,"reward":1200,"scale":1.9,"burst":2,"burst_gap":.45,"recover":.7},
+	"alpha":{"label":"首领奶龙","hp":700.0,"speed":3.5,"damage":28.0,"range":4.0,"cooldown":2.5,"windup":1.5,"reward":1200,"scale":1.9,"burst":2,"burst_gap":.7,"recover":.7},
 	"winglet":{"label":"轻翼奶龙","hp":95.0,"speed":12.0,"damage":10.0,"range":2.8,"cooldown":2.0,"windup":1.0,"reward":220,"scale":.95,"air":true,"attack_mode":"dive","cruise_height":7.0,"acceleration":18.0,"recover":.45},
-	"stormwing":{"label":"雷翼奶龙","hp":260.0,"speed":8.5,"damage":15.0,"range":32.0,"cooldown":3.4,"windup":1.6,"reward":520,"scale":1.35,"air":true,"attack_mode":"ranged","cruise_height":10.0,"acceleration":13.0,"burst":2,"burst_gap":.5,"recover":.8}
+	"stormwing":{"label":"雷翼奶龙","hp":260.0,"speed":8.5,"damage":15.0,"range":32.0,"cooldown":3.4,"windup":1.6,"reward":520,"scale":1.35,"air":true,"attack_mode":"ranged","cruise_height":10.0,"acceleration":13.0,"burst":2,"burst_gap":.7,"recover":.8}
 }
 var enemy_type: String = "roamer"
 var level: int = 1
@@ -378,7 +380,7 @@ func _physics_process(delta: float) -> void:
 				_burst_left = maxi(1,int(spec.get("burst",1)))-1
 				_strike(distance)
 				if dead: return
-				if _burst_left>0: _burst_gap = float(spec.get("burst_gap",.3))
+				if _burst_left>0: _burst_gap = float(spec.get("burst_gap",.7))
 				else: _recover_left = float(spec.get("recover",0.0))
 		elif _burst_gap>0.0:
 			state = "strike"
@@ -387,7 +389,7 @@ func _physics_process(delta: float) -> void:
 				_burst_left -= 1
 				_strike(distance)
 				if dead: return
-				if _burst_left>0: _burst_gap = float(spec.get("burst_gap",.3))
+				if _burst_left>0: _burst_gap = float(spec.get("burst_gap",.7))
 				else: _recover_left = float(spec.get("recover",0.0))
 		elif _recover_left>0.0:
 			# The opening after an attack: no new strike, no chasing.

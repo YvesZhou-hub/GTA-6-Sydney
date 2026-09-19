@@ -14,6 +14,7 @@ var _hits: Array = []
 var _rng := RandomNumberGenerator.new()
 var _offset := Vector3.ZERO
 var _last_health := 0.0
+var _rim_drawn := false
 
 
 func setup(host: Node) -> void:
@@ -41,20 +42,35 @@ func kick(strength: float) -> void:
 	shake(strength * 0.9)
 
 
-## Records where a hit came from, for the arc around the crosshair.
+## Records where a hit came from, for the arc around the crosshair. The world
+## point is kept, so the arc keeps pointing at it while the player turns.
 func hit_from(origin: Vector3) -> void:
 	if not origin.is_finite() or not is_instance_valid(game.player): return
 	var offset: Vector3 = origin - game.player.global_position
 	offset.y = 0.0
 	if offset.length_squared() < 0.01: return
-	_hits.append({"heading": atan2(offset.x, offset.z), "time": HIT_SECONDS})
+	_hits.append({"origin": origin, "time": HIT_SECONDS})
 	if _hits.size() > 6: _hits.pop_front()
+
+
+## Where on the ring around the crosshair a world point sits, as seen from the
+## current camera: 0 is straight up the screen (in front), PI/2 is the right.
+func screen_angle(origin: Vector3) -> float:
+	if not is_instance_valid(game.player) or not is_instance_valid(game.camera): return 0.0
+	var offset: Vector3 = origin - game.player.global_position
+	var right: Vector3 = game.camera.global_basis.x
+	var ahead: Vector3 = -game.camera.global_basis.z
+	right.y = 0.0
+	ahead.y = 0.0
+	return atan2(offset.dot(right.normalized()), offset.dot(ahead.normalized()))
 
 
 ## Healing and respawning also change health; only losing it is a hit.
 func _on_player_health(current: float, maximum: float) -> void:
 	var lost := _last_health - current
 	_last_health = current
+	# Healing has to clear the red rim too, not only damage drawing it.
+	if is_instance_valid(overlay): overlay.queue_redraw()
 	if not is_instance_valid(game.player) or lost <= 0.0: return
 	if current <= 0.0:
 		shake(0.75)
@@ -81,8 +97,10 @@ func _process(delta: float) -> void:
 		if hit.time <= 0.0:
 			_hits.erase(hit)
 			changed = true
-	if is_instance_valid(overlay) and (changed or trauma > 0.0 or not _hits.is_empty() or health_ratio() < VIGNETTE_AT):
+	var rim := health_ratio() < VIGNETTE_AT
+	if is_instance_valid(overlay) and (changed or trauma > 0.0 or not _hits.is_empty() or rim or rim != _rim_drawn):
 		overlay.queue_redraw()
+	_rim_drawn = rim
 
 
 ## Called after the follow camera has been placed, so the shake is an offset and

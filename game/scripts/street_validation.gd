@@ -69,6 +69,35 @@ func run(host: Node) -> void:
 		if road_distance(car.global_position) > 9.0: off_road += 1
 	check("traffic stays on mapped roads", off_road == 0, {"off_road": off_road, "cars": street.cars.size()})
 	check("nothing spawns beyond the release radius", far_cars == 0, {"far": far_cars})
+	# The mapped road rules, on the real city: how many ways they close or turn
+	# one-way, and whether every car on the street keeps to them.
+	var closed := 0
+	var one_way := 0
+	for segment: Array in street._segments:
+		if not bool(segment[3]): closed += 1
+		if int(segment[4]) != 0: one_way += 1
+	check("the city's pedestrian streets and one-way streets reach the traffic", closed > 50 and one_way > 500, {"pedestrian_ways": closed, "one_way": one_way, "indexed": street._segments.size()})
+	var broken := 0
+	var close_spawns := 0
+	for car in street.cars:
+		if not street.in_spawn_ring(car.route[0], george): close_spawns += 1
+		for step in car.route_segments.size():
+			var segment: Array = street._segments[int(car.route_segments[step])]
+			var start: Vector3 = car.route[step]
+			var from_a: bool = Vector2(start.x, start.z).distance_to(segment[0]) < Vector2(start.x, start.z).distance_to(segment[1])
+			if not bool(segment[3]) or (int(segment[4]) == 1 and not from_a) or (int(segment[4]) == -1 and from_a): broken += 1
+	check("every car keeps off pedestrian streets and drives one-way streets the right way", broken == 0, {"broken_steps": broken, "cars": street.cars.size()})
+	check("every car appeared in the spawn ring, not beside the player", close_spawns == 0, {"close": close_spawns})
+	var backwards := 0
+	for car in street.cars:
+		var index: int = mini(int(car.route_index) + 1, car.route.size() - 1)
+		var travel: Vector3 = car.route[index] - car.route[maxi(0, index - 1)]
+		travel.y = 0.0
+		if travel.length() < 0.1: continue
+		for mesh: MeshInstance3D in car.find_children("*Front*Wheel*", "MeshInstance3D", true, false):
+			if (mesh.global_transform * mesh.get_aabb().get_center() - car.global_position).dot(travel.normalized()) < 0.0: backwards += 1
+			break
+	check("every car faces the way it drives", backwards == 0, {"backwards": backwards, "cars": street.cars.size()})
 	var walk_off := 0
 	for person in street.pedestrians:
 		if road_distance(person.global_position) > 16.0: walk_off += 1

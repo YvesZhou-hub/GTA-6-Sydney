@@ -202,11 +202,11 @@ func run():
 	await steps(100)
 	check("boss heavy windup raises both arms with red full range warning",boss.state=="windup" and boss._warning.visible and boss._warning.scale.x>3.6 and boss._parts.arms[0].rotation.x< -1.4 and boss._parts.arms[1].rotation.x< -1.4 and boss._label.text.contains("重击蓄力") and boss_hits.is_empty(),boss.snapshot())
 	await steps(45)
-	# The boss now lands its attack as two strikes 0.45 s apart; the level-scaled
+	# The boss now lands its attack as two strikes 0.7 s apart; the level-scaled
 	# total is unchanged, so its damage per cycle still matches the type table.
 	check("boss first strike carries half of the level scaled damage",
 		boss_hits.size()==1 and is_equal_approx(float(boss_hits[0]),15.68),{"hits":boss_hits})
-	await steps(40)
+	await steps(50)
 	var boss_total: float = boss_hits.reduce(func(sum: float, value: float): return sum + value, 0.0)
 	check("the second strike completes the same total damage",
 		boss_hits.size()==2 and is_equal_approx(boss_total,31.36),{"hits":boss_hits,"state":boss.state})
@@ -217,11 +217,13 @@ func run():
 	spitter.set_target(goal(Vector3(420,0,-12.0)))
 	await steps(125)
 	var mid_volley: int = volley.size()
-	await steps(60)
+	await steps(100)
 	var volley_total: float = volley.reduce(func(sum: float, value: float): return sum + value, 0.0)
 	check("a spitter fires its attack as three spaced spits totalling the same damage",
 		volley.size()==3 and mid_volley>=1 and mid_volley<3 and is_equal_approx(volley_total,12.0) and is_equal_approx(float(volley[0]),4.0),
 		{"volley":volley,"spits_at_125_steps":mid_volley})
+	check("every burst gap outlasts the player's hit protection, so no strike is wasted",
+		["spitter","alpha","stormwing"].all(func(kind): return float(Enemy.TYPES[kind].get("burst_gap",0.7)) > preload("res://scripts/harbor_player.gd").HIT_PROTECTION + 0.05))
 	check("the volley is followed by a recovery opening", spitter._recover_left>0.0 or spitter.state in ["recover","chase"],{"state":spitter.state,"recover":spitter._recover_left})
 	# A leaper crouches, then jumps at where the target stood; it only hurts on landing.
 	var leaper = creature("leaper",Vector3(460,0,0))

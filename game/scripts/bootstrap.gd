@@ -31,7 +31,7 @@ func _ready() -> void:
 	column.add_child(progress)
 	await get_tree().process_frame
 	await get_tree().process_frame
-	if DisplayServer.get_name()!="headless": RenderingServer.force_draw(false)
+	if DisplayServer.get_name()!="headless": RenderingServer.force_draw(true)
 	var started:=Time.get_ticks_msec()
 	# The build reports between stages so the window keeps redrawing and handling events.
 	Loading.listen(progress.show_stage)
