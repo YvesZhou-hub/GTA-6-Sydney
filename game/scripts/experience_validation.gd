@@ -44,7 +44,10 @@ func run():
 		var button_found:Button
 		for child in game.modal_content.get_children():
 			if child is Button and child.text.begins_with(game.VEHICLE_NAMES[kind]):button_found=child;break
-		check("free garage action exists "+kind,is_instance_valid(button_found) and "免费" in button_found.text)
+		# Buttons show the shared durability; the panel itself says every copy is free,
+		# and the zero-balance check below proves no money is taken.
+		var free_note: bool = game.modal_content.get_children().any(func(child): return child is Label and "全部免费" in child.text)
+		check("free garage action exists "+kind,is_instance_valid(button_found) and free_note and "耐久" in button_found.text)
 		if not is_instance_valid(button_found):continue
 		button_found.pressed.emit()
 		var fresh=game.current_vehicle

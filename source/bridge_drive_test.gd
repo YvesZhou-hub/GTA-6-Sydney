@@ -6,6 +6,17 @@ var race_result: Dictionary={}
 
 func _initialize(): call_deferred("run")
 
+## What the campaign has paid so far. Boarding the car completes its first step
+## (坐进一辆载具, +$2,000) during the drive; that money is not the race's.
+func campaign_paid() -> int:
+	var campaign = game.get("campaign")
+	if not is_instance_valid(campaign): return 0
+	var total := 0
+	for row: Dictionary in campaign.STEPS:
+		if campaign.rewarded.has(str(row.id)): total += int(row.get("reward", 0))
+	if campaign.rewarded.has("chapter"): total += int(campaign.CHAPTER_REWARD)
+	return total
+
 func run():
 	print("BRIDGE_PHYSICS_BACKEND ",ProjectSettings.get_setting("physics/3d/physics_engine","DEFAULT")," enhanced_internal_edges=",ProjectSettings.get_setting("physics/jolt_physics_3d/simulation/use_enhanced_internal_edge_removal",false))
 	game=load("res://main.tscn").instantiate()
@@ -45,6 +56,7 @@ func drive(route:Array,reverse:bool):
 	game.enter_vehicle(car)
 	var money_before:int=game.life.money
 	var earnings_before:int=game.life.lifetime_earnings
+	var campaign_before:int=campaign_paid()
 	var completions_before:int=game.life.completed_jobs.get("race",0)
 	var race_stage=0
 	var race_checkpoints:Array=[]
@@ -117,8 +129,9 @@ func drive(route:Array,reverse:bool):
 		if car.health<99.0 or car.global_position.y<1.0: break
 	for action in ["forward","left","right","brake"]: Input.action_release(action)
 	if not reverse:
-		var money_delta:int=game.life.money-money_before
-		var earnings_delta:int=game.life.lifetime_earnings-earnings_before
+		var campaign_delta:int=campaign_paid()-campaign_before
+		var money_delta:int=game.life.money-money_before-campaign_delta
+		var earnings_delta:int=game.life.lifetime_earnings-earnings_before-campaign_delta
 		var completions_delta:int=int(game.life.completed_jobs.get("race",0))-completions_before
 		var completion_elapsed:float=float(race_state.get("elapsed",0.0))
 		var race_incidents:int=int(race_state.get("incidents",0))
@@ -128,10 +141,10 @@ func drive(route:Array,reverse:bool):
 		var sequential=true
 		for i in range(race_checkpoints.size()):
 			if int(race_checkpoints[i].checkpoint)!=i+1: sequential=false
-		race_result={"passed":race_started and sequential and race_checkpoints.size()==8 and completions_delta==1 and money_delta>race_base_reward and race_base_reward==2000 and full_clean_bonus and int(race_state.get("stage",0))==8 and earnings_delta==money_delta and game.life.active_job.is_empty(),"started":race_started,"expected_checkpoints":8,"observed_checkpoints":race_checkpoints,"completed_count_delta":completions_delta,"base_reward":race_base_reward,"money_delta":money_delta,"time_bonus_paid":paid_bonus,"time_bonus_expected":expected_bonus,"completion_elapsed_s":completion_elapsed,"race_incidents":race_incidents,"full_clean_bonus_paid":full_clean_bonus,"lifetime_earnings_delta":earnings_delta,"completion_text":game.life.status_text,"scope":"Production life job; checkpoints advanced only by main physics context while the real vehicle was driven with ordinary inputs"}
+		race_result={"passed":race_started and sequential and race_checkpoints.size()==8 and completions_delta==1 and money_delta>race_base_reward and race_base_reward==2000 and full_clean_bonus and int(race_state.get("stage",0))==8 and earnings_delta==money_delta and game.life.active_job.is_empty(),"started":race_started,"campaign_paid_during_race":campaign_delta,"expected_checkpoints":8,"observed_checkpoints":race_checkpoints,"completed_count_delta":completions_delta,"base_reward":race_base_reward,"money_delta":money_delta,"time_bonus_paid":paid_bonus,"time_bonus_expected":expected_bonus,"completion_elapsed_s":completion_elapsed,"race_incidents":race_incidents,"full_clean_bonus_paid":full_clean_bonus,"lifetime_earnings_delta":earnings_delta,"completion_text":game.life.status_text,"scope":"Production life job; checkpoints advanced only by main physics context while the real vehicle was driven with ordinary inputs"}
 		print("BRIDGE_RACE_COMPLETE ",JSON.stringify(race_result))
 	else:
-		var no_repeat=game.life.money==money_before and int(game.life.completed_jobs.get("race",0))==completions_before
+		var no_repeat=game.life.money-(campaign_paid()-campaign_before)==money_before and int(game.life.completed_jobs.get("race",0))==completions_before
 		race_result["return_drive_does_not_repeat_reward"]=no_repeat
 		race_result["passed"]=race_result.get("passed",false) and no_repeat
 	results.append({"direction":"north_to_south" if reverse else "south_to_north","passed":done and minimum_health>=99.0,"elapsed_s":time,"minimum_health":minimum_health,"maximum_lateral_error_m":maximum_deviation,"section":section,"end":[car.global_position.x,car.global_position.y,car.global_position.z],"impacts":impact_log})

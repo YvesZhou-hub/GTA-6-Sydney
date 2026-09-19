@@ -93,10 +93,15 @@ func run():
 	created[2].fuel=42.0
 	var expected_states:={}
 	for v in game.vehicles: expected_states[v.vehicle_id]=v.get_state()
+	# Copies share one durability ledger per vehicle type (docs/SURVIVAL_DESIGN.md,
+	# 同款耐久): a fresh copy must not undo damage. Fuel and position stay per copy.
+	var type_health:={}
+	for v in game.vehicles: type_health[v.kind]=minf(float(type_health.get(v.kind,100.0)),v.health)
 	var expected_occupied_id:String=game.current_vehicle.vehicle_id
 	var expected_target_id:String=game.spawn_target.vehicle_id
 	check(game.save_world(),"dynamic fleet save succeeds")
-	check(Store.read(test_id).get("version")==5,"fleet format5 protects new hoverboards from older app4")
+	# Format 5 introduced the protection; later formats keep it.
+	check(Store.read(test_id).get("version")==Store.VERSION and Store.VERSION>=5,"fleet saves in the current format (5+ protects new hoverboards from older app4)")
 	var legacy=Store.read(test_id)
 	legacy.version=2
 	var legacy_file=FileAccess.open(Store.ROOT+test_id+"_legacy.json",FileAccess.WRITE)
@@ -106,13 +111,21 @@ func run():
 	game.load_world(test_id)
 	check(game.vehicles.size()==expected_states.size(),"all dynamic copies survive actual load_world")
 	var state_match:=true
+	var mismatches:=[]
 	for v in game.vehicles:
 		if not expected_states.has(v.vehicle_id):
 			state_match=false
+			mismatches.append({"id":v.vehicle_id,"missing":true})
 			continue
 		var expected:Dictionary=expected_states[v.vehicle_id]
-		if v.global_position.distance_to(game.unvec(expected.position))>0.001 or absf(v.health-float(expected.health))>0.001 or absf(v.fuel-float(expected.fuel))>0.001: state_match=false
-	check(state_match,"copy identities, position, independent health and fuel restored")
+		var moved:float=v.global_position.distance_to(game.unvec(expected.position))
+		if moved>0.001 or absf(v.health-float(type_health[v.kind]))>0.001 or absf(v.fuel-float(expected.fuel))>0.001:
+			state_match=false
+			mismatches.append({"id":v.vehicle_id,"kind":v.kind,"moved_m":moved,"health":[v.health,type_health[v.kind]],"fuel":[v.fuel,expected.fuel]})
+	if not mismatches.is_empty(): print("VEHICLE_SPAWN_MISMATCH ",JSON.stringify(mismatches))
+	check(state_match,"copy identities, positions and own fuel restored; health follows the shared per-type ledger")
+	var damaged: Array = game.vehicles.filter(func(v): return v.kind==created[1].kind)
+	check(damaged.size()>1 and damaged.all(func(v): return is_equal_approx(v.health,73.0)),"damage to one copy is not undone by its same-type copies")
 	check(is_instance_valid(game.current_vehicle) and game.current_vehicle.vehicle_id==expected_occupied_id,"original occupied copy restored")
 	check(is_instance_valid(game.spawn_target) and game.spawn_target.vehicle_id==expected_target_id,"new-copy waypoint restored")
 	var saved_wing=null
