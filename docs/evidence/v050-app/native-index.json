@@ -1,0 +1,79 @@
+{
+  "app_identity": {
+    "executable_sha256": "89d6ea5cad865b87b432437dfa89862344d90b347e759bb0c591e3035bbe6bc5",
+    "pck_sha256": "1b3b6710c773d14e118893bf433f6198fed4c80c73697634b67750212d12f78b"
+  },
+  "archive_sha256": "d0a41b5526135e57c4544529745267dde0395791012146997115756881c7b73f",
+  "audio_driver": "Dummy for QA processes only; no audible output or CoreAudio hardware validation",
+  "suites": {
+    "survival": {
+      "checks": 40,
+      "passed": true,
+      "exit_code": 0,
+      "runtime_errors": [],
+      "screenshots": 4,
+      "app_identity_unchanged": true,
+      "report_sha256": "3780c321530fe3a3b0ed2b3dbef8c6d9ddaacfc56229149cfaf35b8aeea7dd30"
+    },
+    "encounter": {
+      "checks": 96,
+      "passed": true,
+      "exit_code": 0,
+      "runtime_errors": [],
+      "screenshots": 7,
+      "app_identity_unchanged": true,
+      "report_sha256": "4acc02992ba05eb38a39f59b5e2683156a9eb7e4e41f559cef7c6a1009d0b84e"
+    },
+    "arsenal": {
+      "checks": 35,
+      "passed": true,
+      "exit_code": 0,
+      "runtime_errors": [],
+      "screenshots": 5,
+      "app_identity_unchanged": true,
+      "report_sha256": "a7b5c423bdcdcf8effae4cbf679203e540c80c7b167cd61b1ebc76a341fb1fe4"
+    },
+    "campaign": {
+      "checks": 71,
+      "passed": true,
+      "runtime_errors": [],
+      "native": true,
+      "report_sha256": "d4dc90241b14a3eb6d0bdb27a8385de0866c5c61f71eb0a08556647f0fbf1d51",
+      "launch": "Harbourlife --audio-driver Dummy -- --campaign-qa"
+    },
+    "hud": {
+      "checks": 53,
+      "passed": true,
+      "runtime_errors": [],
+      "native": true,
+      "report_sha256": "98fad283075f5dab8b914962fb762e31e0b580709a352f0a358703dfefa2c3e1",
+      "launch": "Harbourlife --audio-driver Dummy -- --hud-qa"
+    },
+    "district": {
+      "checks": 40,
+      "passed": true,
+      "runtime_errors": [],
+      "native": true,
+      "report_sha256": "0871dddf1a04ea32b20206f8d662797f996c4a8231ac488ac86613fc3c98e7af",
+      "launch": "Harbourlife --audio-driver Dummy -- --district-qa"
+    },
+    "street": {
+      "checks": 13,
+      "passed": true,
+      "runtime_errors": [],
+      "native": true,
+      "report_sha256": "5d5fb42ea338f661b42559eea1e7716931a3e85cd179938704634a5ec1dd619e",
+      "launch": "Harbourlife --audio-driver Dummy -- --street-qa"
+    },
+    "feel": {
+      "checks": 17,
+      "passed": true,
+      "runtime_errors": [],
+      "native": true,
+      "report_sha256": "4778e819183d77895ad8da5af17c49d99f96ad2afdf1493366672f2254fe1d02",
+      "launch": "Harbourlife --audio-driver Dummy -- --feel-qa"
+    }
+  },
+  "total_checks": 365,
+  "all_passed": true
+}

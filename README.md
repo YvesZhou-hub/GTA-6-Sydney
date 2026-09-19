@@ -1,10 +1,16 @@
 # Harbourlife · 悉尼海港
 
-**v0.4.0-preview.1 · 街上有人有车、城市氛围与夺回港区**
+**v0.5.0-preview.1 · 战斗手感、奶龙新节奏与港区限时求助**
 
-[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.4.0-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.4.0-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases)
+[下载 Windows x86_64 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.5.0-preview.1/Harbourlife-Windows-x86_64.zip) · [下载 Mac 试玩包](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases/download/v0.5.0-preview.1/Harbourlife-macOS-arm64.zip) · [所有发布](https://github.com/YvesZhou-hub/GTA-6-Sydney/releases)
 
 免费的原生单人城市沙盒。从悉尼金斯福德机场起飞，飞向歌剧院和海港大桥；也可以步行、驾车、开船，探索 CBD、Darling Harbour、Darling Square 和 Manly。游戏离线运行，不需要账号或付费服务。
+
+**v0.5.0 新内容：** 战斗有了手感：开枪有后坐，挨打时镜头会抖、准星旁的红色弧线指出攻击方向，血量低时屏幕四边变红，打中的奶龙会被击退。奶龙出手分成「预警 → 出手 → 收招」三段，喷吐奶龙三连发、首领和雷翼奶龙连打两下，出手后的僵直是你还手的机会；新敌人**跳袭奶龙**会蹲下蓄力再扑过来，蓄力时走开就能躲。设置里新增**战斗难度**（轻松 / 标准 / 硬核）。港区会发出**限时求助**：3 分钟内打退围攻或巡查 3 个点，完成得 $3,000 和清剿进度。[本版改动](docs/FIXES_0.5.0.md) · [战斗手感与难度](docs/COMBAT_FEEL.md) · [港区限时求助](docs/DISTRICTS.md#限时求助事件)
+
+![v0.5.0 港区限时求助：港区卡片倒计时、地图标记与导航 · 最终 Mac App 画面](docs/screenshots/v050/district-event.png)
+
+![v0.5.0 低血量红框与受击方向弧线 · 最终 Mac App 画面](docs/screenshots/v050/combat-feedback.png)
 
 **v0.4.0 新内容：** 主角和居民换成带动作的人物模型；街上有按真实路网行驶的车流和走在人行道上的行人（可在设置里调节或关闭）；树、路灯、长椅和信号灯让街道不再空旷；市区地面是铺装、公园是草地，夜里路灯会亮。玩法上新增**夺回港区**：九个港区被奶龙占据，在港区里打奶龙或完成工作、城市体验就能把它夺回来，解放后街上的人车明显变多，并开放下一个港区。[本版改动](docs/FIXES_0.4.0.md) · [港区解放](docs/DISTRICTS.md) · [街上的车流与行人](docs/STREET_LIFE.md)
 
