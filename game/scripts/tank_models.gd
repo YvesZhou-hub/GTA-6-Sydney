@@ -22,7 +22,7 @@ static func _solid(parent:Node3D,points:Array[Vector3],faces:Array,mat:Material,
 		var n:Vector3=(b-a).cross(c-a).normalized()
 		if n.dot((a+b+c)/3.0-centre)<0:n=-n
 		for i in range(1,face.size()-1):_triangle(s,a,points[face[i]],points[face[i+1]],n)
-	var view:=MeshInstance3D.new();view.mesh=s.commit();view.material_override=mat;parent.add_child(view)
+	var view:=MeshInstance3D.new();view.mesh=load("res://scripts/vehicle_factory.gd").commit_mesh(s);view.material_override=mat;parent.add_child(view)
 	if collision:
 		var shape:=ConvexPolygonShape3D.new();shape.points=PackedVector3Array(points)
 		var col:=CollisionShape3D.new();col.shape=shape;parent.add_child(col)

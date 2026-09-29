@@ -4,10 +4,16 @@ extends RefCounted
 ## Cache contains authored build outputs only, never a live Vehicle or its state.
 static var _geometry_cache: Dictionary={}
 static var _build_profile: Dictionary={}
+const CpuMesh = preload("res://scripts/cpu_mesh.gd")
+static var _building := false
+static var _source_arrays: Dictionary = {}
+static var _primitive_arrays: Dictionary = {}
 const MODEL_METADATA := ["vehicle_model","boat_spec","boat_profile","model_reference","model_confidence","fighter_design","tank_ground_offset"]
 
 static func clear_geometry_cache() -> void:
 	_geometry_cache.clear()
+	_source_arrays.clear()
+	_primitive_arrays.clear()
 
 static func geometry_cache_stats() -> Dictionary:
 	return {"kinds":_geometry_cache.keys(),"entries":_geometry_cache.size(),"scope":"immutable merged mesh resources and authored node descriptions; no live vehicle state"}
@@ -27,12 +33,16 @@ static func material(color: Color, metal: float = 0.0, roughness: float = 0.45) 
 static func build(body: Node3D, kind: String) -> Dictionary:
 	var started:=Time.get_ticks_usec()
 	_build_profile={"kind":kind,"cache_hit":_geometry_cache.has(kind),"source_meshes":0,"source_surfaces":0,"merged_meshes":0,"temporary_mesh_commits":0,"extract_ms":0.0,"index_ms":0.0,"temporary_commit_ms":0.0,"append_ms":0.0,"final_commit_ms":0.0}
+	_build_profile.merge({"cpu_source_surfaces":0,"gpu_readback_surfaces":0,"primitive_cache_hits":0,"unmerged_unsupported_meshes":0})
 	if _geometry_cache.has(kind):
 		var cached_moving: Dictionary=_instantiate_geometry(body,_geometry_cache[kind])
 		_build_profile["instantiate_ms"]=(Time.get_ticks_usec()-started)/1000.0
 		_build_profile["total_ms"]=_build_profile.instantiate_ms
 		body.set_meta("vehicle_factory_profile",_build_profile.duplicate(true))
 		return cached_moving
+	_building = true
+	_source_arrays.clear()
+	_primitive_arrays.clear()
 	var mats := {
 		"white": material(Color("e6e9e1"), 0.35, 0.26),
 		"dark": material(Color("14212c"), 0.50, 0.32),
@@ -80,9 +90,36 @@ static func build(body: Node3D, kind: String) -> Dictionary:
 	if not recipe.is_empty(): _geometry_cache[kind]=recipe
 	_build_profile["cache_capture_ms"]=(Time.get_ticks_usec()-cache_started)/1000.0
 	_build_profile["cache_stored"]=not recipe.is_empty()
+	# Source copies are needed only during this cold build, not for the lifetime
+	# of the cached vehicle. Final immutable GPU meshes remain in the recipe.
+	_building = false
+	_source_arrays.clear()
+	_primitive_arrays.clear()
 	_build_profile["total_ms"]=(Time.get_ticks_usec()-started)/1000.0
 	body.set_meta("vehicle_factory_profile",_build_profile.duplicate(true))
 	return moving
+
+static func commit_mesh(surface: SurfaceTool) -> ArrayMesh:
+	var mesh := surface.commit()
+	if _building and mesh.get_surface_count() == 1:
+		var arrays := surface.commit_to_arrays()
+		# Godot supplies an arbitrary tangent when uploading a normal-only mesh.
+		# Reproduce it before batching so normal-mapped materials keep the same
+		# tangent basis even though we no longer read that uploaded mesh back.
+		if arrays[Mesh.ARRAY_NORMAL] != null and arrays[Mesh.ARRAY_TANGENT] == null:
+			var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+			var tangents := PackedFloat32Array()
+			tangents.resize(normals.size() * 4)
+			for i in normals.size():
+				var normal := normals[i]
+				var tangent := Vector3(normal.z, -normal.x, normal.y).cross(normal.normalized()).normalized()
+				tangents[i * 4] = tangent.x
+				tangents[i * 4 + 1] = tangent.y
+				tangents[i * 4 + 2] = tangent.z
+				tangents[i * 4 + 3] = 1.0
+			arrays[Mesh.ARRAY_TANGENT] = tangents
+		_source_arrays[mesh] = [arrays]
+	return mesh
 
 static func _geometry_nodes(parent: Node, found: Array[Node]) -> bool:
 	for child: Node in parent.get_children():
@@ -248,7 +285,7 @@ static func _hull(parent: Node3D, stations: Array, mat: Material, segments: int 
 				surface.add_vertex(points[idx])
 	surface.generate_normals()
 	var node := MeshInstance3D.new()
-	node.mesh = surface.commit()
+	node.mesh = commit_mesh(surface)
 	node.material_override = mat
 	parent.add_child(node)
 	if collision:
@@ -277,7 +314,7 @@ static func _prism(parent: Node3D, outline: Array[Vector3], thickness: float, ma
 			surface.add_vertex(points[idx])
 	surface.generate_normals()
 	var node := MeshInstance3D.new()
-	node.mesh = surface.commit()
+	node.mesh = commit_mesh(surface)
 	node.material_override = mat
 	parent.add_child(node)
 	if collision:
@@ -475,7 +512,7 @@ static func _airliner(b:Node3D,m:Dictionary,v:Dictionary) -> void:
 		fin_mesh.add_vertex(fin_points[idx])
 	fin_mesh.generate_normals()
 	var tail := MeshInstance3D.new()
-	tail.mesh = fin_mesh.commit()
+	tail.mesh = commit_mesh(fin_mesh)
 	tail.material_override = m.teal
 	b.add_child(tail)
 	var fc := CollisionShape3D.new()
@@ -499,44 +536,187 @@ static func _gather_static_meshes(node: Node3D, excluded: Array, result: Array) 
 		elif child is Node3D:
 			_gather_static_meshes(child, excluded, result)
 
+# Typed members keep append_array in place instead of copying growing packed
+# arrays out of a Dictionary on every source primitive.
+class MeshBatch:
+	extends RefCounted
+	var material: Material
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var tangents := PackedFloat32Array()
+	var colors := PackedColorArray()
+	var uv := PackedVector2Array()
+	var uv2 := PackedVector2Array()
+	var indices := PackedInt32Array()
+
+	func append(arrays: Array, pose: Transform3D) -> void:
+		var source: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+		var offset := vertices.size()
+		var count := source.size()
+		vertices.append_array(pose * source)
+		var directions := Transform3D(pose.basis, Vector3.ZERO)
+		# Match SurfaceTool.append_from: basis transform, without normalizing or
+		# inverse-transposing. This also preserves authored nonuniform scales.
+		if arrays[Mesh.ARRAY_NORMAL] != null:
+			if normals.is_empty(): normals.resize(offset)
+			normals.append_array(directions * arrays[Mesh.ARRAY_NORMAL])
+		elif not normals.is_empty(): normals.resize(offset + count)
+		if arrays[Mesh.ARRAY_TANGENT] != null:
+			if tangents.is_empty():
+				tangents.resize(offset * 4)
+				for i in offset: tangents[i * 4 + 3] = 1.0
+			var source_tangents: PackedFloat32Array = arrays[Mesh.ARRAY_TANGENT]
+			var at := tangents.size()
+			tangents.resize(at + count * 4)
+			for i in count:
+				var j := i * 4
+				var original := Vector3(source_tangents[j], source_tangents[j + 1], source_tangents[j + 2])
+				var tangent := pose.basis * original
+				tangents[at + j] = tangent.x
+				tangents[at + j + 1] = tangent.y
+				tangents[at + j + 2] = tangent.z
+				# Godot 4.7.2 SurfaceTool reconstructs and transforms the binormal,
+				# then derives handedness (including zero/degenerate tangents).
+				var normal: Vector3 = arrays[Mesh.ARRAY_NORMAL][i] if arrays[Mesh.ARRAY_NORMAL] != null else Vector3.ZERO
+				var binormal := pose.basis * (normal.cross(original).normalized() * source_tangents[j + 3])
+				tangents[at + j + 3] = -1.0 if binormal.dot((pose.basis * normal).cross(tangent)) < 0.0 else 1.0
+		elif not tangents.is_empty():
+			tangents.resize((offset + count) * 4)
+			for i in count: tangents[(offset + i) * 4 + 3] = 1.0
+		if arrays[Mesh.ARRAY_COLOR] != null:
+			if colors.is_empty() and offset > 0:
+				colors.resize(offset)
+				colors.fill(Color(0, 0, 0, 1))
+			colors.append_array(arrays[Mesh.ARRAY_COLOR])
+		elif not colors.is_empty():
+			var missing := PackedColorArray()
+			missing.resize(count)
+			missing.fill(Color(0, 0, 0, 1))
+			colors.append_array(missing)
+		if arrays[Mesh.ARRAY_TEX_UV] != null:
+			if uv.is_empty(): uv.resize(offset)
+			uv.append_array(arrays[Mesh.ARRAY_TEX_UV])
+		elif not uv.is_empty(): uv.resize(offset + count)
+		if arrays[Mesh.ARRAY_TEX_UV2] != null:
+			if uv2.is_empty(): uv2.resize(offset)
+			uv2.append_array(arrays[Mesh.ARRAY_TEX_UV2])
+		elif not uv2.is_empty(): uv2.resize(offset + count)
+		var source_indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+		var at := indices.size()
+		indices.resize(at + source_indices.size())
+		for i in source_indices.size(): indices[at + i] = source_indices[i] + offset
+
+	func commit() -> ArrayMesh:
+		var arrays := []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = vertices
+		if not normals.is_empty(): arrays[Mesh.ARRAY_NORMAL] = normals
+		if not tangents.is_empty(): arrays[Mesh.ARRAY_TANGENT] = tangents
+		if not colors.is_empty(): arrays[Mesh.ARRAY_COLOR] = colors
+		if not uv.is_empty(): arrays[Mesh.ARRAY_TEX_UV] = uv
+		if not uv2.is_empty(): arrays[Mesh.ARRAY_TEX_UV2] = uv2
+		arrays[Mesh.ARRAY_INDEX] = indices
+		var mesh := ArrayMesh.new()
+		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		return mesh
+
+static func _primitive_key(mesh: Mesh) -> String:
+	var values: Array = [mesh.get_class()]
+	var properties: Array = []
+	if mesh is CylinderMesh:
+		properties = ["top_radius", "bottom_radius", "height", "radial_segments", "rings", "cap_top", "cap_bottom"]
+	elif mesh is SphereMesh:
+		properties = ["radius", "height", "radial_segments", "rings", "is_hemisphere"]
+	else: return ""
+	# Read final parameters here: e.g. tank wheels change segments after creation.
+	properties.append_array(["flip_faces", "add_uv2", "uv2_padding"])
+	for property: String in properties: values.append(mesh.get(property))
+	return var_to_bytes(values).hex_encode()
+
+static func _mesh_arrays(mesh: Mesh) -> Array:
+	if _source_arrays.has(mesh):
+		var saved: Array = _source_arrays[mesh]
+		if saved.size() == mesh.get_surface_count() and saved.size() > 0 and saved[0][Mesh.ARRAY_VERTEX].size() == mesh.surface_get_array_len(0):
+			_build_profile["cpu_source_surfaces"] = int(_build_profile.get("cpu_source_surfaces", 0)) + saved.size()
+			return saved
+	if CpuMesh.has_cpu_arrays(mesh):
+		var arrays := CpuMesh.surface_arrays(mesh)
+		_build_profile["cpu_source_surfaces"] = int(_build_profile.get("cpu_source_surfaces", 0)) + arrays.size()
+		return arrays
+	var key := _primitive_key(mesh)
+	if not key.is_empty() and _primitive_arrays.has(key):
+		_build_profile["primitive_cache_hits"] = int(_build_profile.get("primitive_cache_hits", 0)) + 1
+		return _primitive_arrays[key]
+	var result: Array = []
+	for index in mesh.get_surface_count():
+		result.append(mesh.surface_get_arrays(index))
+		_build_profile["gpu_readback_surfaces"] = int(_build_profile.get("gpu_readback_surfaces", 0)) + 1
+	if not key.is_empty(): _primitive_arrays[key] = result
+	return result
+
+static func _can_merge_arrays(mesh: Mesh, surfaces: Array) -> bool:
+	if surfaces.is_empty() or surfaces.size() != mesh.get_surface_count() or (mesh is ArrayMesh and mesh.get_blend_shape_count() > 0): return false
+	for i in surfaces.size():
+		var arrays: Array = surfaces[i]
+		if arrays.size() != Mesh.ARRAY_MAX: return false
+		if mesh is ArrayMesh:
+			if mesh.surface_get_primitive_type(i) != Mesh.PRIMITIVE_TRIANGLES: return false
+		elif not (mesh is BoxMesh or mesh is CylinderMesh or mesh is SphereMesh): return false
+		if not arrays[Mesh.ARRAY_VERTEX] is PackedVector3Array or arrays[Mesh.ARRAY_VERTEX].is_empty(): return false
+		var count: int = arrays[Mesh.ARRAY_VERTEX].size()
+		for slot in [Mesh.ARRAY_CUSTOM0, Mesh.ARRAY_CUSTOM1, Mesh.ARRAY_CUSTOM2, Mesh.ARRAY_CUSTOM3, Mesh.ARRAY_BONES, Mesh.ARRAY_WEIGHTS]:
+			if arrays[slot] != null and not arrays[slot].is_empty(): return false
+		for slot in [Mesh.ARRAY_NORMAL, Mesh.ARRAY_COLOR, Mesh.ARRAY_TEX_UV, Mesh.ARRAY_TEX_UV2]:
+			if arrays[slot] != null and arrays[slot].size() != count: return false
+		if arrays[Mesh.ARRAY_TANGENT] != null and arrays[Mesh.ARRAY_TANGENT].size() != count * 4: return false
+	return true
+
 static func _merge_static_meshes(parent: Node3D, excluded: Array) -> void:
-	# Keep authored detail while batching static geometry to one draw per material.
+	# Use CPU arrays retained at authoring time and batch them directly. The old
+	# create_from -> commit -> append_from path read every surface back twice.
 	var meshes: Array = []
 	_gather_static_meshes(parent, excluded, meshes)
-	_build_profile["source_meshes"]=int(_build_profile.get("source_meshes",0))+meshes.size()
+	_build_profile["source_meshes"] = int(_build_profile.get("source_meshes", 0)) + meshes.size()
 	var groups: Dictionary = {}
-	for node in meshes:
-		var relative: Transform3D = parent.global_transform.affine_inverse()*node.global_transform
-		for surface_index in node.mesh.get_surface_count():
-			_build_profile["source_surfaces"]=int(_build_profile.get("source_surfaces",0))+1
+	for node: MeshInstance3D in meshes:
+		if node.mesh == null: continue
+		var sample := Time.get_ticks_usec()
+		var surfaces := _mesh_arrays(node.mesh)
+		_build_profile["extract_ms"] = float(_build_profile.get("extract_ms", 0.0)) + (Time.get_ticks_usec() - sample) / 1000.0
+		# Future skinned/custom/line meshes remain intact instead of losing data.
+		if not _can_merge_arrays(node.mesh, surfaces):
+			_build_profile["unmerged_unsupported_meshes"] = int(_build_profile.get("unmerged_unsupported_meshes", 0)) + 1
+			continue
+		var relative: Transform3D = parent.global_transform.affine_inverse() * node.global_transform
+		for surface_index in surfaces.size():
+			_build_profile["source_surfaces"] = int(_build_profile.get("source_surfaces", 0)) + 1
 			var mat: Material = node.material_override
 			if mat == null: mat = node.mesh.surface_get_material(surface_index)
 			var key: int = mat.get_instance_id() if mat else 0
 			if not groups.has(key):
-				var builder := SurfaceTool.new()
-				builder.begin(Mesh.PRIMITIVE_TRIANGLES)
-				groups[key] = {"surface":builder,"material":mat}
-			var indexed_source := SurfaceTool.new()
-			var sample:=Time.get_ticks_usec()
-			indexed_source.create_from(node.mesh,surface_index)
-			_build_profile["extract_ms"]=float(_build_profile.get("extract_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
-			sample=Time.get_ticks_usec()
-			indexed_source.index()
-			_build_profile["index_ms"]=float(_build_profile.get("index_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
-			sample=Time.get_ticks_usec()
-			var temporary_mesh:=indexed_source.commit()
-			_build_profile["temporary_commit_ms"]=float(_build_profile.get("temporary_commit_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
-			_build_profile["temporary_mesh_commits"]=int(_build_profile.get("temporary_mesh_commits",0))+1
-			sample=Time.get_ticks_usec()
-			groups[key].surface.append_from(temporary_mesh,0,relative)
-			_build_profile["append_ms"]=float(_build_profile.get("append_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
+				var batch := MeshBatch.new()
+				batch.material = mat
+				groups[key] = batch
+			var arrays: Array = surfaces[surface_index]
+			sample = Time.get_ticks_usec()
+			# Index unindexed authored triangles on the CPU, preserving all faces
+			# when combined with the already indexed primitives in this material.
+			if arrays[Mesh.ARRAY_INDEX] == null or arrays[Mesh.ARRAY_INDEX].is_empty():
+				var indexed := SurfaceTool.new()
+				indexed.create_from_arrays(arrays, Mesh.PRIMITIVE_TRIANGLES)
+				indexed.index()
+				arrays = indexed.commit_to_arrays()
+			_build_profile["index_ms"] = float(_build_profile.get("index_ms", 0.0)) + (Time.get_ticks_usec() - sample) / 1000.0
+			sample = Time.get_ticks_usec()
+			groups[key].append(arrays, relative)
+			_build_profile["append_ms"] = float(_build_profile.get("append_ms", 0.0)) + (Time.get_ticks_usec() - sample) / 1000.0
 		node.queue_free()
 	for key in groups:
 		var combined := MeshInstance3D.new()
-		var sample:=Time.get_ticks_usec()
-		combined.mesh = groups[key].surface.commit()
-		_build_profile["final_commit_ms"]=float(_build_profile.get("final_commit_ms",0.0))+(Time.get_ticks_usec()-sample)/1000.0
-		_build_profile["merged_meshes"]=int(_build_profile.get("merged_meshes",0))+1
+		var sample := Time.get_ticks_usec()
+		combined.mesh = groups[key].commit()
+		_build_profile["final_commit_ms"] = float(_build_profile.get("final_commit_ms", 0.0)) + (Time.get_ticks_usec() - sample) / 1000.0
+		_build_profile["merged_meshes"] = int(_build_profile.get("merged_meshes", 0)) + 1
 		combined.material_override = groups[key].material
 		parent.add_child(combined)
 

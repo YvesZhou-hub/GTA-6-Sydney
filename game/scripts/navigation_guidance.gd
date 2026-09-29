@@ -10,6 +10,40 @@ var target_name := ""
 var arrival_radius := 25.0
 var arrival_height := 12.0
 var panel_style:StyleBoxFlat
+var touch_safe := Rect2()
+var touch_obstacles: Array[Rect2] = []
+
+func set_touch_layout(safe: Rect2, obstacles: Array[Rect2]) -> void:
+	touch_safe = safe
+	touch_obstacles = obstacles
+
+## Keep the whole destination label, not only its arrow, clear of touch controls.
+static func clear_target_rect(preferred: Rect2, safe: Rect2, obstacles: Array[Rect2]) -> Rect2:
+	var area := safe.grow(-8)
+	var dimensions := preferred.size.min(area.size)
+	var at := preferred.position.clamp(area.position, area.end-dimensions)
+	var xs: Array[float] = [at.x,area.position.x,area.end.x-dimensions.x]
+	var ys: Array[float] = [at.y,area.position.y,area.end.y-dimensions.y]
+	for obstacle in obstacles:
+		xs.append(clampf(obstacle.position.x-dimensions.x-8,area.position.x,area.end.x-dimensions.x))
+		xs.append(clampf(obstacle.end.x+8,area.position.x,area.end.x-dimensions.x))
+		ys.append(clampf(obstacle.position.y-dimensions.y-8,area.position.y,area.end.y-dimensions.y))
+		ys.append(clampf(obstacle.end.y+8,area.position.y,area.end.y-dimensions.y))
+	var best := Rect2(at,dimensions)
+	var score := INF
+	for x in xs:
+		for y in ys:
+			var candidate := Rect2(Vector2(x,y),dimensions)
+			var blocked := false
+			for obstacle in obstacles:
+				if candidate.intersects(obstacle.grow(4)):
+					blocked = true
+					break
+			if blocked: continue
+			var distance := candidate.position.distance_squared_to(at)
+			if distance < score: best=candidate;score=distance
+	# A fully covered screen should suppress the pin, never paint over a button.
+	return best if is_finite(score) else Rect2()
 
 func _ready():
 	mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -72,6 +106,11 @@ func _draw():
 	var direction:=Vector2(local.x,-local.y)
 	if behind and absf(direction.x)<0.5: direction=Vector2.DOWN
 	var at:=edge_position(direction,bounds) if outside else projected
+	var mobile_rect := Rect2()
+	if touch_safe.has_area():
+		mobile_rect = clear_target_rect(Rect2(at-Vector2(120,16),Vector2(240,98)),touch_safe,touch_obstacles)
+		if not mobile_rect.has_area(): return
+		at = mobile_rect.position+Vector2(mobile_rect.size.x*.5,16)
 	var color:=Color("a6ffe8") if has_arrived(player_position,target_position,arrival_radius,arrival_height) else Color("ffe38a")
 	if outside:
 		var normal:Vector2=(at-bounds.get_center()).normalized()
@@ -82,11 +121,19 @@ func _draw():
 		draw_line(at+Vector2(0,13),at+Vector2(0,35),color,2,true)
 	var distance_text:="%.2f km"%(distance/1000) if distance>=1000 else "%.0f m"%distance
 	var short_name:=target_name.left(25)+( "…" if target_name.length()>25 else "")
-	var text_x:=clampf(at.x-80,28,size.x-300)
+	var text_x:=mobile_rect.position.x if mobile_rect.has_area() else clampf(at.x-80,28,size.x-300)
+	if mobile_rect.has_area():
+		var font := get_theme_default_font()
+		while short_name.length()>1 and font.get_string_size(short_name,HORIZONTAL_ALIGNMENT_LEFT,-1,16).x>mobile_rect.size.x:
+			short_name=short_name.left(short_name.length()-2)+"…"
 	_text(Vector2(text_x,at.y+54),short_name,color,16)
 	var status:=distance_text+(" · 后方" if behind else "")
 	if has_arrived(player_position,target_position,arrival_radius,arrival_height): status=GameSettings.keys("已到达 · {experiences} 附近体验")
 	elif distance<arrival_radius and absf(delta_position.y)>arrival_height: status+=" · 目的地在地面"
+	if mobile_rect.has_area():
+		var font := get_theme_default_font()
+		while status.length()>1 and font.get_string_size(status,HORIZONTAL_ALIGNMENT_LEFT,-1,14).x>mobile_rect.size.x:
+			status=status.left(status.length()-2)+"…"
 	_text(Vector2(text_x,at.y+76),status,Color("edf3df"),14)
 
 func _panel() -> StyleBoxFlat:

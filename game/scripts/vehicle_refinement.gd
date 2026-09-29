@@ -37,7 +37,7 @@ class Panels:
 			var node := MeshInstance3D.new()
 			node.name = "Sculpted_" + key
 			if key in smooth_keys: surfaces[key].generate_normals()
-			node.mesh = surfaces[key].commit()
+			node.mesh = load("res://scripts/vehicle_factory.gd").commit_mesh(surfaces[key])
 			node.material_override = materials[key]
 			parent.add_child(node)
 

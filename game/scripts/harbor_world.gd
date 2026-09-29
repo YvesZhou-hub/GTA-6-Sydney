@@ -66,6 +66,8 @@ const FACADE = preload("res://assets/world_facade.gdshader")
 const WATER = preload("res://shaders/water.gdshader")
 const LANDCOVER = preload("res://shaders/world_landcover.gdshader")
 var _box_meshes: Dictionary={}
+## Desktop entries are surface Arrays. Mobile may store lossless compressed
+## records instead; _mesh_arrays_for_cell decodes only for one rebuild call.
 var _mesh_array_cache: Dictionary={}
 var facade_stream:RefCounted
 var material_roles=preload("res://scripts/material_roles.gd").new()
@@ -436,6 +438,114 @@ func _build_structure_batches() -> void:
 					_mesh_array_cache[child.mesh]=CpuMesh.surface_arrays(child.mesh)
 	for cell in _visual_cells: _rebuild_visual_cell(cell,is_instance_valid(facade_stream))
 	CpuMesh.release()
+	_compact_mobile_source_meshes()
+	_compress_mobile_source_arrays()
+
+func _mobile_memory_enabled() -> bool:
+	return bool(get_meta("mobile_memory_test",false)) or preload("res://scripts/mobile_profile.gd").is_mobile()
+
+## Source meshes are hidden after cell batching, but their uploaded surfaces
+## otherwise remain beside both the CPU rebuild arrays and the combined mesh.
+## Give each private source a lightweight cache handle. Never clear the original
+## resource: a model library or a later vehicle may still legitimately own it.
+func _compact_mobile_source_meshes() -> Dictionary:
+	if not _mobile_memory_enabled(): return {"enabled":false,"replaced":0}
+	var hidden:Dictionary={}
+	for part:Dictionary in structures.values():
+		for child in part.node.get_children():
+			if child is MeshInstance3D and not child.visible: hidden[child.get_instance_id()]=true
+	var protected:Dictionary={}
+	var scan_root:Node=get_tree().root if is_inside_tree() else self
+	for view in scan_root.find_children("*","MeshInstance3D",true,false):
+		if view.mesh!=null and not hidden.has(view.get_instance_id()): protected[view.mesh]=true
+	for view in scan_root.find_children("*","MultiMeshInstance3D",true,false):
+		if view.multimesh!=null and view.multimesh.mesh!=null: protected[view.multimesh.mesh]=true
+	var replacements:Dictionary={}
+	for source in _mesh_array_cache.keys():
+		if not source is ArrayMesh or source.get_surface_count()==0 or protected.has(source): continue
+		var handle:=ArrayMesh.new()
+		handle.custom_aabb=source.get_aabb()
+		_mesh_array_cache[handle]=_mesh_array_cache[source]
+		replacements[source]=handle
+	for part:Dictionary in structures.values():
+		for child in part.node.get_children():
+			if child is MeshInstance3D and hidden.has(child.get_instance_id()) and replacements.has(child.mesh):
+				child.mesh=replacements[child.mesh]
+	for source in replacements: _mesh_array_cache.erase(source)
+	var result:={"enabled":true,"replaced":replacements.size(),"shared_meshes_preserved":protected.size(),"cpu_cache_entries":_mesh_array_cache.size()}
+	set_meta("mobile_source_mesh_compaction",result)
+	return result
+
+func _encode_source_arrays(arrays: Array) -> Dictionary:
+	var raw := var_to_bytes(arrays)
+	var packed := raw.compress(FileAccess.COMPRESSION_ZSTD)
+	# Check the codec before dropping the only CPU copy of a compacted mesh.
+	# Unprofitable or failed compression leaves the original Array resident.
+	if packed.is_empty() or packed.size() >= raw.size() or packed.decompress(raw.size(),FileAccess.COMPRESSION_ZSTD) != raw:
+		return {"raw_size":raw.size()}
+	return {"packed":packed,"raw_size":raw.size(),"surfaces":arrays.size()}
+
+func _compress_mobile_source_arrays() -> Dictionary:
+	if not _mobile_memory_enabled(): return {"enabled":false}
+	var started := Time.get_ticks_usec()
+	var result := {"enabled":true,"codec":"zstd","compressed_entries":0,"retained_entries":0,"raw_serialized_bytes":0,"compressed_bytes":0,"saved_serialized_bytes":0,"largest_entry_bytes":0}
+	# Iterate keys, never values(): a values snapshot would retain all original
+	# Arrays until the end and defeat incremental memory release during startup.
+	for source in _mesh_array_cache.keys():
+		if not _mesh_array_cache[source] is Array: continue
+		var encoded := _encode_source_arrays(_mesh_array_cache[source])
+		var raw_size := int(encoded.get("raw_size",0))
+		result.raw_serialized_bytes += raw_size
+		result.largest_entry_bytes = maxi(result.largest_entry_bytes,raw_size)
+		if not encoded.has("packed"):
+			result.retained_entries += 1
+			continue
+		result.compressed_entries += 1
+		result.compressed_bytes += encoded.packed.size()
+		result.saved_serialized_bytes += raw_size-encoded.packed.size()
+		_mesh_array_cache[source] = encoded
+	result["compression_ms"] = (Time.get_ticks_usec()-started)/1000.0
+	# These byte totals describe serialized payloads, not physical footprint;
+	# shared PackedArray buffers and the allocator can change the actual saving.
+	set_meta("mobile_source_array_compression",result)
+	return result
+
+func _mesh_arrays_for_cell(source: Mesh, decoded: Dictionary) -> Variant:
+	if decoded.has(source): return decoded[source]
+	if not _mesh_array_cache.has(source): _mesh_array_cache[source] = CpuMesh.surface_arrays(source)
+	var cached: Variant = _mesh_array_cache[source]
+	if cached is Array: return cached
+	var raw: PackedByteArray = cached.packed.decompress(cached.raw_size,FileAccess.COMPRESSION_ZSTD)
+	var arrays: Variant = bytes_to_var(raw) if raw.size() == cached.raw_size else null
+	var valid: bool = arrays is Array and arrays.size() == cached.surfaces
+	if valid:
+		for surface in arrays:
+			if not surface is Array or surface.size() != Mesh.ARRAY_MAX or not surface[Mesh.ARRAY_VERTEX] is PackedVector3Array or not surface[Mesh.ARRAY_NORMAL] is PackedVector3Array:
+				valid = false
+				break
+	if not valid:
+		push_error("Unable to restore compressed source geometry; retaining the existing visual cell")
+		return null
+	decoded[source] = arrays
+	return arrays
+
+## Call after the occupancy cache and map geometry have consumed the full city
+## source. Replace the outer dictionary so aliases/streamed facade recipes stay
+## intact; counts, trees and provenance remain available to QA and capture tools.
+func release_mobile_map_snapshot() -> Dictionary:
+	if not _mobile_memory_enabled(): return {"enabled":false,"released":false}
+	if not _ready_complete or not has_meta("map_migration_cache"):
+		return {"enabled":true,"released":false,"reason":"world_or_occupancy_not_ready"}
+	var retained:=map_snapshot.duplicate()
+	var removed:Array=[]
+	for field in ["buildings","roads","land","places","parks","beaches","excavations"]:
+		if retained.has(field):
+			retained.erase(field)
+			removed.append(field)
+	map_snapshot=retained
+	var result:={"enabled":true,"released":not removed.is_empty(),"removed_fields":removed,"retained_fields":map_snapshot.keys()}
+	set_meta("mobile_map_snapshot_release",result)
+	return result
 
 ## One material's geometry inside a visual cell, gathered as indexed arrays.
 class CellGroup:
@@ -449,8 +559,10 @@ class CellGroup:
 func _rebuild_visual_cell(cell: Vector2i,base_only:=false,detail_only:=false) -> void:
 	if is_instance_valid(facade_stream) and not detail_only:
 		base_only=true
-		facade_stream.invalidate(cell)
 	var groups: Dictionary = {false:{},true:{}}
+	# Repeated mullions/steps can share one mesh hundreds of times in a cell.
+	# Decode each source once here, and release it when this rebuild returns.
+	var decoded_sources: Dictionary = {}
 	var data: Dictionary = _visual_cells[cell]
 	for id in data["ids"]:
 		if destroyed.has(id): continue
@@ -467,9 +579,12 @@ func _rebuild_visual_cell(cell: Vector2i,base_only:=false,detail_only:=false) ->
 			var near:bool=child.get_meta("near_facade",false)
 			if (base_only and near) or (detail_only and not near):continue
 			var group:=_cell_group(groups[near],child.material_override)
-			if not _mesh_array_cache.has(child.mesh): _mesh_array_cache[child.mesh]=CpuMesh.surface_arrays(child.mesh)
-			for arrays in _mesh_array_cache[child.mesh]:
+			var source_arrays: Variant = _mesh_arrays_for_cell(child.mesh,decoded_sources)
+			if source_arrays == null: return
+			for arrays in source_arrays:
 				_append_cached_arrays(group,arrays,node.transform*child.transform)
+	# Retain both the previous base mesh and streamed detail if decoding failed.
+	if is_instance_valid(facade_stream) and not detail_only: facade_stream.invalidate(cell)
 	for near in [false,true]:
 		if (base_only and near) or (detail_only and not near):continue
 		var mesh := ArrayMesh.new()
@@ -1291,20 +1406,26 @@ func apply_state(data: Dictionary) -> void:
 		rubble.append(body)
 
 func repair_all() -> void:
-	for id in structures:
+	if destroyed.is_empty() and partial_damage.is_empty() and rubble.is_empty(): return
+	var affected:=destroyed.duplicate()
+	affected.merge(partial_damage,true)
+	var bridge_changed:=false
+	for id in affected:
+		if not structures.has(id): continue
 		var node: Node3D = structures[id]["node"]
-		if destroyed.has(id) or partial_damage.has(id): _mark_visual_dirty(id)
+		_mark_visual_dirty(id)
 		node.visible = true
 		for child in node.get_children():
 			if child is CollisionShape3D: child.set_deferred("disabled",false)
-			elif child is MeshInstance3D and (destroyed.has(id) or partial_damage.has(id)):
+			elif child is MeshInstance3D:
 				child.material_override = child.get_meta("intact_material",materials.get(structures[id]["color"],materials["sandstone"]))
+		if str(id).begins_with("bridge/deck/") or str(id).begins_with("bridge/ramp/"): bridge_changed=true
 	destroyed.clear()
 	partial_damage.clear()
 	for node in rubble:
 		if is_instance_valid(node): node.queue_free()
 	rubble.clear()
-	_queue_bridge_collision_refresh()
+	if bridge_changed: _queue_bridge_collision_refresh()
 
 func stream_view(position:Vector3,velocity:Vector3,delta:float):
 	if is_instance_valid(facade_stream):facade_stream.tick(position,velocity,delta)

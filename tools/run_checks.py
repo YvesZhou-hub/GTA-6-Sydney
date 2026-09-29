@@ -39,7 +39,7 @@ def plan(manifest, group):
         markers = manifest.get("qa_marker", {})
         for name, seconds in manifest["qa"].items():
             # A fixed frame step keeps game time independent of how fast the machine is.
-            checks.append((name, "qa", seconds, ["--fixed-fps", "60", *extra.get(name, []), "--", f"--{name}-qa"],
+            checks.append((name, "qa", seconds, ["--fixed-fps", "60", *extra.get(name, []), "--", f"--{name}-qa", *manifest.get("qa_user_args", {}).get(name, [])],
                            markers.get(name, "COMPLETE")))
     return checks
 

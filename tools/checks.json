@@ -86,7 +86,16 @@
     "box_geometry_equivalence_test": 1,
     "boat_model_test": 1,
     "arsenal_test": 1,
-    "airport_test": 1
+    "airport_test": 1,
+    "mobile_profile_test": 2,
+    "mobile_controls_test": 2,
+    "mobile_map_test": 2,
+    "mobile_ui_test": 2,
+    "mobile_world_memory_test": 3,
+    "mobile_lifecycle_test": 1,
+    "mobile_hud_updates_test": 2,
+    "vehicle_factory_cpu_merge_test": 5,
+    "character_attachment_scale_test": 1
   },
   "qa": {
     "driving": 267,
@@ -98,13 +107,22 @@
     "district": 25,
     "feel": 17,
     "combat": 15,
-    "interactive": 15
+    "interactive": 15,
+    "mobile": 25
   },
   "qa_args": {
-    "interactive": ["--quit-after", "15"]
+    "interactive": [
+      "--quit-after",
+      "15"
+    ],
+    "mobile": [
+      "--rendering-method",
+      "mobile"
+    ]
   },
   "qa_marker": {
-    "interactive": "INTERACTIVE_QA_READY"
+    "interactive": "INTERACTIVE_QA_READY",
+    "mobile": "MOBILE_QA_COMPLETE"
   },
   "not_run": {
     "survival_boost_test": "Runs longer than seven minutes.",
@@ -120,6 +138,12 @@
     "encounter_baseline": "Measurement probe with no pass or fail.",
     "world_physics_probe": "Measurement probe with no pass or fail.",
     "world_winding_check": "Measurement probe with no pass or fail.",
-    "hud (QA mode)": "Needs real window frames; run natively before a release."
+    "hud (QA mode)": "Needs real window frames; run natively before a release.",
+    "mobile-stress (QA mode)": "Requires a physical iOS device and real wall-clock frames; run before an iOS release."
+  },
+  "qa_user_args": {
+    "mobile": [
+      "--mobile-preview"
+    ]
   }
 }

@@ -83,6 +83,10 @@ jobs:
       - name: Run ${{ matrix.group }} checks, shard ${{ matrix.shard }}
         run: python3 tools/run_checks.py --group ${{ matrix.group }} --shard ${{ matrix.shard }} --summary "$GITHUB_STEP_SUMMARY"
 
+      - name: Check iOS export guards without building or installing
+        if: matrix.group == 'source' && matrix.shard == '1/4'
+        run: python3 source/ios_build_test.py
+
       - name: Keep the logs of a failed run
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
