@@ -2,6 +2,8 @@ extends SceneTree
 ## Small UI fixture; no production 3D city construction and no player saves.
 const MAP=preload("res://scripts/harbor_map.gd")
 const MINI=preload("res://scripts/harbor_minimap.gd")
+const GUIDANCE=preload("res://scripts/navigation_guidance.gd")
+const TOUCH=preload("res://scripts/mobile_controls.gd")
 var checks:Array=[]
 var selected:Array=[]
 var pins:Array=[]
@@ -18,6 +20,20 @@ func mouse(view,point:Vector2,pressed:bool):
 	event.pressed=pressed
 	view._gui_input(event)
 func run():
+	var controls:=TOUCH.new()
+	for dimensions in [Vector2(932,430),Vector2(667,375),Vector2(1180,820)]:
+		var safe:=Rect2(Vector2(24,0),dimensions-Vector2(48,20))
+		controls.layout_for(dimensions,safe)
+		controls._kind="helicopter"
+		var obstacles:Array[Rect2]=controls.reserved_rects()
+		var clear:=true
+		for direction in [Vector2.LEFT,Vector2.RIGHT,Vector2.UP,Vector2.DOWN]:
+			var edge:=GUIDANCE.edge_position(direction,safe)
+			var label:=GUIDANCE.clear_target_rect(Rect2(edge-Vector2(120,16),Vector2(240,98)),safe,obstacles)
+			clear=clear and label.has_area() and safe.encloses(label)
+			for obstacle in obstacles: clear=clear and not label.intersects(obstacle)
+		check("mobile edge destination remains readable and clear of flight controls "+str(dimensions),clear)
+	controls.free()
 	root.size=Vector2i(1200,850)
 	var map=MAP.new()
 	map.size=Vector2(820,735)

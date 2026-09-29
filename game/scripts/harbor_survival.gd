@@ -666,6 +666,11 @@ func rescue(was_defeated: bool = false) -> void:
 	game.close_panel()
 	game.notify("救援完成 · 扣除 $%d，保留升级与金币余额\n生命恢复 · 12 秒保护 · 奶龙继续接近，准备反击" % cost)
 
+## The mobile crosshair needs only this flag every frame, not enemy searches,
+## formatted encounter text, fleet status or the complete HUD snapshot.
+func aim_hit_active() -> bool:
+	return _hit_flash > 0.0
+
 func hud_state() -> Dictionary:
 	var vehicle = game.current_vehicle
 	var phase := "保护" if grace > 0.0 else ("夜间增援" if night_factor() > 0.5 else "持续接战")

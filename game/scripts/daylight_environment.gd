@@ -88,7 +88,9 @@ static func apply_quality(env: Environment, quality: int, options: Dictionary = 
 	var profile := quality_profile(quality)
 	var forward_plus := RenderingServer.get_current_rendering_method()=="forward_plus"
 	for key in profile:
-		if key in ["quality","name"]: continue
+		# Capability-gated flags are set below. Enabling then clearing them still
+		# issues unsupported-renderer calls (and warnings) on iOS Mobile.
+		if key in ["quality","name","ssao_enabled","ssr_enabled"]: continue
 		env.set(key, profile[key])
 	# Only setup or explicit quality-menu changes call this; no frame-time toggles.
 	env.ssao_enabled = profile.ssao_enabled and forward_plus

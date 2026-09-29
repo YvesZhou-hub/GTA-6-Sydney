@@ -32,7 +32,7 @@ static func _quad(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3,d:Vector3):
 static func _surface(parent:Node3D,st:SurfaceTool,mat:Material,name:String,collision:=false) -> MeshInstance3D:
 	var instance:=MeshInstance3D.new()
 	instance.name=name
-	instance.mesh=st.commit()
+	instance.mesh=load("res://scripts/vehicle_factory.gd").commit_mesh(st)
 	instance.material_override=mat
 	parent.add_child(instance)
 	if collision:

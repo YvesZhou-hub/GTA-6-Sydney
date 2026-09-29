@@ -5,6 +5,10 @@ const City=preload("res://scripts/city_map.gd")
 const MAX_RESIDENT:=64
 const LOAD_RADIUS:=560.0
 const RETAIN_RADIUS:=780.0
+var max_resident:=MAX_RESIDENT
+var load_radius:=LOAD_RADIUS
+var retain_radius:=RETAIN_RADIUS
+var visible_distance:=320.0
 var world:Node3D
 var resident:Dictionary={}
 var wanted:Array[Vector2i]=[]
@@ -21,6 +25,24 @@ var last_upload_ms:=0.0
 var max_upload_ms:=0.0
 
 func setup(owner_world:Node3D): world=owner_world
+
+## Changes only the existing near-facade cache. Base shells and collisions stay
+## resident and keep their IDs; desktop callers retain the original defaults.
+func configure_budget(limit:int,radius:float,retention:float,visibility:float=320.0) -> void:
+	max_resident=clampi(limit,1,MAX_RESIDENT)
+	load_radius=clampf(radius if is_finite(radius) else LOAD_RADIUS,160.0,LOAD_RADIUS)
+	retain_radius=clampf(retention if is_finite(retention) else RETAIN_RADIUS,load_radius,RETAIN_RADIUS)
+	visible_distance=clampf(visibility if is_finite(visibility) else 320.0,80.0,320.0)
+	# Immediate shrink also covers a profile applied after a worker was started.
+	while resident.size()>max_resident: _evict(resident.keys().back())
+	if wanted.size()>max_resident: wanted.resize(max_resident)
+	_clock=0.0
+	if not is_instance_valid(world):return
+	for cell:Vector2i in world._visual_cells:
+		var detail:Variant=world._visual_cells[cell].get("detail")
+		if is_instance_valid(detail):
+			detail.visibility_range_end=visible_distance
+			detail.visibility_range_end_margin=minf(60.0,visible_distance*.15)
 
 func _produce(parts:Array) -> void:
 	var started:=Time.get_ticks_usec()
@@ -46,12 +68,12 @@ func _commit_ready():
 	if not _task_cell in wanted: return
 	# Retained cells can fill the budget between the 150 ms planning ticks.
 	# Reserve a slot before uploading, including rapid direction changes.
-	if not resident.has(_task_cell) and resident.size()>=MAX_RESIDENT:
+	if not resident.has(_task_cell) and resident.size()>=max_resident:
 		for cell:Vector2i in resident.keys():
 			if not cell in wanted:
 				_evict(cell)
 				break
-		if resident.size()>=MAX_RESIDENT:return
+		if resident.size()>=max_resident:return
 	var started:=Time.get_ticks_usec()
 	for item:Dictionary in output:
 		if not world.structures.has(item.id): continue
@@ -89,13 +111,13 @@ func tick(position:Vector3,velocity:Vector3,delta:float):
 			if not data.get("has_near",false):continue
 			var center:Vector2=(Vector2(cell)+Vector2(.5,.5))*160
 			var distance:=minf(center.distance_to(here),center.distance_to(ahead))
-			if distance<LOAD_RADIUS and position.y<900: candidates.append({"cell":cell,"distance":distance})
+			if distance<load_radius and position.y<900: candidates.append({"cell":cell,"distance":distance})
 		candidates.sort_custom(func(a,b): return a.distance<b.distance)
 		wanted.clear()
-		for item:Dictionary in candidates.slice(0,MAX_RESIDENT): wanted.append(item.cell)
+		for item:Dictionary in candidates.slice(0,max_resident): wanted.append(item.cell)
 		for cell:Vector2i in resident.keys():
 			var center:Vector2=(Vector2(cell)+Vector2(.5,.5))*160
-			if (not cell in wanted and (center.distance_to(here)>RETAIN_RADIUS or resident.size()>=MAX_RESIDENT)) or position.y>=900:
+			if (not cell in wanted and (center.distance_to(here)>retain_radius or resident.size()>=max_resident)) or position.y>=900:
 				_evict(cell)
 	_commit_ready()
 	if _task>=0: return
@@ -116,7 +138,7 @@ func tick(position:Vector3,velocity:Vector3,delta:float):
 func stats() -> Dictionary:
 	var cells:Array=[]
 	for cell:Vector2i in resident: cells.append([cell.x,cell.y])
-	return {"enabled":true,"scope":"near_facade_only","cell_size_m":160,"resident":resident.size(),"limit":MAX_RESIDENT,"resident_cells":cells,"wanted":wanted.size(),"pending_worker":int(_task>=0),"builds":builds,"evictions":evictions,"last_worker_ms":last_worker_ms,"last_upload_ms":last_upload_ms,"max_upload_ms":max_upload_ms,"base_collision_resident":true}
+	return {"enabled":true,"scope":"near_facade_only","cell_size_m":160,"resident":resident.size(),"limit":max_resident,"load_radius_m":load_radius,"retain_radius_m":retain_radius,"visible_distance_m":visible_distance,"resident_cells":cells,"wanted":wanted.size(),"pending_worker":int(_task>=0),"builds":builds,"evictions":evictions,"last_worker_ms":last_worker_ms,"last_upload_ms":last_upload_ms,"max_upload_ms":max_upload_ms,"base_collision_resident":true}
 
 func close():
 	if _task>=0:

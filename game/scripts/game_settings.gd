@@ -1,7 +1,8 @@
 extends RefCounted
 ## Player settings that PC and Steam Deck players expect: display, frame pacing,
 ## upscaling, anti-aliasing, field of view, controller input and key rebinding.
-## main.gd owns the menu; this file owns defaults, validation and application.
+## main.gd owns the menu; this file owns persistence, defaults and application.
+const MobileProfile = preload("res://scripts/mobile_profile.gd")
 
 const DEFAULTS := {
 	"volume": 0.65, "sensitivity": 0.003, "quality": 1, "invert": false, "large_text": false,
@@ -35,8 +36,34 @@ static var default_keys: Dictionary = {}
 static var _hint_cache: Dictionary = {}
 
 
-static func sanitized(data: Dictionary) -> Dictionary:
-	var result := DEFAULTS.duplicate(true)
+static func storage_path(profile: Dictionary = {}, directory: String = "user://") -> String:
+	var selected := MobileProfile.current() if profile.is_empty() else profile
+	# Preview uses the mobile file too: capped display values must never leak into
+	# the desktop preferences. Do not migrate or rewrite the existing desktop file.
+	return directory.path_join("settings_mobile.json" if bool(selected.enabled) else "settings.json")
+
+
+static func load_preferences(profile: Dictionary = {}, directory: String = "user://") -> Dictionary:
+	var path := storage_path(profile,directory)
+	if FileAccess.file_exists(path):
+		var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if data is Dictionary: return sanitized(data,profile)
+	return defaults_for_platform(profile)
+
+
+static func save_preferences(data: Dictionary, profile: Dictionary = {}, directory: String = "user://") -> Error:
+	var file := FileAccess.open(storage_path(profile,directory),FileAccess.WRITE)
+	if file == null: return FileAccess.get_open_error()
+	file.store_string(JSON.stringify(data))
+	return file.get_error()
+
+
+static func defaults_for_platform(profile: Dictionary = {}) -> Dictionary:
+	return MobileProfile.constrain_settings(DEFAULTS,profile)
+
+
+static func sanitized(data: Dictionary, profile: Dictionary = {}) -> Dictionary:
+	var result := defaults_for_platform(profile)
 	for key: String in data:
 		if not result.has(key): continue
 		var fallback: Variant = DEFAULTS[key]
@@ -59,30 +86,38 @@ static func sanitized(data: Dictionary) -> Dictionary:
 	var bindings := {}
 	for group: Array in REBINDABLE:
 		var codes: Variant = result.bindings.get(group[1][0], null)
-		if codes is Array and not codes.is_empty() and codes.all(func(code: Variant): return typeof(code) in [TYPE_INT, TYPE_FLOAT] and int(code) > 0):
+		if codes is Array and not codes.is_empty() and codes.all(func(code: Variant): return typeof(code) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(code)) and int(code) > 0):
 			bindings[group[1][0]] = codes.map(func(code: Variant): return int(code))
 	result.bindings = bindings
-	return result
+	return MobileProfile.constrain_settings(result,profile)
 
 
-static func apply_display(settings: Dictionary, viewport: Viewport, camera: Camera3D, allow_window_changes: bool) -> void:
-	if allow_window_changes and DisplayServer.get_name() != "headless":
+static func apply_display(settings: Dictionary, viewport: Viewport, camera: Camera3D, allow_window_changes: bool, profile: Dictionary = {}) -> void:
+	var selected := MobileProfile.current() if profile.is_empty() else profile
+	var effective := sanitized(settings,selected)
+	var mobile := bool(selected.enabled)
+	# iOS owns its single fullscreen surface. Never call desktop window APIs there.
+	if allow_window_changes and not mobile and DisplayServer.get_name() != "headless":
 		var mode := DisplayServer.WINDOW_MODE_WINDOWED
-		if settings.window_mode == "borderless": mode = DisplayServer.WINDOW_MODE_FULLSCREEN
-		elif settings.window_mode == "fullscreen": mode = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+		if effective.window_mode == "borderless": mode = DisplayServer.WINDOW_MODE_FULLSCREEN
+		elif effective.window_mode == "fullscreen": mode = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 		if DisplayServer.window_get_mode() != mode: DisplayServer.window_set_mode(mode)
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if settings.vsync else DisplayServer.VSYNC_DISABLED)
-		Engine.max_fps = int(settings.max_fps)
-	var scale := float(settings.render_scale)
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if effective.vsync else DisplayServer.VSYNC_DISABLED)
+	# The mobile cap must work even when no desktop window changes are allowed.
+	# Preserve uncapped desktop QA, which sizes/paces its own measurements.
+	if mobile or allow_window_changes: Engine.max_fps = int(effective.max_fps)
+	var scale := float(effective.render_scale)
 	viewport.scaling_3d_scale = scale
-	# FSR 1 is a spatial upscaler. FSR 2 needs motion-vector pipelines that took
-	# 8-68 s to compile across the city on first use, freezing the game mid-menu.
-	viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if scale < 0.999 else Viewport.SCALING_3D_MODE_BILINEAR
-	var aa: String = settings.antialiasing
+	# Godot 4.7.2's Mobile renderer rejects FSR1 as well as temporal upscalers.
+	# Desktop preview uses the same bilinear mobile path for reproducible QA.
+	var renderer := RenderingServer.get_current_rendering_method()
+	viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if scale < 0.999 and not mobile and renderer == "forward_plus" else Viewport.SCALING_3D_MODE_BILINEAR
+	var aa: String = effective.antialiasing
+	if aa == "taa" and renderer != "forward_plus": aa = "msaa2"
 	viewport.msaa_3d = Viewport.MSAA_4X if aa == "msaa4" else Viewport.MSAA_2X if aa == "msaa2" else Viewport.MSAA_DISABLED
-	viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA if aa == "fxaa" else Viewport.SCREEN_SPACE_AA_DISABLED
+	viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA if aa == "fxaa" and renderer != "gl_compatibility" else Viewport.SCREEN_SPACE_AA_DISABLED
 	viewport.use_taa = aa == "taa"
-	if is_instance_valid(camera): camera.fov = float(settings.fov)
+	if is_instance_valid(camera): camera.fov = float(effective.fov)
 
 
 static func _key(physical: Key) -> InputEventKey:
@@ -164,10 +199,10 @@ static func key_label(action: String) -> String:
 	return " / ".join(names) if not names.is_empty() else "未绑定"
 
 
-## Name of a physical key on the player's keyboard layout. Headless runs have no
-## layout and the lookup logs an error per call, so they use the physical name.
+## Native mobile and headless display servers do not expose desktop keyboard
+## layout translation; use the physical name without calling unsupported APIs.
 static func _key_name(physical: Key) -> String:
-	if DisplayServer.get_name() == "headless": return OS.get_keycode_string(physical)
+	if DisplayServer.get_name() == "headless" or MobileProfile.current().native_mobile: return OS.get_keycode_string(physical)
 	var keycode := DisplayServer.keyboard_get_keycode_from_physical(physical)
 	return OS.get_keycode_string(keycode if keycode != KEY_NONE else physical)
 

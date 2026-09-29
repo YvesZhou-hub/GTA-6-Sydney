@@ -6,8 +6,11 @@ const Sound = preload("res://scripts/harbor_audio.gd")
 const AudioShutdown = preload("res://scripts/audio_shutdown.gd")
 const VehicleSpawn = preload("res://scripts/vehicle_spawn.gd")
 const GameSettings = preload("res://scripts/game_settings.gd")
+const MobileProfile = preload("res://scripts/mobile_profile.gd")
 const Loading = preload("res://scripts/loading_progress.gd")
 const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 重装坦克","fighter":"Aster F-27 · 战斗机"}
+var mobile_controls: Control
+var mobile_ui: Node
 var survival: Node3D
 var survival_hud: Control
 var campaign: Node
@@ -65,7 +68,7 @@ var world_id=""
 var world_name=""
 var mode="life"
 var owned: Array=["car"]
-var settings:Dictionary=GameSettings.DEFAULTS.duplicate(true)
+var settings:Dictionary=GameSettings.defaults_for_platform()
 var _using_pad:=false
 var _pad_focus_pending:=false
 var _rebind_group:=""
@@ -84,6 +87,7 @@ var qa_frame_stamp=0
 var qa_manual_render=false
 var qa_render_count=0
 var quitting=false
+var _background_saved := false
 var menu_orbit=0.0
 var photo_cooldown=0.0
 var save_indicator: Label
@@ -116,10 +120,14 @@ func _ready():
 		set_process_unhandled_input(false)
 		add_child(load("res://scripts/mobility_validation.gd").new())
 		return
-	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa","--district-qa","--feel-qa"].any(func(flag):return flag in arguments)
+	qa_running=qa_running or "--script" in OS.get_cmdline_args() or ["--qa","--flight-qa","--experience-qa","--air-vehicle-qa","--visual-qa","--interactive-qa","--navigation-input-qa","--precinct-qa","--opera-access-qa","--combat-qa","--diagnostics-qa","--daylight-qa","--trailer-capture","--ui-font-qa","--driving-qa","--survival-qa","--encounter-qa","--arsenal-qa","--hud-qa","--campaign-qa","--street-qa","--district-qa","--feel-qa","--mobile-qa","--mobile-stress-qa"].any(func(flag):return flag in arguments)
 	get_tree().auto_accept_quit=false
 	setup_input()
 	setup_environment()
+	if MobileProfile.is_mobile():
+		# Apply GPU budgets before any city geometry can be rendered during loading.
+		GameSettings.apply_display(settings,get_viewport(),null,false)
+		MobileProfile.apply_runtime(self)
 	world=load("res://scripts/harbor_world.gd").new()
 	world.set_meta("stream_details",true)
 	add_child(world)
@@ -175,6 +183,9 @@ func _ready():
 	survival_hud=load("res://scripts/survival_hud.gd").new()
 	hud.add_child(survival_hud)
 	survival_hud.setup(self)
+	if MobileProfile.is_mobile():
+		survival_hud.set_process(false)
+		survival_hud.hide()
 	survival_hud.service_requested.connect(survival_menu)
 	survival_hud.heal_requested.connect(func(): notify(survival.quick_recovery()))
 	combat_feel=load("res://scripts/combat_feel.gd").new()
@@ -216,8 +227,22 @@ func _ready():
 	canvas.add_child(diagnostics_panel)
 	diagnostics_panel.setup(self,diagnostics)
 	diagnostics_panel.toggled.connect(_diagnostics_toggled)
+	mobile_controls=load("res://scripts/mobile_controls.gd").new()
+	canvas.add_child(mobile_controls)
+	mobile_controls.setup(self)
+	mobile_ui=load("res://scripts/mobile_ui.gd").new()
+	add_child(mobile_ui)
+	mobile_ui.setup(self)
 	main_menu()
-	if "--qa" in OS.get_cmdline_user_args():
+	if "--mobile-stress-qa" in arguments:
+		var validation=load("res://scripts/mobile_stress_validation.gd").new()
+		add_child(validation)
+		validation.call_deferred("run",self)
+	elif "--mobile-qa" in arguments:
+		var validation=load("res://scripts/mobile_validation.gd").new()
+		add_child(validation)
+		validation.call_deferred("run",self)
+	elif "--qa" in OS.get_cmdline_user_args():
 		qa_running=true
 		qa_manual_render=DisplayServer.get_name()!="headless"
 		if qa_manual_render:
@@ -465,7 +490,11 @@ func setup_ui():
 	map_panel.position=Vector2(595,75)
 	map_panel.size=Vector2(780,735)
 	map_panel.visible=false
+	# The 3D world has already parsed this 19 MB file; do not parse a second
+	# 226 MB Dictionary for the map during the mobile startup peak.
+	map_panel.map_source=world.map_snapshot
 	root.add_child(map_panel)
+	if MobileProfile.is_mobile(): world.release_mobile_map_snapshot()
 	map_panel.anchors=world.anchors
 	map_panel.landmarks=landmark_catalog()
 	if is_instance_valid(airport):map_panel.runway_data=airport.runway_data
@@ -528,6 +557,7 @@ func label(text_value:String,sz:int=18,col:Color=Color("f1efdf")) -> Label:
 	return l
 
 func clear_panel(title:String,subtitle:String=""):
+	if is_instance_valid(mobile_controls): mobile_controls.release_all()
 	if is_instance_valid(survival): survival.trigger_released = false
 	var scroll:ScrollContainer=modal_content.get_parent()
 	scroll.scroll_vertical=0
@@ -555,7 +585,7 @@ func clear_panel(title:String,subtitle:String=""):
 	_pad_focus_pending=true
 	modal.visible=true
 	hud.visible=false
-	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	if not MobileProfile.current().native_mobile: Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 	if active:
 		paused=true
 		get_tree().paused=true
@@ -594,7 +624,7 @@ func main_menu():
 	button("奶龙危机 · 开始生存  →",func(): new_world("life",name_edit.text),"PrimaryButton")
 	button("自由观光 · 无敌人  →",func(): new_world("sandbox",name_edit.text),"PrimaryButton")
 	if is_instance_valid(airport): button("机场出发 · 奶龙危机  ↗",airport_start)
-	note(GameSettings.keys("奶龙跟随所在街区持续增援 · 免费弹药、免费载具\n{auto_support} 自动锁定 · {heal} 急救 / 快修 · {survival_services} 战地升级 · {map} 地图"))
+	note("左侧摇杆移动 · 右侧滑动瞄准 · 按住开火\n载具免费 · 弹药免费 · 上方按钮打开地图、急救和整备" if MobileProfile.is_mobile() else GameSettings.keys("奶龙跟随所在街区持续增援 · 免费弹药、免费载具\n{auto_support} 自动锁定 · {heal} 急救 / 快修 · {survival_services} 战地升级 · {map} 地图"))
 	var worlds=[] if qa_running else Store.slots()
 	if not worlds.is_empty():
 		section("继续你的世界")
@@ -609,7 +639,7 @@ func main_menu():
 	button("存档与恢复",worlds_menu,"GhostButton")
 	button("操作与设置",settings_menu,"GhostButton")
 	button("制作与资料来源",credits_menu,"GhostButton")
-	button("退出",func(): get_tree().quit(),"GhostButton")
+	if not OS.has_feature("ios"): button("退出",func(): get_tree().quit(),"GhostButton")
 	note("v"+str(ProjectSettings.get_setting("application/config/version"))+" · 离线单人 · 不需要账号")
 
 func close_panel():
@@ -638,12 +668,16 @@ func _diagnostics_toggled(opened:bool):
 	sync_mouse_capture()
 
 func sync_mouse_capture():
+	if MobileProfile.is_mobile():
+		if not MobileProfile.current().native_mobile: Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+		if is_instance_valid(minimap): minimap.cursor_released=true
+		return
 	# Menus own the pointer even if opened while a vehicle or a modifier is active.
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED if active and not paused and not modal.visible and not map_panel.visible and not _cursor_held else Input.MOUSE_MODE_VISIBLE
 	if is_instance_valid(minimap): minimap.cursor_released=_cursor_held
 
 func camera_accepts_mouse() -> bool:
-	return active and not paused and not modal.visible and not map_panel.visible and not _cursor_held and Input.mouse_mode==Input.MOUSE_MODE_CAPTURED
+	return not MobileProfile.is_mobile() and active and not paused and not modal.visible and not map_panel.visible and not _cursor_held and Input.mouse_mode==Input.MOUSE_MODE_CAPTURED
 
 func new_world(new_mode:String,new_name:String,save_now=true):
 	if active and not save_world(): return
@@ -681,7 +715,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	yaw=0
 	pitch=-0.17
 	autosave=0
-	notify("$50,000 已到账 · 12 秒保护，奶龙正在接近\n左键反击 / Tab 武装载具 · H 急救 / 快修 · B 升级" if is_instance_valid(survival) and survival.enabled else "自由观光 · 奶龙刷新关闭 · B 可原地开启奶龙危机")
+	notify(("$50,000 已到账 · 12 秒保护，奶龙正在接近\n按住开火反击 · 载具按钮上车 · 整备升级" if MobileProfile.is_mobile() else "$50,000 已到账 · 12 秒保护，奶龙正在接近\n左键反击 / Tab 武装载具 · H 急救 / 快修 · B 升级") if is_instance_valid(survival) and survival.enabled else ("自由观光 · 奶龙刷新关闭 · 整备菜单可开启战斗" if MobileProfile.is_mobile() else "自由观光 · 奶龙刷新关闭 · B 可原地开启奶龙危机"))
 	if save_now: save_world()
 
 func enable_encounters():
@@ -712,7 +746,10 @@ func reset_fleet(with_defaults: bool = true):
 	var marina=world.anchors.get("marina",Vector3(-240,1,-330))
 	var helipad=world.anchors.get("helipad",Vector3(-280,8,-250))
 	var placements={"car":home+Vector3(12,1,6),"motorcycle":home+Vector3(18,1,6),"hoverboard":home+Vector3(22,1,6),"speedboat":Vector3(marina.x-8.5,0.9,marina.z-28),"yacht":Vector3(marina.x-30,0.9,marina.z-64),"helicopter":helipad+Vector3(0,3,0),"paraglider":world.anchors.get("north",Vector3(50,5,-1350))+Vector3(40,90,0),"glider":Vector3(700,230,-1600),"airliner":Vector3(-4180,10.78,8600),"tank":home+Vector3(35,2,6),"fighter":Vector3(680,250,-1600)}
-	for kind in VEHICLE_NAMES:
+	# The mobile garage retains every free vehicle type, but builds parked
+	# models on request instead of eleven expensive prototypes on Start.
+	var parked_kinds:Array=["car"] if MobileProfile.is_mobile() else VEHICLE_NAMES.keys()
+	for kind in parked_kinds:
 		var v=make_vehicle(kind,"owned_"+kind,placements[kind])
 		# Place parked contact geometry just above its authored support surface.
 		# The new world has not necessarily flushed its Jolt broad phase yet.
@@ -923,7 +960,7 @@ func pause_menu():
 			player.enabled=false
 			get_tree().paused=false
 			main_menu())
-	button("保存并退出",quit_game,"GhostButton")
+	if not OS.has_feature("ios"): button("保存并退出",quit_game,"GhostButton")
 
 func jobs_menu():
 	active_panel="jobs"
@@ -1356,6 +1393,9 @@ func clear_landmark_target(announce:=true):
 	if announce: notify("地标指引已清除")
 
 func update_landmark_marker():
+	# Mobile navigation uses its map and navigation overlay; this desktop label
+	# stays hidden and must not be reshaped or made visible each frame.
+	if MobileProfile.is_mobile(): return
 	if not is_instance_valid(landmark_marker):
 		landmark_marker=label("",18,Color("a2efe0"))
 		landmark_marker.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -1379,7 +1419,7 @@ func update_landmark_marker():
 
 func map_menu():
 	active_panel="map"
-	clear_panel("悉尼 · 地图与目的地","鼠标已释放 · 左键选点，拖动平移，滚轮缩放，右键清除。\nM / Esc 或右上角「返回游戏」关闭地图，继续步行或驾驶。")
+	clear_panel("悉尼 · 地图与目的地","轻触选点 · 拖动平移 · ＋ / − 缩放。\n点右上角「返回游戏」，继续步行或驾驶。" if MobileProfile.is_mobile() else "鼠标已释放 · 左键选点，拖动平移，滚轮缩放，右键清除。\nM / Esc 或右上角「返回游戏」关闭地图，继续步行或驾驶。")
 	button("海港与城市核心",func(): map_panel.show_preset("core"))
 	button("机场 ↔ 海港 ↔ Manly 全图",func(): map_panel.show_preset("all"))
 	button("Manly 码头与海滩",func(): map_panel.show_preset("manly"))
@@ -1462,7 +1502,7 @@ func objectives_menu():
 
 func settings_menu():
 	active_panel="settings"
-	clear_panel("设置","修改立即生效并自动保存。键盘、鼠标与手柄均可操作菜单。")
+	clear_panel("设置","修改立即生效并自动保存。"+("触屏移动 / 瞄准，按钮切换载具与地图。" if MobileProfile.is_mobile() else "键盘、鼠标与手柄均可操作菜单。"))
 	if not _settings_notice.is_empty():
 		var notice=label(_settings_notice,15,Color("f3cb80"))
 		notice.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
@@ -1470,18 +1510,21 @@ func settings_menu():
 		modal_content.add_child(notice)
 		_settings_notice=""
 	_settings_section("画面")
-	var modes:Array=GameSettings.WINDOW_MODES
-	_settings_option("显示模式",modes.map(func(row):return row[1]),modes.map(func(row):return row[0]).find(settings.window_mode),func(i): settings.window_mode=modes[i][0]; _settings_changed())
-	_settings_toggle("垂直同步",settings.vsync,func(v): settings.vsync=v; _settings_changed())
-	_settings_option("帧率上限",GameSettings.FPS_LIMITS.map(func(v):return "不限制" if v==0 else "%d FPS"%v),GameSettings.FPS_LIMITS.find(int(settings.max_fps)),func(i): settings.max_fps=GameSettings.FPS_LIMITS[i]; _settings_changed())
-	var scales:Array=GameSettings.RENDER_SCALES
+	var mobile:=MobileProfile.is_mobile()
+	if not mobile:
+		var modes:Array=GameSettings.WINDOW_MODES
+		_settings_option("显示模式",modes.map(func(row):return row[1]),modes.map(func(row):return row[0]).find(settings.window_mode),func(i): settings.window_mode=modes[i][0]; _settings_changed())
+		_settings_toggle("垂直同步",settings.vsync,func(v): settings.vsync=v; _settings_changed())
+		_settings_option("帧率上限",GameSettings.FPS_LIMITS.map(func(v):return "不限制" if v==0 else "%d FPS"%v),GameSettings.FPS_LIMITS.find(int(settings.max_fps)),func(i): settings.max_fps=GameSettings.FPS_LIMITS[i]; _settings_changed())
+	else: note("移动版 · 目标 30 FPS · 可降低分辨率和阴影减轻发热")
+	var scales:Array=[0.5,float(MobileProfile.current().render_scale)] if mobile else GameSettings.RENDER_SCALES
 	var scale_index:=0
 	for i in scales.size():
 		if absf(scales[i]-float(settings.render_scale))<absf(scales[scale_index]-float(settings.render_scale)): scale_index=i
-	_settings_option("渲染分辨率",scales.map(func(v):return "100% · 原生" if v>=0.999 else "%d%% · FSR 1 放大"%roundi(v*100)),scale_index,func(i): settings.render_scale=scales[i]; _settings_changed())
-	var aa:Array=GameSettings.ANTIALIASING
+	_settings_option("渲染分辨率",scales.map(func(v):return "100% · 原生" if v>=0.999 else ("%d%% · 移动缩放" if mobile else "%d%% · FSR 1 放大")%roundi(v*100)),scale_index,func(i): settings.render_scale=scales[i]; _settings_changed())
+	var aa:Array=MobileProfile.MOBILE_AA if mobile else GameSettings.ANTIALIASING
 	_settings_option("抗锯齿",aa.map(func(row):return row[1]),aa.map(func(row):return row[0]).find(settings.antialiasing),func(i): settings.antialiasing=aa[i][0]; _settings_changed())
-	_settings_option("画质",["轻盈 · 关闭实时阴影","标准 · 实时阴影","精细 · 更远阴影与反射"],int(settings.quality),func(i): settings.quality=i; _settings_changed())
+	_settings_option("画质",["轻盈 · 关闭实时阴影","标准 · 近处实时阴影"] if mobile else ["轻盈 · 关闭实时阴影","标准 · 实时阴影","精细 · 更远阴影与反射"],int(settings.quality),func(i): settings.quality=i; _settings_changed())
 	_settings_slider("视野",55,95,1,float(settings.fov),func(v):return "%d°"%v,func(v): settings.fov=v; _settings_changed())
 	var street_life:Array=GameSettings.STREET_LIFE
 	_settings_option("街上人车",street_life.map(func(row):return row[0]+" · "+row[1]),clampi(int(settings.street_life),0,street_life.size()-1),func(i): settings.street_life=i; _settings_changed())
@@ -1492,26 +1535,27 @@ func settings_menu():
 	_settings_slider("主音量",0,1,0.05,float(settings.volume),func(v):return "%d%%"%roundi(v*100),func(v): settings.volume=v; _settings_changed())
 	_settings_toggle("切到其他窗口时静音",settings.mute_unfocused,func(v): settings.mute_unfocused=v; _settings_changed())
 	_settings_section("操作")
-	_settings_slider("鼠标灵敏度",0.001,0.008,0.0005,float(settings.sensitivity),func(v):return "%.1f"%(v*1000),func(v): settings.sensitivity=v; _settings_changed())
+	_settings_slider("触屏视角速度" if mobile else "鼠标灵敏度",0.001,0.008,0.0005,float(settings.sensitivity),func(v):return "%.1f"%(v*1000),func(v): settings.sensitivity=v; _settings_changed())
 	_settings_slider("手柄视角速度",0.8,6.0,0.1,float(settings.pad_sensitivity),func(v):return "%.1f"%v,func(v): settings.pad_sensitivity=v; _settings_changed())
 	_settings_toggle("反转垂直视角",settings.invert,func(v): settings.invert=v; _settings_changed())
 	_settings_toggle("加大游戏提示文字",settings.large_text,func(v): settings.large_text=v; _settings_changed())
-	_settings_section("键盘按键")
-	for group:Array in GameSettings.REBINDABLE:
-		var row=_settings_row(group[0])
-		var rebind=Button.new()
-		rebind.text=GameSettings.key_label(group[1][0])
-		rebind.custom_minimum_size.x=190
-		rebind.pressed.connect(func():
-			_rebind_group=group[1][0]
-			rebind.text="按下新按键 · Esc 取消")
-		row.add_child(rebind)
-		_focus_for_pad(rebind)
-	button("恢复默认按键",func():
-		settings.bindings={}
-		_settings_changed()
-		_settings_notice="已恢复默认按键。"
-		settings_menu())
+	if not mobile:
+		_settings_section("键盘按键")
+		for group:Array in GameSettings.REBINDABLE:
+			var row=_settings_row(group[0])
+			var rebind=Button.new()
+			rebind.text=GameSettings.key_label(group[1][0])
+			rebind.custom_minimum_size.x=190
+			rebind.pressed.connect(func():
+				_rebind_group=group[1][0]
+				rebind.text="按下新按键 · Esc 取消")
+			row.add_child(rebind)
+			_focus_for_pad(rebind)
+		button("恢复默认按键",func():
+			settings.bindings={}
+			_settings_changed()
+			_settings_notice="已恢复默认按键。"
+			settings_menu())
 	_settings_section("手柄（Xbox 布局，PlayStation 与 Steam Deck 按对应位置）")
 	var pad_help=label("左摇杆 移动 / 驾驶 · 右摇杆 视角\nA 跳跃 / 刹车 · B 互动 / 上下车 · X 漂移 · Y 载具\nRT 开火 · LT 奔跑 / 3 倍加速 · RB / LB 升降\n十字键 ↑ 地图 · ↓ 急救 · ← 工作 · → 整备\nR3 自动武器 · Back 城市体验 · Start 暂停",14,Color("bbc8c5"))
 	pad_help.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
@@ -1607,12 +1651,11 @@ func _capture_rebind(event:InputEvent):
 	settings_menu()
 
 func load_settings():
-	if FileAccess.file_exists("user://settings.json"):
-		var data=JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))
-		if data is Dictionary: settings=GameSettings.sanitized(data)
+	settings=GameSettings.load_preferences()
 	apply_settings()
 
 func apply_settings():
+	settings=GameSettings.sanitized(settings)
 	AudioServer.set_bus_volume_db(0,linear_to_db(maxf(float(settings.volume),0.001)))
 	GameSettings.apply_bindings(settings.bindings)
 	# QA runs size their own windows; only players' settings change the window.
@@ -1623,12 +1666,12 @@ func apply_settings():
 	context_hint.add_theme_font_size_override("font_size",17 if settings.large_text else 14)
 	activity_label.add_theme_font_size_override("font_size",18 if settings.large_text else 15)
 	toast_label.add_theme_font_size_override("font_size",22 if settings.large_text else 19)
+	MobileProfile.apply_runtime(self)
 
 func save_settings():
 	# QA shares the player's user data folder; never overwrite real preferences.
 	if qa_running: return
-	var file=FileAccess.open("user://settings.json",FileAccess.WRITE)
-	if file: file.store_string(JSON.stringify(settings))
+	GameSettings.save_preferences(settings)
 
 func credits_menu():
 	active_panel="credits"
@@ -1758,7 +1801,7 @@ func take_photo():
 	DirAccess.make_dir_recursive_absolute(path)
 	var image_path=path+Time.get_datetime_string_from_system().replace(":","-")+".png"
 	get_viewport().get_texture().get_image().save_png(image_path)
-	notify("照片已保存到本机相册文件夹")
+	notify("照片已保存到游戏内部 photos 文件夹" if MobileProfile.is_mobile() else "照片已保存到本机相册文件夹")
 	if is_instance_valid(campaign): campaign.record_photo(current_vehicle.global_position if is_instance_valid(current_vehicle) else player.global_position)
 	if life.has_method("take_photo"): life.take_photo(player.global_position)
 
@@ -1810,7 +1853,7 @@ func _process(delta):
 	update_hud()
 	if is_instance_valid(campaign): campaign.tick(delta)
 	update_combat_reticle(delta)
-	if is_instance_valid(survival_hud): survival_hud.update_state(survival.hud_state())
+	if not MobileProfile.is_mobile() and is_instance_valid(survival_hud): survival_hud.update_state(survival.hud_state())
 	if qa_manual_render:
 		qa_render_count+=1
 		RenderingServer.force_draw(true,delta)
@@ -1857,9 +1900,10 @@ func _update_follow_camera(delta: float):
 
 func update_combat_reticle(delta:float):
 	if active and not paused and survival.enabled and not is_instance_valid(current_vehicle):
-		combat_reticle.visible = camera_accepts_mouse() and player.health > 0.0
+		combat_reticle.visible = (camera_accepts_mouse() or MobileProfile.is_mobile()) and player.health > 0.0
 		combat_reticle.position = get_viewport().get_visible_rect().size * 0.5 - combat_reticle.size * 0.5
-		combat_reticle.modulate = Color("96ddc7") if survival.hud_state().aim_hit else Color.WHITE
+		var aim_hit:bool=survival.aim_hit_active() if MobileProfile.is_mobile() else bool(survival.hud_state().aim_hit)
+		combat_reticle.modulate = Color("96ddc7") if aim_hit else Color.WHITE
 		return
 	combat_reticle.modulate = Color.WHITE
 	if not can_fire_weapon():
@@ -1873,18 +1917,21 @@ func update_combat_reticle(delta:float):
 	if combat_reticle.visible:
 		combat_reticle.position=camera.unproject_position(_combat_aim_point)-combat_reticle.size*.5
 	var status:Dictionary=weapons.aim_status()
-	fire_button.disabled=not status.get("ready",false)
-	if fire_button.disabled: fire_button.text="装填 %.1f s"%status.get("cooldown_remaining",0.0)
+	if not MobileProfile.is_mobile():
+		fire_button.disabled=not status.get("ready",false)
+		if fire_button.disabled: fire_button.text="装填 %.1f s"%status.get("cooldown_remaining",0.0)
 	if current_vehicle.kind=="tank":
 		speed_label.text+="\n炮管 %+.0f°"%status.get("elevation_deg",0.0)
 
 func update_hud():
-	var combat_active:=can_fire_weapon()
-	fire_button.visible=combat_active
-	combat_reticle.visible=combat_active and not _cursor_held
-	if combat_active:
-		fire_button.text="发射炮弹  ·  X / 左键" if current_vehicle.kind=="tank" else "发射火箭  ·  X / 左键"
-	mode_label.text="HARBOURLIFE  /  "+("自由观光" if mode=="sandbox" else "奶龙危机")
+	var mobile:=MobileProfile.is_mobile()
+	if not mobile:
+		var combat_active:=can_fire_weapon()
+		fire_button.visible=combat_active
+		combat_reticle.visible=combat_active and not _cursor_held
+		if combat_active:
+			fire_button.text="发射炮弹  ·  X / 左键" if current_vehicle.kind=="tank" else "发射火箭  ·  X / 左键"
+		mode_label.text="HARBOURLIFE  /  "+("自由观光" if mode=="sandbox" else "奶龙危机")
 	info.text="$%s    ·    耐力 %d%%    ·    %s" %[life.money,player.stamina,city_clock.display_time() if is_instance_valid(city_clock) else "16:00"]
 	var regions={"quay":"Circular Quay · 环形码头","opera":"Bennelong Point · 歌剧院","rocks":"The Rocks · 岩石区","north":"Milsons Point · 北岸","home":"Harbour Studio · 你的家","marina":"Marina · 海港码头","helipad":"Harbour Air · 停机坪","airport":"Sydney Airport · 悉尼机场","ribbon":"Darling Harbour · 达令港","exchange_haidilao":"Darling Square · 达令广场","icc_convention":"ICC Sydney · 会展中心","icc_exhibition":"ICC Sydney · 展览中心","tiktok_entertainment":"TikTok Entertainment Centre · 演出场馆","tower_one":"Barangaroo · 巴兰加鲁","manly_wharf":"Manly Wharf · 曼利码头","manly_beach":"Manly Beach · 曼利海滩","martin_place_metro":"Martin Place · 马丁广场"}
 	var closest="quay"
@@ -1901,8 +1948,9 @@ func update_hud():
 	region_label.text=regions[closest] if distance<520 else broad
 	if player.global_position.z>7400 and player.global_position.z<12800 and player.global_position.x>-5700 and player.global_position.x<0:
 		region_label.text="Sydney Airport · 悉尼机场"
-	activity_label.text=life.status_text
-	activity_panel.visible=not life.status_text.strip_edges().is_empty()
+	if not mobile:
+		activity_label.text=life.status_text
+		activity_panel.visible=not life.status_text.strip_edges().is_empty()
 	if is_instance_valid(current_vehicle):
 		speed_label.text="%d km/h  ·  %d m\n%s  %d%%" %[current_vehicle.linear_velocity.length()*3.6,current_vehicle.global_position.y,VEHICLE_NAMES[current_vehicle.kind].split(" · ")[0],current_vehicle.health]
 		if current_vehicle.kind=="hoverboard":
@@ -1916,17 +1964,22 @@ func update_hud():
 			info.text="航向 %03d° · 海港 %.1f km" %[fposmod(rad_to_deg(atan2(forward.x,-forward.z)),360),current_vehicle.global_position.distance_to(world.anchors.opera)/1000]
 		if current_vehicle.is_boosting():
 			speed_label.text+="\n3倍加速中 · 上限 %d km/h"%current_vehicle.effective_top_speed_kmh()
-		context_hint.text=vehicle_help(current_vehicle.kind)+GameSettings.keys(" · {boost} 3倍加速   {interact} 离开   {vehicles} 新增   {map} 地图")+(GameSettings.keys("\n{auto_support} 自动武器   {heal} 战地快修   {survival_services} 补给 / 升级 · 弹药免费") if survival.enabled else "   T 时间")
+		if not mobile:
+			context_hint.text=vehicle_help(current_vehicle.kind)+GameSettings.keys(" · {boost} 3倍加速   {interact} 离开   {vehicles} 新增   {map} 地图")+(GameSettings.keys("\n{auto_support} 自动武器   {heal} 战地快修   {survival_services} 补给 / 升级 · 弹药免费") if survival.enabled else "   T 时间")
 	else:
 		speed_label.text="游泳" if player.swimming else ""
-		var near=nearest_vehicle()
-		var hint=GameSettings.keys("{interact} 进入 ")+VEHICLE_NAMES[near.kind] if near else life.available_actions(player.global_position)
-		# Life actions name their default key first; show the player's binding instead.
-		if hint.begins_with("E  "): hint=GameSettings.keys("{interact}")+hint.substr(1)
-		elif hint.begins_with("G  "): hint=GameSettings.keys("{carry}")+hint.substr(1)
-		context_hint.text=(hint+"   ·   " if hint!="" else "")+(GameSettings.keys("左键 / {fire} 反击 · {heal} 治疗 · {survival_services} 整备 · ") if survival.enabled else "")+GameSettings.keys("{move} 行走   {sprint} 奔跑   {vehicles} 载具   {map} 地图")
-	if _using_pad: context_hint.text=GameSettings.pad_hint(current_vehicle.kind if is_instance_valid(current_vehicle) else "",survival.enabled)
+		if not mobile:
+			var near=nearest_vehicle()
+			var hint=GameSettings.keys("{interact} 进入 ")+VEHICLE_NAMES[near.kind] if near else life.available_actions(player.global_position)
+			# Life actions name their default key first; show the player's binding instead.
+			if hint.begins_with("E  "): hint=GameSettings.keys("{interact}")+hint.substr(1)
+			elif hint.begins_with("G  "): hint=GameSettings.keys("{carry}")+hint.substr(1)
+			context_hint.text=(hint+"   ·   " if hint!="" else "")+(GameSettings.keys("左键 / {fire} 反击 · {heal} 治疗 · {survival_services} 整备 · ") if survival.enabled else "")+GameSettings.keys("{move} 行走   {sprint} 奔跑   {vehicles} 载具   {map} 地图")
+	if not mobile and _using_pad: context_hint.text=GameSettings.pad_hint(current_vehicle.kind if is_instance_valid(current_vehicle) else "",survival.enabled)
 	vehicle_panel.visible=not speed_label.text.is_empty()
+	# mobile_ui owns placement and the replacement health card. Updating hidden
+	# desktop panels here would immediately undo its layout and visibility.
+	if mobile: return
 	# Sit above the control strip, whose height changes with wrapped vehicle hints.
 	var readout_bottom:=-(hud.size.y-(hint_panel.get_global_rect().position.y-hud.global_position.y)+12.0)
 	if not is_equal_approx(vehicle_panel.offset_bottom,readout_bottom):
@@ -1951,14 +2004,27 @@ func _notification(what):
 	# Closing during loading has no world to save yet.
 	if what==NOTIFICATION_WM_CLOSE_REQUEST and Loading.active(): get_tree().quit()
 	elif what==NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
+	elif what==NOTIFICATION_APPLICATION_PAUSED or (what==NOTIFICATION_APPLICATION_FOCUS_OUT and MobileProfile.is_mobile()):
+		if is_instance_valid(mobile_controls): mobile_controls.release_all()
+		if active and not qa_running and not quitting:
+			# iOS sends focus loss before pause. Save immediately, once per cycle,
+			# so the second notification cannot overwrite the recovery copy.
+			# A failed write remains eligible for a retry when suspension follows.
+			if not _background_saved: _background_saved = save_world()
+			if not paused: pause_menu()
+		AudioServer.set_bus_mute(0,true)
+	elif what==NOTIFICATION_APPLICATION_RESUMED:
+		_background_saved = false
+		AudioServer.set_bus_mute(0,false)
 	elif what==NOTIFICATION_APPLICATION_FOCUS_OUT:
 		if bool(settings.get("mute_unfocused",false)): AudioServer.set_bus_mute(0,true)
 	elif what==NOTIFICATION_APPLICATION_FOCUS_IN:
+		_background_saved = false
 		AudioServer.set_bus_mute(0,false)
 	elif what==NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		# The OS may release Option in another app without delivering key-up here.
 		_cursor_held=false
-		Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+		if not MobileProfile.current().native_mobile: Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 		if is_instance_valid(minimap):minimap.cursor_released=false
 	elif what==NOTIFICATION_WM_WINDOW_FOCUS_IN:
 		if is_instance_valid(modal) and is_instance_valid(map_panel):sync_mouse_capture()

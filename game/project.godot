@@ -13,6 +13,9 @@ RuntimeDiagnostics="*res://scripts/runtime_diagnostics.gd"
 [display]
 window/size/viewport_width=1440
 window/size/viewport_height=900
+window/size/viewport_width.mobile=1280
+window/size/viewport_height.mobile=720
+window/handheld/orientation=4
 window/size/window_width_override=1440
 window/size/window_height_override=900
 window/stretch/mode="canvas_items"
@@ -20,6 +23,7 @@ window/stretch/aspect="expand"
 
 [rendering]
 rendering_device/driver.macos="metal"
+rendering_device/driver.ios="metal"
 renderer/rendering_method="forward_plus"
 renderer/rendering_method.mobile="mobile"
 textures/vram_compression/import_etc2_astc=true
@@ -39,6 +43,8 @@ common/physics_interpolation=true
 3d/default_gravity=9.81
 
 [debug]
+file_logging/enable_file_logging.ios=true
+file_logging/log_path="user://logs/godot.log"
 gdscript/warnings/treat_warnings_as_errors=false
 
 [editor]

@@ -1,4 +1,5 @@
 extends Control
+const MobileProfile = preload("res://scripts/mobile_profile.gd")
 ## North-up navigation over the full map's shared geographic drawing resources.
 ## Geographic vectors are rasterized into a local overscan cache. Ordinary
 ## movement transforms one texture, not every road/building in the whole city.
@@ -196,7 +197,7 @@ func paint_overlay(ink:Node2D):
 	ink.draw_circle(centre,12,Color(0.25,1,0.8,0.16),true,-1,true)
 	ink.draw_colored_polygon(PackedVector2Array([centre+forward*10,centre-forward*7+side*6,centre-forward*4,centre-forward*7-side*6]),Color("94f3cf"))
 	_text(ink,Vector2(11,22),"悉尼 · 导航",14,Color("e4e9da"))
-	_text(ink,Vector2(size.x-76,22),GameSettings.keys("{map} 地图 ↗"),12,Color("b1c5bc"))
+	_text(ink,Vector2(size.x-76,22),"地图 ↗" if MobileProfile.is_mobile() else GameSettings.keys("{map} 地图 ↗"),12,Color("b1c5bc"))
 	var north:=Vector2.UP.rotated(map_rotation())
 	var north_at:=centre+north*(minf(rect.size.x,rect.size.y)*0.5-13)
 	_text(ink,north_at+Vector2(-4,4),"N",13,Color("eef3df"))
@@ -204,7 +205,7 @@ func paint_overlay(ink:Node2D):
 	var scale_origin:=rect.end-Vector2(scale_m*pixels_per_metre+8,12)
 	ink.draw_line(scale_origin,scale_origin+Vector2(scale_m*pixels_per_metre,0),Color("e6e0ce"),2,true)
 	_text(ink,scale_origin+Vector2(-2,-5),"%d m"%scale_m,10,Color("e6e0ce"))
-	var title:=target_name if indicator.visible else GameSettings.keys("按 {map} 选点 · 按住 Alt / Option 点这里")
+	var title:=target_name if indicator.visible else ("轻触小地图 · 选择目的地" if MobileProfile.is_mobile() else GameSettings.keys("按 {map} 选点 · 按住 Alt / Option 点这里"))
 	_text(ink,Vector2(10,size.y-32),title,13,Color("f2d18b") if indicator.visible else Color("b1c5bc"),size.x-20)
 	var detail:="北朝上 · OSM" if north_up else "朝向跟随 · OSM"
 	if indicator.visible:
@@ -212,4 +213,4 @@ func paint_overlay(ink:Node2D):
 		if indicator.distance<35: detail="已到达附近 · "+detail
 	_text(ink,Vector2(10,size.y-13),detail,11,Color("b1c5bc"))
 	if cursor_released:
-		_text(ink,Vector2(12,46),"鼠标已释放 · 点击打开地图",12,Color("b6ffe1"),size.x-24)
+		_text(ink,Vector2(12,46),"轻触打开地图" if MobileProfile.is_mobile() else "鼠标已释放 · 点击打开地图",12,Color("b6ffe1"),size.x-24)

@@ -127,8 +127,13 @@ func mount(bone: String) -> Node3D:
 	for skeleton: Skeleton3D in find_children("*", "Skeleton3D", true, false):
 		if skeleton.find_bone(bone) < 0: continue
 		for existing: BoneAttachment3D in skeleton.find_children("*", "BoneAttachment3D", false, false):
-			if existing.bone_name == bone and existing.name.begins_with("Mount"): return existing
+			if existing.bone_name == bone and existing.name.begins_with("Mount"):
+				existing.set_disable_scale(true)
+				return existing
 		var point := BoneAttachment3D.new()
+		# Imported bones carry centimetre-to-metre scale in their poses. Held
+		# props are authored in metres: follow the bone position/rotation only.
+		point.set_disable_scale(true)
 		point.name = "Mount_" + bone
 		skeleton.add_child(point)
 		point.bone_name = bone

@@ -23,6 +23,9 @@ var map_center:=Vector2(0,-350)
 var pixels_per_metre:=0.26
 var view_name:="悉尼海港"
 var data_loaded:=false
+## Optional startup source from the world. Geometry consumes this reference once;
+## it must not retain a second city dictionary after startup.
+var map_source:Dictionary={}
 var data_counts:={"land":0,"roads":0,"buildings":0,"places":0}
 var _ink:MapInk
 var _land_mesh:ArrayMesh
@@ -42,6 +45,9 @@ var _press_position:=Vector2.ZERO
 var _labels:Array[Rect2]=[]
 var _label_hits:Array[Dictionary]=[]
 var _clear_button:Button
+var _zoom_in:Button
+var _zoom_out:Button
+var touch_mode:=preload("res://scripts/mobile_profile.gd").is_mobile()
 var _close_button:Button
 # Resource and packed-array references are shared by all map views. Only the
 # first full map reads the geographic JSON and constructs its meshes.
@@ -68,6 +74,15 @@ func _ready():
 	_close_button.tooltip_text="M / Esc · 关闭地图并恢复视角控制"
 	_close_button.pressed.connect(func(): close_requested.emit())
 	add_child(_close_button)
+	if touch_mode:
+		_zoom_in=Button.new()
+		_zoom_in.text="＋"
+		_zoom_in.pressed.connect(func(): zoom_at(1.35,view_center()))
+		add_child(_zoom_in)
+		_zoom_out=Button.new()
+		_zoom_out.text="−"
+		_zoom_out.pressed.connect(func(): zoom_at(1.0/1.35,view_center()))
+		add_child(_zoom_out)
 	resized.connect(refresh)
 	visibility_changed.connect(func(): _dragging=false)
 	load_map_data()
@@ -95,13 +110,15 @@ func _append_lines(to:PackedVector2Array,points:PackedVector2Array,closed:=false
 
 func load_map_data():
 	if not _shared_geometry.is_empty():
+		map_source={}
 		_use_geometry(_shared_geometry)
 		refresh()
 		return
-	source_load_count+=1
 	var file_path:="res://assets/city_map.json"
-	var data:Dictionary={}
-	if FileAccess.file_exists(file_path):
+	var data:Dictionary=map_source
+	map_source={}
+	if data.is_empty() and FileAccess.file_exists(file_path):
+		source_load_count+=1
 		var parsed=JSON.parse_string(FileAccess.get_file_as_string(file_path))
 		if parsed is Dictionary: data=parsed
 	data_loaded=not data.is_empty()
@@ -223,6 +240,15 @@ func refresh():
 	if is_instance_valid(_close_button):
 		_close_button.position=Vector2(size.x-144,10)
 		_close_button.size=Vector2(126,34)
+	if touch_mode and is_instance_valid(_zoom_in):
+		_clear_button.position=Vector2(size.x-284,10)
+		_clear_button.size=Vector2(128,64)
+		_close_button.position=Vector2(size.x-146,10)
+		_close_button.size=Vector2(136,64)
+		_zoom_in.position=Vector2(size.x-82,94)
+		_zoom_out.position=Vector2(size.x-82,174)
+		_zoom_in.size=Vector2(72,72)
+		_zoom_out.size=Vector2(72,72)
 	if is_instance_valid(_ink): _ink.queue_redraw()
 
 func _append_hatching(polygon:PackedVector2Array):
@@ -243,11 +269,12 @@ func _append_hatching(polygon:PackedVector2Array):
 		hits.sort_custom(func(a:Vector2,b:Vector2): return a.x<b.x)
 		for i in range(0,hits.size()-1,2): _simplified_hatching.append_array(PackedVector2Array([hits[i],hits[i+1]]))
 
-func view_center() -> Vector2: return Vector2(size.x*0.5,(size.y-FOOTER_HEIGHT-54)*0.5+54)
+func header_height() -> float: return 84.0 if touch_mode else 54.0
+func view_center() -> Vector2: return Vector2(size.x*0.5,(size.y-FOOTER_HEIGHT-header_height())*0.5+header_height())
 func project_flat(point:Vector2) -> Vector2: return (point-map_center)*pixels_per_metre+view_center()
 func project_point(point:Vector3) -> Vector2: return project_flat(Vector2(point.x,point.z))
 func unproject_point(point:Vector2) -> Vector2: return (point-view_center())/pixels_per_metre+map_center
-func map_rect() -> Rect2: return Rect2(Vector2(10,62),Vector2(maxf(0,size.x-20),maxf(0,size.y-FOOTER_HEIGHT-69)))
+func map_rect() -> Rect2: return Rect2(Vector2(10,header_height()+8),Vector2(maxf(0,size.x-20),maxf(0,size.y-FOOTER_HEIGHT-header_height()-15)))
 func landmark_point(landmark:Dictionary) -> Vector3: return landmark.get("map_position",landmark.position)
 
 func search_destinations(query:String,limit:int=40) -> Array[Dictionary]:
@@ -384,7 +411,7 @@ func _label(ink:Node2D,point:Vector2,text:String,color:Color,font_size:int=13,fo
 	var font=get_theme_default_font()
 	var extent=font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size)
 	var rect:=Rect2(point+Vector2(7,-extent.y),extent+Vector2(10,5))
-	if not Rect2(Vector2(18,63),size-Vector2(36,FOOTER_HEIGHT+70)).encloses(rect): return false
+	if not map_rect().grow(-8).encloses(rect): return false
 	if not force:
 		for previous in _labels:
 			if previous.grow(5).intersects(rect): return false
@@ -459,7 +486,7 @@ func paint(ink:Node2D):
 		ink.draw_line(player,player+forward,Color("c8ffe3"),2.2,true)
 		_label(ink,player,"你在这里",Color("b9f8d6"),13)
 	var font=get_theme_default_font()
-	ink.draw_rect(Rect2(Vector2.ZERO,Vector2(size.x,54)),Color("0c2936"))
+	ink.draw_rect(Rect2(Vector2.ZERO,Vector2(size.x,header_height())),Color("0c2936"))
 	ink.draw_string(font,Vector2(22,34),"N ↑   "+view_name,HORIZONTAL_ALIGNMENT_LEFT,-1,20,Color("eee6c9"))
 	ink.draw_rect(Rect2(Vector2(0,size.y-FOOTER_HEIGHT),Vector2(size.x,FOOTER_HEIGHT)),Color("0c2936"))
 	var distance:=pow(10.0,floor(log(120.0/pixels_per_metre)/log(10.0)))
@@ -470,7 +497,7 @@ func paint(ink:Node2D):
 	ink.draw_line(origin+Vector2(0,-4),origin+Vector2(0,4),Color("e5dfc6"),2)
 	ink.draw_line(origin+Vector2(length_px,-4),origin+Vector2(length_px,4),Color("e5dfc6"),2)
 	ink.draw_string(font,origin+Vector2(length_px+10,5),("%.1f km"%(distance/1000.0)) if distance>=1000 else ("%d m"%distance),HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("e5dfc6"))
-	ink.draw_string(font,Vector2(size.x-374,size.y-99),"滚轮缩放 · 拖动平移 · 点击设标 · 右键清除",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("b2c9be"))
+	ink.draw_string(font,Vector2(size.x-374,size.y-99),"拖动平移 · 点选目的地 · ＋ / − 缩放" if touch_mode else "滚轮缩放 · 拖动平移 · 点击设标 · 右键清除",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("b2c9be"))
 	var target_distance:=Vector2(target_position.x-player_position.x,target_position.z-player_position.z).length()
 	var status:="绿箭头：你  ·  白点：地标  ·  金旗：目的地  ·  虚线：直线方向"
 	if not target_key.is_empty(): status="前往 %s · %s · 直线指引，未计算道路路线"%[target_name.left(34),("%.2f km"%(target_distance/1000.0)) if target_distance>=1000 else ("%.0f m"%target_distance)]
