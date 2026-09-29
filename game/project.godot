@@ -21,6 +21,10 @@ window/size/window_height_override=900
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[input_devices]
+sensors/enable_gyroscope.mobile=true
+sensors/enable_gravity.mobile=true
+
 [rendering]
 rendering_device/driver.macos="metal"
 rendering_device/driver.ios="metal"

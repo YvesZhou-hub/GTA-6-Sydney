@@ -1,10 +1,11 @@
 extends SceneTree
 ## No city, saves, network, physics bodies or player profile are loaded.
-## Run: tools/runtime/godot --headless --path game --script ../source/mobile_controls_test.gd
+## Run: tools/runtime/godot --headless --audio-driver Dummy --path game --script ../source/mobile_controls_test.gd
 const Mobile = preload("res://scripts/mobile_controls.gd")
 var checks: Array[Dictionary] = []
 var host: FixtureHost
 var controls: Control
+var flow_failures: Array[String] = []
 
 class WeaponFixture extends Node:
 	var attempts := 0
@@ -27,7 +28,7 @@ class FixtureHost extends Node:
 	var yaw := 0.0
 	var pitch := 0.0
 	var font: Font
-	var settings := {"sensitivity": 0.003, "invert": false}
+	var settings := {"sensitivity": 0.003, "invert": false, "mobile_floating_stick": false}
 	var current_vehicle: Node
 	var modal := Control.new()
 	var map_panel := Control.new()
@@ -60,7 +61,7 @@ func _initialize() -> void: call_deferred("run")
 
 func check(title: String, passed: bool) -> void:
 	checks.append({"name": title, "passed": passed})
-	print("MOBILE_CONTROLS ", "PASS " if passed else "FAIL ", title)
+	if not passed: print("MOBILE_CONTROLS FAIL ", title)
 
 func touch(index: int, at: Vector2, pressed := true, look := false, canceled := false) -> bool:
 	var event := InputEventScreenTouch.new()
@@ -86,6 +87,175 @@ func no_actions() -> bool:
 		for action in actions:
 			if Input.is_action_pressed(action): return false
 	return true
+
+func flow_step(passed: bool, detail: String) -> void:
+	if not passed: flow_failures.append(detail)
+
+func finish_flow() -> bool:
+	for detail in flow_failures: print("MOBILE_CONTROLS FLOW FAIL ", detail)
+	return flow_failures.is_empty()
+
+## One complete on-foot flow: move, aim while firing, lock a run, then stop it.
+func firing_movement_flow() -> bool:
+	flow_failures.clear()
+	controls.release_all()
+	host.current_vehicle = null
+	host.resume()
+	host.settings.merge({"mobile_floating_stick": true, "mobile_left_fire": true, "mobile_run_lock": true, "mobile_look_sensitivity": 1.3, "mobile_fire_sensitivity": 0.6}, true)
+	controls._process(0)
+	var origin := Vector2(285, 560)
+	flow_step(not touch(40, origin) and touch(40, origin, true, true), "floating stick waits for GUI, then starts at the finger")
+	flow_step(no_actions(), "floating touch starts neutral away from its old fixed center")
+	drag(40, origin + Vector2(0, -55), Vector2(0, -55))
+	flow_step(Input.get_action_strength("forward") > 0.4, "floating displacement starts proportional movement")
+	var fire_at := button_center("fire")
+	var fired: Array[int] = []
+	var on_shot := func(): fired.append(1)
+	controls.weapon_fired.connect(on_shot)
+	var shots_before := host.survival.shots
+	var attempts_before := host.survival.attempts
+	host.survival.cooldown = 0
+	touch(41, fire_at)
+	var yaw_before := host.yaw
+	var pitch_before := host.pitch
+	drag(41, fire_at + Vector2(-48, -26), Vector2(-48, -26))
+	var expected_fire := 0.003 * 0.6
+	flow_step(is_equal_approx(host.yaw - yaw_before, 48 * expected_fire) and is_equal_approx(host.pitch - pitch_before, 26 * expected_fire), "right fire drag changes camera yaw and pitch using firing sensitivity")
+	controls._process(0.016)
+	controls._process(0.016)
+	host.survival.cooldown = 0
+	controls._process(0.016)
+	flow_step(host.survival.shots == shots_before + 2 and host.survival.attempts == attempts_before + 3 and fired.size() == 2, "held drag continues requesting fire, cooldown suppresses duplicate shots and haptics")
+	flow_step(Input.is_action_pressed("forward") and Input.is_action_pressed("fire"), "movement and firing remain held during camera drag")
+	var look_at := Vector2(850, 290)
+	touch(42, look_at, true, true)
+	yaw_before = host.yaw
+	drag(42, look_at + Vector2(50, 0), Vector2(50, 0))
+	flow_step(is_equal_approx(host.yaw, yaw_before), "second camera finger cannot steal right-fire aim")
+	touch(42, look_at, false)
+	touch(43, button_center("fire_left"))
+	touch(41, fire_at, false)
+	flow_step(Input.is_action_pressed("fire"), "left fire keeps the weapon held when right fire lifts")
+	touch(42, look_at, true, true)
+	yaw_before = host.yaw
+	drag(42, look_at + Vector2(30, 0), Vector2(30, 0))
+	flow_step(is_equal_approx(yaw_before - host.yaw, 30 * expected_fire), "left fire allows an independent right-side aim finger")
+	touch(43, button_center("fire_left"), false)
+	yaw_before = host.yaw
+	drag(42, look_at + Vector2(60, 0), Vector2(30, 0))
+	flow_step(not Input.is_action_pressed("fire") and is_equal_approx(yaw_before - host.yaw, 30 * 0.003 * 1.3), "releasing fire restores ordinary look sensitivity")
+	touch(42, look_at, false)
+	var far_forward := origin + Vector2(0, -150)
+	drag(40, far_forward, far_forward - origin)
+	controls._process(0.3)
+	touch(40, far_forward, false)
+	flow_step(Input.is_action_pressed("forward") and Input.is_action_pressed("sprint"), "pushing beyond the forward ring then releasing locks a run")
+	touch(44, origin, true, true)
+	flow_step(no_actions(), "a fresh floating-stick touch cancels the run and starts neutral")
+	drag(44, far_forward, far_forward - origin)
+	controls._process(0.3)
+	touch(44, far_forward, false, false, true)
+	flow_step(no_actions(), "OS cancellation never commits a run lock")
+	host.settings.mobile_left_fire = false
+	host.settings.mobile_run_lock = false
+	controls._process(0)
+	flow_step(not touch(45, button_center("fire_left"), true, true), "disabled left fire no longer captures touches")
+	touch(46, origin, true, true)
+	drag(46, far_forward, far_forward - origin)
+	controls._process(0.3)
+	touch(46, far_forward, false)
+	flow_step(no_actions(), "run-lock setting prevents a sustained run after release")
+	controls.weapon_fired.disconnect(on_shot)
+	controls.release_all()
+	return finish_flow()
+
+## One interruption/vehicle journey: menu, background, two drive modes, get out.
+func interruption_vehicle_flow() -> bool:
+	flow_failures.clear()
+	host.settings.merge({"mobile_left_fire": true, "mobile_run_lock": true, "mobile_floating_stick": true, "mobile_drive_mode": "joystick", "mobile_vehicle_sensitivity": 1.8}, true)
+	controls._process(0)
+	var origin := Vector2(250, 550)
+	var ahead := origin + Vector2(0, -150)
+	touch(50, origin, true, true)
+	drag(50, ahead, ahead - origin)
+	controls._process(0.3)
+	touch(50, ahead, false)
+	touch(51, button_center("fire"))
+	touch(52, button_center("pause"))
+	touch(52, button_center("pause"), false)
+	flow_step(host.paused and no_actions(), "pause clears held fire and latched run")
+	host.resume()
+	controls._process(0)
+	flow_step(not drag(51, Vector2(900, 350), Vector2(80, 0)) and no_actions(), "menu return cannot revive an old finger")
+	touch(53, button_center("fire_left"))
+	touch(54, origin, true, true)
+	drag(54, ahead, ahead - origin)
+	controls._notification(Node.NOTIFICATION_APPLICATION_PAUSED)
+	flow_step(no_actions(), "backgrounding releases both movement and left fire")
+	controls._notification(Node.NOTIFICATION_APPLICATION_RESUMED)
+	controls._process(0)
+	flow_step(not drag(54, ahead, Vector2(0, -30)) and no_actions(), "foreground return requires fresh touches")
+	touch(55, button_center("boost"))
+	var car := VehicleFixture.new()
+	car.kind = "car"
+	host.add_child(car)
+	host.current_vehicle = car
+	controls._process(0)
+	flow_step(no_actions(), "entering a car clears foot run input")
+	touch(56, origin, true, true)
+	drag(56, origin + Vector2(45, -60), Vector2(45, -60))
+	flow_step(Input.is_action_pressed("right") and Input.is_action_pressed("forward"), "vehicle joystick steers and accelerates together")
+	host.settings.mobile_drive_mode = "buttons"
+	controls._process(0)
+	flow_step(no_actions() and not touch(57, origin, true, true), "drive-mode switch releases joystick and its old touch area")
+	touch(58, button_center("steer_left"))
+	touch(59, button_center("throttle"))
+	flow_step(Input.is_action_pressed("left") and Input.is_action_pressed("forward"), "button mode supports simultaneous left turn and throttle")
+	touch(58, button_center("steer_left"), false)
+	touch(59, button_center("throttle"), false)
+	touch(60, button_center("steer_right"))
+	touch(61, button_center("reverse"))
+	flow_step(Input.is_action_pressed("right") and Input.is_action_pressed("back") and not Input.is_action_pressed("brake"), "button mode exposes right turn and independent reverse")
+	touch(61, button_center("reverse"), false)
+	touch(62, button_center("brake"))
+	flow_step(Input.is_action_pressed("brake") and not Input.is_action_pressed("back"), "braking does not simultaneously request reverse")
+	var replacement := VehicleFixture.new()
+	replacement.kind = "car"
+	host.add_child(replacement)
+	host.current_vehicle = replacement
+	controls._process(0)
+	flow_step(no_actions(), "switching even between two cars clears held driving controls")
+	replacement.kind = "tank"
+	controls._process(0)
+	touch(63, button_center("fire"))
+	var yaw_before := host.yaw
+	drag(63, button_center("fire") + Vector2(-40, 0), Vector2(-40, 0))
+	flow_step(is_equal_approx(host.yaw - yaw_before, 40 * 0.003 * 1.8), "tank fire drag uses vehicle camera sensitivity")
+	for fixture in [{"size": Vector2(1560, 720), "safe": Rect2(50, 0, 1460, 694)}, {"size": Vector2(1280, 960), "safe": Rect2(0, 24, 1280, 908)}]:
+		controls.release_all()
+		controls.layout_for(fixture.size, fixture.safe)
+		var rects: Array[Rect2] = controls.reserved_rects()
+		var fits := true
+		for a in rects.size():
+			fits = fits and fixture.safe.encloses(rects[a])
+			for b in range(a + 1, rects.size()): fits = fits and not rects[a].intersects(rects[b])
+		flow_step(fits, "vehicle buttons fit safe area at " + str(fixture.size))
+	controls._process(0)
+	touch(64, button_center("throttle"))
+	touch(65, button_center("fire"))
+	host.current_vehicle = null
+	controls._process(0)
+	flow_step(no_actions(), "getting out clears all vehicle controls")
+	touch(66, button_center("fire"))
+	host.map_panel.show()
+	controls._process(0)
+	flow_step(no_actions() and not controls.visible, "a map modal clears fire before the pause flag is set")
+	host.resume()
+	controls._process(0)
+	car.queue_free()
+	replacement.queue_free()
+	controls.release_all()
+	return finish_flow()
 
 func run() -> void:
 	root.size = Vector2i(1280, 720)
@@ -198,6 +368,8 @@ func run() -> void:
 	controls._process(0)
 	host.current_vehicle = null
 	controls._process(0)
+	check("player flow: fire-drag camera, continuous shots, floating movement and run lock", firing_movement_flow())
+	check("player flow: menu/background/vehicle transitions never leave held inputs", interruption_vehicle_flow())
 	var gui_button := Button.new()
 	gui_button.position = Vector2(770, 250)
 	gui_button.size = Vector2(180, 100)

@@ -11,6 +11,7 @@ const Loading = preload("res://scripts/loading_progress.gd")
 const VEHICLE_NAMES = {"car":"Veloce V12 · 超跑","motorcycle":"Apex RR · 超级运动摩托","hoverboard":"Aether X1 · 反重力平衡车","speedboat":"Riviera 39 · 豪华快艇","yacht":"Ocean 90 · 豪华游艇","paraglider":"Thermal 9 · 滑翔伞","glider":"Southern Arc · 滑翔机","helicopter":"Harbour H6 · 直升机","airliner":"Dreamliner 787-9 · 双发客机","tank":"Harbour Bastion · 重装坦克","fighter":"Aster F-27 · 战斗机"}
 var mobile_controls: Control
 var mobile_ui: Node
+var mobile_sensors: Node
 var survival: Node3D
 var survival_hud: Control
 var campaign: Node
@@ -230,6 +231,10 @@ func _ready():
 	mobile_controls=load("res://scripts/mobile_controls.gd").new()
 	canvas.add_child(mobile_controls)
 	mobile_controls.setup(self)
+	if MobileProfile.is_mobile():
+		mobile_sensors=load("res://scripts/mobile_sensors.gd").new()
+		add_child(mobile_sensors)
+		mobile_sensors.setup(self,mobile_controls)
 	mobile_ui=load("res://scripts/mobile_ui.gd").new()
 	add_child(mobile_ui)
 	mobile_ui.setup(self)
@@ -1509,8 +1514,11 @@ func settings_menu():
 		notice.custom_minimum_size.x=430
 		modal_content.add_child(notice)
 		_settings_notice=""
-	_settings_section("画面")
 	var mobile:=MobileProfile.is_mobile()
+	if mobile:
+		button("触屏操作与灵敏度  →",func(): preload("res://scripts/mobile_settings_menu.gd").build(self),"PrimaryButton")
+		note("开火瞄准、摇杆、载具、陀螺仪与震动。")
+	_settings_section("画面")
 	if not mobile:
 		var modes:Array=GameSettings.WINDOW_MODES
 		_settings_option("显示模式",modes.map(func(row):return row[1]),modes.map(func(row):return row[0]).find(settings.window_mode),func(i): settings.window_mode=modes[i][0]; _settings_changed())
@@ -1535,7 +1543,8 @@ func settings_menu():
 	_settings_slider("主音量",0,1,0.05,float(settings.volume),func(v):return "%d%%"%roundi(v*100),func(v): settings.volume=v; _settings_changed())
 	_settings_toggle("切到其他窗口时静音",settings.mute_unfocused,func(v): settings.mute_unfocused=v; _settings_changed())
 	_settings_section("操作")
-	_settings_slider("触屏视角速度" if mobile else "鼠标灵敏度",0.001,0.008,0.0005,float(settings.sensitivity),func(v):return "%.1f"%(v*1000),func(v): settings.sensitivity=v; _settings_changed())
+	if not mobile:
+		_settings_slider("鼠标灵敏度",0.001,0.008,0.0005,float(settings.sensitivity),func(v):return "%.1f"%(v*1000),func(v): settings.sensitivity=v; _settings_changed())
 	_settings_slider("手柄视角速度",0.8,6.0,0.1,float(settings.pad_sensitivity),func(v):return "%.1f"%v,func(v): settings.pad_sensitivity=v; _settings_changed())
 	_settings_toggle("反转垂直视角",settings.invert,func(v): settings.invert=v; _settings_changed())
 	_settings_toggle("加大游戏提示文字",settings.large_text,func(v): settings.large_text=v; _settings_changed())

@@ -22,6 +22,9 @@ static func clear_target_rect(preferred: Rect2, safe: Rect2, obstacles: Array[Re
 	var area := safe.grow(-8)
 	var dimensions := preferred.size.min(area.size)
 	var at := preferred.position.clamp(area.position, area.end-dimensions)
+	var initial := Rect2(at,dimensions)
+	if not obstacles.any(func(obstacle:Rect2): return initial.intersects(obstacle.grow(4))):
+		return initial
 	var xs: Array[float] = [at.x,area.position.x,area.end.x-dimensions.x]
 	var ys: Array[float] = [at.y,area.position.y,area.end.y-dimensions.y]
 	for obstacle in obstacles:
@@ -34,13 +37,14 @@ static func clear_target_rect(preferred: Rect2, safe: Rect2, obstacles: Array[Re
 	for x in xs:
 		for y in ys:
 			var candidate := Rect2(Vector2(x,y),dimensions)
+			var distance := candidate.position.distance_squared_to(at)
+			if distance >= score: continue
 			var blocked := false
 			for obstacle in obstacles:
 				if candidate.intersects(obstacle.grow(4)):
 					blocked = true
 					break
 			if blocked: continue
-			var distance := candidate.position.distance_squared_to(at)
 			if distance < score: best=candidate;score=distance
 	# A fully covered screen should suppress the pin, never paint over a button.
 	return best if is_finite(score) else Rect2()
