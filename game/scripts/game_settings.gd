@@ -11,6 +11,17 @@ const DEFAULTS := {
 	"street_life": 1, "combat_difficulty": 1,
 	"bindings": {},
 }
+const MOBILE_DEFAULTS := {
+	"mobile_left_fire": true, "mobile_floating_stick": true, "mobile_run_lock": true,
+	"mobile_drive_mode": "joystick", "mobile_look_sensitivity": 1.0,
+	"mobile_fire_sensitivity": 0.8, "mobile_vehicle_sensitivity": 1.0,
+	"mobile_gyro_sensitivity": 1.0, "mobile_gyro_mode": "off", "mobile_haptics": true,
+}
+const MOBILE_SENSITIVITIES := ["mobile_look_sensitivity", "mobile_fire_sensitivity", "mobile_vehicle_sensitivity", "mobile_gyro_sensitivity"]
+const MOBILE_SENSITIVITY_MIN := 0.2
+const MOBILE_SENSITIVITY_MAX := 3.0
+const MOBILE_DRIVE_MODES := [["joystick", "摇杆驾驶"], ["buttons", "按键驾驶"]]
+const MOBILE_GYRO_MODES := [["off", "关闭"], ["firing", "开火时开启"], ["always", "始终开启"]]
 const WINDOW_MODES := [["windowed", "窗口"], ["borderless", "全屏（无边框）"], ["fullscreen", "独占全屏"]]
 const FPS_LIMITS := [0, 30, 60, 120, 144, 240]
 const RENDER_SCALES := [1.0, 0.85, 0.75, 0.67, 0.5]
@@ -59,14 +70,17 @@ static func save_preferences(data: Dictionary, profile: Dictionary = {}, directo
 
 
 static func defaults_for_platform(profile: Dictionary = {}) -> Dictionary:
-	return MobileProfile.constrain_settings(DEFAULTS,profile)
+	var selected := MobileProfile.current() if profile.is_empty() else profile
+	var result := MobileProfile.constrain_settings(DEFAULTS,selected)
+	if bool(selected.enabled): result.merge(MOBILE_DEFAULTS)
+	return result
 
 
 static func sanitized(data: Dictionary, profile: Dictionary = {}) -> Dictionary:
 	var result := defaults_for_platform(profile)
 	for key: String in data:
 		if not result.has(key): continue
-		var fallback: Variant = DEFAULTS[key]
+		var fallback: Variant = result[key]
 		var value: Variant = data[key]
 		if typeof(fallback) == TYPE_BOOL and typeof(value) == TYPE_BOOL: result[key] = value
 		elif typeof(fallback) in [TYPE_INT, TYPE_FLOAT] and typeof(value) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(value)): result[key] = value
@@ -83,6 +97,11 @@ static func sanitized(data: Dictionary, profile: Dictionary = {}) -> Dictionary:
 	result.pad_sensitivity = clampf(float(result.pad_sensitivity), 0.8, 6.0)
 	if not WINDOW_MODES.any(func(row: Array): return row[0] == result.window_mode): result.window_mode = "windowed"
 	if not ANTIALIASING.any(func(row: Array): return row[0] == result.antialiasing): result.antialiasing = "msaa2"
+	if result.has("mobile_drive_mode"):
+		for key: String in MOBILE_SENSITIVITIES:
+			result[key] = clampf(float(result[key]), MOBILE_SENSITIVITY_MIN, MOBILE_SENSITIVITY_MAX)
+		if not MOBILE_DRIVE_MODES.any(func(row: Array): return row[0] == result.mobile_drive_mode): result.mobile_drive_mode = MOBILE_DEFAULTS.mobile_drive_mode
+		if not MOBILE_GYRO_MODES.any(func(row: Array): return row[0] == result.mobile_gyro_mode): result.mobile_gyro_mode = MOBILE_DEFAULTS.mobile_gyro_mode
 	var bindings := {}
 	for group: Array in REBINDABLE:
 		var codes: Variant = result.bindings.get(group[1][0], null)

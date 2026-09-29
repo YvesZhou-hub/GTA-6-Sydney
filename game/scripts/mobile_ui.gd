@@ -113,6 +113,8 @@ func apply_layout(safe: Rect2) -> void:
 	if is_instance_valid(guidance) and is_instance_valid(controls) and controls.has_method("reserved_rects"):
 		var obstacles: Array[Rect2] = controls.reserved_rects()
 		guidance.set_touch_layout(safe,obstacles)
+		var feedback: Variant = host.get("combat_feedback")
+		if is_instance_valid(feedback): feedback.set_reserved_rects(obstacles)
 	for property in ["activity_panel", "survival_hud", "hint_panel", "landmark_marker", "fire_button", "mode_label"]: _hide(host.get(property))
 	for property in ["campaign", "districts"]:
 		var system: Variant = host.get(property)

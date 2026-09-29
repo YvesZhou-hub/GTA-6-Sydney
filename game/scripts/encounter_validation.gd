@@ -362,7 +362,9 @@ func continuous_vehicle_defence(tank: RigidBody3D):
 		if game.survival.cleared > initial_cleared and clear_s < 0.0:
 			clear_s = elapsed
 			spawn_sequence_at_clear = game.survival._spawn_sequence
-		if clear_s >= 0.0 and elapsed - clear_s >= 6.0: break
+		# A kill milestone may precede enough natural damage to exercise repairs.
+		# Finish only once both player journeys ran, retaining the 75-second bound.
+		if clear_s >= 0.0 and elapsed - clear_s >= 6.0 and not repair_events.is_empty(): break
 		if not is_instance_valid(tank) or tank.health <= 0.0: break
 		if tank.health < 50.0 and game.survival.field_repair_cooldown <= 0.0:
 			# Real player recovery action, while enemy AI and projectiles continue.

@@ -1,4 +1,5 @@
 extends Control
+signal damage_confirmed(amount: float)
 ## Presentation only: every number comes from an enemy's settled damage signal.
 ## Add before the main HUD in its CanvasLayer. This Control never consumes input.
 const Fonts = preload("res://scripts/ui_fonts.gd")
@@ -167,6 +168,7 @@ func _on_damaged(enemy: Node3D, actual: float, hit_position: Vector3, remaining:
 	if remaining <= 0.0: record.dead_until = _clock + 0.5
 	_damage_events += 1
 	_actual_damage += actual
+	damage_confirmed.emit(actual)
 	var style := str(enemy.get_meta("damage_style", "default"))
 	# Blast callbacks carry the shared explosion centre, not each victim's body.
 	# Keep every HP number attached to its actual victim. A precise bullet hit

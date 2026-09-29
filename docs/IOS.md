@@ -6,8 +6,12 @@ connected device without authorization for the current session.
 
 ## Controls and settings
 
-Left stick moves/steers; drag the right side to look. The contextual controls
-use the existing jump, brake, boost, drift, elevation and weapon actions.
+Left stick moves/steers; drag the right side or the held right fire button to
+look. Optional left fire leaves the right thumb free. The floating stick follows
+the initial touch; push forward beyond its ring briefly and release to lock
+running, then touch the stick again to cancel. Menus, backgrounding and vehicle
+changes clear all held controls. The contextual controls use the existing jump,
+brake, boost, drift, elevation and weapon actions; combat values are unchanged.
 Rise/raise is above descend/lower. Menus pause combat and release held actions.
 The map supports touch selection and panning. Notifications use a compact
 maximum-two-line banner; destination labels avoid the touch controls.
@@ -16,6 +20,13 @@ Mobile and `--mobile-preview` use `user://settings_mobile.json`. Desktop keeps
 `user://settings.json`; the mobile renderer's frame limit, resolution and window
 settings cannot overwrite desktop preferences. Existing world saves are shared.
 Backgrounding saves an active non-QA world once and pauses combat.
+
+Settings → Touch controls has four independent sensitivities (look, held fire,
+vehicle camera and gyroscope), fixed/floating stick, run lock, left fire and
+joystick/button driving. Button driving separates throttle, reverse and brake;
+enter/exit stays in the same place. Gyroscope modes are off, while firing and
+always. Optional short haptics confirm successful firing, hits and damage;
+neither haptics nor real sensor performance can be checked in the Mac preview.
 
 Phone defaults target 30 FPS at 67% render resolution; tablet uses 75%.
 These are budgets, not promises of measured performance. Nearby facade detail
@@ -79,6 +90,9 @@ out of public reports. See [Godot's iOS export guide](https://docs.godotengine.o
 ## Real-device checklist
 
 - Actual finger movement, simultaneous fire/aim, menus, map, entering/leaving vehicles.
+- Both fire buttons together; floating stick/run lock; both driving modes and reverse.
+- Gyroscope in both landscape orientations and different holding angles; all four
+  sensitivities, firing-only mode and haptics on/off, including cooldown refusals.
 - Foreground/background, lock/unlock, interruption and save/resume; no stuck actions.
 - Screenshots on foot, in car, tank, helicopter and map, including safe-area edges.
 - Ordinary title-menu idle and loaded-game idle, not only the scripted QA route.

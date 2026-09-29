@@ -3,14 +3,19 @@ extends Control
 ## Existing menus retain mouse emulation; claimed gameplay touches cannot leak
 ## through to GUI buttons or become a second mouse-triggered weapon request.
 
+signal weapon_fired
+
 const HOLD_ACTIONS := {
-	"fire": ["fire"], "boost": ["sprint", "boost"],
+	"fire": ["fire"], "fire_left": ["fire"], "boost": ["sprint", "boost"],
 	"brake": ["jump", "brake"], "rise": ["rise", "combat_raise"],
 	"fall": ["fall", "combat_lower"], "drift": ["drift"],
+	"steer_left": ["left"], "steer_right": ["right"],
+	"throttle": ["forward"], "reverse": ["back"],
 }
 const MOVE_ACTIONS := ["left", "right", "forward", "back"]
 const AIR_KINDS := ["helicopter", "airliner", "fighter", "glider", "paraglider", "hoverboard", "tank"]
 const DEAD_ZONE := 0.13
+const RUN_LOCK_HOLD := 0.28
 
 var host: Node
 var enabled := false
@@ -22,10 +27,21 @@ var _button_styles: Dictionary = {}
 var _safe := Rect2()
 var _layout_size := Vector2.ZERO
 var _stick_center := Vector2.ZERO
+var _stick_home := Vector2.ZERO
+var _stick_origin := Vector2.ZERO
 var _stick_radius := 92.0
 var _stick_vector := Vector2.ZERO
 var _scale := 1.0
 var _kind := ""
+var _vehicle_id := 0
+var _look_finger := -1
+var _left_fire := true
+var _floating_stick := true
+var _run_lock_enabled := true
+var _drive_mode := "joystick"
+var _run_locked := false
+var _run_candidate := false
+var _run_charge := 0.0
 var _draw_font: Font
 var _mouse_echo_position := Vector2(-10000, -10000)
 var _mouse_echo_until := 0
@@ -55,6 +71,17 @@ func is_gameplay_enabled() -> bool:
 		if is_instance_valid(panel) and panel is CanvasItem and panel.visible: return false
 	return true
 
+func is_firing() -> bool:
+	return is_gameplay_enabled() and (_is_held("fire") or _is_held("fire_left"))
+
+## Shared with the optional motion sensor, without making touch depend on it.
+func camera_input_context() -> String:
+	if not _kind.is_empty(): return "vehicle"
+	return "fire" if is_firing() else "look"
+
+func _settings() -> Dictionary:
+	return host.get("settings") if is_instance_valid(host) and host.get("settings") is Dictionary else {}
+
 ## Logical canvas coordinates, including the iPhone notch and home-indicator inset.
 func safe_area_rect() -> Rect2:
 	var bounds := Rect2(Vector2.ZERO, get_viewport_rect().size)
@@ -67,7 +94,8 @@ func safe_area_rect() -> Rect2:
 
 ## These areas should stay clear of desktop HUD panels while touch is enabled.
 func reserved_rects() -> Array[Rect2]:
-	var result: Array[Rect2] = [Rect2(_stick_center - Vector2.ONE * (_stick_radius + 20 * _scale), Vector2.ONE * (_stick_radius + 20 * _scale) * 2)]
+	var result: Array[Rect2] = []
+	if not _button_driving(): result.append(Rect2(_stick_center - Vector2.ONE * (_stick_radius + 20 * _scale), Vector2.ONE * (_stick_radius + 20 * _scale) * 2))
 	for id: String in _buttons:
 		if _button_visible(id): result.append(_buttons[id].rect)
 	return result
@@ -79,7 +107,9 @@ func layout_for(view_size: Vector2, safe_rect := Rect2()) -> void:
 	_scale = clampf(minf(_safe.size.y / 720.0, _safe.size.x / 1180.0), 0.72, 1.15)
 	var pad := 20.0 * _scale
 	_stick_radius = 92.0 * _scale
-	_stick_center = Vector2(_safe.position.x + 132 * _scale, _safe.end.y - 142 * _scale)
+	_stick_home = Vector2(_safe.position.x + 132 * _scale, _safe.end.y - 142 * _scale)
+	_stick_center = _stick_home
+	_stick_origin = _stick_home
 	var right := _safe.end.x - pad
 	var bottom := _safe.end.y - pad
 	_buttons.clear()
@@ -90,12 +120,18 @@ func layout_for(view_size: Vector2, safe_rect := Rect2()) -> void:
 	for i in top_ids.size():
 		_buttons[top_ids[i]] = {"rect": Rect2(Vector2(toolbar_x + i * 98 * _scale, _safe.position.y + 94 * _scale), Vector2(88, 72) * _scale), "text": top_text[i]}
 	_add_button("fire", "开火", Vector2(right - 108 * _scale, bottom - 120 * _scale), Vector2(108, 108) * _scale)
+	var left_fire_y := minf(_safe.position.y + maxf(254, 260 * _scale), _stick_home.y - _stick_radius - 116 * _scale)
+	_add_button("fire_left", "开火", Vector2(_safe.position.x + 24 * _scale, left_fire_y), Vector2(84, 84) * _scale)
 	_add_button("interact", "上下车", Vector2(right - 214 * _scale, bottom - 102 * _scale), Vector2(94, 84) * _scale)
 	_add_button("boost", "奔跑", Vector2(right - 318 * _scale, bottom - 102 * _scale), Vector2(94, 84) * _scale)
 	_add_button("brake", "跳跃", Vector2(right - 422 * _scale, bottom - 102 * _scale), Vector2(94, 84) * _scale)
 	_add_button("rise", "升高", Vector2(right - 94 * _scale, bottom - 316 * _scale), Vector2(94, 84) * _scale)
 	_add_button("fall", "降低", Vector2(right - 94 * _scale, bottom - 220 * _scale), Vector2(94, 84) * _scale)
 	_add_button("drift", "漂移", Vector2(right - 214 * _scale, bottom - 202 * _scale), Vector2(94, 84) * _scale)
+	_add_button("steer_left", "左转", Vector2(_safe.position.x + 28 * _scale, bottom - 102 * _scale), Vector2(94, 84) * _scale)
+	_add_button("steer_right", "右转", Vector2(_safe.position.x + 136 * _scale, bottom - 102 * _scale), Vector2(94, 84) * _scale)
+	_add_button("throttle", "油门", Vector2(right - 318 * _scale, bottom - 202 * _scale), Vector2(94, 84) * _scale)
+	_add_button("reverse", "倒车", Vector2(right - 422 * _scale, bottom - 202 * _scale), Vector2(94, 84) * _scale)
 	_build_button_styles()
 	queue_redraw()
 
@@ -121,25 +157,42 @@ func _refresh_layout() -> void:
 		layout_for(get_viewport_rect().size, next_safe)
 
 func _sync_state() -> void:
+	var settings := _settings()
+	var left_fire := bool(settings.get("mobile_left_fire", true))
+	var floating_stick := bool(settings.get("mobile_floating_stick", true))
+	var run_lock := bool(settings.get("mobile_run_lock", true))
+	var drive_mode := "buttons" if settings.get("mobile_drive_mode", "joystick") == "buttons" else "joystick"
+	if left_fire != _left_fire or floating_stick != _floating_stick or run_lock != _run_lock_enabled or drive_mode != _drive_mode:
+		release_all()
+		_left_fire = left_fire
+		_floating_stick = floating_stick
+		_run_lock_enabled = run_lock
+		_drive_mode = drive_mode
+		queue_redraw()
 	var playing := is_gameplay_enabled()
 	if not playing: release_all()
 	visible = playing
 	var vehicle: Variant = host.get("current_vehicle") if is_instance_valid(host) else null
 	var next_kind: String = str(vehicle.get("kind")) if is_instance_valid(vehicle) else ""
-	if next_kind != _kind:
+	var next_id: int = vehicle.get_instance_id() if is_instance_valid(vehicle) else 0
+	if next_kind != _kind or next_id != _vehicle_id:
 		# A held jump or aircraft control must not carry into a newly entered vehicle.
 		release_all()
 		_kind = next_kind
+		_vehicle_id = next_id
 		queue_redraw()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not enabled:
 		release_all()
 		visible = false
 		return
 	_refresh_layout()
 	_sync_state()
-	if is_gameplay_enabled() and _is_held("fire"): _request_fire()
+	if is_gameplay_enabled() and _run_candidate and _is_held("stick") and _run_charge < RUN_LOCK_HOLD:
+		_run_charge += maxf(0, delta)
+		if _run_charge >= RUN_LOCK_HOLD: queue_redraw()
+	if is_firing(): _request_fire()
 
 func _input(event: InputEvent) -> void:
 	if not enabled: return
@@ -157,6 +210,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func handle_touch(event: InputEvent, allow_look := false) -> bool:
 	if not event is InputEventScreenTouch and not event is InputEventScreenDrag: return false
+	_sync_state()
 	if not is_gameplay_enabled():
 		release_all()
 		return false
@@ -165,9 +219,17 @@ func handle_touch(event: InputEvent, allow_look := false) -> bool:
 		if not event.pressed or event.canceled:
 			if not _touches.has(index): return false
 			var role: String = _touches[index]
+			if role == "stick":
+				_move_stick(event.position)
+				_run_locked = not event.canceled and _run_candidate and _run_charge >= RUN_LOCK_HOLD
+				_stick_vector = Vector2.ZERO
+				_stick_center = _stick_home
+				_stick_origin = _stick_home
+				_run_candidate = false
+				_run_charge = 0.0
 			_touches.erase(index)
+			if _look_finger == index: _look_finger = -1
 			_remember_mouse_echo(event.position)
-			if role == "stick": _stick_vector = Vector2.ZERO
 			_update_actions()
 			if not event.canceled and not HOLD_ACTIONS.has(role) and _buttons.has(role) and _buttons[role].rect.has_point(event.position): _activate_tap(role)
 			queue_redraw()
@@ -176,24 +238,36 @@ func handle_touch(event: InputEvent, allow_look := false) -> bool:
 		for id: String in _buttons:
 			if _button_visible(id) and _buttons[id].rect.has_point(event.position):
 				_touches[index] = id
+				if id == "fire" and _look_finger < 0: _look_finger = index
 				_remember_mouse_echo(event.position)
 				_update_actions()
 				queue_redraw()
 				return true
-		if event.position.distance_to(_stick_center) <= _stick_radius + 24 * _scale:
+		# Floating movement, like free look, waits until existing GUI declines.
+		var stick_hit: bool = _stick_region().has_point(event.position) if _floating_stick else event.position.distance_to(_stick_center) <= _stick_radius + 24 * _scale
+		if not _button_driving() and stick_hit and (allow_look or not _floating_stick):
 			_touches[index] = "blocked" if _is_held("stick") else "stick"
-			if _touches[index] == "stick": _move_stick(event.position)
+			if _touches[index] == "stick":
+				_run_locked = false
+				_run_charge = 0.0
+				if _floating_stick:
+					_stick_origin = event.position
+					_stick_center = _floating_center(event.position)
+				_move_stick(event.position)
 			_remember_mouse_echo(event.position)
 			return true
 		if allow_look and _look_region().has_point(event.position):
-			_touches[index] = "blocked" if _is_held("look") else "look"
+			_touches[index] = "blocked" if _look_finger >= 0 else "look"
+			if _touches[index] == "look": _look_finger = index
 			_remember_mouse_echo(event.position)
 			return true
 	elif _touches.has(index):
 		_remember_mouse_echo(event.position)
 		match _touches[index]:
 			"stick": _move_stick(event.position)
-			"look": _move_camera(event.relative)
+			"look", "fire":
+				if _look_finger < 0: _look_finger = index
+				if _look_finger == index: _move_camera(event.relative)
 		# Held buttons retain their original finger until release. A swipe across
 		# neighbouring buttons cannot accidentally press another action.
 		return true
@@ -206,15 +280,33 @@ func _remember_mouse_echo(at: Vector2) -> void:
 func _look_region() -> Rect2:
 	return Rect2(Vector2(_safe.get_center().x, _safe.position.y + 176 * _scale), Vector2(_safe.size.x / 2.0, maxf(0, _safe.size.y - 196 * _scale)))
 
+func _stick_region() -> Rect2:
+	return Rect2(Vector2(_safe.position.x + 16 * _scale, _safe.end.y - 280 * _scale), Vector2(minf(440 * _scale, _safe.size.x * 0.45) - 32 * _scale, 264 * _scale))
+
+func _floating_center(at: Vector2) -> Vector2:
+	var extent := _stick_radius + 20 * _scale
+	var top := _stick_region().position.y
+	if _left_fire: top = maxf(top, _buttons.fire_left.rect.end.y + extent)
+	# Keep the drawn ring inside safe bounds; displacement still starts at the
+	# actual finger so touching an edge never starts unintended movement.
+	return Vector2(clampf(at.x, _safe.position.x + extent, _stick_region().end.x - extent), clampf(at.y, top, _safe.end.y - extent))
+
 func _move_stick(at: Vector2) -> void:
-	_stick_vector = ((at - _stick_center) / _stick_radius).limit_length(1.0)
+	if not at.is_finite(): return
+	var raw := (at - _stick_origin) / _stick_radius
+	_stick_vector = raw.limit_length(1.0)
+	_run_candidate = _kind.is_empty() and _run_lock_enabled and raw.y <= -1.25 and absf(raw.x) <= -raw.y * 0.55
+	if not _run_candidate: _run_charge = 0.0
 	_update_actions()
 	queue_redraw()
 
 func _move_camera(relative: Vector2) -> void:
 	if not relative.is_finite(): return
-	var settings: Dictionary = host.get("settings") if host.get("settings") is Dictionary else {}
-	var sensitivity := clampf(float(settings.get("sensitivity", 0.003)), 0.0005, 0.02) / _scale
+	var settings := _settings()
+	var context := camera_input_context()
+	var multiplier := float(settings.get("mobile_" + context + "_sensitivity", 0.8 if context == "fire" else 1.0))
+	if not is_finite(multiplier): multiplier = 1.0
+	var sensitivity := 0.003 * clampf(multiplier, 0.2, 3.0) / _scale
 	host.set("yaw", float(host.get("yaw")) - relative.x * sensitivity)
 	host.set("pitch", clampf(float(host.get("pitch")) - relative.y * sensitivity * (-1.0 if settings.get("invert", false) else 1.0), -1.05, 0.65))
 
@@ -229,8 +321,11 @@ func _update_actions() -> void:
 	wanted["right"] = maxf(0, move.x)
 	wanted["forward"] = maxf(0, -move.y)
 	wanted["back"] = maxf(0, move.y)
+	if _run_locked:
+		wanted["forward"] = 1.0
+		wanted["sprint"] = 1.0
 	for role: String in HOLD_ACTIONS:
-		for action: String in HOLD_ACTIONS[role]: wanted[action] = 1.0 if _is_held(role) else 0.0
+		for action: String in HOLD_ACTIONS[role]: wanted[action] = maxf(float(wanted.get(action, 0)), 1.0 if _is_held(role) else 0.0)
 	for action: String in wanted:
 		if not InputMap.has_action(action): continue
 		var strength := float(wanted[action])
@@ -247,10 +342,10 @@ func _request_fire() -> void:
 	if not is_gameplay_enabled(): return
 	if host.has_method("can_fire_weapon") and host.call("can_fire_weapon"):
 		var weapons: Variant = host.get("weapons")
-		if is_instance_valid(weapons): weapons.call("fire_current")
+		if is_instance_valid(weapons) and weapons.call("fire_current"): weapon_fired.emit()
 	elif _kind.is_empty():
 		var survival: Variant = host.get("survival")
-		if is_instance_valid(survival) and survival.has_method("fire_blaster"): survival.call("fire_blaster")
+		if is_instance_valid(survival) and survival.has_method("fire_blaster") and survival.call("fire_blaster"): weapon_fired.emit()
 
 func _activate_tap(id: String) -> void:
 	if not is_gameplay_enabled(): return
@@ -267,16 +362,27 @@ func _activate_tap(id: String) -> void:
 	_sync_state()
 
 func _button_visible(id: String) -> bool:
+	if id == "fire_left": return _left_fire
+	if id in ["steer_left", "steer_right", "throttle", "reverse"]: return _button_driving()
 	if id in ["rise", "fall"]: return _kind in AIR_KINDS
 	if id == "drift": return _kind in ["car", "motorcycle"]
 	return true
 
+func _button_driving() -> bool:
+	return not _kind.is_empty() and _drive_mode == "buttons"
+
 func release_all() -> void:
-	if _pressed_actions.is_empty() and _touches.is_empty() and _stick_vector == Vector2.ZERO: return
+	if _pressed_actions.is_empty() and _touches.is_empty() and _stick_vector == Vector2.ZERO and not _run_locked: return
 	for action: String in _pressed_actions: Input.action_release(action)
 	_pressed_actions.clear()
 	_touches.clear()
 	_stick_vector = Vector2.ZERO
+	_stick_center = _stick_home
+	_stick_origin = _stick_home
+	_look_finger = -1
+	_run_locked = false
+	_run_candidate = false
+	_run_charge = 0.0
 	queue_redraw()
 
 func _notification(what: int) -> void:
@@ -292,14 +398,21 @@ func _draw() -> void:
 	if not is_gameplay_enabled() or _draw_font == null: return
 	var rim := Color(0.78, 0.92, 1.0, 0.42)
 	var fill := Color(0.035, 0.075, 0.11, 0.58)
-	draw_circle(_stick_center, _stick_radius + 12 * _scale, fill)
-	draw_arc(_stick_center, _stick_radius + 12 * _scale, 0, TAU, 64, rim, 2 * _scale, true)
-	draw_circle(_stick_center + _stick_vector * _stick_radius * 0.64, 38 * _scale, Color(0.64, 0.85, 0.98, 0.52 if _is_held("stick") else 0.26))
-	_draw_text("移动 / 转向", Rect2(_stick_center + Vector2(-90, 112) * _scale, Vector2(180, 24) * _scale), 17)
+	if not _button_driving():
+		draw_circle(_stick_center, _stick_radius + 12 * _scale, fill)
+		draw_arc(_stick_center, _stick_radius + 12 * _scale, 0, TAU, 64, rim, 2 * _scale, true)
+		draw_circle(_stick_center + _stick_vector * _stick_radius * 0.64, 38 * _scale, Color(0.64, 0.85, 0.98, 0.52 if _is_held("stick") else 0.26))
+		var stick_text := "转向 / 前后" if not _kind.is_empty() else "移动"
+		if _run_locked or _run_charge >= RUN_LOCK_HOLD:
+			stick_text = "已锁定 · 触碰取消" if _run_locked else "松手锁定奔跑"
+			var lock_at := _stick_center + Vector2(0, -64) * _scale
+			draw_arc(lock_at, 9 * _scale, PI, TAU, 20, Color(0.42, 0.92, 0.79), 3 * _scale, true)
+			draw_rect(Rect2(lock_at + Vector2(-12, 0) * _scale, Vector2(24, 19) * _scale), Color(0.42, 0.92, 0.79))
+		_draw_text(stick_text, Rect2(_stick_center + Vector2(-106, 77) * _scale, Vector2(212, 24) * _scale), 17)
 	for id: String in _buttons:
 		if not _button_visible(id): continue
 		var rect: Rect2 = _buttons[id].rect
-		var style: StyleBoxFlat = _button_styles[("fire" if id == "fire" else "normal") + ("_held" if _is_held(id) else "")]
+		var style: StyleBoxFlat = _button_styles[("fire" if id in ["fire", "fire_left"] else "normal") + ("_held" if _is_held(id) else "")]
 		draw_style_box(style, rect)
 		var title: String = _buttons[id].text
 		if id == "boost": title = "加速" if not _kind.is_empty() else "奔跑"
