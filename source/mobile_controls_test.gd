@@ -399,7 +399,7 @@ func run() -> void:
 	await process_frame
 	check("viewport resize immediately releases all fingers and held actions", no_actions() and controls._touches.is_empty())
 	var passed := checks.all(func(item): return item.passed)
-	print("MOBILE_CONTROLS_RESULT ", JSON.stringify({"passed": passed, "checks": checks.size(), "scope": "isolated overlay, fake host and production API contracts; no world or player saves; physical iOS multitouch not tested"}))
+	print("MOBILE_CONTROLS_COMPLETE ", JSON.stringify({"passed": passed, "checks": checks.size(), "scope": "isolated overlay, fake host and production API contracts; no world or player saves; physical iOS multitouch not tested"}))
 	controls.release_all()
 	host.queue_free()
 	await process_frame
