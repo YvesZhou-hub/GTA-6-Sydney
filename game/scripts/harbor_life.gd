@@ -145,7 +145,7 @@ func _build_board() -> void:
 	for y in [0.64, 2.36]:
 		_box(_board_node, Vector3(0, y, 0), Vector3(2.88, 0.055, 0.22), brass)
 	var label := Label3D.new()
-	label.text = "HARBOUR EXCHANGE\n──────────────\nFIELDWORK · SALVAGE · SURVEY\n\nE  Browse local work"
+	label.text = "HARBOUR EXCHANGE\n──────────────\nFIELDWORK · SALVAGE · SURVEY\n\n" + ("「互动」 查看工作" if MobileProfile.is_mobile() else "E  Browse local work")
 	label.position = Vector3(0, 1.52, 0.102)
 	label.font_size = 40
 	label.pixel_size = 0.002
@@ -153,7 +153,7 @@ func _build_board() -> void:
 	label.outline_size = 2
 	_board_node.add_child(label)
 	var back := Label3D.new()
-	back.text = "HARBOUR\nEXCHANGE\nE  Local work"
+	back.text = "HARBOUR\nEXCHANGE\n" + ("「互动」 查看工作" if MobileProfile.is_mobile() else "E  Local work")
 	back.position = Vector3(0, 1.5, -0.102)
 	back.rotation.y = PI
 	back.font_size = 40
@@ -640,6 +640,13 @@ func interact(player_pos: Vector3) -> String:
 		return toggle_carry(player_pos)
 	return "附近没有可以互动的人或物。请靠近行人、海港交易所或货箱。"
 
+## Whether interact would pick up or deliver a crate here. Phones share one
+## button for boarding and crates, so this lets a crate win over a parked car.
+func cargo_action_ready(player_pos: Vector3) -> bool:
+	if player_pos.distance_to(_delivery()) < 7.0 and (is_instance_valid(carried_cargo) or (not active_job.is_empty() and str(active_job.id)=="salvage")):
+		return true
+	return not is_instance_valid(carried_cargo) and is_instance_valid(_nearest_cargo(player_pos))
+
 func toggle_carry(player_pos: Vector3) -> String:
 	if is_instance_valid(carried_cargo):
 		var item := carried_cargo
@@ -741,7 +748,7 @@ func spend(cost: int, reason: String = "") -> bool:
 		money -= cost
 	money_changed.emit(money)
 	if not reason.is_empty():
-		notification.emit(reason + (" · 观光模式免费" if sandbox else " · $%d" % cost))
+		notification.emit(reason + (" · 自由沙盒免费" if sandbox else " · $%d" % cost))
 	return true
 
 func recover_cargo() -> String:

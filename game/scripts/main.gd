@@ -698,7 +698,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	landmark_target_key=""
 	landmark_target_name=""
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
-	if is_instance_valid(survival) and survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
+	if is_instance_valid(survival) and survival.enabled: life.status_text="奶龙持续增援 · 击败赚金币 · 无需清完上一批\n「急救」治疗 / 快修 · 「整备」里升级和开关自动武器" if MobileProfile.is_mobile() else GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
 	if is_instance_valid(campaign): campaign.start_new()
 	if is_instance_valid(districts): districts.reset()
 	if is_instance_valid(street): street.clear()
@@ -733,7 +733,7 @@ func enable_encounters():
 	survival.grace=12.0
 	survival._spawn_clock=0.6
 	survival.rest=0.0
-	life.status_text=GameSettings.keys("奶龙跟随街区持续增援 · 击败赚金币\n{heal} 急救 / 快修 · {survival_services} 升级 · {auto_support} 自动武器")
+	life.status_text="奶龙跟随街区持续增援 · 击败赚金币\n「急救」治疗 / 快修 · 「整备」里升级和开关自动武器" if MobileProfile.is_mobile() else GameSettings.keys("奶龙跟随街区持续增援 · 击败赚金币\n{heal} 急救 / 快修 · {survival_services} 升级 · {auto_support} 自动武器")
 	close_panel()
 	notify("奶龙危机已开启 · 保留当前财富、载具与位置\n12 秒保护，奶龙正在接近 · 「载具」新增武装载具" if MobileProfile.is_mobile() else "奶龙危机已开启 · 保留当前财富、载具与位置\n12 秒保护，奶龙正在接近 · Tab 新增武装载具")
 
@@ -1788,7 +1788,8 @@ func _unhandled_input(event):
 		if is_instance_valid(current_vehicle): exit_vehicle()
 		else:
 			var vehicle=nearest_vehicle()
-			if vehicle: enter_vehicle(vehicle)
+			# On phones the same button boards vehicles and carries crates.
+			if vehicle and not (MobileProfile.is_mobile() and life.cargo_action_ready(player.global_position)): enter_vehicle(vehicle)
 			else:
 				var message=life.interact(player.global_position)
 				if message=="OPEN_JOBS": jobs_menu()
