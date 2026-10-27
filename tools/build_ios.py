@@ -429,11 +429,16 @@ def main(argv=None):
                 archive_path = (args.archive_path.resolve() if args.archive_path else
                                 pathlib.Path.home() / 'Library/Developer/Xcode/Archives' / time.strftime('%Y-%m-%d')
                                 / f'Harbourlife {version_match[1]} ({args.build_number}).xcarchive')
+                if archive_path.suffix != '.xcarchive':
+                    # xcodebuild appends the suffix itself, so checks would look in the wrong place.
+                    archive_path = archive_path.with_name(archive_path.name + '.xcarchive')
                 export_path = archive_path.with_name(archive_path.stem + '-export')
-                # Synced Documents adds Finder metadata that breaks signatures.
+                # Synced Documents adds Finder metadata that breaks signatures. The
+                # archive is built from the --output project, so both must be outside.
                 documents = pathlib.Path.home() / 'Documents'
-                if documents == archive_path or documents in archive_path.parents:
-                    raise RuntimeError('Archive must be outside synced Documents: ' + str(archive_path))
+                for path in (archive_path, output):
+                    if documents == path or documents in path.parents:
+                        raise RuntimeError('Archive and --output must be outside synced Documents: ' + str(path))
                 if archive_path.exists() or export_path.exists():
                     raise RuntimeError('Archive destination must not exist; choose a new --archive-path or --build-number: ' + str(archive_path))
             preset = ios_preset(args.template.resolve(), args.team or UNSIGNED_TEAM, args.bundle_id,

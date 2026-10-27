@@ -96,16 +96,18 @@ out of public reports. See [Godot's iOS export guide](https://docs.godotengine.o
 python3 tools/build_ios.py --archive --team YOURTEAMID --build-number 2 \
   --output "$HOME/Library/Application Support/Harbourlife/ios-projects/testflight-2" \
   --report reports/ios-testflight-2.json
-# 归档并上传到 App Store Connect：
-python3 tools/build_ios.py --upload --team YOURTEAMID --build-number 2 \
-  --output "$HOME/Library/Application Support/Harbourlife/ios-projects/testflight-2-upload" \
-  --report reports/ios-testflight-2-upload.json
+# 归档并上传到 App Store Connect（自查用过的 build 号不能再用）：
+python3 tools/build_ios.py --upload --team YOURTEAMID --build-number 3 \
+  --output "$HOME/Library/Application Support/Harbourlife/ios-projects/testflight-3" \
+  --report reports/ios-testflight-3.json
 ```
 
 - 第一次上传前，要先在 App Store Connect 建好 bundle id 为
-  `com.yveszhou.harbourlife` 的 App 记录。
+  `com.yveszhou.harbourlife` 的 App 记录；Xcode 的 Settings > Accounts 里要登录一个
+  有 Admin 或 App Manager 权限的账号，云端签名和上传都用它。
+- 外部测试组的第一个 build 要先过 Beta App Review，并且要先填好测试说明和反馈邮箱。
 - 显示的版本号就是游戏的 `config/version`；`--build-number` 是 CFBundleVersion，
-  每次上传都要比上一次大。
+  每次上传都要比上一次大；同一天归档过的号也不能再用（归档已经存在会直接报错）。
 - `--archive` 用自动签名，会向 Apple 请求更新证书和描述文件。归档默认放在
   `~/Library/Developer/Xcode/Archives/`，中间文件在
   `~/Library/Application Support/Harbourlife/ios-derived/`，都不放进同步的 Documents。
@@ -116,7 +118,9 @@ python3 tools/build_ios.py --upload --team YOURTEAMID --build-number 2 \
 - 只能装在 iPhone 15 Pro 及更新的机型上（`iphone-performance-gaming-tier`，需要
   iOS 17），这一轮也只支持 iPhone，不支持 iPad。
 - 打开了 increased memory limit 权限（`com.apple.developer.kernel.increased-memory-limit`），
-  让系统给游戏更高的内存上限。
+  让系统给游戏更高的内存上限。这也影响上面的 `--sign`：开发描述文件要对应
+  `com.yveszhou.harbourlife` 并包含这项权限（先用 Xcode 打开工程让它自动生成一次）；
+  要继续签旧的开发版，加 `--bundle-id local.yveszhou.harbourlife`。
 
 ## Real-device checklist
 
