@@ -1,6 +1,7 @@
 extends Node3D
 ## Street encounters use the existing city's physical surfaces. No replacement map.
 const GameSettings = preload("res://scripts/game_settings.gd")
+const MobileProfile = preload("res://scripts/mobile_profile.gd")
 const Enemy = preload("res://scripts/nailong_enemy.gd")
 const Spawn = preload("res://scripts/encounter_spawn.gd")
 const Armory = preload("res://scripts/vehicle_armory.gd")
@@ -324,7 +325,7 @@ func _enemy_defeated(enemy, reward: int) -> void:
 		_spawn_clock = minf(_spawn_clock, 0.6)
 		_credit(800 + mini(cleared, 6) * 150)
 		medkits = mini(MEDKIT_LIMIT, medkits + 1)
-		game.notify("清理奖金到账 · 医疗包 +1 · 下一批奶龙正在赶来\nH 急救 / 战地快修 · B 整备升级 · 持续反击")
+		game.notify("清理奖金到账 · 医疗包 +1 · 下一批奶龙正在赶来\n「急救」治疗 / 战地快修 · 「整备」升级 · 持续反击" if MobileProfile.is_mobile() else "清理奖金到账 · 医疗包 +1 · 下一批奶龙正在赶来\nH 急救 / 战地快修 · B 整备升级 · 持续反击")
 
 func _credit(amount: int) -> void:
 	game.life.money += maxi(amount, 0)
@@ -366,7 +367,7 @@ func _hurt_target(damage: float, origin: Vector3, limit_crowd: bool = true) -> f
 	_hurt_direction = ("右侧" if side > 0 else "左侧") if absf(side) > absf(front) else ("前方" if front > 0 else "后方")
 	if target is RigidBody3D:
 		fleet_health[target.kind] = minf(float(fleet_health.get(target.kind, 100.0)), target.health)
-		if target.health <= 0.0: game.notify("载具已失去动力 · E 离舱反击，或 Home 呼叫救援", false)
+		if target.health <= 0.0: game.notify("载具已失去动力 · 「下车」反击，或在「暂停」里救援" if MobileProfile.is_mobile() else "载具已失去动力 · E 离舱反击，或 Home 呼叫救援", false)
 	return actual
 
 func _add_hazard(from: Vector3, at: Vector3, damage: float, radius: float, shockwave: bool = false, electric: bool = false) -> void:
@@ -525,12 +526,12 @@ func apply_fleet_to(vehicle: RigidBody3D) -> void:
 func service_block_reason(action: String = "repair") -> String:
 	# Portable supplies and software upgrades remain usable in continuous combat.
 	if action in ["medkit", "upgrade"]: return ""
-	if subject() is RigidBody3D and subject().kind not in ["yacht", "speedboat"] and subject().global_position.y < 0.0: return "载具已落水 · 先 E 离舱或 Home 救援，再远程维修"
+	if subject() is RigidBody3D and subject().kind not in ["yacht", "speedboat"] and subject().global_position.y < 0.0: return "载具已落水 · 先「下车」或在「暂停」里救援，再远程维修" if MobileProfile.is_mobile() else "载具已落水 · 先 E 离舱或 Home 救援，再远程维修"
 	if action == "field_repair":
 		return "快修冷却 %.0f 秒" % ceil(field_repair_cooldown) if field_repair_cooldown > 0.0 else ""
 	if action == "refuel": return ""
-	if subject() is RigidBody3D and subject().linear_velocity.length() > 1.0: return "先停稳载具，再进行完整维修；H 可随时快修"
-	if _hurt_clock > 0.0: return "完整维修需脱战 %.0f 秒；H 快修不受影响" % ceil(_hurt_clock)
+	if subject() is RigidBody3D and subject().linear_velocity.length() > 1.0: return "先停稳载具，再进行完整维修；「急救」可随时快修" if MobileProfile.is_mobile() else "先停稳载具，再进行完整维修；H 可随时快修"
+	if _hurt_clock > 0.0: return ("完整维修需脱战 %.0f 秒；「急救」快修不受影响" if MobileProfile.is_mobile() else "完整维修需脱战 %.0f 秒；H 快修不受影响") % ceil(_hurt_clock)
 	for enemy in enemies:
 		if is_instance_valid(enemy) and enemy.distance_to_target_surface(subject()) < 20.0: return "附近 20 米内有奶龙 · 先清理或撤到安全位置"
 	return ""
@@ -540,7 +541,7 @@ func heal_player() -> String:
 	if game.player.health <= 0.0 or _rescue_pending: return "救援正在前往，不会消耗医疗包"
 	if game.player.health >= game.player.max_health: return "生命值已满，医疗包已保留"
 	if heal_cooldown > 0.0: return "医疗冷却 %.0f 秒" % ceil(heal_cooldown)
-	if medkits <= 0: return "医疗包用完 · B 补给，或清理奶龙获取"
+	if medkits <= 0: return "医疗包用完 · 「整备」补给，或清理奶龙获取" if MobileProfile.is_mobile() else "医疗包用完 · B 补给，或清理奶龙获取"
 	medkits -= 1; heal_cooldown = 12.0
 	game.player.heal(60.0)
 	return "使用医疗包 · 恢复 60 生命"
@@ -597,7 +598,7 @@ func transact(action: String, kind: String = "") -> Dictionary:
 		if vehicle.weapon_upgrade >= 3: return {"ok": false, "message": "火控已达到 III 级"}
 		cost = UPGRADE_COSTS[vehicle.weapon_upgrade]
 	else: return {"ok": false, "message": "未知服务"}
-	if game.life.money < cost: return {"ok": false, "message": "金币不足 · 清理奶龙或 J 接取工作"}
+	if game.life.money < cost: return {"ok": false, "message": "金币不足 · 清理奶龙或在「暂停」里接取工作" if MobileProfile.is_mobile() else "金币不足 · 清理奶龙或 J 接取工作"}
 	game.life.money -= cost
 	game.life.money_changed.emit(game.life.money)
 	if action == "medkit": medkits += 1
@@ -619,7 +620,7 @@ func transact(action: String, kind: String = "") -> Dictionary:
 				elif action == "repair": member.repair()
 				else: member.health = float(fleet_health[kind])
 			else: member.weapon_upgrade = int(fleet_upgrades[vehicle.kind])
-	var message := {"medkit": "医疗包 +1", "refuel": "当前载具能源已补满", "repair": "同款载具已维修，落水残骸已回收 · Tab 可重新出发", "field_repair": "战地快修 · 同款耐久 +25%，12 秒冷却", "upgrade": "火控升级完成 · 覆盖范围扩大、火力更强、装填更快"}
+	var message := {"medkit": "医疗包 +1", "refuel": "当前载具能源已补满", "repair": "同款载具已维修，落水残骸已回收 · 「载具」可重新出发" if MobileProfile.is_mobile() else "同款载具已维修，落水残骸已回收 · Tab 可重新出发", "field_repair": "战地快修 · 同款耐久 +25%，12 秒冷却", "upgrade": "火控升级完成 · 覆盖范围扩大、火力更强、装填更快"}
 	if action == "field_repair": message.field_repair = "战地快修 · 同款耐久 +%.0f%%，12 秒冷却" % restored
 	if action == "upgrade":
 		var stats: Dictionary = game.weapons.upgrade_stats(kind, vehicle.weapon_upgrade).current

@@ -1,5 +1,6 @@
 """Packaging guard checks; these do not claim device or graphics validation."""
 import importlib.util
+import configparser
 import contextlib
 import io
 import json
@@ -75,6 +76,44 @@ class IOSBuildGuards(unittest.TestCase):
         with self.assertRaises(SystemExit) as result, contextlib.redirect_stderr(io.StringIO()):
             build.main(['--sign'])
         self.assertEqual(result.exception.code, 2)
+
+    def test_archive_and_upload_require_explicit_team(self):
+        for flag in ('--archive', '--upload'):
+            with self.assertRaises(SystemExit) as result, contextlib.redirect_stderr(io.StringIO()):
+                build.main([flag])
+            self.assertEqual(result.exception.code, 2)
+
+    def staged_options(self, **kwargs):
+        parser = configparser.ConfigParser(interpolation=None)
+        parser.optionxform = str
+        parser.read_string(build.ios_preset('ios.zip', 'ABCDE12345', 'com.example.game', '0.5.0', 7, '17.0', **kwargs))
+        return {key: json.loads(value) for key, value in parser['preset.0.options'].items()}
+
+    def test_build_number_is_separate_from_version(self):
+        options = self.staged_options()
+        self.assertEqual(options['application/short_version'], '0.5.0')
+        self.assertEqual(options['application/version'], '7')
+
+    def test_staged_preset_has_app_store_requirements(self):
+        options = self.staged_options(app_store=True)
+        self.assertEqual(options['application/export_method_release'], 0)
+        self.assertEqual(self.staged_options()['application/export_method_release'], 1)
+        self.assertEqual(options['application/targeted_device_family'], 0)
+        self.assertEqual(options['application/min_ios_version'], '17.0')
+        self.assertIs(options['capabilities/performance_gaming_tier'], True)
+        self.assertIs(options['entitlements/increased_memory_limit'], True)
+        for kind in ('camera', 'microphone', 'photolibrary'):
+            self.assertTrue(options[f'privacy/{kind}_usage_description'].strip())
+        icon = options['icons/icon_1024x1024']
+        self.assertTrue((ROOT / 'game' / icon.removeprefix('res://')).is_file())
+
+    def test_export_options_target_public_testflight(self):
+        for upload, destination in ((True, 'upload'), (False, 'export')):
+            options = build.export_options('ABCDE12345', upload)
+            self.assertEqual(options['method'], 'app-store-connect')
+            self.assertEqual(options['destination'], destination)
+            self.assertIs(options['testFlightInternalTestingOnly'], False)
+            self.assertIs(options['manageAppVersionAndBuildNumber'], False)
 
     def test_placeholder_is_removed_without_changing_real_team(self):
         with tempfile.TemporaryDirectory() as tmp:

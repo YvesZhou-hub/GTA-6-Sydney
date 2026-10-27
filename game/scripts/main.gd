@@ -698,7 +698,7 @@ func new_world(new_mode:String,new_name:String,save_now=true):
 	landmark_target_key=""
 	landmark_target_name=""
 	if is_instance_valid(survival): survival.reset_mode(mode!="sandbox")
-	if is_instance_valid(survival) and survival.enabled: life.status_text=GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
+	if is_instance_valid(survival) and survival.enabled: life.status_text="奶龙持续增援 · 击败赚金币 · 无需清完上一批\n「急救」治疗 / 快修 · 「整备」里升级和开关自动武器" if MobileProfile.is_mobile() else GameSettings.keys("奶龙持续增援 · 击败赚金币 · 无需清完上一批\n{heal} 急救 / 快修 · {survival_services} 战地升级 · {auto_support} 自动武器")
 	if is_instance_valid(campaign): campaign.start_new()
 	if is_instance_valid(districts): districts.reset()
 	if is_instance_valid(street): street.clear()
@@ -733,9 +733,9 @@ func enable_encounters():
 	survival.grace=12.0
 	survival._spawn_clock=0.6
 	survival.rest=0.0
-	life.status_text=GameSettings.keys("奶龙跟随街区持续增援 · 击败赚金币\n{heal} 急救 / 快修 · {survival_services} 升级 · {auto_support} 自动武器")
+	life.status_text="奶龙跟随街区持续增援 · 击败赚金币\n「急救」治疗 / 快修 · 「整备」里升级和开关自动武器" if MobileProfile.is_mobile() else GameSettings.keys("奶龙跟随街区持续增援 · 击败赚金币\n{heal} 急救 / 快修 · {survival_services} 升级 · {auto_support} 自动武器")
 	close_panel()
-	notify("奶龙危机已开启 · 保留当前财富、载具与位置\n12 秒保护，奶龙正在接近 · Tab 新增武装载具")
+	notify("奶龙危机已开启 · 保留当前财富、载具与位置\n12 秒保护，奶龙正在接近 · 「载具」新增武装载具" if MobileProfile.is_mobile() else "奶龙危机已开启 · 保留当前财富、载具与位置\n12 秒保护，奶龙正在接近 · Tab 新增武装载具")
 
 func reset_fleet(with_defaults: bool = true):
 	if is_instance_valid(weapons): weapons.clear()
@@ -942,8 +942,8 @@ func pause_menu():
 	section("战斗与世界")
 	if is_instance_valid(districts): button(districts_label(),districts_menu)
 	if not survival.enabled: button("开启奶龙危机 · 保留当前世界与财富",enable_encounters)
-	button("战地补给与武器升级  ·  B",survival_menu)
-	button("时间与晚霞  ·  T",time_menu)
+	button("战地补给与武器升级" if MobileProfile.is_mobile() else "战地补给与武器升级  ·  B",survival_menu)
+	button("时间与晚霞" if MobileProfile.is_mobile() else "时间与晚霞  ·  T",time_menu)
 	button("保存世界",func():
 		if save_world(): notify("世界已保存"))
 	section("设置与存档")
@@ -985,7 +985,7 @@ func jobs_menu():
 
 func experiences_menu():
 	active_panel="experiences"
-	clear_panel("来悉尼，玩得开心。","口袋里还有 $%d · 载具始终免费。选一个地方去逛逛，留下你的城市足迹。\nK 随时打开体验菜单，M 查看方向与距离。"%life.money)
+	clear_panel("来悉尼，玩得开心。",("口袋里还有 $%d · 载具始终免费。选一个地方去逛逛，留下你的城市足迹。\n随时从「暂停」打开城市体验，「地图」查看方向与距离。" if MobileProfile.is_mobile() else "口袋里还有 $%d · 载具始终免费。选一个地方去逛逛，留下你的城市足迹。\nK 随时打开体验菜单，M 查看方向与距离。")%life.money)
 	var visits:Dictionary=life.get_state().get("experience_visits",{})
 	modal_content.add_child(label("已体验 %d 个项目 · 每个项目都可再次参与"%visits.size(),17,Color("a2efe0")))
 	var services:Array=life.service_catalog()
@@ -1012,12 +1012,12 @@ func on_service_completed(result:Dictionary):
 
 func vehicles_menu():
 	active_panel="vehicles"
-	clear_panel("新增载具，立即出发。","全部免费 · 点击即生成并入座。\n同款载具共享耐久与火控等级；新增不会洗掉损伤，B 可维修升级。")
+	clear_panel("新增载具，立即出发。","全部免费 · 点击即生成并入座。\n同款载具共享耐久与火控等级；新增不会洗掉损伤，「整备」可维修升级。" if MobileProfile.is_mobile() else "全部免费 · 点击即生成并入座。\n同款载具共享耐久与火控等级；新增不会洗掉损伤，B 可维修升级。")
 	survival.sync_fleet()
 	for kind in VEHICLE_NAMES:
 		button(VEHICLE_NAMES[kind]+" · 耐久 %d%%"%int(survival.fleet_health.get(kind,100)),func(): request_vehicle(kind))
 	if is_instance_valid(current_vehicle):
-		button("维修、补给与火控升级  ·  B",survival_menu)
+		button("维修、补给与火控升级" if MobileProfile.is_mobile() else "维修、补给与火控升级  ·  B",survival_menu)
 	button("机场跑道起飞",airport_start)
 	button("返回",close_panel)
 
@@ -1036,18 +1036,18 @@ func survival_menu():
 		reason.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 		modal_content.add_child(reason)
 	modal_content.add_child(label("生命 %d / 120 · 医疗包 %d / 5"%[player.health,survival.medkits],19))
-	var medicine=button("补充医疗包  ·  $300  ·  H 恢复 60 生命",func(): _survival_transaction("medkit"))
+	var medicine=button("补充医疗包  ·  $300  ·  「急救」恢复 60 生命" if MobileProfile.is_mobile() else "补充医疗包  ·  $300  ·  H 恢复 60 生命",func(): _survival_transaction("medkit"))
 	medicine.disabled=survival.medkits>=5 or life.money<300
 	if is_instance_valid(current_vehicle):
 		var fitted:Array=survival.weapon_loadout(current_vehicle.kind)
 		button("选装武器 · %d / 3 槽\n机关枪 / 范围炮 / 激光 / 闪电"%fitted.size(),armory_menu)
 		var field_cost:int=survival.field_repair_cost()
 		var field_reason:String=survival.service_block_reason("field_repair")
-		var quick=button("H 快修最多 +25%% 耐久 · $%d · 12 秒冷却"%field_cost,func(): _survival_transaction("field_repair"))
+		var quick=button(("「急救」快修最多 +25%% 耐久 · $%d · 12 秒冷却" if MobileProfile.is_mobile() else "H 快修最多 +25%% 耐久 · $%d · 12 秒冷却")%field_cost,func(): _survival_transaction("field_repair"))
 		quick.disabled=not survival.enabled or field_cost<=0 or life.money<field_cost or not field_reason.is_empty()
 		if not field_reason.is_empty(): modal_content.add_child(label(field_reason,15,Color("f3cb80")))
 		var auto=weapons.auto_status()
-		button("V 自动辅助武器 · "+("已开启" if auto.enabled else "已关闭")+" · 免费追踪弹",func():
+		button(("自动辅助武器 · " if MobileProfile.is_mobile() else "V 自动辅助武器 · ")+("已开启" if auto.enabled else "已关闭")+" · 免费追踪弹",func():
 			weapons.set_auto_enabled(not weapons.auto_enabled())
 			survival_menu())
 	if is_instance_valid(current_vehicle) and current_vehicle.fuel < 100.0:
@@ -1077,7 +1077,7 @@ func survival_menu():
 	if not damaged: modal_content.add_child(label("所有车型耐久良好",16,Color("96ddc7")))
 	var rescue=button("呼叫救援  ·  最多 $500  ·  返回个人空间",func(): survival.rescue())
 	rescue.tooltip_text="保留金币余额与火控升级，受损载具不会自动修复"
-	button("继续探索  ·  Esc",close_panel)
+	button("继续探索" if MobileProfile.is_mobile() else "继续探索  ·  Esc",close_panel)
 
 func _survival_transaction(action:String,kind:String=""):
 	var result:Dictionary=survival.transact(action,kind)
@@ -1096,7 +1096,7 @@ func armory_menu():
 	var kind:String=current_vehicle.kind
 	var fitted:Array=survival.weapon_loadout(kind)
 	active_panel="armory"
-	clear_panel("武器选装。","%s · 金币 $%d\n三个额外槽位 · 同款共享 · 弹药免费 · V 控制全部自动武器"%[VEHICLE_NAMES[kind].split(" · ")[0],life.money])
+	clear_panel("武器选装。",("%s · 金币 $%d\n三个额外槽位 · 同款共享 · 弹药免费 · 「整备」页开关全部自动武器" if MobileProfile.is_mobile() else "%s · 金币 $%d\n三个额外槽位 · 同款共享 · 弹药免费 · V 控制全部自动武器")%[VEHICLE_NAMES[kind].split(" · ")[0],life.money])
 	modal_content.add_child(label("已装配 %d / 3 · 原有免费副炮不占槽"%fitted.size(),19,Color("96ddc7")))
 	for item:Dictionary in fitted:
 		button("%s %s · 卸下（保留等级）"%[modules.CATALOG[item.id].label,["I","II","III"][item.level-1]],func(): _module_transaction("unequip",item.id))
@@ -1130,7 +1130,7 @@ func armory_menu():
 			var equip=button("免费装配 "+data.label,func(): _module_transaction("equip",id))
 			equip.disabled=fitted.size()>=3 or current_vehicle.health<=0.0
 	button("返回战地整备",survival_menu)
-	button("继续战斗 · Esc",close_panel)
+	button("继续战斗" if MobileProfile.is_mobile() else "继续战斗 · Esc",close_panel)
 
 func _module_transaction(action:String,id:String):
 	var result:Dictionary=survival.transact_module(action,id)
@@ -1145,7 +1145,7 @@ func request_vehicle(kind:String):
 	if not VEHICLE_NAMES.has(kind): return null
 	survival.sync_fleet()
 	if float(survival.fleet_health.get(kind,100.0))<=0.0:
-		notify("这款载具已损毁 · B 可远程维修车队，或使用其他车型",false)
+		notify("这款载具已损毁 · 「整备」可远程维修车队，或使用其他车型" if MobileProfile.is_mobile() else "这款载具已损毁 · B 可远程维修车队，或使用其他车型",false)
 		return null
 	var request_started:=Time.get_ticks_usec()
 	# Placement succeeds before changing the driver. Failure preserves the current ride.
@@ -1173,7 +1173,7 @@ func request_vehicle(kind:String):
 	enter_vehicle(v)
 	close_panel()
 	get_meta("last_spawn_profile")["total_ms"]=(Time.get_ticks_usec()-request_started)/1000.0
-	notify("已免费新增并入座 · %s\n%s · B 整备，E 离舱"%[VEHICLE_NAMES[kind],placement.description])
+	notify(("已免费新增并入座 · %s\n%s · 「整备」维修升级，「下车」离舱" if MobileProfile.is_mobile() else "已免费新增并入座 · %s\n%s · B 整备，E 离舱")%[VEHICLE_NAMES[kind],placement.description])
 	return v
 
 func finish_vehicle_spawn(v:RigidBody3D,placement:Dictionary):
@@ -1202,8 +1202,8 @@ func update_spawn_marker():
 	var delta_position:Vector3=spawn_target.global_position-player.global_position
 	var distance=delta_position.length()
 	var direction="北" if absf(delta_position.z)>absf(delta_position.x) and delta_position.z<0 else ("南" if absf(delta_position.z)>absf(delta_position.x) else ("东" if delta_position.x>0 else "西"))
-	spawn_marker.text="◆ %s · %.0f m · %s
-靠近 E 再次进入 · Tab 新增载具"%[VEHICLE_NAMES[spawn_target.kind],distance,direction]
+	spawn_marker.text=("◆ %s · %.0f m · %s\n靠近后点「互动」再次进入 · 「载具」新增载具" if MobileProfile.is_mobile() else "◆ %s · %.0f m · %s
+靠近 E 再次进入 · Tab 新增载具")%[VEHICLE_NAMES[spawn_target.kind],distance,direction]
 	var screen_size=get_viewport().get_visible_rect().size
 	var point=Vector2(screen_size.x*0.5,100) if camera.is_position_behind(position3d) else camera.unproject_position(position3d)
 	spawn_marker.position=Vector2(clampf(point.x-spawn_marker.size.x*0.5,24,screen_size.x-spawn_marker.size.x-24),clampf(point.y,95,screen_size.y-spawn_marker.size.y-140))
@@ -1243,7 +1243,7 @@ func enter_vehicle(v):
 	player.reset_physics_interpolation()
 	v.reset_physics_interpolation()
 	reset_follow_camera()
-	notify("已进入 "+VEHICLE_NAMES[v.kind]+"\n操作见底部 · B 维修升级，E 离舱")
+	notify("已进入 "+VEHICLE_NAMES[v.kind]+("\n「整备」维修升级，「下车」离舱" if MobileProfile.is_mobile() else "\n操作见底部 · B 维修升级，E 离舱"))
 
 func exit_vehicle():
 	if not is_instance_valid(current_vehicle): return
@@ -1272,7 +1272,7 @@ func exit_vehicle():
 	camera_distance=7
 	player.reset_physics_interpolation()
 	reset_follow_camera()
-	notify("已离开载具 · 高空离舱会自由落体，可 Tab 调用滑翔伞")
+	notify("已离开载具 · 高空离舱会自由落体，可点「载具」调用滑翔伞" if MobileProfile.is_mobile() else "已离开载具 · 高空离舱会自由落体，可 Tab 调用滑翔伞")
 
 func repair_vehicle():
 	if is_instance_valid(survival): survival_menu()
@@ -1355,7 +1355,7 @@ func set_navigation_target(key:String,title:String,position:Vector3,announce:=tr
 	if announce and active_panel!="map": close_panel()
 	update_navigation(1.0)
 	update_landmark_marker()
-	if announce: notify("目的地已标记 · "+landmark_target_name+"\n跟随黄色标记与小地图；M 更换目的地。")
+	if announce: notify("目的地已标记 · "+landmark_target_name+("\n跟随黄色标记与小地图；「地图」更换目的地。" if MobileProfile.is_mobile() else "\n跟随黄色标记与小地图；M 更换目的地。"))
 
 func set_map_waypoint(position:Vector3,title:String="我的标记"):
 	set_navigation_target("map_pin",title,position)
@@ -1769,7 +1769,7 @@ func _unhandled_input(event):
 		return
 	if event.is_action_pressed("auto_support"):
 		weapons.set_auto_enabled(not weapons.auto_enabled())
-		notify("自动辅助武器 · "+("开启，自动锁定附近奶龙" if weapons.auto_enabled() else "关闭")+" · V 切换")
+		notify("自动辅助武器 · "+("开启，自动锁定附近奶龙" if weapons.auto_enabled() else "关闭")+(" · 「整备」里切换" if MobileProfile.is_mobile() else " · V 切换"))
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed("survival_services"):
@@ -1788,7 +1788,8 @@ func _unhandled_input(event):
 		if is_instance_valid(current_vehicle): exit_vehicle()
 		else:
 			var vehicle=nearest_vehicle()
-			if vehicle: enter_vehicle(vehicle)
+			# On phones the same button boards vehicles and carries crates.
+			if vehicle and not (MobileProfile.is_mobile() and life.cargo_action_ready(player.global_position)): enter_vehicle(vehicle)
 			else:
 				var message=life.interact(player.global_position)
 				if message=="OPEN_JOBS": jobs_menu()
@@ -1826,7 +1827,7 @@ func _physics_process(delta):
 	if is_instance_valid(current_vehicle):
 		player.global_position=current_vehicle.global_position
 		if current_vehicle.global_position.y < -45:
-			notify("载具沉没 · 可离舱游泳或 Home 呼叫救援",false)
+			notify("载具沉没 · 可「下车」游泳，或在「暂停」里救援" if MobileProfile.is_mobile() else "载具沉没 · 可离舱游泳或 Home 呼叫救援",false)
 	player.yaw=yaw
 	life.tick_context(player.global_position,current_vehicle.kind if is_instance_valid(current_vehicle) else "",current_vehicle.linear_velocity.length() if is_instance_valid(current_vehicle) else player.velocity.length(),delta)
 
@@ -2185,7 +2186,7 @@ func airport_start():
 	if not active: new_world("life","悉尼机场奶龙危机")
 	survival.sync_fleet()
 	if float(survival.fleet_health.get("airliner",100.0)) <= 0.0:
-		notify("客机已损毁 · B 远程维修后再从机场出发",false)
+		notify("客机已损毁 · 「整备」远程维修后再从机场出发" if MobileProfile.is_mobile() else "客机已损毁 · B 远程维修后再从机场出发",false)
 		return
 	if not "airliner" in owned: owned.append("airliner")
 	var v=make_vehicle("airliner",next_vehicle_id("airliner"),Vector3(0,-2000,0))
@@ -2203,7 +2204,9 @@ func airport_start():
 	yaw=airport.runway_heading
 	pitch=-0.1
 	reset_follow_camera()
-	notify("34L 跑道 · 按住 W 加油门，约 250 km/h 时 R 抬头，A/D 转弯。海港约在北偏东 12 km。")
+	if not MobileProfile.is_mobile(): notify("34L 跑道 · 按住 W 加油门，约 250 km/h 时 R 抬头，A/D 转弯。海港约在北偏东 12 km。")
+	elif settings.get("mobile_drive_mode","joystick")=="buttons": notify("34L 跑道 · 按住「油门」加大推力，约 250 km/h 时按住「升高」抬头，「左转」/「右转」转弯。海港约在北偏东 12 km。")
+	else: notify("34L 跑道 · 摇杆向前推加大推力，约 250 km/h 时按住「升高」抬头，摇杆左右转弯。海港约在北偏东 12 km。")
 
 func vehicle_help(kind:String) -> String:
 	return GameSettings.keys(_vehicle_help_template(kind))

@@ -5,6 +5,7 @@ extends Node3D
 
 const CargoScript = preload("res://scripts/harbor_cargo.gd")
 const NpcScript = preload("res://scripts/harbor_npc.gd")
+const MobileProfile = preload("res://scripts/mobile_profile.gd")
 signal notification(text: String)
 signal money_changed(value: int)
 signal activity_changed
@@ -79,7 +80,7 @@ func setup(world_anchors: Dictionary, sandbox_mode: bool) -> void:
 	_build_npcs()
 	_build_marker()
 	_ready_to_work = true
-	status_text = "欢迎来到海港 · $50,000 旅行资金 · 全部载具免费。J 轻松工作 · K 美食与场馆体验。"
+	status_text = "欢迎来到海港 · $50,000 旅行资金 · 全部载具免费。「暂停」里有轻松工作、美食与场馆体验。" if MobileProfile.is_mobile() else "欢迎来到海港 · $50,000 旅行资金 · 全部载具免费。J 轻松工作 · K 美食与场馆体验。"
 
 func _point(key: String, fallback: Vector3) -> Vector3:
 	var value: Variant = anchors.get(key, fallback)
@@ -144,7 +145,7 @@ func _build_board() -> void:
 	for y in [0.64, 2.36]:
 		_box(_board_node, Vector3(0, y, 0), Vector3(2.88, 0.055, 0.22), brass)
 	var label := Label3D.new()
-	label.text = "HARBOUR EXCHANGE\n──────────────\nFIELDWORK · SALVAGE · SURVEY\n\nE  Browse local work"
+	label.text = "HARBOUR EXCHANGE\n──────────────\nFIELDWORK · SALVAGE · SURVEY\n\n" + ("「互动」 查看工作" if MobileProfile.is_mobile() else "E  Browse local work")
 	label.position = Vector3(0, 1.52, 0.102)
 	label.font_size = 40
 	label.pixel_size = 0.002
@@ -152,7 +153,7 @@ func _build_board() -> void:
 	label.outline_size = 2
 	_board_node.add_child(label)
 	var back := Label3D.new()
-	back.text = "HARBOUR\nEXCHANGE\nE  Local work"
+	back.text = "HARBOUR\nEXCHANGE\n" + ("「互动」 查看工作" if MobileProfile.is_mobile() else "E  Local work")
 	back.position = Vector3(0, 1.5, -0.102)
 	back.rotation.y = PI
 	back.font_size = 40
@@ -237,8 +238,8 @@ func _build_marker() -> void:
 
 func job_catalog() -> Array:
 	return [
-		{"id": "photo", "title": "海港摄影漫步", "description": "步行到三个滨水观景点，站稳后按 E 拍照。", "reward": 1500, "mode": "ON FOOT", "duration": "4–8 min"},
-		{"id": "salvage", "title": "旧物回收", "description": "按 G 拿起实体货箱，自选运输方式，送回工作室后按 E 卸货。", "reward": 2000, "mode": "CARGO / ANY TRANSPORT", "duration": "3–6 min"},
+		{"id": "photo", "title": "海港摄影漫步", "description": "步行到三个滨水观景点，站稳后点「互动」拍照。" if MobileProfile.is_mobile() else "步行到三个滨水观景点，站稳后按 E 拍照。", "reward": 1500, "mode": "ON FOOT", "duration": "4–8 min"},
+		{"id": "salvage", "title": "旧物回收", "description": "靠近实体货箱后点「互动」拿起，自选运输方式，送回工作室后点「互动」卸货。" if MobileProfile.is_mobile() else "按 G 拿起实体货箱，自选运输方式，送回工作室后按 E 卸货。", "reward": 2000, "mode": "CARGO / ANY TRANSPORT", "duration": "3–6 min"},
 		{"id": "harbor", "title": "码头巡检", "description": "驾驶船只到三个海港站点，每站低于 3 m/s 停留两秒。", "reward": 2200, "mode": "BOAT", "duration": "4–7 min"},
 		{"id": "air", "title": "空中观察", "description": "使用直升机、滑翔机或客机，依次飞过海港上空的三个观察区域。", "reward": 3000, "mode": "AIRCRAFT", "duration": "3–6 min"},
 		{"id": "race", "title": "两岸计时赛", "description": "驾驶汽车或摩托车依次穿过大桥检查点，速度与安全表现决定奖金。", "reward": 2000, "mode": "CAR / MOTORCYCLE", "duration": "3–5 min"}]
@@ -350,14 +351,14 @@ func _show_experience(service: Dictionary) -> void:
 
 func start_job(job_id: String) -> String:
 	if not active_job.is_empty():
-		return "Finish or cancel your current activity before taking another."
+		return "请先完成或取消当前活动，再接新的活动。"
 	var definition: Dictionary = {}
 	for entry in job_catalog():
 		if str(entry.id) == job_id:
 			definition = entry
 			break
 	if definition.is_empty():
-		return "That activity is not available."
+		return "这项活动暂不可用。"
 	_jobs_started += 1
 	active_job = {"id": job_id, "title": definition.title, "reward": definition.reward,
 		"stage": 0, "elapsed": 0.0, "dwell": 0.0, "incidents": 0, "hint": "", "instance": _jobs_started}
@@ -365,16 +366,16 @@ func start_job(job_id: String) -> String:
 		_prepare_salvage()
 	_update_hint()
 	activity_changed.emit()
-	var response := "Started: " + str(definition.title) + ". " + str(active_job.hint)
+	var response := "已开始：" + str(definition.title) + "。" + str(active_job.hint)
 	notification.emit(response)
 	return response
 
 func cancel_job() -> String:
 	if active_job.is_empty():
-		return "No activity is currently running."
+		return "当前没有进行中的活动。"
 	active_job = {}
 	_marker.visible = false
-	status_text = "Activity cancelled. Your cargo and world remain where you left them."
+	status_text = "活动已取消。货箱和世界都保持原样。"
 	activity_changed.emit()
 	return status_text
 
@@ -420,13 +421,13 @@ func get_objective() -> Dictionary:
 	if id == "salvage":
 		var item := _find_cargo(str(active_job.get("cargo_id", "")))
 		if int(active_job.stage) == 0 and is_instance_valid(item):
-			return {"position": item.global_position, "label": "Recover case · G", "kind": "cargo"}
-		return {"position": _delivery(), "label": "Workshop · E unload", "kind": "delivery"}
+			return {"position": item.global_position, "label": "回收货箱 · 「互动」" if MobileProfile.is_mobile() else "回收货箱 · G", "kind": "cargo"}
+		return {"position": _delivery(), "label": "工作室 · 「互动」卸货" if MobileProfile.is_mobile() else "工作室 · E 卸货", "kind": "delivery"}
 	var route := _job_route(id)
 	var stage := int(active_job.stage)
 	if stage >= route.size():
 		return {}
-	var label := "VIEWPOINT · E PHOTO" if id == "photo" else "INSPECTION · SLOW BOAT" if id == "harbor" else "SURVEY AREA" if id == "air" else "TIME TRIAL GATE"
+	var label := ("观景点 · 「互动」拍照" if MobileProfile.is_mobile() else "观景点 · E 拍照") if id == "photo" else "巡检站 · 船只慢行" if id == "harbor" else "观察区域" if id == "air" else "计时赛关卡"
 	return {"position": route[stage], "label": "%s  %d/%d" % [label, stage + 1, route.size()], "kind": id}
 
 func tick_context(player_pos: Vector3, player_vehicle: String, speed: float, delta: float) -> void:
@@ -529,7 +530,7 @@ func _advance_stage() -> void:
 	if int(active_job.stage) >= _job_route(id).size():
 		_complete_job()
 	else:
-		notification.emit("%s · checkpoint %d complete" % [str(active_job.title), int(active_job.stage)])
+		notification.emit("%s · 第 %d 个检查点完成" % [str(active_job.title), int(active_job.stage)])
 		_update_hint()
 		activity_changed.emit()
 
@@ -553,9 +554,9 @@ func _complete_job() -> void:
 	for npc in npcs:
 		if npc.job_id == id:
 			npc.memories["jobs_completed"] = int(npc.memories.get("jobs_completed", 0)) + 1
-	status_text = "%s complete · +$%d · %d:%02d" % [str(active_job.title), reward, int(time) / 60, int(time) % 60]
+	status_text = "%s 完成 · +$%d · %d:%02d" % [str(active_job.title), reward, int(time) / 60, int(time) % 60]
 	if bonus > 0:
-		status_text += " · $%d time bonus" % bonus
+		status_text += " · 时间奖励 $%d" % bonus
 	active_job = {}
 	_marker.visible = false
 	notification.emit(status_text)
@@ -573,11 +574,13 @@ func _update_hint() -> void:
 		distance = int(_player_pos.distance_to(objective.position))
 	var hint := ""
 	match id:
-		"photo": hint = "Viewpoint %d/%d · %d m · On foot, stop and press E to take a photo." % [stage + 1, _job_route(id).size(), distance]
-		"salvage": hint = "Recover marked case · %d m · G to carry. Any transport is allowed." % distance if stage == 0 else "Bring case to workshop · %d m · E to unload within 7 m." % distance
-		"harbor": hint = "Station %d/%d · %d m · In a boat, slow below 3 m/s for 2 seconds." % [stage + 1, _job_route(id).size(), distance]
-		"air": hint = "Survey %d/%d · %d m · Fly through the amber area above 45 m." % [stage + 1, _job_route(id).size(), distance]
-		"race": hint = "Gate %d/%d · %d m · %d:%02d elapsed · Car or motorcycle." % [stage + 1, _job_route(id).size(), distance, int(active_job.elapsed) / 60, int(active_job.elapsed) % 60]
+		"photo": hint = ("观景点 %d/%d · %d m · 步行停稳后点「互动」拍照。" if MobileProfile.is_mobile() else "观景点 %d/%d · %d m · 步行停稳后按 E 拍照。") % [stage + 1, _job_route(id).size(), distance]
+		"salvage":
+			if stage == 0: hint = ("回收标记货箱 · %d m · 靠近后点「互动」拿起，任何交通方式都可以。" if MobileProfile.is_mobile() else "回收标记货箱 · %d m · 按 G 拿起，任何交通方式都可以。") % distance
+			else: hint = ("把货箱送回工作室 · %d m · 7 m 内点「互动」卸货。" if MobileProfile.is_mobile() else "把货箱送回工作室 · %d m · 7 m 内按 E 卸货。") % distance
+		"harbor": hint = "巡检站 %d/%d · %d m · 乘船进入站点，速度低于 3 m/s 停留 2 秒。" % [stage + 1, _job_route(id).size(), distance]
+		"air": hint = "观察区 %d/%d · %d m · 在 45 m 以上飞过琥珀色区域。" % [stage + 1, _job_route(id).size(), distance]
+		"race": hint = "关卡 %d/%d · %d m · 已用时 %d:%02d · 汽车或摩托车。" % [stage + 1, _job_route(id).size(), distance, int(active_job.elapsed) / 60, int(active_job.elapsed) % 60]
 	active_job["hint"] = hint
 	status_text = str(active_job.title) + "\n" + hint
 
@@ -611,11 +614,11 @@ func interact(player_pos: Vector3) -> String:
 		var target := get_objective()
 		if not target.is_empty() and player_pos.distance_to(target.position) < 16.0:
 			if not _on_foot():
-				return "Step out of the vehicle to compose this photograph."
+				return "先离开载具，再取景拍照。"
 			if _speed > 1.2:
-				return "Hold still for a clear harbour photograph."
+				return "站稳不动，才能拍出清晰的海港照片。"
 			_advance_stage()
-			return "Photograph captured. " + ("The next viewpoint is marked." if not active_job.is_empty() else "Your photo set is complete.")
+			return "照片已拍好。" + ("下一个观景点已标记。" if not active_job.is_empty() else "这组照片已全部完成。")
 	if player_pos.distance_to(_delivery()) < 7.0 and (is_instance_valid(carried_cargo) or (not active_job.is_empty() and str(active_job.id)=="salvage")):
 		return deposit_cargo(player_pos)
 	if player_pos.distance_to(_board()) < 6.0:
@@ -630,12 +633,19 @@ func interact(player_pos: Vector3) -> String:
 			if item.stored:
 				carried_cargo = item
 				item.set_carried(true)
-				return "Retrieved a case from your workshop. G puts it down; E stores it again."
-		return "Your workshop · %d cases stored. Carry a case here and press E to store it. Use your fleet panel for repairs and recovery." % stored_count()
+				return "已从工作室取出一个货箱。到卸货点再点「互动」可放回。" if MobileProfile.is_mobile() else "已从工作室取出一个货箱。G 放下，E 再次存放。"
+		return ("你的工作室 · 已存放 %d 个货箱。把货箱带到这里点「互动」存放；维修与救援请用「整备」。" if MobileProfile.is_mobile() else "你的工作室 · 已存放 %d 个货箱。把货箱带到这里按 E 存放；维修与救援请用整备面板。") % stored_count()
 	var nearby := _nearest_cargo(player_pos)
 	if is_instance_valid(nearby):
 		return toggle_carry(player_pos)
-	return "No one or nothing close enough to interact with. Move closer to a person, the exchange or a case."
+	return "附近没有可以互动的人或物。请靠近行人、海港交易所或货箱。"
+
+## Whether interact would pick up or deliver a crate here. Phones share one
+## button for boarding and crates, so this lets a crate win over a parked car.
+func cargo_action_ready(player_pos: Vector3) -> bool:
+	if player_pos.distance_to(_delivery()) < 7.0 and (is_instance_valid(carried_cargo) or (not active_job.is_empty() and str(active_job.id)=="salvage")):
+		return true
+	return not is_instance_valid(carried_cargo) and is_instance_valid(_nearest_cargo(player_pos))
 
 func toggle_carry(player_pos: Vector3) -> String:
 	if is_instance_valid(carried_cargo):
@@ -643,20 +653,20 @@ func toggle_carry(player_pos: Vector3) -> String:
 		carried_cargo = null
 		item.set_carried(false)
 		item.linear_velocity = _carry_direction * minf(_speed, 12.0)
-		return "Case released. It remains a physical object in this world."
+		return "货箱已放下，它会作为实体物品留在世界里。"
 	var item := _nearest_cargo(player_pos)
 	if not is_instance_valid(item):
-		return "No case within 3.5 m. The amber recovery marker shows your assigned case."
+		return "3.5 m 内没有货箱。琥珀色回收标记指向你的任务货箱。"
 	carried_cargo = item
 	item.set_carried(true)
 	if not active_job.is_empty() and str(active_job.get("cargo_id", "")) == item.stable_id:
 		active_job["stage"] = 1
 		_update_hint()
-	return "Carrying 32 kg case. Enter any vehicle to transport it; G releases it."
+	return "正在搬运 32 kg 货箱。可进入任意载具运输，到工作室卸货点再点「互动」卸货。" if MobileProfile.is_mobile() else "正在搬运 32 kg 货箱。可进入任意载具运输；G 放下。"
 
 func deposit_cargo(player_pos: Vector3) -> String:
 	if player_pos.distance_to(_delivery()) >= 7.0:
-		return "Bring the case to the workshop unloading point."
+		return "把货箱带到工作室卸货点。"
 	if not is_instance_valid(carried_cargo):
 		# A freely dropped case also counts: the delivery depends on the object,
 		# not on the carrier flag or a menu action.
@@ -665,7 +675,7 @@ func deposit_cargo(player_pos: Vector3) -> String:
 			if is_instance_valid(loose) and loose.global_position.distance_to(_delivery()) < 7.0 and loose.linear_velocity.length() < 2.0:
 				_complete_job()
 				return status_text
-		return "Carry a case to the unloading point, then press E."
+		return "把货箱搬到卸货点，再点「互动」。" if MobileProfile.is_mobile() else "把货箱搬到卸货点，再按 E。"
 	var item := carried_cargo
 	carried_cargo = null
 	var storage_index := stored_count()
@@ -677,7 +687,7 @@ func deposit_cargo(player_pos: Vector3) -> String:
 		item.freeze = false
 		_complete_job()
 		return status_text
-	return "Case stored in your workshop. It will be here when you return."
+	return "货箱已存放在工作室，回来时它还在。"
 
 func stored_count() -> int:
 	var result := 0
@@ -738,7 +748,7 @@ func spend(cost: int, reason: String = "") -> bool:
 		money -= cost
 	money_changed.emit(money)
 	if not reason.is_empty():
-		notification.emit(reason + (" · Free in sandbox" if sandbox else " · $%d" % cost))
+		notification.emit(reason + (" · 自由沙盒免费" if sandbox else " · $%d" % cost))
 	return true
 
 func recover_cargo() -> String:
@@ -752,7 +762,7 @@ func recover_cargo() -> String:
 			item.linear_velocity = Vector3.ZERO
 			item.angular_velocity = Vector3.ZERO
 			recovered += 1
-	return "%d lost cases recovered to your workshop." % recovered
+	return "已找回 %d 个遗失货箱，放回你的工作室。" % recovered
 
 func on_incident(pos: Vector3, severity: float, player_caused: bool = true) -> void:
 	for npc in npcs:
@@ -830,6 +840,6 @@ func apply_state(state: Dictionary) -> void:
 			_prepare_salvage()
 		_update_hint()
 	else:
-		status_text = "自由探索 · 全部载具免费 · 已收集 %d 个旅行印章。J 轻松工作 · K 城市体验。" % experience_visits.size()
+		status_text = ("自由探索 · 全部载具免费 · 已收集 %d 个旅行印章。「暂停」里有轻松工作和城市体验。" if MobileProfile.is_mobile() else "自由探索 · 全部载具免费 · 已收集 %d 个旅行印章。J 轻松工作 · K 城市体验。") % experience_visits.size()
 	money_changed.emit(money)
 	activity_changed.emit()

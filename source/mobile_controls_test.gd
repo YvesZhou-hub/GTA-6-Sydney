@@ -231,7 +231,7 @@ func interruption_vehicle_flow() -> bool:
 	var yaw_before := host.yaw
 	drag(63, button_center("fire") + Vector2(-40, 0), Vector2(-40, 0))
 	flow_step(is_equal_approx(host.yaw - yaw_before, 40 * 0.003 * 1.8), "tank fire drag uses vehicle camera sensitivity")
-	for fixture in [{"size": Vector2(1560, 720), "safe": Rect2(50, 0, 1460, 694)}, {"size": Vector2(1280, 960), "safe": Rect2(0, 24, 1280, 908)}]:
+	for fixture in [{"size": Vector2(1560, 720), "safe": Rect2(50, 0, 1460, 694)}, {"size": Vector2(1280, 960), "safe": Rect2(0, 24, 1280, 908)}, {"size": Vector2(1564, 720), "safe": Rect2(101.43, 0, 1361.14, 687.27)}, {"size": Vector2(1564, 720), "safe": Rect2(0, 0, 1564, 687.27)}]:
 		controls.release_all()
 		controls.layout_for(fixture.size, fixture.safe)
 		var rects: Array[Rect2] = controls.reserved_rects()
@@ -356,6 +356,8 @@ func run() -> void:
 		{"size": Vector2(1560, 720), "safe": Rect2(50, 0, 1460, 694)},
 		{"size": Vector2(1280, 960), "safe": Rect2(0, 24, 1280, 908)},
 		{"size": Vector2(1440, 900), "safe": Rect2(0, 0, 1440, 880)},
+		{"size": Vector2(1564, 720), "safe": Rect2(101.43, 0, 1361.14, 687.27)},
+		{"size": Vector2(1564, 720), "safe": Rect2(0, 0, 1564, 687.27)},
 	]:
 		controls.layout_for(fixture.size, fixture.safe)
 		var contained := true
