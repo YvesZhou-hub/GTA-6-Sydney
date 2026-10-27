@@ -123,7 +123,7 @@ func run() -> void:
 	controls.setup(host)
 	controls.set_process(false)
 	controls.enabled = false
-	for fixture in [{"size":Vector2i(1560, 720), "safe":Rect2(50, 0, 1460, 694)}, {"size":Vector2i(1280, 960), "safe":Rect2(0, 24, 1280, 908)}]:
+	for fixture in [{"size":Vector2i(1560, 720), "safe":Rect2(50, 0, 1460, 694)}, {"size":Vector2i(1280, 960), "safe":Rect2(0, 24, 1280, 908)}, {"size":Vector2i(1564, 720), "safe":Rect2(101.43, 0, 1361.14, 687.27)}, {"size":Vector2i(1564, 720), "safe":Rect2(0, 0, 1564, 687.27)}, {"size":Vector2i(1280, 720), "safe":Rect2(0, 0, 1280, 720)}]:
 		root.size = fixture.size
 		root.content_scale_size = fixture.size
 		host.hud.size = fixture.size
