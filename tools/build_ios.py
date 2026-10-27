@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Stage Harbourlife, export an iOS Xcode project, and optionally build a device app.
 
-The default build is unsigned and cannot be installed on an iPhone. Nothing is
-uploaded, installed, or provisioned. All Godot configuration changes are staged.
+The default build is unsigned and cannot be installed on an iPhone. Only
+--archive requests provisioning updates and only --upload sends a build to App
+Store Connect; nothing is ever installed. All Godot configuration changes are staged.
 """
 import argparse
 import hashlib
@@ -150,8 +151,10 @@ def ensure_template(template, fetch=False, archive=None, download_timeout=600):
     return receipt
 
 
-def ios_preset(template, team, bundle_id, version, minimum_ios):
+def ios_preset(template, team, bundle_id, version, build_number, minimum_ios, app_store=False):
     quote = lambda value: json.dumps(str(value), ensure_ascii=False)
+    # Enum indices from Godot 4.7.2: export methods are App Store, Development,
+    # Ad-Hoc, Enterprise; device families are iPhone, iPad, iPhone & iPad.
     return f'''[preset.0]
 name="iOS"
 platform="iOS"
@@ -170,15 +173,73 @@ application/app_store_team_id={quote(team)}
 application/bundle_identifier={quote(bundle_id)}
 application/export_project_only=true
 application/export_method_debug=1
-application/export_method_release=1
+application/export_method_release={0 if app_store else 1}
 application/code_sign_identity_debug="Apple Development"
 application/code_sign_identity_release="Apple Development"
 application/short_version={quote(version)}
-application/version={quote(version)}
-application/targeted_device_family=2
+application/version={quote(build_number)}
+application/targeted_device_family=0
 application/min_ios_version={quote(minimum_ios)}
+icons/icon_1024x1024="res://assets/ios/app_icon_1024.png"
+privacy/camera_usage_description="Harbourlife does not use the camera."
+privacy/microphone_usage_description="Harbourlife does not record audio."
+privacy/photolibrary_usage_description="Harbourlife does not read your photo library."
+entitlements/increased_memory_limit=true
+capabilities/performance_gaming_tier=true
 shader_baker/enabled=false
 '''
+
+
+def archive_command(project, derived, archive, team):
+    return ['xcodebuild', '-project', project, '-scheme', 'Harbourlife',
+            '-configuration', 'Release', '-sdk', 'iphoneos',
+            '-destination', 'generic/platform=iOS', '-derivedDataPath', derived,
+            '-archivePath', archive, '-allowProvisioningUpdates',
+            'DEVELOPMENT_TEAM=' + team, 'CODE_SIGN_STYLE=Automatic',
+            'DEBUG_INFORMATION_FORMAT=dwarf-with-dsym', 'archive']
+
+
+def export_options(team, upload):
+    return {'method': 'app-store-connect', 'destination': 'upload' if upload else 'export',
+            'teamID': team, 'signingStyle': 'automatic', 'uploadSymbols': True,
+            'manageAppVersionAndBuildNumber': False, 'testFlightInternalTestingOnly': False}
+
+
+def check_archived_app(app, build_number, minimum_ios):
+    """Check the App Store requirements Godot settings are expected to produce."""
+    with (app / 'Info.plist').open('rb') as stream:
+        info = plistlib.load(stream)
+    usage = {key: value for key, value in info.items()
+             if key.startswith('NS') and key.endswith('UsageDescription')}
+    icons = {}
+    for icon in sorted(app.glob('AppIcon*.png')):
+        alpha = capture(['sips', '-g', 'hasAlpha', str(icon)])
+        icons[icon.name] = not alpha['returncode'] and alpha['output'].rstrip().endswith('hasAlpha: no')
+    # Xcode 26 compiles iOS 17 app icons only into Assets.car; assetutil reports
+    # whether each compiled rendition is opaque.
+    catalog = subprocess.run(['xcrun', 'assetutil', '--info', str(app / 'Assets.car')],
+                             capture_output=True, text=True, timeout=45)
+    for entry in json.loads(catalog.stdout) if catalog.returncode == 0 else []:
+        if isinstance(entry, dict) and entry.get('AssetType') == 'Icon Image' and entry.get('Name') == 'AppIcon':
+            name = f"Assets.car:{entry.get('RenditionName')}:{entry.get('PixelWidth')}"
+            icons[name] = icons.get(name, True) and entry.get('Opaque') is True
+    entitlements =capture(['codesign', '-d', '--entitlements', '-', '--xml', str(app)])
+    checks = {
+        'bundle_version_is_build_number': info.get('CFBundleVersion') == str(build_number),
+        'usage_descriptions_not_empty': all(isinstance(v, str) and v.strip() for v in usage.values()),
+        'performance_gaming_tier_required': 'iphone-performance-gaming-tier' in info.get('UIRequiredDeviceCapabilities', []),
+        'minimum_ios': info.get('MinimumOSVersion') == minimum_ios,
+        'iphone_only': info.get('UIDeviceFamily') == [1],
+        'app_icons_opaque': bool(icons) and all(icons.values()),
+        'increased_memory_limit_entitlement': not entitlements['returncode']
+            and 'com.apple.developer.kernel.increased-memory-limit' in entitlements['output'],
+    }
+    return {'checks': checks, 'bundle_identifier': info.get('CFBundleIdentifier'),
+            'short_version': info.get('CFBundleShortVersionString'),
+            'bundle_version': info.get('CFBundleVersion'), 'usage_descriptions': usage,
+            'required_device_capabilities': info.get('UIRequiredDeviceCapabilities'),
+            'minimum_ios': info.get('MinimumOSVersion'), 'device_family': info.get('UIDeviceFamily'),
+            'app_icons_without_alpha': icons}
 
 
 def clear_placeholder_team(exported):
@@ -271,20 +332,35 @@ def main(argv=None):
     parser.add_argument('--project-only', action='store_true', help='generate the Xcode project without compiling it')
     parser.add_argument('--configuration', choices=['Debug', 'Release'], default='Release')
     parser.add_argument('--team', help='real Apple team ID (ten alphanumeric characters); optional for unsigned export')
-    parser.add_argument('--bundle-id', default='local.yveszhou.harbourlife')
-    parser.add_argument('--minimum-ios', default='16.0')
+    parser.add_argument('--bundle-id', default='com.yveszhou.harbourlife')
+    parser.add_argument('--build-number', type=int, default=1, help='CFBundleVersion; the short version stays the game version')
+    parser.add_argument('--minimum-ios', default='17.0')
     parser.add_argument('--sign', action='store_true', help='opt in to local development signing using existing credentials; requires --team')
     parser.add_argument('--identity', default='Apple Development')
     parser.add_argument('--provisioning-profile', help='existing local development profile name for manual signing')
+    parser.add_argument('--archive', action='store_true',
+                        help='archive with automatic signing (requests provisioning updates) and export a local App Store IPA; requires --team')
+    parser.add_argument('--upload', action='store_true', help='archive, then upload the build to App Store Connect; implies --archive')
+    parser.add_argument('--archive-path', type=pathlib.Path,
+                        help='default: ~/Library/Developer/Xcode/Archives/<date>/Harbourlife <version> (<build>).xcarchive')
     args = parser.parse_args(argv)
+    args.archive = args.archive or args.upload
     if args.sign and not args.team:
         parser.error('--sign requires an explicit --team')
+    if args.archive and not args.team:
+        parser.error('--archive and --upload require an explicit --team')
+    if args.archive and (args.sign or args.project_only or args.configuration != 'Release'):
+        parser.error('--archive builds Release with automatic signing; do not combine it with --sign, --project-only or Debug')
+    if args.build_number < 1:
+        parser.error('--build-number must be a positive integer')
     if args.team and (not re.fullmatch(r'[A-Z0-9]{10}', args.team) or args.team == UNSIGNED_TEAM):
         parser.error('--team must be a real ten-character Apple team ID')
     if not re.fullmatch(r'[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+', args.bundle_id):
         parser.error('--bundle-id must be a reverse-DNS identifier')
     if not re.fullmatch(r'\d+\.\d+(?:\.\d+)?', args.minimum_ios):
         parser.error('--minimum-ios must be a numeric OS version')
+    if int(args.minimum_ios.split('.')[0]) < 17:
+        parser.error('--minimum-ios must be 17.0 or later for iphone-performance-gaming-tier')
     if args.download_timeout < 30 or args.download_timeout > 1800:
         parser.error('--download-timeout must be between 30 and 1800 seconds')
     report_path, output = args.report.resolve(), args.output.resolve()
@@ -295,8 +371,9 @@ def main(argv=None):
     logs.mkdir(parents=True, exist_ok=True)
     report = {'status': 'STARTED', 'stages': {}, 'runtime_tested': False,
               'device_installation_tested': False, 'simulator_tested': False,
-              'signing_requested': args.sign, 'provisioning_updates_requested': False,
-              'installable_claim': False, 'output': str(output)}
+              'signing_requested': args.sign, 'provisioning_updates_requested': args.archive,
+              'upload_requested': args.upload, 'installable_claim': False,
+              'build_number': args.build_number, 'output': str(output)}
     phase = 'preflight'
     try:
         if sys.platform != 'darwin':
@@ -323,7 +400,7 @@ def main(argv=None):
         phase = 'staging'
         if output.exists() and any(output.iterdir()):
             raise RuntimeError('Output must be empty; choose a new --output directory: ' + str(output))
-        if not args.project_only and app_output.exists():
+        if not args.project_only and not args.archive and app_output.exists():
             raise RuntimeError('App destination must not exist; choose a new --app-output: ' + str(app_output))
         if ROOT / 'game' == output or ROOT / 'game' in output.parents:
             raise RuntimeError('Output must not be inside the source game directory.')
@@ -348,8 +425,19 @@ def main(argv=None):
             if not version_match:
                 raise RuntimeError('Expected a numeric major.minor.patch game version.')
             report['game_version'] = version_match[1]
-            preset = ios_preset(args.template.resolve(), args.team or UNSIGNED_TEAM,
-                                args.bundle_id, version_match[1], args.minimum_ios)
+            if args.archive:
+                archive_path = (args.archive_path.resolve() if args.archive_path else
+                                pathlib.Path.home() / 'Library/Developer/Xcode/Archives' / time.strftime('%Y-%m-%d')
+                                / f'Harbourlife {version_match[1]} ({args.build_number}).xcarchive')
+                export_path = archive_path.with_name(archive_path.stem + '-export')
+                # Synced Documents adds Finder metadata that breaks signatures.
+                documents = pathlib.Path.home() / 'Documents'
+                if documents == archive_path or documents in archive_path.parents:
+                    raise RuntimeError('Archive must be outside synced Documents: ' + str(archive_path))
+                if archive_path.exists() or export_path.exists():
+                    raise RuntimeError('Archive destination must not exist; choose a new --archive-path or --build-number: ' + str(archive_path))
+            preset = ios_preset(args.template.resolve(), args.team or UNSIGNED_TEAM, args.bundle_id,
+                                version_match[1], args.build_number, args.minimum_ios, args.archive)
             (game / 'export_presets.cfg').write_text(preset, encoding='utf-8')
             report['staged_preset'] = preset
             report['stages'][phase] = 'PASS'
@@ -384,7 +472,36 @@ def main(argv=None):
             report['xcode_project'] = str(output / project.name)
             report['xcode_project_sha256'] = digest(project / 'project.pbxproj')
             report['status'] = 'XCODE_PROJECT_READY'
-            if not args.project_only:
+            if args.archive:
+                phase = 'archive'
+                derived = pathlib.Path.home() / 'Library/Application Support/Harbourlife/ios-derived' / output.name
+                run_logged(archive_command(output / project.name, derived, archive_path, args.team),
+                           logs / 'xcodebuild-archive.log', timeout=3600)
+                archived = check_archived_app(archive_path / 'Products/Applications/Harbourlife.app',
+                                              args.build_number, args.minimum_ios)
+                report['archive'] = {'path': str(archive_path), 'derived_data': str(derived), **archived}
+                failed = [name for name, passed in archived['checks'].items() if not passed]
+                if failed:
+                    raise RuntimeError('Archived app failed App Store checks: ' + ', '.join(failed))
+                report['stages'][phase] = 'PASS'
+                report['status'] = 'ARCHIVE_READY'
+                phase = 'upload' if args.upload else 'ipa_export'
+                options = export_options(args.team, args.upload)
+                options_path = stage / 'ExportOptions.plist'
+                with options_path.open('wb') as stream:
+                    plistlib.dump(options, stream)
+                report['export_options'] = options
+                run_logged(['xcodebuild', '-exportArchive', '-archivePath', archive_path,
+                            '-exportOptionsPlist', options_path, '-exportPath', export_path,
+                            '-allowProvisioningUpdates'], logs / 'xcodebuild-export.log', timeout=3600)
+                report['export_path'] = str(export_path)
+                if not args.upload:
+                    report['ipa'] = [str(p) for p in sorted(export_path.glob('*.ipa'))]
+                    if not report['ipa']:
+                        raise RuntimeError('xcodebuild -exportArchive succeeded but no IPA was written.')
+                report['stages'][phase] = 'PASS'
+                report['status'] = 'UPLOADED_TO_APP_STORE_CONNECT' if args.upload else 'APP_STORE_IPA_READY'
+            elif not args.project_only:
                 phase = 'device_build'
                 derived = stage / 'DerivedData'
                 run_logged(xcode_command(project, derived, args), logs / 'xcodebuild.log', timeout=1800)
@@ -426,7 +543,9 @@ def main(argv=None):
         print(report['status'] + ': ' + str(output))
         if 'app' in report:
             print('App: ' + report['app']['path'])
-        if not args.sign:
+        if 'archive' in report:
+            print('Archive: ' + report['archive']['path'])
+        if not args.sign and not args.archive:
             print('Unsigned output cannot be installed on an iPhone. Open the Xcode project and configure development signing.')
         return 0
     except Exception as error:

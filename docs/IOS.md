@@ -1,6 +1,7 @@
 # iPhone / iPad development
 
-Native Godot 4.7.2, arm64, iOS 16+, landscape. A successful export is not a
+Native Godot 4.7.2, arm64, iOS 17+, landscape; builds currently target iPhone
+only. A successful export is not a
 real-device performance or touch validation. Do not install or launch on a
 connected device without authorization for the current session.
 
@@ -74,18 +75,48 @@ and SHA-512 and caches the iOS template. Subsequent builds use the verified cach
 Outputs must be empty: use a new output/report path for each build.
 
 The build stages a copy of the game and licensing notices, leaving source presets
-and files unchanged. Unsigned output cannot run on a device. Signing uses existing
-credentials and never requests provisioning automatically. Signed bundles live
+and files unchanged. Unsigned output cannot run on a device. `--sign` uses existing
+credentials and never requests provisioning; only `--archive`/`--upload` (see
+TestFlight below) do. Signed bundles live
 outside synced Documents by default, under
 `~/Library/Application Support/Harbourlife/ios-builds/`, to avoid Finder metadata
 invalidating signatures; use the exact `app.path` returned in the build report.
-The script does not install, publish, upload to App Store Connect or export an IPA.
+The script never installs; only `--upload` sends a build to App Store Connect.
 
 For an authorized installation, open the generated Xcode project, select your
 team and connected device, enable Developer Mode/trust as required by iOS, and run.
 Update-install the same bundle identifier to retain app data; do not uninstall
 as a routine troubleshooting step. Keep team IDs, device IDs and account details
 out of public reports. See [Godot's iOS export guide](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_for_ios.html).
+
+## TestFlight 公测
+
+```sh
+# 归档并导出本地 .ipa 自查，不上传：
+python3 tools/build_ios.py --archive --team YOURTEAMID --build-number 2 \
+  --output "$HOME/Library/Application Support/Harbourlife/ios-projects/testflight-2" \
+  --report reports/ios-testflight-2.json
+# 归档并上传到 App Store Connect：
+python3 tools/build_ios.py --upload --team YOURTEAMID --build-number 2 \
+  --output "$HOME/Library/Application Support/Harbourlife/ios-projects/testflight-2-upload" \
+  --report reports/ios-testflight-2-upload.json
+```
+
+- 第一次上传前，要先在 App Store Connect 建好 bundle id 为
+  `com.yveszhou.harbourlife` 的 App 记录。
+- 显示的版本号就是游戏的 `config/version`；`--build-number` 是 CFBundleVersion，
+  每次上传都要比上一次大。
+- `--archive` 用自动签名，会向 Apple 请求更新证书和描述文件。归档默认放在
+  `~/Library/Developer/Xcode/Archives/`，中间文件在
+  `~/Library/Application Support/Harbourlife/ios-derived/`，都不放进同步的 Documents。
+  上传前脚本会检查归档里的版本号、隐私说明、设备要求、图标有没有透明通道和内存权限，
+  有一项不过就停下，不上传。
+- bundle id 从 `local.yveszhou.harbourlife` 改成了 `com.yveszhou.harbourlife`：
+  以前装的开发版算另一个 App，里面的存档不会带过来。
+- 只能装在 iPhone 15 Pro 及更新的机型上（`iphone-performance-gaming-tier`，需要
+  iOS 17），这一轮也只支持 iPhone，不支持 iPad。
+- 打开了 increased memory limit 权限（`com.apple.developer.kernel.increased-memory-limit`），
+  让系统给游戏更高的内存上限。
 
 ## Real-device checklist
 
