@@ -4,6 +4,7 @@ extends CharacterBody3D
 ## memory. The model and its clips are CC0 by Quaternius; see
 ## assets/thirdparty/SOURCES.md.
 const Visual = preload("res://scripts/character_visual.gd")
+const MobileProfile = preload("res://scripts/mobile_profile.gd")
 
 var stable_id: String = ""
 var display_name: String = ""
@@ -81,22 +82,22 @@ func talk(active_job: Dictionary, completed: Dictionary) -> String:
 	memories["greeted"] = int(memories.get("greeted", 0)) + 1
 	_greeting_time = 5.0
 	if _danger_time > 0.0:
-		return "%s: Give us some room! I'll be here when the waterfront is safe." % display_name
+		return "%s：请给我们让点地方！海滨安全了我还会在这儿。" % display_name
 	if int(memories.get("accidents", 0)) > 0 and int(memories["greeted"]) % 3 == 0:
-		return "%s: I remember that crash. The workshop can repair vehicles; the damage stays until someone fixes it." % display_name
+		return "%s：我记得那次撞车。工作室能修好载具；没人修的话，损伤会一直留着。" % display_name
 	if not active_job.is_empty():
 		if str(active_job.get("id", "")) == job_id:
-			return "%s: %s" % [display_name, str(active_job.get("hint", "Your activity is under way. Follow the amber marker."))]
-		return "%s: Finish your current activity, then come back. There's always another shift." % display_name
+			return "%s：%s" % [display_name, str(active_job.get("hint", "你的活动正在进行，跟着琥珀色标记走。"))]
+		return "%s：先完成手头的活动再回来吧，总会有下一班。" % display_name
 	if int(completed.get(job_id, 0)) > 0:
-		return "%s: Welcome back. Your last shift helped. There is another %s available at the exchange." % [display_name, occupation.to_lower()]
+		return "%s：欢迎回来，你上一班帮了大忙。交易所还有新的工作。" % display_name
 	match job_id:
-		"photo": return "%s: The harbour looks different on foot. Three viewpoints, three photographs. Use E at each amber marker." % display_name
-		"salvage": return "%s: There is a loose timber case at the recovery point. Carry it with G, bring any vehicle, then unload it at the workshop." % display_name
-		"harbor": return "%s: Our wharf sensors need a close inspection. Visit each station in a boat and slow below 3 metres per second." % display_name
-		"air": return "%s: The aerial survey needs three clear observation passes. A helicopter, glider or aircraft will do; keep above the water." % display_name
-		"race": return "%s: A timed harbour drive. The next gate appears in amber. Stay on the road; repairs come out of your earnings." % display_name
-	return "%s: %s" % [display_name, ["The steps lead up to the bridge walk. The view is worth it.", "You can keep recovered things in your waterfront workshop.", "The harbour is busy. Slow down near the wharves.", "A sunset crossing is my favourite part of this city."][int(memories["greeted"]) % 4]]
+		"photo": return ("%s：步行看海港很不一样。三个观景点，三张照片，在每个琥珀色标记处点「互动」。" if MobileProfile.is_mobile() else "%s：步行看海港很不一样。三个观景点，三张照片，在每个琥珀色标记处按 E。") % display_name
+		"salvage": return ("%s：回收点有个散落的木货箱。靠近后点「互动」拿起，开任意载具运走，再到工作室卸货。" if MobileProfile.is_mobile() else "%s：回收点有个散落的木货箱。按 G 拿起，开任意载具运走，再到工作室卸货。") % display_name
+		"harbor": return "%s：码头传感器需要近距离巡检。乘船逐个到访站点，速度降到每秒 3 米以下。" % display_name
+		"air": return "%s：空中观察需要三次清晰的观测飞行。直升机、滑翔机或飞机都行，保持在水面上空。" % display_name
+		"race": return "%s：一场海港计时驾驶。下一个关卡会以琥珀色出现。别冲出道路，维修费会从收入里扣。" % display_name
+	return "%s：%s" % [display_name, ["台阶通往大桥步道，那里的风景值得一看。", "回收的东西可以放在你的海滨工作室。", "海港很繁忙，靠近码头时请减速。", "日落时过桥是我在这座城市最喜欢的时刻。"][int(memories["greeted"]) % 4]]
 
 func _physics_process(delta: float) -> void:
 	if not is_inside_tree():

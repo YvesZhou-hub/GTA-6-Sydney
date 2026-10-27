@@ -6,6 +6,7 @@ extends Node
 const Achievements = preload("res://scripts/achievements.gd")
 const Bridge = preload("res://scripts/bridge_landmark.gd")
 const GameSettings = preload("res://scripts/game_settings.gd")
+const MobileProfile = preload("res://scripts/mobile_profile.gd")
 const CHAPTER_ID := "harbour_first_day"
 const CHAPTER_TITLE := "港城第一天"
 const CHAPTER_REWARD := 20000
@@ -22,6 +23,7 @@ const STEPS := [
 	{"id": "nailong", "title": "击败 5 只奶龙", "detail": "奶龙危机中按 {fire} 反击；自由观光世界可在暂停菜单开启奶龙危机。", "kind": "kills", "amount": 5, "reward": 5000},
 ]
 const PAD_LABELS := {"interact": "B", "vehicles": "Y", "photo": "暂停菜单 → 拍照", "jobs": "十字键 ←", "experiences": "Back", "fire": "RT"}
+const TOUCH_LABELS := {"interact": "「互动」", "vehicles": "「载具」", "photo": "「暂停」 → 「拍照」", "jobs": "「暂停」", "experiences": "「暂停」", "fire": "「开火」"}
 const TOUR := {"opera": ["opera"], "bridge": ["bridge_mid"], "sydney_tower": ["sydney_tower"], "qvb": ["qvb", "qvb_public"], "icc": ["icc_convention", "icc_exhibition"], "manly": ["manly_wharf", "manly_beach"]}
 
 var game: Node
@@ -286,12 +288,13 @@ func _check_achievements() -> void:
 	if not notes.is_empty(): game.notify("\n".join(notes))
 
 
-## Fills {action} placeholders with the player's current bindings or pad buttons.
+## Fills {action} placeholders with the player's current bindings, pad or touch buttons.
 func describe(text: String) -> String:
 	var labels := {}
+	var touch := MobileProfile.is_mobile() and not bool(game._using_pad)
 	for action: String in PAD_LABELS:
-		labels[action] = PAD_LABELS[action] if bool(game._using_pad) else GameSettings.key_label(action)
-	if not bool(game._using_pad): labels["fire"] = "左键 / " + str(labels.fire)
+		labels[action] = PAD_LABELS[action] if bool(game._using_pad) else TOUCH_LABELS[action] if touch else GameSettings.key_label(action)
+	if not bool(game._using_pad) and not touch: labels["fire"] = "左键 / " + str(labels.fire)
 	return text.format(labels)
 
 

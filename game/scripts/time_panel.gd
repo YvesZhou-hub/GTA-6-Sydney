@@ -53,7 +53,7 @@ static func build(game:Node3D):
 	game.button("恢复夏日默认 · 16:00 / 12 倍速",func():
 		game.city_clock.apply_state({})
 		refresh(game))
-	game.button("返回游戏  ·  T / Esc",game.close_panel)
+	game.button("返回游戏" if preload("res://scripts/mobile_profile.gd").is_mobile() else "返回游戏  ·  T / Esc",game.close_panel)
 	refresh(game)
 
 static func refresh(game:Node3D):
