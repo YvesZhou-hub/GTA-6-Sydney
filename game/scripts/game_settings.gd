@@ -42,6 +42,17 @@ const REBINDABLE := [
 ]
 
 const KEY_NAMES := {"Space": "空格", "Escape": "Esc"}
+## Touch devices name the on-screen control from mobile_controls.gd instead of a key.
+## Actions without a button of their own name the touch route that reaches them.
+const TOUCH_NAMES := {
+	"move": "摇杆", "forward": "摇杆向前", "back": "摇杆向后", "left": "摇杆向左", "right": "摇杆向右",
+	"interact": "互动", "fire": "开火", "sprint": "奔跑", "boost": "加速", "jump": "跳跃", "brake": "刹车",
+	"drift": "漂移", "rise": "升高", "fall": "降低", "combat_raise": "抬炮", "combat_lower": "压炮",
+	"combat_yaw_left": "右侧滑动", "combat_yaw_right": "右侧滑动",
+	"vehicles": "载具", "map": "地图", "heal": "急救", "survival_services": "整备", "pause": "暂停",
+	"auto_support": "整备", "carry": "互动", "jobs": "暂停", "experiences": "暂停", "photo": "暂停",
+	"save": "暂停", "recover": "暂停",
+}
 
 static var default_keys: Dictionary = {}
 static var _hint_cache: Dictionary = {}
@@ -237,14 +248,17 @@ static func primary_key(action: String) -> String:
 
 
 ## Fills {action} placeholders in a hint with current keys; {move} is the four walking keys.
+## On touch devices each placeholder names the on-screen control, e.g. 「急救」.
 ## Results are cached per template until bindings change, so HUD code can call it every frame.
 static func keys(template: String) -> String:
 	if _hint_cache.has(template): return _hint_cache[template]
+	var touch := MobileProfile.is_mobile()
 	var result := template
 	for found: RegExMatch in RegEx.create_from_string("\\{([a-z_]+)\\}").search_all(template):
 		var action := found.get_string(1)
 		var label := primary_key(action)
-		if action == "move":
+		if touch and TOUCH_NAMES.has(action): label = "「%s」" % TOUCH_NAMES[action]
+		elif action == "move":
 			var parts := PackedStringArray(["forward", "left", "back", "right"].map(func(name: String): return primary_key(name)))
 			label = "".join(parts) if Array(parts).all(func(part: String): return part.length() == 1) else "/".join(parts)
 		result = result.replace(found.get_string(), label)

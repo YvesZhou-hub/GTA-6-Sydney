@@ -270,6 +270,8 @@ func run(owner_game: Node) -> void:
 	var count_before:int=game.vehicles.size()
 	var tank:Variant=game.request_vehicle("tank")
 	check("production spawn places and seats a new tank",is_instance_valid(tank) and game.current_vehicle==tank and tank.kind=="tank" and tank.occupied and game.vehicles.size()==count_before+1 and bool(game.get_meta("last_spawn_profile",{}).get("ready",false)))
+	var ride_hint:String=game.campaign.describe(str(game.campaign.STEPS[0].detail)) if is_instance_valid(game.campaign) else ""
+	check("touch hints name on-screen buttons instead of desktop keys","「下车」" in game.toast_label.text and not "E 离舱" in game.toast_label.text and "「互动」" in ride_hint and preload("res://scripts/game_settings.gd").keys("{heal} 快修")=="「急救」 快修",{"toast":game.toast_label.text,"objective":ride_hint})
 	if is_instance_valid(tank):
 		await physics_frames(12)
 		await frames(3)

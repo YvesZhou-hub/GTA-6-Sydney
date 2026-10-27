@@ -71,7 +71,7 @@ func _ready():
 	_close_button=Button.new()
 	_close_button.text="返回游戏 ×"
 	_close_button.custom_minimum_size=Vector2(126,34)
-	_close_button.tooltip_text="M / Esc · 关闭地图并恢复视角控制"
+	_close_button.tooltip_text="关闭地图并恢复视角控制" if touch_mode else "M / Esc · 关闭地图并恢复视角控制"
 	_close_button.pressed.connect(func(): close_requested.emit())
 	add_child(_close_button)
 	if touch_mode:
